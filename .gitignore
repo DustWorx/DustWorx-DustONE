@@ -1,0 +1,30 @@
+# System i pliki tymczasowe
+Thumbs.db
+.DS_Store
+*.tmp
+*.bak
+~$*
+
+# Dane dostępowe i lokalna konfiguracja
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Wyniki i pamięć podręczna narzędzi
+[Bb]uild/
+[Dd]ist/
+out/
+[Bb]in/
+[Oo]bj/
+node_modules/
+__pycache__/
+*.py[cod]
+.venv/
+.vs/
+
+# Lokalna otoczka projektu ChatGPT
+/sources/
+/.codex/
+/.agents/
