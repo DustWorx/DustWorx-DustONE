@@ -22,6 +22,7 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-010 | Aplikacja umożliwia aktualizację oprogramowania ECU i HMI. |
 | SYS-011 | Aplikacja zawiera narzędzia rozwojowe do testowania i debugowania ECU oraz komunikacji CAN. |
 | SYS-012 | ECU obsługuje silniki z gaźnikiem oraz z wtryskiem paliwa. Rodzaje i parametry układów wtryskowych pozostają do ustalenia. |
+| SYS-013 | ECU jest przeznaczone do instalacji motocykla z akumulatorem o napięciu nominalnym 12 V. Zakres napięć pracy i zachowanie podczas rozruchu pozostają do określenia. |
 
 ## 3. Proponowany podział odpowiedzialności
 
@@ -37,6 +38,14 @@ Propozycje do uwzględnienia w wymaganiach szczegółowych:
 - Zdefiniować ograniczenia narzędzi rozwojowych i sposób wejścia w tryb testowy.
 - Zdefiniować odzyskiwanie urządzenia po przerwaniu aktualizacji.
 
+### Pożądana funkcja: rozruch kopniakiem przy osłabionym akumulatorze
+
+Intencja właściciela: umożliwić rozruch silnika kopniakiem, gdy podłączony akumulator 12 V nie wystarcza do użycia rozrusznika, ale nadal zasila elektronikę. Praca bez energii z akumulatora nie jest wymagana w ramach tej funkcji.
+
+Status: funkcja pożądana, do analizy wykonalności i określenia mierzalnych kryteriów. Nie jest jeszcze gwarantowaną zdolnością systemu. Ocena ma objąć cały tor rozruchu: ECU, czujniki, zapłon oraz — przy wtrysku — układ paliwowy. Wariant gaźnikowy i wtryskowy należy ocenić oddzielnie.
+
+Do ustalenia: minimalne napięcie i dostępny prąd pod obciążeniem, chemia i stan akumulatora, temperatura, obciążenia aktywne podczas rozruchu oraz warunki mechaniczne rozruchu. Nie przyjmujemy arbitralnego progu 12 V jako granicy działania rozrusznika. Napięcie spoczynkowe nie zastępuje oceny pod obciążeniem: [Yuasa — badanie akumulatora ołowiowego](https://www.yuasabatteries.com.au/resources/expert-advice/how-to-test-a-lead-acid-battery).
+
 ## 4. Decyzje potrzebne przed doborem sprzętu
 
 | Obszar | Do ustalenia |
@@ -45,7 +54,7 @@ Propozycje do uwzględnienia w wymaganiach szczegółowych:
 | Zapłon | Typy obsługiwanych układów i cewek; wymagane interfejsy sterujące. |
 | Synchronizacja | Czujniki wału i ewentualnie wałka, ich sygnały oraz układy znaczników. |
 | Układ paliwowy | Rodzaj układu wtryskowego, liczba i parametry wtryskiwaczy, sterowanie pompą. |
-| Instalacja | Napięcie nominalne, akumulator lub praca bez akumulatora, warunki zasilania podczas rozruchu. |
+| Instalacja | Akumulator nominalnie 12 V (SYS-013). Do określenia: zakres napięć, chemia akumulatora i warunki rozruchu. Pożądany rozruch kopniakiem z osłabionym, podłączonym akumulatorem; rozruch bez energii z akumulatora nie jest wymagany. |
 | Akcesoria | Pełna lista odbiorników, prądy robocze i rozruchowe, sterowanie bezpośrednie lub przez przekaźniki/styczniki. |
 | Pomiary | Lista czujników, zakresy i wymagana dokładność. |
 | HMI | Ekran, sposób obsługi, prezentowane dane i zakres personalizacji. |
