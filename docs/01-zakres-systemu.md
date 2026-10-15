@@ -23,6 +23,8 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-011 | Aplikacja zawiera narzędzia rozwojowe do testowania i debugowania ECU oraz komunikacji CAN. |
 | SYS-012 | ECU obsługuje silniki z gaźnikiem oraz z wtryskiem paliwa. Rodzaje i parametry układów wtryskowych pozostają do ustalenia. |
 | SYS-013 | ECU jest przeznaczone do instalacji motocykla z akumulatorem o napięciu nominalnym 12 V. Zakres napięć pracy i zachowanie podczas rozruchu pozostają do określenia. |
+| SYS-014 | ECU obsługuje silniki z gaźnikiem bez TPS oraz z gaźnikiem z TPS (czujnikiem położenia przepustnicy). |
+| SYS-015 | Wspólna PCB ECU zawiera sprzęt potrzebny do obsługi wariantów gaźnikowych oraz KTM TPI i TBI, bez przeróbek PCB ani wymiany obsady komponentów między tymi zastosowaniami. Konkretne modele, roczniki i granice parametrów elektrycznych pozostają do określenia przed zamknięciem projektu sprzętu. |
 
 ## 3. Proponowany podział odpowiedzialności
 
@@ -50,7 +52,7 @@ Do ustalenia: minimalne napięcie i dostępny prąd pod obciążeniem, chemia i 
 
 | Obszar | Do ustalenia |
 | --- | --- |
-| Silnik | Modele referencyjne i maksymalne obroty. Obsługa gaźnika oraz wtrysku jest ustalona (SYS-012). |
+| Silnik | Pierwszy motocykl testowy: Beta 300 RR, 2015, wskazany przez właściciela. Do ustalenia: dokładna wersja i stan osprzętu, maksymalne obroty oraz reprezentatywne jednostki 4T, TPI i TBI. Obsługa gaźnika z TPS i bez TPS oraz TPI/TBI jest wymagana (SYS-012, SYS-014, SYS-015). |
 | Zapłon | Typy obsługiwanych układów i cewek; wymagane interfejsy sterujące. |
 | Synchronizacja | Czujniki wału i ewentualnie wałka, ich sygnały oraz układy znaczników. |
 | Układ paliwowy | Rodzaj układu wtryskowego, liczba i parametry wtryskiwaczy, sterowanie pompą. |
@@ -64,7 +66,7 @@ Do ustalenia: minimalne napięcie i dostępny prąd pod obciążeniem, chemia i 
 
 ## 5. Następny rezultat inżynierski
 
-Po określeniu silników referencyjnych i instalacji elektrycznej: opracować listę wejść/wyjść ECU, granice obsługiwanego sprzętu oraz architekturę blokową. Następnie ustalić mierzalne kryteria weryfikacji wymagań i plan prób. Dobór komponentów PCB następuje po zamknięciu tych danych.
+Po inwentaryzacji Bety 300 RR 2015 i określeniu docelowych wariantów 4T, TPI i TBI oraz instalacji elektrycznej: opracować listę wejść/wyjść ECU, granice obsługiwanego sprzętu oraz architekturę blokową. Następnie ustalić mierzalne kryteria weryfikacji wymagań i plan prób. Dobór komponentów PCB następuje po zamknięciu tych danych.
 
 ## 6. Sposób realizacji i współpracy
 
@@ -74,4 +76,19 @@ Ustalenia właściciela projektu z 2026-10-15:
 - Firmware przygotowuje właściciel projektu z Codexem. Wspólna praca inżynierska obejmuje wymagania, interfejsy i kryteria weryfikacji potrzebne do jego implementacji.
 - Pytania przedstawiamy pojedynczo, z przygotowanymi wariantami odpowiedzi. Gdy wybór wymaga danych technicznych lub porównania, przedstawiamy podstawy i konsekwencje przed decyzją.
 - Ustalenia i wyniki prac zapisujemy w repozytorium DustWorx/DustWorx-DustONE zgodnie z jego strukturą.
-- Obsługa gaźnika i wtrysku została potwierdzona przez właściciela; nie wybrano jeszcze referencyjnych silników ani układów wtryskowych.
+- Obsługa gaźnika z TPS i bez TPS oraz KTM TPI/TBI została potwierdzona przez właściciela. Pierwszym motocyklem testowym jest jego Beta 300 RR z 2015 r.; jednostki referencyjne 4T i konkretne generacje układów wtryskowych pozostają do ustalenia.
+
+## 7. Motocykl referencyjny i zakres weryfikacji
+
+**Potwierdzone przez właściciela:** dostępny jest cały motocykl Beta 300 RR, rocznik 2015, przeznaczony do pierwszych testów. Nie potwierdzono jeszcze odmiany RR/Racing, aktualnych modyfikacji ani parametrów zamontowanych elementów. Producent udostępnia instrukcje tej rodziny w [indeksie dokumentacji Beta](https://www.betamotor.com.au/support/off-road/); parametry konkretnego egzemplarza wymagają inwentaryzacji.
+
+Beta służy do pierwszej integracji. Jej wyposażenie nie ogranicza docelowego zakresu PCB. Wymagania dotyczące gaźnika z TPS i bez TPS, 4T oraz TPI/TBI muszą być uwzględnione przed zamknięciem projektu sprzętu, również gdy nie można ich sprawdzić na tym motocyklu.
+
+Weryfikację dzielimy na próby dostępne na Becie oraz próby stanowiskowe i późniejsze próby na innych jednostkach. Wynik na Becie nie potwierdza zgodności z pozostałymi wariantami. Właściciel dopuszcza późniejsze testy funkcji nieweryfikowalnych na dostępnym motocyklu; plan weryfikacji należy przygotować wraz z wymaganiami.
+
+### Podstawy do dalszej analizy sprzętu
+
+- KTM opisuje TPI MY2018 jako wtrysk z dwoma wtryskiwaczami w kanałach przepłukujących: [KTM — prezentacja TPI](https://press.ktm.com/News_Detail.aspx?id=49472&menueid=3050).
+- KTM EXC MY2024 stosuje TBI oraz elektroniczne sterowanie zaworem wydechowym: [KTM — prezentacja EXC MY2024](https://press.ktm.com/news-challenge-accepted-the-2024-ktm-exc-range-is-here-to-redefine-limits?id=179901&l=uk&menueid=5904).
+
+Są to przykłady do ustalenia zakresu, nie zatwierdzona lista wspieranych motocykli ani kompletna specyfikacja elektryczna. Do analizy: kanały wtrysku, zapłon, pompa paliwa, ewentualna pompa oleju, sterowanie zaworem wydechowym, czujniki i synchronizacja. Nie wybrano jeszcze liczby kanałów, sterowników wyjściowych ani sposobu zgodności z osprzętem OEM.
