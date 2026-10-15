@@ -6,6 +6,8 @@ Status: punkt wyjścia do wymagań; zakres zapisany na podstawie opisu właścic
 
 Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy oraz jedną aplikację Windows do konfiguracji, strojenia, personalizacji HMI, diagnostyki, aktualizacji i prac rozwojowych.
 
+**Przeznaczenie potwierdzone przez właściciela:** wyłącznie sport i testy poza drogami publicznymi.
+
 ## 2. Wymagania wynikające z opisu
 
 | ID | Wymaganie |
@@ -70,7 +72,7 @@ Do ustalenia: minimalne napięcie i dostępny prąd pod obciążeniem, chemia i 
 | HMI | Ekran, sposób obsługi, prezentowane dane i zakres personalizacji. |
 | Połączenie z PC | Sposób fizycznego podłączenia do ECU/HMI; CAN między urządzeniami nie przesądza interfejsu komputera. |
 | Debugowanie | Rozróżnić podgląd danych, testy wyjść i analizę CAN od debugowania programu przez interfejs debuggera. |
-| Warunki pracy | Temperatura, woda, pył, drgania, miejsce montażu oraz docelowe zastosowanie motocykla. |
+| Warunki pracy | Zastosowanie ustalone: sport i testy poza drogami publicznymi. Do określenia: temperatura, woda, pył, drgania i miejsce montażu. |
 
 ## 5. Następny rezultat inżynierski
 
