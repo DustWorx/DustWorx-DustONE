@@ -21,6 +21,7 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-009 | Aplikacja umożliwia diagnostykę ECU i HMI. |
 | SYS-010 | Aplikacja umożliwia aktualizację oprogramowania ECU i HMI. |
 | SYS-011 | Aplikacja zawiera narzędzia rozwojowe do testowania i debugowania ECU oraz komunikacji CAN. |
+| SYS-012 | ECU obsługuje silniki z gaźnikiem oraz z wtryskiem paliwa. Rodzaje i parametry układów wtryskowych pozostają do ustalenia. |
 
 ## 3. Proponowany podział odpowiedzialności
 
@@ -40,10 +41,10 @@ Propozycje do uwzględnienia w wymaganiach szczegółowych:
 
 | Obszar | Do ustalenia |
 | --- | --- |
-| Silnik | Modele referencyjne, maksymalne obroty, zasilanie paliwem: gaźnik lub wtrysk. |
+| Silnik | Modele referencyjne i maksymalne obroty. Obsługa gaźnika oraz wtrysku jest ustalona (SYS-012). |
 | Zapłon | Typy obsługiwanych układów i cewek; wymagane interfejsy sterujące. |
 | Synchronizacja | Czujniki wału i ewentualnie wałka, ich sygnały oraz układy znaczników. |
-| Układ paliwowy | Jeżeli występuje wtrysk: liczba i parametry wtryskiwaczy, sterowanie pompą. |
+| Układ paliwowy | Rodzaj układu wtryskowego, liczba i parametry wtryskiwaczy, sterowanie pompą. |
 | Instalacja | Napięcie nominalne, akumulator lub praca bez akumulatora, warunki zasilania podczas rozruchu. |
 | Akcesoria | Pełna lista odbiorników, prądy robocze i rozruchowe, sterowanie bezpośrednie lub przez przekaźniki/styczniki. |
 | Pomiary | Lista czujników, zakresy i wymagana dokładność. |
@@ -55,3 +56,13 @@ Propozycje do uwzględnienia w wymaganiach szczegółowych:
 ## 5. Następny rezultat inżynierski
 
 Po określeniu silników referencyjnych i instalacji elektrycznej: opracować listę wejść/wyjść ECU, granice obsługiwanego sprzętu oraz architekturę blokową. Następnie ustalić mierzalne kryteria weryfikacji wymagań i plan prób. Dobór komponentów PCB następuje po zamknięciu tych danych.
+
+## 6. Sposób realizacji i współpracy
+
+Ustalenia właściciela projektu z 2026-10-15:
+
+- Cały proces inżynierski prowadzimy wspólnie w rozmowie: organizację projektu, wymagania, funkcjonalność, architekturę, elektronikę, dobór każdego komponentu, schematy, projekt PCB, mechanikę oraz weryfikację.
+- Firmware przygotowuje właściciel projektu z Codexem. Wspólna praca inżynierska obejmuje wymagania, interfejsy i kryteria weryfikacji potrzebne do jego implementacji.
+- Pytania przedstawiamy pojedynczo, z przygotowanymi wariantami odpowiedzi. Gdy wybór wymaga danych technicznych lub porównania, przedstawiamy podstawy i konsekwencje przed decyzją.
+- Ustalenia i wyniki prac zapisujemy w repozytorium DustWorx/DustWorx-DustONE zgodnie z jego strukturą.
+- Obsługa gaźnika i wtrysku została potwierdzona przez właściciela; nie wybrano jeszcze referencyjnych silników ani układów wtryskowych.
