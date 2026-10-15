@@ -15,7 +15,7 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-001 | ECU steruje pracą silnika jednocylindrowego. |
 | SYS-002 | Ten sam wariant sprzętowy ECU obsługuje silniki dwusuwowe i czterosuwowe bez zmian na PCB. |
 | SYS-003 | Wybór silnika 2T lub 4T jest dostępny przez konfigurację w aplikacji Windows. |
-| SYS-004 | ECU steruje akcesoriami motocykla, w tym światłami, wentylatorem i rozrusznikiem; sposób podłączenia obciążeń pozostaje do ustalenia. |
+| SYS-004 | ECU obsługuje światła przednie, tylne i STOP, wentylator, rozrusznik, kierunkowskazy, klakson oraz dodatkowe wyjścia konfigurowalne, np. do dodatkowego oświetlenia. Liczba wyjść, ich parametry i sposób podłączenia obciążeń pozostają do ustalenia. |
 | SYS-005 | ECU komunikuje się z HMI na kierownicy przez CAN. |
 | SYS-006 | Jedna aplikacja Windows obsługuje ECU oraz HMI. |
 | SYS-007 | Aplikacja umożliwia konfigurację ECU i strojenie silnika za pomocą map. |
@@ -67,7 +67,7 @@ Do ustalenia: minimalne napięcie i dostępny prąd pod obciążeniem, chemia i 
 | Synchronizacja | Czujniki wału i ewentualnie wałka, ich sygnały oraz układy znaczników. |
 | Układ paliwowy | Rodzaj układu wtryskowego, liczba i parametry wtryskiwaczy, sterowanie pompą. |
 | Instalacja | Akumulator nominalnie 12 V (SYS-013). Do określenia: zakres napięć, chemia akumulatora i warunki rozruchu. Pożądany rozruch kopniakiem z osłabionym, podłączonym akumulatorem; rozruch bez energii z akumulatora nie jest wymagany. |
-| Akcesoria | Pełna lista odbiorników, prądy robocze i rozruchowe, sterowanie bezpośrednie lub przez przekaźniki/styczniki. |
+| Akcesoria | Zakres rozszerzony według SYS-004. Do określenia: podział świateł przednich na funkcje, liczba niezależnych kanałów i wyjść konfigurowalnych, prądy robocze i rozruchowe, sterowanie bezpośrednie lub przez przekaźniki/styczniki, zabezpieczenia i diagnostyka wyjść. |
 | Pomiary | Lista czujników, zakresy i wymagana dokładność. |
 | HMI | Ekran, sposób obsługi, prezentowane dane i zakres personalizacji. |
 | Połączenie z PC | Sposób fizycznego podłączenia do ECU/HMI; CAN między urządzeniami nie przesądza interfejsu komputera. |
