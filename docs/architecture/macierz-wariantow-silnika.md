@@ -4,7 +4,7 @@ Data: 2026-10-18. Status: roboczy podział zakresu, nie lista zatwierdzonych zgo
 
 | Wariant | Podstawa / jednostka referencyjna | Dane decydujące o sprzęcie |
 | --- | --- | --- |
-| 2T, gaźnik bez TPS | W zakresie; Beta Racing 2015 jako pierwszy motocykl, wyposażenie do potwierdzenia | Synchronizacja, zapłon, zasilanie, czujniki i akcesoria rzeczywistego egzemplarza. |
+| 2T, gaźnik bez TPS | W zakresie; właściciel potwierdził brak TPS w swojej Becie Racing 2015 | Synchronizacja, zapłon, zasilanie, pozostałe czujniki i akcesoria do sprawdzenia. [Analiza instrukcji](../interfaces/beta-2015-analiza-dokumentacji.md) nie potwierdza jeszcze zgodności złączy egzemplarza. |
 | 2T, gaźnik z TPS | W zakresie; model referencyjny do wyboru | Jak wyżej oraz interfejs TPS i strategia jego wykorzystania. |
 | 4T, gaźnik | W zakresie ogólnej obsługi 4T/gaźnika; model do wyboru | Synchronizacja fazy cyklu i zapłon, wyposażenie czujnikowe i zakres obrotów. |
 | 4T, wtrysk, przepustnica na linkę | W zakresie; model do wyboru | Synchronizacja, wtryskiwacze, pompa, zapłon i komplet czujników strategii sterowania. |
