@@ -54,6 +54,7 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-038 | Platforma ECU obsługuje przepustnicę poruszaną mechanicznie linką, z odczytem TPS w wariantach wyposażonych w ten czujnik. Sterowanie napędem przepustnicy elektronicznej (ride-by-wire) pozostaje poza zakresem sprzętu i firmware. Obsługa gaźnika bez TPS pozostaje wymagana według SYS-014. |
 | SYS-039 | System wykrywa przewrócenie motocykla i automatycznie wyłącza silnik po potwierdzeniu tego stanu. Sposób wykrywania i warunki zadziałania pozostają do określenia z uwzględnieniem normalnej jazdy enduro. Ponowny rozruch według SYS-040. |
 | SYS-040 | Po automatycznym wyłączeniu silnika wskutek przewrócenia, postawieniu motocykla i spełnieniu warunków bezpieczeństwa możliwy jest ponowny rozruch przyciskiem START lub kopniakiem, bez wyłączania i ponownego włączania zasilania systemu. Samo postawienie motocykla nie uruchamia silnika; ponowny rozruch wymaga świadomego działania kierowcy. Szczegółowe warunki odblokowania pozostają do określenia. |
+| SYS-041 | PCB ECU umożliwia podłączenie opcjonalnego sygnału sprzęgła oraz opcjonalnego czujnika położenia biegu, rozróżniającego poszczególne biegi, nie tylko luz. Czujniki można dołączyć w przyszłości bez zmian PCB; ich obecność nie jest wymagana do pracy ECU. Interfejsy elektryczne i zakres obsługiwanych czujników pozostają do określenia. Wejście stopki bocznej jest poza zakresem. |
 
 ## 3. Proponowany podział odpowiedzialności
 
@@ -142,6 +143,12 @@ System ma wykrywać przewrócenie motocykla i automatycznie wyłączać silnik (
 
 **Ponowny rozruch potwierdzony przez właściciela:** po postawieniu motocykla i spełnieniu warunków bezpieczeństwa kierowca może użyć START lub kopniaka bez wyłączania zasilania systemu (SYS-040). Samo postawienie motocykla nie uruchamia silnika. Do określenia: kryteria i czas potwierdzenia prawidłowego położenia, pozostałe warunki odblokowania oraz obsługa przycisku START, który pozostał wciśnięty podczas zadziałania funkcji. Podtrzymane polecenie START nie może być traktowane jako nowe żądanie rozruchu po odblokowaniu.
 
+### Sprzęgło i położenie biegu — ustalenie właściciela z 2026-10-18
+
+Przewidujemy na PCB ECU obsługę opcjonalnego sygnału sprzęgła i czujnika położenia biegu, z rozpoznawaniem poszczególnych biegów, nie tylko luzu (SYS-041). Ma to umożliwić późniejsze podłączenie czujników bez przebudowy PCB. Ich montaż nie jest obowiązkowy; wariant bez tych czujników musi działać. Nie przewidujemy wejścia stopki bocznej.
+
+Do określenia przed doborem torów wejściowych: reprezentatywne czujniki OEM, typy sygnałów, poziomy elektryczne, liczba rozróżnianych pozycji, kalibracja, diagnostyka oraz konfiguracja obecności czujników. Sposób wykorzystania danych, w tym prezentacja biegu i ewentualne blokady rozruchu, pozostaje do uzgodnienia. Należy odróżnić brak opcjonalnego czujnika od usterki czujnika zadeklarowanego w konfiguracji; brak danych nie może być traktowany jako potwierdzenie luzu ani określonego stanu sprzęgła.
+
 ### Polecenia z kierownicy i utrata komunikacji
 
 Ustalony tor sterowania akcesoriami: przyciski i przełączniki → HMI → CAN → ECU → odbiorniki. Interfejsy wejściowe HMI muszą zostać dobrane do zachowywanych elementów obsługi kierownicy. Podłączenie zwykłych przełączników akcesoriów bezpośrednio do ECU nie jest wymagane w wybranym wariancie.
@@ -173,6 +180,7 @@ Do ustalenia: minimalne napięcie i dostępny prąd pod obciążeniem, chemia i 
 | Silnik | Pierwszy motocykl testowy: Beta 300 RR Racing / Race Edition, 2015, wskazany przez właściciela. Według właściciela gaźnik, zapłon i instalacja są fabryczne. Do potwierdzenia podczas inwentaryzacji: parametry i stan osprzętu. Do ustalenia: maksymalne obroty oraz reprezentatywne jednostki 4T, TPI i TBI. Obsługa gaźnika z TPS i bez TPS oraz TPI/TBI według SYS-012, SYS-014 i SYS-015, z warunkami smarowania 2T według SYS-032 i SYS-033. |
 | Zapłon | Typy obsługiwanych układów i cewek; wymagane interfejsy sterujące. |
 | Przepustnica | Mechaniczna, poruszana linką; odczyt TPS zależnie od wyposażenia (SYS-038). Ride-by-wire poza zakresem. Do określenia: parametry, kalibracja i diagnostyka TPS. Gaźnik bez TPS obsługiwany według SYS-014. |
+| Sprzęgło i położenie biegu | Opcjonalne wejścia przewidziane na PCB według SYS-041; czujnik biegu ma rozróżniać poszczególne biegi, nie tylko luz. Stopka boczna poza zakresem. Do określenia: czujniki referencyjne, interfejsy, kalibracja, diagnostyka i wykorzystanie danych. |
 | Wykrywanie przewrócenia | Automatyczne wyłączenie silnika według SYS-039; ponowny rozruch po postawieniu motocykla bez cyklu zasilania według SYS-040. Do określenia: tor pomiarowy, lokalizacja, kryteria i czasy detekcji, sposób wyłączenia silnika, diagnostyka oraz szczegółowe warunki odblokowania. |
 | Synchronizacja | Czujniki wału i ewentualnie wałka, ich sygnały oraz układy znaczników. |
 | Układ paliwowy | Rodzaj układu wtryskowego, liczba i parametry wtryskiwaczy, sterowanie pompą paliwa. Dla 2T warunek pracy na mieszance według SYS-033; konwersja TPI wymaga osobnej oceny. |
