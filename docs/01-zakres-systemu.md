@@ -32,6 +32,7 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-018 | HMI zastępuje fabryczny licznik i stanowi główny panel motocykla, prezentujący prędkość, przebieg, dane silnika i stan motocykla. Źródła danych, zakres wskazań i parametry pomiarów pozostają do ustalenia. |
 | SYS-019 | ECU rejestruje występujące usterki jako DTC i zapisuje zamrożone ramki danych (freeze frame) powiązane z danym DTC, opisujące warunki jego wystąpienia. |
 | SYS-020 | Diagnostyka w aplikacji Windows umożliwia odczyt zapisanych DTC i powiązanych freeze frame oraz rozróżnienie usterek aktualnie aktywnych i zapisanych w historii. |
+| SYS-021 | Zapis DTC i powiązanej freeze frame zawiera rzeczywistą datę i godzinę, czas od uruchomienia ECU oraz informację o ważności czasu rzeczywistego. Brak wiarygodnej daty i godziny nie wstrzymuje zapisu DTC, freeze frame ani czasu od uruchomienia. |
 
 ## 3. Proponowany podział odpowiedzialności
 
@@ -51,9 +52,9 @@ Propozycje do uwzględnienia w wymaganiach szczegółowych:
 
 Potwierdzony zakres zapisu danych obejmuje występujące usterki, ich DTC i powiązane zamrożone ramki danych. Dane mają umożliwiać analizę momentu oraz warunków wystąpienia usterki i ocenę, czy pozostaje aktywna (SYS-019, SYS-020).
 
-Do określenia w wymaganiach szczegółowych: lista i identyfikacja DTC, warunki wykrycia i ustąpienia usterki, zawartość freeze frame, moment i zasady zapisu przy kolejnych wystąpieniach, oznaczanie czasu, pojemność i trwałość pamięci, zachowanie po utracie zasilania, nadpisywanie i kasowanie zapisów oraz sposób ich prezentacji w aplikacji Windows.
+Do określenia w wymaganiach szczegółowych: lista i identyfikacja DTC, warunki wykrycia i ustąpienia usterki, zawartość freeze frame, moment i zasady zapisu przy kolejnych wystąpieniach, źródło i parametry czasu, pojemność i trwałość pamięci, zachowanie po utracie zasilania, nadpisywanie i kasowanie zapisów oraz sposób ich prezentacji w aplikacji Windows.
 
-Sposób oznaczania czasu jest przedmiotem kolejnego pytania do właściciela. Nie ustalono jeszcze wymagania ciągłego zapisu przebiegów jazdy.
+Oznaczanie czasu ustalone przez właściciela: rzeczywista data i godzina, czas od uruchomienia ECU oraz informacja, czy czas rzeczywisty jest ważny (SYS-021). Zapis z nieważnym czasem rzeczywistym pozostaje dostępny i jest tak oznaczony. Do określenia: źródło czasu, podtrzymanie, ustawianie i synchronizacja, format i referencja czasowa, dokładność oraz kryteria ważności zegara. Nie ustalono jeszcze wymagania ciągłego zapisu przebiegów jazdy.
 
 ### Polecenia z kierownicy i utrata komunikacji
 
@@ -90,7 +91,7 @@ Do ustalenia: minimalne napięcie i dostępny prąd pod obciążeniem, chemia i 
 | Pomiary | Lista czujników, zakresy i wymagana dokładność. |
 | HMI | Odczyt przełączników kierownicy i polecenia do ECU przez CAN (SYS-016); menu i ekrany obsługiwane fizycznymi przyciskami, ekran bez dotyku (SYS-017). Główny panel zastępujący licznik (SYS-018). Do ustalenia: ekran, liczba i rodzaje wejść przycisków, szczegółowy zakres i źródła danych, sposób zachowania przebiegu oraz zakres personalizacji. |
 | Połączenie z PC | Sposób fizycznego podłączenia do ECU/HMI; CAN między urządzeniami nie przesądza interfejsu komputera. |
-| Diagnostyka | Zapis DTC i powiązanych freeze frame w ECU; odczyt w aplikacji Windows i rozróżnienie usterek aktywnych oraz historycznych (SYS-019, SYS-020). Szczegóły rejestracji, pamięci i oznaczania czasu do określenia. |
+| Diagnostyka | Zapis DTC i powiązanych freeze frame w ECU; odczyt w aplikacji Windows i rozróżnienie usterek aktywnych oraz historycznych (SYS-019, SYS-020). Oznaczanie czasu według SYS-021. Szczegóły rejestracji, pamięci i realizacji zegara do określenia. |
 | Debugowanie | Rozróżnić podgląd danych, testy wyjść i analizę CAN od debugowania programu przez interfejs debuggera. |
 | Warunki pracy | Zastosowanie ustalone: sport i testy poza drogami publicznymi. Do określenia: temperatura, woda, pył, drgania i miejsce montażu. |
 
