@@ -52,7 +52,8 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-036 | Kompletne ECU i HMI mają znosić deszcz, błoto, zachlapania oraz chwilowe zanurzenie, np. podczas brodzenia lub upadku w wodzie. Wymaganie obejmuje obudowy, złącza i przepusty. Głębokość, czas, warunki zanurzenia i kryteria prób pozostają do określenia. |
 | SYS-037 | Przycisk gaszenia silnika STOP ma osobny obwód przewodowy, umożliwiający zgaszenie silnika także przy awarii HMI lub komunikacji CAN. Realizacja obwodu i zachowanie przy uszkodzeniu przewodów pozostają do określenia. |
 | SYS-038 | Platforma ECU obsługuje przepustnicę poruszaną mechanicznie linką, z odczytem TPS w wariantach wyposażonych w ten czujnik. Sterowanie napędem przepustnicy elektronicznej (ride-by-wire) pozostaje poza zakresem sprzętu i firmware. Obsługa gaźnika bez TPS pozostaje wymagana według SYS-014. |
-| SYS-039 | System wykrywa przewrócenie motocykla i automatycznie wyłącza silnik po potwierdzeniu tego stanu. Sposób wykrywania, warunki zadziałania i zasady ponownego rozruchu pozostają do określenia z uwzględnieniem normalnej jazdy enduro. |
+| SYS-039 | System wykrywa przewrócenie motocykla i automatycznie wyłącza silnik po potwierdzeniu tego stanu. Sposób wykrywania i warunki zadziałania pozostają do określenia z uwzględnieniem normalnej jazdy enduro. Ponowny rozruch według SYS-040. |
+| SYS-040 | Po automatycznym wyłączeniu silnika wskutek przewrócenia, postawieniu motocykla i spełnieniu warunków bezpieczeństwa możliwy jest ponowny rozruch przyciskiem START lub kopniakiem, bez wyłączania i ponownego włączania zasilania systemu. Samo postawienie motocykla nie uruchamia silnika; ponowny rozruch wymaga świadomego działania kierowcy. Szczegółowe warunki odblokowania pozostają do określenia. |
 
 ## 3. Proponowany podział odpowiedzialności
 
@@ -137,7 +138,9 @@ Przed projektem mechanicznym określimy głębokość i czas zanurzenia, warunki
 
 ### Automatyczne gaszenie po przewróceniu — ustalenie właściciela z 2026-10-18
 
-System ma wykrywać przewrócenie motocykla i automatycznie wyłączać silnik (SYS-039). Przed doborem sprzętu określimy sposób i miejsce pomiaru, kryteria odróżniania upadku od normalnej jazdy enduro, czas potwierdzania oraz wymagany czas reakcji. Należy także określić realizację wyłączenia silnika, reakcję na usterkę toru wykrywania oraz zasady odblokowania i ponownego rozruchu. Nie wybrano jeszcze czujnika ani lokalizacji funkcji w ECU lub HMI. Ręczny STOP według SYS-037 pozostaje osobną funkcją.
+System ma wykrywać przewrócenie motocykla i automatycznie wyłączać silnik (SYS-039). Przed doborem sprzętu określimy sposób i miejsce pomiaru, kryteria odróżniania upadku od normalnej jazdy enduro, czas potwierdzania oraz wymagany czas reakcji. Należy także określić realizację wyłączenia silnika i reakcję na usterkę toru wykrywania. Nie wybrano jeszcze czujnika ani lokalizacji funkcji w ECU lub HMI. Ręczny STOP według SYS-037 pozostaje osobną funkcją.
+
+**Ponowny rozruch potwierdzony przez właściciela:** po postawieniu motocykla i spełnieniu warunków bezpieczeństwa kierowca może użyć START lub kopniaka bez wyłączania zasilania systemu (SYS-040). Samo postawienie motocykla nie uruchamia silnika. Do określenia: kryteria i czas potwierdzenia prawidłowego położenia, pozostałe warunki odblokowania oraz obsługa przycisku START, który pozostał wciśnięty podczas zadziałania funkcji. Podtrzymane polecenie START nie może być traktowane jako nowe żądanie rozruchu po odblokowaniu.
 
 ### Polecenia z kierownicy i utrata komunikacji
 
@@ -170,7 +173,7 @@ Do ustalenia: minimalne napięcie i dostępny prąd pod obciążeniem, chemia i 
 | Silnik | Pierwszy motocykl testowy: Beta 300 RR Racing / Race Edition, 2015, wskazany przez właściciela. Według właściciela gaźnik, zapłon i instalacja są fabryczne. Do potwierdzenia podczas inwentaryzacji: parametry i stan osprzętu. Do ustalenia: maksymalne obroty oraz reprezentatywne jednostki 4T, TPI i TBI. Obsługa gaźnika z TPS i bez TPS oraz TPI/TBI według SYS-012, SYS-014 i SYS-015, z warunkami smarowania 2T według SYS-032 i SYS-033. |
 | Zapłon | Typy obsługiwanych układów i cewek; wymagane interfejsy sterujące. |
 | Przepustnica | Mechaniczna, poruszana linką; odczyt TPS zależnie od wyposażenia (SYS-038). Ride-by-wire poza zakresem. Do określenia: parametry, kalibracja i diagnostyka TPS. Gaźnik bez TPS obsługiwany według SYS-014. |
-| Wykrywanie przewrócenia | Automatyczne wyłączenie silnika wymagane według SYS-039. Do określenia: tor pomiarowy, lokalizacja, kryteria i czasy detekcji, sposób wyłączenia silnika, diagnostyka oraz warunki ponownego rozruchu. |
+| Wykrywanie przewrócenia | Automatyczne wyłączenie silnika według SYS-039; ponowny rozruch po postawieniu motocykla bez cyklu zasilania według SYS-040. Do określenia: tor pomiarowy, lokalizacja, kryteria i czasy detekcji, sposób wyłączenia silnika, diagnostyka oraz szczegółowe warunki odblokowania. |
 | Synchronizacja | Czujniki wału i ewentualnie wałka, ich sygnały oraz układy znaczników. |
 | Układ paliwowy | Rodzaj układu wtryskowego, liczba i parametry wtryskiwaczy, sterowanie pompą paliwa. Dla 2T warunek pracy na mieszance według SYS-033; konwersja TPI wymaga osobnej oceny. |
 | Smarowanie 2T | Pompa dozująca olej wyłączona z ECU (SYS-032). Montaż po przystosowaniu silnika do mieszanki (SYS-033); sposób i walidacja konwersji TPI pozostają otwarte. |
