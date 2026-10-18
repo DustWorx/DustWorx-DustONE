@@ -17,7 +17,7 @@ Nie potwierdzono dostępności sondy różnicowej/izolowanej ani prądowej. Samo
 
 ## Kolejność prac
 
-Właściciel potwierdził 2026-10-18 zamontowany wentylator chłodnicy sterowany automatycznie przez osobny elektroniczny moduł z czujnikiem temperatury, bez ręcznego włącznika. W INV-01 zinwentaryzować oznaczenia modułu, wentylatora i czujnika, miejsce montażu czujnika oraz połączenia. Następnie określić możliwość wykorzystania istniejącego czujnika do wymaganego pomiaru temperatury płynu, zabezpieczenia i prądy roboczy/rozruchowy wentylatora (INV-06). Sama deklaracja o zestawie nie określa typu ani charakterystyki czujnika i parametrów kanału ECU.
+Właściciel potwierdził 2026-10-18, że sterownik wentylatora wykonał samodzielnie i zastosował czujnik [B57301K0103A001](../interfaces/beta-czujnik-temperatury-b57301k0103a001.md). Sterowanie obecnie automatyczne, bez ręcznego włącznika. W INV-01 zebrać schemat modułu, oznaczenia wentylatora, miejsce montażu czujnika i połączenia. Następnie ocenić wykorzystanie NTC do pomiaru temperatury płynu, zabezpieczenia i prądy roboczy/rozruchowy wentylatora (INV-06). Dokumentacja czujnika jest rozpoznana; nie przeprowadzono weryfikacji montażu ani pomiarów.
 
 | Etap | Zakres | Wynik |
 | --- | --- | --- |
