@@ -33,6 +33,8 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-019 | ECU rejestruje występujące usterki jako DTC i zapisuje zamrożone ramki danych (freeze frame) powiązane z danym DTC, opisujące warunki jego wystąpienia. |
 | SYS-020 | Diagnostyka w aplikacji Windows umożliwia odczyt zapisanych DTC i powiązanych freeze frame oraz rozróżnienie usterek aktualnie aktywnych i zapisanych w historii. |
 | SYS-021 | Zapis DTC i powiązanej freeze frame zawiera rzeczywistą datę i godzinę, czas od uruchomienia ECU oraz informację o ważności czasu rzeczywistego. Brak wiarygodnej daty i godziny nie wstrzymuje zapisu DTC, freeze frame ani czasu od uruchomienia. |
+| SYS-022 | Historia DTC i powiązanych freeze frame nie jest automatycznie kasowana wskutek ustąpienia usterki, upływu czasu, kolejnych cykli pracy ani ponownego uruchomienia ECU. Zapisy diagnostyczne są zachowywane w pamięci nieulotnej. Zasady ręcznego kasowania i obsługi zapełnienia pamięci pozostają do ustalenia. |
+| SYS-023 | Ostrzeżenie o danym DTC na HMI wygasa po potwierdzonym ustąpieniu usterki, zgodnie z kryteriami diagnostycznymi przypisanymi do tego DTC. Wygaszenie ostrzeżenia nie usuwa historycznego DTC ani jego freeze frame. |
 
 ## 3. Proponowany podział odpowiedzialności
 
@@ -52,9 +54,19 @@ Propozycje do uwzględnienia w wymaganiach szczegółowych:
 
 Potwierdzony zakres zapisu danych obejmuje występujące usterki, ich DTC i powiązane zamrożone ramki danych. Dane mają umożliwiać analizę momentu oraz warunków wystąpienia usterki i ocenę, czy pozostaje aktywna (SYS-019, SYS-020).
 
-Do określenia w wymaganiach szczegółowych: lista i identyfikacja DTC, warunki wykrycia i ustąpienia usterki, zawartość freeze frame, moment i zasady zapisu przy kolejnych wystąpieniach, źródło i parametry czasu, pojemność i trwałość pamięci, zachowanie po utracie zasilania, nadpisywanie i kasowanie zapisów oraz sposób ich prezentacji w aplikacji Windows.
+Do określenia w wymaganiach szczegółowych: lista i identyfikacja DTC, warunki wykrycia i ustąpienia usterki, zawartość freeze frame, moment i zasady zapisu przy kolejnych wystąpieniach, źródło i parametry czasu, pojemność i trwałość pamięci, zachowanie po utracie zasilania, obsługa pełnej pamięci i ewentualne kasowanie serwisowe oraz sposób prezentacji zapisów w aplikacji Windows.
 
 Oznaczanie czasu ustalone przez właściciela: rzeczywista data i godzina, czas od uruchomienia ECU oraz informacja, czy czas rzeczywisty jest ważny (SYS-021). Zapis z nieważnym czasem rzeczywistym pozostaje dostępny i jest tak oznaczony. Do określenia: źródło czasu, podtrzymanie, ustawianie i synchronizacja, format i referencja czasowa, dokładność oraz kryteria ważności zegara. Nie ustalono jeszcze wymagania ciągłego zapisu przebiegów jazdy.
+
+### Historia DTC i ostrzeżenia HMI — ustalenie z 2026-10-18
+
+Oddzielamy stan usterki, żądanie wyświetlenia ostrzeżenia oraz historyczny zapis diagnostyczny. Właściciel wymaga zachowania historii i ustąpienia ostrzeżenia HMI po ustąpieniu problemu (SYS-022, SYS-023).
+
+Potwierdzenie ustąpienia wymaga poprawnego wyniku odpowiedniego testu w warunkach, w których może on ocenić dany problem. Brak wykonania testu, brak nowego komunikatu o błędzie lub utrata komunikacji nie są poprawnym wynikiem testu. Dla każdego DTC określimy warunki wykonania testu, potwierdzenia wykrycia i ustąpienia, filtrację/histerezę oraz warunki wygaszenia ostrzeżenia. Nie przyjmujemy jednej arbitralnej liczby cykli dla wszystkich usterek.
+
+Odniesienie projektowe: [AUTOSAR Diagnostic Event Manager, CP R24-11, rozdziały 7.7.8 i 7.7.9](https://www.autosar.org/fileadmin/standards/R24-11/CP/AUTOSAR_CP_SWS_DiagnosticEventManager.pdf) rozdziela starzenie wpisów pamięci (aging) i wygaszanie ostrzeżeń (healing). Zachowanie historii bez automatycznego starzenia jest wyborem tego projektu. Odniesienie nie stanowi deklaracji wdrożenia platformy AUTOSAR ani pełnej zgodności z jej specyfikacją.
+
+Otwarte decyzje: sposób agregacji kolejnych wystąpień tego samego DTC, pojemność pamięci i zachowanie po jej zapełnieniu, eksport/archiwizacja oraz ewentualne jawne kasowanie serwisowe. Nie ustalono bezterminowego przechowywania osobnej ramki dla każdego wystąpienia.
 
 ### Polecenia z kierownicy i utrata komunikacji
 
@@ -91,7 +103,7 @@ Do ustalenia: minimalne napięcie i dostępny prąd pod obciążeniem, chemia i 
 | Pomiary | Lista czujników, zakresy i wymagana dokładność. |
 | HMI | Odczyt przełączników kierownicy i polecenia do ECU przez CAN (SYS-016); menu i ekrany obsługiwane fizycznymi przyciskami, ekran bez dotyku (SYS-017). Główny panel zastępujący licznik (SYS-018). Do ustalenia: ekran, liczba i rodzaje wejść przycisków, szczegółowy zakres i źródła danych, sposób zachowania przebiegu oraz zakres personalizacji. |
 | Połączenie z PC | Sposób fizycznego podłączenia do ECU/HMI; CAN między urządzeniami nie przesądza interfejsu komputera. |
-| Diagnostyka | Zapis DTC i powiązanych freeze frame w ECU; odczyt w aplikacji Windows i rozróżnienie usterek aktywnych oraz historycznych (SYS-019, SYS-020). Oznaczanie czasu według SYS-021. Szczegóły rejestracji, pamięci i realizacji zegara do określenia. |
+| Diagnostyka | Zapis DTC i powiązanych freeze frame w ECU; odczyt w aplikacji Windows i rozróżnienie usterek aktywnych oraz historycznych (SYS-019, SYS-020). Oznaczanie czasu według SYS-021. Trwałość historii i wygaszanie ostrzeżeń według SYS-022 i SYS-023. Szczegóły rejestracji, obsługi pełnej pamięci i realizacji zegara do określenia. |
 | Debugowanie | Rozróżnić podgląd danych, testy wyjść i analizę CAN od debugowania programu przez interfejs debuggera. |
 | Warunki pracy | Zastosowanie ustalone: sport i testy poza drogami publicznymi. Do określenia: temperatura, woda, pył, drgania i miejsce montażu. |
 
