@@ -206,7 +206,9 @@ Do ustalenia: minimalne napięcie i dostępny prąd pod obciążeniem, chemia i 
 
 ## 5. Następny rezultat inżynierski
 
-Po inwentaryzacji Bety 300 RR Racing 2015 i określeniu docelowych wariantów 4T, TPI i TBI oraz instalacji elektrycznej: opracować listę wejść/wyjść ECU, granice obsługiwanego sprzętu oraz architekturę blokową. Następnie ustalić mierzalne kryteria weryfikacji wymagań i plan prób. Dobór komponentów PCB następuje po zamknięciu tych danych.
+Przygotowano robocze materiały: [listę funkcji wejść/wyjść](interfaces/wstepna-lista-io.md), [macierz wariantów silnika](architecture/macierz-wariantow-silnika.md) i [plan inwentaryzacji Bety 300 RR Racing 2015](verification/beta-2015-plan-inwentaryzacji.md). Nie są one zatwierdzonym pinoutem ani potwierdzeniem zgodności sprzętu.
+
+Najbliższy krok: inwentaryzacja Bety i określenie modeli referencyjnych pozostałych wariantów, następnie zamknięcie parametrów i liczby kanałów oraz opracowanie architektury blokowej. Wymagania szczegółowe mają otrzymać mierzalne kryteria weryfikacji i plan prób. Dobór komponentów PCB następuje po ustaleniu danych potrzebnych dla danego bloku.
 
 ## 6. Sposób realizacji i współpracy
 
