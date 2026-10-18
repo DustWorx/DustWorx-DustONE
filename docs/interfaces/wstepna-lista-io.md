@@ -30,6 +30,8 @@ Wiersz oznacza funkcję, nie pojedynczy pin ani kanał. Kanałów nie sumujemy p
 
 Preferowany kierunek wyjść akcesoriów: [SmartFET-y na PCB](../architecture/wyjscia-akcesoriow-porownanie.md). Nie oznacza wyboru high-side/low-side dla wszystkich odbiorników ani potwierdzenia ich parametrów.
 
+Pierwszy motocykl: według właściciela Beta Racing 2015 nie ma TPS. [Analiza przekazanych instrukcji](beta-2015-analiza-dokumentacji.md) zawiera mapę obwodów i odniesienia do osprzętu; suplement jest wewnętrznie oznaczony MY14 i nie potwierdza pinoutu tego egzemplarza. Opis CDI w instrukcji wymaga uwzględnienia przy analizie stopnia zapłonowego. Docelowy zakres PCB pozostaje bez zmian.
+
 ## Tory proponowane do analizy inżynierskiej
 
 Poniższe pozycje nie są nowymi zatwierdzonymi wymaganiami właściciela.
