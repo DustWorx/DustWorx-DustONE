@@ -48,6 +48,7 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-032 | Sterowanie pompą dozującą olej do silnika 2T pozostaje poza zakresem ECU; nie projektujemy dla niej dedykowanej funkcji sprzętowej ani programowej. |
 | SYS-033 | Warunkiem montażu ECU w motocyklu 2T jest przystosowanie silnika do mieszanki paliwowo-olejowej przygotowanej w zbiorniku. W motocyklu z oddzielnym dozowaniem wymagane jest sprzętowe usunięcie pompy i odpowiednie przystosowanie układu paliwowego/smarowania. Zgodność danej konwersji wymaga oceny i walidacji; sam demontaż pompy jej nie potwierdza. |
 | SYS-034 | ECU steruje elektronicznym zaworem wydechowym (power valve) w silnikach 2T wyposażonych w taki napęd. Typy napędów, wymagane sygnały sterujące i ewentualne sprzężenie zwrotne dobierzemy do docelowych silników. |
+| SYS-035 | Priorytetem projektowym jest możliwie maksymalna kompaktowość ECU do motocykli enduro. Ocenie podlega kompletne urządzenie: PCB, obudowa, złącza i przestrzeń instalacyjna na wyprowadzenie wiązki. Liczbowe limity gabarytów pozostają do określenia po analizie miejsca montażu i architektury sprzętu. |
 
 ## 3. Proponowany podział odpowiedzialności
 
@@ -161,6 +162,7 @@ Do ustalenia: minimalne napięcie i dostępny prąd pod obciążeniem, chemia i 
 | Mapy silnika | Maksymalnie 3 zestawy map w ECU i przełączanie z HMI także podczas pracy silnika (SYS-028). Do określenia: zakres map, warunki i sposób przełączenia, walidacja zestawów oraz warunki ich zapisu. |
 | Narzędzia rozwojowe | Zakres aplikacji ustalony według SYS-011; debugowanie kodu w osobnym środowisku. Do określenia: szczegóły testów wejść/wyjść, warunki dopuszczenia i przerwania testu, funkcje analizy CAN, format logów, przepustowość oraz sprzętowy dostęp debuggera. |
 | Warunki pracy | Zastosowanie ustalone: sport i testy poza drogami publicznymi. Do określenia: temperatura, woda, pył, drgania i miejsce montażu. |
+| Gabaryty i montaż ECU | Priorytet: maksymalna kompaktowość według SYS-035. Właściciel nie wskazał wymiarów ani wybranej obudowy. Do określenia: miejsce i dostępna przestrzeń montażowa, obrys PCB i obudowy, złącza, wyprowadzenie wiązki, mocowanie oraz bilans cieplny. |
 
 ## 5. Następny rezultat inżynierski
 
