@@ -55,6 +55,7 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-039 | System wykrywa przewrócenie motocykla i automatycznie wyłącza silnik po potwierdzeniu tego stanu. Sposób wykrywania i warunki zadziałania pozostają do określenia z uwzględnieniem normalnej jazdy enduro. Ponowny rozruch według SYS-040. |
 | SYS-040 | Po automatycznym wyłączeniu silnika wskutek przewrócenia, postawieniu motocykla i spełnieniu warunków bezpieczeństwa możliwy jest ponowny rozruch przyciskiem START lub kopniakiem, bez wyłączania i ponownego włączania zasilania systemu. Samo postawienie motocykla nie uruchamia silnika; ponowny rozruch wymaga świadomego działania kierowcy. Szczegółowe warunki odblokowania pozostają do określenia. |
 | SYS-041 | PCB ECU umożliwia podłączenie opcjonalnego sygnału sprzęgła oraz opcjonalnego czujnika położenia biegu, rozróżniającego poszczególne biegi, nie tylko luz. Czujniki można dołączyć w przyszłości bez zmian PCB; ich obecność nie jest wymagana do pracy ECU. Interfejsy elektryczne i zakres obsługiwanych czujników pozostają do określenia. Wejście stopki bocznej jest poza zakresem. |
+| SYS-042 | Obsługa quickshiftera pozostaje poza zakresem tej platformy ECU. Nie przewidujemy dedykowanego wejścia jego czujnika ani funkcji wspomagania zmiany biegu w firmware. |
 
 ## 3. Proponowany podział odpowiedzialności
 
@@ -148,6 +149,8 @@ System ma wykrywać przewrócenie motocykla i automatycznie wyłączać silnik (
 Przewidujemy na PCB ECU obsługę opcjonalnego sygnału sprzęgła i czujnika położenia biegu, z rozpoznawaniem poszczególnych biegów, nie tylko luzu (SYS-041). Ma to umożliwić późniejsze podłączenie czujników bez przebudowy PCB. Ich montaż nie jest obowiązkowy; wariant bez tych czujników musi działać. Nie przewidujemy wejścia stopki bocznej.
 
 Do określenia przed doborem torów wejściowych: reprezentatywne czujniki OEM, typy sygnałów, poziomy elektryczne, liczba rozróżnianych pozycji, kalibracja, diagnostyka oraz konfiguracja obecności czujników. Sposób wykorzystania danych, w tym prezentacja biegu i ewentualne blokady rozruchu, pozostaje do uzgodnienia. Należy odróżnić brak opcjonalnego czujnika od usterki czujnika zadeklarowanego w konfiguracji; brak danych nie może być traktowany jako potwierdzenie luzu ani określonego stanu sprzęgła.
+
+Quickshifter pozostaje poza zakresem (SYS-042). Opcjonalne wejścia sprzęgła i położenia biegu nie oznaczają wymagania tej funkcji; ich obsługa według SYS-041 pozostaje wymagana.
 
 ### Polecenia z kierownicy i utrata komunikacji
 
