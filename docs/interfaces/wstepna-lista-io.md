@@ -4,6 +4,8 @@ Data: 2026-10-18. Status: materiał roboczy do architektury, bez zatwierdzonego 
 
 Wiersz oznacza funkcję, nie pojedynczy pin ani kanał. Kanałów nie sumujemy przed analizą jednoczesnej pracy, wariantów silnika i współdzielenia zasobów. „Opcjonalny czujnik” oznacza możliwość pracy bez niego, przy zachowaniu wymaganej obsługi sprzętowej na PCB.
 
+Wiązkę i złącze ECU projektujemy od nowa (SYS-045), według potrzebnych funkcji, prądów i gabarytów. Pinout starego ECU nie jest ograniczeniem projektu. Potrzebne są parametry i połączenia zachowywanych czujników oraz odbiorników; dla zapłonu przygotowano [kartę cewki IG5128](beta-cewka-zaplonowa-ig5128.md).
+
 ## Funkcje wynikające z ustalonego zakresu
 
 | Funkcja | Miejsce / kierunek | Podstawa | Dane potrzebne do projektu |
