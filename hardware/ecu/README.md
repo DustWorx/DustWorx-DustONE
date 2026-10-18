@@ -2,6 +2,8 @@
 
 Miejsce na edytowalne schematy i PCB, BOM oraz kontrolowane eksporty produkcyjne ECU.
 
-Wymaganie bazowe: jedna platforma sprzętowa dla jednocylindrowych silników 2T i 4T. Obsługiwane układy zapłonu, paliwa, czujniki, obciążenia i warunki zasilania pozostają do ustalenia.
+Wymaganie bazowe: jedna platforma sprzętowa dla jednocylindrowych silników 2T i 4T. Parametry i interfejsy obsługiwanych układów zapłonu, paliwa, czujników i obciążeń oraz granice warunków zasilania wymagają szczegółowej specyfikacji.
 
-Narzędzie EDA i komponenty nie zostały wybrane. Wymagania i definicje interfejsów odsyłają do `docs/`.
+Narzędzie EDA: **Autodesk Fusion Electronics**, płatna subskrypcja właściciela projektu. Komponenty nie zostały jeszcze wybrane.
+
+Wymagania i otwarte decyzje: [zakres systemu](../../docs/01-zakres-systemu.md). Definicje interfejsów rozwijamy w `docs/interfaces/`.
