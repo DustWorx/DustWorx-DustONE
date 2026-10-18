@@ -58,6 +58,7 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-042 | Obsługa quickshiftera pozostaje poza zakresem tej platformy ECU. Nie przewidujemy dedykowanego wejścia jego czujnika ani funkcji wspomagania zmiany biegu w firmware. |
 | SYS-043 | ECU automatycznie steruje wentylatorem według temperatury i umożliwia wymuszenie jego włączenia z HMI przez CAN. Wycofanie ręcznego wymuszenia przywraca sterowanie automatyczne; nie wyłącza wentylatora, gdy automatyka nadal wymaga chłodzenia. |
 | SYS-044 | W silnikach chłodzonych cieczą ECU mierzy rzeczywistą temperaturę płynu chłodzącego i udostępnia jej wskazanie na HMI. Progi temperaturowe sterowania wentylatorem są konfigurowalne w aplikacji Windows. Interfejs czujnika, zakres i dokładność pomiaru oraz dopuszczalne ustawienia pozostają do określenia. |
+| SYS-045 | DustONE otrzymuje nową wiązkę motocykla i nowe złącze ECU, dobrane do funkcji i parametrów systemu. Zachowanie złącza fabrycznego ECU ani zgodność z jego pinoutem nie są wymagane. Zachowywane czujniki i osprzęt wymagają potwierdzenia własnych interfejsów elektrycznych. |
 
 ## 3. Proponowany podział odpowiedzialności
 
@@ -178,7 +179,7 @@ Do osobnej analizy pozostają: automatyczna reakcja na awarię HMI lub CAN, aktu
 
 Priorytetem jest zachowanie seryjnych czujników i osprzętu silnika w możliwie największym zakresie, o ile pozwala na to zgodność techniczna z ECU. Nie oznacza to potwierdzonej zgodności ze wszystkimi elementami OEM ani bezwzględnego zakazu ich wymiany. Ewentualne odstępstwa należy uzasadnić wynikami analizy.
 
-Wiązka motocykla może być modyfikowana lub zaprojektowana od nowa, w tym przez zastosowanie adapterów i zmianę złączy. Samo dopasowanie wiązki nie stanowi potwierdzenia zgodności elektrycznej.
+Właściciel potwierdził nową wiązkę motocykla i nowe złącze ECU, dobrane do rozszerzonych funkcji DustONE (SYS-045). Nie wymagamy zachowania złącza starego ECU ani odtworzenia całej jego wiązki. Rozpoznajemy interfejsy zachowywanych czujników i osprzętu. Samo dopasowanie połączeń nie stanowi potwierdzenia zgodności elektrycznej.
 
 Dla wybranych modeli przed doborem interfejsów PCB należy zinwentaryzować i sprawdzić parametry czujników, cewek, wtryskiwaczy oraz pozostałych elementów wykonawczych. Wynik analizy ma wskazywać elementy zachowywane, potrzebne adaptacje i ewentualne wymiany wraz z uzasadnieniem.
 
@@ -235,6 +236,8 @@ Ustalenia właściciela projektu z 2026-10-15:
 **Potwierdzone przez właściciela:** dostępny jest cały motocykl Beta 300 RR Racing / Race Edition, rocznik 2015, przeznaczony do pierwszych testów. Wersję Racing / Race Edition wskazał właściciel. Według jego wiedzy gaźnik, układ zapłonowy i instalacja elektryczna są fabryczne. Jest to deklaracja właściciela; oznaczenia, parametry i zgodność ze stanem fabrycznym wymagają potwierdzenia podczas inwentaryzacji. Producent udostępnia instrukcje tej rodziny w [indeksie dokumentacji Beta](https://www.betamotor.com.au/support/off-road/); parametry konkretnego egzemplarza wymagają inwentaryzacji.
 
 Właściciel potwierdził 2026-10-18 brak TPS w gaźniku oraz obecność wentylatora chłodnicy, obecnie załączanego automatycznie zależnie od temperatury, bez ręcznego włącznika. Osobny sterownik wentylatora jest własnym projektem właściciela; czujnik to [B57301K0103A001 - dane i ocena integracji](interfaces/beta-czujnik-temperatury-b57301k0103a001.md), zamontowany według właściciela w przewodzie łączącym obie chłodnice, z końcówką w płynie. Ten zestaw jest odstępstwem od wcześniejszej ogólnej deklaracji fabrycznej instalacji. Schemat modułu, oznaczenia wentylatora, prądy, przebieg i kierunek przepływu w miejscu pomiaru oraz połączenia pozostają do określenia. Docelowe sterowanie i pomiar temperatury płynu według SYS-043 i SYS-044. Przeanalizowano dostarczoną instrukcję użytkownika i suplement: [mapa obwodów, tabela osprzętu i brakujące dane](interfaces/beta-2015-analiza-dokumentacji.md). Suplement ma w treści oznaczenie MY14 i pokazuje TPS; zgodność jego schematu z motocyklem pozostaje niepotwierdzona.
+
+Na zdjęciach właściciela rozpoznano [moduł zapłonowy Kokusan Denki CU7542](interfaces/beta-modul-zaplonowy-kokusan-cu7542.md) z boczną etykietą Beta 026400038 300 oraz [cewkę z oznaczeniami RC01 / IG5128 / 140822](interfaces/beta-cewka-zaplonowa-ig5128.md). Według właściciela we wtyczce starego modułu jest 8 przewodów; to informacja o osprzęcie referencyjnym. Parametry elektryczne cewki i synchronizacji pozostają do potwierdzenia. Nową wiązkę i złącze ECU projektujemy według SYS-045.
 
 Beta służy do pierwszej integracji. Jej wyposażenie nie ogranicza docelowego zakresu PCB. Wymagania dotyczące gaźnika z TPS i bez TPS, 4T oraz TPI/TBI muszą być uwzględnione przed zamknięciem projektu sprzętu, również gdy nie można ich sprawdzić na tym motocyklu. Dla 2T obowiązują SYS-032 i SYS-033; konwersja TPI nie ma jeszcze potwierdzonej zgodności.
 
