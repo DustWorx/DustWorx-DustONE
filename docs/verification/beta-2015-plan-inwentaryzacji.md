@@ -17,7 +17,7 @@ Nie potwierdzono dostępności sondy różnicowej/izolowanej ani prądowej. Samo
 
 ## Kolejność prac
 
-Właściciel potwierdził 2026-10-18, że sterownik wentylatora wykonał samodzielnie i zastosował czujnik [B57301K0103A001](../interfaces/beta-czujnik-temperatury-b57301k0103a001.md). Sterowanie obecnie automatyczne, bez ręcznego włącznika. W INV-01 zebrać schemat modułu, oznaczenia wentylatora, miejsce montażu czujnika i połączenia. Następnie ocenić wykorzystanie NTC do pomiaru temperatury płynu, zabezpieczenia i prądy roboczy/rozruchowy wentylatora (INV-06). Dokumentacja czujnika jest rozpoznana; nie przeprowadzono weryfikacji montażu ani pomiarów.
+Właściciel potwierdził 2026-10-18, że sterownik wentylatora wykonał samodzielnie i zastosował czujnik [B57301K0103A001](../interfaces/beta-czujnik-temperatury-b57301k0103a001.md). Sterowanie obecnie automatyczne, bez ręcznego włącznika. Według właściciela czujnik jest w króćcu/adapterze przewodu, a końcówka ma bezpośredni kontakt z płynem. W INV-01 zebrać schemat modułu, oznaczenia wentylatora, położenie adaptera w obiegu i połączenia; sprawdzić wykonanie montażu. Następnie ocenić wykorzystanie NTC do pomiaru temperatury płynu, zabezpieczenia i prądy roboczy/rozruchowy wentylatora (INV-06). Dokumentacja czujnika jest rozpoznana; nie przeprowadzono weryfikacji montażu ani pomiarów.
 
 | Etap | Zakres | Wynik |
 | --- | --- | --- |
