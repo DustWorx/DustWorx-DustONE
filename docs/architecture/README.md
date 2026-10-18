@@ -6,4 +6,4 @@ Stan: architektura docelowa do opracowania po określeniu silników referencyjny
 
 Analizy do decyzji:
 
-- [Wyjścia akcesoriów — porównanie realizacji](wyjscia-akcesoriow-porownanie.md): integracja stopni mocy na PCB ECU i wariant mieszany; wybór pozostaje otwarty.
+- [Wyjścia akcesoriów — porównanie realizacji](wyjscia-akcesoriow-porownanie.md): preferowany kierunek to SmartFET-y na PCB ECU; podział i parametry kanałów oraz wykonalność pełnej integracji pozostają do analizy.
