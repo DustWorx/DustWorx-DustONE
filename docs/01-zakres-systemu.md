@@ -132,6 +132,10 @@ Aplikacja Windows udostępnia eksport danych oraz jawne kasowanie historii po wy
 
 Otwarte decyzje: pojemność pamięci i zachowanie po jej zapełnieniu, zawartość i format eksportu, warunki dopuszczenia kasowania oraz zachowanie diagnostyki przy kasowaniu w obecności aktywnej usterki.
 
+### Wyjścia akcesoriów — decyzja otwarta
+
+Przed wyborem stopnia integracji właściciel wymaga porównania bezpośrednich wyjść mocy ECU z wariantem dopuszczającym zewnętrzne przekaźniki lub moduły. [Porównanie i propozycję](architecture/wyjscia-akcesoriow-porownanie.md) przygotowano do decyzji; nie zatwierdzono jeszcze architektury ani podziału kanałów. Zakres akcesoriów SYS-004 i priorytet kompaktowości SYS-035 pozostają obowiązujące.
+
 ### Kontakt z wodą i mycie — ustalenia właściciela z 2026-10-18
 
 Kompletne ECU i HMI mają znosić deszcz, błoto, zachlapania oraz chwilowe zanurzenie (SYS-036). Bezpośredni strumień myjki ciśnieniowej pozostaje poza wymaganym zakresem odporności; podczas mycia należy unikać kierowania go na ECU i HMI.
