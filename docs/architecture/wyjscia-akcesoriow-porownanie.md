@@ -1,12 +1,12 @@
 # Wyjścia akcesoriów — porównanie realizacji
 
-Data: 2026-10-18. Status: analiza i propozycja do decyzji właściciela; architektura wyjść nie jest zatwierdzona.
+Data: 2026-10-18. Status: preferencja właściciela — SmartFET-y na PCB ECU; dobór elementów, podział kanałów i wykonalność pełnej integracji pozostają do analizy.
 
 Zakres: światła, wentylator, klakson i pozostałe akcesoria według SYS-004. Tor dużego prądu rozrusznika wymaga osobnej analizy. Wyjścia zapłonu, wtrysku i zaworu wydechowego nie są przedmiotem tego porównania.
 
 ## Porównanie
 
-Wariant zintegrowany zakłada elektroniczne klucze mocy na PCB ECU. Wariant mieszany dopuszcza część takich wyjść oraz zewnętrzne przekaźniki lub moduły mocy dla wybranych odbiorników. Poniższe wnioski są oceną projektową, a nie wynikiem pomiarów DustONE.
+Wariant zintegrowany zakłada elektroniczne klucze mocy na PCB ECU. Wariant mieszany dopuszcza część takich wyjść oraz zewnętrzne przekaźniki lub moduły mocy dla wybranych odbiorników. Przekaźniki w tym porównaniu są zewnętrzne; nie proponowano ich montażu na PCB ECU. Poniższe wnioski są oceną projektową, a nie wynikiem pomiarów DustONE.
 
 | Kryterium | Wyjścia mocy na PCB ECU | Wybrane stopnie mocy poza ECU |
 | --- | --- | --- |
@@ -19,9 +19,11 @@ Wariant zintegrowany zakłada elektroniczne klucze mocy na PCB ECU. Wariant mies
 
 W obu wariantach należy zaprojektować ochronę zasilania i wiązki, stany po restarcie/utracie komunikacji oraz odporność na wodę. Elektroniczne zabezpieczenie kanału nie oznacza automatycznie rezygnacji z bezpiecznika zasilania. Bez liczby kanałów i parametrów obciążeń nie rozstrzygamy kosztu, końcowych wymiarów ani niezawodności całej instalacji.
 
-## Propozycja do zatwierdzenia
+## Preferowany kierunek i dalsza analiza
 
-Dopuścić wariant mieszany. Stosować bezpośrednie wyjścia ECU tam, gdzie analiza prądowa, cieplna i montażowa to uzasadni; zachować możliwość użycia zewnętrznego stopnia mocy dla pozostałych odbiorników. Nie przypisano jeszcze żadnego akcesorium do konkretnego rozwiązania ani nie wybrano komponentów.
+Po porównaniu właściciel zaproponował zastąpienie przekaźników SmartFET-ami w celu ograniczenia miejsca. Przyjmujemy SmartFET-y na PCB ECU jako preferowany kierunek dalszej analizy wyjść akcesoriów. Nie jest to jeszcze potwierdzenie możliwości zasilania wszystkich odbiorników bezpośrednio z ECU ani zatwierdzenie wariantu mieszanego. Nie wybrano komponentów i parametrów kanałów.
+
+Inteligentny klucz mocy łączy tranzystor z funkcjami sterowania, ochrony i diagnostyki; zakres zależy od układu [1]. Dla odbiorników zasilanych przełączanym plusem rozpatrzymy klucze high-side. Interfejs należy dopasować do sposobu podłączenia obciążenia OEM. Miejsce na PCB musi obejmować także miedź odprowadzającą ciepło, tory prądowe, otoczenie układu i złącza. Straty przewodzenia oceniamy z P = I² × R; uwzględniamy rezystancję w temperaturze pracy i równoczesne obciążenie kanałów. Sam mały rozmiar obudowy układu nie potwierdza docelowych gabarytów ECU.
 
 Przed zatwierdzeniem podziału kanałów zebrać: prądy robocze i rozruchowe, czas jednoczesnej pracy, rodzaj obciążenia, wymagania sterowania i diagnostyki, przekroje/trasy przewodów, parametry złączy oraz warunki chłodzenia szczelnej obudowy. Porównywać przestrzeń zajętą przez kompletny układ zgodnie z SYS-035.
 
