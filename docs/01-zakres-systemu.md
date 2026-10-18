@@ -22,7 +22,7 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-008 | Aplikacja umożliwia dostosowanie wyglądu ekranu HMI. |
 | SYS-009 | Aplikacja umożliwia diagnostykę ECU i HMI. |
 | SYS-010 | Aplikacja umożliwia aktualizację oprogramowania ECU i HMI. |
-| SYS-011 | Aplikacja zawiera narzędzia rozwojowe do testowania i debugowania ECU oraz komunikacji CAN. |
+| SYS-011 | Development tool w aplikacji Windows umożliwia podgląd danych i logów, testy wejść/wyjść oraz analizę, wysyłanie i rejestrowanie ramek CAN. Debugowanie kodu przez debugger procesora odbywa się w osobnym środowisku programistycznym. |
 | SYS-012 | ECU obsługuje silniki z gaźnikiem oraz z wtryskiem paliwa. Rodzaje i parametry układów wtryskowych pozostają do ustalenia. |
 | SYS-013 | ECU jest przeznaczone do instalacji motocykla z akumulatorem o napięciu nominalnym 12 V. Zakres napięć pracy i zachowanie podczas rozruchu pozostają do określenia. |
 | SYS-014 | ECU obsługuje silniki z gaźnikiem bez TPS oraz z gaźnikiem z TPS (czujnikiem położenia przepustnicy). |
@@ -120,7 +120,7 @@ Do ustalenia: minimalne napięcie i dostępny prąd pod obciążeniem, chemia i 
 | HMI | Odczyt przełączników kierownicy i polecenia do ECU przez CAN (SYS-016); menu i ekrany obsługiwane fizycznymi przyciskami, ekran bez dotyku (SYS-017). Główny panel zastępujący licznik (SYS-018). Do ustalenia: ekran, liczba i rodzaje wejść przycisków, szczegółowy zakres i źródła danych, sposób zachowania przebiegu oraz zakres personalizacji. |
 | Połączenie z PC | Połączenie przewodowe (SYS-026), jeden wspólny punkt i jeden kabel do standardowej obsługi ECU/HMI (SYS-027). Do ustalenia: interfejs fizyczny, lokalizacja złącza, realizacja dostępu do obu urządzeń i zasady aktualizacji/odzyskiwania. CAN między ECU i HMI nie przesądza interfejsu komputera. |
 | Diagnostyka | Zapis DTC i powiązanych freeze frame w ECU; odczyt w aplikacji Windows i rozróżnienie usterek aktywnych oraz historycznych (SYS-019, SYS-020). Oznaczanie czasu według SYS-021. Trwałość historii i wygaszanie ostrzeżeń według SYS-022 i SYS-023. Pierwsze/ostatnie wystąpienie i licznik według SYS-024; eksport i ręczne kasowanie według SYS-025. Szczegóły rejestracji, obsługi pełnej pamięci i realizacji zegara do określenia. |
-| Debugowanie | Rozróżnić podgląd danych, testy wyjść i analizę CAN od debugowania programu przez interfejs debuggera. |
+| Narzędzia rozwojowe | Zakres aplikacji ustalony według SYS-011; debugowanie kodu w osobnym środowisku. Do określenia: szczegóły testów wejść/wyjść, warunki dopuszczenia i przerwania testu, funkcje analizy CAN, format logów, przepustowość oraz sprzętowy dostęp debuggera. |
 | Warunki pracy | Zastosowanie ustalone: sport i testy poza drogami publicznymi. Do określenia: temperatura, woda, pył, drgania i miejsce montażu. |
 
 ## 5. Następny rezultat inżynierski
