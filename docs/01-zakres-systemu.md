@@ -224,6 +224,8 @@ Ustalenia właściciela projektu z 2026-10-15:
 
 **Potwierdzone przez właściciela:** dostępny jest cały motocykl Beta 300 RR Racing / Race Edition, rocznik 2015, przeznaczony do pierwszych testów. Wersję Racing / Race Edition wskazał właściciel. Według jego wiedzy gaźnik, układ zapłonowy i instalacja elektryczna są fabryczne. Jest to deklaracja właściciela; oznaczenia, parametry i zgodność ze stanem fabrycznym wymagają potwierdzenia podczas inwentaryzacji. Producent udostępnia instrukcje tej rodziny w [indeksie dokumentacji Beta](https://www.betamotor.com.au/support/off-road/); parametry konkretnego egzemplarza wymagają inwentaryzacji.
 
+Właściciel potwierdził 2026-10-18 brak TPS w gaźniku tego egzemplarza. Przeanalizowano dostarczoną instrukcję użytkownika i suplement: [mapa obwodów, tabela osprzętu i brakujące dane](interfaces/beta-2015-analiza-dokumentacji.md). Suplement ma w treści oznaczenie MY14 i pokazuje TPS; zgodność jego schematu z motocyklem pozostaje niepotwierdzona.
+
 Beta służy do pierwszej integracji. Jej wyposażenie nie ogranicza docelowego zakresu PCB. Wymagania dotyczące gaźnika z TPS i bez TPS, 4T oraz TPI/TBI muszą być uwzględnione przed zamknięciem projektu sprzętu, również gdy nie można ich sprawdzić na tym motocyklu. Dla 2T obowiązują SYS-032 i SYS-033; konwersja TPI nie ma jeszcze potwierdzonej zgodności.
 
 Weryfikację dzielimy na próby dostępne na Becie oraz próby stanowiskowe i późniejsze próby na innych jednostkach. Wynik na Becie nie potwierdza zgodności z pozostałymi wariantami. Właściciel dopuszcza późniejsze testy funkcji nieweryfikowalnych na dostępnym motocyklu; plan weryfikacji należy przygotować wraz z wymaganiami.
