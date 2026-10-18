@@ -4,7 +4,7 @@ Data: 2026-10-18. Status: zidentyfikowany przez właściciela element istniejąc
 
 ## Ustalenia właściciela
 
-Sterownik wentylatora jest własnym projektem właściciela. Wykorzystuje czujnik B57301K0103A001 i załącza wentylator automatycznie, bez ręcznego włącznika. Miejsce montażu czujnika, połączenia, schemat i parametry istniejącego sterownika nie zostały jeszcze przekazane.
+Sterownik wentylatora jest własnym projektem właściciela. Wykorzystuje czujnik B57301K0103A001 i załącza wentylator automatycznie, bez ręcznego włącznika. Właściciel potwierdził montaż czujnika w króćcu lub adapterze przewodu chłodzenia, z końcówką mającą bezpośredni kontakt z płynem. Położenie względem kierunku przepływu, szczegóły mechaniczne, połączenia, schemat i parametry istniejącego sterownika pozostają do ustalenia. Montażu nie zweryfikowano oględzinami ani pomiarami.
 
 ## Dane producenta
 
@@ -30,6 +30,6 @@ Producent opisuje sondę zanurzeniową do urządzeń wodnych; podaje również p
 - Wymagany zakres temperatur pomiaru i dopuszczalne warunki pracy silnika trzeba porównać z limitem 110°C tego zespołu. Tabela R/T obejmująca wyższe temperatury nie rozszerza dopuszczalnego zakresu pracy sondy.
 - Do ustalenia: pobudzenie, rezystor odniesienia, tor ADC, filtracja, zabezpieczenia i wykrywanie przerwy/zwarcia. Sprawdzić budżet błędu, samonagrzewanie, tolerancje i opóźnienie całego pomiaru; ±2% rezystancji nie oznacza ±2°C.
 - Po poznaniu schematu istniejącego sterownika określić docelowe połączenie czujnika z ECU i dalszą rolę obecnego modułu. Nie zatwierdzono współdzielenia jednego NTC przez dwa tory pomiarowe.
-- Powiązać interpretację wskazania i progi wentylatora z miejscem pomiaru. Do czasu potwierdzenia montażu nie określono, czy czujnik mierzy płyn bezpośrednio.
+- Powiązać interpretację wskazania i progi wentylatora z miejscem pomiaru. Według właściciela końcówka mierzy płyn bezpośrednio; do ustalenia pozostaje, czy jest to dopływ do chłodnicy, czy powrót do silnika, oraz ocena głębokości zanurzenia i szczelności adaptera.
 
 Nie dobrano elementów wejścia ADC ani wartości progów. Obsługa tego czujnika w Becie nie ogranicza docelowej zgodności ECU do jednego typu NTC.
