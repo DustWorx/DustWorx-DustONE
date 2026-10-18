@@ -38,6 +38,8 @@ Sprawdzić wspólne masy kanałów, uziemienie, połączenia USB/ładowarek i li
 
 ## Dokumentacja źródłowa i zapis wyników
 
+Właściciel potwierdził 2026-10-18 posiadanie instrukcji serwisowej lub schematu oraz suplementu wersji Racing dla motocykla referencyjnego. Plików nie przekazano jeszcze do analizy; tytuły, rewizje, zakres roczników i zawartość wymagają sprawdzenia. Posiadanie dokumentacji nie oznacza zakończenia INV-02 ani potwierdzenia pinów i osprzętu konkretnego egzemplarza.
+
 [Indeks Beta Motorcycles Australia](https://www.betamotor.com.au/support/off-road/) wymienia instrukcję serwisową 2015 250/300 RR/RACING 2T, instrukcję użytkownika 2015 RR 2T i suplement Race 2T. Podczas sprawdzenia 2026-10-18 odsyłacze do plików przekierowywały do logowania SharePoint; treści instrukcji i pinoutów nie zweryfikowano. Nie przenosimy danych innego rocznika na egzemplarz właściciela bez potwierdzenia.
 
 Dla każdego pomiaru zapisać: obiekt i oznaczenia styków, warunki, przyrząd/sondę, odniesienie masy, tłumienie, ustawienia rejestracji, jednostki, wynik i plik źródłowy. Odróżniać dane producenta, deklarację właściciela, pomiar i hipotezę. Kryteria oceny ustalimy przed daną próbą; nie ma jeszcze wyników ani potwierdzonych parametrów elektrycznych.
