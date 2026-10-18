@@ -47,6 +47,7 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-031 | Pomiar temperatury powietrza dolotowego do kompensacji wtrysku jest realizowany przez fabryczny lub zewnętrzny czujnik IAT. Temperatura mierzona na PCB stanowi osobny pomiar ECU. |
 | SYS-032 | Sterowanie pompą dozującą olej do silnika 2T pozostaje poza zakresem ECU; nie projektujemy dla niej dedykowanej funkcji sprzętowej ani programowej. |
 | SYS-033 | Warunkiem montażu ECU w motocyklu 2T jest przystosowanie silnika do mieszanki paliwowo-olejowej przygotowanej w zbiorniku. W motocyklu z oddzielnym dozowaniem wymagane jest sprzętowe usunięcie pompy i odpowiednie przystosowanie układu paliwowego/smarowania. Zgodność danej konwersji wymaga oceny i walidacji; sam demontaż pompy jej nie potwierdza. |
+| SYS-034 | ECU steruje elektronicznym zaworem wydechowym (power valve) w silnikach 2T wyposażonych w taki napęd. Typy napędów, wymagane sygnały sterujące i ewentualne sprzężenie zwrotne dobierzemy do docelowych silników. |
 
 ## 3. Proponowany podział odpowiedzialności
 
@@ -150,6 +151,7 @@ Do ustalenia: minimalne napięcie i dostępny prąd pod obciążeniem, chemia i 
 | Synchronizacja | Czujniki wału i ewentualnie wałka, ich sygnały oraz układy znaczników. |
 | Układ paliwowy | Rodzaj układu wtryskowego, liczba i parametry wtryskiwaczy, sterowanie pompą paliwa. Dla 2T warunek pracy na mieszance według SYS-033; konwersja TPI wymaga osobnej oceny. |
 | Smarowanie 2T | Pompa dozująca olej wyłączona z ECU (SYS-032). Montaż po przystosowaniu silnika do mieszanki (SYS-033); sposób i walidacja konwersji TPI pozostają otwarte. |
+| Zawór wydechowy 2T | Sterowanie elektronicznym power valve wymagane według SYS-034. Do określenia: typ napędu i interfejs, parametry zasilania i sterowania, sygnały położenia, kalibracja, diagnostyka oraz zachowanie przy usterce. |
 | Instalacja | Akumulator nominalnie 12 V (SYS-013). Do określenia: zakres napięć, chemia akumulatora i warunki rozruchu. Pożądany rozruch kopniakiem z osłabionym, podłączonym akumulatorem; rozruch bez energii z akumulatora nie jest wymagany. |
 | Akcesoria | Zakres rozszerzony według SYS-004. Do określenia: podział świateł przednich na funkcje, liczba niezależnych kanałów i wyjść konfigurowalnych, prądy robocze i rozruchowe, sterowanie bezpośrednie lub przez przekaźniki/styczniki, zabezpieczenia i diagnostyka wyjść. |
 | Pomiary | Dodatkowy zakres według SYS-029–SYS-031: ciśnienie atmosferyczne i temperatura na PCB, tor ciśnienia paliwa oraz wejście ciśnienia oleju 0/1. Temperatura dolotu pochodzi z IAT, temperatura PCB jest osobnym pomiarem ECU. Do określenia: parametry, czujniki, dokładność, zabezpieczenia, kalibracja i diagnostyka. EGT i lambda są pomiarami zewnętrznymi podczas strojenia. |
