@@ -49,6 +49,7 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-033 | Warunkiem montażu ECU w motocyklu 2T jest przystosowanie silnika do mieszanki paliwowo-olejowej przygotowanej w zbiorniku. W motocyklu z oddzielnym dozowaniem wymagane jest sprzętowe usunięcie pompy i odpowiednie przystosowanie układu paliwowego/smarowania. Zgodność danej konwersji wymaga oceny i walidacji; sam demontaż pompy jej nie potwierdza. |
 | SYS-034 | ECU steruje elektronicznym zaworem wydechowym (power valve) w silnikach 2T wyposażonych w taki napęd. Typy napędów, wymagane sygnały sterujące i ewentualne sprzężenie zwrotne dobierzemy do docelowych silników. |
 | SYS-035 | Priorytetem projektowym jest możliwie maksymalna kompaktowość ECU do motocykli enduro. Ocenie podlega kompletne urządzenie: PCB, obudowa, złącza i przestrzeń instalacyjna na wyprowadzenie wiązki. Liczbowe limity gabarytów pozostają do określenia po analizie miejsca montażu i architektury sprzętu. |
+| SYS-036 | Kompletne ECU i HMI mają znosić deszcz, błoto, zachlapania oraz chwilowe zanurzenie, np. podczas brodzenia lub upadku w wodzie. Wymaganie obejmuje obudowy, złącza i przepusty. Głębokość, czas, warunki zanurzenia i kryteria prób pozostają do określenia. |
 
 ## 3. Proponowany podział odpowiedzialności
 
@@ -121,6 +122,12 @@ Aplikacja Windows udostępnia eksport danych oraz jawne kasowanie historii po wy
 
 Otwarte decyzje: pojemność pamięci i zachowanie po jej zapełnieniu, zawartość i format eksportu, warunki dopuszczenia kasowania oraz zachowanie diagnostyki przy kasowaniu w obecności aktywnej usterki.
 
+### Kontakt z wodą i mycie — ustalenia właściciela z 2026-10-18
+
+Kompletne ECU i HMI mają znosić deszcz, błoto, zachlapania oraz chwilowe zanurzenie (SYS-036). Bezpośredni strumień myjki ciśnieniowej pozostaje poza wymaganym zakresem odporności; podczas mycia należy unikać kierowania go na ECU i HMI.
+
+Przed projektem mechanicznym określimy głębokość i czas zanurzenia, warunki prób oraz kryteria akceptacji. Należy zdefiniować stan zasilania urządzeń, stan złączy i zaślepek oraz uwzględnić przepusty i wyrównywanie ciśnienia wymagane przez barometr ECU. Nie wybrano jeszcze stopnia IP ani rozwiązania uszczelnienia; deklaracja odporności wymaga weryfikacji kompletnego urządzenia.
+
 ### Polecenia z kierownicy i utrata komunikacji
 
 Ustalony tor sterowania akcesoriami: przyciski i przełączniki → HMI → CAN → ECU → odbiorniki. Interfejsy wejściowe HMI muszą zostać dobrane do zachowywanych elementów obsługi kierownicy. Podłączenie zwykłych przełączników akcesoriów bezpośrednio do ECU nie jest wymagane w wybranym wariancie.
@@ -161,7 +168,7 @@ Do ustalenia: minimalne napięcie i dostępny prąd pod obciążeniem, chemia i 
 | Diagnostyka | Zapis DTC i powiązanych freeze frame w ECU; odczyt w aplikacji Windows i rozróżnienie usterek aktywnych oraz historycznych (SYS-019, SYS-020). Oznaczanie czasu według SYS-021. Trwałość historii i wygaszanie ostrzeżeń według SYS-022 i SYS-023. Pierwsze/ostatnie wystąpienie i licznik według SYS-024; eksport i ręczne kasowanie według SYS-025. Szczegóły rejestracji, obsługi pełnej pamięci i realizacji zegara do określenia. |
 | Mapy silnika | Maksymalnie 3 zestawy map w ECU i przełączanie z HMI także podczas pracy silnika (SYS-028). Do określenia: zakres map, warunki i sposób przełączenia, walidacja zestawów oraz warunki ich zapisu. |
 | Narzędzia rozwojowe | Zakres aplikacji ustalony według SYS-011; debugowanie kodu w osobnym środowisku. Do określenia: szczegóły testów wejść/wyjść, warunki dopuszczenia i przerwania testu, funkcje analizy CAN, format logów, przepustowość oraz sprzętowy dostęp debuggera. |
-| Warunki pracy | Zastosowanie ustalone: sport i testy poza drogami publicznymi. Do określenia: temperatura, woda, pył, drgania i miejsce montażu. |
+| Warunki pracy | Zastosowanie: sport i testy poza drogami publicznymi. Deszcz, błoto, zachlapania i chwilowe zanurzenie według SYS-036. Bezpośredni strumień myjki ciśnieniowej wyłączony z wymagań. Do określenia: parametry i kryteria prób wodnych, temperatura, pył, drgania i miejsce montażu. |
 | Gabaryty i montaż ECU | Priorytet: maksymalna kompaktowość według SYS-035. Właściciel nie wskazał wymiarów ani wybranej obudowy. Do określenia: miejsce i dostępna przestrzeń montażowa, obrys PCB i obudowy, złącza, wyprowadzenie wiązki, mocowanie oraz bilans cieplny. |
 
 ## 5. Następny rezultat inżynierski
