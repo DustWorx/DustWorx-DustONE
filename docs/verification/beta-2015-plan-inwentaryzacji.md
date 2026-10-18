@@ -17,13 +17,15 @@ Nie potwierdzono dostępności sondy różnicowej/izolowanej ani prądowej. Samo
 
 ## Kolejność prac
 
-Właściciel potwierdził 2026-10-18 zamontowany wentylator chłodnicy. Uwzględnić go w INV-01 i INV-06; ustalić oznaczenia, obecny tor sterowania, zabezpieczenia oraz prądy roboczy i rozruchowy. Sama obecność nie potwierdza typu zestawu ani docelowych parametrów kanału ECU.
+Zapłon: [karta modułu Kokusan CU7542](../interfaces/beta-modul-zaplonowy-kokusan-cu7542.md) zawiera odczyt zdjęć IMG_3020.JPG i IMG_3021.JPG oraz deklarowane 8 przewodów starego złącza. Z IMG_3019.JPG odczytano [oznaczenia cewki RC01 / IG5128 / 140822](../interfaces/beta-cewka-zaplonowa-ig5128.md). Parametry cewki i źródła synchronizacji pozostają otwarte. Projektujemy nową wiązkę i nowe złącze ECU (SYS-045); INV-01/03 dotyczą rozpoznania zachowywanych elementów, a nie odtwarzania całego pinoutu starego CDI.
+
+Właściciel potwierdził 2026-10-18, że sterownik wentylatora wykonał samodzielnie i zastosował czujnik [B57301K0103A001](../interfaces/beta-czujnik-temperatury-b57301k0103a001.md). Sterowanie obecnie automatyczne, bez ręcznego włącznika. Według właściciela czujnik jest w króćcu/adapterze przewodu łączącego obie chłodnice, a końcówka ma bezpośredni kontakt z płynem. W INV-01 zebrać schemat modułu, oznaczenia wentylatora, przebieg i kierunek przepływu w miejscu adaptera oraz połączenia; sprawdzić wykonanie montażu. Następnie ocenić wykorzystanie NTC do pomiaru temperatury płynu, zabezpieczenia i prądy roboczy/rozruchowy wentylatora (INV-06). Dokumentacja czujnika jest rozpoznana; nie przeprowadzono weryfikacji montażu ani pomiarów.
 
 | Etap | Zakres | Wynik |
 | --- | --- | --- |
-| INV-01 | Oznaczenia motocykla, gaźnika, modułu zapłonowego, cewki, regulatora, akumulatora i dostępnych czujników; fotografie złączy, liczba styków i przebieg wiązki. | Karta osprzętu: oznaczenie, lokalizacja, złącze, źródło identyfikacji i status potwierdzenia. |
+| INV-01 | Oznaczenia motocykla, gaźnika, modułu zapłonowego, cewki, regulatora, akumulatora i dostępnych czujników; przyłącza zachowywanych elementów i ich lokalizacja. | Karta osprzętu: oznaczenie, lokalizacja, interfejs, źródło identyfikacji i status potwierdzenia. |
 | INV-02 | Zebranie instrukcji rocznika/modelu i schematu, sprawdzenie zgodności z wyposażeniem egzemplarza. | Lista dokumentów z rewizją i stronami; mapa obwodów, bez zgadywania pinów według koloru przewodu. |
-| INV-03 | Oględziny i pomiary nieaktywnej instalacji według potwierdzonego schematu; ustalenie połączeń mas i styków przełączników. | Mapa połączeń i stanów. Ciągłość/rezystancję badać wyłącznie w odpowiednio odłączonych, pozbawionych zasilania obwodach. |
+| INV-03 | Oględziny i pomiary przyłączy zachowywanych elementów, mas i styków przełączników, potrzebne do nowej wiązki. | Potwierdzone interfejsy i stany; nie jest wymagane odtworzenie całej starej wiązki. Ciągłość/rezystancję badać wyłącznie w odpowiednio odłączonych, pozbawionych zasilania obwodach. |
 | INV-04 | Po identyfikacji punktów i przyrządów: plan pomiaru napięcia akumulatora, zasilania odbiorników i spadków podczas rozruchu. | Przebiegi z warunkami, minimum napięcia i czasem spadku; identyfikacja obwodów AC/DC. |
 | INV-05 | Po ustaleniu toru pomiarowego: charakterystyka sygnału synchronizacji podczas kopania/rozruchu i pracy silnika. | Amplituda, polaryzacja, kształt i odstępy impulsów, odniesienie pomiaru i warunki. |
 | INV-06 | Po identyfikacji odbiorników: charakterystyki obciążeń świateł, klaksonu, wentylatora i toru sterowania rozrusznikiem, o ile są dostępne. | Prądy robocze, rozruchowe, czas pracy i równoczesność; podstawa do doboru SmartFET-ów i złączy. |

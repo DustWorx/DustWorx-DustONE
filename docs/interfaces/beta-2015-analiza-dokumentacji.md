@@ -36,7 +36,7 @@ Zauważono błąd angielskiej legendy B: pozycje 21 i 24 powtarzają błędne ok
 | --- | --- | --- | --- |
 | Akumulator | 26; zaciski 25/32 | 29; zaciski 28/33 | W obu legendach 12 V, 4 Ah; aktualny model i chemia do sprawdzenia. |
 | Generator / regulator | 27 / 18 | 30 / 18 | Oznaczenia, uzwojenia, prostowanie i przebiegi do identyfikacji. |
-| Moduł zapłonowy / cewka / świeca | 33 / 34 / 35 | 35 / 36 / 37 | Potrzebne oznaczenia OEM, złącza, parametry energii i sterowania. |
+| Moduł zapłonowy / cewka / świeca | 33 / 34 / 35 | 35 / 36 / 37 | Zdjęcia: [Kokusan CU7542, etykieta Beta 026400038 300](beta-modul-zaplonowy-kokusan-cu7542.md) oraz [cewka IG5128](beta-cewka-zaplonowa-ig5128.md). Parametry energii i sterowania do ustalenia; nowa wiązka i złącze ECU według SYS-045. |
 | Przekaźnik / silnik rozrusznika | 31 / 30 | 31 / 32 | Prąd cewki, tłumienie przepięć i tor dużego prądu do ustalenia. |
 | Bezpiecznik / masy | 28 / 29, 37 | 27 / 26, 38 | Bezpiecznik opisany 10 A; podział zabezpieczeń do odtworzenia na egzemplarzu. |
 | START / gaszenie silnika | 3 / 12 | 3 / 11 | Stan styków, odniesienie elektryczne i reakcje na uszkodzenia do potwierdzenia. |
@@ -46,7 +46,7 @@ Zauważono błąd angielskiej legendy B: pozycje 21 i 24 powtarzają błędne ok
 | Kierunkowskazy przód P/L, tył L/P | 1/17, 21/23 | 1/17, 21/24 | 12 V 10 W na lampę według legend; prądy załączania do pomiaru. |
 | Tył LED / oświetlenie tablicy | 22 / 24 | 22 / 23 | Funkcje pozycyjne/STOP i rzeczywiste prądy do potwierdzenia. |
 | Klakson / jego przycisk | 11 / 13 | 41 / 12 | Klakson opisany 12 V; prąd niepodany. |
-| Wentylator / przerywacz | 19 / 20 | 19 / 20 | W dokumentach wentylator jest opcją; właściciel potwierdził 2026-10-18 obecność i automatyczne załączanie według temperatury, bez ręcznego włącznika. Model, prądy, typ czujnika/termowłącznika i połączenia do ustalenia; zgodność z przedstawionym zestawem OEM niepotwierdzona. |
+| Wentylator / przerywacz | 19 / 20 | 19 / 20 | Obecny sterownik wentylatora jest własnym projektem właściciela, działa automatycznie bez ręcznego włącznika i wykorzystuje [NTC B57301K0103A001](beta-czujnik-temperatury-b57301k0103a001.md), według właściciela z końcówką w płynie w przewodzie łączącym obie chłodnice. Schemat modułu, wentylator, prądy, kierunek przepływu i połączenia do ustalenia. Numery dotyczą dokumentów, nie potwierdzają zgodności z zestawem OEM. |
 | TPS / przełącznik map / kondensator | Brak osobnych pozycji w legendzie | 34 / 10 / 16 | Według B kondensator 4700 µF, przełącznik wybiera dwie mapy (s. 3). Właściciel potwierdza brak TPS w swojej Becie. |
 
 A s. 22 wskazuje gaźnik PWK 36S AG; A s. 23 opisuje odśrodkowy zawór wydechowy ze sprężynami. Są to dane instrukcji, nie wyniki oględzin Racing 2015. Mechaniczny zawór w wariancie zgodnym z A nie pozwoli zweryfikować wymaganego elektronicznego power valve na tym motocyklu.
@@ -71,4 +71,4 @@ Kolejność: oznaczenia i fotografie osprzętu, porównanie z dokumentami, mapa 
 
 ## 5. Stan weryfikacji
 
-Przeczytano dane i legendy oraz obejrzano schemat A s. 24 i B s. 4. Schemat A ma ograniczoną czytelność drobnych oznaczeń w dostarczonym PDF. Nie ustalono zweryfikowanego pinoutu, numerów części ani zgodności z instalacją motocykla. Nie wykonano pomiarów i prób. Brak elementu w legendzie nie jest dowodem jego braku w egzemplarzu. Opracowanie przechowujemy w repozytorium; źródła PDF identyfikujemy nazwą, stronami i sumą kontrolną.
+Przeczytano dane i legendy oraz obejrzano schemat A s. 24 i B s. 4. Schemat A ma ograniczoną czytelność drobnych oznaczeń w dostarczonym PDF. Oznaczenia CDI i cewki odczytano z późniejszych zdjęć właściciela; szczegóły w kartach powyżej. Nie potwierdzono parametrów elektrycznych ani pełnej zgodności schematów z egzemplarzem. Nowa wiązka i złącze ECU podlegają SYS-045. Nie wykonano pomiarów i prób. Brak elementu w legendzie nie jest dowodem jego braku w egzemplarzu. Opracowanie przechowujemy w repozytorium; źródła PDF identyfikujemy nazwą, stronami i sumą kontrolną.
