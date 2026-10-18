@@ -43,7 +43,8 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-027 | Podczas standardowej obsługi jeden kabel podłączony do jednego wspólnego punktu zapewnia aplikacji Windows dostęp do ECU i HMI, obejmujący konfigurację, diagnostykę i aktualizacje obu urządzeń. |
 | SYS-028 | ECU przechowuje maksymalnie 3 zestawy map dla skonfigurowanego silnika. Użytkownik może przełączać aktywny zestaw z HMI także podczas pracy silnika. Warunki i sposób przełączenia wymagają określenia w specyfikacji sterowania. |
 | SYS-029 | ECU posiada tor pomiaru wartości ciśnienia paliwa oraz wejście binarne czujnika/wyłącznika ciśnienia oleju, rozróżniające obecność i brak ciśnienia. Parametry elektryczne, zakres pomiaru paliwa i logika wejścia oleju pozostają do ustalenia. |
-| SYS-030 | PCB ECU zawiera pomiar ciśnienia atmosferycznego oraz temperatury. Barometr służy do kompensacji pracy wtrysku; rola temperatury z PCB w kompensacji wymaga doprecyzowania z uwzględnieniem miejsca pomiaru i nagrzewania ECU. |
+| SYS-030 | PCB ECU zawiera pomiar ciśnienia atmosferycznego do kompensacji pracy wtrysku oraz osobny pomiar temperatury ECU. |
+| SYS-031 | Pomiar temperatury powietrza dolotowego do kompensacji wtrysku jest realizowany przez fabryczny lub zewnętrzny czujnik IAT. Temperatura mierzona na PCB stanowi osobny pomiar ECU. |
 
 ## 3. Proponowany podział odpowiedzialności
 
@@ -63,16 +64,24 @@ Propozycje do uwzględnienia w wymaganiach szczegółowych:
 
 Wcześniejsze ogólne wymaganie dodatkowych wejść uszczegółowiono do następującego zakresu:
 
-- **Na PCB:** ciśnienie atmosferyczne i temperatura; intencją właściciela jest wsparcie kompensacji wtrysku.
+- **Na PCB:** barometr do kompensacji wtrysku oraz osobny pomiar temperatury ECU. Temperaturę dolotu mierzy IAT.
 - **Zewnętrzny czujnik ciśnienia paliwa:** tor pomiaru wartości ciśnienia.
 - **Czujnik/wyłącznik ciśnienia oleju:** wejście binarne „ciśnienie obecne / brak ciśnienia”, bez wymaganego pomiaru jego wartości.
 - **EGT i szerokopasmowa lambda:** pomiary przyrządami zewnętrznymi podczas strojenia; nie są wymagane zintegrowane tory tych pomiarów w ECU.
 
 Do określenia przed projektem torów: interfejs i zakres czujnika paliwa, poziomy i polaryzacja wejścia oleju, diagnostyka przewodów i czujników, zasady aktywacji pomiarów w danym wariancie silnika oraz dokładność i częstotliwość pomiarów. Pomiar barometryczny wymaga uwzględnienia wyrównywania ciśnienia z otoczeniem w projekcie obudowy.
 
-**Otwarta kwestia temperatury:** czujnik na PCB jest podatny na wpływ temperatury płytki i samonagrzewania. Ilustruje to [dokumentacja Bosch BME280, uwaga 7 do dokładności temperatury](https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bme280-ds002.pdf). Jest to odniesienie do zjawiska, nie wybór komponentu. Nie potwierdzono, że temperatura z PCB może zastąpić pomiar temperatury dolotu IAT. Propozycja inżynierska: pomiar temperatury dolotu przez fabryczny lub zewnętrzny IAT, a temperatura PCB jako osobny pomiar ECU; właściciel otrzymał pytanie o ten podział.
+**Podział temperatur potwierdzony przez właściciela:** do kompensacji wtrysku wykorzystujemy fabryczny lub zewnętrzny IAT, a temperaturę na PCB traktujemy jako osobny pomiar ECU (SYS-030, SYS-031). Parametry IAT i sposób pomiaru temperatury ECU określimy przy doborze interfejsów i komponentów. Uzasadnienie rozdzielenia: wpływ temperatury płytki i samonagrzewania na pomiar ilustruje [dokumentacja Bosch BME280, uwaga 7 do dokładności temperatury](https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bme280-ds002.pdf); przywołanie dokumentu nie jest wyborem komponentu.
 
 Zakres podstawowych czujników dla docelowych układów wtryskowych określimy osobno. Przykładowo [KTM EXC TBI MY2024](https://www.ktm.com/en-ca/2024-enduro-range-press-kit.html) wykorzystuje m.in. temperaturę powietrza, ciśnienie otoczenia i ciśnienie w skrzyni korbowej; samo wskazanie barometru nie definiuje kompletnego zestawu sygnałów sterowania.
+
+### Otwarta zależność: smarowanie 2T a zgodność z TPI
+
+W odpowiedzi na pytanie 27 właściciel wskazał preferencję pracy 2T wyłącznie na mieszance przygotowanej w zbiorniku i wyłączenia sterowania pompą dozującą olej. Wymaga to rozstrzygnięcia względem wcześniejszego wymagania zgodności z seryjnym TPI (SYS-015).
+
+[Instrukcja KTM 250/300 EXC TPI MY2022, rozdziały 9.8–9.9, strona drukowana 49](https://en.enduro.team/images/9/9a/2022_KTM_250-300_EXC_TPI_OM_eng.pdf) wymaga oddzielnego smarowania i wyklucza tankowanie mieszanki. [Opis producenta](https://www.ktm.com/en-ph/models/enduro/2-stroke/ktm-300-exc-tpi-sixdays2022.html) wskazuje dozowanie oleju do przepustnicy dla smarowania m.in. wału korbowego, przy wtrysku paliwa do kanałów przepłukujących.
+
+Wniosek projektowy: obsługa seryjnego TPI wymaga uwzględnienia jego układu smarowania; sama deklaracja użycia mieszanki nie zapewnia tej zgodności. Właściciel otrzymał pytanie 28 o zachowanie sterowania pompą w wymagających tego silnikach albo ograniczenie listy obsługiwanych układów. Do rozstrzygnięcia nie zamykamy zakresu wyjść smarowania ani zgodności z seryjnym TPI. Nie wybrano rozwiązania zastępczego lub konwersji smarowania.
 
 ### Zestawy map silnika — ustalenie właściciela
 
@@ -142,7 +151,7 @@ Do ustalenia: minimalne napięcie i dostępny prąd pod obciążeniem, chemia i 
 | Układ paliwowy | Rodzaj układu wtryskowego, liczba i parametry wtryskiwaczy, sterowanie pompą. |
 | Instalacja | Akumulator nominalnie 12 V (SYS-013). Do określenia: zakres napięć, chemia akumulatora i warunki rozruchu. Pożądany rozruch kopniakiem z osłabionym, podłączonym akumulatorem; rozruch bez energii z akumulatora nie jest wymagany. |
 | Akcesoria | Zakres rozszerzony według SYS-004. Do określenia: podział świateł przednich na funkcje, liczba niezależnych kanałów i wyjść konfigurowalnych, prądy robocze i rozruchowe, sterowanie bezpośrednie lub przez przekaźniki/styczniki, zabezpieczenia i diagnostyka wyjść. |
-| Pomiary | Dodatkowy zakres według SYS-029 i SYS-030: ciśnienie atmosferyczne i temperatura na PCB, tor ciśnienia paliwa oraz wejście ciśnienia oleju 0/1. Do określenia: rola temperatury PCB względem IAT, parametry, czujniki, dokładność, zabezpieczenia, kalibracja i diagnostyka. EGT i lambda są pomiarami zewnętrznymi podczas strojenia. |
+| Pomiary | Dodatkowy zakres według SYS-029–SYS-031: ciśnienie atmosferyczne i temperatura na PCB, tor ciśnienia paliwa oraz wejście ciśnienia oleju 0/1. Temperatura dolotu pochodzi z IAT, temperatura PCB jest osobnym pomiarem ECU. Do określenia: parametry, czujniki, dokładność, zabezpieczenia, kalibracja i diagnostyka. EGT i lambda są pomiarami zewnętrznymi podczas strojenia. |
 | HMI | Odczyt przełączników kierownicy i polecenia do ECU przez CAN (SYS-016); menu i ekrany obsługiwane fizycznymi przyciskami, ekran bez dotyku (SYS-017). Główny panel zastępujący licznik (SYS-018). Do ustalenia: ekran, liczba i rodzaje wejść przycisków, szczegółowy zakres i źródła danych, sposób zachowania przebiegu i ograniczenia zasobów ekranów. Zakres personalizacji według SYS-008; do określenia edytor, format projektu ekranów oraz prezentacja ostrzeżeń w układach użytkownika. |
 | Połączenie z PC | Połączenie przewodowe (SYS-026), jeden wspólny punkt i jeden kabel do standardowej obsługi ECU/HMI (SYS-027). Do ustalenia: interfejs fizyczny, lokalizacja złącza, realizacja dostępu do obu urządzeń i zasady aktualizacji/odzyskiwania. CAN między ECU i HMI nie przesądza interfejsu komputera. |
 | Diagnostyka | Zapis DTC i powiązanych freeze frame w ECU; odczyt w aplikacji Windows i rozróżnienie usterek aktywnych oraz historycznych (SYS-019, SYS-020). Oznaczanie czasu według SYS-021. Trwałość historii i wygaszanie ostrzeżeń według SYS-022 i SYS-023. Pierwsze/ostatnie wystąpienie i licznik według SYS-024; eksport i ręczne kasowanie według SYS-025. Szczegóły rejestracji, obsługi pełnej pamięci i realizacji zegara do określenia. |
