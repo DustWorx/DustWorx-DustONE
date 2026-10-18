@@ -1,0 +1,53 @@
+# Wstępna lista funkcji wejść i wyjść
+
+Data: 2026-10-18. Status: materiał roboczy do architektury, bez zatwierdzonego pinoutu i liczby kanałów. Podstawa: [wymagania systemu](../01-zakres-systemu.md).
+
+Wiersz oznacza funkcję, nie pojedynczy pin ani kanał. Kanałów nie sumujemy przed analizą jednoczesnej pracy, wariantów silnika i współdzielenia zasobów. „Opcjonalny czujnik” oznacza możliwość pracy bez niego, przy zachowaniu wymaganej obsługi sprzętowej na PCB.
+
+## Funkcje wynikające z ustalonego zakresu
+
+| Funkcja | Miejsce / kierunek | Podstawa | Dane potrzebne do projektu |
+| --- | --- | --- | --- |
+| Zapłon | Wyjście ECU; realizacja otwarta | SYS-001, 002, 015 | Układy i cewki referencyjne, sposób zasilania, energia i interfejs sterowania. |
+| Wtrysk paliwa | Wyjścia ECU; aktywne w wariantach wtryskowych | SYS-012, 015 | Liczba wtryskiwaczy działających jednocześnie, typy, prądy, czasy i sposób sterowania. |
+| Układ pompy paliwa | Sterowanie ECU; zakres toru mocy otwarty | SYS-012, 015 | Pompy referencyjne, prądy robocze/rozruchowe, sposób wyłączania i diagnostyka. |
+| Elektroniczny zawór wydechowy 2T | Sterowanie ECU i ewentualne wejścia zwrotne | SYS-034 | Typ napędu, zasilanie, interfejs, zakres ruchu i sygnały położenia. |
+| TPS | Wejście ECU; zależnie od wyposażenia | SYS-014, 038 | Typ sygnału, poziomy, zasilanie i kalibracja; obsługa wariantu bez TPS. |
+| IAT | Wejście ECU | SYS-031 | Czujniki referencyjne, charakterystyki i sposób podłączenia. |
+| Ciśnienie paliwa | Wejście pomiarowe ECU | SYS-029 | Zakres ciśnienia, sygnał, zasilanie i wymagana dokładność. |
+| Ciśnienie oleju obecne/brak | Wejście binarne ECU | SYS-029 | Polaryzacja, poziomy, czujnik/wyłącznik i diagnostyka przewodów. |
+| Sprzęgło | Opcjonalny sygnał do ECU | SYS-041 | Rodzaj przełącznika/sygnału i parametry elektryczne. |
+| Położenie poszczególnych biegów | Opcjonalny czujnik do ECU | SYS-041 | Typ interfejsu, liczba pozycji, sygnały i kalibracja. |
+| Światła przednie, tylne i STOP | Wyjścia ECU | SYS-004 | Podział funkcji i kanałów, odbiorniki, ich prądy i sposób podłączenia OEM. |
+| Kierunkowskazy, klakson, wentylator | Wyjścia ECU | SYS-004 | Niezależne obwody, prądy, równoczesność pracy i wymagania diagnostyczne. |
+| Dodatkowe wyjścia konfigurowalne | Wyjścia ECU | SYS-004 | Liczba, dopuszczalne obciążenia i funkcje. |
+| Rozrusznik | Polecenie HMI → CAN → ECU → tor wykonawczy | SYS-004, 016 | Stycznik/przekaźnik i prąd sterowania; osobna analiza toru dużego prądu. |
+| Przyciski i przełączniki kierownicy | Wejścia HMI, polecenia do ECU po CAN | SYS-016, 017 | Lista elementów i funkcji, styki, wspólne przewody, poziomy. |
+| Ręczny STOP | Osobny obwód przewodowy, niezależny od HMI/CAN | SYS-037 | Sposób odcięcia, interfejs i reakcje na zwarcie/przerwę. |
+| Wykrywanie przewrócenia | Lokalizacja i tor pomiarowy otwarte | SYS-039, 040 | Pomiar, montaż, kryteria, czasy reakcji i odblokowania. |
+| Prędkość motocykla | Źródło i miejsce podłączenia otwarte | SYS-018 | Czujnik lub inne źródło, sygnał, kalibracja i wymagana dokładność. |
+| Barometr i temperatura ECU | Pomiary na PCB ECU | SYS-030 | Zakres, dokładność, interfejsy wewnętrzne i obudowa; nie są zewnętrznymi wejściami czujników. |
+
+Preferowany kierunek wyjść akcesoriów: [SmartFET-y na PCB](../architecture/wyjscia-akcesoriow-porownanie.md). Nie oznacza wyboru high-side/low-side dla wszystkich odbiorników ani potwierdzenia ich parametrów.
+
+## Tory proponowane do analizy inżynierskiej
+
+Poniższe pozycje nie są nowymi zatwierdzonymi wymaganiami właściciela.
+
+| Tor | Cel analizy | Do określenia |
+| --- | --- | --- |
+| Położenie/prędkość wału | Podstawa synchronizacji zapłonu i wtrysku | Układy znaczników, typy czujników, amplitudy, polaryzacja, zakres obrotów. |
+| Faza cyklu 4T | Ocena potrzeby dodatkowego sygnału synchronizacji | Strategia sterowania i źródło fazy; nie zakładamy obowiązkowego czujnika wałka. |
+| Temperatura silnika | Ocena kompensacji, diagnostyki i sterowania wentylatorem | Czujniki OEM, charakterystyki oraz wymagane funkcje. |
+| Ciśnienia wymagane przez wybrane strategie wtrysku | Ustalenie kompletnego zestawu sygnałów | Potrzeba MAP/ciśnienia skrzyni korbowej i interfejsy dla konkretnych jednostek. |
+| Stan hamulców | Pozyskanie polecenia światła STOP | Istniejące przełączniki i miejsce podłączenia; SYS-016 nie rozstrzyga tego toru. |
+| Napięcie zasilania | Diagnostyka i kompensacja zależna od napięcia | Punkt pomiaru, zakres, dokładność i częstotliwość. |
+
+## Zasilanie i komunikacja
+
+- Akumulator nominalnie 12 V: zakres pracy, złącza zasilania, masy, ochrona i rezerwa energii do ustalenia (SYS-013). HMI również wymaga określenia zasilania i stanów uśpienia.
+- CAN ECU–HMI: interfejs wymagany; szybkość, przewody, terminacja i protokół otwarte (SYS-005).
+- Jeden przewodowy punkt obsługi obu urządzeń: interfejs i lokalizacja otwarte (SYS-026, 027).
+- Dostęp debuggera i odzyskiwanie urządzeń: punkty serwisowe do określenia, niezależnie od standardowego kabla użytkownika.
+
+Poza zakresem: dozownik oleju 2T, ride-by-wire, quickshifter, wejście stopki bocznej oraz zintegrowane tory EGT/lambda. Ograniczenia i warunki smarowania 2T pozostają zgodne z wymaganiami systemu.
