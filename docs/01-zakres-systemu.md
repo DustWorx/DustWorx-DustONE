@@ -39,6 +39,7 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-025 | Aplikacja Windows umożliwia eksport historii DTC i freeze frame oraz świadome ręczne skasowanie historii po wyraźnym potwierdzeniu użytkownika. Eksport jest dostępny przed kasowaniem, ale nie jest obowiązkowym warunkiem kasowania. |
 | SYS-026 | Komputer z aplikacją Windows łączy się z systemem ECU i HMI przewodowo. Konkretny interfejs i topologia połączenia pozostają do ustalenia. |
 | SYS-027 | Podczas standardowej obsługi jeden kabel podłączony do jednego wspólnego punktu zapewnia aplikacji Windows dostęp do ECU i HMI, obejmujący konfigurację, diagnostykę i aktualizacje obu urządzeń. |
+| SYS-028 | ECU przechowuje maksymalnie 3 zestawy map dla skonfigurowanego silnika. Użytkownik może przełączać aktywny zestaw z HMI także podczas pracy silnika. Warunki i sposób przełączenia wymagają określenia w specyfikacji sterowania. |
 
 ## 3. Proponowany podział odpowiedzialności
 
@@ -53,6 +54,12 @@ Propozycje do uwzględnienia w wymaganiach szczegółowych:
 - Ustalić warunki dopuszczające zapis map, zmianę typu silnika, aktualizację i testy wyjść.
 - Zdefiniować ograniczenia narzędzi rozwojowych i sposób wejścia w tryb testowy.
 - Zdefiniować odzyskiwanie urządzenia po przerwaniu aktualizacji.
+
+### Zestawy map silnika — ustalenie właściciela
+
+ECU ma obsługiwać maksymalnie 3 zapisane zestawy map i wybór aktywnego zestawu podczas pracy silnika (SYS-028). Polecenie wyboru pochodzi z HMI i trafia do ECU przez CAN. Zestawy dotyczą zestrojenia aktualnej konfiguracji silnika.
+
+Do określenia: zawartość zestawu dla poszczególnych wariantów silnika, walidacja zgodności i kompletności danych, warunki dopuszczenia przełączenia, spójny moment zastosowania nowych danych, ewentualny sposób przejścia, potwierdzenie aktywnego zestawu na HMI oraz wybór po ponownym uruchomieniu ECU. Warunki zapisu/edycji map z aplikacji Windows określimy oddzielnie.
 
 ### Wspólne połączenie z aplikacją Windows — ustalenie właściciela
 
@@ -120,6 +127,7 @@ Do ustalenia: minimalne napięcie i dostępny prąd pod obciążeniem, chemia i 
 | HMI | Odczyt przełączników kierownicy i polecenia do ECU przez CAN (SYS-016); menu i ekrany obsługiwane fizycznymi przyciskami, ekran bez dotyku (SYS-017). Główny panel zastępujący licznik (SYS-018). Do ustalenia: ekran, liczba i rodzaje wejść przycisków, szczegółowy zakres i źródła danych, sposób zachowania przebiegu oraz zakres personalizacji. |
 | Połączenie z PC | Połączenie przewodowe (SYS-026), jeden wspólny punkt i jeden kabel do standardowej obsługi ECU/HMI (SYS-027). Do ustalenia: interfejs fizyczny, lokalizacja złącza, realizacja dostępu do obu urządzeń i zasady aktualizacji/odzyskiwania. CAN między ECU i HMI nie przesądza interfejsu komputera. |
 | Diagnostyka | Zapis DTC i powiązanych freeze frame w ECU; odczyt w aplikacji Windows i rozróżnienie usterek aktywnych oraz historycznych (SYS-019, SYS-020). Oznaczanie czasu według SYS-021. Trwałość historii i wygaszanie ostrzeżeń według SYS-022 i SYS-023. Pierwsze/ostatnie wystąpienie i licznik według SYS-024; eksport i ręczne kasowanie według SYS-025. Szczegóły rejestracji, obsługi pełnej pamięci i realizacji zegara do określenia. |
+| Mapy silnika | Maksymalnie 3 zestawy map w ECU i przełączanie z HMI także podczas pracy silnika (SYS-028). Do określenia: zakres map, warunki i sposób przełączenia, walidacja zestawów oraz warunki ich zapisu. |
 | Narzędzia rozwojowe | Zakres aplikacji ustalony według SYS-011; debugowanie kodu w osobnym środowisku. Do określenia: szczegóły testów wejść/wyjść, warunki dopuszczenia i przerwania testu, funkcje analizy CAN, format logów, przepustowość oraz sprzętowy dostęp debuggera. |
 | Warunki pracy | Zastosowanie ustalone: sport i testy poza drogami publicznymi. Do określenia: temperatura, woda, pył, drgania i miejsce montażu. |
 
