@@ -51,6 +51,7 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-035 | Priorytetem projektowym jest możliwie maksymalna kompaktowość ECU do motocykli enduro. Ocenie podlega kompletne urządzenie: PCB, obudowa, złącza i przestrzeń instalacyjna na wyprowadzenie wiązki. Liczbowe limity gabarytów pozostają do określenia po analizie miejsca montażu i architektury sprzętu. |
 | SYS-036 | Kompletne ECU i HMI mają znosić deszcz, błoto, zachlapania oraz chwilowe zanurzenie, np. podczas brodzenia lub upadku w wodzie. Wymaganie obejmuje obudowy, złącza i przepusty. Głębokość, czas, warunki zanurzenia i kryteria prób pozostają do określenia. |
 | SYS-037 | Przycisk gaszenia silnika STOP ma osobny obwód przewodowy, umożliwiający zgaszenie silnika także przy awarii HMI lub komunikacji CAN. Realizacja obwodu i zachowanie przy uszkodzeniu przewodów pozostają do określenia. |
+| SYS-038 | Platforma ECU obsługuje przepustnicę poruszaną mechanicznie linką, z odczytem TPS w wariantach wyposażonych w ten czujnik. Sterowanie napędem przepustnicy elektronicznej (ride-by-wire) pozostaje poza zakresem sprzętu i firmware. Obsługa gaźnika bez TPS pozostaje wymagana według SYS-014. |
 
 ## 3. Proponowany podział odpowiedzialności
 
@@ -86,6 +87,10 @@ Zakres podstawowych czujników dla docelowych układów wtryskowych określimy o
 Sterowanie pompą dozującą olej 2T jest wyłączone z ECU. Montaż wymaga pracy silnika na mieszance przygotowanej w zbiorniku, a w motocyklach z dozownikiem — jego sprzętowego usunięcia i odpowiedniego przystosowania układu (SYS-032, SYS-033).
 
 Zakres pompy został rozstrzygnięty. **Konfiguracja TPI po samej eliminacji pompy nie jest zatwierdzona do montażu.** Sposób konwersji i jej walidacja pozostają otwarte; nie wybrano zastępczego rozwiązania smarowania. Uzasadnienie i źródła: [ADR-001 — smarowanie 2T](decisions/adr-001-smarowanie-2t-mieszanka.md).
+
+### Przepustnica — ustalenie właściciela z 2026-10-18
+
+Przepustnica jest poruszana mechanicznie linką. ECU może odczytywać TPS; nie steruje napędem przepustnicy elektronicznej (SYS-038). Zakres obejmuje również gaźniki bez TPS (SYS-014). Parametry wejścia TPS, kalibrację i diagnostykę określimy przy projektowaniu interfejsów czujników. Zakres TPI/TBI według SYS-015 podlega temu ograniczeniu; nie oznacza obsługi ride-by-wire.
 
 ### Zestawy map silnika — ustalenie właściciela
 
@@ -159,6 +164,7 @@ Do ustalenia: minimalne napięcie i dostępny prąd pod obciążeniem, chemia i 
 | --- | --- |
 | Silnik | Pierwszy motocykl testowy: Beta 300 RR Racing / Race Edition, 2015, wskazany przez właściciela. Według właściciela gaźnik, zapłon i instalacja są fabryczne. Do potwierdzenia podczas inwentaryzacji: parametry i stan osprzętu. Do ustalenia: maksymalne obroty oraz reprezentatywne jednostki 4T, TPI i TBI. Obsługa gaźnika z TPS i bez TPS oraz TPI/TBI według SYS-012, SYS-014 i SYS-015, z warunkami smarowania 2T według SYS-032 i SYS-033. |
 | Zapłon | Typy obsługiwanych układów i cewek; wymagane interfejsy sterujące. |
+| Przepustnica | Mechaniczna, poruszana linką; odczyt TPS zależnie od wyposażenia (SYS-038). Ride-by-wire poza zakresem. Do określenia: parametry, kalibracja i diagnostyka TPS. Gaźnik bez TPS obsługiwany według SYS-014. |
 | Synchronizacja | Czujniki wału i ewentualnie wałka, ich sygnały oraz układy znaczników. |
 | Układ paliwowy | Rodzaj układu wtryskowego, liczba i parametry wtryskiwaczy, sterowanie pompą paliwa. Dla 2T warunek pracy na mieszance według SYS-033; konwersja TPI wymaga osobnej oceny. |
 | Smarowanie 2T | Pompa dozująca olej wyłączona z ECU (SYS-032). Montaż po przystosowaniu silnika do mieszanki (SYS-033); sposób i walidacja konwersji TPI pozostają otwarte. |
