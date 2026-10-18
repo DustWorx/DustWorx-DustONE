@@ -56,6 +56,8 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-040 | Po automatycznym wyłączeniu silnika wskutek przewrócenia, postawieniu motocykla i spełnieniu warunków bezpieczeństwa możliwy jest ponowny rozruch przyciskiem START lub kopniakiem, bez wyłączania i ponownego włączania zasilania systemu. Samo postawienie motocykla nie uruchamia silnika; ponowny rozruch wymaga świadomego działania kierowcy. Szczegółowe warunki odblokowania pozostają do określenia. |
 | SYS-041 | PCB ECU umożliwia podłączenie opcjonalnego sygnału sprzęgła oraz opcjonalnego czujnika położenia biegu, rozróżniającego poszczególne biegi, nie tylko luz. Czujniki można dołączyć w przyszłości bez zmian PCB; ich obecność nie jest wymagana do pracy ECU. Interfejsy elektryczne i zakres obsługiwanych czujników pozostają do określenia. Wejście stopki bocznej jest poza zakresem. |
 | SYS-042 | Obsługa quickshiftera pozostaje poza zakresem tej platformy ECU. Nie przewidujemy dedykowanego wejścia jego czujnika ani funkcji wspomagania zmiany biegu w firmware. |
+| SYS-043 | ECU automatycznie steruje wentylatorem według temperatury i umożliwia wymuszenie jego włączenia z HMI przez CAN. Wycofanie ręcznego wymuszenia przywraca sterowanie automatyczne; nie wyłącza wentylatora, gdy automatyka nadal wymaga chłodzenia. |
+| SYS-044 | W silnikach chłodzonych cieczą ECU mierzy rzeczywistą temperaturę płynu chłodzącego i udostępnia jej wskazanie na HMI. Progi temperaturowe sterowania wentylatorem są konfigurowalne w aplikacji Windows. Interfejs czujnika, zakres i dokładność pomiaru oraz dopuszczalne ustawienia pozostają do określenia. |
 
 ## 3. Proponowany podział odpowiedzialności
 
@@ -131,6 +133,14 @@ Zliczamy nowe, potwierdzone wystąpienia, a nie kolejne wykonania testu stale ak
 Aplikacja Windows udostępnia eksport danych oraz jawne kasowanie historii po wyraźnym potwierdzeniu użytkownika (SYS-025). Wcześniejszy eksport jest możliwością, a nie obowiązkowym krokiem. Automatyczne kasowanie historii po ustąpieniu problemu pozostaje wyłączone.
 
 Otwarte decyzje: pojemność pamięci i zachowanie po jej zapełnieniu, zawartość i format eksportu, warunki dopuszczenia kasowania oraz zachowanie diagnostyki przy kasowaniu w obecności aktywnej usterki.
+
+### Sterowanie wentylatorem i temperatura płynu — ustalenia właściciela z 2026-10-18
+
+ECU załącza wentylator według temperatury; HMI umożliwia dodatkowe wymuszenie włączenia przez CAN (SYS-043). Żądanie automatyki i ręczne wymuszenie mogą niezależnie podtrzymywać pracę wentylatora. Wycofanie wymuszenia oznacza powrót do automatyki, bez blokowania jej żądania chłodzenia.
+
+W silnikach chłodzonych cieczą wymagamy pomiaru wartości temperatury płynu, prezentacji na HMI i konfiguracji progów wentylatora w aplikacji Windows (SYS-044). Potrzebny jest czujnik pomiarowy; sam sygnał termowłącznika nie dostarcza wartości temperatury. Czujnik, jego charakterystykę i instalację dobierzemy z uwzględnieniem priorytetu zachowania osprzętu OEM. Istniejący automatyczny zestaw wentylatora Bety wymaga inwentaryzacji.
+
+Do określenia: zakres, dokładność i filtracja pomiaru, progi włączenia/wyłączenia i histereza, ograniczenia ustawień, diagnostyka czujnika/wyjścia oraz reakcje na ich uszkodzenia. Osobno ustalimy zachowanie ręcznego wymuszenia przy utracie CAN, restarcie ECU/HMI i zmianach zasilania oraz pracę wentylatora po zgaszeniu silnika. Nie ustalono wartości liczbowych ani typu czujnika. Temperatura płynu jest odrębnym pomiarem od IAT i temperatury PCB.
 
 ### Wyjścia akcesoriów — preferowany kierunek
 
@@ -224,7 +234,7 @@ Ustalenia właściciela projektu z 2026-10-15:
 
 **Potwierdzone przez właściciela:** dostępny jest cały motocykl Beta 300 RR Racing / Race Edition, rocznik 2015, przeznaczony do pierwszych testów. Wersję Racing / Race Edition wskazał właściciel. Według jego wiedzy gaźnik, układ zapłonowy i instalacja elektryczna są fabryczne. Jest to deklaracja właściciela; oznaczenia, parametry i zgodność ze stanem fabrycznym wymagają potwierdzenia podczas inwentaryzacji. Producent udostępnia instrukcje tej rodziny w [indeksie dokumentacji Beta](https://www.betamotor.com.au/support/off-road/); parametry konkretnego egzemplarza wymagają inwentaryzacji.
 
-Właściciel potwierdził 2026-10-18 brak TPS w gaźniku oraz obecność wentylatora chłodnicy, obecnie załączanego automatycznie zależnie od temperatury, bez ręcznego włącznika. Model wentylatora, prądy, typ elementu reagującego na temperaturę i połączenia pozostają do określenia. Docelowe sterowanie wentylatorem przez DustONE wymaga osobnego ustalenia. Przeanalizowano dostarczoną instrukcję użytkownika i suplement: [mapa obwodów, tabela osprzętu i brakujące dane](interfaces/beta-2015-analiza-dokumentacji.md). Suplement ma w treści oznaczenie MY14 i pokazuje TPS; zgodność jego schematu z motocyklem pozostaje niepotwierdzona.
+Właściciel potwierdził 2026-10-18 brak TPS w gaźniku oraz obecność wentylatora chłodnicy, obecnie załączanego automatycznie zależnie od temperatury, bez ręcznego włącznika. Model wentylatora, prądy, typ elementu reagującego na temperaturę i połączenia pozostają do określenia. Docelowe sterowanie i pomiar temperatury płynu według SYS-043 i SYS-044. Przeanalizowano dostarczoną instrukcję użytkownika i suplement: [mapa obwodów, tabela osprzętu i brakujące dane](interfaces/beta-2015-analiza-dokumentacji.md). Suplement ma w treści oznaczenie MY14 i pokazuje TPS; zgodność jego schematu z motocyklem pozostaje niepotwierdzona.
 
 Beta służy do pierwszej integracji. Jej wyposażenie nie ogranicza docelowego zakresu PCB. Wymagania dotyczące gaźnika z TPS i bez TPS, 4T oraz TPI/TBI muszą być uwzględnione przed zamknięciem projektu sprzętu, również gdy nie można ich sprawdzić na tym motocyklu. Dla 2T obowiązują SYS-032 i SYS-033; konwersja TPI nie ma jeszcze potwierdzonej zgodności.
 
