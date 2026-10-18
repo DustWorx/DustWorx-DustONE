@@ -50,6 +50,7 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-034 | ECU steruje elektronicznym zaworem wydechowym (power valve) w silnikach 2T wyposażonych w taki napęd. Typy napędów, wymagane sygnały sterujące i ewentualne sprzężenie zwrotne dobierzemy do docelowych silników. |
 | SYS-035 | Priorytetem projektowym jest możliwie maksymalna kompaktowość ECU do motocykli enduro. Ocenie podlega kompletne urządzenie: PCB, obudowa, złącza i przestrzeń instalacyjna na wyprowadzenie wiązki. Liczbowe limity gabarytów pozostają do określenia po analizie miejsca montażu i architektury sprzętu. |
 | SYS-036 | Kompletne ECU i HMI mają znosić deszcz, błoto, zachlapania oraz chwilowe zanurzenie, np. podczas brodzenia lub upadku w wodzie. Wymaganie obejmuje obudowy, złącza i przepusty. Głębokość, czas, warunki zanurzenia i kryteria prób pozostają do określenia. |
+| SYS-037 | Przycisk gaszenia silnika STOP ma osobny obwód przewodowy, umożliwiający zgaszenie silnika także przy awarii HMI lub komunikacji CAN. Realizacja obwodu i zachowanie przy uszkodzeniu przewodów pozostają do określenia. |
 
 ## 3. Proponowany podział odpowiedzialności
 
@@ -132,7 +133,9 @@ Przed projektem mechanicznym określimy głębokość i czas zanurzenia, warunki
 
 Ustalony tor sterowania akcesoriami: przyciski i przełączniki → HMI → CAN → ECU → odbiorniki. Interfejsy wejściowe HMI muszą zostać dobrane do zachowywanych elementów obsługi kierownicy. Podłączenie zwykłych przełączników akcesoriów bezpośrednio do ECU nie jest wymagane w wybranym wariancie.
 
-Do osobnej analizy pozostają: awaryjne gaszenie silnika, zachowanie przy awarii HMI lub CAN, aktualność i poprawność poleceń, stany wyjść po utracie komunikacji oraz warunki sterowania rozrusznikiem. Wybór toru CAN dla akcesoriów nie rozstrzyga architektury awaryjnego gaszenia ani sposobu reakcji na te awarie.
+**Gaszenie potwierdzone przez właściciela:** przycisk STOP ma osobny obwód przewodowy i umożliwia zgaszenie silnika przy awarii HMI lub CAN (SYS-037). Jest to odrębny tor od zwykłych poleceń akcesoriów. Do określenia: sposób odcięcia zapłonu i podawania paliwa, interfejs elektryczny STOP, reakcja na przerwanie lub zwarcie przewodów i warunki ponownego uruchomienia. Samo wymaganie niezależności od HMI i CAN nie potwierdza jeszcze działania przy awarii procesora ECU.
+
+Do osobnej analizy pozostają: automatyczna reakcja na awarię HMI lub CAN, aktualność i poprawność poleceń, stany wyjść po utracie komunikacji oraz warunki sterowania rozrusznikiem.
 
 ### Zasada integracji z motocyklem — ustalenie właściciela
 
