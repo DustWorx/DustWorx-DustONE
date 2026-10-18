@@ -132,9 +132,9 @@ Aplikacja Windows udostępnia eksport danych oraz jawne kasowanie historii po wy
 
 Otwarte decyzje: pojemność pamięci i zachowanie po jej zapełnieniu, zawartość i format eksportu, warunki dopuszczenia kasowania oraz zachowanie diagnostyki przy kasowaniu w obecności aktywnej usterki.
 
-### Wyjścia akcesoriów — decyzja otwarta
+### Wyjścia akcesoriów — preferowany kierunek
 
-Przed wyborem stopnia integracji właściciel wymaga porównania bezpośrednich wyjść mocy ECU z wariantem dopuszczającym zewnętrzne przekaźniki lub moduły. [Porównanie i propozycję](architecture/wyjscia-akcesoriow-porownanie.md) przygotowano do decyzji; nie zatwierdzono jeszcze architektury ani podziału kanałów. Zakres akcesoriów SYS-004 i priorytet kompaktowości SYS-035 pozostają obowiązujące.
+Po porównaniu wariantów właściciel zaproponował SmartFET-y zamiast przekaźników w celu ograniczenia miejsca. Preferowany kierunek to inteligentne klucze mocy na PCB ECU. [Porównanie i dalsza analiza](architecture/wyjscia-akcesoriow-porownanie.md) rozróżniają tę preferencję od potwierdzenia wykonalności pełnej integracji. Nie wybrano jeszcze komponentów, parametrów i podziału kanałów ani nie zatwierdzono wariantu mieszanego. Zakres akcesoriów SYS-004 i priorytet kompaktowości SYS-035 pozostają obowiązujące.
 
 ### Kontakt z wodą i mycie — ustalenia właściciela z 2026-10-18
 
