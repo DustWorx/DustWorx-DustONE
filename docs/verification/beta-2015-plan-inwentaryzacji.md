@@ -17,7 +17,7 @@ Nie potwierdzono dostępności sondy różnicowej/izolowanej ani prądowej. Samo
 
 ## Kolejność prac
 
-Właściciel potwierdził 2026-10-18 zamontowany wentylator chłodnicy. Uwzględnić go w INV-01 i INV-06; ustalić oznaczenia, obecny tor sterowania, zabezpieczenia oraz prądy roboczy i rozruchowy. Sama obecność nie potwierdza typu zestawu ani docelowych parametrów kanału ECU.
+Właściciel potwierdził 2026-10-18 zamontowany wentylator chłodnicy sterowany automatycznie przez osobny elektroniczny moduł z czujnikiem temperatury, bez ręcznego włącznika. W INV-01 zinwentaryzować oznaczenia modułu, wentylatora i czujnika, miejsce montażu czujnika oraz połączenia. Następnie określić możliwość wykorzystania istniejącego czujnika do wymaganego pomiaru temperatury płynu, zabezpieczenia i prądy roboczy/rozruchowy wentylatora (INV-06). Sama deklaracja o zestawie nie określa typu ani charakterystyki czujnika i parametrów kanału ECU.
 
 | Etap | Zakres | Wynik |
 | --- | --- | --- |
