@@ -42,7 +42,8 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-026 | Komputer z aplikacją Windows łączy się z systemem ECU i HMI przewodowo. Konkretny interfejs i topologia połączenia pozostają do ustalenia. |
 | SYS-027 | Podczas standardowej obsługi jeden kabel podłączony do jednego wspólnego punktu zapewnia aplikacji Windows dostęp do ECU i HMI, obejmujący konfigurację, diagnostykę i aktualizacje obu urządzeń. |
 | SYS-028 | ECU przechowuje maksymalnie 3 zestawy map dla skonfigurowanego silnika. Użytkownik może przełączać aktywny zestaw z HMI także podczas pracy silnika. Warunki i sposób przełączenia wymagają określenia w specyfikacji sterowania. |
-| SYS-029 | PCB ECU przewiduje dodatkowe, konfigurowalne wejścia do podłączenia czujników ponad wejścia wymagane przez podstawową obsługę silnika i wskazania HMI. Liczbę, typy i parametry tych wejść dobierzemy do uzgodnionych zastosowań. |
+| SYS-029 | ECU posiada tor pomiaru wartości ciśnienia paliwa oraz wejście binarne czujnika/wyłącznika ciśnienia oleju, rozróżniające obecność i brak ciśnienia. Parametry elektryczne, zakres pomiaru paliwa i logika wejścia oleju pozostają do ustalenia. |
+| SYS-030 | PCB ECU zawiera pomiar ciśnienia atmosferycznego oraz temperatury. Barometr służy do kompensacji pracy wtrysku; rola temperatury z PCB w kompensacji wymaga doprecyzowania z uwzględnieniem miejsca pomiaru i nagrzewania ECU. |
 
 ## 3. Proponowany podział odpowiedzialności
 
@@ -57,6 +58,21 @@ Propozycje do uwzględnienia w wymaganiach szczegółowych:
 - Ustalić warunki dopuszczające zapis map, zmianę typu silnika, aktualizację i testy wyjść.
 - Zdefiniować ograniczenia narzędzi rozwojowych i sposób wejścia w tryb testowy.
 - Zdefiniować odzyskiwanie urządzenia po przerwaniu aktualizacji.
+
+### Dodatkowe pomiary — doprecyzowanie właściciela z 2026-10-18
+
+Wcześniejsze ogólne wymaganie dodatkowych wejść uszczegółowiono do następującego zakresu:
+
+- **Na PCB:** ciśnienie atmosferyczne i temperatura; intencją właściciela jest wsparcie kompensacji wtrysku.
+- **Zewnętrzny czujnik ciśnienia paliwa:** tor pomiaru wartości ciśnienia.
+- **Czujnik/wyłącznik ciśnienia oleju:** wejście binarne „ciśnienie obecne / brak ciśnienia”, bez wymaganego pomiaru jego wartości.
+- **EGT i szerokopasmowa lambda:** pomiary przyrządami zewnętrznymi podczas strojenia; nie są wymagane zintegrowane tory tych pomiarów w ECU.
+
+Do określenia przed projektem torów: interfejs i zakres czujnika paliwa, poziomy i polaryzacja wejścia oleju, diagnostyka przewodów i czujników, zasady aktywacji pomiarów w danym wariancie silnika oraz dokładność i częstotliwość pomiarów. Pomiar barometryczny wymaga uwzględnienia wyrównywania ciśnienia z otoczeniem w projekcie obudowy.
+
+**Otwarta kwestia temperatury:** czujnik na PCB jest podatny na wpływ temperatury płytki i samonagrzewania. Ilustruje to [dokumentacja Bosch BME280, uwaga 7 do dokładności temperatury](https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bme280-ds002.pdf). Jest to odniesienie do zjawiska, nie wybór komponentu. Nie potwierdzono, że temperatura z PCB może zastąpić pomiar temperatury dolotu IAT. Propozycja inżynierska: pomiar temperatury dolotu przez fabryczny lub zewnętrzny IAT, a temperatura PCB jako osobny pomiar ECU; właściciel otrzymał pytanie o ten podział.
+
+Zakres podstawowych czujników dla docelowych układów wtryskowych określimy osobno. Przykładowo [KTM EXC TBI MY2024](https://www.ktm.com/en-ca/2024-enduro-range-press-kit.html) wykorzystuje m.in. temperaturę powietrza, ciśnienie otoczenia i ciśnienie w skrzyni korbowej; samo wskazanie barometru nie definiuje kompletnego zestawu sygnałów sterowania.
 
 ### Zestawy map silnika — ustalenie właściciela
 
@@ -126,7 +142,7 @@ Do ustalenia: minimalne napięcie i dostępny prąd pod obciążeniem, chemia i 
 | Układ paliwowy | Rodzaj układu wtryskowego, liczba i parametry wtryskiwaczy, sterowanie pompą. |
 | Instalacja | Akumulator nominalnie 12 V (SYS-013). Do określenia: zakres napięć, chemia akumulatora i warunki rozruchu. Pożądany rozruch kopniakiem z osłabionym, podłączonym akumulatorem; rozruch bez energii z akumulatora nie jest wymagany. |
 | Akcesoria | Zakres rozszerzony według SYS-004. Do określenia: podział świateł przednich na funkcje, liczba niezależnych kanałów i wyjść konfigurowalnych, prądy robocze i rozruchowe, sterowanie bezpośrednie lub przez przekaźniki/styczniki, zabezpieczenia i diagnostyka wyjść. |
-| Pomiary | Lista czujników, zakresy i wymagana dokładność. Wymagane dodatkowe wejścia konfigurowalne (SYS-029). Do określenia: ich zastosowania, typy, liczba kanałów, parametry elektryczne, zabezpieczenia, skalowanie/kalibracja i diagnostyka czujników. |
+| Pomiary | Dodatkowy zakres według SYS-029 i SYS-030: ciśnienie atmosferyczne i temperatura na PCB, tor ciśnienia paliwa oraz wejście ciśnienia oleju 0/1. Do określenia: rola temperatury PCB względem IAT, parametry, czujniki, dokładność, zabezpieczenia, kalibracja i diagnostyka. EGT i lambda są pomiarami zewnętrznymi podczas strojenia. |
 | HMI | Odczyt przełączników kierownicy i polecenia do ECU przez CAN (SYS-016); menu i ekrany obsługiwane fizycznymi przyciskami, ekran bez dotyku (SYS-017). Główny panel zastępujący licznik (SYS-018). Do ustalenia: ekran, liczba i rodzaje wejść przycisków, szczegółowy zakres i źródła danych, sposób zachowania przebiegu i ograniczenia zasobów ekranów. Zakres personalizacji według SYS-008; do określenia edytor, format projektu ekranów oraz prezentacja ostrzeżeń w układach użytkownika. |
 | Połączenie z PC | Połączenie przewodowe (SYS-026), jeden wspólny punkt i jeden kabel do standardowej obsługi ECU/HMI (SYS-027). Do ustalenia: interfejs fizyczny, lokalizacja złącza, realizacja dostępu do obu urządzeń i zasady aktualizacji/odzyskiwania. CAN między ECU i HMI nie przesądza interfejsu komputera. |
 | Diagnostyka | Zapis DTC i powiązanych freeze frame w ECU; odczyt w aplikacji Windows i rozróżnienie usterek aktywnych oraz historycznych (SYS-019, SYS-020). Oznaczanie czasu według SYS-021. Trwałość historii i wygaszanie ostrzeżeń według SYS-022 i SYS-023. Pierwsze/ostatnie wystąpienie i licznik według SYS-024; eksport i ręczne kasowanie według SYS-025. Szczegóły rejestracji, obsługi pełnej pamięci i realizacji zegara do określenia. |
