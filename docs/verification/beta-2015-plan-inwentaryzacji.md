@@ -17,6 +17,8 @@ Nie potwierdzono dostępności sondy różnicowej/izolowanej ani prądowej. Samo
 
 ## Kolejność prac
 
+Właściciel potwierdził 2026-10-18 zamontowany wentylator chłodnicy. Uwzględnić go w INV-01 i INV-06; ustalić oznaczenia, obecny tor sterowania, zabezpieczenia oraz prądy roboczy i rozruchowy. Sama obecność nie potwierdza typu zestawu ani docelowych parametrów kanału ECU.
+
 | Etap | Zakres | Wynik |
 | --- | --- | --- |
 | INV-01 | Oznaczenia motocykla, gaźnika, modułu zapłonowego, cewki, regulatora, akumulatora i dostępnych czujników; fotografie złączy, liczba styków i przebieg wiązki. | Karta osprzętu: oznaczenie, lokalizacja, złącze, źródło identyfikacji i status potwierdzenia. |
