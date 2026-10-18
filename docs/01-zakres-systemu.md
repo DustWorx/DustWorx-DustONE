@@ -8,6 +8,8 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 
 **Przeznaczenie potwierdzone przez właściciela:** wyłącznie sport i testy poza drogami publicznymi.
 
+**Bieżący etap projektu:** opracowanie prototypu ECU + HMI i aplikacji Windows. Właściciel pozostawia dalsze przeznaczenie projektu do późniejszej decyzji (ustalenie z 2026-10-18). Wymagania produkcyjne doprecyzujemy po określeniu dalszego kierunku i skali.
+
 ## 2. Wymagania wynikające z opisu
 
 | ID | Wymaganie |
