@@ -46,7 +46,7 @@ Zauważono błąd angielskiej legendy B: pozycje 21 i 24 powtarzają błędne ok
 | Kierunkowskazy przód P/L, tył L/P | 1/17, 21/23 | 1/17, 21/24 | 12 V 10 W na lampę według legend; prądy załączania do pomiaru. |
 | Tył LED / oświetlenie tablicy | 22 / 24 | 22 / 23 | Funkcje pozycyjne/STOP i rzeczywiste prądy do potwierdzenia. |
 | Klakson / jego przycisk | 11 / 13 | 41 / 12 | Klakson opisany 12 V; prąd niepodany. |
-| Wentylator / przerywacz | 19 / 20 | 19 / 20 | W dokumentach wentylator jest opcją; właściciel potwierdził 2026-10-18 obecność, automatyczne załączanie i osobny elektroniczny moduł z czujnikiem temperatury, bez ręcznego włącznika. Modele modułu/wentylatora, prądy, typ i miejsce czujnika oraz połączenia do ustalenia; zgodność z przedstawionym zestawem OEM niepotwierdzona. |
+| Wentylator / przerywacz | 19 / 20 | 19 / 20 | Obecny sterownik wentylatora jest własnym projektem właściciela, działa automatycznie bez ręcznego włącznika i wykorzystuje [NTC B57301K0103A001](beta-czujnik-temperatury-b57301k0103a001.md). Schemat modułu, wentylator, prądy, montaż i połączenia do ustalenia. Numery dotyczą dokumentów, nie potwierdzają zgodności z zestawem OEM. |
 | TPS / przełącznik map / kondensator | Brak osobnych pozycji w legendzie | 34 / 10 / 16 | Według B kondensator 4700 µF, przełącznik wybiera dwie mapy (s. 3). Właściciel potwierdza brak TPS w swojej Becie. |
 
 A s. 22 wskazuje gaźnik PWK 36S AG; A s. 23 opisuje odśrodkowy zawór wydechowy ze sprężynami. Są to dane instrukcji, nie wyniki oględzin Racing 2015. Mechaniczny zawór w wariancie zgodnym z A nie pozwoli zweryfikować wymaganego elektronicznego power valve na tym motocyklu.
