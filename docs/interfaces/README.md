@@ -13,4 +13,5 @@ Specyfikacje i przyszłe pliki maszynowe, np. DBC lub schematy danych, przechowu
 
 Opracowania referencyjne:
 
+- [Czujnik temperatury B57301K0103A001 w Becie](beta-czujnik-temperatury-b57301k0103a001.md): dane producenta i otwarte kwestie integracji własnego zestawu wentylatora właściciela.
 - [Beta Racing 2015 - analiza przekazanej dokumentacji](beta-2015-analiza-dokumentacji.md): mapa obwodów, osprzęt, braki i obiekty do pomiarów. Suplement ma oznaczenie MY14; zgodność z egzemplarzem niepotwierdzona.
