@@ -196,3 +196,11 @@ Są to przykłady do ustalenia zakresu, nie zatwierdzona lista wspieranych motoc
 Na tym etapie właściciel nie określa sztywnego limitu budżetu pierwszego kompletu prototypowego ECU + HMI. Kosztorys przygotujemy na podstawie projektu, obejmując komponenty, wykonanie PCB i montaż. Narzędzia oraz czas pracy są poza zakresem tego kosztorysu.
 
 Przy doborze części i technologii uwzględniamy wymagane funkcje, dostępność oraz koszt. Szacunki należy powiązać z rewizją projektu, liczbą sztuk i datą pozyskania cen.
+
+## 9. Narzędzia projektowe — ustalenie z 2026-10-18
+
+Schematy i PCB ECU oraz HMI projektujemy w **Autodesk Fusion Electronics**. Właściciel korzysta z płatnej subskrypcji Autodesk Fusion. Wersję programu i zasady archiwizacji plików edytowalnych oraz bibliotek ustalimy przed rozpoczęciem projektu CAD.
+
+Fusion Electronics wykorzystuje zintegrowaną technologię EAGLE: [informacja Autodesk](https://www.autodesk.com/support/technical/article/caas/sfdcarticles/sfdcarticles/Autodesk-EAGLE-Announcement-Next-steps-and-FAQ.html).
+
+Dokumentacja projektu pozostaje w repozytorium. Archiwa projektów, biblioteki i eksporty produkcyjne należy powiązać z konkretną rewizją; sposób ich przygotowywania i formaty określimy w instrukcji pracy z CAD.
