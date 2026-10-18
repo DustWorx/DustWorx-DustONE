@@ -28,7 +28,7 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-012 | ECU obsługuje silniki z gaźnikiem oraz z wtryskiem paliwa. Rodzaje i parametry układów wtryskowych pozostają do ustalenia. |
 | SYS-013 | ECU jest przeznaczone do instalacji motocykla z akumulatorem o napięciu nominalnym 12 V. Zakres napięć pracy i zachowanie podczas rozruchu pozostają do określenia. |
 | SYS-014 | ECU obsługuje silniki z gaźnikiem bez TPS oraz z gaźnikiem z TPS (czujnikiem położenia przepustnicy). |
-| SYS-015 | Wspólna PCB ECU zawiera sprzęt potrzebny do obsługi wariantów gaźnikowych oraz KTM TPI i TBI, bez przeróbek PCB ani wymiany obsady komponentów między tymi zastosowaniami. Konkretne modele, roczniki i granice parametrów elektrycznych pozostają do określenia przed zamknięciem projektu sprzętu. |
+| SYS-015 | Wspólna PCB ECU zawiera sprzęt do obsługi wariantów gaźnikowych oraz wtrysku TPI/TBI, bez przeróbek PCB ani wymiany obsady komponentów między zastosowaniami. Warianty 2T podlegają warunkom smarowania SYS-032 i SYS-033. Modele, roczniki i parametry elektryczne pozostają do określenia; zgodność konwersji TPI nie została potwierdzona. |
 | SYS-016 | Przyciski i przełączniki kierownicy sterujące akcesoriami, np. światłami, kierunkowskazami i rozrusznikiem, są podłączone do HMI. HMI przekazuje polecenia do ECU przez CAN, a ECU steruje odbiornikami. |
 | SYS-017 | Menu i przełączanie ekranów HMI są obsługiwane fizycznymi przyciskami. Ekran HMI nie ma funkcji dotykowej. |
 | SYS-018 | HMI zastępuje fabryczny licznik i stanowi główny panel motocykla, prezentujący prędkość, przebieg, dane silnika i stan motocykla. Źródła danych, zakres wskazań i parametry pomiarów pozostają do ustalenia. |
@@ -45,6 +45,8 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-029 | ECU posiada tor pomiaru wartości ciśnienia paliwa oraz wejście binarne czujnika/wyłącznika ciśnienia oleju, rozróżniające obecność i brak ciśnienia. Parametry elektryczne, zakres pomiaru paliwa i logika wejścia oleju pozostają do ustalenia. |
 | SYS-030 | PCB ECU zawiera pomiar ciśnienia atmosferycznego do kompensacji pracy wtrysku oraz osobny pomiar temperatury ECU. |
 | SYS-031 | Pomiar temperatury powietrza dolotowego do kompensacji wtrysku jest realizowany przez fabryczny lub zewnętrzny czujnik IAT. Temperatura mierzona na PCB stanowi osobny pomiar ECU. |
+| SYS-032 | Sterowanie pompą dozującą olej do silnika 2T pozostaje poza zakresem ECU; nie projektujemy dla niej dedykowanej funkcji sprzętowej ani programowej. |
+| SYS-033 | Warunkiem montażu ECU w motocyklu 2T jest przystosowanie silnika do mieszanki paliwowo-olejowej przygotowanej w zbiorniku. W motocyklu z oddzielnym dozowaniem wymagane jest sprzętowe usunięcie pompy i odpowiednie przystosowanie układu paliwowego/smarowania. Zgodność danej konwersji wymaga oceny i walidacji; sam demontaż pompy jej nie potwierdza. |
 
 ## 3. Proponowany podział odpowiedzialności
 
@@ -75,13 +77,11 @@ Do określenia przed projektem torów: interfejs i zakres czujnika paliwa, pozio
 
 Zakres podstawowych czujników dla docelowych układów wtryskowych określimy osobno. Przykładowo [KTM EXC TBI MY2024](https://www.ktm.com/en-ca/2024-enduro-range-press-kit.html) wykorzystuje m.in. temperaturę powietrza, ciśnienie otoczenia i ciśnienie w skrzyni korbowej; samo wskazanie barometru nie definiuje kompletnego zestawu sygnałów sterowania.
 
-### Otwarta zależność: smarowanie 2T a zgodność z TPI
+### Smarowanie 2T — ustalenie właściciela z 2026-10-18
 
-W odpowiedzi na pytanie 27 właściciel wskazał preferencję pracy 2T wyłącznie na mieszance przygotowanej w zbiorniku i wyłączenia sterowania pompą dozującą olej. Wymaga to rozstrzygnięcia względem wcześniejszego wymagania zgodności z seryjnym TPI (SYS-015).
+Sterowanie pompą dozującą olej 2T jest wyłączone z ECU. Montaż wymaga pracy silnika na mieszance przygotowanej w zbiorniku, a w motocyklach z dozownikiem — jego sprzętowego usunięcia i odpowiedniego przystosowania układu (SYS-032, SYS-033).
 
-[Instrukcja KTM 250/300 EXC TPI MY2022, rozdziały 9.8–9.9, strona drukowana 49](https://en.enduro.team/images/9/9a/2022_KTM_250-300_EXC_TPI_OM_eng.pdf) wymaga oddzielnego smarowania i wyklucza tankowanie mieszanki. [Opis producenta](https://www.ktm.com/en-ph/models/enduro/2-stroke/ktm-300-exc-tpi-sixdays2022.html) wskazuje dozowanie oleju do przepustnicy dla smarowania m.in. wału korbowego, przy wtrysku paliwa do kanałów przepłukujących.
-
-Wniosek projektowy: obsługa seryjnego TPI wymaga uwzględnienia jego układu smarowania; sama deklaracja użycia mieszanki nie zapewnia tej zgodności. Właściciel otrzymał pytanie 28 o zachowanie sterowania pompą w wymagających tego silnikach albo ograniczenie listy obsługiwanych układów. Do rozstrzygnięcia nie zamykamy zakresu wyjść smarowania ani zgodności z seryjnym TPI. Nie wybrano rozwiązania zastępczego lub konwersji smarowania.
+Zakres pompy został rozstrzygnięty. **Konfiguracja TPI po samej eliminacji pompy nie jest zatwierdzona do montażu.** Sposób konwersji i jej walidacja pozostają otwarte; nie wybrano zastępczego rozwiązania smarowania. Uzasadnienie i źródła: [ADR-001 — smarowanie 2T](decisions/adr-001-smarowanie-2t-mieszanka.md).
 
 ### Zestawy map silnika — ustalenie właściciela
 
@@ -145,10 +145,11 @@ Do ustalenia: minimalne napięcie i dostępny prąd pod obciążeniem, chemia i 
 
 | Obszar | Do ustalenia |
 | --- | --- |
-| Silnik | Pierwszy motocykl testowy: Beta 300 RR Racing / Race Edition, 2015, wskazany przez właściciela. Według właściciela gaźnik, zapłon i instalacja są fabryczne. Do potwierdzenia podczas inwentaryzacji: parametry i stan osprzętu. Do ustalenia: maksymalne obroty oraz reprezentatywne jednostki 4T, TPI i TBI. Obsługa gaźnika z TPS i bez TPS oraz TPI/TBI jest wymagana (SYS-012, SYS-014, SYS-015). |
+| Silnik | Pierwszy motocykl testowy: Beta 300 RR Racing / Race Edition, 2015, wskazany przez właściciela. Według właściciela gaźnik, zapłon i instalacja są fabryczne. Do potwierdzenia podczas inwentaryzacji: parametry i stan osprzętu. Do ustalenia: maksymalne obroty oraz reprezentatywne jednostki 4T, TPI i TBI. Obsługa gaźnika z TPS i bez TPS oraz TPI/TBI według SYS-012, SYS-014 i SYS-015, z warunkami smarowania 2T według SYS-032 i SYS-033. |
 | Zapłon | Typy obsługiwanych układów i cewek; wymagane interfejsy sterujące. |
 | Synchronizacja | Czujniki wału i ewentualnie wałka, ich sygnały oraz układy znaczników. |
-| Układ paliwowy | Rodzaj układu wtryskowego, liczba i parametry wtryskiwaczy, sterowanie pompą. |
+| Układ paliwowy | Rodzaj układu wtryskowego, liczba i parametry wtryskiwaczy, sterowanie pompą paliwa. Dla 2T warunek pracy na mieszance według SYS-033; konwersja TPI wymaga osobnej oceny. |
+| Smarowanie 2T | Pompa dozująca olej wyłączona z ECU (SYS-032). Montaż po przystosowaniu silnika do mieszanki (SYS-033); sposób i walidacja konwersji TPI pozostają otwarte. |
 | Instalacja | Akumulator nominalnie 12 V (SYS-013). Do określenia: zakres napięć, chemia akumulatora i warunki rozruchu. Pożądany rozruch kopniakiem z osłabionym, podłączonym akumulatorem; rozruch bez energii z akumulatora nie jest wymagany. |
 | Akcesoria | Zakres rozszerzony według SYS-004. Do określenia: podział świateł przednich na funkcje, liczba niezależnych kanałów i wyjść konfigurowalnych, prądy robocze i rozruchowe, sterowanie bezpośrednie lub przez przekaźniki/styczniki, zabezpieczenia i diagnostyka wyjść. |
 | Pomiary | Dodatkowy zakres według SYS-029–SYS-031: ciśnienie atmosferyczne i temperatura na PCB, tor ciśnienia paliwa oraz wejście ciśnienia oleju 0/1. Temperatura dolotu pochodzi z IAT, temperatura PCB jest osobnym pomiarem ECU. Do określenia: parametry, czujniki, dokładność, zabezpieczenia, kalibracja i diagnostyka. EGT i lambda są pomiarami zewnętrznymi podczas strojenia. |
@@ -171,13 +172,13 @@ Ustalenia właściciela projektu z 2026-10-15:
 - Firmware przygotowuje właściciel projektu z Codexem. Wspólna praca inżynierska obejmuje wymagania, interfejsy i kryteria weryfikacji potrzebne do jego implementacji.
 - Pytania przedstawiamy pojedynczo, z przygotowanymi wariantami odpowiedzi. Gdy wybór wymaga danych technicznych lub porównania, przedstawiamy podstawy i konsekwencje przed decyzją.
 - Ustalenia i wyniki prac zapisujemy w repozytorium DustWorx/DustWorx-DustONE zgodnie z jego strukturą.
-- Obsługa gaźnika z TPS i bez TPS oraz KTM TPI/TBI została potwierdzona przez właściciela. Pierwszym motocyklem testowym jest jego Beta 300 RR Racing / Race Edition z 2015 r.; jednostki referencyjne 4T i konkretne generacje układów wtryskowych pozostają do ustalenia.
+- Obsługa gaźnika z TPS i bez TPS oraz wtrysku TPI/TBI pozostaje celem, z doprecyzowanym warunkiem pracy 2T na mieszance (SYS-032, SYS-033). Pierwszym motocyklem testowym jest jego Beta 300 RR Racing / Race Edition z 2015 r.; jednostki referencyjne 4T i konkretne generacje układów wtryskowych pozostają do ustalenia.
 
 ## 7. Motocykl referencyjny i zakres weryfikacji
 
 **Potwierdzone przez właściciela:** dostępny jest cały motocykl Beta 300 RR Racing / Race Edition, rocznik 2015, przeznaczony do pierwszych testów. Wersję Racing / Race Edition wskazał właściciel. Według jego wiedzy gaźnik, układ zapłonowy i instalacja elektryczna są fabryczne. Jest to deklaracja właściciela; oznaczenia, parametry i zgodność ze stanem fabrycznym wymagają potwierdzenia podczas inwentaryzacji. Producent udostępnia instrukcje tej rodziny w [indeksie dokumentacji Beta](https://www.betamotor.com.au/support/off-road/); parametry konkretnego egzemplarza wymagają inwentaryzacji.
 
-Beta służy do pierwszej integracji. Jej wyposażenie nie ogranicza docelowego zakresu PCB. Wymagania dotyczące gaźnika z TPS i bez TPS, 4T oraz TPI/TBI muszą być uwzględnione przed zamknięciem projektu sprzętu, również gdy nie można ich sprawdzić na tym motocyklu.
+Beta służy do pierwszej integracji. Jej wyposażenie nie ogranicza docelowego zakresu PCB. Wymagania dotyczące gaźnika z TPS i bez TPS, 4T oraz TPI/TBI muszą być uwzględnione przed zamknięciem projektu sprzętu, również gdy nie można ich sprawdzić na tym motocyklu. Dla 2T obowiązują SYS-032 i SYS-033; konwersja TPI nie ma jeszcze potwierdzonej zgodności.
 
 Weryfikację dzielimy na próby dostępne na Becie oraz próby stanowiskowe i późniejsze próby na innych jednostkach. Wynik na Becie nie potwierdza zgodności z pozostałymi wariantami. Właściciel dopuszcza późniejsze testy funkcji nieweryfikowalnych na dostępnym motocyklu; plan weryfikacji należy przygotować wraz z wymaganiami.
 
@@ -186,7 +187,7 @@ Weryfikację dzielimy na próby dostępne na Becie oraz próby stanowiskowe i p�
 - KTM opisuje TPI MY2018 jako wtrysk z dwoma wtryskiwaczami w kanałach przepłukujących: [KTM — prezentacja TPI](https://press.ktm.com/News_Detail.aspx?id=49472&menueid=3050).
 - KTM EXC MY2024 stosuje TBI oraz elektroniczne sterowanie zaworem wydechowym: [KTM — prezentacja EXC MY2024](https://press.ktm.com/news-challenge-accepted-the-2024-ktm-exc-range-is-here-to-redefine-limits?id=179901&l=uk&menueid=5904).
 
-Są to przykłady do ustalenia zakresu, nie zatwierdzona lista wspieranych motocykli ani kompletna specyfikacja elektryczna. Do analizy: kanały wtrysku, zapłon, pompa paliwa, ewentualna pompa oleju, sterowanie zaworem wydechowym, czujniki i synchronizacja. Nie wybrano jeszcze liczby kanałów, sterowników wyjściowych ani szczegółowych interfejsów elektrycznych do osprzętu OEM.
+Są to przykłady do ustalenia zakresu, nie zatwierdzona lista wspieranych motocykli ani kompletna specyfikacja elektryczna. Do analizy: kanały wtrysku, zapłon, pompa paliwa, sterowanie zaworem wydechowym, czujniki i synchronizacja. Nie wybrano jeszcze liczby kanałów, sterowników wyjściowych ani szczegółowych interfejsów elektrycznych do osprzętu OEM.
 
 ## 8. Założenia kosztowe — ustalenie z 2026-10-18
 
