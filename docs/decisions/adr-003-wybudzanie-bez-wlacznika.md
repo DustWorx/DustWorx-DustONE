@@ -28,6 +28,8 @@ W odpowiedzi na pytanie 64 z 2026-10-25 właściciel wybrał brak osobnego włą
 
 Budżet prądu czuwania, napięcia pracy, detekcja kopania i zakłóceń, czasy gotowości ECU/zapłonu/wtrysku, wybudzanie HMI od START/kopniaka, zasady zasypiania bez komputera i stany wyjść. Źródło energii podczas serwisu i możliwość serwisowania samej elektroniki bez zasilania 12 V pozostają otwarte. Dla komputera ustalić definicję wykrywanego połączenia, sposób podtrzymania blokady i bezpieczne jej zwolnienie po rozłączeniu lub przerwaniu aktualizacji.
 
+Zasilanie serwisowe: [porównanie wariantów A/B i rekomendacja do decyzji](../architecture/zasilanie-serwisowe-porownanie.md). Właściciel w odpowiedzi na pytanie 65 poprosił o porównanie; nie wybrał jeszcze źródła energii podczas serwisu.
+
 ## Proponowana weryfikacja
 
 Z uśpienia sprawdzić osobno każde zdarzenie z tabeli; START i kopniak także przy niedostępnym HMI. Zmierzyć czasy wybudzenia i gotowości do rozruchu oraz prąd czuwania. Sprawdzić, że HMI i komputer mogą wybudzić urządzenia do obsługi przy zgaszonym silniku.
