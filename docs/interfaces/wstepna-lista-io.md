@@ -27,7 +27,8 @@ Wiązkę i złącze ECU projektujemy od nowa (SYS-045), według potrzebnych funk
 | Światło hamowania | Wyjście ECU; załączane po użyciu któregokolwiek hamulca | SYS-004, 051 | Działanie bez HMI/CAN. Odbiornik, prąd, połączenia, zabezpieczenia i reakcje na usterki do określenia. |
 | Kierunkowskazy | Wyjścia ECU; miganie realizowane lokalnie | SYS-004, 052 | Wyłączenie aktywnego kierunkowskazu po potwierdzeniu utraty komunikacji z HMI. Obwody, prądy, parametry migania, kryterium/czas utraty łączności i zachowanie po jej przywróceniu do określenia. |
 | Klakson | Wyjście ECU | SYS-004 | Obwód, prąd, sposób sterowania i wymagania diagnostyczne. |
-| Wentylator | Wyjście ECU; dodatkowe żądanie włączenia z HMI przez CAN | SYS-004, 043, 044, 053, 060 | Po utracie HMI/CAN anulowanie ręcznego wymuszenia i sterowanie automatyczne. Konfigurowalna praca po zgaszeniu silnika, z limitem czasu i odcięciem przy niskim napięciu. Parametry kanału, temperatury, czasy, napięcia i reakcje na usterki do określenia. |
+| Wentylator | Wyjście ECU; dodatkowe żądanie włączenia z HMI przez CAN | SYS-004, 043, 044, 053, 060, 061 | Po utracie HMI/CAN anulowanie ręcznego wymuszenia i sterowanie automatyczne. Po zgaszeniu wspólne limity czasu i napięcia dla automatyki oraz ręcznego wymuszenia. Parametry kanału, temperatury, czasy, napięcia i reakcje na usterki do określenia. |
+| Nadzór napięcia akumulatora | Tor ECU do odcięcia wentylatora przy niskim napięciu | SYS-060, 061 | Punkt pomiaru, metoda detekcji, progi, dokładność, filtracja i histereza do określenia. |
 | Dodatkowe wyjścia konfigurowalne | Wyjścia ECU | SYS-004 | Liczba, dopuszczalne obciążenia i funkcje. |
 | Przycisk START | Osobne przewodowe wejście ECU; wybudzenie ECU i HMI z priorytetem ECU | SYS-048, 054 | Żądanie rozruchu podczas przytrzymywania; puszczenie kończy sterowanie rozrusznikiem. Rozruch niezależny od gotowości HMI. Tor wybudzania, sekwencja, czasy, poziomy, polaryzacja, filtracja i diagnostyka do określenia. |
 | Rozrusznik | Wyjście ECU → tor wykonawczy | SYS-004, 048, 049 | Odcięcie po potwierdzeniu pracy silnika lub przekroczeniu czasu kręcenia; kolejna próba wymaga puszczenia i ponownego naciśnięcia START. Stycznik/przekaźnik, prąd, tor dużego prądu, metoda detekcji, limity i pozostałe warunki rozruchu do określenia. |
@@ -51,7 +52,7 @@ Poniższe pozycje nie są nowymi zatwierdzonymi wymaganiami właściciela.
 | Faza cyklu 4T | Ocena potrzeby dodatkowego sygnału synchronizacji | Strategia sterowania i źródło fazy; nie zakładamy obowiązkowego czujnika wałka. |
 | Inne zastosowania temperatury silnika | Ocena kompensacji i funkcji ochronnych poza uzgodnionym sterowaniem wentylatorem | Potrzebne funkcje i kryteria do ustalenia. Pomiar płynu i sterowanie wentylatorem są już wymagane według SYS-043/044. |
 | Ciśnienia wymagane przez wybrane strategie wtrysku | Ustalenie kompletnego zestawu sygnałów | Potrzeba MAP/ciśnienia skrzyni korbowej i interfejsy dla konkretnych jednostek. |
-| Napięcie zasilania | Diagnostyka i kompensacja zależna od napięcia | Punkt pomiaru, zakres, dokładność i częstotliwość. |
+| Pomiar wartości napięcia zasilania do dodatkowych zastosowań | Diagnostyka i kompensacja zależna od napięcia | Zakres, dokładność i częstotliwość do analizy; nadzór wymagany do odcięcia wentylatora ujęto wyżej jako funkcję potwierdzoną. |
 
 ## Zasilanie i komunikacja
 
