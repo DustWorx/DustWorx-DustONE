@@ -79,6 +79,7 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-063 | Po przyjęciu polecenia uśpienia HMI wysyła ECU aplikacyjną ramkę CAN potwierdzającą przyjęcie polecenia. Po zakończeniu wysyłania potwierdzenia HMI przestaje nadawać i przechodzi w sen. W normalnej sekwencji ECU usypia po uzyskaniu tego potwierdzenia i zakończeniu uzgodnionej fazy usypiania HMI, przy nadal spełnionych warunkach uśpienia. Czasy i identyfikacja bieżącej sekwencji pozostają do określenia; ścieżkę braku potwierdzenia określa SYS-065. |
 | SYS-064 | Zasilanie HMI jest wyprowadzone z ECU i kontrolowane przez ECU poprzez sterowany tor zasilania. Awaryjne odłączenie części aktywnej HMI działa niezależnie od aplikacji HMI i komunikacji CAN. Przy odłączonej części aktywnej trzeba zachować wybudzanie przyciskami HMI oraz pozostałe źródła wybudzania według SYS-054–056. Topologia toru zasilania i wybudzania oraz parametry elektryczne pozostają do projektu. |
 | SYS-065 | Gdy HMI nie potwierdzi polecenia uśpienia, ECU po ograniczonym oczekiwaniu i próbach awaryjnie odłącza zasilanie części aktywnej HMI, rejestruje problem i może zasnąć przy nadal spełnionych warunkach SYS-059. Awaryjne odłączenie jest rozróżniane od normalnej sekwencji potwierdzonej przez HMI. Czasy, liczba prób, ewentualny cykl odzyskania oraz warunki ponownego załączenia pozostają do określenia. |
+| SYS-066 | Po poprawnej sekwencji usypiania wyjście zasilania HMI z ECU pozostaje włączone, a ECU i HMI przechodzą w swoje stany niskiego poboru. Kontrolowane odłączenie zasilania HMI jest ostatecznym środkiem przy awarii albo wynika z jawnie zdefiniowanej polityki ograniczeń dla HMI; nie jest zwykłym etapem usypiania. Kryteria takiej polityki oraz parametry stanów niskiego poboru pozostają do określenia. |
 
 ## 3. Podział odpowiedzialności
 
@@ -153,7 +154,9 @@ W odpowiedzi na pytanie 70 z 2026-10-25 właściciel ustalił ECU jako koordynat
 
 W odpowiedzi na pytanie „71 — wybór po porównaniu” z 2026-10-25 właściciel zatwierdził kontrolę zasilania HMI i wskazał, że zasilanie HMI ma wychodzić z ECU. Wybrano awaryjne odłączenie części aktywnej HMI po nieudanej sekwencji, z zachowaniem wybudzania przyciskami (SYS-064/065). [Porównanie i uzasadnienie wyboru](architecture/brak-potwierdzenia-uspienia-hmi.md) zachowuje rozważone alternatywy.
 
-Podstawa architektury, źródła wybudzania i propozycje prób: [ADR-003 — wybudzanie bez osobnego włącznika](decisions/adr-003-wybudzanie-bez-wlacznika.md). Parametry czasu bezczynności, pozostałe blokady, pobór prądu w czuwaniu, parametry zasilania, czasy przejść, próby odzyskania i obsługa ponownego wybudzenia pozostają do projektu. Stan zasilania HMI po poprawnej sekwencji ustalimy osobno. Nie wybrano jeszcze komponentów ani torów wybudzania.
+W odpowiedzi na pytanie 72 z 2026-10-25 właściciel potwierdził pozostawienie zasilania HMI włączonego po poprawnej sekwencji. ECU i HMI pozostają w sleep; kontrolowane odłączenie zasilania jest ostateczną opcją przy awarii lub wynikiem zdefiniowanych ograniczeń dla HMI (SYS-066). Szczegóły polityki ograniczeń pozostają otwarte.
+
+Podstawa architektury, źródła wybudzania i propozycje prób: [ADR-003 — wybudzanie bez osobnego włącznika](decisions/adr-003-wybudzanie-bez-wlacznika.md). Parametry czasu bezczynności, pozostałe blokady, pobór prądu w czuwaniu, parametry zasilania, czasy przejść, próby odzyskania i obsługa ponownego wybudzenia pozostają do projektu. Nie wybrano jeszcze komponentów ani torów wybudzania.
 
 ### Rejestracja diagnostyczna ECU — ustalenie właściciela z 2026-10-18
 
