@@ -10,7 +10,7 @@ Wybudzanie i czuwanie: [ADR-003 — obsługa bez osobnego włącznika](../decisi
 
 Praca wentylatora po zgaszeniu silnika: funkcja konfigurowalna, z limitem czasu i odcięciem przy niskim napięciu; obsługa wstrzymuje uśpienie ECU (SYS-060). Te same ograniczenia obowiązują ręczne wymuszenie i są egzekwowane w ECU (SYS-061), co wymaga nadzoru napięcia akumulatora. HMI pozostaje aktywne do polecenia ECU. Zastosowanie w danym układzie chłodzenia i parametry wymagają doprecyzowania.
 
-Usypianie koordynuje ECU: [normalna sekwencja ECU–HMI](usypianie-ecu-hmi.md), SYS-062/063. HMI potwierdza przyjęcie polecenia ramką CAN, kończy nadawanie i przechodzi w sen; następnie zasypia ECU. Zasilanie HMI wychodzi z ECU i jest przez nie kontrolowane; brak potwierdzenia uruchamia ograniczoną ścieżkę awaryjną z odłączeniem części aktywnej HMI i zachowaniem wybudzania przyciskami (SYS-064/065). Topologia i parametry pozostają do projektu.
+Usypianie koordynuje ECU: [normalna sekwencja ECU–HMI](usypianie-ecu-hmi.md), SYS-062/063. HMI potwierdza przyjęcie polecenia ramką CAN, kończy nadawanie i zasypia; następnie zasypia ECU. Wyjście zasilania HMI pozostaje włączone podczas normalnego snu obu urządzeń (SYS-066). Zasilanie wychodzi z ECU i jest przez nie kontrolowane; odłączenie jest ostateczną ścieżką awaryjną lub wynika ze zdefiniowanych ograniczeń HMI (SYS-064–066). Wybudzanie przyciskami po odłączeniu pozostaje wymagane; topologia i parametry są do projektu.
 
 Analizy architektoniczne:
 
