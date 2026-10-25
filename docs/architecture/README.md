@@ -8,8 +8,8 @@ Zatwierdzona podstawa: [ADR-002 — samodzielność ECU](../decisions/adr-002-sa
 
 Wybudzanie i czuwanie: [ADR-003 — obsługa bez osobnego włącznika](../decisions/adr-003-wybudzanie-bez-wlacznika.md). ECU wybudzają START, kopniak, HMI i komputer; przyciski HMI wybudzają także samo HMI. Podłączenie komputera wybudza oba urządzenia i blokuje ich usypianie (SYS-054–057). Tory sprzętowe, budżet prądu czuwania i warunki zasypiania wymagają projektu.
 
-Analizy do decyzji:
+Analizy architektoniczne:
 
-- [Zasilanie podczas serwisu — 12 V czy z komputera](zasilanie-serwisowe-porownanie.md): wygoda obsługi, wpływ na PCB, ograniczenia mocy i otwarte warunki zasilania ECU/HMI; wariant nie został wybrany.
+- [Zasilanie podczas serwisu — 12 V czy z komputera](zasilanie-serwisowe-porownanie.md): wybrano wariant A — wymagane zasilanie 12 V, kabel PC do komunikacji i wybudzenia (SYS-058). Parametry toru zasilania pozostają do projektu.
 - [Macierz wariantów silnika](macierz-wariantow-silnika.md): zakres gaźnika/wtrysku i 2T/4T oraz dane potrzebne do wspólnej PCB; modele poza Betą pozostają do wyboru.
 - [Wyjścia akcesoriów — porównanie realizacji](wyjscia-akcesoriow-porownanie.md): preferowany kierunek to SmartFET-y na PCB ECU; podział i parametry kanałów oraz wykonalność pełnej integracji pozostają do analizy.
