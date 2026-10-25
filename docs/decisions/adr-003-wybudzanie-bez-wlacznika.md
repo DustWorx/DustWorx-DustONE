@@ -10,7 +10,7 @@ Rozważono osobny włącznik/stacyjkę albo obsługę bez niego z wybudzaniem ur
 
 W odpowiedzi na pytanie 64 z 2026-10-25 właściciel wybrał brak osobnego włącznika. Wskazał wybudzanie ECU przez START i kopniak, wybudzanie HMI oraz ECU przyciskami HMI, a także wybudzenie i blokadę usypiania obu urządzeń po podłączeniu komputera, w tym podczas aktualizacji. Po porównaniu wariantów w pytaniu 65 zatwierdził wymagane zasilanie serwisowe z akumulatora lub zasilacza 12 V; kabel PC służy do komunikacji i wybudzenia. W pytaniu 66 potwierdził, że START i kopniak wybudzają również HMI, z priorytetem gotowości ECU do rozruchu. W pytaniu 67 wybrał automatyczne usypianie obu urządzeń po konfigurowalnym czasie bezczynności, odnawianym używaniem przycisków, przy zgaszonym silniku, odłączonym PC i zakończonych zadaniach wymagających pracy. Wymagania: [SYS-054–059](../01-zakres-systemu.md).
 
-W pytaniu 68 z 2026-10-25 właściciel zatwierdził konfigurowalną pracę wentylatora po zgaszeniu silnika, z limitem czasu i odcięciem przy niskim napięciu. Obsługa funkcji wstrzymuje uśpienie ECU ([SYS-060](../01-zakres-systemu.md)); przydatność dla danego układu chłodzenia wymaga weryfikacji.
+W pytaniu 68 z 2026-10-25 właściciel zatwierdził konfigurowalną pracę wentylatora po zgaszeniu silnika, z limitem czasu i odcięciem przy niskim napięciu. Obsługa funkcji wstrzymuje uśpienie ECU ([SYS-060](../01-zakres-systemu.md)); przydatność dla danego układu chłodzenia wymaga weryfikacji. W pytaniu 69 tego samego dnia potwierdził wspólne ograniczenia dla automatyki oraz ręcznego wymuszenia przy zgaszonym silniku, bez możliwości ominięcia ich żądaniem HMI (SYS-061).
 
 | Zdarzenie | Wymagane wybudzenie | Uwagi |
 | --- | --- | --- |
@@ -27,11 +27,11 @@ W pytaniu 68 z 2026-10-25 właściciel zatwierdził konfigurowalną pracę wenty
 - Zaprojektować detekcję podłączenia komputera i utrzymanie blokady usypiania w obu urządzeniach, także przy bezczynności transmisji. Uwzględnić aplikację urządzeń i bootloadery. Kontrolowany restart wymagany przez aktualizację jest odrębną operacją od uśpienia.
 - Rozdzielić przyczynę wybudzenia od żądania rozruchu. Użycie przycisków HMI i podłączenie komputera służą także do obsługi przy zgaszonym silniku.
 - Skoordynować automatyczne usypianie obu urządzeń i odnawianie czasu bezczynności po aktywności przycisków. Zwykły cykliczny odczyt danych i ruch CAN nie stanowią same w sobie aktywności użytkownika; podłączenie PC blokuje sen niezależnie od ruchu danych.
-- Przed planowanym uśpieniem zakończyć zadania wymagające pracy, np. obsługę rozruchu i wymagane zapisy pamięci nieulotnej. Automatyczna praca wentylatora po zgaszeniu według SYS-060 jest zadaniem wstrzymującym uśpienie ECU. Pozostałe blokady i ewentualne wcześniejsze usypianie samego HMI wymagają doprecyzowania.
+- Przed planowanym uśpieniem zakończyć zadania wymagające pracy, np. obsługę rozruchu i wymagane zapisy pamięci nieulotnej. Obsługa wentylatora po zgaszeniu według SYS-060/061 wstrzymuje uśpienie ECU. Limity czasu i napięcia mają pierwszeństwo przed ręcznym żądaniem HMI. Pozostałe blokady i ewentualne wcześniejsze usypianie samego HMI wymagają doprecyzowania.
 
 ## Do określenia
 
-Budżet prądu czuwania, napięcia pracy i wymagania wobec zasilacza warsztatowego, detekcja kopania i zakłóceń, sekwencja zasilania i czasy gotowości ECU/zapłonu/wtrysku/HMI, zakres i wartość domyślna czasu bezczynności, początek odliczania, pozostałe zadania wstrzymujące sen, sekwencja usypiania i stany wyjść. Dla wentylatora po zgaszeniu: limit czasu, próg napięcia, warunki zakończenia, przejście przy ponownym rozruchu, zachowanie ręcznego wymuszenia i HMI. Dla komputera ustalić definicję wykrywanego połączenia, sposób podtrzymania blokady i bezpieczne jej zwolnienie po rozłączeniu lub przerwaniu aktualizacji.
+Budżet prądu czuwania, napięcia pracy i wymagania wobec zasilacza warsztatowego, detekcja kopania i zakłóceń, sekwencja zasilania i czasy gotowości ECU/zapłonu/wtrysku/HMI, zakres i wartość domyślna czasu bezczynności, początek odliczania, pozostałe zadania wstrzymujące sen, sekwencja usypiania i stany wyjść. Dla wentylatora po zgaszeniu: wspólny limit czasu i próg napięcia, detekcja napięcia, filtracja/histereza, warunki zakończenia i ponowienia, przejście przy ponownym rozruchu i zachowanie HMI. Dla komputera ustalić definicję wykrywanego połączenia, sposób podtrzymania blokady i bezpieczne jej zwolnienie po rozłączeniu lub przerwaniu aktualizacji.
 
 Zasilanie serwisowe: [porównanie wariantów A/B i uzasadnienie wyboru A](../architecture/zasilanie-serwisowe-porownanie.md). Wybrano wymagane zewnętrzne zasilanie 12 V (SYS-058).
 
@@ -41,6 +41,6 @@ Z uśpienia sprawdzić osobno każde zdarzenie z tabeli; potwierdzić automatycz
 
 Przy zgaszonym silniku, odłączonym PC i braku zadań blokujących sprawdzić automatyczne uśpienie po skonfigurowanym czasie. Użycie przycisków przed jego upływem ma rozpocząć odliczanie od nowa. Sprawdzić odnawianie aktywności także przez przyciski HMI oraz brak odnawiania czasu przez sam cykliczny odczyt danych. Praca silnika, aktywne zadanie wymagające pracy i podłączony PC mają wstrzymywać uśpienie.
 
-Dla automatycznej pracy wentylatora po zgaszeniu sprawdzić blokowanie uśpienia ECU, zakończenie funkcji po limicie czasu lub niskim napięciu i późniejsze dopuszczenie uśpienia według SYS-059 przy braku innych blokad. Szczegółowe próby funkcji są wskazane przy SYS-060 w zakresie systemu.
+Dla pracy wentylatora po zgaszeniu sprawdzić blokowanie uśpienia ECU, odcięcie po limicie czasu lub niskim napięciu także przy ręcznym żądaniu HMI i późniejsze dopuszczenie uśpienia według SYS-059 przy braku innych blokad. Szczegółowe próby funkcji są wskazane przy SYS-060/061 w zakresie systemu.
 
 Przy zasilaniu 12 V z akumulatora i osobno z odpowiedniego zasilacza warsztatowego sprawdzić wybudzenie po podłączeniu PC oraz utrzymanie gotowości ECU/HMI mimo bezczynności, podczas diagnostyki i aktualizacji. Po rozłączeniu sprawdzić zwolnienie blokady według przyszłej specyfikacji z uwzględnieniem stanu aktualizacji. Warunki i mierzalne limity ustalić przed próbami; testów sprzętu ani firmware nie wykonano.
