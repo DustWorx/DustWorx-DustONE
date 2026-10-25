@@ -29,7 +29,7 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-013 | ECU jest przeznaczone do instalacji motocykla z akumulatorem o napięciu nominalnym 12 V. Zakres napięć pracy i zachowanie podczas rozruchu pozostają do określenia. |
 | SYS-014 | ECU obsługuje silniki z gaźnikiem bez TPS oraz z gaźnikiem z TPS (czujnikiem położenia przepustnicy). |
 | SYS-015 | Wspólna PCB ECU zawiera sprzęt do obsługi wariantów gaźnikowych oraz wtrysku TPI/TBI, bez przeróbek PCB ani wymiany obsady komponentów między zastosowaniami. Warianty 2T podlegają warunkom smarowania SYS-032 i SYS-033. Modele, roczniki i parametry elektryczne pozostają do określenia; zgodność konwersji TPI nie została potwierdzona. |
-| SYS-016 | Przyciski i przełączniki kierownicy sterujące akcesoriami, np. światłami, kierunkowskazami i rozrusznikiem, są podłączone do HMI. HMI przekazuje polecenia do ECU przez CAN, a ECU steruje odbiornikami. |
+| SYS-016 | Przyciski obsługi HMI oraz przełączniki kierownicy sterujące akcesoriami, np. światłami i kierunkowskazami, są podłączone do HMI. HMI przekazuje żądania sterowania akcesoriami do ECU przez CAN, a ECU steruje odbiornikami. START i STOP mają niezależne od HMI połączenia według SYS-048 i SYS-037. |
 | SYS-017 | Menu i przełączanie ekranów HMI są obsługiwane fizycznymi przyciskami. Ekran HMI nie ma funkcji dotykowej. |
 | SYS-018 | HMI zastępuje fabryczny licznik i stanowi główny panel motocykla, prezentujący prędkość, przebieg, dane silnika i stan motocykla. Źródła danych, zakres wskazań i parametry pomiarów pozostają do ustalenia. |
 | SYS-019 | ECU rejestruje występujące usterki jako DTC i zapisuje zamrożone ramki danych (freeze frame) powiązane z danym DTC, opisujące warunki jego wystąpienia. |
@@ -61,6 +61,7 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-045 | DustONE otrzymuje nową wiązkę motocykla i nowe złącze ECU, dobrane do funkcji i parametrów systemu. Zachowanie złącza fabrycznego ECU ani zgodność z jego pinoutem nie są wymagane. Zachowywane czujniki i osprzęt wymagają potwierdzenia własnych interfejsów elektrycznych. |
 | SYS-046 | ECU działa samodzielnie bez HMI, zarówno gdy HMI jest nieobecne od włączenia zasilania, jak i po utracie komunikacji podczas pracy. Sama nieobecność HMI lub utrata CAN ECU–HMI nie wyłącza silnika. Sterowanie silnikiem i jego zabezpieczenia są realizowane w ECU na podstawie danych dostępnych bez HMI. |
 | SYS-047 | ECU jest właścicielem i źródłem prawdy danych sterowania i eksploatacji motocykla, konfiguracji silnika, map oraz diagnostyki. HMI odczytuje dane i wysyła żądania, np. zmiany mapy lub sterowania akcesoriami; ECU rozstrzyga ich wykonanie i udostępnia rzeczywisty stan. |
+| SYS-048 | Przycisk START jest połączony przewodowo z wejściem ECU, niezależnie od HMI i CAN ECU–HMI. Umożliwia żądanie rozruchu przy nieobecnym, wyłączonym lub niesprawnym HMI oraz bez komunikacji z HMI. ECU realizuje sterowanie rozrusznikiem i warunki rozruchu. Sposób obsługi naciśnięcia, limity czasu i warunki odcięcia pozostają do ustalenia. |
 
 ## 3. Podział odpowiedzialności
 
@@ -80,7 +81,7 @@ Propozycje do uwzględnienia w wymaganiach szczegółowych:
 
 ECU działa niezależnie od obecności i komunikacji z HMI. Dane i decyzje sterujące należą do ECU; HMI odczytuje dane oraz wysyła żądania (SYS-046/047). Brak HMI nie przerywa pracy silnika, lokalnej diagnostyki ani zabezpieczeń ECU. Dane wymagane do tej pracy muszą być dostępne bez udziału HMI. Ustalenie i konsekwencje architektoniczne: [ADR-002 — samodzielne ECU i HMI jako klient](decisions/adr-002-samodzielnosc-ecu.md).
 
-Sposób wywołania rozruchu pozostaje zgodny z SYS-016 i SYS-037; ustalenie nie dodaje osobnego przycisku START do ECU. Ważność żądań akcesoriów, zachowanie po ponownym połączeniu i szczegóły protokołu pozostają do określenia.
+W odpowiedzi na pytanie 56 i późniejszym doprecyzowaniu z 2026-10-25 właściciel potwierdził: przyciski obsługi HMI pozostają podłączone do HMI, natomiast START i STOP działają niezależnie od HMI. START trafia przewodowo do ECU (SYS-048), a STOP ma osobny obwód gaszenia (SYS-037). Zaktualizowano SYS-016. Sposób obsługi naciśnięcia START, ważność żądań akcesoriów, zachowanie po ponownym połączeniu i szczegóły protokołu pozostają do określenia.
 
 ### Dodatkowe pomiary — doprecyzowanie właściciela z 2026-10-18
 
@@ -163,7 +164,7 @@ Przed projektem mechanicznym określimy głębokość i czas zanurzenia, warunki
 
 ### Automatyczne gaszenie po przewróceniu — ustalenie właściciela z 2026-10-18
 
-System ma wykrywać przewrócenie motocykla i automatycznie wyłączać silnik (SYS-039). Przed doborem sprzętu określimy sposób i miejsce pomiaru, kryteria odróżniania upadku od normalnej jazdy enduro, czas potwierdzania oraz wymagany czas reakcji. Należy także określić realizację wyłączenia silnika i reakcję na usterkę toru wykrywania. Nie wybrano jeszcze czujnika ani lokalizacji funkcji w ECU lub HMI. Ręczny STOP według SYS-037 pozostaje osobną funkcją.
+System ma wykrywać przewrócenie motocykla i automatycznie wyłączać silnik (SYS-039). Przed doborem sprzętu określimy sposób i miejsce pomiaru, kryteria odróżniania upadku od normalnej jazdy enduro, czas potwierdzania oraz wymagany czas reakcji. Należy także określić realizację wyłączenia silnika i reakcję na usterkę toru wykrywania. Nie wybrano jeszcze czujnika ani toru pomiarowego; zabezpieczenie musi działać w ECU bez udziału HMI (SYS-046). Ręczny STOP według SYS-037 pozostaje osobną funkcją.
 
 **Ponowny rozruch potwierdzony przez właściciela:** po postawieniu motocykla i spełnieniu warunków bezpieczeństwa kierowca może użyć START lub kopniaka bez wyłączania zasilania systemu (SYS-040). Samo postawienie motocykla nie uruchamia silnika. Do określenia: kryteria i czas potwierdzenia prawidłowego położenia, pozostałe warunki odblokowania oraz obsługa przycisku START, który pozostał wciśnięty podczas zadziałania funkcji. Podtrzymane polecenie START nie może być traktowane jako nowe żądanie rozruchu po odblokowaniu.
 
@@ -177,7 +178,7 @@ Quickshifter pozostaje poza zakresem (SYS-042). Opcjonalne wejścia sprzęgła i
 
 ### Polecenia z kierownicy i utrata komunikacji
 
-Ustalony tor sterowania akcesoriami: przyciski i przełączniki → HMI → CAN → ECU → odbiorniki. Interfejsy wejściowe HMI muszą zostać dobrane do zachowywanych elementów obsługi kierownicy. Podłączenie zwykłych przełączników akcesoriów bezpośrednio do ECU nie jest wymagane w wybranym wariancie.
+Przyciski obsługi HMI są podłączone do HMI. Tor sterowania zwykłymi akcesoriami: przełączniki → HMI → CAN → ECU → odbiorniki (SYS-016). Interfejsy wejściowe HMI dobierzemy do zachowywanych elementów obsługi kierownicy. START ma osobny tor: przycisk → wejście ECU → sterowanie rozrusznikiem (SYS-048). Obecność HMI i komunikacja CAN ECU–HMI nie są potrzebne do obsługi START.
 
 **Gaszenie potwierdzone przez właściciela:** przycisk STOP ma osobny obwód przewodowy i umożliwia zgaszenie silnika przy awarii HMI lub CAN (SYS-037). Jest to odrębny tor od zwykłych poleceń akcesoriów. Do określenia: sposób odcięcia zapłonu i podawania paliwa, interfejs elektryczny STOP, reakcja na przerwanie lub zwarcie przewodów i warunki ponownego uruchomienia. Samo wymaganie niezależności od HMI i CAN nie potwierdza jeszcze działania przy awarii procesora ECU.
 
