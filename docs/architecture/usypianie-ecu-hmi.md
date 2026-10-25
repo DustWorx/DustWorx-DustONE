@@ -1,6 +1,6 @@
 # Sekwencja usypiania ECU–HMI
 
-Data: 2026-10-25. Status: uzgodniony normalny przebieg; szczegóły protokołu, czasy i wyjątki do projektu. Podstawa: odpowiedź właściciela na pytanie 70, [SYS-059/062/063](../01-zakres-systemu.md), [ADR-003](../decisions/adr-003-wybudzanie-bez-wlacznika.md).
+Data: 2026-10-25. Status: uzgodniony normalny przebieg oraz wybór kontroli zasilania jako ścieżki awaryjnej; topologia, szczegóły protokołu i czasy do projektu. Podstawa: odpowiedzi właściciela na pytania 70 i „71 — wybór po porównaniu”, [SYS-059/062–065](../01-zakres-systemu.md), [ADR-003](../decisions/adr-003-wybudzanie-bez-wlacznika.md).
 
 ## Uzgodniony przebieg
 
@@ -29,14 +29,20 @@ Potwierdzenie jest osobną aplikacyjną ramką CAN i oznacza przyjęcie poleceni
 - Skoordynować wygaszanie okresowych transmisji ECU i HMI z wybranymi torami wybudzania, aby ruch końcowy nie powodował niezamierzonego ponownego wybudzenia. Zaplanowane zakończenie nadawania HMI odróżniać od nieoczekiwanej utraty komunikacji w diagnostyce.
 - Blokada snu przy podłączonym PC pozostaje zgodna z SYS-057. Priorytet rozruchu i niezależność ECU od sprawności HMI pozostają zgodne z SYS-046/054.
 
+## Wybrana ścieżka awaryjna
+
+Właściciel zatwierdził sterowanie zasilaniem HMI z ECU. Przy braku potwierdzenia po ograniczonym oczekiwaniu/próbach ECU odłącza część aktywną HMI, rejestruje problem i może zasnąć, jeśli nadal spełnia warunki SYS-059. Ewentualny cykl odzyskania i jego parametry wymagają określenia. Stan awaryjnego odłączenia rozróżniamy od poprawnej sekwencji potwierdzonej przez HMI.
+
+Wybudzanie przyciskami HMI oraz pozostałe źródła wybudzania muszą pozostać dostępne przy odłączonej części aktywnej HMI (SYS-064). Konkretny tor wymaga projektu. Nowa aktywność i blokady serwisowe mają pierwszeństwo przed kontynuowaniem odłączenia i snu.
+
 ## Otwarte decyzje i parametry
 
-Formaty i identyfikatory ramek, oznaczenie bieżącej próby, czasy odpowiedzi i przejścia w sen, ponowienia oraz reakcja na brak potwierdzenia lub brak HMI. Ustalić warunki rozstrzygania nowej aktywności podczas polecenia, transmisji potwierdzenia i końcowego przejścia w sen. Nie wybrano jeszcze zachowania awaryjnego po braku potwierdzenia.
+Formaty i identyfikatory ramek, oznaczenie bieżącej próby, czasy odpowiedzi i przejścia w sen, liczba ponowień, ewentualne odzyskiwanie HMI, topologia sterowanego zasilania oraz wybudzania i warunki ponownego załączenia. Ustalić rozstrzyganie nowej aktywności w każdej fazie. Stan zasilania HMI po poprawnym potwierdzeniu wymaga osobnego ustalenia.
 
-Właściciel w odpowiedzi na pytanie 71 poprosił o [porównanie timeoutu, niezależnego resetu i kontroli zasilania HMI](brak-potwierdzenia-uspienia-hmi.md). Analiza zawiera rekomendację do wyboru; normalna sekwencja jest uzgodniona, a ścieżka awaryjna nadal wymaga decyzji.
+[Porównanie timeoutu, resetu i kontroli zasilania](brak-potwierdzenia-uspienia-hmi.md) zachowuje uzasadnienie wyboru i rozważone alternatywy.
 
 ## Proponowana weryfikacja
 
 Zarejestrować poprawny przebieg polecenia i potwierdzenia, zakończenie nadawania HMI oraz kolejność rzeczywistych przejść w stan niskiego poboru. Sprawdzić odnawianie bezczynności po próbach START/kopniakiem i interakcji z HMI oraz blokady podczas pracy silnika, obsługi wentylatora, zapisów pamięci i połączenia z PC.
 
-Wprowadzić nową aktywność w każdej fazie i sprawdzić, że nie kończy się ona nieuprawnionym uśpieniem. Sprawdzić spóźnione, powtórzone i brakujące potwierdzenie według później przyjętej polityki. Kryteria czasowe i poboru ustalić przed próbami; testów sprzętu ani firmware nie wykonano.
+Wprowadzić nową aktywność w każdej fazie i sprawdzić, że nie kończy się ona nieuprawnionym uśpieniem. Sprawdzić spóźnione i powtórzone potwierdzenia, a przy braku potwierdzenia — ograniczenie oczekiwania, niezależne od CAN odłączenie części aktywnej HMI, zapis problemu i późniejszy sen ECU. Potwierdzić wymagane wybudzanie po odłączeniu oraz blokady podczas serwisu i zapisów pamięci. Kryteria czasowe i poboru ustalić przed próbami; testów sprzętu ani firmware nie wykonano.
