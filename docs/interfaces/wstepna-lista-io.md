@@ -29,9 +29,9 @@ Wiązkę i złącze ECU projektujemy od nowa (SYS-045), według potrzebnych funk
 | Klakson | Wyjście ECU | SYS-004 | Obwód, prąd, sposób sterowania i wymagania diagnostyczne. |
 | Wentylator | Wyjście ECU; dodatkowe żądanie włączenia z HMI przez CAN | SYS-004, 043, 044, 053 | Po utracie HMI/CAN anulowanie ręcznego wymuszenia i sterowanie według automatyki temperatury. Parametry kanału, progi/histereza, czasy wykrywania i reakcje na usterki do określenia. |
 | Dodatkowe wyjścia konfigurowalne | Wyjścia ECU | SYS-004 | Liczba, dopuszczalne obciążenia i funkcje. |
-| Przycisk START | Osobne przewodowe wejście ECU, niezależne od HMI/CAN | SYS-048 | Żądanie rozruchu podczas przytrzymywania; puszczenie kończy sterowanie rozrusznikiem. Poziomy i polaryzacja, styki, filtracja, diagnostyka przewodów oraz limity i blokady do określenia. |
+| Przycisk START | Osobne przewodowe wejście i źródło wybudzenia ECU, niezależne od HMI | SYS-048, 054 | Żądanie rozruchu podczas przytrzymywania; puszczenie kończy sterowanie rozrusznikiem. Tor wybudzania, czasy, poziomy, polaryzacja, filtracja i diagnostyka przewodów do określenia. |
 | Rozrusznik | Wyjście ECU → tor wykonawczy | SYS-004, 048, 049 | Odcięcie po potwierdzeniu pracy silnika lub przekroczeniu czasu kręcenia; kolejna próba wymaga puszczenia i ponownego naciśnięcia START. Stycznik/przekaźnik, prąd, tor dużego prądu, metoda detekcji, limity i pozostałe warunki rozruchu do określenia. |
-| Przyciski obsługi HMI i przełączniki akcesoriów | Wejścia HMI; żądania sterowania akcesoriami do ECU po CAN | SYS-016, 017 | Lista elementów i funkcji, styki, wspólne przewody, poziomy. START i STOP mają osobne tory według SYS-048/037. |
+| Przyciski obsługi HMI i przełączniki akcesoriów | Wejścia HMI; przyciski obsługi wybudzają HMI i ECU | SYS-016, 017, 055 | Lista elementów i funkcji, styki, poziomy oraz przekazanie wybudzenia do ECU. Żądania akcesoriów po CAN; START i STOP mają osobne tory według SYS-048/037. |
 | Ręczny STOP | Osobny obwód przewodowy, niezależny od HMI/CAN | SYS-037 | Sposób odcięcia, interfejs i reakcje na zwarcie/przerwę. |
 | Wykrywanie przewrócenia | Lokalizacja i tor pomiarowy otwarte | SYS-039, 040 | Pomiar, montaż, kryteria, czasy reakcji i odblokowania. |
 | Prędkość motocykla | Źródło i miejsce podłączenia otwarte | SYS-018 | Czujnik lub inne źródło, sygnał, kalibracja i wymagana dokładność. |
@@ -55,9 +55,10 @@ Poniższe pozycje nie są nowymi zatwierdzonymi wymaganiami właściciela.
 
 ## Zasilanie i komunikacja
 
-- Akumulator nominalnie 12 V: zakres pracy, złącza zasilania, masy, ochrona i rezerwa energii do ustalenia (SYS-013). HMI również wymaga określenia zasilania i stanów uśpienia.
+- Akumulator nominalnie 12 V: zakres pracy, złącza zasilania, masy, ochrona i rezerwa energii do ustalenia (SYS-013). Obsługa bez osobnego włącznika; tory czuwania i wybudzania ECU oraz HMI według SYS-054/055 i [ADR-003](../decisions/adr-003-wybudzanie-bez-wlacznika.md).
+- Kopniak: wymagane wybudzenie ECU podczas rozruchu (SYS-054); źródło detekcji, tor sprzętowy i czas gotowości pozostają do projektu i weryfikacji.
 - CAN ECU–HMI: interfejs wymagany; szybkość, przewody, terminacja i protokół otwarte (SYS-005). ECU pracuje bez HMI; dane konieczne do sterowania silnikiem i jego zabezpieczeń muszą być dostępne ECU bez udziału HMI (SYS-046/047, [ADR-002](../decisions/adr-002-samodzielnosc-ecu.md)).
-- Jeden przewodowy punkt obsługi obu urządzeń: interfejs i lokalizacja otwarte (SYS-026, 027).
+- Jeden przewodowy punkt obsługi obu urządzeń: podłączenie komputera wybudza ECU i HMI oraz blokuje usypianie obu urządzeń na czas połączenia (SYS-026, 027, 056, 057). Interfejs, lokalizacja, detekcja podłączenia i zasilanie podczas serwisu pozostają otwarte.
 - Dostęp debuggera i odzyskiwanie urządzeń: punkty serwisowe do określenia, niezależnie od standardowego kabla użytkownika.
 
 Poza zakresem: dozownik oleju 2T, ride-by-wire, quickshifter, wejście stopki bocznej oraz zintegrowane tory EGT/lambda. Ograniczenia i warunki smarowania 2T pozostają zgodne z wymaganiami systemu.
