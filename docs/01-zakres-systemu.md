@@ -67,10 +67,11 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-051 | ECU ma osobne wejścia przewodowe wyłączników hamulca przedniego i tylnego, umożliwiające rozróżnienie ich stanów. Przy prawidłowych sygnałach i sprawnym torze wyjściowym światło hamowania jest włączone, gdy aktywny jest co najmniej jeden hamulec, i wyłączone, gdy oba są nieaktywne. Obsługa działa bez HMI i komunikacji CAN ECU–HMI. Parametry elektryczne, filtracja i reakcje na usterki pozostają do określenia. |
 | SYS-052 | Miganiem kierunkowskazów steruje lokalnie ECU. Po potwierdzeniu utraty komunikacji z HMI ECU wyłącza aktywny kierunkowskaz. Kryterium i czas potwierdzenia utraty łączności oraz zachowanie po jej przywróceniu pozostają do określenia. |
 | SYS-053 | Po potwierdzeniu utraty komunikacji z HMI ECU anuluje ręczne wymuszenie włączenia wentylatora i pozostawia sterowanie automatyce temperatury. Anulowanie wymuszenia nie wyłącza wentylatora, gdy automatyka nadal wymaga chłodzenia. Kryterium i czas potwierdzenia utraty łączności pozostają do określenia. |
-| SYS-054 | System nie wymaga osobnego włącznika ani stacyjki do codziennej obsługi. ECU wybudza się po naciśnięciu przewodowego START oraz przy rozruchu kopniakiem, niezależnie od HMI. Źródło detekcji kopania, czasy wybudzania i gotowości do rozruchu pozostają do określenia i weryfikacji. |
+| SYS-054 | System nie wymaga osobnego włącznika ani stacyjki do codziennej obsługi. Naciśnięcie przewodowego START oraz rozruch kopniakiem wybudzają automatycznie ECU i HMI. Gotowość ECU do rozruchu ma priorytet; rozruch nie wymaga zakończenia uruchamiania ani sprawności HMI. Źródło detekcji kopania, sekwencja zasilania oraz czasy wybudzania i gotowości pozostają do określenia i weryfikacji. |
 | SYS-055 | Użycie przycisków obsługi HMI wybudza samo HMI oraz ECU. Sposób przekazania wybudzenia do ECU pozostaje do określenia; obsługa przycisków HMI nadal odbywa się w HMI. |
-| SYS-056 | Podłączenie komputera przez przewodowy interfejs serwisowy wybudza ECU i HMI, bez wcześniejszego użycia START lub przycisków HMI. Interfejs, detekcja podłączenia i źródło zasilania podczas serwisu pozostają do określenia. |
+| SYS-056 | Przy dostępnym zasilaniu według SYS-058 podłączenie komputera przez przewodowy interfejs serwisowy wybudza ECU i HMI, bez wcześniejszego użycia START lub przycisków HMI. Interfejs i detekcja podłączenia pozostają do określenia. |
 | SYS-057 | Przez czas połączenia z komputerem usypianie ECU i HMI jest zablokowane, aby umożliwić pracę z urządzeniami, w tym konfigurację, diagnostykę i aktualizacje. Sposób podtrzymania blokady w obu urządzeniach oraz warunki jej zwolnienia po rozłączeniu pozostają do określenia. |
+| SYS-058 | Podczas konfiguracji, diagnostyki i aktualizacji z komputera wymagane jest zasilanie ECU i HMI z akumulatora instalacji nominalnie 12 V lub odpowiedniego zasilacza warsztatowego. Kabel PC zapewnia komunikację i wybudzenie; zasilanie elektroniki obu urządzeń wyłącznie z kabla PC pozostaje poza przyjętym zakresem. Parametry zasilania i wymagana wydajność prądowa będą określone w projekcie. |
 
 ## 3. Podział odpowiedzialności
 
@@ -135,7 +136,11 @@ Przy projektowaniu aktualizacji określimy dostępność wspólnego połączenia
 
 W odpowiedzi na pytanie 64 właściciel wybrał obsługę bez osobnego włącznika: START i kopniak wybudzają ECU, a przyciski HMI wybudzają HMI oraz ECU. Podłączenie komputera wybudza urządzenia i blokuje ich usypianie na czas połączenia, w tym pracy diagnostycznej i aktualizacji (SYS-054–057). Blokady nie ograniczamy wyłącznie do aktywnego przesyłania danych.
 
-Podstawa architektury, źródła wybudzania, otwarte parametry oraz propozycje prób: [ADR-003 — wybudzanie bez osobnego włącznika](decisions/adr-003-wybudzanie-bez-wlacznika.md). Warunki zasypiania bez komputera, pobór prądu w czuwaniu, źródło energii podczas serwisu i wybudzanie HMI od START/kopniaka pozostają do doprecyzowania. Nie wybrano jeszcze komponentów ani torów wybudzania.
+Po porównaniu wariantów w odpowiedzi na pytanie 65 właściciel wybrał zasilanie serwisowe z akumulatora lub zasilacza warsztatowego 12 V. Kabel PC służy do komunikacji i wybudzenia (SYS-058); wybrano wariant A z [porównania zasilania serwisowego](architecture/zasilanie-serwisowe-porownanie.md).
+
+W odpowiedzi na pytanie 66 z 2026-10-25 właściciel potwierdził automatyczne wybudzanie również HMI od START i kopniaka, z priorytetem gotowości ECU do rozruchu (SYS-054). ECU nie czeka na uruchomienie HMI ani potwierdzenie komunikacji.
+
+Podstawa architektury, źródła wybudzania, otwarte parametry oraz propozycje prób: [ADR-003 — wybudzanie bez osobnego włącznika](decisions/adr-003-wybudzanie-bez-wlacznika.md). Warunki zasypiania bez komputera, pobór prądu w czuwaniu, parametry zasilania, sekwencja i czasy wybudzania pozostają do doprecyzowania. Nie wybrano jeszcze komponentów ani torów wybudzania.
 
 ### Rejestracja diagnostyczna ECU — ustalenie właściciela z 2026-10-18
 
