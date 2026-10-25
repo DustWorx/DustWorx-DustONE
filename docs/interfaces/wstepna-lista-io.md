@@ -25,7 +25,8 @@ Wiązkę i złącze ECU projektujemy od nowa (SYS-045), według potrzebnych funk
 | Hamulec przedni | Osobne przewodowe wejście ECU | SYS-051 | Wyłącznik i jego interfejs, poziomy, polaryzacja, filtracja oraz diagnostyka. Działanie bez HMI/CAN. |
 | Hamulec tylny | Osobne przewodowe wejście ECU | SYS-051 | Wyłącznik i jego interfejs, poziomy, polaryzacja, filtracja oraz diagnostyka. Odczyt rozróżniany od hamulca przedniego. |
 | Światło hamowania | Wyjście ECU; załączane po użyciu któregokolwiek hamulca | SYS-004, 051 | Działanie bez HMI/CAN. Odbiornik, prąd, połączenia, zabezpieczenia i reakcje na usterki do określenia. |
-| Kierunkowskazy, klakson | Wyjścia ECU | SYS-004 | Niezależne obwody, prądy, równoczesność pracy i wymagania diagnostyczne. |
+| Kierunkowskazy | Wyjścia ECU; miganie realizowane lokalnie | SYS-004, 052 | Wyłączenie aktywnego kierunkowskazu po potwierdzeniu utraty komunikacji z HMI. Obwody, prądy, parametry migania, kryterium/czas utraty łączności i zachowanie po jej przywróceniu do określenia. |
+| Klakson | Wyjście ECU | SYS-004 | Obwód, prąd, sposób sterowania i wymagania diagnostyczne. |
 | Wentylator | Wyjście ECU; dodatkowe żądanie włączenia z HMI przez CAN | SYS-004, 043, 044 | Automatyka według temperatury i wymuszenie włączenia; parametry kanału, progi/histereza i reakcje na usterki do określenia. |
 | Dodatkowe wyjścia konfigurowalne | Wyjścia ECU | SYS-004 | Liczba, dopuszczalne obciążenia i funkcje. |
 | Przycisk START | Osobne przewodowe wejście ECU, niezależne od HMI/CAN | SYS-048 | Żądanie rozruchu podczas przytrzymywania; puszczenie kończy sterowanie rozrusznikiem. Poziomy i polaryzacja, styki, filtracja, diagnostyka przewodów oraz limity i blokady do określenia. |
