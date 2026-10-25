@@ -1,6 +1,6 @@
 # Brak potwierdzenia uśpienia HMI — porównanie reakcji
 
-Data: 2026-10-25. Status: analiza na prośbę właściciela w pytaniu 71; ścieżka awaryjna nie została wybrana. Podstawa: [normalna sekwencja ECU–HMI](usypianie-ecu-hmi.md), [ADR-003](../decisions/adr-003-wybudzanie-bez-wlacznika.md), SYS-054/055/057/062/063 w [zakresie systemu](../01-zakres-systemu.md).
+Data: 2026-10-25. Status: właściciel po porównaniu w pytaniu 71 zatwierdził kontrolę zasilania HMI z ECU jako ścieżkę awaryjną; topologia i parametry do projektu. Podstawa: [normalna sekwencja ECU–HMI](usypianie-ecu-hmi.md), [ADR-003](../decisions/adr-003-wybudzanie-bez-wlacznika.md), SYS-054/055/057/062–065 w [zakresie systemu](../01-zakres-systemu.md).
 
 ## Porównanie
 
@@ -18,13 +18,17 @@ Polecenie resetu wysyłane wyłącznie po CAN nie stanowi niezależnej drogi odz
 
 Wariant z kontrolą zasilania musi zachować SYS-054/055: START, kopniak, PC i przyciski HMI mają nadal uruchamiać wymagane urządzenia. Dla przycisków potrzebna jest droga działająca przy wyłączonej części aktywnej HMI — np. osobna linia WAKE do ECU albo niezależnie zasilany tor czuwania zdolny zgłosić żądanie wybudzenia. Przyciski pozostają podłączone do HMI; osobny sygnał może przekazywać samo żądanie wybudzenia.
 
-Przykład funkcjonalny z osobną linią WAKE, do dalszego projektu:
+Zasilanie HMI wychodzi z ECU i jest przez nie kontrolowane (SYS-064). Przykład funkcjonalny z osobną linią WAKE poniżej; konkretny tor wybudzania pozostaje do wyboru:
 
 ```mermaid
 flowchart LR
-    B["Zasilanie 12 V"] --> E["ECU: sterowanie i czuwanie"]
-    B --> S["Sterowany tor zasilania HMI"]
-    E -->|Sterowanie niezależne od CAN| S
+    B["Zasilanie 12 V"] --> E
+    B --> S
+    subgraph ECU["ECU"]
+        E["Sterowanie i tor czuwania"]
+        S["Sterowane wyjście zasilania HMI"]
+        E -->|Sterowanie sprzętowe| S
+    end
     S --> H["Aktywna część HMI"]
     W["Przyciski HMI i niezależny tor WAKE"] -->|Wybudzenie| E
     W -->|Obsługa przycisków po uruchomieniu| H
@@ -39,15 +43,15 @@ Dobór topologii wymaga sprawdzenia działania przycisków przy wyłączonych na
 
 [TI TPS3430-Q1, Rev. A](https://www.ti.com/lit/ds/symlink/tps3430-q1.pdf) opisuje niezależny watchdog okienkowy z wyjściem WDO. Skutek tego sygnału zależy od jego podłączenia i projektu systemu. Konkretnych układów do PCB nie wybrano; przywołania potwierdzają dostępność mechanizmów, bez deklaracji zgodności całego projektu z normami.
 
-## Rekomendacja do decyzji
+## Decyzja właściciela i kierunek realizacji
 
-Dla DustONE rekomendujemy **kontrolę zasilania części aktywnej HMI**, z zachowanym wybudzaniem przyciskami. Daje ECU fizyczny sposób ograniczenia poboru HMI, gdy normalna sekwencja nie działa. Timeout pozostaje potrzebny do ograniczenia oczekiwania, a watchdog/reset może stanowić próbę odzyskania.
+W odpowiedzi „71 — wybór po porównaniu” z 2026-10-25 właściciel zatwierdził **kontrolę zasilania HMI** i potwierdził jego wyprowadzenie z ECU. Zachowujemy wymagane wybudzanie przyciskami przy odłączonej części aktywnej. Zapis wymagań: SYS-064/065. Timeout ogranicza oczekiwanie; ewentualna próba odzyskania przez reset lub cykl zasilania wymaga jeszcze określenia.
 
-Proponowana ścieżka: ograniczone ponowienia polecenia, ograniczona próba odzyskania HMI, a po niepowodzeniu odłączenie części aktywnej HMI, zapis problemu i samodzielny sen ECU przy nadal spełnionych warunkach. Kontrolowany cykl zasilania może pełnić rolę resetu odzyskującego; osobną linię RESET rozważymy przy konkretnej potrzebie.
+Po nieudanej sekwencji z ograniczonym oczekiwaniem/próbami ECU odłącza część aktywną HMI, zapisuje problem i może zasnąć przy nadal spełnionych warunkach. Kontrolowany cykl zasilania może pełnić rolę resetu odzyskującego; osobną linię RESET rozważymy przy konkretnej potrzebie. Liczba prób i kryteria cyklu odzyskania pozostają do specyfikacji.
 
 Awaryjne odłączenie należy odróżnić w diagnostyce od poprawnie zakończonej sekwencji z potwierdzeniem HMI. Nowa aktywność i zadania wymagające pracy mają pierwszeństwo. Blokady związane z komputerem, aktualizacją i zapisami pamięci muszą zapobiegać nieuprawnionemu odłączeniu energii w trakcie tych operacji.
 
-Dokładny wpływ na PCB, złącza i BOM poznamy po wyborze topologii i bilansie mocy HMI. Powyższa ścieżka jest propozycją, a nie zatwierdzonym jeszcze wymaganiem.
+Dokładny wpływ na PCB, złącza i BOM poznamy po wyborze topologii i bilansie mocy HMI. Mechanizm kontroli zasilania jest zatwierdzony; parametry, tor wybudzania i stan zasilania HMI po poprawnej sekwencji pozostają do określenia.
 
 ## Do weryfikacji po wyborze
 
