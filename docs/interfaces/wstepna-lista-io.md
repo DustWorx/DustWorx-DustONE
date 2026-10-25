@@ -10,6 +10,7 @@ Wiązkę i złącze ECU projektujemy od nowa (SYS-045), według potrzebnych funk
 
 | Funkcja | Miejsce / kierunek | Podstawa | Dane potrzebne do projektu |
 | --- | --- | --- | --- |
+| Zasilanie HMI | Sterowane wyjście zasilania z ECU do HMI | SYS-064, 065, 066 | W normalnym śnie wyjście pozostaje włączone. Kontrolowane odłączenie jako ostateczność przy awarii lub zdefiniowanych ograniczeniach. Podtrzymanie stanu wyjścia podczas snu ECU, pobór toru w obu stanach, zabezpieczenia i wybudzanie przyciskami po odłączeniu do projektu. |
 | Zapłon | Wyjście ECU; realizacja otwarta | SYS-001, 002, 015 | Układy i cewki referencyjne, sposób zasilania, energia i interfejs sterowania. |
 | Wtrysk paliwa | Wyjścia ECU; aktywne w wariantach wtryskowych | SYS-012, 015 | Liczba wtryskiwaczy działających jednocześnie, typy, prądy, czasy i sposób sterowania. |
 | Układ pompy paliwa | Sterowanie ECU; zakres toru mocy otwarty | SYS-012, 015 | Pompy referencyjne, prądy robocze/rozruchowe, sposób wyłączania i diagnostyka. |
@@ -27,7 +28,8 @@ Wiązkę i złącze ECU projektujemy od nowa (SYS-045), według potrzebnych funk
 | Światło hamowania | Wyjście ECU; załączane po użyciu któregokolwiek hamulca | SYS-004, 051 | Działanie bez HMI/CAN. Odbiornik, prąd, połączenia, zabezpieczenia i reakcje na usterki do określenia. |
 | Kierunkowskazy | Wyjścia ECU; miganie realizowane lokalnie | SYS-004, 052 | Wyłączenie aktywnego kierunkowskazu po potwierdzeniu utraty komunikacji z HMI. Obwody, prądy, parametry migania, kryterium/czas utraty łączności i zachowanie po jej przywróceniu do określenia. |
 | Klakson | Wyjście ECU | SYS-004 | Obwód, prąd, sposób sterowania i wymagania diagnostyczne. |
-| Wentylator | Wyjście ECU; dodatkowe żądanie włączenia z HMI przez CAN | SYS-004, 043, 044, 053 | Po utracie HMI/CAN anulowanie ręcznego wymuszenia i sterowanie według automatyki temperatury. Parametry kanału, progi/histereza, czasy wykrywania i reakcje na usterki do określenia. |
+| Wentylator | Wyjście ECU; dodatkowe żądanie włączenia z HMI przez CAN | SYS-004, 043, 044, 053, 060, 061 | Po utracie HMI/CAN anulowanie ręcznego wymuszenia i sterowanie automatyczne. Po zgaszeniu wspólne limity czasu i napięcia dla automatyki oraz ręcznego wymuszenia. Parametry kanału, temperatury, czasy, napięcia i reakcje na usterki do określenia. |
+| Nadzór napięcia akumulatora | Tor ECU do odcięcia wentylatora przy niskim napięciu | SYS-060, 061 | Punkt pomiaru, metoda detekcji, progi, dokładność, filtracja i histereza do określenia. |
 | Dodatkowe wyjścia konfigurowalne | Wyjścia ECU | SYS-004 | Liczba, dopuszczalne obciążenia i funkcje. |
 | Przycisk START | Osobne przewodowe wejście ECU; wybudzenie ECU i HMI z priorytetem ECU | SYS-048, 054 | Żądanie rozruchu podczas przytrzymywania; puszczenie kończy sterowanie rozrusznikiem. Rozruch niezależny od gotowości HMI. Tor wybudzania, sekwencja, czasy, poziomy, polaryzacja, filtracja i diagnostyka do określenia. |
 | Rozrusznik | Wyjście ECU → tor wykonawczy | SYS-004, 048, 049 | Odcięcie po potwierdzeniu pracy silnika lub przekroczeniu czasu kręcenia; kolejna próba wymaga puszczenia i ponownego naciśnięcia START. Stycznik/przekaźnik, prąd, tor dużego prądu, metoda detekcji, limity i pozostałe warunki rozruchu do określenia. |
@@ -51,7 +53,7 @@ Poniższe pozycje nie są nowymi zatwierdzonymi wymaganiami właściciela.
 | Faza cyklu 4T | Ocena potrzeby dodatkowego sygnału synchronizacji | Strategia sterowania i źródło fazy; nie zakładamy obowiązkowego czujnika wałka. |
 | Inne zastosowania temperatury silnika | Ocena kompensacji i funkcji ochronnych poza uzgodnionym sterowaniem wentylatorem | Potrzebne funkcje i kryteria do ustalenia. Pomiar płynu i sterowanie wentylatorem są już wymagane według SYS-043/044. |
 | Ciśnienia wymagane przez wybrane strategie wtrysku | Ustalenie kompletnego zestawu sygnałów | Potrzeba MAP/ciśnienia skrzyni korbowej i interfejsy dla konkretnych jednostek. |
-| Napięcie zasilania | Diagnostyka i kompensacja zależna od napięcia | Punkt pomiaru, zakres, dokładność i częstotliwość. |
+| Pomiar wartości napięcia zasilania do dodatkowych zastosowań | Diagnostyka i kompensacja zależna od napięcia | Zakres, dokładność i częstotliwość do analizy; nadzór wymagany do odcięcia wentylatora ujęto wyżej jako funkcję potwierdzoną. |
 
 ## Zasilanie i komunikacja
 
@@ -59,6 +61,8 @@ Poniższe pozycje nie są nowymi zatwierdzonymi wymaganiami właściciela.
 - Kopniak: wymagane automatyczne wybudzenie ECU i HMI, z priorytetem gotowości ECU do rozruchu (SYS-054). Źródło detekcji, tory wybudzania i przekazania sygnału do HMI, sekwencja oraz czasy pozostają do projektu i weryfikacji.
 - CAN ECU–HMI: interfejs wymagany; szybkość, przewody, terminacja i protokół otwarte (SYS-005). ECU pracuje bez HMI; dane konieczne do sterowania silnikiem i jego zabezpieczeń muszą być dostępne ECU bez udziału HMI (SYS-046/047, [ADR-002](../decisions/adr-002-samodzielnosc-ecu.md)).
 - Jeden przewodowy punkt obsługi obu urządzeń: przy dostępnym zasilaniu 12 V podłączenie komputera wybudza ECU i HMI oraz blokuje usypianie obu urządzeń na czas połączenia (SYS-026, 027, 056, 057, 058). Serwis wymaga akumulatora lub odpowiedniego zasilacza warsztatowego. Interfejs, lokalizacja, detekcja podłączenia i parametry zasilania pozostają do określenia.
+- Usypianie ECU i HMI: ECU po upływie bezczynności i zakończeniu zadań wydaje polecenie HMI, które potwierdza je ramką CAN, kończy nadawanie i zasypia; następnie zasypia ECU (SYS-059, 062, 063). Przyciski, próby rozruchu i rzeczywista aktywność użytkownika w HMI odnawiają czas. Formaty, czasy, sygnalizacja aktywności i wyjątki wymagają specyfikacji: [sekwencja ECU–HMI](../architecture/usypianie-ecu-hmi.md).
+- Brak potwierdzenia HMI: ograniczone oczekiwanie/próby, awaryjne odłączenie części aktywnej z wyjścia zasilania ECU i dopuszczenie snu ECU (SYS-064/065). Tor wybudzania przyciskami musi działać także przy tym odłączeniu; szczegółowy sposób realizacji pozostaje do projektu.
 - Dostęp debuggera i odzyskiwanie urządzeń: punkty serwisowe do określenia, niezależnie od standardowego kabla użytkownika.
 
 Poza zakresem: dozownik oleju 2T, ride-by-wire, quickshifter, wejście stopki bocznej oraz zintegrowane tory EGT/lambda. Ograniczenia i warunki smarowania 2T pozostają zgodne z wymaganiami systemu.

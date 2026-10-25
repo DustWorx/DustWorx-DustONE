@@ -13,6 +13,8 @@ Zasada ECU–HMI: ECU jest właścicielem danych i samodzielnie wykonuje sterowa
 
 Wybudzanie: przyciski obsługi HMI wybudzają HMI i ECU; podłączenie komputera przy dostępnym zasilaniu 12 V wybudza oba urządzenia i blokuje ich usypianie na czas połączenia. START i kopniak wybudzają ECU oraz HMI, z priorytetem gotowości ECU do rozruchu i niezależnością rozruchu od HMI. Podstawa i otwarte interfejsy: [ADR-003](../decisions/adr-003-wybudzanie-bez-wlacznika.md), SYS-054–058.
 
+Usypianie koordynuje ECU po upływie bezczynności i spełnieniu warunków SYS-059. HMI potwierdza przyjęcie polecenia aplikacyjną ramką CAN, kończy nadawanie i zasypia; następnie zasypia ECU (SYS-062/063). Przyciski, próby rozruchu i rzeczywista aktywność użytkownika w HMI odnawiają czas; sam cykliczny odczyt danych go nie odnawia. [Normalna sekwencja ECU–HMI](../architecture/usypianie-ecu-hmi.md) określa uzgodniony przebieg; formaty, czasy i wyjątki pozostają otwarte.
+
 Specyfikacje i przyszłe pliki maszynowe, np. DBC lub schematy danych, przechowujemy razem w tym katalogu.
 
 Opracowania referencyjne:
