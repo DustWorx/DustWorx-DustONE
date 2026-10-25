@@ -66,6 +66,11 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-050 | Przy nieprzerwanej pracy ECU utrata HMI lub komunikacji CAN ECU–HMI nie zmienia ostatniego stanu świateł przednich i tylnych pozycyjnych. Stan jest zachowywany do kolejnego przyjętego polecenia, z zachowaniem nadrzędnych zabezpieczeń wyjść. Wymaganie dotyczy bieżącej pracy ECU; stany po restarcie lub zaniku zasilania ECU pozostają do ustalenia. |
 | SYS-051 | ECU ma osobne wejścia przewodowe wyłączników hamulca przedniego i tylnego, umożliwiające rozróżnienie ich stanów. Przy prawidłowych sygnałach i sprawnym torze wyjściowym światło hamowania jest włączone, gdy aktywny jest co najmniej jeden hamulec, i wyłączone, gdy oba są nieaktywne. Obsługa działa bez HMI i komunikacji CAN ECU–HMI. Parametry elektryczne, filtracja i reakcje na usterki pozostają do określenia. |
 | SYS-052 | Miganiem kierunkowskazów steruje lokalnie ECU. Po potwierdzeniu utraty komunikacji z HMI ECU wyłącza aktywny kierunkowskaz. Kryterium i czas potwierdzenia utraty łączności oraz zachowanie po jej przywróceniu pozostają do określenia. |
+| SYS-053 | Po potwierdzeniu utraty komunikacji z HMI ECU anuluje ręczne wymuszenie włączenia wentylatora i pozostawia sterowanie automatyce temperatury. Anulowanie wymuszenia nie wyłącza wentylatora, gdy automatyka nadal wymaga chłodzenia. Kryterium i czas potwierdzenia utraty łączności pozostają do określenia. |
+| SYS-054 | System nie wymaga osobnego włącznika ani stacyjki do codziennej obsługi. ECU wybudza się po naciśnięciu przewodowego START oraz przy rozruchu kopniakiem, niezależnie od HMI. Źródło detekcji kopania, czasy wybudzania i gotowości do rozruchu pozostają do określenia i weryfikacji. |
+| SYS-055 | Użycie przycisków obsługi HMI wybudza samo HMI oraz ECU. Sposób przekazania wybudzenia do ECU pozostaje do określenia; obsługa przycisków HMI nadal odbywa się w HMI. |
+| SYS-056 | Podłączenie komputera przez przewodowy interfejs serwisowy wybudza ECU i HMI, bez wcześniejszego użycia START lub przycisków HMI. Interfejs, detekcja podłączenia i źródło zasilania podczas serwisu pozostają do określenia. |
+| SYS-057 | Przez czas połączenia z komputerem usypianie ECU i HMI jest zablokowane, aby umożliwić pracę z urządzeniami, w tym konfigurację, diagnostykę i aktualizacje. Sposób podtrzymania blokady w obu urządzeniach oraz warunki jej zwolnienia po rozłączeniu pozostają do określenia. |
 
 ## 3. Podział odpowiedzialności
 
@@ -126,6 +131,12 @@ Standardowa obsługa wymaga podłączenia jednego kabla w jednym punkcie. Aplika
 
 Przy projektowaniu aktualizacji określimy dostępność wspólnego połączenia podczas programowania każdego urządzenia oraz procedury odzyskiwania po przerwanej aktualizacji lub uszkodzeniu oprogramowania. Wymaganie jednego kabla dotyczy standardowej obsługi; architektura awaryjnego odzyskiwania i dostępu debuggera pozostaje do określenia.
 
+### Wybudzanie i praca z komputerem — ustalenie właściciela z 2026-10-25
+
+W odpowiedzi na pytanie 64 właściciel wybrał obsługę bez osobnego włącznika: START i kopniak wybudzają ECU, a przyciski HMI wybudzają HMI oraz ECU. Podłączenie komputera wybudza urządzenia i blokuje ich usypianie na czas połączenia, w tym pracy diagnostycznej i aktualizacji (SYS-054–057). Blokady nie ograniczamy wyłącznie do aktywnego przesyłania danych.
+
+Podstawa architektury, źródła wybudzania, otwarte parametry oraz propozycje prób: [ADR-003 — wybudzanie bez osobnego włącznika](decisions/adr-003-wybudzanie-bez-wlacznika.md). Warunki zasypiania bez komputera, pobór prądu w czuwaniu, źródło energii podczas serwisu i wybudzanie HMI od START/kopniaka pozostają do doprecyzowania. Nie wybrano jeszcze komponentów ani torów wybudzania.
+
 ### Rejestracja diagnostyczna ECU — ustalenie właściciela z 2026-10-18
 
 Potwierdzony zakres zapisu danych obejmuje występujące usterki, ich DTC i powiązane zamrożone ramki danych. Dane mają umożliwiać analizę momentu oraz warunków wystąpienia usterki i ocenę, czy pozostaje aktywna (SYS-019, SYS-020).
@@ -156,7 +167,11 @@ ECU załącza wentylator według temperatury; HMI umożliwia dodatkowe wymuszeni
 
 W silnikach chłodzonych cieczą wymagamy pomiaru wartości temperatury płynu, prezentacji na HMI i konfiguracji progów wentylatora w aplikacji Windows (SYS-044). Potrzebny jest czujnik pomiarowy; sam sygnał termowłącznika nie dostarcza wartości temperatury. Czujnik, jego charakterystykę i instalację dobierzemy z uwzględnieniem priorytetu zachowania osprzętu OEM. Istniejący automatyczny zestaw wentylatora Bety wymaga inwentaryzacji.
 
-Do określenia: zakres, dokładność i filtracja pomiaru, progi włączenia/wyłączenia i histereza, ograniczenia ustawień, diagnostyka czujnika/wyjścia oraz reakcje na ich uszkodzenia. Osobno ustalimy zachowanie ręcznego wymuszenia przy utracie CAN, restarcie ECU/HMI i zmianach zasilania oraz pracę wentylatora po zgaszeniu silnika. Nie ustalono wartości liczbowych ani typu czujnika. Temperatura płynu jest odrębnym pomiarem od IAT i temperatury PCB.
+W odpowiedzi na pytanie 63 z 2026-10-25 właściciel wybrał anulowanie ręcznego wymuszenia po utracie HMI/CAN i pozostawienie sterowania automatyce temperatury (SYS-053). Przy utrzymanym żądaniu chłodzenia wentylator nadal pracuje.
+
+Proponowana weryfikacja SYS-053: przy aktywnym ręcznym wymuszeniu przerwać komunikację ECU–HMI lub odłączyć HMI. Po potwierdzeniu utraty łączności wymuszenie ma być anulowane; przy sprawnym torze wyjściowym sprawdzić dalszą pracę wentylatora, gdy automatyka żąda chłodzenia, oraz wyłączenie, gdy automatyka go nie żąda. Kryterium i czas wykrywania ustalić przed próbami; testów nie wykonano.
+
+Do określenia: zakres, dokładność i filtracja pomiaru, progi włączenia/wyłączenia i histereza, ograniczenia ustawień, diagnostyka czujnika/wyjścia oraz reakcje na ich uszkodzenia. Osobno ustalimy zachowanie ręcznego wymuszenia po przywróceniu komunikacji, restarcie ECU i zmianach zasilania oraz pracę wentylatora po zgaszeniu silnika. Nie ustalono wartości liczbowych ani typu czujnika. Temperatura płynu jest odrębnym pomiarem od IAT i temperatury PCB.
 
 ### Wyjścia akcesoriów — preferowany kierunek
 

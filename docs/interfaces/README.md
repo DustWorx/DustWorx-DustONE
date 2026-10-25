@@ -11,6 +11,8 @@ Stan: przygotowano [wstępną listę funkcji I/O](wstepna-lista-io.md), rozdziel
 
 Zasada ECU–HMI: ECU jest właścicielem danych i samodzielnie wykonuje sterowanie; HMI odczytuje dane i wysyła żądania. Brak HMI nie wyłącza silnika. Przyciski obsługi HMI są podłączone do HMI; START jest przewodowym wejściem ECU, a STOP ma niezależny obwód gaszenia (SYS-016/037/048). Podstawa: [ADR-002](../decisions/adr-002-samodzielnosc-ecu.md), SYS-046/047. Model publikacji danych, formaty wiadomości, potwierdzenia żądań i zachowanie po ponownym połączeniu wymagają specyfikacji.
 
+Wybudzanie: przyciski obsługi HMI wybudzają HMI i ECU; podłączenie komputera wybudza oba urządzenia i blokuje ich usypianie na czas połączenia. START i kopniak wybudzają ECU bez udziału HMI. Podstawa i otwarte interfejsy: [ADR-003](../decisions/adr-003-wybudzanie-bez-wlacznika.md), SYS-054–057.
+
 Specyfikacje i przyszłe pliki maszynowe, np. DBC lub schematy danych, przechowujemy razem w tym katalogu.
 
 Opracowania referencyjne:
