@@ -8,6 +8,8 @@ Zatwierdzona podstawa: [ADR-002 — samodzielność ECU](../decisions/adr-002-sa
 
 Wybudzanie i czuwanie: [ADR-003 — obsługa bez osobnego włącznika](../decisions/adr-003-wybudzanie-bez-wlacznika.md). START, kopniak, przyciski HMI i podłączenie komputera wybudzają ECU oraz HMI. Gotowość ECU do rozruchu ma priorytet i nie zależy od uruchomienia HMI. Podłączenie komputera blokuje usypianie obu urządzeń (SYS-054–057). Bez PC, przy zgaszonym silniku i zakończonych zadaniach system zasypia po konfigurowalnym czasie bezczynności; przyciski odnawiają odliczanie (SYS-059). Tory sprzętowe, sekwencje, parametry czasu i budżet prądu czuwania wymagają projektu.
 
+Praca wentylatora po zgaszeniu silnika: funkcja konfigurowalna, z limitem czasu i odcięciem przy niskim napięciu; jej obsługa wstrzymuje uśpienie ECU (SYS-060). Zastosowanie w danym układzie chłodzenia, parametry i zachowanie HMI wymagają doprecyzowania.
+
 Analizy architektoniczne:
 
 - [Zasilanie podczas serwisu — 12 V czy z komputera](zasilanie-serwisowe-porownanie.md): wybrano wariant A — wymagane zasilanie 12 V, kabel PC do komunikacji i wybudzenia (SYS-058). Parametry toru zasilania pozostają do projektu.
