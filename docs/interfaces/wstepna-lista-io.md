@@ -52,7 +52,7 @@ Poniższe pozycje nie są nowymi zatwierdzonymi wymaganiami właściciela.
 ## Zasilanie i komunikacja
 
 - Akumulator nominalnie 12 V: zakres pracy, złącza zasilania, masy, ochrona i rezerwa energii do ustalenia (SYS-013). HMI również wymaga określenia zasilania i stanów uśpienia.
-- CAN ECU–HMI: interfejs wymagany; szybkość, przewody, terminacja i protokół otwarte (SYS-005).
+- CAN ECU–HMI: interfejs wymagany; szybkość, przewody, terminacja i protokół otwarte (SYS-005). ECU pracuje bez HMI; dane konieczne do sterowania silnikiem i jego zabezpieczeń muszą być dostępne ECU bez udziału HMI (SYS-046/047, [ADR-002](../decisions/adr-002-samodzielnosc-ecu.md)).
 - Jeden przewodowy punkt obsługi obu urządzeń: interfejs i lokalizacja otwarte (SYS-026, 027).
 - Dostęp debuggera i odzyskiwanie urządzeń: punkty serwisowe do określenia, niezależnie od standardowego kabla użytkownika.
 
