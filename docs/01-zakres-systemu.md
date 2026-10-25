@@ -63,6 +63,7 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-047 | ECU jest właścicielem i źródłem prawdy danych sterowania i eksploatacji motocykla, konfiguracji silnika, map oraz diagnostyki. HMI odczytuje dane i wysyła żądania, np. zmiany mapy lub sterowania akcesoriami; ECU rozstrzyga ich wykonanie i udostępnia rzeczywisty stan. |
 | SYS-048 | Przycisk START jest połączony przewodowo z wejściem ECU, niezależnie od HMI i CAN ECU–HMI. Umożliwia żądanie rozruchu przy nieobecnym, wyłączonym lub niesprawnym HMI oraz bez komunikacji z HMI. Żądanie trwa podczas przytrzymywania START; puszczenie przycisku kończy sterowanie rozrusznikiem. ECU realizuje warunki rozruchu; przytrzymywanie nie omija blokad i odcięć. Automatyczne odcięcia i ponowienie próby według SYS-049. |
 | SYS-049 | ECU wyłącza sterowanie rozrusznikiem po potwierdzeniu pracy silnika lub po przekroczeniu maksymalnego czasu kręcenia, także gdy START pozostaje wciśnięty. Po takim odcięciu kolejna próba wymaga puszczenia i ponownego naciśnięcia START oraz spełnienia warunków rozruchu; dalsze trzymanie przycisku nie wywołuje kolejnej próby. Metoda potwierdzania pracy silnika, limity czasu i pozostałe warunki rozruchu pozostają do określenia. |
+| SYS-050 | Przy nieprzerwanej pracy ECU utrata HMI lub komunikacji CAN ECU–HMI nie zmienia ostatniego stanu świateł przednich i tylnych pozycyjnych. Stan jest zachowywany do kolejnego przyjętego polecenia, z zachowaniem nadrzędnych zabezpieczeń wyjść. Wymaganie dotyczy bieżącej pracy ECU; stany po restarcie lub zaniku zasilania ECU pozostają do ustalenia. |
 
 ## 3. Podział odpowiedzialności
 
@@ -187,7 +188,11 @@ Przyciski obsługi HMI są podłączone do HMI. Tor sterowania zwykłymi akcesor
 
 **Gaszenie potwierdzone przez właściciela:** przycisk STOP ma osobny obwód przewodowy i umożliwia zgaszenie silnika przy awarii HMI lub CAN (SYS-037). Jest to odrębny tor od zwykłych poleceń akcesoriów. Do określenia: sposób odcięcia zapłonu i podawania paliwa, interfejs elektryczny STOP, reakcja na przerwanie lub zwarcie przewodów i warunki ponownego uruchomienia. Samo wymaganie niezależności od HMI i CAN nie potwierdza jeszcze działania przy awarii procesora ECU.
 
-Samodzielność ECU i dalsza praca silnika przy braku HMI/CAN są wymagane według SYS-046/047. Do osobnej analizy pozostają: aktualność i poprawność żądań, stany poszczególnych wyjść akcesoriów po utracie komunikacji oraz warunki sterowania rozrusznikiem.
+Samodzielność ECU i dalsza praca silnika przy braku HMI/CAN są wymagane według SYS-046/047. START i odcięcia rozrusznika określają SYS-048/049. Do osobnej analizy pozostają: aktualność i poprawność żądań, zachowanie pozostałych akcesoriów po utracie komunikacji oraz szczegółowe parametry rozruchu.
+
+W odpowiedzi na pytanie 60 z 2026-10-25 właściciel potwierdził zachowanie ostatniego stanu świateł przednich i tylnych pozycyjnych po utracie HMI/CAN, przy nadal działających zabezpieczeniach wyjść (SYS-050). Stany początkowe po restarcie lub zaniku zasilania ECU, kierunkowskazy i światło hamowania pozostają do osobnego ustalenia.
+
+Proponowana weryfikacja SYS-050: przy działającym ECU i zasilaniu świateł przerwać komunikację oraz wyłączyć lub odłączyć HMI, sprawdzając zachowanie ostatniego stanu dla świateł wcześniej włączonych i wyłączonych. Sprawdzić przyjęcie nowego polecenia po przywróceniu komunikacji oraz zachowanie działania zabezpieczeń wyjść podczas braku HMI. Warunki i kryteria prób zabezpieczeń określić wraz z projektem stopni mocy; prób nie wykonano.
 
 ### Zasada integracji z motocyklem — ustalenie właściciela
 
