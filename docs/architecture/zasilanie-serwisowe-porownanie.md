@@ -1,6 +1,6 @@
 # Zasilanie podczas serwisu — porównanie
 
-Data: 2026-10-25. Status: analiza do decyzji właściciela po pytaniu 65; wariant nie został wybrany. Podstawa: [ADR-003](../decisions/adr-003-wybudzanie-bez-wlacznika.md), SYS-026/027 i SYS-056/057 w [zakresie systemu](../01-zakres-systemu.md).
+Data: 2026-10-25. Status: właściciel po porównaniu w pytaniu 65 wybrał wariant A — wymagane zasilanie 12 V. Analiza B pozostaje uzasadnieniem rozważonej alternatywy. Podstawa: [ADR-003](../decisions/adr-003-wybudzanie-bez-wlacznika.md), SYS-026/027 i SYS-056–058 w [zakresie systemu](../01-zakres-systemu.md).
 
 ## Zakres wariantów
 
@@ -28,16 +28,16 @@ USB-C może udostępniać 1,5 A lub 3 A przy 5 V, czyli 7,5 W lub 15 W, jeśli �
 
 To limity wejścia, przed stratami przetwornic i przewodów. Nie wybrano jeszcze procesorów, pamięci, ekranu ani podświetlenia, więc pobór ECU/HMI nie został określony. Nie potwierdzono zasilania całego zestawu z dowolnego portu. Ewentualne ograniczenie jasności ekranu lub zakresu działania wymaga jawnego określenia trybu serwisowego.
 
-## Konsekwencje projektu i próby
+## Konsekwencje rozpatrywanego wariantu B
 
-Dla B należy zaprojektować rozdzielenie źródeł zasilania PC/pojazd, ochronę przed przepływem wstecznym i zasilaniem odbiorników motocykla z portu PC, oraz sprzętowe warunki wyłączenia wyjść mocy w trybie zasilania samej elektroniki. Sposób doprowadzenia energii do HMI zależy od wybranych napięć i wiązki. Dokładny wpływ na gabaryty oraz BOM poznamy po projekcie torów.
+Wariant B wymagałby rozdzielenia źródeł zasilania PC/pojazd, ochrony przed przepływem wstecznym i zasilaniem odbiorników motocykla z portu PC, oraz sprzętowych warunków wyłączenia wyjść mocy w trybie zasilania samej elektroniki. Sposób doprowadzenia energii do HMI zależałby od wybranych napięć i wiązki. Dokładny wpływ na gabaryty oraz BOM wymagałby projektu torów.
 
 Blokada usypiania SYS-057 dotyczy zarządzania stanami urządzeń przy dostępnym zasilaniu. Zachowanie po odcięciu energii przez port PC, uśpieniu komputera lub wyjęciu kabla wymaga specyfikacji. W obu wariantach potrzebna jest procedura odzyskiwania po przerwaniu aktualizacji.
 
-Przed zatwierdzeniem B: bilans mocy i rozruchu elektroniki, obsługiwane porty/kable, reakcja na niedostateczną moc, jednoczesne podłączenie 12 V i PC, przełączanie źródeł, brak zasilania wstecznego i próbne przerwanie aktualizacji obu urządzeń. Testów sprzętu nie wykonano.
+Ocena B wymagałaby bilansu mocy i rozruchu elektroniki oraz sprawdzenia obsługiwanych portów/kabli, reakcji na niedostateczną moc, jednoczesnego podłączenia 12 V i PC, przełączania źródeł, braku zasilania wstecznego i przerwania aktualizacji obu urządzeń. Testów sprzętu nie wykonano.
 
-## Rekomendacja do decyzji
+## Decyzja właściciela i uzasadnienie
 
-Na obecnym etapie rekomendujemy **A**, ze względu na kompaktowość ECU i mniejszy zakres dodatkowego toru zasilania. W motocyklu z podłączonym akumulatorem zachowuje wygodę jednego kabla PC. Jest to ocena projektowa; brak jeszcze liczbowego porównania powierzchni PCB i kosztów.
+Właściciel zatwierdził **A** w odpowiedzi „65 — wybór po porównaniu” z 2026-10-25. Wymagane zasilanie 12 V z akumulatora lub zasilacza warsztatowego zapisano jako SYS-058. Uzasadnienie rekomendacji: kompaktowość ECU i mniejszy zakres dodatkowego toru zasilania; na motocyklu z podłączonym akumulatorem pozostaje wygoda jednego kabla PC. Jest to ocena projektowa; brak jeszcze liczbowego porównania powierzchni PCB i kosztów.
 
-**B** ma wartość przy częstym serwisie zestawu poza motocyklem bez zasilacza. Jeśli właściciel wybierze ten zakres, należy uwzględnić go w schemacie i PCB, a następnie zweryfikować budżet mocy obu urządzeń i wymagania wobec portu komputera.
+**B** rozważono jako wygodniejszy serwis zestawu na stole bez zasilacza. Wymagałby dodatkowych torów zasilania oraz weryfikacji budżetu mocy obu urządzeń i wymagań wobec portu PC; nie został przyjęty do zakresu projektu.
