@@ -65,6 +65,7 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-049 | ECU wyłącza sterowanie rozrusznikiem po potwierdzeniu pracy silnika lub po przekroczeniu maksymalnego czasu kręcenia, także gdy START pozostaje wciśnięty. Po takim odcięciu kolejna próba wymaga puszczenia i ponownego naciśnięcia START oraz spełnienia warunków rozruchu; dalsze trzymanie przycisku nie wywołuje kolejnej próby. Metoda potwierdzania pracy silnika, limity czasu i pozostałe warunki rozruchu pozostają do określenia. |
 | SYS-050 | Przy nieprzerwanej pracy ECU utrata HMI lub komunikacji CAN ECU–HMI nie zmienia ostatniego stanu świateł przednich i tylnych pozycyjnych. Stan jest zachowywany do kolejnego przyjętego polecenia, z zachowaniem nadrzędnych zabezpieczeń wyjść. Wymaganie dotyczy bieżącej pracy ECU; stany po restarcie lub zaniku zasilania ECU pozostają do ustalenia. |
 | SYS-051 | ECU ma osobne wejścia przewodowe wyłączników hamulca przedniego i tylnego, umożliwiające rozróżnienie ich stanów. Przy prawidłowych sygnałach i sprawnym torze wyjściowym światło hamowania jest włączone, gdy aktywny jest co najmniej jeden hamulec, i wyłączone, gdy oba są nieaktywne. Obsługa działa bez HMI i komunikacji CAN ECU–HMI. Parametry elektryczne, filtracja i reakcje na usterki pozostają do określenia. |
+| SYS-052 | Miganiem kierunkowskazów steruje lokalnie ECU. Po potwierdzeniu utraty komunikacji z HMI ECU wyłącza aktywny kierunkowskaz. Kryterium i czas potwierdzenia utraty łączności oraz zachowanie po jej przywróceniu pozostają do określenia. |
 
 ## 3. Podział odpowiedzialności
 
@@ -191,13 +192,17 @@ Przyciski obsługi HMI są podłączone do HMI. Tor sterowania zwykłymi akcesor
 
 Samodzielność ECU i dalsza praca silnika przy braku HMI/CAN są wymagane według SYS-046/047. START i odcięcia rozrusznika określają SYS-048/049. Do osobnej analizy pozostają: aktualność i poprawność żądań, zachowanie pozostałych akcesoriów po utracie komunikacji oraz szczegółowe parametry rozruchu.
 
-W odpowiedzi na pytanie 60 z 2026-10-25 właściciel potwierdził zachowanie ostatniego stanu świateł przednich i tylnych pozycyjnych po utracie HMI/CAN, przy nadal działających zabezpieczeniach wyjść (SYS-050). Stany początkowe po restarcie lub zaniku zasilania ECU oraz zachowanie kierunkowskazów pozostają do ustalenia.
+W odpowiedzi na pytanie 60 z 2026-10-25 właściciel potwierdził zachowanie ostatniego stanu świateł przednich i tylnych pozycyjnych po utracie HMI/CAN, przy nadal działających zabezpieczeniach wyjść (SYS-050). Stany początkowe po restarcie lub zaniku zasilania ECU pozostają do ustalenia.
 
 Proponowana weryfikacja SYS-050: przy działającym ECU i zasilaniu świateł przerwać komunikację oraz wyłączyć lub odłączyć HMI, sprawdzając zachowanie ostatniego stanu dla świateł wcześniej włączonych i wyłączonych. Sprawdzić przyjęcie nowego polecenia po przywróceniu komunikacji oraz zachowanie działania zabezpieczeń wyjść podczas braku HMI. Warunki i kryteria prób zabezpieczeń określić wraz z projektem stopni mocy; prób nie wykonano.
 
 W odpowiedzi na pytanie 61 z 2026-10-25 właściciel wybrał osobne przewodowe wejścia ECU dla hamulca przedniego i tylnego; użycie któregokolwiek załącza światło hamowania, bez zależności od HMI/CAN (SYS-051). Do określenia pozostają interfejsy wyłączników, filtracja, diagnostyka i zachowanie przy uszkodzeniach.
 
 Proponowana weryfikacja SYS-051: przy sprawnych wejściach i wyjściu sprawdzić wszystkie cztery kombinacje sygnałów — lampa wyłączona przy obu nieaktywnych i włączona w pozostałych trzech stanach. Potwierdzić osobny odczyt obu wejść oraz powtórzyć próby bez HMI i komunikacji ECU–HMI. Kryteria czasowe ustalić przed próbami; testów nie wykonano.
+
+W odpowiedzi na pytanie 62 z 2026-10-25 właściciel wybrał wyłączenie aktywnego kierunkowskazu po potwierdzeniu utraty łączności z HMI (SYS-052). Kryterium i czas wykrywania utraty komunikacji oraz reakcja po jej przywróceniu pozostają otwarte.
+
+Proponowana weryfikacja SYS-052: osobno dla włączonego lewego i prawego kierunkowskazu przerwać komunikację ECU–HMI oraz odłączyć lub wyłączyć HMI. Sprawdzić wyłączenie po potwierdzeniu utraty łączności, według ustalonego później kryterium i czasu. Próby obejmą utratę komunikacji podczas obu faz migania. Testów nie wykonano.
 
 ### Zasada integracji z motocyklem — ustalenie właściciela
 
