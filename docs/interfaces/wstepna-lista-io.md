@@ -22,7 +22,9 @@ Wiązkę i złącze ECU projektujemy od nowa (SYS-045), według potrzebnych funk
 | Sprzęgło | Opcjonalny sygnał do ECU; dane i wskazania, bez blokady rozrusznika | SYS-041 | Rodzaj przełącznika/sygnału i parametry elektryczne. |
 | Położenie poszczególnych biegów | Opcjonalny czujnik do ECU; dane i wskazania, bez blokady rozrusznika | SYS-041 | Typ interfejsu, liczba pozycji, sygnały i kalibracja. |
 | Światła przednie i tylne pozycyjne | Wyjścia ECU | SYS-004, 050 | Po utracie HMI/CAN zachowanie ostatniego stanu przy działających zabezpieczeniach, w bieżącej sesji ECU. Podział funkcji i kanałów, odbiorniki, prądy, połączenia oraz stany po restarcie do określenia. |
-| Światło hamowania | Wyjście ECU | SYS-004 | Źródło sygnałów hamowania, interfejsy, odbiornik, prąd i połączenia do określenia. |
+| Hamulec przedni | Osobne przewodowe wejście ECU | SYS-051 | Wyłącznik i jego interfejs, poziomy, polaryzacja, filtracja oraz diagnostyka. Działanie bez HMI/CAN. |
+| Hamulec tylny | Osobne przewodowe wejście ECU | SYS-051 | Wyłącznik i jego interfejs, poziomy, polaryzacja, filtracja oraz diagnostyka. Odczyt rozróżniany od hamulca przedniego. |
+| Światło hamowania | Wyjście ECU; załączane po użyciu któregokolwiek hamulca | SYS-004, 051 | Działanie bez HMI/CAN. Odbiornik, prąd, połączenia, zabezpieczenia i reakcje na usterki do określenia. |
 | Kierunkowskazy, klakson | Wyjścia ECU | SYS-004 | Niezależne obwody, prądy, równoczesność pracy i wymagania diagnostyczne. |
 | Wentylator | Wyjście ECU; dodatkowe żądanie włączenia z HMI przez CAN | SYS-004, 043, 044 | Automatyka według temperatury i wymuszenie włączenia; parametry kanału, progi/histereza i reakcje na usterki do określenia. |
 | Dodatkowe wyjścia konfigurowalne | Wyjścia ECU | SYS-004 | Liczba, dopuszczalne obciążenia i funkcje. |
@@ -48,7 +50,6 @@ Poniższe pozycje nie są nowymi zatwierdzonymi wymaganiami właściciela.
 | Faza cyklu 4T | Ocena potrzeby dodatkowego sygnału synchronizacji | Strategia sterowania i źródło fazy; nie zakładamy obowiązkowego czujnika wałka. |
 | Inne zastosowania temperatury silnika | Ocena kompensacji i funkcji ochronnych poza uzgodnionym sterowaniem wentylatorem | Potrzebne funkcje i kryteria do ustalenia. Pomiar płynu i sterowanie wentylatorem są już wymagane według SYS-043/044. |
 | Ciśnienia wymagane przez wybrane strategie wtrysku | Ustalenie kompletnego zestawu sygnałów | Potrzeba MAP/ciśnienia skrzyni korbowej i interfejsy dla konkretnych jednostek. |
-| Stan hamulców | Pozyskanie polecenia światła STOP | Istniejące przełączniki i miejsce podłączenia; SYS-016 nie rozstrzyga tego toru. |
 | Napięcie zasilania | Diagnostyka i kompensacja zależna od napięcia | Punkt pomiaru, zakres, dokładność i częstotliwość. |
 
 ## Zasilanie i komunikacja
