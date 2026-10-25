@@ -59,20 +59,28 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-043 | ECU automatycznie steruje wentylatorem według temperatury i umożliwia wymuszenie jego włączenia z HMI przez CAN. Wycofanie ręcznego wymuszenia przywraca sterowanie automatyczne; nie wyłącza wentylatora, gdy automatyka nadal wymaga chłodzenia. |
 | SYS-044 | W silnikach chłodzonych cieczą ECU mierzy rzeczywistą temperaturę płynu chłodzącego i udostępnia jej wskazanie na HMI. Progi temperaturowe sterowania wentylatorem są konfigurowalne w aplikacji Windows. Interfejs czujnika, zakres i dokładność pomiaru oraz dopuszczalne ustawienia pozostają do określenia. |
 | SYS-045 | DustONE otrzymuje nową wiązkę motocykla i nowe złącze ECU, dobrane do funkcji i parametrów systemu. Zachowanie złącza fabrycznego ECU ani zgodność z jego pinoutem nie są wymagane. Zachowywane czujniki i osprzęt wymagają potwierdzenia własnych interfejsów elektrycznych. |
+| SYS-046 | ECU działa samodzielnie bez HMI, zarówno gdy HMI jest nieobecne od włączenia zasilania, jak i po utracie komunikacji podczas pracy. Sama nieobecność HMI lub utrata CAN ECU–HMI nie wyłącza silnika. Sterowanie silnikiem i jego zabezpieczenia są realizowane w ECU na podstawie danych dostępnych bez HMI. |
+| SYS-047 | ECU jest właścicielem i źródłem prawdy danych sterowania i eksploatacji motocykla, konfiguracji silnika, map oraz diagnostyki. HMI odczytuje dane i wysyła żądania, np. zmiany mapy lub sterowania akcesoriami; ECU rozstrzyga ich wykonanie i udostępnia rzeczywisty stan. |
 
-## 3. Proponowany podział odpowiedzialności
+## 3. Podział odpowiedzialności
 
-- **ECU:** sterowanie silnikiem i akcesoriami, pomiary, wykrywanie usterek oraz reakcje na błędy. Sterowanie wymagające precyzyjnego czasu realizowane lokalnie w ECU.
+- **ECU:** samodzielne sterowanie silnikiem i akcesoriami, pomiary, wykrywanie usterek oraz reakcje na błędy. Właściciel danych i wykonawca żądań według SYS-046 i SYS-047. Sterowanie wymagające precyzyjnego czasu realizowane lokalnie w ECU.
 - **HMI:** główny panel zastępujący fabryczny licznik: prezentacja prędkości, przebiegu, danych silnika i stanu motocykla; odczyt przycisków i przełączników kierownicy oraz przekazywanie poleceń do ECU przez CAN. Menu i ekrany obsługiwane fizycznymi przyciskami; ekran bez dotyku.
 - **Aplikacja Windows:** wspólne środowisko z modułami konfiguracji, map, edycji HMI, diagnostyki, aktualizacji i narzędzi rozwojowych.
 
 Propozycje do uwzględnienia w wymaganiach szczegółowych:
 
-- Określić działanie ECU po utracie HMI, CAN lub połączenia z komputerem.
+- Określić stany poszczególnych wyjść akcesoriów i ważność żądań po utracie HMI/CAN oraz zachowanie po utracie połączenia z komputerem. Samodzielność ECU i dalsza praca silnika bez HMI są już ustalone (SYS-046/047).
 - Oddzielić konfigurację silnika, kalibrację map i projekt wyglądu HMI; określić ich wersje i zgodność z oprogramowaniem urządzeń.
 - Ustalić warunki dopuszczające zapis map, zmianę typu silnika, aktualizację i testy wyjść.
 - Zdefiniować ograniczenia narzędzi rozwojowych i sposób wejścia w tryb testowy.
 - Zdefiniować odzyskiwanie urządzenia po przerwaniu aktualizacji.
+
+### Samodzielność ECU — ustalenie właściciela z 2026-10-25
+
+ECU działa niezależnie od obecności i komunikacji z HMI. Dane i decyzje sterujące należą do ECU; HMI odczytuje dane oraz wysyła żądania (SYS-046/047). Brak HMI nie przerywa pracy silnika, lokalnej diagnostyki ani zabezpieczeń ECU. Dane wymagane do tej pracy muszą być dostępne bez udziału HMI. Ustalenie i konsekwencje architektoniczne: [ADR-002 — samodzielne ECU i HMI jako klient](decisions/adr-002-samodzielnosc-ecu.md).
+
+Sposób wywołania rozruchu pozostaje zgodny z SYS-016 i SYS-037; ustalenie nie dodaje osobnego przycisku START do ECU. Ważność żądań akcesoriów, zachowanie po ponownym połączeniu i szczegóły protokołu pozostają do określenia.
 
 ### Dodatkowe pomiary — doprecyzowanie właściciela z 2026-10-18
 
@@ -173,7 +181,7 @@ Ustalony tor sterowania akcesoriami: przyciski i przełączniki → HMI → CAN 
 
 **Gaszenie potwierdzone przez właściciela:** przycisk STOP ma osobny obwód przewodowy i umożliwia zgaszenie silnika przy awarii HMI lub CAN (SYS-037). Jest to odrębny tor od zwykłych poleceń akcesoriów. Do określenia: sposób odcięcia zapłonu i podawania paliwa, interfejs elektryczny STOP, reakcja na przerwanie lub zwarcie przewodów i warunki ponownego uruchomienia. Samo wymaganie niezależności od HMI i CAN nie potwierdza jeszcze działania przy awarii procesora ECU.
 
-Do osobnej analizy pozostają: automatyczna reakcja na awarię HMI lub CAN, aktualność i poprawność poleceń, stany wyjść po utracie komunikacji oraz warunki sterowania rozrusznikiem.
+Samodzielność ECU i dalsza praca silnika przy braku HMI/CAN są wymagane według SYS-046/047. Do osobnej analizy pozostają: aktualność i poprawność żądań, stany poszczególnych wyjść akcesoriów po utracie komunikacji oraz warunki sterowania rozrusznikiem.
 
 ### Zasada integracji z motocyklem — ustalenie właściciela
 
@@ -207,7 +215,7 @@ Do ustalenia: minimalne napięcie i dostępny prąd pod obciążeniem, chemia i 
 | Instalacja | Akumulator nominalnie 12 V (SYS-013). Do określenia: zakres napięć, chemia akumulatora i warunki rozruchu. Pożądany rozruch kopniakiem z osłabionym, podłączonym akumulatorem; rozruch bez energii z akumulatora nie jest wymagany. |
 | Akcesoria | Zakres rozszerzony według SYS-004. Do określenia: podział świateł przednich na funkcje, liczba niezależnych kanałów i wyjść konfigurowalnych, prądy robocze i rozruchowe, sterowanie bezpośrednie lub przez przekaźniki/styczniki, zabezpieczenia i diagnostyka wyjść. |
 | Pomiary | Dodatkowy zakres według SYS-029–SYS-031: ciśnienie atmosferyczne i temperatura na PCB, tor ciśnienia paliwa oraz wejście ciśnienia oleju 0/1. Temperatura dolotu pochodzi z IAT, temperatura PCB jest osobnym pomiarem ECU. Do określenia: parametry, czujniki, dokładność, zabezpieczenia, kalibracja i diagnostyka. EGT i lambda są pomiarami zewnętrznymi podczas strojenia. |
-| HMI | Odczyt przełączników kierownicy i polecenia do ECU przez CAN (SYS-016); menu i ekrany obsługiwane fizycznymi przyciskami, ekran bez dotyku (SYS-017). Główny panel zastępujący licznik (SYS-018). Do ustalenia: ekran, liczba i rodzaje wejść przycisków, szczegółowy zakres i źródła danych, sposób zachowania przebiegu i ograniczenia zasobów ekranów. Zakres personalizacji według SYS-008; do określenia edytor, format projektu ekranów oraz prezentacja ostrzeżeń w układach użytkownika. |
+| HMI | Odczyt przełączników kierownicy i polecenia do ECU przez CAN (SYS-016); menu i ekrany obsługiwane fizycznymi przyciskami, ekran bez dotyku (SYS-017). Główny panel zastępujący licznik (SYS-018). Do ustalenia: ekran, liczba i rodzaje wejść przycisków, szczegółowy zakres danych prezentowanych z ECU, trwałość danych przebiegu i ograniczenia zasobów ekranów. Zakres personalizacji według SYS-008; do określenia edytor, format projektu ekranów oraz prezentacja ostrzeżeń w układach użytkownika. |
 | Połączenie z PC | Połączenie przewodowe (SYS-026), jeden wspólny punkt i jeden kabel do standardowej obsługi ECU/HMI (SYS-027). Do ustalenia: interfejs fizyczny, lokalizacja złącza, realizacja dostępu do obu urządzeń i zasady aktualizacji/odzyskiwania. CAN między ECU i HMI nie przesądza interfejsu komputera. |
 | Diagnostyka | Zapis DTC i powiązanych freeze frame w ECU; odczyt w aplikacji Windows i rozróżnienie usterek aktywnych oraz historycznych (SYS-019, SYS-020). Oznaczanie czasu według SYS-021. Trwałość historii i wygaszanie ostrzeżeń według SYS-022 i SYS-023. Pierwsze/ostatnie wystąpienie i licznik według SYS-024; eksport i ręczne kasowanie według SYS-025. Szczegóły rejestracji, obsługi pełnej pamięci i realizacji zegara do określenia. |
 | Mapy silnika | Maksymalnie 3 zestawy map w ECU i przełączanie z HMI także podczas pracy silnika (SYS-028). Do określenia: zakres map, warunki i sposób przełączenia, walidacja zestawów oraz warunki ich zapisu. |
