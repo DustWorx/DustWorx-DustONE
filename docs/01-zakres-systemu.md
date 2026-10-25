@@ -72,6 +72,7 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-056 | Przy dostępnym zasilaniu według SYS-058 podłączenie komputera przez przewodowy interfejs serwisowy wybudza ECU i HMI, bez wcześniejszego użycia START lub przycisków HMI. Interfejs i detekcja podłączenia pozostają do określenia. |
 | SYS-057 | Przez czas połączenia z komputerem usypianie ECU i HMI jest zablokowane, aby umożliwić pracę z urządzeniami, w tym konfigurację, diagnostykę i aktualizacje. Sposób podtrzymania blokady w obu urządzeniach oraz warunki jej zwolnienia po rozłączeniu pozostają do określenia. |
 | SYS-058 | Podczas konfiguracji, diagnostyki i aktualizacji z komputera wymagane jest zasilanie ECU i HMI z akumulatora instalacji nominalnie 12 V lub odpowiedniego zasilacza warsztatowego. Kabel PC zapewnia komunikację i wybudzenie; zasilanie elektroniki obu urządzeń wyłącznie z kabla PC pozostaje poza przyjętym zakresem. Parametry zasilania i wymagana wydajność prądowa będą określone w projekcie. |
+| SYS-059 | Gdy silnik nie pracuje i komputer jest odłączony, ECU i HMI przechodzą automatycznie w uśpienie po konfigurowalnym czasie bezczynności, po zakończeniu zadań wymagających dalszej pracy. Używanie przycisków rozpoczyna odliczanie czasu bezczynności od nowa. Zakres i wartość domyślna czasu, szczegółowa lista zadań wstrzymujących uśpienie oraz sekwencja usypiania pozostają do określenia. |
 
 ## 3. Podział odpowiedzialności
 
@@ -140,7 +141,9 @@ Po porównaniu wariantów w odpowiedzi na pytanie 65 właściciel wybrał zasila
 
 W odpowiedzi na pytanie 66 z 2026-10-25 właściciel potwierdził automatyczne wybudzanie również HMI od START i kopniaka, z priorytetem gotowości ECU do rozruchu (SYS-054). ECU nie czeka na uruchomienie HMI ani potwierdzenie komunikacji.
 
-Podstawa architektury, źródła wybudzania, otwarte parametry oraz propozycje prób: [ADR-003 — wybudzanie bez osobnego włącznika](decisions/adr-003-wybudzanie-bez-wlacznika.md). Warunki zasypiania bez komputera, pobór prądu w czuwaniu, parametry zasilania, sekwencja i czasy wybudzania pozostają do doprecyzowania. Nie wybrano jeszcze komponentów ani torów wybudzania.
+W odpowiedzi na pytanie 67 z 2026-10-25 właściciel wybrał automatyczne usypianie ECU i HMI po konfigurowalnym czasie bezczynności, przy zgaszonym silniku i odłączonym komputerze. Używanie przycisków rozpoczyna odliczanie od nowa; zadania wymagające dalszej pracy wstrzymują uśpienie (SYS-059).
+
+Podstawa architektury, źródła wybudzania, otwarte parametry oraz propozycje prób: [ADR-003 — wybudzanie bez osobnego włącznika](decisions/adr-003-wybudzanie-bez-wlacznika.md). Parametry czasu bezczynności, lista zadań wstrzymujących sen, pobór prądu w czuwaniu, parametry zasilania oraz sekwencje i czasy przejść pozostają do projektu. Nie wybrano jeszcze komponentów ani torów wybudzania.
 
 ### Rejestracja diagnostyczna ECU — ustalenie właściciela z 2026-10-18
 
