@@ -19,14 +19,18 @@ Wiązkę i złącze ECU projektujemy od nowa (SYS-045), według potrzebnych funk
 | Temperatura płynu chłodzącego | Wejście pomiarowe ECU; dane do HMI | SYS-044 | Czujniki OEM lub dodatkowe, charakterystyki, zakres, dokładność i montaż. Sam termowłącznik nie zapewnia pomiaru wartości. |
 | Ciśnienie paliwa | Wejście pomiarowe ECU | SYS-029 | Zakres ciśnienia, sygnał, zasilanie i wymagana dokładność. |
 | Ciśnienie oleju obecne/brak | Wejście binarne ECU | SYS-029 | Polaryzacja, poziomy, czujnik/wyłącznik i diagnostyka przewodów. |
-| Sprzęgło | Opcjonalny sygnał do ECU | SYS-041 | Rodzaj przełącznika/sygnału i parametry elektryczne. |
-| Położenie poszczególnych biegów | Opcjonalny czujnik do ECU | SYS-041 | Typ interfejsu, liczba pozycji, sygnały i kalibracja. |
-| Światła przednie, tylne i STOP | Wyjścia ECU | SYS-004 | Podział funkcji i kanałów, odbiorniki, ich prądy i sposób podłączenia OEM. |
-| Kierunkowskazy, klakson | Wyjścia ECU | SYS-004 | Niezależne obwody, prądy, równoczesność pracy i wymagania diagnostyczne. |
+| Sprzęgło | Opcjonalny sygnał do ECU; dane i wskazania, bez blokady rozrusznika | SYS-041 | Rodzaj przełącznika/sygnału i parametry elektryczne. |
+| Położenie poszczególnych biegów | Opcjonalny czujnik do ECU; dane i wskazania, bez blokady rozrusznika | SYS-041 | Typ interfejsu, liczba pozycji, sygnały i kalibracja. |
+| Światła przednie i tylne pozycyjne | Wyjścia ECU | SYS-004, 050 | Po utracie HMI/CAN zachowanie ostatniego stanu przy działających zabezpieczeniach, w bieżącej sesji ECU. Podział funkcji i kanałów, odbiorniki, prądy, połączenia oraz stany po restarcie do określenia. |
+| Hamulec przedni | Osobne przewodowe wejście ECU | SYS-051 | Wyłącznik i jego interfejs, poziomy, polaryzacja, filtracja oraz diagnostyka. Działanie bez HMI/CAN. |
+| Hamulec tylny | Osobne przewodowe wejście ECU | SYS-051 | Wyłącznik i jego interfejs, poziomy, polaryzacja, filtracja oraz diagnostyka. Odczyt rozróżniany od hamulca przedniego. |
+| Światło hamowania | Wyjście ECU; załączane po użyciu któregokolwiek hamulca | SYS-004, 051 | Działanie bez HMI/CAN. Odbiornik, prąd, połączenia, zabezpieczenia i reakcje na usterki do określenia. |
+| Kierunkowskazy | Wyjścia ECU; miganie realizowane lokalnie | SYS-004, 052 | Wyłączenie aktywnego kierunkowskazu po potwierdzeniu utraty komunikacji z HMI. Obwody, prądy, parametry migania, kryterium/czas utraty łączności i zachowanie po jej przywróceniu do określenia. |
+| Klakson | Wyjście ECU | SYS-004 | Obwód, prąd, sposób sterowania i wymagania diagnostyczne. |
 | Wentylator | Wyjście ECU; dodatkowe żądanie włączenia z HMI przez CAN | SYS-004, 043, 044 | Automatyka według temperatury i wymuszenie włączenia; parametry kanału, progi/histereza i reakcje na usterki do określenia. |
 | Dodatkowe wyjścia konfigurowalne | Wyjścia ECU | SYS-004 | Liczba, dopuszczalne obciążenia i funkcje. |
-| Przycisk START | Osobne przewodowe wejście ECU, niezależne od HMI/CAN | SYS-048 | Poziomy i polaryzacja, styki, filtracja, diagnostyka przewodów oraz sposób obsługi naciśnięcia. |
-| Rozrusznik | Wyjście ECU → tor wykonawczy | SYS-004, 048 | Stycznik/przekaźnik i prąd sterowania; osobna analiza toru dużego prądu oraz warunków i ograniczeń rozruchu. |
+| Przycisk START | Osobne przewodowe wejście ECU, niezależne od HMI/CAN | SYS-048 | Żądanie rozruchu podczas przytrzymywania; puszczenie kończy sterowanie rozrusznikiem. Poziomy i polaryzacja, styki, filtracja, diagnostyka przewodów oraz limity i blokady do określenia. |
+| Rozrusznik | Wyjście ECU → tor wykonawczy | SYS-004, 048, 049 | Odcięcie po potwierdzeniu pracy silnika lub przekroczeniu czasu kręcenia; kolejna próba wymaga puszczenia i ponownego naciśnięcia START. Stycznik/przekaźnik, prąd, tor dużego prądu, metoda detekcji, limity i pozostałe warunki rozruchu do określenia. |
 | Przyciski obsługi HMI i przełączniki akcesoriów | Wejścia HMI; żądania sterowania akcesoriami do ECU po CAN | SYS-016, 017 | Lista elementów i funkcji, styki, wspólne przewody, poziomy. START i STOP mają osobne tory według SYS-048/037. |
 | Ręczny STOP | Osobny obwód przewodowy, niezależny od HMI/CAN | SYS-037 | Sposób odcięcia, interfejs i reakcje na zwarcie/przerwę. |
 | Wykrywanie przewrócenia | Lokalizacja i tor pomiarowy otwarte | SYS-039, 040 | Pomiar, montaż, kryteria, czasy reakcji i odblokowania. |
@@ -47,7 +51,6 @@ Poniższe pozycje nie są nowymi zatwierdzonymi wymaganiami właściciela.
 | Faza cyklu 4T | Ocena potrzeby dodatkowego sygnału synchronizacji | Strategia sterowania i źródło fazy; nie zakładamy obowiązkowego czujnika wałka. |
 | Inne zastosowania temperatury silnika | Ocena kompensacji i funkcji ochronnych poza uzgodnionym sterowaniem wentylatorem | Potrzebne funkcje i kryteria do ustalenia. Pomiar płynu i sterowanie wentylatorem są już wymagane według SYS-043/044. |
 | Ciśnienia wymagane przez wybrane strategie wtrysku | Ustalenie kompletnego zestawu sygnałów | Potrzeba MAP/ciśnienia skrzyni korbowej i interfejsy dla konkretnych jednostek. |
-| Stan hamulców | Pozyskanie polecenia światła STOP | Istniejące przełączniki i miejsce podłączenia; SYS-016 nie rozstrzyga tego toru. |
 | Napięcie zasilania | Diagnostyka i kompensacja zależna od napięcia | Punkt pomiaru, zakres, dokładność i częstotliwość. |
 
 ## Zasilanie i komunikacja
