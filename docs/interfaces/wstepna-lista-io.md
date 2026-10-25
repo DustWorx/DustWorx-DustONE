@@ -10,6 +10,7 @@ Wiązkę i złącze ECU projektujemy od nowa (SYS-045), według potrzebnych funk
 
 | Funkcja | Miejsce / kierunek | Podstawa | Dane potrzebne do projektu |
 | --- | --- | --- | --- |
+| Zasilanie HMI | Sterowane wyjście zasilania z ECU do HMI | SYS-064, 065 | Parametry i zabezpieczenia toru, pobór HMI, awaryjne odłączenie niezależne od CAN oraz zachowanie wybudzania przyciskami przy odłączonej części aktywnej. Topologia i stany po poprawnej sekwencji do określenia. |
 | Zapłon | Wyjście ECU; realizacja otwarta | SYS-001, 002, 015 | Układy i cewki referencyjne, sposób zasilania, energia i interfejs sterowania. |
 | Wtrysk paliwa | Wyjścia ECU; aktywne w wariantach wtryskowych | SYS-012, 015 | Liczba wtryskiwaczy działających jednocześnie, typy, prądy, czasy i sposób sterowania. |
 | Układ pompy paliwa | Sterowanie ECU; zakres toru mocy otwarty | SYS-012, 015 | Pompy referencyjne, prądy robocze/rozruchowe, sposób wyłączania i diagnostyka. |
@@ -61,6 +62,7 @@ Poniższe pozycje nie są nowymi zatwierdzonymi wymaganiami właściciela.
 - CAN ECU–HMI: interfejs wymagany; szybkość, przewody, terminacja i protokół otwarte (SYS-005). ECU pracuje bez HMI; dane konieczne do sterowania silnikiem i jego zabezpieczeń muszą być dostępne ECU bez udziału HMI (SYS-046/047, [ADR-002](../decisions/adr-002-samodzielnosc-ecu.md)).
 - Jeden przewodowy punkt obsługi obu urządzeń: przy dostępnym zasilaniu 12 V podłączenie komputera wybudza ECU i HMI oraz blokuje usypianie obu urządzeń na czas połączenia (SYS-026, 027, 056, 057, 058). Serwis wymaga akumulatora lub odpowiedniego zasilacza warsztatowego. Interfejs, lokalizacja, detekcja podłączenia i parametry zasilania pozostają do określenia.
 - Usypianie ECU i HMI: ECU po upływie bezczynności i zakończeniu zadań wydaje polecenie HMI, które potwierdza je ramką CAN, kończy nadawanie i zasypia; następnie zasypia ECU (SYS-059, 062, 063). Przyciski, próby rozruchu i rzeczywista aktywność użytkownika w HMI odnawiają czas. Formaty, czasy, sygnalizacja aktywności i wyjątki wymagają specyfikacji: [sekwencja ECU–HMI](../architecture/usypianie-ecu-hmi.md).
+- Brak potwierdzenia HMI: ograniczone oczekiwanie/próby, awaryjne odłączenie części aktywnej z wyjścia zasilania ECU i dopuszczenie snu ECU (SYS-064/065). Tor wybudzania przyciskami musi działać także przy tym odłączeniu; szczegółowy sposób realizacji pozostaje do projektu.
 - Dostęp debuggera i odzyskiwanie urządzeń: punkty serwisowe do określenia, niezależnie od standardowego kabla użytkownika.
 
 Poza zakresem: dozownik oleju 2T, ride-by-wire, quickshifter, wejście stopki bocznej oraz zintegrowane tory EGT/lambda. Ograniczenia i warunki smarowania 2T pozostają zgodne z wymaganiami systemu.
