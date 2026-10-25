@@ -74,6 +74,7 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-058 | Podczas konfiguracji, diagnostyki i aktualizacji z komputera wymagane jest zasilanie ECU i HMI z akumulatora instalacji nominalnie 12 V lub odpowiedniego zasilacza warsztatowego. Kabel PC zapewnia komunikację i wybudzenie; zasilanie elektroniki obu urządzeń wyłącznie z kabla PC pozostaje poza przyjętym zakresem. Parametry zasilania i wymagana wydajność prądowa będą określone w projekcie. |
 | SYS-059 | Gdy silnik nie pracuje i komputer jest odłączony, ECU i HMI przechodzą automatycznie w uśpienie po konfigurowalnym czasie bezczynności, po zakończeniu zadań wymagających dalszej pracy. Używanie przycisków rozpoczyna odliczanie czasu bezczynności od nowa. Zakres i wartość domyślna czasu, szczegółowa lista zadań wstrzymujących uśpienie oraz sekwencja usypiania pozostają do określenia. |
 | SYS-060 | ECU umożliwia konfigurowalną, automatyczną pracę wentylatora po zgaszeniu silnika, z limitem czasu oraz odcięciem przy niskim napięciu akumulatora. Funkcja działa lokalnie w ECU i wstrzymuje jego uśpienie na czas obsługi. Progi, limit czasu, warunki zakończenia i zastosowanie w konkretnym układzie chłodzenia wymagają określenia i weryfikacji. |
+| SYS-061 | Przy zgaszonym silniku, w normalnej obsłudze, ręczne wymuszenie wentylatora z HMI podlega tym samym limitom czasu i napięcia co automatyczna praca po zgaszeniu według SYS-060. ECU egzekwuje te ograniczenia również przy aktywnym ręcznym żądaniu; ręczne wymuszenie nie omija odcięć. |
 
 ## 3. Podział odpowiedzialności
 
@@ -184,7 +185,11 @@ W odpowiedzi na pytanie 68 z 2026-10-25 właściciel zatwierdził konfigurowaln�
 
 Proponowana weryfikacja SYS-060: przy włączonej funkcji i nieaktywnym ręcznym wymuszeniu sprawdzić pracę po zgaszeniu silnika według automatyki temperatury, odcięcie po limicie czasu oraz odcięcie przy niskim napięciu mimo żądania chłodzenia. Potwierdzić wstrzymanie uśpienia ECU podczas obsługi funkcji i późniejszy powrót do zasad SYS-059. Progi, definicję limitu, czasy reakcji i warunki prób określić przed testami; prób nie wykonano.
 
-Do określenia: zakres, dokładność i filtracja pomiaru, progi temperatury i histereza, ograniczenia ustawień, diagnostyka czujnika/wyjścia oraz reakcje na ich uszkodzenia. Dla pracy po zgaszeniu ustalić limit czasu, próg napięcia, warunki zakończenia i przejście przy ponownym rozruchu. Osobno ustalimy zakres ograniczeń ręcznego wymuszenia przy zgaszonym silniku oraz jego zachowanie po przywróceniu komunikacji, restarcie ECU i zmianach zasilania. Nie ustalono wartości liczbowych ani docelowego typu czujnika. Temperatura płynu jest odrębnym pomiarem od IAT i temperatury PCB.
+W odpowiedzi na pytanie 69 z 2026-10-25 właściciel potwierdził te same ograniczenia czasu i napięcia dla ręcznego wymuszenia przy zgaszonym silniku (SYS-061). Żądanie HMI nie omija odcięć egzekwowanych przez ECU. Zakres pytania dotyczy normalnej obsługi; warunki testów serwisowych ustalimy osobno.
+
+Proponowana weryfikacja SYS-061: sprawdzić działanie ręcznego wymuszenia w dopuszczonym czasie i przy prawidłowym napięciu także wtedy, gdy automatyka temperatury nie żąda chłodzenia. Osobno sprawdzić odcięcie po limicie czasu i przy niskim napięciu mimo utrzymanego żądania HMI. Użyć tych samych parametrów co w próbach SYS-060; aktywne odcięcie nie może zostać ominięte samym żądaniem ON z HMI. Warunki ponowienia i parametry ustalić przed próbami; testów nie wykonano.
+
+Do określenia: zakres, dokładność i filtracja pomiaru, progi temperatury i histereza, ograniczenia ustawień, diagnostyka czujnika/wyjścia oraz reakcje na ich uszkodzenia. Dla pracy po zgaszeniu ustalić wspólny limit czasu i próg napięcia, filtrację i histerezę odcięcia, warunki zakończenia/ponowienia i przejście przy ponownym rozruchu. Doprecyzować zachowanie ręcznego wymuszenia po przywróceniu komunikacji, restarcie ECU i zmianach zasilania. Nie ustalono wartości liczbowych ani docelowego typu czujnika. Temperatura płynu jest odrębnym pomiarem od IAT i temperatury PCB.
 
 ### Wyjścia akcesoriów — preferowany kierunek
 
