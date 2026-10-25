@@ -58,7 +58,7 @@ Poniższe pozycje nie są nowymi zatwierdzonymi wymaganiami właściciela.
 - Akumulator nominalnie 12 V: zakres pracy, złącza zasilania, masy, ochrona i rezerwa energii do ustalenia (SYS-013). Obsługa bez osobnego włącznika; tory czuwania i wybudzania ECU oraz HMI według SYS-054/055 i [ADR-003](../decisions/adr-003-wybudzanie-bez-wlacznika.md).
 - Kopniak: wymagane wybudzenie ECU podczas rozruchu (SYS-054); źródło detekcji, tor sprzętowy i czas gotowości pozostają do projektu i weryfikacji.
 - CAN ECU–HMI: interfejs wymagany; szybkość, przewody, terminacja i protokół otwarte (SYS-005). ECU pracuje bez HMI; dane konieczne do sterowania silnikiem i jego zabezpieczeń muszą być dostępne ECU bez udziału HMI (SYS-046/047, [ADR-002](../decisions/adr-002-samodzielnosc-ecu.md)).
-- Jeden przewodowy punkt obsługi obu urządzeń: podłączenie komputera wybudza ECU i HMI oraz blokuje usypianie obu urządzeń na czas połączenia (SYS-026, 027, 056, 057). Interfejs, lokalizacja, detekcja podłączenia i zasilanie podczas serwisu pozostają otwarte.
+- Jeden przewodowy punkt obsługi obu urządzeń: przy dostępnym zasilaniu 12 V podłączenie komputera wybudza ECU i HMI oraz blokuje usypianie obu urządzeń na czas połączenia (SYS-026, 027, 056, 057, 058). Serwis wymaga akumulatora lub odpowiedniego zasilacza warsztatowego. Interfejs, lokalizacja, detekcja podłączenia i parametry zasilania pozostają do określenia.
 - Dostęp debuggera i odzyskiwanie urządzeń: punkty serwisowe do określenia, niezależnie od standardowego kabla użytkownika.
 
 Poza zakresem: dozownik oleju 2T, ride-by-wire, quickshifter, wejście stopki bocznej oraz zintegrowane tory EGT/lambda. Ograniczenia i warunki smarowania 2T pozostają zgodne z wymaganiami systemu.
