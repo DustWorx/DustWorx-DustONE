@@ -66,6 +66,7 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-050 | Przy nieprzerwanej pracy ECU utrata HMI lub komunikacji CAN ECU–HMI nie zmienia ostatniego stanu świateł przednich i tylnych pozycyjnych. Stan jest zachowywany do kolejnego przyjętego polecenia, z zachowaniem nadrzędnych zabezpieczeń wyjść. Wymaganie dotyczy bieżącej pracy ECU; stany po restarcie lub zaniku zasilania ECU pozostają do ustalenia. |
 | SYS-051 | ECU ma osobne wejścia przewodowe wyłączników hamulca przedniego i tylnego, umożliwiające rozróżnienie ich stanów. Przy prawidłowych sygnałach i sprawnym torze wyjściowym światło hamowania jest włączone, gdy aktywny jest co najmniej jeden hamulec, i wyłączone, gdy oba są nieaktywne. Obsługa działa bez HMI i komunikacji CAN ECU–HMI. Parametry elektryczne, filtracja i reakcje na usterki pozostają do określenia. |
 | SYS-052 | Miganiem kierunkowskazów steruje lokalnie ECU. Po potwierdzeniu utraty komunikacji z HMI ECU wyłącza aktywny kierunkowskaz. Kryterium i czas potwierdzenia utraty łączności oraz zachowanie po jej przywróceniu pozostają do określenia. |
+| SYS-053 | Po potwierdzeniu utraty komunikacji z HMI ECU anuluje ręczne wymuszenie włączenia wentylatora i pozostawia sterowanie automatyce temperatury. Anulowanie wymuszenia nie wyłącza wentylatora, gdy automatyka nadal wymaga chłodzenia. Kryterium i czas potwierdzenia utraty łączności pozostają do określenia. |
 
 ## 3. Podział odpowiedzialności
 
@@ -156,7 +157,11 @@ ECU załącza wentylator według temperatury; HMI umożliwia dodatkowe wymuszeni
 
 W silnikach chłodzonych cieczą wymagamy pomiaru wartości temperatury płynu, prezentacji na HMI i konfiguracji progów wentylatora w aplikacji Windows (SYS-044). Potrzebny jest czujnik pomiarowy; sam sygnał termowłącznika nie dostarcza wartości temperatury. Czujnik, jego charakterystykę i instalację dobierzemy z uwzględnieniem priorytetu zachowania osprzętu OEM. Istniejący automatyczny zestaw wentylatora Bety wymaga inwentaryzacji.
 
-Do określenia: zakres, dokładność i filtracja pomiaru, progi włączenia/wyłączenia i histereza, ograniczenia ustawień, diagnostyka czujnika/wyjścia oraz reakcje na ich uszkodzenia. Osobno ustalimy zachowanie ręcznego wymuszenia przy utracie CAN, restarcie ECU/HMI i zmianach zasilania oraz pracę wentylatora po zgaszeniu silnika. Nie ustalono wartości liczbowych ani typu czujnika. Temperatura płynu jest odrębnym pomiarem od IAT i temperatury PCB.
+W odpowiedzi na pytanie 63 z 2026-10-25 właściciel wybrał anulowanie ręcznego wymuszenia po utracie HMI/CAN i pozostawienie sterowania automatyce temperatury (SYS-053). Przy utrzymanym żądaniu chłodzenia wentylator nadal pracuje.
+
+Proponowana weryfikacja SYS-053: przy aktywnym ręcznym wymuszeniu przerwać komunikację ECU–HMI lub odłączyć HMI. Po potwierdzeniu utraty łączności wymuszenie ma być anulowane; przy sprawnym torze wyjściowym sprawdzić dalszą pracę wentylatora, gdy automatyka żąda chłodzenia, oraz wyłączenie, gdy automatyka go nie żąda. Kryterium i czas wykrywania ustalić przed próbami; testów nie wykonano.
+
+Do określenia: zakres, dokładność i filtracja pomiaru, progi włączenia/wyłączenia i histereza, ograniczenia ustawień, diagnostyka czujnika/wyjścia oraz reakcje na ich uszkodzenia. Osobno ustalimy zachowanie ręcznego wymuszenia po przywróceniu komunikacji, restarcie ECU i zmianach zasilania oraz pracę wentylatora po zgaszeniu silnika. Nie ustalono wartości liczbowych ani typu czujnika. Temperatura płynu jest odrębnym pomiarem od IAT i temperatury PCB.
 
 ### Wyjścia akcesoriów — preferowany kierunek
 
