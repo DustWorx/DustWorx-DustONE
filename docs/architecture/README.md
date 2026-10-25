@@ -10,11 +10,11 @@ Wybudzanie i czuwanie: [ADR-003 — obsługa bez osobnego włącznika](../decisi
 
 Praca wentylatora po zgaszeniu silnika: funkcja konfigurowalna, z limitem czasu i odcięciem przy niskim napięciu; obsługa wstrzymuje uśpienie ECU (SYS-060). Te same ograniczenia obowiązują ręczne wymuszenie i są egzekwowane w ECU (SYS-061), co wymaga nadzoru napięcia akumulatora. HMI pozostaje aktywne do polecenia ECU. Zastosowanie w danym układzie chłodzenia i parametry wymagają doprecyzowania.
 
-Usypianie koordynuje ECU: [normalna sekwencja ECU–HMI](usypianie-ecu-hmi.md), SYS-062/063. HMI potwierdza przyjęcie polecenia ramką CAN, kończy nadawanie i przechodzi w sen; następnie zasypia ECU. Nie wybrano jeszcze parametrów ani reakcji na brak potwierdzenia.
+Usypianie koordynuje ECU: [normalna sekwencja ECU–HMI](usypianie-ecu-hmi.md), SYS-062/063. HMI potwierdza przyjęcie polecenia ramką CAN, kończy nadawanie i przechodzi w sen; następnie zasypia ECU. Zasilanie HMI wychodzi z ECU i jest przez nie kontrolowane; brak potwierdzenia uruchamia ograniczoną ścieżkę awaryjną z odłączeniem części aktywnej HMI i zachowaniem wybudzania przyciskami (SYS-064/065). Topologia i parametry pozostają do projektu.
 
 Analizy architektoniczne:
 
-- [Brak potwierdzenia uśpienia HMI](brak-potwierdzenia-uspienia-hmi.md): timeout, niezależny reset i kontrola zasilania z zachowaniem wybudzania przyciskami; ścieżka awaryjna nie została wybrana.
+- [Brak potwierdzenia uśpienia HMI](brak-potwierdzenia-uspienia-hmi.md): porównanie alternatyw i uzasadnienie wyboru kontroli zasilania z ECU; zachowanie wybudzania przyciskami jest wymagane, topologia i parametry pozostają do projektu.
 - [Zasilanie podczas serwisu — 12 V czy z komputera](zasilanie-serwisowe-porownanie.md): wybrano wariant A — wymagane zasilanie 12 V, kabel PC do komunikacji i wybudzenia (SYS-058). Parametry toru zasilania pozostają do projektu.
 - [Macierz wariantów silnika](macierz-wariantow-silnika.md): zakres gaźnika/wtrysku i 2T/4T oraz dane potrzebne do wspólnej PCB; modele poza Betą pozostają do wyboru.
 - [Wyjścia akcesoriów — porównanie realizacji](wyjscia-akcesoriow-porownanie.md): preferowany kierunek to SmartFET-y na PCB ECU; podział i parametry kanałów oraz wykonalność pełnej integracji pozostają do analizy.
