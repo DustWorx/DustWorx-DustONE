@@ -14,6 +14,8 @@ W pytaniu 68 z 2026-10-25 właściciel zatwierdził konfigurowalną pracę wenty
 
 W pytaniu 70 z 2026-10-25 właściciel wskazał ECU jako koordynatora całego usypiania. HMI pozostaje aktywne do polecenia ECU; potwierdza przyjęcie polecenia ramką CAN, kończy nadawanie i zasypia, następnie zasypia ECU. Bezczynność odnawiają próby rozruchu i aktywność użytkownika w HMI. Ustalenie: SYS-059 oraz SYS-062/063. [Normalna sekwencja i otwarte wyjątki](../architecture/usypianie-ecu-hmi.md).
 
+Po porównaniu w pytaniu 71 z 2026-10-25 właściciel zatwierdził kontrolę zasilania i wskazał, że zasilanie HMI ma wychodzić z ECU. Brak potwierdzenia po ograniczonym oczekiwaniu/próbach prowadzi do awaryjnego odłączenia części aktywnej HMI oraz dopuszczenia snu ECU, z zachowaniem wymaganych źródeł wybudzania (SYS-064/065).
+
 | Zdarzenie | Wymagane wybudzenie | Uwagi |
 | --- | --- | --- |
 | Naciśnięcie przewodowego START | ECU i HMI | Priorytet gotowości ECU; rozruch niezależny od HMI, dalsza obsługa według SYS-048/049. |
@@ -29,22 +31,25 @@ W pytaniu 70 z 2026-10-25 właściciel wskazał ECU jako koordynatora całego us
 - Zaprojektować detekcję podłączenia komputera i utrzymanie blokady usypiania w obu urządzeniach, także przy bezczynności transmisji. Uwzględnić aplikację urządzeń i bootloadery. Kontrolowany restart wymagany przez aktualizację jest odrębną operacją od uśpienia.
 - Rozdzielić przyczynę wybudzenia od żądania rozruchu. Użycie przycisków HMI i podłączenie komputera służą także do obsługi przy zgaszonym silniku.
 - ECU inicjuje usypianie HMI poleceniem i w normalnym przebiegu oczekuje na jego aplikacyjne potwierdzenie, przed własnym uśpieniem. HMI nie zasypia autonomicznie po bezczynności.
+- Wyprowadzić sterowane zasilanie HMI z ECU i zapewnić możliwość awaryjnego odłączenia części aktywnej niezależnie od aplikacji HMI i CAN. Zachować wybudzanie przyciskami także po odłączeniu. Topologia oraz stan wyjścia po poprawnym potwierdzeniu pozostają do projektu i doprecyzowania.
 - Odnawiać czas bezczynności po użyciu przycisków, próbach rozruchu i rzeczywistej aktywności użytkownika w HMI. Zwykły cykliczny odczyt danych i ruch CAN nie stanowią same w sobie aktywności użytkownika; podłączenie PC blokuje sen niezależnie od ruchu danych.
 - Przed planowanym uśpieniem zakończyć zadania wymagające pracy, np. obsługę rozruchu i wymagane zapisy pamięci nieulotnej. Obsługa wentylatora po zgaszeniu według SYS-060/061 wstrzymuje uśpienie; HMI czeka na polecenie ECU. Limity czasu i napięcia mają pierwszeństwo przed ręcznym żądaniem HMI. Pozostałe blokady wymagają doprecyzowania.
 
 ## Do określenia
 
-Budżet prądu czuwania, napięcia pracy i wymagania wobec zasilacza warsztatowego, detekcja kopania i zakłóceń, sekwencja zasilania i czasy gotowości ECU/zapłonu/wtrysku/HMI, zakres i wartość domyślna czasu bezczynności, początek odliczania, pozostałe zadania wstrzymujące sen i stany wyjść. Dla sekwencji usypiania ustalić formaty ramek, czasy, powiązanie potwierdzenia z bieżącą próbą, obsługę nowej aktywności i braków potwierdzenia. Dla wentylatora po zgaszeniu: wspólny limit czasu i próg napięcia, detekcja napięcia, filtracja/histereza, warunki zakończenia i ponowienia oraz przejście przy ponownym rozruchu. Dla komputera ustalić definicję wykrywanego połączenia, sposób podtrzymania blokady i bezpieczne jej zwolnienie po rozłączeniu lub przerwaniu aktualizacji.
+Budżet prądu czuwania, napięcia pracy i wymagania wobec zasilacza warsztatowego, detekcja kopania i zakłóceń, sekwencja zasilania i czasy gotowości ECU/zapłonu/wtrysku/HMI, zakres i wartość domyślna czasu bezczynności, początek odliczania, pozostałe zadania wstrzymujące sen i stany wyjść. Dla sekwencji usypiania: formaty ramek, czasy, identyfikacja bieżącej próby, obsługa nowej aktywności, ograniczenie oczekiwania i prób oraz ewentualne odzyskiwanie HMI. Dla sterowanego zasilania HMI: parametry, tor wybudzania, ponowne załączenie oraz stan po prawidłowej sekwencji. Dla wentylatora po zgaszeniu: wspólny limit czasu i próg napięcia, detekcja napięcia, filtracja/histereza, warunki zakończenia i ponowienia oraz przejście przy ponownym rozruchu. Dla komputera: definicja wykrywanego połączenia, sposób podtrzymania blokady i bezpieczne jej zwolnienie po rozłączeniu lub przerwaniu aktualizacji.
 
 Zasilanie serwisowe: [porównanie wariantów A/B i uzasadnienie wyboru A](../architecture/zasilanie-serwisowe-porownanie.md). Wybrano wymagane zewnętrzne zasilanie 12 V (SYS-058).
 
-Brak potwierdzenia HMI: [porównanie reakcji awaryjnych](../architecture/brak-potwierdzenia-uspienia-hmi.md), przygotowane na prośbę właściciela w pytaniu 71. Obejmuje zachowanie wybudzania przyciskami po odłączeniu części aktywnej HMI; wariant nie został jeszcze wybrany.
+Brak potwierdzenia HMI: [porównanie i uzasadnienie wyboru kontroli zasilania z ECU](../architecture/brak-potwierdzenia-uspienia-hmi.md). Wybudzanie przyciskami po odłączeniu części aktywnej pozostaje wymagane; sposób realizacji nie został jeszcze wybrany.
 
 ## Proponowana weryfikacja
 
 Z uśpienia sprawdzić osobno każde zdarzenie z tabeli; potwierdzić automatyczne wybudzanie obu urządzeń. Dla START i kopniaka sprawdzić także rozruch przy niedostępnym HMI oraz opóźnionym jego uruchomieniu. Zmierzyć sekwencję zasilania, czasy wybudzenia i gotowości do rozruchu oraz prąd czuwania. Sprawdzić, że HMI i komputer mogą wybudzić urządzenia do obsługi przy zgaszonym silniku.
 
 Przy zgaszonym silniku, odłączonym PC i braku zadań blokujących sprawdzić rozpoczęcie sekwencji po skonfigurowanym czasie. Przyciski, próby rozruchu i aktywność użytkownika w HMI mają odnowić odliczanie; sam cykliczny odczyt danych go nie odnawia. Zweryfikować kolejność polecenia, aplikacyjnego potwierdzenia, zakończenia nadawania HMI i przejść w sen; rzeczywisty stan niskiego poboru sprawdzić pomiarowo. Praca silnika, aktywne zadanie wymagające pracy i podłączony PC mają wstrzymywać sekwencję. Dodatkowe przypadki wskazano w opisie sekwencji.
+
+Przy braku potwierdzenia sprawdzić ograniczenie oczekiwania/prób, sterowanie wyjściem zasilania HMI bez działającej aplikacji HMI i CAN, zapis problemu i sen ECU po spełnieniu pozostałych warunków. Potwierdzić wybudzanie po odłączeniu oraz blokady podczas aktywności użytkownika, rozruchu, serwisu i zapisów pamięci.
 
 Dla pracy wentylatora po zgaszeniu sprawdzić blokowanie uśpienia ECU, odcięcie po limicie czasu lub niskim napięciu także przy ręcznym żądaniu HMI i późniejsze dopuszczenie uśpienia według SYS-059 przy braku innych blokad. Szczegółowe próby funkcji są wskazane przy SYS-060/061 w zakresie systemu.
 
