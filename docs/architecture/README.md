@@ -14,6 +14,7 @@ Usypianie koordynuje ECU: [normalna sekwencja ECU–HMI](usypianie-ecu-hmi.md), 
 
 Analizy architektoniczne:
 
+- [Brak potwierdzenia uśpienia HMI](brak-potwierdzenia-uspienia-hmi.md): timeout, niezależny reset i kontrola zasilania z zachowaniem wybudzania przyciskami; ścieżka awaryjna nie została wybrana.
 - [Zasilanie podczas serwisu — 12 V czy z komputera](zasilanie-serwisowe-porownanie.md): wybrano wariant A — wymagane zasilanie 12 V, kabel PC do komunikacji i wybudzenia (SYS-058). Parametry toru zasilania pozostają do projektu.
 - [Macierz wariantów silnika](macierz-wariantow-silnika.md): zakres gaźnika/wtrysku i 2T/4T oraz dane potrzebne do wspólnej PCB; modele poza Betą pozostają do wyboru.
 - [Wyjścia akcesoriów — porównanie realizacji](wyjscia-akcesoriow-porownanie.md): preferowany kierunek to SmartFET-y na PCB ECU; podział i parametry kanałów oraz wykonalność pełnej integracji pozostają do analizy.
