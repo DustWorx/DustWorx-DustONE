@@ -19,8 +19,8 @@ Wiązkę i złącze ECU projektujemy od nowa (SYS-045), według potrzebnych funk
 | Temperatura płynu chłodzącego | Wejście pomiarowe ECU; dane do HMI | SYS-044 | Czujniki OEM lub dodatkowe, charakterystyki, zakres, dokładność i montaż. Sam termowłącznik nie zapewnia pomiaru wartości. |
 | Ciśnienie paliwa | Wejście pomiarowe ECU | SYS-029 | Zakres ciśnienia, sygnał, zasilanie i wymagana dokładność. |
 | Ciśnienie oleju obecne/brak | Wejście binarne ECU | SYS-029 | Polaryzacja, poziomy, czujnik/wyłącznik i diagnostyka przewodów. |
-| Sprzęgło | Opcjonalny sygnał do ECU | SYS-041 | Rodzaj przełącznika/sygnału i parametry elektryczne. |
-| Położenie poszczególnych biegów | Opcjonalny czujnik do ECU | SYS-041 | Typ interfejsu, liczba pozycji, sygnały i kalibracja. |
+| Sprzęgło | Opcjonalny sygnał do ECU; dane i wskazania, bez blokady rozrusznika | SYS-041 | Rodzaj przełącznika/sygnału i parametry elektryczne. |
+| Położenie poszczególnych biegów | Opcjonalny czujnik do ECU; dane i wskazania, bez blokady rozrusznika | SYS-041 | Typ interfejsu, liczba pozycji, sygnały i kalibracja. |
 | Światła przednie, tylne i STOP | Wyjścia ECU | SYS-004 | Podział funkcji i kanałów, odbiorniki, ich prądy i sposób podłączenia OEM. |
 | Kierunkowskazy, klakson | Wyjścia ECU | SYS-004 | Niezależne obwody, prądy, równoczesność pracy i wymagania diagnostyczne. |
 | Wentylator | Wyjście ECU; dodatkowe żądanie włączenia z HMI przez CAN | SYS-004, 043, 044 | Automatyka według temperatury i wymuszenie włączenia; parametry kanału, progi/histereza i reakcje na usterki do określenia. |
