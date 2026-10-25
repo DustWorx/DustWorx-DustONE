@@ -33,6 +33,8 @@ Potwierdzenie jest osobną aplikacyjną ramką CAN i oznacza przyjęcie poleceni
 
 Formaty i identyfikatory ramek, oznaczenie bieżącej próby, czasy odpowiedzi i przejścia w sen, ponowienia oraz reakcja na brak potwierdzenia lub brak HMI. Ustalić warunki rozstrzygania nowej aktywności podczas polecenia, transmisji potwierdzenia i końcowego przejścia w sen. Nie wybrano jeszcze zachowania awaryjnego po braku potwierdzenia.
 
+Właściciel w odpowiedzi na pytanie 71 poprosił o [porównanie timeoutu, niezależnego resetu i kontroli zasilania HMI](brak-potwierdzenia-uspienia-hmi.md). Analiza zawiera rekomendację do wyboru; normalna sekwencja jest uzgodniona, a ścieżka awaryjna nadal wymaga decyzji.
+
 ## Proponowana weryfikacja
 
 Zarejestrować poprawny przebieg polecenia i potwierdzenia, zakończenie nadawania HMI oraz kolejność rzeczywistych przejść w stan niskiego poboru. Sprawdzić odnawianie bezczynności po próbach START/kopniakiem i interakcji z HMI oraz blokady podczas pracy silnika, obsługi wentylatora, zapisów pamięci i połączenia z PC.
