@@ -1,6 +1,6 @@
 # Brak potwierdzenia uśpienia HMI — porównanie reakcji
 
-Data: 2026-10-25. Status: właściciel po porównaniu w pytaniu 71 zatwierdził kontrolę zasilania HMI z ECU jako ścieżkę awaryjną; topologia i parametry do projektu. Podstawa: [normalna sekwencja ECU–HMI](usypianie-ecu-hmi.md), [ADR-003](../decisions/adr-003-wybudzanie-bez-wlacznika.md), SYS-054/055/057/062–065 w [zakresie systemu](../01-zakres-systemu.md).
+Data: 2026-10-25. Status: właściciel po porównaniu w pytaniu 71 zatwierdził kontrolę zasilania HMI z ECU jako ścieżkę awaryjną. W pytaniu 72 wskazał pozostawienie zasilania włączonego podczas normalnego snu; odłączenie jako ostateczność przy awarii lub zdefiniowanych ograniczeniach HMI. Topologia i parametry do projektu. Podstawa: [normalna sekwencja ECU–HMI](usypianie-ecu-hmi.md), [ADR-003](../decisions/adr-003-wybudzanie-bez-wlacznika.md), SYS-054/055/057/062–066 w [zakresie systemu](../01-zakres-systemu.md).
 
 ## Porównanie
 
@@ -51,7 +51,9 @@ Po nieudanej sekwencji z ograniczonym oczekiwaniem/próbami ECU odłącza częś
 
 Awaryjne odłączenie należy odróżnić w diagnostyce od poprawnie zakończonej sekwencji z potwierdzeniem HMI. Nowa aktywność i zadania wymagające pracy mają pierwszeństwo. Blokady związane z komputerem, aktualizacją i zapisami pamięci muszą zapobiegać nieuprawnionemu odłączeniu energii w trakcie tych operacji.
 
-Dokładny wpływ na PCB, złącza i BOM poznamy po wyborze topologii i bilansie mocy HMI. Mechanizm kontroli zasilania jest zatwierdzony; parametry, tor wybudzania i stan zasilania HMI po poprawnej sekwencji pozostają do określenia.
+W pytaniu 72 właściciel zatwierdził normalny sen ECU i HMI przy włączonym wyjściu zasilania HMI z ECU (SYS-066). Kontrolowane odłączenie ma być ostatecznością przy awarii lub wynikać ze zdefiniowanej polityki ograniczeń HMI; nie jest etapem poprawnej sekwencji. Kryteria ograniczeń pozostają do określenia.
+
+Dokładny wpływ na PCB, złącza i BOM poznamy po wyborze topologii i bilansie mocy HMI. Mechanizm kontroli zasilania i jego normalny stan są zatwierdzone; parametry, podtrzymanie stanu wyjścia w śnie ECU i tor wybudzania pozostają do projektu.
 
 ## Do weryfikacji po wyborze
 
