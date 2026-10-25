@@ -67,6 +67,10 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-051 | ECU ma osobne wejścia przewodowe wyłączników hamulca przedniego i tylnego, umożliwiające rozróżnienie ich stanów. Przy prawidłowych sygnałach i sprawnym torze wyjściowym światło hamowania jest włączone, gdy aktywny jest co najmniej jeden hamulec, i wyłączone, gdy oba są nieaktywne. Obsługa działa bez HMI i komunikacji CAN ECU–HMI. Parametry elektryczne, filtracja i reakcje na usterki pozostają do określenia. |
 | SYS-052 | Miganiem kierunkowskazów steruje lokalnie ECU. Po potwierdzeniu utraty komunikacji z HMI ECU wyłącza aktywny kierunkowskaz. Kryterium i czas potwierdzenia utraty łączności oraz zachowanie po jej przywróceniu pozostają do określenia. |
 | SYS-053 | Po potwierdzeniu utraty komunikacji z HMI ECU anuluje ręczne wymuszenie włączenia wentylatora i pozostawia sterowanie automatyce temperatury. Anulowanie wymuszenia nie wyłącza wentylatora, gdy automatyka nadal wymaga chłodzenia. Kryterium i czas potwierdzenia utraty łączności pozostają do określenia. |
+| SYS-054 | System nie wymaga osobnego włącznika ani stacyjki do codziennej obsługi. ECU wybudza się po naciśnięciu przewodowego START oraz przy rozruchu kopniakiem, niezależnie od HMI. Źródło detekcji kopania, czasy wybudzania i gotowości do rozruchu pozostają do określenia i weryfikacji. |
+| SYS-055 | Użycie przycisków obsługi HMI wybudza samo HMI oraz ECU. Sposób przekazania wybudzenia do ECU pozostaje do określenia; obsługa przycisków HMI nadal odbywa się w HMI. |
+| SYS-056 | Podłączenie komputera przez przewodowy interfejs serwisowy wybudza ECU i HMI, bez wcześniejszego użycia START lub przycisków HMI. Interfejs, detekcja podłączenia i źródło zasilania podczas serwisu pozostają do określenia. |
+| SYS-057 | Przez czas połączenia z komputerem usypianie ECU i HMI jest zablokowane, aby umożliwić pracę z urządzeniami, w tym konfigurację, diagnostykę i aktualizacje. Sposób podtrzymania blokady w obu urządzeniach oraz warunki jej zwolnienia po rozłączeniu pozostają do określenia. |
 
 ## 3. Podział odpowiedzialności
 
@@ -126,6 +130,12 @@ Do określenia: zawartość zestawu dla poszczególnych wariantów silnika, wali
 Standardowa obsługa wymaga podłączenia jednego kabla w jednym punkcie. Aplikacja ma uzyskać dostęp do ECU i HMI przez to połączenie (SYS-026, SYS-027). Nie wybrano jeszcze interfejsu, rodzaju złącza, jego lokalizacji ani urządzenia pośredniczącego w komunikacji.
 
 Przy projektowaniu aktualizacji określimy dostępność wspólnego połączenia podczas programowania każdego urządzenia oraz procedury odzyskiwania po przerwanej aktualizacji lub uszkodzeniu oprogramowania. Wymaganie jednego kabla dotyczy standardowej obsługi; architektura awaryjnego odzyskiwania i dostępu debuggera pozostaje do określenia.
+
+### Wybudzanie i praca z komputerem — ustalenie właściciela z 2026-10-25
+
+W odpowiedzi na pytanie 64 właściciel wybrał obsługę bez osobnego włącznika: START i kopniak wybudzają ECU, a przyciski HMI wybudzają HMI oraz ECU. Podłączenie komputera wybudza urządzenia i blokuje ich usypianie na czas połączenia, w tym pracy diagnostycznej i aktualizacji (SYS-054–057). Blokady nie ograniczamy wyłącznie do aktywnego przesyłania danych.
+
+Podstawa architektury, źródła wybudzania, otwarte parametry oraz propozycje prób: [ADR-003 — wybudzanie bez osobnego włącznika](decisions/adr-003-wybudzanie-bez-wlacznika.md). Warunki zasypiania bez komputera, pobór prądu w czuwaniu, źródło energii podczas serwisu i wybudzanie HMI od START/kopniaka pozostają do doprecyzowania. Nie wybrano jeszcze komponentów ani torów wybudzania.
 
 ### Rejestracja diagnostyczna ECU — ustalenie właściciela z 2026-10-18
 
