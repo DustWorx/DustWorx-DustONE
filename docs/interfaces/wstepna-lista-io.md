@@ -21,7 +21,8 @@ Wiązkę i złącze ECU projektujemy od nowa (SYS-045), według potrzebnych funk
 | Ciśnienie oleju obecne/brak | Wejście binarne ECU | SYS-029 | Polaryzacja, poziomy, czujnik/wyłącznik i diagnostyka przewodów. |
 | Sprzęgło | Opcjonalny sygnał do ECU; dane i wskazania, bez blokady rozrusznika | SYS-041 | Rodzaj przełącznika/sygnału i parametry elektryczne. |
 | Położenie poszczególnych biegów | Opcjonalny czujnik do ECU; dane i wskazania, bez blokady rozrusznika | SYS-041 | Typ interfejsu, liczba pozycji, sygnały i kalibracja. |
-| Światła przednie, tylne i STOP | Wyjścia ECU | SYS-004 | Podział funkcji i kanałów, odbiorniki, ich prądy i sposób podłączenia OEM. |
+| Światła przednie i tylne pozycyjne | Wyjścia ECU | SYS-004, 050 | Po utracie HMI/CAN zachowanie ostatniego stanu przy działających zabezpieczeniach, w bieżącej sesji ECU. Podział funkcji i kanałów, odbiorniki, prądy, połączenia oraz stany po restarcie do określenia. |
+| Światło hamowania | Wyjście ECU | SYS-004 | Źródło sygnałów hamowania, interfejsy, odbiornik, prąd i połączenia do określenia. |
 | Kierunkowskazy, klakson | Wyjścia ECU | SYS-004 | Niezależne obwody, prądy, równoczesność pracy i wymagania diagnostyczne. |
 | Wentylator | Wyjście ECU; dodatkowe żądanie włączenia z HMI przez CAN | SYS-004, 043, 044 | Automatyka według temperatury i wymuszenie włączenia; parametry kanału, progi/histereza i reakcje na usterki do określenia. |
 | Dodatkowe wyjścia konfigurowalne | Wyjścia ECU | SYS-004 | Liczba, dopuszczalne obciążenia i funkcje. |
