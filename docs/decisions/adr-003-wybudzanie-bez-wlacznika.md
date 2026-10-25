@@ -38,6 +38,8 @@ Budżet prądu czuwania, napięcia pracy i wymagania wobec zasilacza warsztatowe
 
 Zasilanie serwisowe: [porównanie wariantów A/B i uzasadnienie wyboru A](../architecture/zasilanie-serwisowe-porownanie.md). Wybrano wymagane zewnętrzne zasilanie 12 V (SYS-058).
 
+Brak potwierdzenia HMI: [porównanie reakcji awaryjnych](../architecture/brak-potwierdzenia-uspienia-hmi.md), przygotowane na prośbę właściciela w pytaniu 71. Obejmuje zachowanie wybudzania przyciskami po odłączeniu części aktywnej HMI; wariant nie został jeszcze wybrany.
+
 ## Proponowana weryfikacja
 
 Z uśpienia sprawdzić osobno każde zdarzenie z tabeli; potwierdzić automatyczne wybudzanie obu urządzeń. Dla START i kopniaka sprawdzić także rozruch przy niedostępnym HMI oraz opóźnionym jego uruchomieniu. Zmierzyć sekwencję zasilania, czasy wybudzenia i gotowości do rozruchu oraz prąd czuwania. Sprawdzić, że HMI i komputer mogą wybudzić urządzenia do obsługi przy zgaszonym silniku.
