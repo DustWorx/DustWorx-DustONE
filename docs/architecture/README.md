@@ -8,7 +8,9 @@ Zatwierdzona podstawa: [ADR-002 — samodzielność ECU](../decisions/adr-002-sa
 
 Wybudzanie i czuwanie: [ADR-003 — obsługa bez osobnego włącznika](../decisions/adr-003-wybudzanie-bez-wlacznika.md). START, kopniak, przyciski HMI i podłączenie komputera wybudzają ECU oraz HMI. Gotowość ECU do rozruchu ma priorytet i nie zależy od uruchomienia HMI. Podłączenie komputera blokuje usypianie obu urządzeń (SYS-054–057). Bez PC, przy zgaszonym silniku i zakończonych zadaniach system zasypia po konfigurowalnym czasie bezczynności; przyciski odnawiają odliczanie (SYS-059). Tory sprzętowe, sekwencje, parametry czasu i budżet prądu czuwania wymagają projektu.
 
-Praca wentylatora po zgaszeniu silnika: funkcja konfigurowalna, z limitem czasu i odcięciem przy niskim napięciu; obsługa wstrzymuje uśpienie ECU (SYS-060). Te same ograniczenia obowiązują ręczne wymuszenie i są egzekwowane w ECU (SYS-061), co wymaga nadzoru napięcia akumulatora. Zastosowanie w danym układzie chłodzenia, parametry i zachowanie HMI wymagają doprecyzowania.
+Praca wentylatora po zgaszeniu silnika: funkcja konfigurowalna, z limitem czasu i odcięciem przy niskim napięciu; obsługa wstrzymuje uśpienie ECU (SYS-060). Te same ograniczenia obowiązują ręczne wymuszenie i są egzekwowane w ECU (SYS-061), co wymaga nadzoru napięcia akumulatora. HMI pozostaje aktywne do polecenia ECU. Zastosowanie w danym układzie chłodzenia i parametry wymagają doprecyzowania.
+
+Usypianie koordynuje ECU: [normalna sekwencja ECU–HMI](usypianie-ecu-hmi.md), SYS-062/063. HMI potwierdza przyjęcie polecenia ramką CAN, kończy nadawanie i przechodzi w sen; następnie zasypia ECU. Nie wybrano jeszcze parametrów ani reakcji na brak potwierdzenia.
 
 Analizy architektoniczne:
 
