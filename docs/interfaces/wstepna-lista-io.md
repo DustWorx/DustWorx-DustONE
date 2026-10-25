@@ -25,8 +25,9 @@ Wiązkę i złącze ECU projektujemy od nowa (SYS-045), według potrzebnych funk
 | Kierunkowskazy, klakson | Wyjścia ECU | SYS-004 | Niezależne obwody, prądy, równoczesność pracy i wymagania diagnostyczne. |
 | Wentylator | Wyjście ECU; dodatkowe żądanie włączenia z HMI przez CAN | SYS-004, 043, 044 | Automatyka według temperatury i wymuszenie włączenia; parametry kanału, progi/histereza i reakcje na usterki do określenia. |
 | Dodatkowe wyjścia konfigurowalne | Wyjścia ECU | SYS-004 | Liczba, dopuszczalne obciążenia i funkcje. |
-| Rozrusznik | Polecenie HMI → CAN → ECU → tor wykonawczy | SYS-004, 016 | Stycznik/przekaźnik i prąd sterowania; osobna analiza toru dużego prądu. |
-| Przyciski i przełączniki kierownicy | Wejścia HMI, polecenia do ECU po CAN | SYS-016, 017 | Lista elementów i funkcji, styki, wspólne przewody, poziomy. |
+| Przycisk START | Osobne przewodowe wejście ECU, niezależne od HMI/CAN | SYS-048 | Poziomy i polaryzacja, styki, filtracja, diagnostyka przewodów oraz sposób obsługi naciśnięcia. |
+| Rozrusznik | Wyjście ECU → tor wykonawczy | SYS-004, 048 | Stycznik/przekaźnik i prąd sterowania; osobna analiza toru dużego prądu oraz warunków i ograniczeń rozruchu. |
+| Przyciski obsługi HMI i przełączniki akcesoriów | Wejścia HMI; żądania sterowania akcesoriami do ECU po CAN | SYS-016, 017 | Lista elementów i funkcji, styki, wspólne przewody, poziomy. START i STOP mają osobne tory według SYS-048/037. |
 | Ręczny STOP | Osobny obwód przewodowy, niezależny od HMI/CAN | SYS-037 | Sposób odcięcia, interfejs i reakcje na zwarcie/przerwę. |
 | Wykrywanie przewrócenia | Lokalizacja i tor pomiarowy otwarte | SYS-039, 040 | Pomiar, montaż, kryteria, czasy reakcji i odblokowania. |
 | Prędkość motocykla | Źródło i miejsce podłączenia otwarte | SYS-018 | Czujnik lub inne źródło, sygnał, kalibracja i wymagana dokładność. |
