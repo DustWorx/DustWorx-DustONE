@@ -10,7 +10,7 @@ Wiązkę i złącze ECU projektujemy od nowa (SYS-045), według potrzebnych funk
 
 | Funkcja | Miejsce / kierunek | Podstawa | Dane potrzebne do projektu |
 | --- | --- | --- | --- |
-| Zasilanie HMI | Sterowane wyjście zasilania z ECU do HMI | SYS-064, 065 | Parametry i zabezpieczenia toru, pobór HMI, awaryjne odłączenie niezależne od CAN oraz zachowanie wybudzania przyciskami przy odłączonej części aktywnej. Topologia i stany po poprawnej sekwencji do określenia. |
+| Zasilanie HMI | Sterowane wyjście zasilania z ECU do HMI | SYS-064, 065, 066 | W normalnym śnie wyjście pozostaje włączone. Kontrolowane odłączenie jako ostateczność przy awarii lub zdefiniowanych ograniczeniach. Podtrzymanie stanu wyjścia podczas snu ECU, pobór toru w obu stanach, zabezpieczenia i wybudzanie przyciskami po odłączeniu do projektu. |
 | Zapłon | Wyjście ECU; realizacja otwarta | SYS-001, 002, 015 | Układy i cewki referencyjne, sposób zasilania, energia i interfejs sterowania. |
 | Wtrysk paliwa | Wyjścia ECU; aktywne w wariantach wtryskowych | SYS-012, 015 | Liczba wtryskiwaczy działających jednocześnie, typy, prądy, czasy i sposób sterowania. |
 | Układ pompy paliwa | Sterowanie ECU; zakres toru mocy otwarty | SYS-012, 015 | Pompy referencyjne, prądy robocze/rozruchowe, sposób wyłączania i diagnostyka. |
