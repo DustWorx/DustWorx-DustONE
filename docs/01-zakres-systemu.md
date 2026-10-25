@@ -61,7 +61,7 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-045 | DustONE otrzymuje nową wiązkę motocykla i nowe złącze ECU, dobrane do funkcji i parametrów systemu. Zachowanie złącza fabrycznego ECU ani zgodność z jego pinoutem nie są wymagane. Zachowywane czujniki i osprzęt wymagają potwierdzenia własnych interfejsów elektrycznych. |
 | SYS-046 | ECU działa samodzielnie bez HMI, zarówno gdy HMI jest nieobecne od włączenia zasilania, jak i po utracie komunikacji podczas pracy. Sama nieobecność HMI lub utrata CAN ECU–HMI nie wyłącza silnika. Sterowanie silnikiem i jego zabezpieczenia są realizowane w ECU na podstawie danych dostępnych bez HMI. |
 | SYS-047 | ECU jest właścicielem i źródłem prawdy danych sterowania i eksploatacji motocykla, konfiguracji silnika, map oraz diagnostyki. HMI odczytuje dane i wysyła żądania, np. zmiany mapy lub sterowania akcesoriami; ECU rozstrzyga ich wykonanie i udostępnia rzeczywisty stan. |
-| SYS-048 | Przycisk START jest połączony przewodowo z wejściem ECU, niezależnie od HMI i CAN ECU–HMI. Umożliwia żądanie rozruchu przy nieobecnym, wyłączonym lub niesprawnym HMI oraz bez komunikacji z HMI. ECU realizuje sterowanie rozrusznikiem i warunki rozruchu. Sposób obsługi naciśnięcia, limity czasu i warunki odcięcia pozostają do ustalenia. |
+| SYS-048 | Przycisk START jest połączony przewodowo z wejściem ECU, niezależnie od HMI i CAN ECU–HMI. Umożliwia żądanie rozruchu przy nieobecnym, wyłączonym lub niesprawnym HMI oraz bez komunikacji z HMI. Żądanie trwa podczas przytrzymywania START; puszczenie przycisku kończy sterowanie rozrusznikiem. ECU realizuje warunki rozruchu; przytrzymywanie nie omija blokad i odcięć. Limity czasu i warunki automatycznego odcięcia pozostają do ustalenia. |
 
 ## 3. Podział odpowiedzialności
 
@@ -81,7 +81,7 @@ Propozycje do uwzględnienia w wymaganiach szczegółowych:
 
 ECU działa niezależnie od obecności i komunikacji z HMI. Dane i decyzje sterujące należą do ECU; HMI odczytuje dane oraz wysyła żądania (SYS-046/047). Brak HMI nie przerywa pracy silnika, lokalnej diagnostyki ani zabezpieczeń ECU. Dane wymagane do tej pracy muszą być dostępne bez udziału HMI. Ustalenie i konsekwencje architektoniczne: [ADR-002 — samodzielne ECU i HMI jako klient](decisions/adr-002-samodzielnosc-ecu.md).
 
-W odpowiedzi na pytanie 56 i późniejszym doprecyzowaniu z 2026-10-25 właściciel potwierdził: przyciski obsługi HMI pozostają podłączone do HMI, natomiast START i STOP działają niezależnie od HMI. START trafia przewodowo do ECU (SYS-048), a STOP ma osobny obwód gaszenia (SYS-037). Zaktualizowano SYS-016. Sposób obsługi naciśnięcia START, ważność żądań akcesoriów, zachowanie po ponownym połączeniu i szczegóły protokołu pozostają do określenia.
+W odpowiedzi na pytanie 56 i późniejszym doprecyzowaniu z 2026-10-25 właściciel potwierdził: przyciski obsługi HMI pozostają podłączone do HMI, natomiast START i STOP działają niezależnie od HMI. START trafia przewodowo do ECU (SYS-048), a STOP ma osobny obwód gaszenia (SYS-037). Zaktualizowano SYS-016. W odpowiedzi na pytanie 57 właściciel wybrał pracę rozrusznika podczas przytrzymywania START i zakończenie kręcenia po puszczeniu przycisku. Limity czasu i automatyczne odcięcia, ważność żądań akcesoriów, zachowanie po ponownym połączeniu i szczegóły protokołu pozostają do określenia.
 
 ### Dodatkowe pomiary — doprecyzowanie właściciela z 2026-10-18
 
