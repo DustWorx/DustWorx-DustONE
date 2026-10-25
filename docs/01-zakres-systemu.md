@@ -73,6 +73,7 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-057 | Przez czas połączenia z komputerem usypianie ECU i HMI jest zablokowane, aby umożliwić pracę z urządzeniami, w tym konfigurację, diagnostykę i aktualizacje. Sposób podtrzymania blokady w obu urządzeniach oraz warunki jej zwolnienia po rozłączeniu pozostają do określenia. |
 | SYS-058 | Podczas konfiguracji, diagnostyki i aktualizacji z komputera wymagane jest zasilanie ECU i HMI z akumulatora instalacji nominalnie 12 V lub odpowiedniego zasilacza warsztatowego. Kabel PC zapewnia komunikację i wybudzenie; zasilanie elektroniki obu urządzeń wyłącznie z kabla PC pozostaje poza przyjętym zakresem. Parametry zasilania i wymagana wydajność prądowa będą określone w projekcie. |
 | SYS-059 | Gdy silnik nie pracuje i komputer jest odłączony, ECU i HMI przechodzą automatycznie w uśpienie po konfigurowalnym czasie bezczynności, po zakończeniu zadań wymagających dalszej pracy. Używanie przycisków rozpoczyna odliczanie czasu bezczynności od nowa. Zakres i wartość domyślna czasu, szczegółowa lista zadań wstrzymujących uśpienie oraz sekwencja usypiania pozostają do określenia. |
+| SYS-060 | ECU umożliwia konfigurowalną, automatyczną pracę wentylatora po zgaszeniu silnika, z limitem czasu oraz odcięciem przy niskim napięciu akumulatora. Funkcja działa lokalnie w ECU i wstrzymuje jego uśpienie na czas obsługi. Progi, limit czasu, warunki zakończenia i zastosowanie w konkretnym układzie chłodzenia wymagają określenia i weryfikacji. |
 
 ## 3. Podział odpowiedzialności
 
@@ -179,7 +180,11 @@ W odpowiedzi na pytanie 63 z 2026-10-25 właściciel wybrał anulowanie ręczneg
 
 Proponowana weryfikacja SYS-053: przy aktywnym ręcznym wymuszeniu przerwać komunikację ECU–HMI lub odłączyć HMI. Po potwierdzeniu utraty łączności wymuszenie ma być anulowane; przy sprawnym torze wyjściowym sprawdzić dalszą pracę wentylatora, gdy automatyka żąda chłodzenia, oraz wyłączenie, gdy automatyka go nie żąda. Kryterium i czas wykrywania ustalić przed próbami; testów nie wykonano.
 
-Do określenia: zakres, dokładność i filtracja pomiaru, progi włączenia/wyłączenia i histereza, ograniczenia ustawień, diagnostyka czujnika/wyjścia oraz reakcje na ich uszkodzenia. Osobno ustalimy zachowanie ręcznego wymuszenia po przywróceniu komunikacji, restarcie ECU i zmianach zasilania oraz pracę wentylatora po zgaszeniu silnika. Nie ustalono wartości liczbowych ani typu czujnika. Temperatura płynu jest odrębnym pomiarem od IAT i temperatury PCB.
+W odpowiedzi na pytanie 68 z 2026-10-25 właściciel zatwierdził konfigurowalną funkcję automatycznej pracy wentylatora po zgaszeniu silnika, z limitem czasu i odcięciem przy niskim napięciu akumulatora (SYS-060). Jej obsługa wstrzymuje uśpienie ECU. Przydatność i ustawienia wymagają oceny dla konkretnego układu chłodzenia; nie potwierdzono ich jeszcze dla Bety.
+
+Proponowana weryfikacja SYS-060: przy włączonej funkcji i nieaktywnym ręcznym wymuszeniu sprawdzić pracę po zgaszeniu silnika według automatyki temperatury, odcięcie po limicie czasu oraz odcięcie przy niskim napięciu mimo żądania chłodzenia. Potwierdzić wstrzymanie uśpienia ECU podczas obsługi funkcji i późniejszy powrót do zasad SYS-059. Progi, definicję limitu, czasy reakcji i warunki prób określić przed testami; prób nie wykonano.
+
+Do określenia: zakres, dokładność i filtracja pomiaru, progi temperatury i histereza, ograniczenia ustawień, diagnostyka czujnika/wyjścia oraz reakcje na ich uszkodzenia. Dla pracy po zgaszeniu ustalić limit czasu, próg napięcia, warunki zakończenia i przejście przy ponownym rozruchu. Osobno ustalimy zakres ograniczeń ręcznego wymuszenia przy zgaszonym silniku oraz jego zachowanie po przywróceniu komunikacji, restarcie ECU i zmianach zasilania. Nie ustalono wartości liczbowych ani docelowego typu czujnika. Temperatura płynu jest odrębnym pomiarem od IAT i temperatury PCB.
 
 ### Wyjścia akcesoriów — preferowany kierunek
 
