@@ -1,6 +1,6 @@
 # Oszczędzanie energii po zgaszeniu silnika
 
-Data: 2026-11-01. Podstawa: odpowiedzi właściciela na pytania 87 i 90 oraz A na pytania 88 i 89, [SYS-083–089](../01-zakres-systemu.md), [ADR-009](../decisions/adr-009-oszczedzanie-energii.md). Zakres funkcjonalny wskazany przez właściciela; parametry i reguły szczegółowe do projektu.
+Data: 2026-11-01. Podstawa: odpowiedzi właściciela na pytania 87 i 90 oraz A na pytania 88, 89 i 91, [SYS-083–090](../01-zakres-systemu.md), [ADR-009](../decisions/adr-009-oszczedzanie-energii.md). Zakres funkcjonalny wskazany przez właściciela; parametry i reguły szczegółowe do projektu.
 
 ## Przyjęty zakres
 
@@ -9,6 +9,7 @@ Data: 2026-11-01. Podstawa: odpowiedzi właściciela na pytania 87 i 90 oraz A n
 - Podczas aktywnego odcięcia ECU odrzuca zwykłe żądania ponownego załączenia objętych nim odbiorników. Przy próbie z HMI przy zgaszonym silniku panel informuje: „Wymagane uruchomienie silnika” (SYS-085/086, odpowiedź A na pytanie 88). Kontrola działa w ECU także dla bezpośrednich zwykłych poleceń; restart HMI nie znosi blokady.
 - W normalnym użytkowaniu wyjście wymaga jednocześnie potwierdzonej pracy silnika i napięcia powyżej progu powrotu przez ustalony czas (SYS-087, odpowiedź A na pytanie 89). Do tego momentu odcięcie obejmuje również automatyczne żądania załączenia objętych nim odbiorników. Wartości parametrów pozostają otwarte.
 - Po zwolnieniu odcięcia mijania/drogowe i dodatkowe odbiorniki użytkownika czekają na nowe polecenie HMI (SYS-088). Pozycyjne wracają według automatyki. Funkcje ochrony silnika, w tym wentylator, kierują się aktualnym zapotrzebowaniem i własnymi zabezpieczeniami (SYS-089, odpowiedź właściciela na pytanie 90). Poprzednie ręczne wymuszenie wentylatora nie wraca automatycznie.
+- Jawnie włączony tryb serwisowy pozwala zwolnić odcięcie bez pracy silnika przy potwierdzonym stabilnym zasilaniu warsztatowym (SYS-090, odpowiedź A na pytanie 91). Sam kabel PC nie wystarcza, a zabezpieczenia wyjść pozostają aktywne. Zwolnienie odcięcia dopuszcza wykonanie testów; samo nie załącza wyjść.
 - Nadal obowiązują: automatyczne pozycyjne po uruchomieniu z uwzględnieniem aktywnego odcięcia (SYS-082/087), wyłączenie oświetlenia przed prawidłowym snem (SYS-081) oraz niezależność ECU od HMI. To osobny stan pracy przed snem, nie zastępstwo koordynowanego usypiania.
 
 ## Rekomendacje i decyzje otwarte
@@ -16,10 +17,16 @@ Data: 2026-11-01. Podstawa: odpowiedzi właściciela na pytania 87 i 90 oraz A n
 1. Potwierdzać spadek przez ustalony czas i zastosować histerezę. Wzrost napięcia po odłączeniu obciążeń nie powinien wywoływać cyklicznego przywracania i odcinania. [Analog Devices](https://www.analog.com/en/resources/analog-dialogue/articles/adding-hysteresis-for-smooth-undervoltage-and-overvoltage-lockout.html) opisuje tę zależność; nie oznacza to wyboru układu ani wartości.
 2. Progi dobrać do akumulatora, obciążeń i potrzeb rozruchu oraz potwierdzić pomiarowo. [Yuasa](https://www.yuasabatteries.com/about/events-news/news/new-battery-when-to-replace/) rozróżnia napięcie spoczynkowe, zachowanie pod obciążeniem i typ akumulatora. Nie przyjęto uniwersalnego progu dla wszystkich chemii.
 3. Zwykłe ręczne włączenie po zgaszeniu poza oszczędzaniem pozostaje wymaganiem SYS-083. HMI powinno odróżnić odmowę przy zgaszonym silniku („Wymagane uruchomienie silnika”) od trwającej blokady po jego uruchomieniu; proponowany wtedy opis to „Oczekiwanie na stabilne zasilanie”. Dokładny komunikat tej drugiej sytuacji jest propozycją interfejsu, a stan i powód pochodzą z ECU. W aktywnym odcięciu działa SYS-085/086. Określić status i powód odmowy przekazywany do HMI oraz jego aktualność po przywróceniu CAN. Komunikat o uruchomieniu silnika nie jest automatyczną zgodą na odblokowanie po samym naciśnięciu START.
-4. Wyjście w normalnym użytkowaniu określa SYS-087. Ustalić wartości progu i czasu oraz szczegóły kwalifikacji. Powrót ręcznych odbiorników i automatyki określają SYS-088/089; odrzucone lub dawne żądanie ON nie zastępuje nowego polecenia użytkownika dla odbiornika ręcznego. Zasady zasilania warsztatowego i testów pozostają do określenia. Sam wzrost napięcia przy zgaszonym silniku ani sama praca silnika bez spełnienia warunku napięcia nie zwalniają odcięcia w normalnym użytkowaniu.
+4. Wyjście w normalnym użytkowaniu określa SYS-087. Ustalić wartości progu i czasu oraz szczegóły kwalifikacji. Powrót ręcznych odbiorników i automatyki określają SYS-088/089; odrzucone lub dawne żądanie ON nie zastępuje nowego polecenia użytkownika dla odbiornika ręcznego. Zakres wyjątku serwisowego określa SYS-090; jego kwalifikacja, uprawnienia, przerwanie i powrót do zwykłego sterowania wymagają specyfikacji. Sam wzrost napięcia przy zgaszonym silniku ani sama praca silnika bez spełnienia warunku napięcia nie zwalniają odcięcia w normalnym użytkowaniu.
 5. Określić listę odbiorników i priorytety: ochrona nie może przypadkowo odłączyć funkcji wymaganych do działania ECU, STOP, rozruchu, komunikacji i trwałego zapisu danych. Wentylator ma własne ograniczenia SYS-060/061; powiązać je z nową polityką. Dla PC uwzględnić zasilanie serwisowe SYS-058, blokadę snu SYS-057 i bezpieczne ukończenie lub przerwanie aktualizacji. Sposób prezentacji, ewentualna diagnostyka i postępowanie przy błędzie pomiaru są otwarte.
 
 Tryb oszczędzania odbiorników i minimalne napięcie poprawnej pracy elektroniki wymagają osobnej analizy. Zdolność wykrywania ruchu koła oraz wybudzania przy małym poborze należy powiązać z budżetem energii; nie przyjęto odłączenia akumulatora ani automatycznego odcięcia zasilania HMI w tym trybie.
+
+## Tryb serwisowy — szczegóły do projektu
+
+Określić jawne wejście z aplikacji Windows i potwierdzenie przez ECU, sposób potwierdzenia źródła/wydajności zasilania oraz próg i czas kwalifikacji napięcia. Rozdzielić blokadę snu przy PC (SYS-057) od zezwolenia na testy: obecność połączenia nie jest zezwoleniem. Zaprojektować odrębne polecenie wykonania testu, statusy i warunki przerwania przy utracie sesji, spadku napięcia, STOP, rozruchu lub pracy silnika. Dokładne reakcje i czasy pozostają do uzgodnienia.
+
+Wyjątek dotyczy warunku pracy silnika przy zwalnianiu odcięcia do testów, przy zachowaniu zabezpieczeń wyjść. Nie przyznaje sam w sobie uprawnień do inicjalizacji/przenoszenia chronionych liczników ani dowolnego programowania firmware; obowiązują odrębne zasady SYS-076–078. Sterowanie testami i rozstrzyganie warunków muszą być po stronie ECU, także wobec bezpośrednich poleceń.
 
 ## Plan prób do uszczegółowienia
 
@@ -32,6 +39,7 @@ Tryb oszczędzania odbiorników i minimalne napięcie poprawnej pracy elektronik
 | Wyjście w normalnym użytkowaniu | Sprawdzić osobno: wzrost napięcia bez pracy silnika, pracę silnika bez wymaganego napięcia oraz zbyt krótkie spełnienie warunku. Odcięcie pozostaje aktywne; zwolnienie następuje dopiero po spełnieniu obu warunków przez ustalony czas. Uwzględnić przerwanie warunku napięcia lub pracy silnika przed końcem kwalifikacji. |
 | Powrót odbiorników użytkownika | Mijania/drogowe i dodatkowy odbiornik uprzednio włączone z HMI pozostają wyłączone po zwolnieniu odcięcia; nowe polecenie włącza je przy spełnionych pozostałych warunkach. Pozycyjne wracają według automatyki. |
 | Powrót automatyki | Po wyjściu przy żądaniu chłodzenia wentylator działa bez nowego polecenia HMI; bez żądania chłodzenia nie odtwarza dawnego ręcznego ON. Po ponownym zgaszeniu sprawdzić nadal obowiązujące limity SYS-060/061. Pozostałe uzgodnione funkcje ochronne zweryfikować według ich warunków i zabezpieczeń. |
+| Tryb serwisowy | Przy zgaszonym silniku porównać samo podłączenie PC z jawnym wejściem przy stabilnym zasilaniu. Bez jawnego wejścia odcięcie nie jest zwalniane; dopuszczony tryb umożliwia test po osobnym poleceniu. Nieprawidłowe zasilanie nie spełnia warunków. Potwierdzić aktywność zabezpieczeń wyjść według ich procedur. |
 | Priorytety i przejścia | Potwierdzić, że automatyka pozycyjnych nie omija aktywnego odcięcia. Szczegóły rozruchu, PC/aktualizacji, zapisów danych, snu i lista odbiorników według dalszej specyfikacji. |
 | Pomiar i energia | Dokładność, uszkodzenia toru, prąd odbiorników oraz pobór ECU/HMI w stanach docelowych. |
 

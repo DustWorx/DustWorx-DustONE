@@ -4,7 +4,7 @@ Data: 2026-11-01. Status: zakres funkcjonalny wskazany przez właściciela; para
 
 ## Decyzja i źródło
 
-W odpowiedzi na pytanie 87 właściciel wybrał przejście z włączonych mijania/drogowych na przednie i tylne pozycyjne po zgaszeniu silnika. Przy zgaszonym silniku użytkownik może ponownie włączyć mijania lub drogowe z HMI. ECU ma na bieżąco nadzorować napięcie i przed uśpieniem wyłączać pozycyjne oraz zbędne odbiorniki włączone z HMI, gdy napięcie spadnie poniżej progu. Wymagania: [SYS-083–089](../01-zakres-systemu.md).
+W odpowiedzi na pytanie 87 właściciel wybrał przejście z włączonych mijania/drogowych na przednie i tylne pozycyjne po zgaszeniu silnika. Przy zgaszonym silniku użytkownik może ponownie włączyć mijania lub drogowe z HMI. ECU ma na bieżąco nadzorować napięcie i przed uśpieniem wyłączać pozycyjne oraz zbędne odbiorniki włączone z HMI, gdy napięcie spadnie poniżej progu. Wymagania: [SYS-083–090](../01-zakres-systemu.md).
 
 Uzasadnienie właściciela: ograniczyć rozładowanie akumulatora, zachowując możliwość świadomego użycia oświetlenia po zatrzymaniu silnika.
 
@@ -14,4 +14,6 @@ Rozszerza to nadzór napięcia wymagany już dla wentylatora. Ustalić profil ak
 
 W odpowiedzi na pytanie 90 właściciel wybrał powrót zależny od funkcji: mijania/drogowe i dodatkowe odbiorniki użytkownika pozostają wyłączone do nowego polecenia, a uzgodnione funkcje ochrony silnika, np. wentylator, działają automatycznie według bieżącej potrzeby i własnych zabezpieczeń (SYS-088/089). Ręczne wymuszenie wentylatora nie jest samo odtwarzane.
 
-[Analiza i plan weryfikacji](../architecture/oszczedzanie-energii.md) oddzielają ten zakres od rekomendacji histerezy, filtracji i nieustalonych parametrów, szczegółowej listy odbiorników i trybu warsztatowego. Parametrów liczbowych, mechanizmów i komponentów nie wybrano; działania na produkcie jeszcze nie potwierdzono.
+W odpowiedzi A na pytanie 91 właściciel dopuścił jawne wejście w tryb serwisowy, umożliwiający zwolnienie odcięcia bez pracy silnika przy stabilnym zasilaniu warsztatowym, do testów z Windows. Samo podłączenie PC nie zwalnia odcięcia, a zabezpieczenia wyjść pozostają aktywne (SYS-090). Uprawnienia, kwalifikacja zasilania i zakończenie trybu są otwarte.
+
+[Analiza i plan weryfikacji](../architecture/oszczedzanie-energii.md) oddzielają ten zakres od rekomendacji histerezy, filtracji i nieustalonych parametrów, szczegółowej listy odbiorników i szczegółów trybu serwisowego. Parametrów liczbowych, mechanizmów i komponentów nie wybrano; działania na produkcie jeszcze nie potwierdzono.
