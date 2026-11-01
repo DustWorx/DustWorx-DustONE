@@ -12,6 +12,7 @@ Wiązkę i złącze ECU projektujemy od nowa (SYS-045), według potrzebnych funk
 | --- | --- | --- | --- |
 | Zasilanie HMI | Sterowane wyjście zasilania z ECU do HMI | SYS-064, 065, 066 | W normalnym śnie wyjście pozostaje włączone. Kontrolowane odłączenie jako ostateczność przy awarii lub zdefiniowanych ograniczeniach. Podtrzymanie stanu wyjścia podczas snu ECU, pobór toru w obu stanach, zabezpieczenia i wybudzanie przyciskami po odłączeniu do projektu. |
 | Zapłon CDI i indukcyjny TCI/IDI | Jeden niezależnie sterowany kanał ECU; realizacja otwarta | SYS-001, 002, 015, 067, 068 | Cewki/moduły referencyjne i zgodność potwierdzana analizą/testami; sposób zasilania, energia, prądy, czasy i interfejs sterowania oraz granica integracji stopni mocy. Liczba pinów i elementów mocy nie wynika wprost z liczby kanałów. |
+| Położenie/prędkość wału | Wejście ECU: czujnik VR albo Hall z wyjściem cyfrowym | SYS-001, 069 | Modele i interfejsy czujników, zasilanie, amplitudy, polaryzacja, progi, filtracja, układy znaczników i odniesienie do GMP; zakres od kopania/rozruchu do maksymalnych obrotów. Zgodność potwierdzana analizą i testami. |
 | Wtrysk paliwa | Wyjścia ECU; aktywne w wariantach wtryskowych | SYS-012, 015 | Liczba wtryskiwaczy działających jednocześnie, typy, prądy, czasy i sposób sterowania. |
 | Układ pompy paliwa | Sterowanie ECU; zakres toru mocy otwarty | SYS-012, 015 | Pompy referencyjne, prądy robocze/rozruchowe, sposób wyłączania i diagnostyka. |
 | Elektroniczny zawór wydechowy 2T | Sterowanie ECU i ewentualne wejścia zwrotne | SYS-034 | Typ napędu, zasilanie, interfejs, zakres ruchu i sygnały położenia. |
@@ -49,7 +50,6 @@ Poniższe pozycje nie są nowymi zatwierdzonymi wymaganiami właściciela.
 
 | Tor | Cel analizy | Do określenia |
 | --- | --- | --- |
-| Położenie/prędkość wału | Podstawa synchronizacji zapłonu i wtrysku | Układy znaczników, typy czujników, amplitudy, polaryzacja, zakres obrotów. |
 | Faza cyklu 4T | Ocena potrzeby dodatkowego sygnału synchronizacji | Strategia sterowania i źródło fazy; nie zakładamy obowiązkowego czujnika wałka. |
 | Inne zastosowania temperatury silnika | Ocena kompensacji i funkcji ochronnych poza uzgodnionym sterowaniem wentylatorem | Potrzebne funkcje i kryteria do ustalenia. Pomiar płynu i sterowanie wentylatorem są już wymagane według SYS-043/044. |
 | Ciśnienia wymagane przez wybrane strategie wtrysku | Ustalenie kompletnego zestawu sygnałów | Potrzeba MAP/ciśnienia skrzyni korbowej i interfejsy dla konkretnych jednostek. |
