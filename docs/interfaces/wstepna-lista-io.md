@@ -67,4 +67,4 @@ Poniższe pozycje nie są nowymi zatwierdzonymi wymaganiami właściciela.
 - Brak potwierdzenia HMI: ograniczone oczekiwanie/próby, awaryjne odłączenie części aktywnej z wyjścia zasilania ECU i dopuszczenie snu ECU (SYS-064/065). Tor wybudzania przyciskami musi działać także przy tym odłączeniu; szczegółowy sposób realizacji pozostaje do projektu.
 - Dostęp debuggera i odzyskiwanie urządzeń: punkty serwisowe do określenia, niezależnie od standardowego kabla użytkownika.
 
-Poza zakresem: dozownik oleju 2T, ride-by-wire, quickshifter, wejście stopki bocznej oraz zintegrowane tory EGT/lambda. Ograniczenia i warunki smarowania 2T pozostają zgodne z wymaganiami systemu.
+Poza zakresem: dozownik oleju 2T, ride-by-wire, quickshifter, kontrola trakcji (SYS-072), wejście stopki bocznej oraz zintegrowane tory EGT/lambda. Ograniczenia i warunki smarowania 2T pozostają zgodne z wymaganiami systemu.
