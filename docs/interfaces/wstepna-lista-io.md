@@ -26,7 +26,7 @@ Wiązkę i złącze ECU projektujemy od nowa (SYS-045), według potrzebnych funk
 | Ciśnienie oleju obecne/brak | Wejście binarne ECU | SYS-029 | Polaryzacja, poziomy, czujnik/wyłącznik i diagnostyka przewodów. |
 | Sprzęgło | Opcjonalny sygnał do ECU; dane i wskazania, bez blokady rozrusznika | SYS-041 | Rodzaj przełącznika/sygnału i parametry elektryczne. |
 | Położenie poszczególnych biegów | Opcjonalny czujnik do ECU; dane i wskazania, bez blokady rozrusznika | SYS-041 | Typ interfejsu, liczba pozycji, sygnały i kalibracja. |
-| Światła przednie i tylne pozycyjne | Wyjścia ECU | SYS-004, 050 | Po utracie HMI/CAN zachowanie ostatniego stanu przy działających zabezpieczeniach, w bieżącej sesji ECU. Podział funkcji i kanałów, odbiorniki, prądy, połączenia oraz stany po restarcie do określenia. |
+| Światła przednie i tylne pozycyjne | Wyjścia ECU | SYS-004, 050, 081 | Po utracie HMI/CAN zachowanie ostatniego stanu w bieżącej pracy ECU, przy działających zabezpieczeniach. Przed prawidłowym snem wyłączenie; po wybudzeniu ze zgaszonym silnikiem pozostają wyłączone do polecenia HMI. Podział kanałów, odbiorniki, prądy, połączenia, automatyzacja po rozruchu i stany po restarcie do określenia. |
 | Hamulec przedni | Osobne przewodowe wejście ECU | SYS-051 | Wyłącznik i jego interfejs, poziomy, polaryzacja, filtracja oraz diagnostyka. Działanie bez HMI/CAN. |
 | Hamulec tylny | Osobne przewodowe wejście ECU | SYS-051 | Wyłącznik i jego interfejs, poziomy, polaryzacja, filtracja oraz diagnostyka. Odczyt rozróżniany od hamulca przedniego. |
 | Światło hamowania | Wyjście ECU; załączane po użyciu któregokolwiek hamulca | SYS-004, 051 | Działanie bez HMI/CAN. Odbiornik, prąd, połączenia, zabezpieczenia i reakcje na usterki do określenia. |

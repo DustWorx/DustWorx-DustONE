@@ -20,6 +20,8 @@ W pytaniu 72 z 2026-10-25 właściciel wskazał pozostawienie zasilania HMI wł�
 
 W odpowiedzi na pytanie 83 z 2026-11-01 właściciel zatwierdził wybudzanie ECU po wykryciu obrotów przedniego koła i naliczanie ODO także podczas toczenia/pchania przy zgaszonym silniku ([SYS-075/079](../01-zakres-systemu.md)). W odpowiedzi A na pytanie 84 tego samego dnia potwierdził, że ECU wybudza także HMI, a naliczanie drogi nie czeka na jego uruchomienie (SYS-080). Realizacja i czasy pozostają do projektu.
 
+W odpowiedzi A na pytanie 85 z 2026-11-01 właściciel zatwierdził wyłączenie świateł przednich i tylnych pozycyjnych przed prawidłowym uśpieniem. Po wybudzeniu ze zgaszonym silnikiem pozostają wyłączone do polecenia z HMI (SYS-081). Automatyczne przywracanie stanu sprzed snu nie zostało przyjęte. Przypadki i zakres prób opisuje [sekwencja usypiania](../architecture/usypianie-ecu-hmi.md).
+
 | Zdarzenie | Wymagane wybudzenie | Uwagi |
 | --- | --- | --- |
 | Naciśnięcie przewodowego START | ECU i HMI | Priorytet gotowości ECU; rozruch niezależny od HMI, dalsza obsługa według SYS-048/049. |

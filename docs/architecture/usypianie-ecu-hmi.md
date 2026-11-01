@@ -6,6 +6,8 @@ Data: 2026-10-25. Status: uzgodniony normalny przebieg ze stale włączonym zasi
 
 ECU jest koordynatorem. Przy zgaszonym silniku i odłączonym PC oczekuje na upływ konfigurowalnego czasu bezczynności i zakończenie wymaganych zadań, w tym obsługi wentylatora. HMI pozostaje aktywne do polecenia ECU.
 
+Przed prawidłowym wejściem ECU w sen światła przednie i tylne pozycyjne są wyłączane. Po wybudzeniu ze zgaszonym silnikiem pozostają wyłączone do przyjęcia polecenia włączenia z HMI, także przy wybudzeniu ruchem koła; nie wracają automatycznie do stanu sprzed snu (SYS-081, odpowiedź A na pytanie 85 z 2026-11-01). Zachowanie po rozpoczęciu pracy silnika, resecie i zaniku zasilania wymaga osobnych ustaleń.
+
 ```mermaid
 sequenceDiagram
     participant ECU
@@ -52,6 +54,8 @@ Formaty i identyfikatory ramek, oznaczenie bieżącej próby, czasy odpowiedzi i
 [Porównanie timeoutu, resetu i kontroli zasilania](brak-potwierdzenia-uspienia-hmi.md) zachowuje uzasadnienie wyboru i rozważone alternatywy.
 
 ## Proponowana weryfikacja
+
+Dla SYS-081 rozpocząć prawidłową sekwencję z wcześniej włączonymi, a następnie wyłączonymi światłami. Potwierdzić wyłączenie wyjść przed wejściem ECU w sen i brak automatycznego przywrócenia po wybudzeniu przy zgaszonym silniku. Powtórzyć dla wymaganych źródeł wybudzenia, w tym przedniego koła, oraz przy opóźnionym uruchomieniu HMI. Nowe polecenie z HMI ma umożliwić włączenie świateł. Obsługę zapisanych żądań i nowej aktywności podczas usypiania powiązać z przyszłą specyfikacją protokołu. Stan świateł po nieudanej sekwencji, resecie lub zaniku zasilania pozostaje osobnym tematem.
 
 Zarejestrować poprawny przebieg polecenia i potwierdzenia, zakończenie nadawania HMI oraz kolejność rzeczywistych przejść w stan niskiego poboru. Potwierdzić utrzymanie włączonego wyjścia zasilania HMI podczas snu ECU i zmierzyć pobór obu urządzeń. Sprawdzić odnawianie bezczynności po próbach START/kopniakiem i interakcji z HMI oraz blokady podczas pracy silnika, obsługi wentylatora, zapisów pamięci i połączenia z PC.
 
