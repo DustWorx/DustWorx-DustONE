@@ -82,6 +82,7 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-066 | Po poprawnej sekwencji usypiania wyjście zasilania HMI z ECU pozostaje włączone, a ECU i HMI przechodzą w swoje stany niskiego poboru. Kontrolowane odłączenie zasilania HMI jest ostatecznym środkiem przy awarii albo wynika z jawnie zdefiniowanej polityki ograniczeń dla HMI; nie jest zwykłym etapem usypiania. Kryteria takiej polityki oraz parametry stanów niskiego poboru pozostają do określenia. |
 | SYS-067 | Platforma ECU obsługuje zapłon pojemnościowy CDI oraz indukcyjny TCI/IDI. Zgodność konkretnych cewek i torów sterowania wymaga analizy i testów. Liczbę kanałów określa SYS-068; realizacja stopni mocy pozostaje do określenia. |
 | SYS-068 | ECU ma jeden niezależnie sterowany kanał zapłonu dla silnika jednocylindrowego. Kanał pracuje z wybranym dla danego silnika typem zapłonu w zakresie SYS-067. Obsługa dwóch niezależnie sterowanych kanałów nie jest objęta zakresem. |
+| SYS-069 | Wejście synchronizacji wału korbowego ECU obsługuje czujniki indukcyjne VR oraz czujniki Halla z wyjściem cyfrowym na wspólnej PCB. Parametry elektryczne, zasilanie i zgodność konkretnych czujników wymagają określenia oraz potwierdzenia przez analizę i testy. |
 
 ## 3. Podział odpowiedzialności
 
@@ -100,6 +101,10 @@ Propozycje do uwzględnienia w wymaganiach szczegółowych:
 ### Zakres zapłonu — ustalenie właściciela z 2026-11-01
 
 W odpowiedzi na pytanie 73 właściciel wybrał obsługę CDI oraz zapłonu indukcyjnego TCI/IDI, z potwierdzeniem zgodności konkretnych cewek przez analizę i testy (SYS-067). [ADR-004](decisions/adr-004-zaplon-cdi-indukcyjny.md) zapisuje zakres decyzji, otwarte parametry i plan weryfikacji. W odpowiedzi na pytanie 74 tego samego dnia właściciel wybrał jeden niezależny kanał zapłonu, z priorytetem kompaktowości ECU (SYS-068). Integracja stopni mocy pozostaje otwarta. Kanał oznacza niezależnie sterowany tor zapłonu; liczba jego fizycznych wyprowadzeń i elementów mocy wynika z realizacji.
+
+### Synchronizacja wału — ustalenie właściciela z 2026-11-01
+
+W odpowiedzi na pytanie 75 właściciel wybrał obsługę czujników wału VR oraz Halla z wyjściem cyfrowym na wspólnej PCB (SYS-069). [ADR-005](decisions/adr-005-interfejsy-synchronizacji.md) określa zakres decyzji, otwarte dane i proponowaną weryfikację. Decyzja nie określa dodatkowego wejścia fazy 4T ani obsługiwanych układów znaczników.
 
 ### Samodzielność ECU — ustalenie właściciela z 2026-10-25
 
@@ -279,7 +284,7 @@ Do ustalenia: minimalne napięcie i dostępny prąd pod obciążeniem, chemia i 
 | Przepustnica | Mechaniczna, poruszana linką; odczyt TPS zależnie od wyposażenia (SYS-038). Ride-by-wire poza zakresem. Do określenia: parametry, kalibracja i diagnostyka TPS. Gaźnik bez TPS obsługiwany według SYS-014. |
 | Sprzęgło i położenie biegu | Opcjonalne wejścia do danych i wskazań według SYS-041, bez blokad rozrusznika zależnych od tych sygnałów; czujnik biegu ma rozróżniać poszczególne biegi, nie tylko luz. Stopka boczna poza zakresem. Do określenia: czujniki referencyjne, interfejsy, kalibracja, diagnostyka i szczegóły prezentacji danych. |
 | Wykrywanie przewrócenia | Automatyczne wyłączenie silnika według SYS-039; ponowny rozruch po postawieniu motocykla bez cyklu zasilania według SYS-040. Do określenia: tor pomiarowy, lokalizacja, kryteria i czasy detekcji, sposób wyłączenia silnika, diagnostyka oraz szczegółowe warunki odblokowania. |
-| Synchronizacja | Czujniki wału i ewentualnie wałka, ich sygnały oraz układy znaczników. |
+| Synchronizacja | Wał: obsługa VR oraz Halla z wyjściem cyfrowym według SYS-069. Do określenia: parametry i modele czujników, układy znaczników i odniesienie do GMP, dekodery oraz dodatkowy sygnał fazy 4T. |
 | Układ paliwowy | Rodzaj układu wtryskowego, liczba i parametry wtryskiwaczy, sterowanie pompą paliwa. Dla 2T warunek pracy na mieszance według SYS-033; konwersja TPI wymaga osobnej oceny. |
 | Smarowanie 2T | Pompa dozująca olej wyłączona z ECU (SYS-032). Montaż po przystosowaniu silnika do mieszanki (SYS-033); sposób i walidacja konwersji TPI pozostają otwarte. |
 | Zawór wydechowy 2T | Sterowanie elektronicznym power valve wymagane według SYS-034. Do określenia: typ napędu i interfejs, parametry zasilania i sterowania, sygnały położenia, kalibracja, diagnostyka oraz zachowanie przy usterce. |
