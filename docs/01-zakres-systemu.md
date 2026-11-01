@@ -86,6 +86,7 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-070 | PCB ECU zawiera dodatkowe, odrębne od wejścia wału wejście fazy silnika 4T dla czujnika Halla z wyjściem cyfrowym. Czujnik jest opcjonalny w konfiguracjach niewykorzystujących tego sygnału. Wejście fazy nie obsługuje VR. Parametry elektryczne i zgodność konkretnych czujników pozostają do określenia. |
 | SYS-071 | ECU obsługuje elektroniczną regulację powietrza biegu jałowego IAC z napędem krokowym dla wybranych modeli enduro 4T z przepustnicą na linkę. Zgodne modele i parametry napędów wymagają potwierdzenia przed doborem elektroniki. Konfiguracje niewykorzystujące IAC pracują bez podłączonego napędu. |
 | SYS-072 | Funkcja kontroli trakcji (TC) pozostaje poza zakresem DustONE. ECU nie realizuje algorytmu kontroli poślizgu koła napędzanego. |
+| SYS-073 | ECU umożliwia podłączenie opcjonalnego czujnika rezerwy paliwa, odczytuje jego stan i przekazuje dane do ostrzeżenia na HMI. Konfiguracje bez czujnika działają bez tej funkcji. Zgodne czujniki, ich zasilanie i interfejs elektryczny wymagają potwierdzenia. |
 
 ## 3. Podział odpowiedzialności
 
@@ -116,6 +117,12 @@ Po sprawdzeniu wyposażenia Beta RR 4T EFI 2016 właściciel w odpowiedzi na pop
 ### Kontrola trakcji — wyłączenie z zakresu z 2026-11-01
 
 Po przedstawieniu potwierdzonego zastosowania opcjonalnej TC w KTM EXC-F MY2024 właściciel w odpowiedzi na pytanie 78 wyłączył kontrolę trakcji z DustONE (SYS-072). Nie planujemy dedykowanych zasobów ani funkcji sterowania TC. Metoda weryfikacji: przegląd zakresu, architektury i późniejszej implementacji pod kątem tego wyłączenia. Pozostałe uzgodnione pomiary i funkcje sterowania zachowują swoje wymagania.
+
+### Sygnalizacja rezerwy paliwa — ustalenie właściciela z 2026-11-01
+
+Po przedstawieniu potwierdzonego przykładu Beta RR 4T EFI MY2016 właściciel w odpowiedzi na pytanie 79 przyjął opcjonalną obsługę czujnika rezerwy przez ECU i ostrzeżenie na HMI (SYS-073). Funkcja dotyczy stanu rezerwy; nie ustalono ciągłego pomiaru ilości paliwa. Rodzaj czujnika, ewentualne pobudzenie, tor wejściowy, filtracja/histereza, warunki ostrzegania i diagnostyka pozostają do projektu. Informacja użytkowa o rezerwie nie przesądza o typie wejścia sprzętowego.
+
+Proponowana weryfikacja: dla zgodnego czujnika sprawdzić oba stany i ostrzeżenie na HMI, konfigurację bez czujnika oraz odróżnianie usterek toru od prawidłowej informacji o rezerwie. Dla wybranego zbiornika i czujnika ocenić wpływ przechyłów i ruchu paliwa. Kryteria i procedury ustalić po charakterystyce interfejsu; prób nie wykonano.
 
 ### Samodzielność ECU — ustalenie właściciela z 2026-10-25
 
