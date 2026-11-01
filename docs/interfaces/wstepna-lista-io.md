@@ -22,6 +22,7 @@ Wiązkę i złącze ECU projektujemy od nowa (SYS-045), według potrzebnych funk
 | IAT | Wejście ECU | SYS-031 | Czujniki referencyjne, charakterystyki i sposób podłączenia. |
 | Temperatura płynu chłodzącego | Wejście pomiarowe ECU; dane do HMI | SYS-044 | Czujniki OEM lub dodatkowe, charakterystyki, zakres, dokładność i montaż. Sam termowłącznik nie zapewnia pomiaru wartości. |
 | Ciśnienie paliwa | Wejście pomiarowe ECU | SYS-029 | Zakres ciśnienia, sygnał, zasilanie i wymagana dokładność. |
+| Czujnik rezerwy paliwa | Opcjonalny tor odczytu ECU; stan do HMI | SYS-073 | Zgodne modele, rodzaj sygnału, zasilanie/ewentualne pobudzenie, pomiar, filtracja i diagnostyka do określenia. Odróżnić stan rezerwy, usterkę i konfigurację bez czujnika; nie zakładać zwykłego wejścia 0/1 bez analizy czujnika. |
 | Ciśnienie oleju obecne/brak | Wejście binarne ECU | SYS-029 | Polaryzacja, poziomy, czujnik/wyłącznik i diagnostyka przewodów. |
 | Sprzęgło | Opcjonalny sygnał do ECU; dane i wskazania, bez blokady rozrusznika | SYS-041 | Rodzaj przełącznika/sygnału i parametry elektryczne. |
 | Położenie poszczególnych biegów | Opcjonalny czujnik do ECU; dane i wskazania, bez blokady rozrusznika | SYS-041 | Typ interfejsu, liczba pozycji, sygnały i kalibracja. |
