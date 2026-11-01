@@ -13,6 +13,7 @@ Właściciel projektu wskazał `DustWorx/DustWorx-DustONE` jako repozytorium dok
 - [ADR-005 — interfejsy synchronizacji silnika](adr-005-interfejsy-synchronizacji.md)
 - [ADR-006 — IAC z napędem krokowym w enduro 4T](adr-006-iac-naped-krokowy.md)
 - [ADR-007 — chronione całkowite motogodziny i ODO](adr-007-chronione-liczniki.md)
+- [ADR-008 — dostęp do firmware ECU w użytkowaniu i rozwoju](adr-008-dostep-do-firmware-ecu.md)
 
 ## Kolejne decyzje
 
