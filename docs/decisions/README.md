@@ -12,6 +12,7 @@ Właściciel projektu wskazał `DustWorx/DustWorx-DustONE` jako repozytorium dok
 - [ADR-004 — zakres zapłonu CDI i indukcyjnego](adr-004-zaplon-cdi-indukcyjny.md)
 - [ADR-005 — interfejsy synchronizacji silnika](adr-005-interfejsy-synchronizacji.md)
 - [ADR-006 — IAC z napędem krokowym w enduro 4T](adr-006-iac-naped-krokowy.md)
+- [ADR-007 — chronione całkowite motogodziny i ODO](adr-007-chronione-liczniki.md)
 
 ## Kolejne decyzje
 

@@ -40,7 +40,7 @@ Wiązkę i złącze ECU projektujemy od nowa (SYS-045), według potrzebnych funk
 | Przyciski obsługi HMI i przełączniki akcesoriów | Wejścia HMI; przyciski obsługi wybudzają HMI i ECU | SYS-016, 017, 055 | Lista elementów i funkcji, styki, poziomy oraz przekazanie wybudzenia do ECU. Żądania akcesoriów po CAN; START i STOP mają osobne tory według SYS-048/037. |
 | Ręczny STOP | Osobny obwód przewodowy, niezależny od HMI/CAN | SYS-037 | Sposób odcięcia, interfejs i reakcje na zwarcie/przerwę. |
 | Wykrywanie przewrócenia | Lokalizacja i tor pomiarowy otwarte | SYS-039, 040 | Pomiar, montaż, kryteria, czasy reakcji i odblokowania. |
-| Prędkość motocykla | Źródło i miejsce podłączenia otwarte | SYS-018 | Czujnik lub inne źródło, sygnał, kalibracja i wymagana dokładność. |
+| Prędkość motocykla i naliczanie ODO | Źródło i miejsce podłączenia otwarte | SYS-018, 075, 076 | Czujnik lub inne źródło, sygnał, kalibracja i dokładność. Parametry wpływające na ODO uwzględnić w polityce ochrony liczników; syntetyczne dane z narzędzi nie mogą stanowić niekontrolowanej ścieżki zmiany wartości. |
 | Barometr i temperatura ECU | Pomiary na PCB ECU | SYS-030 | Zakres, dokładność, interfejsy wewnętrzne i obudowa; nie są zewnętrznymi wejściami czujników. |
 
 Preferowany kierunek wyjść akcesoriów: [SmartFET-y na PCB](../architecture/wyjscia-akcesoriow-porownanie.md). Nie oznacza wyboru high-side/low-side dla wszystkich odbiorników ani potwierdzenia ich parametrów.
