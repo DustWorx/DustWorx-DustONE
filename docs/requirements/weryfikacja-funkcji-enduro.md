@@ -28,8 +28,14 @@ Rozróżniamy wyposażenie konkretnego modelu, docelową funkcję wskazaną prze
 
 Po sprawdzeniu przykładów właściciel w odpowiedzi na poprawione pytanie 77 z 2026-11-01 przyjął IAC z napędem krokowym dla potwierdzonych modeli enduro. Zakres zapisuje SYS-071 w [PR #11](https://github.com/DustWorx/DustWorx-DustONE/pull/11). Przed wyborem elektroniki potrzebne są parametry uzwojeń/sterowania, kalibracja, wymagane zasoby, zachowanie przy usterce i plan prób. Nie przyjęto obsługi wszystkich zaworów IAC ani napędów krokowych.
 
-## Kolejny temat do decyzji — kontrola trakcji
+## Potwierdzony przykład, funkcja wyłączona — kontrola trakcji
 
 KTM potwierdza opcjonalną kontrolę trakcji w rodzinie EXC-F MY2024: 250, 350, 450 i 500. Funkcja jest obsługiwana opcjonalnym przełącznikiem wyboru map. [Komunikat producenta z 2023-05-24 o MY2024](https://press.ktm.com/news-challenge-accepted-the-2024-ktm-exc-range-is-here-to-redefine-limits?id=179901&l=uk&menueid=5904).
 
-To potwierdzenie występowania w enduro, nie decyzja o dodaniu do DustONE. Ewentualny algorytm, wymagane sygnały, konfiguracje, ograniczenia i weryfikacja wymagają osobnej analizy. Nie przyjęto potrzeby dodatkowych czujników prędkości kół ani rozszerzenia o ride-by-wire. Quickshifter pozostaje poza zakresem zgodnie z SYS-042.
+W odpowiedzi na pytanie 78 z 2026-11-01 właściciel wyłączył kontrolę trakcji z zakresu DustONE. Wyłączenie zapisuje SYS-072 w [PR #11](https://github.com/DustWorx/DustWorx-DustONE/pull/11). Potwierdzone wyposażenie OEM nie oznacza automatycznego włączenia funkcji do projektu. Quickshifter pozostaje poza zakresem zgodnie z SYS-042; pozostałe uzgodnione pomiary zachowują swoje wymagania.
+
+## Kolejny temat do decyzji — sygnalizacja rezerwy paliwa
+
+Beta RR 350/390/430/480 EFI 2016 ma kontrolkę rezerwy paliwa: [instrukcja, s. 20 oraz s. 25, punkt 7.3](https://betausa.com/content/SUPPORT_PDF%27s/2016%20RR%204%20stroke%20owners%20manual_0.pdf). [Schemat Beta USA, strony PDF 8–9](https://betausa.com/content/WIRING%20DIAGRAM%204T%202%2024%20new.pdf) wskazuje czujnik rezerwy w poz. 31 i kontrolkę w poz. 17.
+
+To podstawa do pytania o opcjonalny odczyt fabrycznego czujnika rezerwy przez ECU i ostrzeżenie na HMI. Funkcja nie została jeszcze przyjęta. Interfejs elektryczny czujnika, ewentualne pobudzenie, tor pomiarowy, filtracja i diagnostyka wymagają sprawdzenia; z samej binarnej informacji użytkowej o rezerwie nie wynika typ wejścia sprzętowego.
