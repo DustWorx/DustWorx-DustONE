@@ -40,8 +40,8 @@ Beta RR 350/390/430/480 EFI 2016 ma kontrolkę rezerwy paliwa: [instrukcja, s. 2
 
 W odpowiedzi na pytanie 79 z 2026-11-01 właściciel przyjął opcjonalny odczyt czujnika rezerwy przez ECU i ostrzeżenie na HMI. Konfiguracje bez czujnika działają bez tej funkcji. Wymaganie SYS-073 zapisano w [PR #11](https://github.com/DustWorx/DustWorx-DustONE/pull/11). Interfejs elektryczny czujnika, ewentualne pobudzenie, tor pomiarowy, filtracja i diagnostyka wymagają sprawdzenia; z samej binarnej informacji użytkowej o rezerwie nie wynika typ wejścia sprzętowego.
 
-## Kolejny temat do decyzji — liczniki godzin
+## Przyjęte liczniki całkowite — motogodziny i ODO
 
 Instrukcja Beta RR 125/200/250/300 2T Standard/Race MY2020 wymienia łączny licznik godzin oraz dwa dodatkowe, kasowalne liczniki A/B: [dokument producenta, s. 25 oraz 28–29](https://betausa.com/content/SUPPORT_PDF%27s/2020%20Beta%20RR%202-Stroke%20Owners%20Manual.pdf).
 
-Dla DustONE propozycją do decyzji jest liczenie czasu potwierdzonej pracy silnika w ECU, trwałe przechowywanie i udostępnianie w HMI oraz Windows, z wariantem dodatkowych liczników A/B. Opis fabrycznego wyświetlacza potwierdza funkcję w enduro; nie określa algorytmu naliczania DustONE. Kryteria pracy silnika, dokładność, utrwalanie i obsługa serwisowa wymagają specyfikacji. Zakres liczników nie został jeszcze przyjęty.
+W odpowiedzi na pytanie 80 i doprecyzowaniu z 2026-11-01 właściciel wybrał całkowite motogodziny oraz ODO, oba odporne na manipulację i bez ustawiania, korekty lub kasowania przez użytkownika końcowego. Zakres zapisują SYS-074–076 i ADR-007 w [PR #11](https://github.com/DustWorx/DustWorx-DustONE/pull/11). Liczniki pomocnicze A/B nie wchodzą do ustalenia. To również jawne wymaganie właściciela, niezależne od sposobu działania fabrycznego wyświetlacza. Kryteria naliczania, dokładność, trwałość, mechanizmy ochrony oraz inicjalizacja/przenoszenie wymagają projektu.
