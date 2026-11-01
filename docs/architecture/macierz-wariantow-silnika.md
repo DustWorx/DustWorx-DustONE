@@ -16,7 +16,7 @@ Warianty 2T podlegają SYS-032/033 i [ADR-001](../decisions/adr-001-smarowanie-2
 ## Dane potrzebne przed zamknięciem architektury
 
 - Wybrać konkretne modele/roczniki i dokumenty referencyjne reprezentujące powyższe warianty. Beta nie jest jedyną podstawą do określenia wspólnego sprzętu.
-- Ustalić maksymalne obroty, układy znaczników i typy sygnałów synchronizacji; ocenić potrzebę dodatkowego sygnału fazy 4T.
+- Wejście wału obsługuje VR oraz Hall z wyjściem cyfrowym według SYS-069 i [ADR-005](../decisions/adr-005-interfejsy-synchronizacji.md). Ustalić parametry i modele czujników, maksymalne obroty, układy znaczników i odniesienie do GMP; dodatkowy sygnał fazy 4T pozostaje do uzgodnienia.
 - Obsługa CDI oraz zapłonu indukcyjnego TCI/IDI jest wymagana według SYS-067 i [ADR-004](../decisions/adr-004-zaplon-cdi-indukcyjny.md). Liczba niezależnych kanałów zapłonu: jeden według SYS-068. Zidentyfikować cewki/moduły referencyjne, parametry i granicę między ECU i ewentualnym zewnętrznym stopniem mocy. Nazwa wariantu silnika nie rozstrzyga interfejsu elektrycznego; zgodność wymaga analizy i testów.
 - Ustalić liczbę, typy i równoczesne działanie wtryskiwaczy; parametry pompy i power valve. Nie sumować automatycznie kanałów alternatywnych wariantów.
 - Ustalić wymagane czujniki i ich zakresy, zasilanie, dokładność, zabezpieczenia oraz diagnostykę. Szczegółowe braki: [lista I/O](../interfaces/wstepna-lista-io.md).
