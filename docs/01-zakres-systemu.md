@@ -85,6 +85,7 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-069 | Wejście synchronizacji wału korbowego ECU obsługuje czujniki indukcyjne VR oraz czujniki Halla z wyjściem cyfrowym na wspólnej PCB. Parametry elektryczne, zasilanie i zgodność konkretnych czujników wymagają określenia oraz potwierdzenia przez analizę i testy. |
 | SYS-070 | PCB ECU zawiera dodatkowe, odrębne od wejścia wału wejście fazy silnika 4T dla czujnika Halla z wyjściem cyfrowym. Czujnik jest opcjonalny w konfiguracjach niewykorzystujących tego sygnału. Wejście fazy nie obsługuje VR. Parametry elektryczne i zgodność konkretnych czujników pozostają do określenia. |
 | SYS-071 | ECU obsługuje elektroniczną regulację powietrza biegu jałowego IAC z napędem krokowym dla wybranych modeli enduro 4T z przepustnicą na linkę. Zgodne modele i parametry napędów wymagają potwierdzenia przed doborem elektroniki. Konfiguracje niewykorzystujące IAC pracują bez podłączonego napędu. |
+| SYS-072 | Funkcja kontroli trakcji (TC) pozostaje poza zakresem DustONE. ECU nie realizuje algorytmu kontroli poślizgu koła napędzanego. |
 
 ## 3. Podział odpowiedzialności
 
@@ -111,6 +112,10 @@ W odpowiedzi na pytanie 75 właściciel wybrał obsługę czujników wału VR or
 ### Regulacja powietrza biegu jałowego IAC — ustalenie właściciela z 2026-11-01
 
 Po sprawdzeniu wyposażenia Beta RR 4T EFI 2016 właściciel w odpowiedzi na poprawione pytanie 77 wybrał obsługę IAC z napędem krokowym dla potwierdzonych modeli enduro (SYS-071). [ADR-006](decisions/adr-006-iac-naped-krokowy.md) zapisuje podstawę, zakres i proponowaną weryfikację. Modele i parametry napędów oraz tor sterowania pozostają do potwierdzenia; nie przyjęto obsługi wszystkich odmian IAC. Sterowanie główną przepustnicą pozostaje mechaniczne według SYS-038.
+
+### Kontrola trakcji — wyłączenie z zakresu z 2026-11-01
+
+Po przedstawieniu potwierdzonego zastosowania opcjonalnej TC w KTM EXC-F MY2024 właściciel w odpowiedzi na pytanie 78 wyłączył kontrolę trakcji z DustONE (SYS-072). Nie planujemy dedykowanych zasobów ani funkcji sterowania TC. Metoda weryfikacji: przegląd zakresu, architektury i późniejszej implementacji pod kątem tego wyłączenia. Pozostałe uzgodnione pomiary i funkcje sterowania zachowują swoje wymagania.
 
 ### Samodzielność ECU — ustalenie właściciela z 2026-10-25
 
