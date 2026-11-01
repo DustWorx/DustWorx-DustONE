@@ -1,6 +1,6 @@
 # Sprawdzanie funkcji w motocyklach enduro
 
-Data: 2026-11-01. Zasada pracy przyjęta przez właściciela; IAC z napędem krokowym zatwierdzone po analizie wyposażenia enduro, zgodność konkretnych napędów pozostaje do potwierdzenia.
+Data: 2026-11-01. Zasada pracy przyjęta przez właściciela. Statusy funkcji zapisano przy przykładach; zgodność konkretnych czujników i napędów z DustONE wymaga analizy oraz prób.
 
 ## Podstawa pytania
 
@@ -34,8 +34,14 @@ KTM potwierdza opcjonalną kontrolę trakcji w rodzinie EXC-F MY2024: 250, 350, 
 
 W odpowiedzi na pytanie 78 z 2026-11-01 właściciel wyłączył kontrolę trakcji z zakresu DustONE. Wyłączenie zapisuje SYS-072 w [PR #11](https://github.com/DustWorx/DustWorx-DustONE/pull/11). Potwierdzone wyposażenie OEM nie oznacza automatycznego włączenia funkcji do projektu. Quickshifter pozostaje poza zakresem zgodnie z SYS-042; pozostałe uzgodnione pomiary zachowują swoje wymagania.
 
-## Kolejny temat do decyzji — sygnalizacja rezerwy paliwa
+## Potwierdzony przykład, funkcja przyjęta — sygnalizacja rezerwy paliwa
 
 Beta RR 350/390/430/480 EFI 2016 ma kontrolkę rezerwy paliwa: [instrukcja, s. 20 oraz s. 25, punkt 7.3](https://betausa.com/content/SUPPORT_PDF%27s/2016%20RR%204%20stroke%20owners%20manual_0.pdf). [Schemat Beta USA, strony PDF 8–9](https://betausa.com/content/WIRING%20DIAGRAM%204T%202%2024%20new.pdf) wskazuje czujnik rezerwy w poz. 31 i kontrolkę w poz. 17.
 
-To podstawa do pytania o opcjonalny odczyt fabrycznego czujnika rezerwy przez ECU i ostrzeżenie na HMI. Funkcja nie została jeszcze przyjęta. Interfejs elektryczny czujnika, ewentualne pobudzenie, tor pomiarowy, filtracja i diagnostyka wymagają sprawdzenia; z samej binarnej informacji użytkowej o rezerwie nie wynika typ wejścia sprzętowego.
+W odpowiedzi na pytanie 79 z 2026-11-01 właściciel przyjął opcjonalny odczyt czujnika rezerwy przez ECU i ostrzeżenie na HMI. Konfiguracje bez czujnika działają bez tej funkcji. Wymaganie SYS-073 zapisano w [PR #11](https://github.com/DustWorx/DustWorx-DustONE/pull/11). Interfejs elektryczny czujnika, ewentualne pobudzenie, tor pomiarowy, filtracja i diagnostyka wymagają sprawdzenia; z samej binarnej informacji użytkowej o rezerwie nie wynika typ wejścia sprzętowego.
+
+## Kolejny temat do decyzji — liczniki godzin
+
+Instrukcja Beta RR 125/200/250/300 2T Standard/Race MY2020 wymienia łączny licznik godzin oraz dwa dodatkowe, kasowalne liczniki A/B: [dokument producenta, s. 25 oraz 28–29](https://betausa.com/content/SUPPORT_PDF%27s/2020%20Beta%20RR%202-Stroke%20Owners%20Manual.pdf).
+
+Dla DustONE propozycją do decyzji jest liczenie czasu potwierdzonej pracy silnika w ECU, trwałe przechowywanie i udostępnianie w HMI oraz Windows, z wariantem dodatkowych liczników A/B. Opis fabrycznego wyświetlacza potwierdza funkcję w enduro; nie określa algorytmu naliczania DustONE. Kryteria pracy silnika, dokładność, utrwalanie i obsługa serwisowa wymagają specyfikacji. Zakres liczników nie został jeszcze przyjęty.
