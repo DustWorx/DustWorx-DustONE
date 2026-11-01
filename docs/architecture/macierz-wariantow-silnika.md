@@ -11,7 +11,7 @@ Data: 2026-10-18. Status: roboczy podział zakresu, nie lista zatwierdzonych zgo
 | 2T, TPI, przepustnica na linkę | Cel interfejsów; model/rocznik i zgodność konwersji niepotwierdzone | Wtryskiwacze i pompa, ciśnienia/czujniki, zapłon, synchronizacja; osobno wykonalność smarowania mieszanką. |
 | 2T, TBI, przepustnica na linkę | Cel interfejsów; model/rocznik do wyboru | Wtryskiwacze, pompa, czujniki, zapłon i synchronizacja; napęd power valve dla jednostek z takim wyposażeniem. |
 
-Warianty 2T podlegają SYS-032/033 i [ADR-001](../decisions/adr-001-smarowanie-2t-mieszanka.md). Macierz nie potwierdza konwersji TPI przez sam demontaż dozownika. Ride-by-wire pozostaje poza zakresem.
+Warianty 2T podlegają SYS-032/033 i [ADR-001](../decisions/adr-001-smarowanie-2t-mieszanka.md). Macierz nie potwierdza konwersji TPI przez sam demontaż dozownika. Ride-by-wire oraz kontrola trakcji (SYS-072) pozostają poza zakresem.
 
 ## Dane potrzebne przed zamknięciem architektury
 
