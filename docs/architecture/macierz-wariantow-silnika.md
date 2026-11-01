@@ -20,7 +20,7 @@ Warianty 2T podlegają SYS-032/033 i [ADR-001](../decisions/adr-001-smarowanie-2
 - Obsługa CDI oraz zapłonu indukcyjnego TCI/IDI jest wymagana według SYS-067 i [ADR-004](../decisions/adr-004-zaplon-cdi-indukcyjny.md). Liczba niezależnych kanałów zapłonu: jeden według SYS-068. Zidentyfikować cewki/moduły referencyjne, parametry i granicę między ECU i ewentualnym zewnętrznym stopniem mocy. Nazwa wariantu silnika nie rozstrzyga interfejsu elektrycznego; zgodność wymaga analizy i testów.
 - Ustalić liczbę, typy i równoczesne działanie wtryskiwaczy; parametry pompy i power valve. Nie sumować automatycznie kanałów alternatywnych wariantów.
 - Dla IAC z napędem krokowym potwierdzić modele i parametry oraz zgodność według SYS-071 i [ADR-006](../decisions/adr-006-iac-naped-krokowy.md). Ocenić zasoby, kalibrację i pozycjonowanie, czas gotowości do rozruchu oraz wpływ na zarządzanie energią.
-- Ustalić wymagane czujniki i ich zakresy, zasilanie, dokładność, zabezpieczenia oraz diagnostykę. Szczegółowe braki: [lista I/O](../interfaces/wstepna-lista-io.md).
+- Ustalić wymagane czujniki i ich zakresy, zasilanie, dokładność, zabezpieczenia oraz diagnostykę, w tym opcjonalny czujnik rezerwy paliwa według SYS-073. Jego rodzaj i interfejs trzeba potwierdzić; stan rezerwy nie określa typu wejścia sprzętowego. Szczegółowe braki: [lista I/O](../interfaces/wstepna-lista-io.md).
 - Zamknąć zakres zasilania, warunki rozruchu i równoczesne obciążenia; oddzielnie ocenić kopniak przy osłabionym akumulatorze dla gaźnika i wtrysku.
 
 ## Weryfikacja
