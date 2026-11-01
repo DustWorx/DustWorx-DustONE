@@ -80,7 +80,8 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-064 | Zasilanie HMI jest wyprowadzone z ECU i kontrolowane przez ECU poprzez sterowany tor zasilania. Awaryjne odłączenie części aktywnej HMI działa niezależnie od aplikacji HMI i komunikacji CAN. Przy odłączonej części aktywnej trzeba zachować wybudzanie przyciskami HMI oraz pozostałe źródła wybudzania według SYS-054–056. Topologia toru zasilania i wybudzania oraz parametry elektryczne pozostają do projektu. |
 | SYS-065 | Gdy HMI nie potwierdzi polecenia uśpienia, ECU po ograniczonym oczekiwaniu i próbach awaryjnie odłącza zasilanie części aktywnej HMI, rejestruje problem i może zasnąć przy nadal spełnionych warunkach SYS-059. Awaryjne odłączenie jest rozróżniane od normalnej sekwencji potwierdzonej przez HMI. Czasy, liczba prób, ewentualny cykl odzyskania oraz warunki ponownego załączenia pozostają do określenia. |
 | SYS-066 | Po poprawnej sekwencji usypiania wyjście zasilania HMI z ECU pozostaje włączone, a ECU i HMI przechodzą w swoje stany niskiego poboru. Kontrolowane odłączenie zasilania HMI jest ostatecznym środkiem przy awarii albo wynika z jawnie zdefiniowanej polityki ograniczeń dla HMI; nie jest zwykłym etapem usypiania. Kryteria takiej polityki oraz parametry stanów niskiego poboru pozostają do określenia. |
-| SYS-067 | Platforma ECU obsługuje zapłon pojemnościowy CDI oraz indukcyjny TCI/IDI. Zgodność konkretnych cewek i torów sterowania wymaga analizy i testów. Liczba kanałów oraz realizacja stopni mocy pozostają do określenia. |
+| SYS-067 | Platforma ECU obsługuje zapłon pojemnościowy CDI oraz indukcyjny TCI/IDI. Zgodność konkretnych cewek i torów sterowania wymaga analizy i testów. Liczbę kanałów określa SYS-068; realizacja stopni mocy pozostaje do określenia. |
+| SYS-068 | ECU ma jeden niezależnie sterowany kanał zapłonu dla silnika jednocylindrowego. Kanał pracuje z wybranym dla danego silnika typem zapłonu w zakresie SYS-067. Obsługa dwóch niezależnie sterowanych kanałów nie jest objęta zakresem. |
 
 ## 3. Podział odpowiedzialności
 
@@ -98,7 +99,7 @@ Propozycje do uwzględnienia w wymaganiach szczegółowych:
 
 ### Zakres zapłonu — ustalenie właściciela z 2026-11-01
 
-W odpowiedzi na pytanie 73 właściciel wybrał obsługę CDI oraz zapłonu indukcyjnego TCI/IDI, z potwierdzeniem zgodności konkretnych cewek przez analizę i testy (SYS-067). [ADR-004](decisions/adr-004-zaplon-cdi-indukcyjny.md) zapisuje zakres decyzji, otwarte parametry i plan weryfikacji. Nie ustalono jeszcze liczby kanałów ani integracji stopni mocy.
+W odpowiedzi na pytanie 73 właściciel wybrał obsługę CDI oraz zapłonu indukcyjnego TCI/IDI, z potwierdzeniem zgodności konkretnych cewek przez analizę i testy (SYS-067). [ADR-004](decisions/adr-004-zaplon-cdi-indukcyjny.md) zapisuje zakres decyzji, otwarte parametry i plan weryfikacji. W odpowiedzi na pytanie 74 tego samego dnia właściciel wybrał jeden niezależny kanał zapłonu, z priorytetem kompaktowości ECU (SYS-068). Integracja stopni mocy pozostaje otwarta. Kanał oznacza niezależnie sterowany tor zapłonu; liczba jego fizycznych wyprowadzeń i elementów mocy wynika z realizacji.
 
 ### Samodzielność ECU — ustalenie właściciela z 2026-10-25
 
@@ -274,7 +275,7 @@ Do ustalenia: minimalne napięcie i dostępny prąd pod obciążeniem, chemia i 
 | Obszar | Do ustalenia |
 | --- | --- |
 | Silnik | Pierwszy motocykl testowy: Beta 300 RR Racing / Race Edition, 2015, wskazany przez właściciela. Według właściciela gaźnik, zapłon i instalacja są fabryczne. Do potwierdzenia podczas inwentaryzacji: parametry i stan osprzętu. Do ustalenia: maksymalne obroty oraz reprezentatywne jednostki 4T, TPI i TBI. Obsługa gaźnika z TPS i bez TPS oraz TPI/TBI według SYS-012, SYS-014 i SYS-015, z warunkami smarowania 2T według SYS-032 i SYS-033. |
-| Zapłon | Obsługa CDI oraz indukcyjnego TCI/IDI według SYS-067. Do określenia: liczba kanałów, cewki/moduły referencyjne, parametry i interfejsy oraz integracja stopni mocy. |
+| Zapłon | Jeden niezależny kanał według SYS-068, z obsługą CDI oraz indukcyjnego TCI/IDI według SYS-067. Do określenia: cewki/moduły referencyjne, parametry i interfejsy oraz integracja stopni mocy. |
 | Przepustnica | Mechaniczna, poruszana linką; odczyt TPS zależnie od wyposażenia (SYS-038). Ride-by-wire poza zakresem. Do określenia: parametry, kalibracja i diagnostyka TPS. Gaźnik bez TPS obsługiwany według SYS-014. |
 | Sprzęgło i położenie biegu | Opcjonalne wejścia do danych i wskazań według SYS-041, bez blokad rozrusznika zależnych od tych sygnałów; czujnik biegu ma rozróżniać poszczególne biegi, nie tylko luz. Stopka boczna poza zakresem. Do określenia: czujniki referencyjne, interfejsy, kalibracja, diagnostyka i szczegóły prezentacji danych. |
 | Wykrywanie przewrócenia | Automatyczne wyłączenie silnika według SYS-039; ponowny rozruch po postawieniu motocykla bez cyklu zasilania według SYS-040. Do określenia: tor pomiarowy, lokalizacja, kryteria i czasy detekcji, sposób wyłączenia silnika, diagnostyka oraz szczegółowe warunki odblokowania. |
