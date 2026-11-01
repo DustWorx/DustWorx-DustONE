@@ -1,6 +1,6 @@
 # Sprawdzanie funkcji w motocyklach enduro
 
-Data: 2026-11-01. Zasada pracy przyjęta przez właściciela; poniższa analiza IAC nie jest decyzją o dodaniu funkcji do ECU.
+Data: 2026-11-01. Zasada pracy przyjęta przez właściciela; IAC z napędem krokowym zatwierdzone po analizie wyposażenia enduro, zgodność konkretnych napędów pozostaje do potwierdzenia.
 
 ## Podstawa pytania
 
@@ -26,4 +26,10 @@ Rozróżniamy wyposażenie konkretnego modelu, docelową funkcję wskazaną prze
 - [Beta USA — schematy RR/Race 4T 2005–2024](https://betausa.com/content/WIRING%20DIAGRAM%204T%202%2024%20new.pdf), strony PDF 8–9: model 2015 350 / 2016–2017 350–480 oraz legenda poz. 46/47. To odniesienie do opublikowanego dokumentu, bez kopiowania oryginału do repozytorium.
 - [KTM — katalog przepustnicy 300 EXC Six Days 2023, pozycje 5/6](https://sparepartsfinder.ktm.com/ComponentGroupTemplate/PrintComponentGroupTemplate/55590?culture=en&modelidentifier=1002337401&tenantId=1).
 
-Pytanie 77 pozostaje otwarte. Właściciel poprosił o potwierdzenie zastosowania w enduro; nie zatwierdził ani nie wykluczył IAC. Ewentualny zakres musi odnosić się do potwierdzonych modeli i napędów. Przed wyborem elektroniki potrzebne są parametry uzwojeń/sterowania, kalibracja, wymagane zasoby, zachowanie przy usterce i plan prób. Nie przyjęto obsługi wszystkich zaworów IAC ani napędów krokowych.
+Po sprawdzeniu przykładów właściciel w odpowiedzi na poprawione pytanie 77 z 2026-11-01 przyjął IAC z napędem krokowym dla potwierdzonych modeli enduro. Zakres zapisuje SYS-071 w [PR #11](https://github.com/DustWorx/DustWorx-DustONE/pull/11). Przed wyborem elektroniki potrzebne są parametry uzwojeń/sterowania, kalibracja, wymagane zasoby, zachowanie przy usterce i plan prób. Nie przyjęto obsługi wszystkich zaworów IAC ani napędów krokowych.
+
+## Kolejny temat do decyzji — kontrola trakcji
+
+KTM potwierdza opcjonalną kontrolę trakcji w rodzinie EXC-F MY2024: 250, 350, 450 i 500. Funkcja jest obsługiwana opcjonalnym przełącznikiem wyboru map. [Komunikat producenta z 2023-05-24 o MY2024](https://press.ktm.com/news-challenge-accepted-the-2024-ktm-exc-range-is-here-to-redefine-limits?id=179901&l=uk&menueid=5904).
+
+To potwierdzenie występowania w enduro, nie decyzja o dodaniu do DustONE. Ewentualny algorytm, wymagane sygnały, konfiguracje, ograniczenia i weryfikacja wymagają osobnej analizy. Nie przyjęto potrzeby dodatkowych czujników prędkości kół ani rozszerzenia o ride-by-wire. Quickshifter pozostaje poza zakresem zgodnie z SYS-042.
