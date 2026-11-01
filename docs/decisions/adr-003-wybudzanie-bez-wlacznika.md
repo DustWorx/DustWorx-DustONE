@@ -18,7 +18,7 @@ Po porównaniu w pytaniu 71 z 2026-10-25 właściciel zatwierdził kontrolę zas
 
 W pytaniu 72 z 2026-10-25 właściciel wskazał pozostawienie zasilania HMI włączonego po poprawnej sekwencji. ECU i HMI mają pozostać w sleep. Kontrolowane odłączenie zasilania jest ostateczną opcją przy awarii lub wynika ze zdefiniowanych ograniczeń dla HMI (SYS-066); kryteria ograniczeń pozostają otwarte.
 
-W odpowiedzi na pytanie 83 z 2026-11-01 właściciel zatwierdził wybudzanie ECU po wykryciu obrotów przedniego koła i naliczanie ODO także podczas toczenia/pchania przy zgaszonym silniku ([SYS-075/079](../01-zakres-systemu.md)). Realizacja i wybudzanie HMI od koła pozostają do ustalenia.
+W odpowiedzi na pytanie 83 z 2026-11-01 właściciel zatwierdził wybudzanie ECU po wykryciu obrotów przedniego koła i naliczanie ODO także podczas toczenia/pchania przy zgaszonym silniku ([SYS-075/079](../01-zakres-systemu.md)). W odpowiedzi A na pytanie 84 tego samego dnia potwierdził, że ECU wybudza także HMI, a naliczanie drogi nie czeka na jego uruchomienie (SYS-080). Realizacja i czasy pozostają do projektu.
 
 | Zdarzenie | Wymagane wybudzenie | Uwagi |
 | --- | --- | --- |
@@ -26,7 +26,7 @@ W odpowiedzi na pytanie 83 z 2026-11-01 właściciel zatwierdził wybudzanie ECU
 | Rozruch kopniakiem | ECU i HMI | Priorytet gotowości ECU; detekcja, sekwencja i czasy wymagają projektu. Obowiązuje założenie podłączonego akumulatora z SYS-013 i zakresu systemu. |
 | Użycie przycisków obsługi HMI | HMI i ECU | Przyciski pozostają w HMI. |
 | Podłączenie komputera | ECU i HMI | Przy dostępnym zasilaniu 12 V według SYS-058; utrzymana blokada usypiania obu urządzeń przez czas połączenia. |
-| Wykrycie obrotów przedniego koła | ECU; wybudzanie HMI do ustalenia | Przy dostępnym zasilaniu, także ze zgaszonym silnikiem. Naliczanie ODO niezależne od HMI (SYS-075/079). |
+| Wykrycie obrotów przedniego koła | ECU i HMI | Przy dostępnym zasilaniu, także ze zgaszonym silnikiem. ECU wybudza HMI; naliczanie ODO nie czeka na jego gotowość (SYS-075/079/080). |
 
 ## Konsekwencje dla projektu
 
@@ -51,7 +51,7 @@ Brak potwierdzenia HMI: [porównanie i uzasadnienie wyboru kontroli zasilania z 
 
 ## Proponowana weryfikacja
 
-Z uśpienia sprawdzić osobno każde zdarzenie z tabeli; potwierdzić wybudzanie urządzeń zgodnie z jej zakresem. Dla przedniego koła sprawdzić wybudzenie ECU, naliczanie ODO przy zgaszonym silniku i niedostępnym HMI, początek ruchu, wolne toczenie oraz impulsy podczas usypiania; kryteria dokładności i czasu pozostają do określenia. Wybudzania HMI od koła jeszcze nie rozstrzygnięto. Dla START i kopniaka sprawdzić także rozruch przy niedostępnym HMI oraz opóźnionym jego uruchomieniu. Zmierzyć sekwencję zasilania, czasy wybudzenia i gotowości do rozruchu oraz prąd czuwania. W normalnym śnie potwierdzić utrzymanie włączonego wyjścia zasilania HMI podczas snu ECU i brak niezamierzonego odłączenia przy wybudzaniu. Sprawdzić, że HMI i komputer mogą wybudzić urządzenia do obsługi przy zgaszonym silniku.
+Z uśpienia sprawdzić osobno każde zdarzenie z tabeli; potwierdzić wybudzanie urządzeń zgodnie z jej zakresem. Dla przedniego koła sprawdzić wybudzenie ECU, naliczanie ODO przy zgaszonym silniku i niedostępnym HMI, początek ruchu, wolne toczenie oraz impulsy podczas usypiania; kryteria dokładności i czasu pozostają do określenia. Sprawdzić także wybudzenie HMI przez ECU oraz ciągłość naliczania ODO przy celowo opóźnionym uruchomieniu HMI lub jego awarii (SYS-080). Dla START i kopniaka sprawdzić także rozruch przy niedostępnym HMI oraz opóźnionym jego uruchomieniu. Zmierzyć sekwencję zasilania, czasy wybudzenia i gotowości do rozruchu oraz prąd czuwania. W normalnym śnie potwierdzić utrzymanie włączonego wyjścia zasilania HMI podczas snu ECU i brak niezamierzonego odłączenia przy wybudzaniu. Sprawdzić, że HMI i komputer mogą wybudzić urządzenia do obsługi przy zgaszonym silniku.
 
 Przy zgaszonym silniku, odłączonym PC i braku zadań blokujących sprawdzić rozpoczęcie sekwencji po skonfigurowanym czasie. Przyciski, próby rozruchu i aktywność użytkownika w HMI mają odnowić odliczanie; sam cykliczny odczyt danych go nie odnawia. Zweryfikować kolejność polecenia, aplikacyjnego potwierdzenia, zakończenia nadawania HMI i przejść w sen; rzeczywisty stan niskiego poboru sprawdzić pomiarowo. Praca silnika, aktywne zadanie wymagające pracy i podłączony PC mają wstrzymywać sekwencję. Dodatkowe przypadki wskazano w opisie sekwencji.
 

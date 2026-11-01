@@ -35,7 +35,7 @@ Potwierdzenie jest osobną aplikacyjną ramką CAN i oznacza przyjęcie poleceni
 
 ## Ruch przedniego koła — uzupełnienie z 2026-11-01
 
-Według SYS-079 wykrycie obrotów przedniego koła wybudza ECU do naliczania ODO także przy zgaszonym silniku. Tor detekcji musi działać w śnie, niezależnie od HMI. Wybudzanie HMI od tego zdarzenia pozostaje do ustalenia.
+Według SYS-079 wykrycie obrotów przedniego koła wybudza ECU do naliczania ODO także przy zgaszonym silniku. Tor detekcji musi działać w śnie, niezależnie od HMI. Zgodnie z SYS-080 ECU wybudza również HMI. Naliczanie ODO nie czeka na gotowość HMI i działa także przy jego awarii. Sposób przekazania wybudzenia i czasy reakcji pozostają do projektu. W próbach sprawdzić wybudzenie obu urządzeń i powtórzyć naliczanie przy opóźnionym lub niedostępnym HMI.
 
 Specyfikacja sekwencji ma uwzględnić impulsy koła w każdej fazie usypiania i ciągłość naliczania zgodną z ustaloną dokładnością. Zasady bezczynności podczas toczenia i po jego zakończeniu, obsługę pierwszych impulsów i filtrację trzeba opracować. Zakres prób: [chronione liczniki](chronione-liczniki.md).
 
