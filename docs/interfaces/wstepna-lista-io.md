@@ -11,14 +11,18 @@ Wiązkę i złącze ECU projektujemy od nowa (SYS-045), według potrzebnych funk
 | Funkcja | Miejsce / kierunek | Podstawa | Dane potrzebne do projektu |
 | --- | --- | --- | --- |
 | Zasilanie HMI | Sterowane wyjście zasilania z ECU do HMI | SYS-064, 065, 066 | W normalnym śnie wyjście pozostaje włączone. Kontrolowane odłączenie jako ostateczność przy awarii lub zdefiniowanych ograniczeniach. Podtrzymanie stanu wyjścia podczas snu ECU, pobór toru w obu stanach, zabezpieczenia i wybudzanie przyciskami po odłączeniu do projektu. |
-| Zapłon | Wyjście ECU; realizacja otwarta | SYS-001, 002, 015 | Układy i cewki referencyjne, sposób zasilania, energia i interfejs sterowania. |
+| Zapłon CDI i indukcyjny TCI/IDI | Jeden niezależnie sterowany kanał ECU; realizacja otwarta | SYS-001, 002, 015, 067, 068 | Cewki/moduły referencyjne i zgodność potwierdzana analizą/testami; sposób zasilania, energia, prądy, czasy i interfejs sterowania oraz granica integracji stopni mocy. Liczba pinów i elementów mocy nie wynika wprost z liczby kanałów. |
+| Położenie/prędkość wału | Wejście ECU: czujnik VR albo Hall z wyjściem cyfrowym | SYS-001, 069 | Modele i interfejsy czujników, zasilanie, amplitudy, polaryzacja, progi, filtracja, układy znaczników i odniesienie do GMP; zakres od kopania/rozruchu do maksymalnych obrotów. Zgodność potwierdzana analizą i testami. |
+| Faza cyklu silnika 4T | Dodatkowe wejście ECU; Hall z wyjściem cyfrowym | SYS-070 | Czujnik opcjonalny w konfiguracjach niewykorzystujących fazy. Modele, zasilanie, rodzaj wyjścia i podciąganie, poziomy, progi, filtracja, położenie znacznika względem wału/GMP i diagnostyka do ustalenia. VR nie jest obsługiwany na tym wejściu. |
 | Wtrysk paliwa | Wyjścia ECU; aktywne w wariantach wtryskowych | SYS-012, 015 | Liczba wtryskiwaczy działających jednocześnie, typy, prądy, czasy i sposób sterowania. |
 | Układ pompy paliwa | Sterowanie ECU; zakres toru mocy otwarty | SYS-012, 015 | Pompy referencyjne, prądy robocze/rozruchowe, sposób wyłączania i diagnostyka. |
 | Elektroniczny zawór wydechowy 2T | Sterowanie ECU i ewentualne wejścia zwrotne | SYS-034 | Typ napędu, zasilanie, interfejs, zakres ruchu i sygnały położenia. |
+| Regulacja powietrza biegu jałowego IAC | Wyjścia sterujące napędem krokowym; aktywne w odpowiednich konfiguracjach 4T | SYS-071 | Modele napędów, uzwojenia, prądy, zasilanie, zakres ruchu i kalibracja, liczba linii sterowania, stopień mocy, pozycja przy rozruchu/sen i diagnostyka do określenia. Konfiguracje bez IAC pracują bez napędu. |
 | TPS | Wejście ECU; zależnie od wyposażenia | SYS-014, 038 | Typ sygnału, poziomy, zasilanie i kalibracja; obsługa wariantu bez TPS. |
 | IAT | Wejście ECU | SYS-031 | Czujniki referencyjne, charakterystyki i sposób podłączenia. |
 | Temperatura płynu chłodzącego | Wejście pomiarowe ECU; dane do HMI | SYS-044 | Czujniki OEM lub dodatkowe, charakterystyki, zakres, dokładność i montaż. Sam termowłącznik nie zapewnia pomiaru wartości. |
 | Ciśnienie paliwa | Wejście pomiarowe ECU | SYS-029 | Zakres ciśnienia, sygnał, zasilanie i wymagana dokładność. |
+| Czujnik rezerwy paliwa | Opcjonalny tor odczytu ECU; stan do HMI | SYS-073 | Zgodne modele, rodzaj sygnału, zasilanie/ewentualne pobudzenie, pomiar, filtracja i diagnostyka do określenia. Odróżnić stan rezerwy, usterkę i konfigurację bez czujnika; nie zakładać zwykłego wejścia 0/1 bez analizy czujnika. |
 | Ciśnienie oleju obecne/brak | Wejście binarne ECU | SYS-029 | Polaryzacja, poziomy, czujnik/wyłącznik i diagnostyka przewodów. |
 | Sprzęgło | Opcjonalny sygnał do ECU; dane i wskazania, bez blokady rozrusznika | SYS-041 | Rodzaj przełącznika/sygnału i parametry elektryczne. |
 | Położenie poszczególnych biegów | Opcjonalny czujnik do ECU; dane i wskazania, bez blokady rozrusznika | SYS-041 | Typ interfejsu, liczba pozycji, sygnały i kalibracja. |
@@ -36,7 +40,7 @@ Wiązkę i złącze ECU projektujemy od nowa (SYS-045), według potrzebnych funk
 | Przyciski obsługi HMI i przełączniki akcesoriów | Wejścia HMI; przyciski obsługi wybudzają HMI i ECU | SYS-016, 017, 055 | Lista elementów i funkcji, styki, poziomy oraz przekazanie wybudzenia do ECU. Żądania akcesoriów po CAN; START i STOP mają osobne tory według SYS-048/037. |
 | Ręczny STOP | Osobny obwód przewodowy, niezależny od HMI/CAN | SYS-037 | Sposób odcięcia, interfejs i reakcje na zwarcie/przerwę. |
 | Wykrywanie przewrócenia | Lokalizacja i tor pomiarowy otwarte | SYS-039, 040 | Pomiar, montaż, kryteria, czasy reakcji i odblokowania. |
-| Prędkość motocykla | Źródło i miejsce podłączenia otwarte | SYS-018 | Czujnik lub inne źródło, sygnał, kalibracja i wymagana dokładność. |
+| Prędkość motocykla i naliczanie ODO | Źródło i miejsce podłączenia otwarte | SYS-018, 075, 076 | Czujnik lub inne źródło, sygnał, kalibracja i dokładność. Parametry wpływające na ODO uwzględnić w polityce ochrony liczników; syntetyczne dane z narzędzi nie mogą stanowić niekontrolowanej ścieżki zmiany wartości. |
 | Barometr i temperatura ECU | Pomiary na PCB ECU | SYS-030 | Zakres, dokładność, interfejsy wewnętrzne i obudowa; nie są zewnętrznymi wejściami czujników. |
 
 Preferowany kierunek wyjść akcesoriów: [SmartFET-y na PCB](../architecture/wyjscia-akcesoriow-porownanie.md). Nie oznacza wyboru high-side/low-side dla wszystkich odbiorników ani potwierdzenia ich parametrów.
@@ -49,7 +53,6 @@ Poniższe pozycje nie są nowymi zatwierdzonymi wymaganiami właściciela.
 
 | Tor | Cel analizy | Do określenia |
 | --- | --- | --- |
-| Położenie/prędkość wału | Podstawa synchronizacji zapłonu i wtrysku | Układy znaczników, typy czujników, amplitudy, polaryzacja, zakres obrotów. |
 | Faza cyklu 4T | Ocena potrzeby dodatkowego sygnału synchronizacji | Strategia sterowania i źródło fazy; nie zakładamy obowiązkowego czujnika wałka. |
 | Inne zastosowania temperatury silnika | Ocena kompensacji i funkcji ochronnych poza uzgodnionym sterowaniem wentylatorem | Potrzebne funkcje i kryteria do ustalenia. Pomiar płynu i sterowanie wentylatorem są już wymagane według SYS-043/044. |
 | Ciśnienia wymagane przez wybrane strategie wtrysku | Ustalenie kompletnego zestawu sygnałów | Potrzeba MAP/ciśnienia skrzyni korbowej i interfejsy dla konkretnych jednostek. |
@@ -65,4 +68,4 @@ Poniższe pozycje nie są nowymi zatwierdzonymi wymaganiami właściciela.
 - Brak potwierdzenia HMI: ograniczone oczekiwanie/próby, awaryjne odłączenie części aktywnej z wyjścia zasilania ECU i dopuszczenie snu ECU (SYS-064/065). Tor wybudzania przyciskami musi działać także przy tym odłączeniu; szczegółowy sposób realizacji pozostaje do projektu.
 - Dostęp debuggera i odzyskiwanie urządzeń: punkty serwisowe do określenia, niezależnie od standardowego kabla użytkownika.
 
-Poza zakresem: dozownik oleju 2T, ride-by-wire, quickshifter, wejście stopki bocznej oraz zintegrowane tory EGT/lambda. Ograniczenia i warunki smarowania 2T pozostają zgodne z wymaganiami systemu.
+Poza zakresem: dozownik oleju 2T, ride-by-wire, quickshifter, kontrola trakcji (SYS-072), wejście stopki bocznej oraz zintegrowane tory EGT/lambda. Ograniczenia i warunki smarowania 2T pozostają zgodne z wymaganiami systemu.

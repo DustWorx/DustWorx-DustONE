@@ -80,6 +80,16 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-064 | Zasilanie HMI jest wyprowadzone z ECU i kontrolowane przez ECU poprzez sterowany tor zasilania. Awaryjne odłączenie części aktywnej HMI działa niezależnie od aplikacji HMI i komunikacji CAN. Przy odłączonej części aktywnej trzeba zachować wybudzanie przyciskami HMI oraz pozostałe źródła wybudzania według SYS-054–056. Topologia toru zasilania i wybudzania oraz parametry elektryczne pozostają do projektu. |
 | SYS-065 | Gdy HMI nie potwierdzi polecenia uśpienia, ECU po ograniczonym oczekiwaniu i próbach awaryjnie odłącza zasilanie części aktywnej HMI, rejestruje problem i może zasnąć przy nadal spełnionych warunkach SYS-059. Awaryjne odłączenie jest rozróżniane od normalnej sekwencji potwierdzonej przez HMI. Czasy, liczba prób, ewentualny cykl odzyskania oraz warunki ponownego załączenia pozostają do określenia. |
 | SYS-066 | Po poprawnej sekwencji usypiania wyjście zasilania HMI z ECU pozostaje włączone, a ECU i HMI przechodzą w swoje stany niskiego poboru. Kontrolowane odłączenie zasilania HMI jest ostatecznym środkiem przy awarii albo wynika z jawnie zdefiniowanej polityki ograniczeń dla HMI; nie jest zwykłym etapem usypiania. Kryteria takiej polityki oraz parametry stanów niskiego poboru pozostają do określenia. |
+| SYS-067 | Platforma ECU obsługuje zapłon pojemnościowy CDI oraz indukcyjny TCI/IDI. Zgodność konkretnych cewek i torów sterowania wymaga analizy i testów. Liczbę kanałów określa SYS-068; realizacja stopni mocy pozostaje do określenia. |
+| SYS-068 | ECU ma jeden niezależnie sterowany kanał zapłonu dla silnika jednocylindrowego. Kanał pracuje z wybranym dla danego silnika typem zapłonu w zakresie SYS-067. Obsługa dwóch niezależnie sterowanych kanałów nie jest objęta zakresem. |
+| SYS-069 | Wejście synchronizacji wału korbowego ECU obsługuje czujniki indukcyjne VR oraz czujniki Halla z wyjściem cyfrowym na wspólnej PCB. Parametry elektryczne, zasilanie i zgodność konkretnych czujników wymagają określenia oraz potwierdzenia przez analizę i testy. |
+| SYS-070 | PCB ECU zawiera dodatkowe, odrębne od wejścia wału wejście fazy silnika 4T dla czujnika Halla z wyjściem cyfrowym. Czujnik jest opcjonalny w konfiguracjach niewykorzystujących tego sygnału. Wejście fazy nie obsługuje VR. Parametry elektryczne i zgodność konkretnych czujników pozostają do określenia. |
+| SYS-071 | ECU obsługuje elektroniczną regulację powietrza biegu jałowego IAC z napędem krokowym dla wybranych modeli enduro 4T z przepustnicą na linkę. Zgodne modele i parametry napędów wymagają potwierdzenia przed doborem elektroniki. Konfiguracje niewykorzystujące IAC pracują bez podłączonego napędu. |
+| SYS-072 | Funkcja kontroli trakcji (TC) pozostaje poza zakresem DustONE. ECU nie realizuje algorytmu kontroli poślizgu koła napędzanego. |
+| SYS-073 | ECU umożliwia podłączenie opcjonalnego czujnika rezerwy paliwa, odczytuje jego stan i przekazuje dane do ostrzeżenia na HMI. Konfiguracje bez czujnika działają bez tej funkcji. Zgodne czujniki, ich zasilanie i interfejs elektryczny wymagają potwierdzenia. |
+| SYS-074 | ECU prowadzi trwały, całkowity licznik czasu pracy silnika (motogodzin), naliczany podczas potwierdzonej pracy silnika i udostępniany HMI oraz aplikacji Windows. Kryteria naliczania, dokładność i utrwalanie wymagają specyfikacji. |
+| SYS-075 | ECU prowadzi trwały, całkowity licznik drogi ODO, udostępniany HMI oraz aplikacji Windows. Źródło pomiaru, kalibracja, dokładność, inicjalizacja i zasady zachowania historii przy wymianie ECU wymagają specyfikacji. |
+| SYS-076 | Całkowite motogodziny i ODO są chronione przed manipulacją użytkownika końcowego. Użytkownik nie może ustawiać, korygować ani kasować ich wartości przez HMI, aplikację Windows, diagnostykę, development tool ani dostępne mu interfejsy ECU. Konfiguracja, operacje serwisowe użytkownika i aktualizacje nie mogą stanowić obejścia tej ochrony. |
 
 ## 3. Podział odpowiedzialności
 
@@ -94,6 +104,32 @@ Propozycje do uwzględnienia w wymaganiach szczegółowych:
 - Ustalić warunki dopuszczające zapis map, zmianę typu silnika, aktualizację i testy wyjść.
 - Zdefiniować ograniczenia narzędzi rozwojowych i sposób wejścia w tryb testowy.
 - Zdefiniować odzyskiwanie urządzenia po przerwaniu aktualizacji.
+
+### Zakres zapłonu — ustalenie właściciela z 2026-11-01
+
+W odpowiedzi na pytanie 73 właściciel wybrał obsługę CDI oraz zapłonu indukcyjnego TCI/IDI, z potwierdzeniem zgodności konkretnych cewek przez analizę i testy (SYS-067). [ADR-004](decisions/adr-004-zaplon-cdi-indukcyjny.md) zapisuje zakres decyzji, otwarte parametry i plan weryfikacji. W odpowiedzi na pytanie 74 tego samego dnia właściciel wybrał jeden niezależny kanał zapłonu, z priorytetem kompaktowości ECU (SYS-068). Integracja stopni mocy pozostaje otwarta. Kanał oznacza niezależnie sterowany tor zapłonu; liczba jego fizycznych wyprowadzeń i elementów mocy wynika z realizacji.
+
+### Synchronizacja wału i fazy 4T — ustalenia właściciela z 2026-11-01
+
+W odpowiedzi na pytanie 75 właściciel wybrał obsługę czujników wału VR oraz Halla z wyjściem cyfrowym na wspólnej PCB (SYS-069). [ADR-005](decisions/adr-005-interfejsy-synchronizacji.md) określa zakres decyzji, otwarte dane i proponowaną weryfikację. W odpowiedzi na pytanie 76 właściciel wybrał dodatkowe, opcjonalne wejście fazy 4T tylko dla Halla z wyjściem cyfrowym (SYS-070). Zakres VR/Hall z SYS-069 dotyczy wejścia wału. Obsługiwane układy znaczników i dekodery pozostają do określenia.
+
+### Regulacja powietrza biegu jałowego IAC — ustalenie właściciela z 2026-11-01
+
+Po sprawdzeniu wyposażenia Beta RR 4T EFI 2016 właściciel w odpowiedzi na poprawione pytanie 77 wybrał obsługę IAC z napędem krokowym dla potwierdzonych modeli enduro (SYS-071). [ADR-006](decisions/adr-006-iac-naped-krokowy.md) zapisuje podstawę, zakres i proponowaną weryfikację. Modele i parametry napędów oraz tor sterowania pozostają do potwierdzenia; nie przyjęto obsługi wszystkich odmian IAC. Sterowanie główną przepustnicą pozostaje mechaniczne według SYS-038.
+
+### Kontrola trakcji — wyłączenie z zakresu z 2026-11-01
+
+Po przedstawieniu potwierdzonego zastosowania opcjonalnej TC w KTM EXC-F MY2024 właściciel w odpowiedzi na pytanie 78 wyłączył kontrolę trakcji z DustONE (SYS-072). Nie planujemy dedykowanych zasobów ani funkcji sterowania TC. Metoda weryfikacji: przegląd zakresu, architektury i późniejszej implementacji pod kątem tego wyłączenia. Pozostałe uzgodnione pomiary i funkcje sterowania zachowują swoje wymagania.
+
+### Sygnalizacja rezerwy paliwa — ustalenie właściciela z 2026-11-01
+
+Po przedstawieniu potwierdzonego przykładu Beta RR 4T EFI MY2016 właściciel w odpowiedzi na pytanie 79 przyjął opcjonalną obsługę czujnika rezerwy przez ECU i ostrzeżenie na HMI (SYS-073). Funkcja dotyczy stanu rezerwy; nie ustalono ciągłego pomiaru ilości paliwa. Rodzaj czujnika, ewentualne pobudzenie, tor wejściowy, filtracja/histereza, warunki ostrzegania i diagnostyka pozostają do projektu. Informacja użytkowa o rezerwie nie przesądza o typie wejścia sprzętowego.
+
+Proponowana weryfikacja: dla zgodnego czujnika sprawdzić oba stany i ostrzeżenie na HMI, konfigurację bez czujnika oraz odróżnianie usterek toru od prawidłowej informacji o rezerwie. Dla wybranego zbiornika i czujnika ocenić wpływ przechyłów i ruchu paliwa. Kryteria i procedury ustalić po charakterystyce interfejsu; prób nie wykonano.
+
+### Całkowite motogodziny i ODO — ustalenie właściciela z 2026-11-01
+
+W odpowiedzi na pytanie 80 i doprecyzowaniu właściciel wybrał całkowite motogodziny oraz ODO i wymaga odporności obu liczników na manipulację użytkownika końcowego, bez możliwości zmiany lub korekty z jego poziomu (SYS-074–076). ECU pozostaje właścicielem danych. Liczniki pomocnicze A/B nie wchodzą do tego ustalenia. [ADR-007](decisions/adr-007-chronione-liczniki.md) zapisuje decyzję; [architektura ochrony i plan weryfikacji](architecture/chronione-liczniki.md) określa obszary do projektu. Inicjalizacja, migracja przy wymianie ECU, role producenta/serwisu i granice ochrony sprzętowej pozostają do uzgodnienia przed wyborem mechanizmów i komponentów.
 
 ### Samodzielność ECU — ustalenie właściciela z 2026-10-25
 
@@ -269,11 +305,12 @@ Do ustalenia: minimalne napięcie i dostępny prąd pod obciążeniem, chemia i 
 | Obszar | Do ustalenia |
 | --- | --- |
 | Silnik | Pierwszy motocykl testowy: Beta 300 RR Racing / Race Edition, 2015, wskazany przez właściciela. Według właściciela gaźnik, zapłon i instalacja są fabryczne. Do potwierdzenia podczas inwentaryzacji: parametry i stan osprzętu. Do ustalenia: maksymalne obroty oraz reprezentatywne jednostki 4T, TPI i TBI. Obsługa gaźnika z TPS i bez TPS oraz TPI/TBI według SYS-012, SYS-014 i SYS-015, z warunkami smarowania 2T według SYS-032 i SYS-033. |
-| Zapłon | Typy obsługiwanych układów i cewek; wymagane interfejsy sterujące. |
+| Zapłon | Jeden niezależny kanał według SYS-068, z obsługą CDI oraz indukcyjnego TCI/IDI według SYS-067. Do określenia: cewki/moduły referencyjne, parametry i interfejsy oraz integracja stopni mocy. |
 | Przepustnica | Mechaniczna, poruszana linką; odczyt TPS zależnie od wyposażenia (SYS-038). Ride-by-wire poza zakresem. Do określenia: parametry, kalibracja i diagnostyka TPS. Gaźnik bez TPS obsługiwany według SYS-014. |
+| Bieg jałowy IAC | Obsługa napędu krokowego w wybranych enduro 4T według SYS-071. Do określenia: modele i parametry napędów, kalibracja, zasoby i stopień mocy, wpływ na rozruch i sen, sterowanie oraz diagnostyka. |
 | Sprzęgło i położenie biegu | Opcjonalne wejścia do danych i wskazań według SYS-041, bez blokad rozrusznika zależnych od tych sygnałów; czujnik biegu ma rozróżniać poszczególne biegi, nie tylko luz. Stopka boczna poza zakresem. Do określenia: czujniki referencyjne, interfejsy, kalibracja, diagnostyka i szczegóły prezentacji danych. |
 | Wykrywanie przewrócenia | Automatyczne wyłączenie silnika według SYS-039; ponowny rozruch po postawieniu motocykla bez cyklu zasilania według SYS-040. Do określenia: tor pomiarowy, lokalizacja, kryteria i czasy detekcji, sposób wyłączenia silnika, diagnostyka oraz szczegółowe warunki odblokowania. |
-| Synchronizacja | Czujniki wału i ewentualnie wałka, ich sygnały oraz układy znaczników. |
+| Synchronizacja | Wał: VR oraz Hall z wyjściem cyfrowym według SYS-069. Dodatkowe wejście fazy 4T: tylko Hall z wyjściem cyfrowym, opcjonalne zależnie od konfiguracji (SYS-070). Do określenia: parametry i modele czujników, układy znaczników, odniesienie do GMP, dekodery i reakcje na usterki. |
 | Układ paliwowy | Rodzaj układu wtryskowego, liczba i parametry wtryskiwaczy, sterowanie pompą paliwa. Dla 2T warunek pracy na mieszance według SYS-033; konwersja TPI wymaga osobnej oceny. |
 | Smarowanie 2T | Pompa dozująca olej wyłączona z ECU (SYS-032). Montaż po przystosowaniu silnika do mieszanki (SYS-033); sposób i walidacja konwersji TPI pozostają otwarte. |
 | Zawór wydechowy 2T | Sterowanie elektronicznym power valve wymagane według SYS-034. Do określenia: typ napędu i interfejs, parametry zasilania i sterowania, sygnały położenia, kalibracja, diagnostyka oraz zachowanie przy usterce. |
@@ -281,6 +318,7 @@ Do ustalenia: minimalne napięcie i dostępny prąd pod obciążeniem, chemia i 
 | Akcesoria | Zakres rozszerzony według SYS-004. Do określenia: podział świateł przednich na funkcje, liczba niezależnych kanałów i wyjść konfigurowalnych, prądy robocze i rozruchowe, sterowanie bezpośrednie lub przez przekaźniki/styczniki, zabezpieczenia i diagnostyka wyjść. |
 | Pomiary | Dodatkowy zakres według SYS-029–SYS-031: ciśnienie atmosferyczne i temperatura na PCB, tor ciśnienia paliwa oraz wejście ciśnienia oleju 0/1. Temperatura dolotu pochodzi z IAT, temperatura PCB jest osobnym pomiarem ECU. Do określenia: parametry, czujniki, dokładność, zabezpieczenia, kalibracja i diagnostyka. EGT i lambda są pomiarami zewnętrznymi podczas strojenia. |
 | HMI | Odczyt przełączników kierownicy i polecenia do ECU przez CAN (SYS-016); menu i ekrany obsługiwane fizycznymi przyciskami, ekran bez dotyku (SYS-017). Główny panel zastępujący licznik (SYS-018). Do ustalenia: ekran, liczba i rodzaje wejść przycisków, szczegółowy zakres danych prezentowanych z ECU, trwałość danych przebiegu i ograniczenia zasobów ekranów. Zakres personalizacji według SYS-008; do określenia edytor, format projektu ekranów oraz prezentacja ostrzeżeń w układach użytkownika. |
+| Liczniki eksploatacyjne | Całkowite motogodziny i ODO w ECU, z ochroną przed manipulacją użytkownika według SYS-074–076. Do określenia: źródła i kryteria naliczania, dokładność, trwałość i odporność zapisu, inicjalizacja/przenoszenie, uprawnienia oraz ochrona pamięci, uruchamiania i aktualizacji. |
 | Połączenie z PC | Połączenie przewodowe (SYS-026), jeden wspólny punkt i jeden kabel do standardowej obsługi ECU/HMI (SYS-027). Do ustalenia: interfejs fizyczny, lokalizacja złącza, realizacja dostępu do obu urządzeń i zasady aktualizacji/odzyskiwania. CAN między ECU i HMI nie przesądza interfejsu komputera. |
 | Diagnostyka | Zapis DTC i powiązanych freeze frame w ECU; odczyt w aplikacji Windows i rozróżnienie usterek aktywnych oraz historycznych (SYS-019, SYS-020). Oznaczanie czasu według SYS-021. Trwałość historii i wygaszanie ostrzeżeń według SYS-022 i SYS-023. Pierwsze/ostatnie wystąpienie i licznik według SYS-024; eksport i ręczne kasowanie według SYS-025. Szczegóły rejestracji, obsługi pełnej pamięci i realizacji zegara do określenia. |
 | Mapy silnika | Maksymalnie 3 zestawy map w ECU i przełączanie z HMI także podczas pracy silnika (SYS-028). Do określenia: zakres map, warunki i sposób przełączenia, walidacja zestawów oraz warunki ich zapisu. |
