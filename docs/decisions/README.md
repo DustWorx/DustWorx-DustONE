@@ -10,6 +10,7 @@ Właściciel projektu wskazał `DustWorx/DustWorx-DustONE` jako repozytorium dok
 - [ADR-002 — samodzielność ECU i HMI jako klient](adr-002-samodzielnosc-ecu.md)
 - [ADR-003 — wybudzanie bez osobnego włącznika](adr-003-wybudzanie-bez-wlacznika.md)
 - [ADR-004 — zakres zapłonu CDI i indukcyjnego](adr-004-zaplon-cdi-indukcyjny.md)
+- [ADR-005 — interfejsy synchronizacji silnika](adr-005-interfejsy-synchronizacji.md)
 
 ## Kolejne decyzje
 
