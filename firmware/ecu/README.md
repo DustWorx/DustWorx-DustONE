@@ -13,3 +13,5 @@ ECU nalicza i przechowuje [chronione całkowite motogodziny i ODO](../../docs/ar
 SYS-075/079 wymagają wybudzenia ECU obrotami przedniego koła i naliczania ODO także przy zgaszonym silniku oraz niedostępnym HMI. Zaprojektować obsługę pierwszych impulsów i przejść sen–praca zgodnie z przyszłym limitem błędu. Motogodziny nadal wymagają pracy silnika; samo koło nie żąda rozruchu. [Analiza i zakres prób](../../docs/architecture/chronione-liczniki.md).
 
 SYS-081 wymaga wyłączenia świateł przednich i tylnych pozycyjnych przed prawidłowym uśpieniem oraz pozostawienia ich wyłączonych po wybudzeniu ze zgaszonym silnikiem do polecenia HMI. Obsługa snu nie przywraca automatycznie stanu sprzed snu; należy ją uzgodnić z ważnością żądań HMI. [Przebieg i zakres prób](../../docs/architecture/usypianie-ecu-hmi.md).
+
+SYS-082 wymaga automatycznego włączenia przednich i tylnych pozycyjnych po potwierdzonym uruchomieniu silnika, również bez gotowego lub sprawnego HMI. Mijania i drogowe włącza użytkownik z HMI. W logice rozdzielić samo wybudzenie od potwierdzonego uruchomienia silnika i poleceń oświetlenia. [Zakres prób](../../docs/architecture/usypianie-ecu-hmi.md).

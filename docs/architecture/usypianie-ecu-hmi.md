@@ -6,7 +6,7 @@ Data: 2026-10-25. Status: uzgodniony normalny przebieg ze stale włączonym zasi
 
 ECU jest koordynatorem. Przy zgaszonym silniku i odłączonym PC oczekuje na upływ konfigurowalnego czasu bezczynności i zakończenie wymaganych zadań, w tym obsługi wentylatora. HMI pozostaje aktywne do polecenia ECU.
 
-Przed prawidłowym wejściem ECU w sen światła przednie i tylne pozycyjne są wyłączane. Po wybudzeniu ze zgaszonym silnikiem pozostają wyłączone do przyjęcia polecenia włączenia z HMI, także przy wybudzeniu ruchem koła; nie wracają automatycznie do stanu sprzed snu (SYS-081, odpowiedź A na pytanie 85 z 2026-11-01). Zachowanie po rozpoczęciu pracy silnika, resecie i zaniku zasilania wymaga osobnych ustaleń.
+Przed prawidłowym wejściem ECU w sen światła przednie i tylne pozycyjne są wyłączane. Po wybudzeniu ze zgaszonym silnikiem pozostają wyłączone do przyjęcia polecenia włączenia z HMI, także przy wybudzeniu ruchem koła; nie wracają automatycznie do stanu sprzed snu (SYS-081, odpowiedź A na pytanie 85 z 2026-11-01). Po potwierdzonym uruchomieniu silnika ECU włącza automatycznie przednie i tylne pozycyjne; mijania i drogowe włącza użytkownik z HMI (SYS-082, odpowiedź na pytanie 86 z 2026-11-01). Automatyka pozycyjnych działa także bez HMI. Zachowanie po zgaszeniu silnika przed snem, resecie i zaniku zasilania wymaga osobnych ustaleń.
 
 ```mermaid
 sequenceDiagram
@@ -54,6 +54,8 @@ Formaty i identyfikatory ramek, oznaczenie bieżącej próby, czasy odpowiedzi i
 [Porównanie timeoutu, resetu i kontroli zasilania](brak-potwierdzenia-uspienia-hmi.md) zachowuje uzasadnienie wyboru i rozważone alternatywy.
 
 ## Proponowana weryfikacja
+
+Dla SYS-082 rozpocząć ze światłami wyłączonymi i bez żądania HMI: samo wybudzenie przy zgaszonym silniku pozostawia światła wyłączone, a potwierdzone uruchomienie włącza przednie i tylne pozycyjne. Mijania i drogowe mają włączyć się po odpowiednim poleceniu użytkownika z HMI. Powtórzyć automatyczne włączenie pozycyjnych przy opóźnionym oraz niedostępnym HMI. Zweryfikować oddzielne funkcje logiczne; ich połączenia, prądy i dozwolone kombinacje dla konkretnych lamp określić przed próbami.
 
 Dla SYS-081 rozpocząć prawidłową sekwencję z wcześniej włączonymi, a następnie wyłączonymi światłami. Potwierdzić wyłączenie wyjść przed wejściem ECU w sen i brak automatycznego przywrócenia po wybudzeniu przy zgaszonym silniku. Powtórzyć dla wymaganych źródeł wybudzenia, w tym przedniego koła, oraz przy opóźnionym uruchomieniu HMI. Nowe polecenie z HMI ma umożliwić włączenie świateł. Obsługę zapisanych żądań i nowej aktywności podczas usypiania powiązać z przyszłą specyfikacją protokołu. Stan świateł po nieudanej sekwencji, resecie lub zaniku zasilania pozostaje osobnym tematem.
 
