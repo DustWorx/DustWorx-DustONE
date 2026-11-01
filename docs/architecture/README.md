@@ -19,3 +19,4 @@ Analizy architektoniczne:
 - [Macierz wariantów silnika](macierz-wariantow-silnika.md): zakres gaźnika/wtrysku i 2T/4T oraz dane potrzebne do wspólnej PCB; modele poza Betą pozostają do wyboru.
 - [Wyjścia akcesoriów — porównanie realizacji](wyjscia-akcesoriow-porownanie.md): preferowany kierunek to SmartFET-y na PCB ECU; podział i parametry kanałów oraz wykonalność pełnej integracji pozostają do analizy.
 - [Chronione liczniki motogodzin i ODO](chronione-liczniki.md): zatwierdzone dane i ograniczenia użytkownika, wpływ na sprzęt/firmware oraz plan prób; inicjalizacja, migracja i mechanizmy ochrony otwarte.
+- [Oszczędzanie energii po zgaszeniu silnika](oszczedzanie-energii.md): przejście na pozycyjne, nadzór akumulatora, wyłączenie zbędnych odbiorników, rekomendacje i plan prób (SYS-083/084).
