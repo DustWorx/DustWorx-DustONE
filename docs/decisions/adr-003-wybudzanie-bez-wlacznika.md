@@ -1,6 +1,6 @@
 # ADR-003 — wybudzanie bez osobnego włącznika
 
-Data: 2026-10-25. Status: zatwierdzone wymagania użytkowe; realizacja sprzętowa i parametry do projektu oraz weryfikacji.
+Data: 2026-10-25; uzupełnienie: 2026-11-01. Status: zatwierdzone wymagania użytkowe; realizacja sprzętowa i parametry do projektu oraz weryfikacji.
 
 ## Problem i opcje
 
@@ -18,12 +18,15 @@ Po porównaniu w pytaniu 71 z 2026-10-25 właściciel zatwierdził kontrolę zas
 
 W pytaniu 72 z 2026-10-25 właściciel wskazał pozostawienie zasilania HMI włączonego po poprawnej sekwencji. ECU i HMI mają pozostać w sleep. Kontrolowane odłączenie zasilania jest ostateczną opcją przy awarii lub wynika ze zdefiniowanych ograniczeń dla HMI (SYS-066); kryteria ograniczeń pozostają otwarte.
 
+W odpowiedzi na pytanie 83 z 2026-11-01 właściciel zatwierdził wybudzanie ECU po wykryciu obrotów przedniego koła i naliczanie ODO także podczas toczenia/pchania przy zgaszonym silniku ([SYS-075/079](../01-zakres-systemu.md)). Realizacja i wybudzanie HMI od koła pozostają do ustalenia.
+
 | Zdarzenie | Wymagane wybudzenie | Uwagi |
 | --- | --- | --- |
 | Naciśnięcie przewodowego START | ECU i HMI | Priorytet gotowości ECU; rozruch niezależny od HMI, dalsza obsługa według SYS-048/049. |
 | Rozruch kopniakiem | ECU i HMI | Priorytet gotowości ECU; detekcja, sekwencja i czasy wymagają projektu. Obowiązuje założenie podłączonego akumulatora z SYS-013 i zakresu systemu. |
 | Użycie przycisków obsługi HMI | HMI i ECU | Przyciski pozostają w HMI. |
 | Podłączenie komputera | ECU i HMI | Przy dostępnym zasilaniu 12 V według SYS-058; utrzymana blokada usypiania obu urządzeń przez czas połączenia. |
+| Wykrycie obrotów przedniego koła | ECU; wybudzanie HMI do ustalenia | Przy dostępnym zasilaniu, także ze zgaszonym silnikiem. Naliczanie ODO niezależne od HMI (SYS-075/079). |
 
 ## Konsekwencje dla projektu
 
@@ -31,7 +34,8 @@ W pytaniu 72 z 2026-10-25 właściciel wskazał pozostawienie zasilania HMI wł�
 - Zaprojektować automatyczne wybudzenie HMI od START/kopniaka z priorytetem gotowości ECU. Opóźnione uruchomienie lub awaria HMI nie może blokować rozruchu ECU.
 - Określić sposób przekazania wybudzenia HMI–ECU, np. przez odpowiedni tor CAN lub osobny sygnał. Nie wybrano jeszcze interfejsu wybudzania ani komponentów.
 - Zaprojektować detekcję podłączenia komputera i utrzymanie blokady usypiania w obu urządzeniach, także przy bezczynności transmisji. Uwzględnić aplikację urządzeń i bootloadery. Kontrolowany restart wymagany przez aktualizację jest odrębną operacją od uśpienia.
-- Rozdzielić przyczynę wybudzenia od żądania rozruchu. Użycie przycisków HMI i podłączenie komputera służą także do obsługi przy zgaszonym silniku.
+- Rozdzielić przyczynę wybudzenia od żądania rozruchu. Użycie przycisków HMI, podłączenie komputera i obrót przedniego koła służą także do pracy przy zgaszonym silniku. Sam obrót koła nie żąda rozruchu.
+- Tor przedniego koła musi umożliwiać detekcję podczas snu ECU. Określić czujnik, interfejs, pobór w śnie, obsługę początku ruchu oraz przejść sen–praca z zachowaniem wymaganej dokładności ODO. [Analiza i plan prób liczników](../architecture/chronione-liczniki.md) obejmują ten zakres.
 - ECU inicjuje usypianie HMI poleceniem i w normalnym przebiegu oczekuje na jego aplikacyjne potwierdzenie, przed własnym uśpieniem. HMI nie zasypia autonomicznie po bezczynności.
 - Wyprowadzić sterowane zasilanie HMI z ECU. Po poprawnej sekwencji wyjście pozostaje włączone podczas snu obu urządzeń; odłączenie jest ostatecznością przy awarii lub zdefiniowanych ograniczeniach. Zachować wybudzanie przyciskami po odłączeniu. Zapewnić podtrzymanie właściwego stanu wyjścia także podczas snu ECU: włączonego w normalnej pracy i odłączonego po zadziałaniu ścieżki awaryjnej. Topologia i parametry pozostają do projektu.
 - Odnawiać czas bezczynności po użyciu przycisków, próbach rozruchu i rzeczywistej aktywności użytkownika w HMI. Zwykły cykliczny odczyt danych i ruch CAN nie stanowią same w sobie aktywności użytkownika; podłączenie PC blokuje sen niezależnie od ruchu danych.
@@ -47,7 +51,7 @@ Brak potwierdzenia HMI: [porównanie i uzasadnienie wyboru kontroli zasilania z 
 
 ## Proponowana weryfikacja
 
-Z uśpienia sprawdzić osobno każde zdarzenie z tabeli; potwierdzić automatyczne wybudzanie obu urządzeń. Dla START i kopniaka sprawdzić także rozruch przy niedostępnym HMI oraz opóźnionym jego uruchomieniu. Zmierzyć sekwencję zasilania, czasy wybudzenia i gotowości do rozruchu oraz prąd czuwania. W normalnym śnie potwierdzić utrzymanie włączonego wyjścia zasilania HMI podczas snu ECU i brak niezamierzonego odłączenia przy wybudzaniu. Sprawdzić, że HMI i komputer mogą wybudzić urządzenia do obsługi przy zgaszonym silniku.
+Z uśpienia sprawdzić osobno każde zdarzenie z tabeli; potwierdzić wybudzanie urządzeń zgodnie z jej zakresem. Dla przedniego koła sprawdzić wybudzenie ECU, naliczanie ODO przy zgaszonym silniku i niedostępnym HMI, początek ruchu, wolne toczenie oraz impulsy podczas usypiania; kryteria dokładności i czasu pozostają do określenia. Wybudzania HMI od koła jeszcze nie rozstrzygnięto. Dla START i kopniaka sprawdzić także rozruch przy niedostępnym HMI oraz opóźnionym jego uruchomieniu. Zmierzyć sekwencję zasilania, czasy wybudzenia i gotowości do rozruchu oraz prąd czuwania. W normalnym śnie potwierdzić utrzymanie włączonego wyjścia zasilania HMI podczas snu ECU i brak niezamierzonego odłączenia przy wybudzaniu. Sprawdzić, że HMI i komputer mogą wybudzić urządzenia do obsługi przy zgaszonym silniku.
 
 Przy zgaszonym silniku, odłączonym PC i braku zadań blokujących sprawdzić rozpoczęcie sekwencji po skonfigurowanym czasie. Przyciski, próby rozruchu i aktywność użytkownika w HMI mają odnowić odliczanie; sam cykliczny odczyt danych go nie odnawia. Zweryfikować kolejność polecenia, aplikacyjnego potwierdzenia, zakończenia nadawania HMI i przejść w sen; rzeczywisty stan niskiego poboru sprawdzić pomiarowo. Praca silnika, aktywne zadanie wymagające pracy i podłączony PC mają wstrzymywać sekwencję. Dodatkowe przypadki wskazano w opisie sekwencji.
 

@@ -33,6 +33,12 @@ Potwierdzenie jest osobną aplikacyjną ramką CAN i oznacza przyjęcie poleceni
 - Blokada snu przy podłączonym PC pozostaje zgodna z SYS-057. Priorytet rozruchu i niezależność ECU od sprawności HMI pozostają zgodne z SYS-046/054.
 - Tor sterowania zasilaniem HMI musi utrzymywać zadany stan podczas snu ECU: włączony po poprawnej sekwencji, odłączony po zadziałaniu ścieżki awaryjnej. Uwzględnić to przy wyborze stanów niskiego poboru, sterownika wyjścia i ewentualnego podtrzymania stanu.
 
+## Ruch przedniego koła — uzupełnienie z 2026-11-01
+
+Według SYS-079 wykrycie obrotów przedniego koła wybudza ECU do naliczania ODO także przy zgaszonym silniku. Tor detekcji musi działać w śnie, niezależnie od HMI. Wybudzanie HMI od tego zdarzenia pozostaje do ustalenia.
+
+Specyfikacja sekwencji ma uwzględnić impulsy koła w każdej fazie usypiania i ciągłość naliczania zgodną z ustaloną dokładnością. Zasady bezczynności podczas toczenia i po jego zakończeniu, obsługę pierwszych impulsów i filtrację trzeba opracować. Zakres prób: [chronione liczniki](chronione-liczniki.md).
+
 ## Wybrana ścieżka awaryjna
 
 Właściciel zatwierdził sterowanie zasilaniem HMI z ECU. Przy braku potwierdzenia po ograniczonym oczekiwaniu/próbach ECU odłącza część aktywną HMI, rejestruje problem i może zasnąć, jeśli nadal spełnia warunki SYS-059. Ewentualny cykl odzyskania i jego parametry wymagają określenia. Stan awaryjnego odłączenia rozróżniamy od poprawnej sekwencji potwierdzonej przez HMI.
