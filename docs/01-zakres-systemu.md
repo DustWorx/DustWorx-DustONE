@@ -84,6 +84,7 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-068 | ECU ma jeden niezależnie sterowany kanał zapłonu dla silnika jednocylindrowego. Kanał pracuje z wybranym dla danego silnika typem zapłonu w zakresie SYS-067. Obsługa dwóch niezależnie sterowanych kanałów nie jest objęta zakresem. |
 | SYS-069 | Wejście synchronizacji wału korbowego ECU obsługuje czujniki indukcyjne VR oraz czujniki Halla z wyjściem cyfrowym na wspólnej PCB. Parametry elektryczne, zasilanie i zgodność konkretnych czujników wymagają określenia oraz potwierdzenia przez analizę i testy. |
 | SYS-070 | PCB ECU zawiera dodatkowe, odrębne od wejścia wału wejście fazy silnika 4T dla czujnika Halla z wyjściem cyfrowym. Czujnik jest opcjonalny w konfiguracjach niewykorzystujących tego sygnału. Wejście fazy nie obsługuje VR. Parametry elektryczne i zgodność konkretnych czujników pozostają do określenia. |
+| SYS-071 | ECU obsługuje elektroniczną regulację powietrza biegu jałowego IAC z napędem krokowym dla wybranych modeli enduro 4T z przepustnicą na linkę. Zgodne modele i parametry napędów wymagają potwierdzenia przed doborem elektroniki. Konfiguracje niewykorzystujące IAC pracują bez podłączonego napędu. |
 
 ## 3. Podział odpowiedzialności
 
@@ -106,6 +107,10 @@ W odpowiedzi na pytanie 73 właściciel wybrał obsługę CDI oraz zapłonu indu
 ### Synchronizacja wału i fazy 4T — ustalenia właściciela z 2026-11-01
 
 W odpowiedzi na pytanie 75 właściciel wybrał obsługę czujników wału VR oraz Halla z wyjściem cyfrowym na wspólnej PCB (SYS-069). [ADR-005](decisions/adr-005-interfejsy-synchronizacji.md) określa zakres decyzji, otwarte dane i proponowaną weryfikację. W odpowiedzi na pytanie 76 właściciel wybrał dodatkowe, opcjonalne wejście fazy 4T tylko dla Halla z wyjściem cyfrowym (SYS-070). Zakres VR/Hall z SYS-069 dotyczy wejścia wału. Obsługiwane układy znaczników i dekodery pozostają do określenia.
+
+### Regulacja powietrza biegu jałowego IAC — ustalenie właściciela z 2026-11-01
+
+Po sprawdzeniu wyposażenia Beta RR 4T EFI 2016 właściciel w odpowiedzi na poprawione pytanie 77 wybrał obsługę IAC z napędem krokowym dla potwierdzonych modeli enduro (SYS-071). [ADR-006](decisions/adr-006-iac-naped-krokowy.md) zapisuje podstawę, zakres i proponowaną weryfikację. Modele i parametry napędów oraz tor sterowania pozostają do potwierdzenia; nie przyjęto obsługi wszystkich odmian IAC. Sterowanie główną przepustnicą pozostaje mechaniczne według SYS-038.
 
 ### Samodzielność ECU — ustalenie właściciela z 2026-10-25
 
@@ -283,6 +288,7 @@ Do ustalenia: minimalne napięcie i dostępny prąd pod obciążeniem, chemia i 
 | Silnik | Pierwszy motocykl testowy: Beta 300 RR Racing / Race Edition, 2015, wskazany przez właściciela. Według właściciela gaźnik, zapłon i instalacja są fabryczne. Do potwierdzenia podczas inwentaryzacji: parametry i stan osprzętu. Do ustalenia: maksymalne obroty oraz reprezentatywne jednostki 4T, TPI i TBI. Obsługa gaźnika z TPS i bez TPS oraz TPI/TBI według SYS-012, SYS-014 i SYS-015, z warunkami smarowania 2T według SYS-032 i SYS-033. |
 | Zapłon | Jeden niezależny kanał według SYS-068, z obsługą CDI oraz indukcyjnego TCI/IDI według SYS-067. Do określenia: cewki/moduły referencyjne, parametry i interfejsy oraz integracja stopni mocy. |
 | Przepustnica | Mechaniczna, poruszana linką; odczyt TPS zależnie od wyposażenia (SYS-038). Ride-by-wire poza zakresem. Do określenia: parametry, kalibracja i diagnostyka TPS. Gaźnik bez TPS obsługiwany według SYS-014. |
+| Bieg jałowy IAC | Obsługa napędu krokowego w wybranych enduro 4T według SYS-071. Do określenia: modele i parametry napędów, kalibracja, zasoby i stopień mocy, wpływ na rozruch i sen, sterowanie oraz diagnostyka. |
 | Sprzęgło i położenie biegu | Opcjonalne wejścia do danych i wskazań według SYS-041, bez blokad rozrusznika zależnych od tych sygnałów; czujnik biegu ma rozróżniać poszczególne biegi, nie tylko luz. Stopka boczna poza zakresem. Do określenia: czujniki referencyjne, interfejsy, kalibracja, diagnostyka i szczegóły prezentacji danych. |
 | Wykrywanie przewrócenia | Automatyczne wyłączenie silnika według SYS-039; ponowny rozruch po postawieniu motocykla bez cyklu zasilania według SYS-040. Do określenia: tor pomiarowy, lokalizacja, kryteria i czasy detekcji, sposób wyłączenia silnika, diagnostyka oraz szczegółowe warunki odblokowania. |
 | Synchronizacja | Wał: VR oraz Hall z wyjściem cyfrowym według SYS-069. Dodatkowe wejście fazy 4T: tylko Hall z wyjściem cyfrowym, opcjonalne zależnie od konfiguracji (SYS-070). Do określenia: parametry i modele czujników, układy znaczników, odniesienie do GMP, dekodery i reakcje na usterki. |
