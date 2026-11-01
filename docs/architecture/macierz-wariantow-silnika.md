@@ -17,11 +17,11 @@ Warianty 2T podlegają SYS-032/033 i [ADR-001](../decisions/adr-001-smarowanie-2
 
 - Wybrać konkretne modele/roczniki i dokumenty referencyjne reprezentujące powyższe warianty. Beta nie jest jedyną podstawą do określenia wspólnego sprzętu.
 - Ustalić maksymalne obroty, układy znaczników i typy sygnałów synchronizacji; ocenić potrzebę dodatkowego sygnału fazy 4T.
-- Obsługa CDI oraz zapłonu indukcyjnego TCI/IDI jest wymagana według SYS-067 i [ADR-004](../decisions/adr-004-zaplon-cdi-indukcyjny.md). Zidentyfikować cewki/moduły referencyjne, liczbę kanałów, parametry i granicę między ECU i ewentualnym zewnętrznym stopniem mocy. Nazwa wariantu silnika nie rozstrzyga interfejsu elektrycznego; zgodność wymaga analizy i testów.
+- Obsługa CDI oraz zapłonu indukcyjnego TCI/IDI jest wymagana według SYS-067 i [ADR-004](../decisions/adr-004-zaplon-cdi-indukcyjny.md). Liczba niezależnych kanałów zapłonu: jeden według SYS-068. Zidentyfikować cewki/moduły referencyjne, parametry i granicę między ECU i ewentualnym zewnętrznym stopniem mocy. Nazwa wariantu silnika nie rozstrzyga interfejsu elektrycznego; zgodność wymaga analizy i testów.
 - Ustalić liczbę, typy i równoczesne działanie wtryskiwaczy; parametry pompy i power valve. Nie sumować automatycznie kanałów alternatywnych wariantów.
 - Ustalić wymagane czujniki i ich zakresy, zasilanie, dokładność, zabezpieczenia oraz diagnostykę. Szczegółowe braki: [lista I/O](../interfaces/wstepna-lista-io.md).
 - Zamknąć zakres zasilania, warunki rozruchu i równoczesne obciążenia; oddzielnie ocenić kopniak przy osłabionym akumulatorze dla gaźnika i wtrysku.
 
 ## Weryfikacja
 
-Beta: pierwsza integracja wariantu zgodnego z zinwentaryzowanym osprzętem. Pozostałe interfejsy: najpierw analiza dokumentacji i próby stanowiskowe; testy na jednostkach reprezentatywnych w późniejszym etapie. Symulacja elektryczna nie zastępuje walidacji sterowania silnikiem ani smarowania. Liczba kanałów i lista komponentów zostaną określone po zebraniu powyższych danych.
+Beta: pierwsza integracja wariantu zgodnego z zinwentaryzowanym osprzętem. Pozostałe interfejsy: najpierw analiza dokumentacji i próby stanowiskowe; testy na jednostkach reprezentatywnych w późniejszym etapie. Symulacja elektryczna nie zastępuje walidacji sterowania silnikiem ani smarowania. Jeden niezależny kanał zapłonu jest wymagany według SYS-068. Liczby pozostałych kanałów i lista komponentów zostaną określone po zebraniu powyższych danych.
