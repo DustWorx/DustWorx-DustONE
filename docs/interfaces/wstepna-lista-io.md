@@ -11,7 +11,7 @@ Wiązkę i złącze ECU projektujemy od nowa (SYS-045), według potrzebnych funk
 | Funkcja | Miejsce / kierunek | Podstawa | Dane potrzebne do projektu |
 | --- | --- | --- | --- |
 | Zasilanie HMI | Sterowane wyjście zasilania z ECU do HMI | SYS-064, 065, 066 | W normalnym śnie wyjście pozostaje włączone. Kontrolowane odłączenie jako ostateczność przy awarii lub zdefiniowanych ograniczeniach. Podtrzymanie stanu wyjścia podczas snu ECU, pobór toru w obu stanach, zabezpieczenia i wybudzanie przyciskami po odłączeniu do projektu. |
-| Zapłon CDI i indukcyjny TCI/IDI | Wyjścia ECU; realizacja i liczba kanałów otwarte | SYS-001, 002, 015, 067 | Cewki/moduły referencyjne i zgodność potwierdzana analizą/testami; sposób zasilania, energia, prądy, czasy i interfejs sterowania oraz granica integracji stopni mocy. |
+| Zapłon CDI i indukcyjny TCI/IDI | Jeden niezależnie sterowany kanał ECU; realizacja otwarta | SYS-001, 002, 015, 067, 068 | Cewki/moduły referencyjne i zgodność potwierdzana analizą/testami; sposób zasilania, energia, prądy, czasy i interfejs sterowania oraz granica integracji stopni mocy. Liczba pinów i elementów mocy nie wynika wprost z liczby kanałów. |
 | Wtrysk paliwa | Wyjścia ECU; aktywne w wariantach wtryskowych | SYS-012, 015 | Liczba wtryskiwaczy działających jednocześnie, typy, prądy, czasy i sposób sterowania. |
 | Układ pompy paliwa | Sterowanie ECU; zakres toru mocy otwarty | SYS-012, 015 | Pompy referencyjne, prądy robocze/rozruchowe, sposób wyłączania i diagnostyka. |
 | Elektroniczny zawór wydechowy 2T | Sterowanie ECU i ewentualne wejścia zwrotne | SYS-034 | Typ napędu, zasilanie, interfejs, zakres ruchu i sygnały położenia. |
