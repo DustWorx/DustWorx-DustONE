@@ -14,6 +14,8 @@ Doprecyzowanie z odpowiedzi B na pytanie 97: dla motocykla z rozrusznikiem i kop
 
 Uzupełnienie z odpowiedzi A na pytanie 99: dla celu 4 tygodni postoju i późniejszego rozruchu przyjęto temperaturę otoczenia od −10°C do +40°C. Zakres pracy elektroniki podczas jazdy pozostaje do osobnego ustalenia.
 
+Uzupełnienie z odpowiedzi A na pytanie 100: dla celu 4 tygodni postoju przyjęto minimalne pojemności znamionowe 3 Ah AGM i 2 Ah LiFePO4 (C10). Dobór konkretnych modeli, sprawności początkowej oraz potwierdzenie rezerwy w temperaturach granicznych należą do dalszego projektu i prób.
+
 ## Konsekwencje i ograniczenia
 
 - Wspólny wariant sprzętowy ma obsługiwać oba typy bez zmiany obsady. Tor zasilania, jego ochronę i pomiar dobierzemy do uzgodnionych warunków; wykonalność potwierdzimy analizą i próbami.
