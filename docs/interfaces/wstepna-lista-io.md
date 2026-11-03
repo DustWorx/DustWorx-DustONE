@@ -1,6 +1,6 @@
 # Wstępna lista funkcji wejść i wyjść
 
-Data: 2026-10-18. Status: materiał roboczy do architektury, bez zatwierdzonego pinoutu i liczby kanałów. Podstawa: [wymagania systemu](../01-zakres-systemu.md).
+Stan na: 2026-11-03. Status: materiał roboczy do architektury, bez zatwierdzonego pinoutu i liczby kanałów. Przydział funkcji do wariantów i zasobów: [macierz silników](../architecture/macierz-wariantow-silnika.md). Podstawa: [wymagania systemu](../01-zakres-systemu.md).
 
 Wiersz oznacza funkcję, nie pojedynczy pin ani kanał. Kanałów nie sumujemy przed analizą jednoczesnej pracy, wariantów silnika i współdzielenia zasobów. „Opcjonalny czujnik” oznacza możliwość pracy bez niego, przy zachowaniu wymaganej obsługi sprzętowej na PCB.
 
@@ -54,7 +54,6 @@ Poniższe pozycje nie są nowymi zatwierdzonymi wymaganiami właściciela.
 
 | Tor | Cel analizy | Do określenia |
 | --- | --- | --- |
-| Faza cyklu 4T | Ocena potrzeby dodatkowego sygnału synchronizacji | Strategia sterowania i źródło fazy; nie zakładamy obowiązkowego czujnika wałka. |
 | Inne zastosowania temperatury silnika | Ocena kompensacji i funkcji ochronnych poza uzgodnionym sterowaniem wentylatorem | Potrzebne funkcje i kryteria do ustalenia. Pomiar płynu i sterowanie wentylatorem są już wymagane według SYS-043/044. |
 | Ciśnienia wymagane przez wybrane strategie wtrysku | Ustalenie kompletnego zestawu sygnałów | Potrzeba MAP/ciśnienia skrzyni korbowej i interfejsy dla konkretnych jednostek. |
 | Pomiar wartości napięcia zasilania do dodatkowych zastosowań | Diagnostyka i kompensacja zależna od napięcia | Zakres, dokładność i częstotliwość do analizy; nadzór wymagany do odcięcia wentylatora ujęto wyżej jako funkcję potwierdzoną. |

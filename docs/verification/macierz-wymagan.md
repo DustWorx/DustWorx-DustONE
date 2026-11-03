@@ -1,0 +1,133 @@
+# Macierz wymagań, bloków i weryfikacji
+
+Stan na: 2026-11-03. **Pierwszy przydział planistyczny — 94 wymagania, 13 grup weryfikacji.** Treść wymagań ma jedno miejsce źródłowe w [rejestrze SYS](../01-zakres-systemu.md), a ID bloków w [architekturze](../architecture/blokowa-systemu.md).
+
+Wszystkie wymagania pozostają **niezweryfikowane na produkcie**. Poniższe powiązanie nie jest kompletem procedur ani potwierdzeniem kompletności funkcji. Dla każdej próby rozwijamy: wariant/model i konfigurację, rewizje HW/FW/aplikacji, metodę, mierzalne kryteria, wyposażenie/połączenia, kroki, warunki przerwania oraz dowód wyniku. Wymaganie może mieć kilka bloków i prób.
+
+## Grupy do rozwinięcia w procedury
+
+| Grupa | Zakres | Metoda i etap | Kierunek kryterium akceptacji | Otwarte dane przed wykonaniem |
+| --- | --- | --- | --- | --- |
+| V01 | Synchronizacja | Analiza, generator/symulator i stanowisko; później silnik. | Sygnały wału VR/Hall i dodatkowej fazy Hall rozpoznawane zgodnie z przyjętymi dekoderami; granice i utrata synchronizacji. | Modele, zakres prędkości/amplitud, dokładność i czasy reakcji. |
+| V02 | Sterowanie silnikiem i mapy | Analiza osprzętu, testy bloków/stanowiska i właściwy silnik. | Zapłon/wtrysk/napędy działają zgodnie z konfiguracją; zgodność zestawu, przełączanie i strojenie na żywo nie zakłócają wymaganej pracy. | Cewki, wtryskiwacze/napędy, strategie, tolerancje czasowe, reguły map i walidacja smarowania 2T. |
+| V03 | Pomiary i wejścia | Analiza błędów, wzorce/symulatory i rzeczywiste czujniki. | Prawidłowe wartości/stany oraz rozróżnianie braku wyposażenia i usterek według konfiguracji. | Charakterystyki, dokładności, zakresy, progi i diagnostyka wejść. |
+| V04 | START, STOP i przewrócenie | Stanowisko, następnie kontrolowane próby właściwego motocykla. | START podczas przytrzymania, odcięcia i ponowienie, STOP bez HMI/CAN, zatrzymanie po przewróceniu i świadomy ponowny rozruch. | Warunki/czasy, kryterium pracy silnika i przewrócenia, tor STOP, połączenia stanowiska. |
+| V05 | Akcesoria i ochrona energii | Symulacja stanów, stanowisko obciążeń i integracja. | Światła, hamulce, kierunkowskazy, klakson, wentylator i wyjścia realizują przyjęte stany, priorytety i odcięcia. | Prądy, temperatury, progi/czasy, brakujące stany po usterkach/resecie i lista dodatkowych odbiorników. |
+| V06 | Zasilanie, wybudzanie i sen | Bilans, pomiary całego zestawu i próby konfiguracji akumulator/regulator/temperatura. | Wymagane wybudzenia, sen, sterowanie zasilaniem HMI, blokada snu z PC i rezerwa na rozruch po 28 dniach. | Domeny/napięcia, prądy, czasy, modele i stan baterii, kryteria rozruchu oraz kompletne warunki prób. |
+| V07 | CAN, role i autonomia | Stanowisko ECU–HMI, wymuszanie usterek komunikacji i integracja. | ECU działa bez HMI; realizuje rzeczywiste stany/odmowy i uzgodnione reakcje po utracie łączności; poprawna sekwencja snu. | Protokół, częstotliwości i czasy, kryteria utraty/powrotu, odzyskiwanie magistrali. |
+| V08 | HMI i edytowalne ekrany | Przegląd scenariuszy oraz rzeczywiste HMI z konfiguracjami ekranów. | Obsługa przyciskami, odczyt danych/ostrzeżeń, szablony i układy użytkownika zgodnie z zakresem. | Ekrany/menu, priorytety, limity zasobów, czytelność i czasy. |
+| V09 | Windows i operacje serwisowe | Testy aplikacji/protokołu, potem ECU–HMI–Windows. | Jeden punkt obsługi obu urządzeń, konfiguracja/strojenie, narzędzia I/O/CAN i dopuszczanie poleceń w ustalonych stanach. | Przypadki użycia, interfejs, uprawnienia, parametry map, sesje i stany końcowe. |
+| V10 | DTC, czas i trwałość | Wymuszanie usterek, cykle pracy/zaniki zasilania, odczyt i eksport. | DTC/freeze frame, pierwsze/ostatnie wystąpienie, licznik, ważność czasu, wygaszanie i ręczne kasowanie według SYS-019–025. | Katalog, kryteria detekcji, pełna pamięć, tolerancja utraty danych, sposób i dokładność czasu. |
+| V11 | Motogodziny, ODO i dostęp | Wzorce czasu/impulsów, cykle snu/zasilania, próby ról i migracji. | Naliczanie we właściwych warunkach, ODO bez HMI/pracy silnika, trwałość i odrzucenie niedozwolonej korekty; rejestr operacji uprawnionych. | Dokładność, kalibracja koła, zapis po zaniku, model zagrożeń i autoryzacja. |
+| V12 | Firmware, aktualizacja i odzyskiwanie | Przegląd mechanizmów, testy wersji/uprawnień i przerwanych aktualizacji. | Zatwierdzony firmware ECU w trybie użytkowym, zachowany dostęp twórców, aktualizacja obu urządzeń i ochrona danych. | Polityka HMI/starszych wersji, tryby, drogi odzyskiwania, zachowanie po przerwaniu. |
+| V13 | Zakres konstrukcji i instalacja | Inspekcja schematów/BOM/PCB/konfiguracji oraz pomiary i próby kompletnego urządzenia. | Ta sama obsada PCB dla zakresu; właściwa wiązka i montaż, kompaktowość, obudowy/złącza i uzgodnione warunki wodne; jawne wyłączenia funkcji. | Gabaryty, środowisko, parametry prób i kwalifikowane konfiguracje. Inspekcja wyłączenia funkcji jest odrębna od testów funkcji użytkowych. |
+
+Próby dobieramy do wymagania; pełna grupa nie jest automatycznie obowiązkowa dla każdego przypisanego wiersza. Pierwsze stanowisko obejmie Betę, a pozostałe warianty wymagają własnych danych i prób zgodnie z [macierzą silników](../architecture/macierz-wariantow-silnika.md). SYM/stanowisko nie zastępuje walidacji na wymaganym silniku. Zasady i wzór procedury: [weryfikacja](README.md).
+
+## Przydział SYS → blok → grupa
+
+| Wymaganie | Bloki realizujące / współpracujące | Grupy weryfikacji |
+| --- | --- | --- |
+| SYS-001 | ECU-CTRL, ECU-IN, ECU-OUT | V01, V02 |
+| SYS-002 | ECU-CTRL, ECU-IN, ECU-OUT, SYS-INST | V01, V02, V03, V13 |
+| SYS-003 | ECU-CTRL, WIN-APP | V09 |
+| SYS-004 | ECU-CTRL, ECU-OUT | V04, V05 |
+| SYS-005 | ECU-COM, HMI-COM | V07 |
+| SYS-006 | WIN-APP | V09 |
+| SYS-007 | ECU-CTRL, ECU-DATA, WIN-APP | V09 |
+| SYS-008 | HMI-UI, WIN-APP | V08, V09 |
+| SYS-009 | ECU-COM, HMI-COM, WIN-APP | V09, V10 |
+| SYS-010 | ECU-COM, HMI-COM, WIN-APP | V12 |
+| SYS-011 | ECU-COM, ECU-IN, ECU-OUT, WIN-APP | V09 |
+| SYS-012 | ECU-CTRL, ECU-OUT | V02 |
+| SYS-013 | ECU-PWR | V06 |
+| SYS-014 | ECU-IN, ECU-CTRL | V02, V03 |
+| SYS-015 | ECU-IN, ECU-OUT, ECU-CTRL, SYS-INST | V02, V03, V13 |
+| SYS-016 | HMI-UI, HMI-COM, ECU-COM, ECU-CTRL | V05, V07 |
+| SYS-017 | HMI-UI | V08 |
+| SYS-018 | ECU-IN, ECU-DATA, HMI-UI | V08, V11 |
+| SYS-019 | ECU-CTRL, ECU-DATA | V10 |
+| SYS-020 | ECU-DATA, WIN-APP | V10 |
+| SYS-021 | ECU-DATA | V10 |
+| SYS-022 | ECU-DATA | V10 |
+| SYS-023 | ECU-CTRL, ECU-COM, HMI-UI | V08, V10 |
+| SYS-024 | ECU-DATA | V10 |
+| SYS-025 | ECU-DATA, ECU-COM, WIN-APP | V10 |
+| SYS-026 | ECU-COM, WIN-APP | V09 |
+| SYS-027 | ECU-COM, HMI-COM, WIN-APP | V09, V12 |
+| SYS-028 | ECU-CTRL, ECU-DATA, HMI-UI | V02, V09 |
+| SYS-029 | ECU-IN | V03 |
+| SYS-030 | ECU-IN, SYS-INST | V03, V13 |
+| SYS-031 | ECU-IN | V03 |
+| SYS-032 | ECU-CTRL, ECU-OUT, SYS-INST | V13 |
+| SYS-033 | SYS-INST, ECU-CTRL, ECU-OUT | V02, V13 |
+| SYS-034 | ECU-IN, ECU-OUT, ECU-CTRL | V02 |
+| SYS-035 | SYS-INST | V13 |
+| SYS-036 | SYS-INST | V13 |
+| SYS-037 | ECU-CTRL, ECU-OUT | V04 |
+| SYS-038 | ECU-IN, ECU-CTRL, SYS-INST | V02, V13 |
+| SYS-039 | ECU-IN, ECU-CTRL, ECU-OUT | V04 |
+| SYS-040 | ECU-IN, ECU-CTRL, ECU-OUT | V04 |
+| SYS-041 | ECU-IN, ECU-CTRL | V03 |
+| SYS-042 | ECU-IN, ECU-CTRL | V13 |
+| SYS-043 | ECU-IN, ECU-CTRL, ECU-OUT | V05 |
+| SYS-044 | ECU-IN, ECU-CTRL, HMI-UI | V03, V05 |
+| SYS-045 | SYS-INST | V13 |
+| SYS-046 | ECU-CTRL, ECU-IN, ECU-OUT | V07 |
+| SYS-047 | ECU-CTRL, ECU-DATA, ECU-COM | V07 |
+| SYS-048 | ECU-IN, ECU-WAKE, ECU-CTRL, ECU-OUT | V04, V06 |
+| SYS-049 | ECU-IN, ECU-CTRL, ECU-OUT | V04 |
+| SYS-050 | ECU-CTRL, ECU-OUT, ECU-COM | V05, V07 |
+| SYS-051 | ECU-IN, ECU-CTRL, ECU-OUT | V05, V07 |
+| SYS-052 | ECU-CTRL, ECU-OUT, ECU-COM | V05, V07 |
+| SYS-053 | ECU-CTRL, ECU-OUT, ECU-COM | V05, V07 |
+| SYS-054 | ECU-WAKE, ECU-CTRL, HMI-PWR | V04, V06 |
+| SYS-055 | ECU-WAKE, HMI-PWR, HMI-UI | V06 |
+| SYS-056 | ECU-COM, ECU-WAKE, HMI-PWR | V06, V09 |
+| SYS-057 | ECU-COM, ECU-WAKE, ECU-CTRL, HMI-PWR | V06, V09 |
+| SYS-058 | ECU-PWR, HMI-PWR | V06, V09 |
+| SYS-059 | ECU-WAKE, ECU-CTRL, HMI-PWR | V06 |
+| SYS-060 | ECU-IN, ECU-CTRL, ECU-OUT, ECU-WAKE | V05, V06 |
+| SYS-061 | ECU-IN, ECU-CTRL, ECU-OUT | V05, V06 |
+| SYS-062 | ECU-WAKE, ECU-CTRL, HMI-PWR, HMI-COM | V06, V07 |
+| SYS-063 | ECU-COM, HMI-COM, ECU-WAKE | V06, V07 |
+| SYS-064 | ECU-PWR, ECU-WAKE, HMI-PWR | V06 |
+| SYS-065 | ECU-PWR, ECU-WAKE, ECU-COM, ECU-DATA, HMI-PWR | V06, V07, V10 |
+| SYS-066 | ECU-PWR, ECU-WAKE, HMI-PWR | V06 |
+| SYS-067 | ECU-CTRL, ECU-OUT | V02 |
+| SYS-068 | ECU-CTRL, ECU-OUT, SYS-INST | V02, V13 |
+| SYS-069 | ECU-IN | V01 |
+| SYS-070 | ECU-IN | V01 |
+| SYS-071 | ECU-IN, ECU-CTRL, ECU-OUT | V02 |
+| SYS-072 | ECU-CTRL | V13 |
+| SYS-073 | ECU-IN, HMI-UI | V03, V08 |
+| SYS-074 | ECU-CTRL, ECU-DATA, HMI-UI, WIN-APP | V11 |
+| SYS-075 | ECU-IN, ECU-DATA, HMI-UI, WIN-APP | V11 |
+| SYS-076 | ECU-CTRL, ECU-DATA, ECU-COM, WIN-APP | V11, V12 |
+| SYS-077 | ECU-DATA, ECU-COM, WIN-APP | V11 |
+| SYS-078 | ECU-CTRL, ECU-COM, WIN-APP | V12 |
+| SYS-079 | ECU-IN, ECU-WAKE, ECU-DATA | V06, V11 |
+| SYS-080 | ECU-WAKE, HMI-PWR, ECU-DATA | V06, V11 |
+| SYS-081 | ECU-CTRL, ECU-OUT | V05, V06 |
+| SYS-082 | ECU-CTRL, ECU-OUT | V05, V07 |
+| SYS-083 | ECU-CTRL, ECU-OUT | V05 |
+| SYS-084 | ECU-IN, ECU-CTRL, ECU-OUT | V05, V06 |
+| SYS-085 | ECU-CTRL, ECU-OUT, ECU-COM | V05, V09 |
+| SYS-086 | HMI-UI, ECU-CTRL, ECU-COM | V05, V08 |
+| SYS-087 | ECU-IN, ECU-CTRL, ECU-OUT | V05, V06 |
+| SYS-088 | ECU-CTRL, ECU-OUT | V05 |
+| SYS-089 | ECU-IN, ECU-CTRL, ECU-OUT | V05 |
+| SYS-090 | ECU-IN, ECU-CTRL, ECU-OUT, ECU-COM, WIN-APP | V05, V09 |
+| SYS-091 | ECU-CTRL, ECU-OUT, ECU-COM, WIN-APP | V05, V09 |
+| SYS-092 | ECU-PWR, ECU-IN, ECU-CTRL | V06 |
+| SYS-093 | ECU-PWR, ECU-WAKE, HMI-PWR | V04, V06 |
+| SYS-094 | ECU-CTRL, ECU-DATA, ECU-COM, WIN-APP | V02, V09 |
+
+## Sposób utrzymania
+
+- Nowe lub zmienione SYS otrzymuje przydział bloków i weryfikacji w tej samej zmianie dokumentacji.
+- Rozwijana procedura otrzyma własny trwały ID i odsyłacz z odpowiedniego wymagania; ID grupy V nie jest numerem gotowej procedury.
+- Wyniki zapisujemy dla konkretnych rewizji i konfiguracji. Test przeprowadzony na Becie nie zamyka automatycznie wiersza dla 4T/TPI/TBI.
+- Zamknięcie wymagania następuje dopiero po ocenie wymaganych dowodów i ograniczeń. Do tego czasu zachowujemy status niezweryfikowany.
+
+Najbliżej: uzupełnić dane osprzętu, reguły map i stany awaryjne; następnie dopisać mierzalne kryteria i procedury dla projektowanych bloków. [Plan INV Bety](beta-2015-plan-inwentaryzacji.md) dotyczy pozyskania danych wejściowych, nie jest próbą gotowego DustONE.

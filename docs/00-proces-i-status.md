@@ -1,20 +1,20 @@
 # DustONE — ścieżka projektu, status i odpowiedzialności
 
-Stan na: 2026-11-03. Ocena głównej gałęzi, bieżącej dokumentacji oraz uzgodnień właściciela do pytania 100. Ostatnie doprecyzowanie warunków postoju znajduje się w [aktualizacji SYS-093](https://github.com/DustWorx/DustWorx-DustONE/pull/17). Dokument aktualizujemy po przeglądach etapów i istotnych zmianach zakresu.
+Stan na: 2026-11-03. Ocena głównej gałęzi, materiałów roboczych oraz uzgodnień właściciela do pytania 101. Ścieżka projektu i warunki postoju z PR #17/#18 są scalone. Dokument aktualizujemy przy istotnej odpowiedzi lub decyzji, wykonanej pracy, wyniku próby, zmianie zakresu i przeglądzie etapu; wraz z wymaganiami, ADR, interfejsami i weryfikacją.
 
 ## Aktualne miejsce w procesie
 
-**Główny zakres funkcji jest opisany; trwa jego domykanie i przygotowanie architektury systemu.** Równolegle potrzebujemy danych z inwentaryzacji Bety. Formalne zakończenie zakresu wymaga przeglądu opisanych niżej pakietów, a następnie bramki G0.
+**Główny zakres funkcji jest opisany; trwa jego domykanie i opracowanie architektury systemu.** Równolegle potrzebujemy danych z inwentaryzacji Bety. Formalne zakończenie zakresu wymaga przeglądu opisanych niżej pakietów, a następnie bramki G0.
 
 | Obszar | Stan potwierdzony dokumentacją |
 | --- | --- |
-| Wymagania systemowe | 93 wymagania SYS-001–093; będą rozwijane w wymagania bloków i przypadki testowe. |
-| Decyzje | 10 zapisów ADR-001–010, z podstawą uzgodnień. |
+| Wymagania systemowe | 94 wymagania SYS-001–094; pierwszy przydział do bloków i grup weryfikacji gotowy, kryteria i procedury do rozwinięcia. |
+| Decyzje | 11 zapisów ADR-001–011; ostatni zatwierdza strojenie na żywo z Windows. |
 | Zakres wariantów | Macierz 6 wariantów silnika; jest planem obsługi, nie potwierdzeniem zgodności modeli. |
 | Pierwsza jednostka | Beta 300 RR Racing 2015; analiza dokumentów i zdjęć, bez raportów pomiarowych instalacji. |
-| Architektura | Przyjęte role ECU/HMI/Windows, ważne stany pracy i wstępna lista funkcji I/O; pełna architektura i bilanse przed nami. |
+| Architektura | Pierwszy diagram blokowy, funkcje sześciu wariantów i przydział zasobów gotowe jako wersje robocze. Modele, parametry i liczbowe bilanse pozostają otwarte. |
 | Schematy, BOM, PCB i mechanika | W repozytorium brak projektu wykonawczego i zatwierdzonego kompletnego BOM ECU/HMI. |
-| Kod i próby produktu | W repozytorium brak implementacji firmware/Windows i raportów prób DustONE. Istnieją plany oraz szablon procedury. |
+| Kod i próby produktu | W repozytorium brak implementacji firmware/Windows i raportów prób DustONE. Istnieją plany, szablon procedury i przydział 94 wymagań do 13 grup weryfikacji. |
 
 Podstawy: [wymagania](requirements/README.md), [decyzje](decisions/README.md), [macierz silników](architecture/macierz-wariantow-silnika.md), [I/O](interfaces/wstepna-lista-io.md) i [weryfikacja](verification/README.md). Liczba wymagań i pytań nie jest procentem wykonania produktu.
 
@@ -25,10 +25,10 @@ Etapy częściowo prowadzimy równolegle. Wyjście z etapu wynika z gotowych rez
 | Etap | Główny rezultat | Bieżący status | Warunek zakończenia / przejścia |
 | --- | --- | --- | --- |
 | 1. Organizacja | Repozytorium, struktura, zasady zmian i decyzji. | Baza gotowa; utrzymanie ciągłe. | Uzgodnienia i źródła mają miejsce w repozytorium, zmiany są wersjonowane. |
-| 2. Zakres funkcjonalny | Funkcje, wyłączenia, warianty i reguły użytkowania ECU/HMI/Windows. | W trakcie domykania: 8 pakietów przeglądu. | G0: przyjęta baza zakresu, rozstrzygnięte decyzje produktowe i jawne otwarte parametry techniczne. |
+| 2. Zakres funkcjonalny | Funkcje, wyłączenia, warianty i reguły użytkowania ECU/HMI/Windows. | W trakcie domykania: F01/F02 w opracowaniu; 8 pakietów nadal otwartych. | G0: przyjęta baza zakresu, rozstrzygnięte decyzje produktowe i jawne otwarte parametry techniczne. |
 | 3. Inwentaryzacja i dane | Osprzęt, sygnały, obciążenia, zasilanie i przestrzeń montażowa. | Częściowo: dokumenty i zdjęcia Bety; pomiary przed nami. | Dane wystarczają do projektowania odpowiedniego bloku; braki innych wariantów mają plan pozyskania. |
-| 4. Architektura | Diagramy blokowe, I/O dla wariantów, zasoby, zasilanie, interfejsy i stany awaryjne. | Wstępne ustalenia; pełna architektura otwarta. | G1: uzasadniony podział bloków, bilanse, granice interfejsów i zamknięte niewiadome wpływające na projektowane bloki. |
-| 5. Plan weryfikacji | Powiązanie wymaganie → blok → metoda → kryterium → próba → dowód. | Proces, szablon i częściowe plany gotowe; pełna macierz otwarta. | Wymagania mają przydzieloną metodę i etap; procedura wykonawcza jest gotowa przed daną próbą. |
+| 4. Architektura | Diagramy blokowe, I/O dla wariantów, zasoby, zasilanie, interfejsy i stany awaryjne. | Pierwszy diagram i funkcjonalny przydział zasobów gotowe do przeglądu; dane i bilanse otwarte. | G1: uzasadniony podział bloków, bilanse, granice interfejsów i zamknięte niewiadome wpływające na projektowane bloki. |
+| 5. Plan weryfikacji | Powiązanie wymaganie → blok → metoda → kryterium → próba → dowód. | Pierwszy przydział 94 SYS do bloków i 13 grup gotowy; szczegółowe kryteria i procedury otwarte. | Wymagania mają przydzieloną metodę i etap; procedura wykonawcza jest gotowa przed daną próbą. |
 | 6. Komponenty i schematy | Wspólny wybór ważnych części, obliczenia, biblioteki, schematy i BOM. | Projekt wykonawczy nie rozpoczęty. | Przyjęte części, zweryfikowane symbole/footprinty, obliczenia i przegląd schematów/ERC. |
 | 7. Mechanika i instalacja | Obudowy, mocowania, uszczelnienia, złącza i nowa wiązka. | Wymagania wstępne; projekt wykonawczy przed nami. | Zgodność z miejscem montażu, dostępem, złączami, ciepłem i wymaganiami środowiskowymi. |
 | 8. PCB w Fusion | Warstwy, rozmieszczenie, routing, zasilanie/masy i eksporty produkcyjne. | Nie rozpoczęto; CAD wykonuje właściciel przy wsparciu asystenta. | G2: przegląd schematu/BOM/bibliotek, ERC/DRC, mechaniki i planu uruchomienia; gotowy komplet do wykonania. |
@@ -45,16 +45,20 @@ Pozostaje **8 pakietów końcowego przeglądu F01–F08** oraz przegląd zamykaj
 
 Parametry wyliczane z osprzętu, charakterystyki czujników, wartości elementów, konkretne procesory i układy, formaty CAN oraz layout rozwijamy w odpowiednich etapach architektury i projektu wykonawczego. Ważne komponenty nadal wybieramy wspólnie.
 
-## Najbliższy krok rozwoju
+## Bieżące prace i następny rezultat
 
-**Pierwsza pełna architektura blokowa, rozwijana równolegle z domknięciem zakresu i inwentaryzacją.** Najbliższy pakiet pracy asystenta:
+| Zadanie | Status | Dowód / kolejny wynik |
+| --- | --- | --- |
+| W01 — Architektura blokowa | Pierwsza wersja robocza gotowa. | [Diagram i bloki](architecture/blokowa-systemu.md); G1 pozostaje otwarta. |
+| W02 — Funkcje i zasoby wariantów | Pierwsza macierz gotowa; bilans liczbowy w przygotowaniu danych. | [Macierz](architecture/macierz-wariantow-silnika.md); uzupełnić modele, parametry i jednoczesność kanałów. |
+| W03 — Powiązanie wymagań i weryfikacji | Pierwszy przydział gotowy. | [94 SYS → blok → 13 grup](verification/macierz-wymagan.md); kryteria/procedury i dowody przed nami. |
+| W04 — Domknięcie F01/F02 | W opracowaniu; strojenie na żywo przyjęte w SYS-094. | Modele referencyjne i reguły zestawów/edycji/utrwalania; [ADR-011](decisions/adr-011-strojenie-na-zywo.md). |
+| W05 — Inwentaryzacja Bety | Plan jest; brak wyników pomiarowych. | Uzupełnić dane według [planu INV](verification/beta-2015-plan-inwentaryzacji.md) i przygotować właściwe procedury pomiarowe. |
+| W06 — Bilanse przed wyborem komponentów | Dane wejściowe niekompletne. | Prądy/ciepło, czasy, pamięć, interfejsy i budżet snu; dopiero potem porównanie kandydatów. |
 
-1. Diagram ECU–HMI–Windows z blokami zasilania, czuwania, sterowania silnikiem, I/O, danych/RTC, CAN i obsługi serwisowej.
-2. Macierz funkcji i I/O dla wariantów, z jednoczesnością obciążeń, potrzebnymi zasobami i listą danych do potwierdzenia.
-3. Przygotowanie inwentaryzacji i właściwych pomiarów Bety według [planu INV](verification/beta-2015-plan-inwentaryzacji.md); dla pozostałych wariantów analiza modeli i źródeł OEM.
-4. Rozwijana macierz wymagań i weryfikacji oraz rejestr niewiadomych przypisanych do bloków.
+**Kolejny rezultat: uzupełnione dane osprzętu i reguły map, potrzebne do liczbowego bilansu I/O, czasu, pamięci i zasilania.** Asystent przygotowuje analizy modeli/OEM i propozycje; właściciel rozstrzyga decyzje produktowe oraz dostarcza dane/pomiary Bety. Równolegle rozwijamy mierzalne kryteria i procedury właściwych prób.
 
-Po wstępnych bilansach i rozpoznaniu interfejsów przedstawimy kandydatów MCU, zasilania, transceiverów i driverów do wspólnego wyboru. Firmware/CAN/Windows mogą być rozwijane równolegle po określeniu interfejsów. Próba 28-dniowa może trwać równolegle z innymi pracami po uzyskaniu stabilnego snu i gotowych kryteriów.
+Nie zamykamy etapu samym utworzeniem dokumentu. Po uzyskaniu danych dla bloku porównamy MCU, zasilanie, transceivery, drivery i inne ważne komponenty do wspólnego wyboru. Firmware/CAN/Windows mogą być rozwijane równolegle po określeniu interfejsów. Próba 28-dniowa może trwać równolegle z innymi pracami po uzyskaniu stabilnego snu i gotowych kryteriów.
 
 ## Warunki przechodzenia dalej
 

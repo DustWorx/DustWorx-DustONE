@@ -16,6 +16,7 @@ Właściciel projektu wskazał `DustWorx/DustWorx-DustONE` jako repozytorium dok
 - [ADR-008 — dostęp do firmware ECU w użytkowaniu i rozwoju](adr-008-dostep-do-firmware-ecu.md)
 - [ADR-009 — oświetlenie i oszczędzanie energii po zgaszeniu](adr-009-oszczedzanie-energii.md)
 - [ADR-010 — akumulatory AGM i LiFePO4 na wspólnej PCB](adr-010-akumulatory-agm-lifepo4.md)
+- [ADR-011 — strojenie map podczas pracy silnika](adr-011-strojenie-na-zywo.md)
 
 ## Kolejne decyzje
 

@@ -1,6 +1,6 @@
 # Domknięcie zakresu funkcjonalnego
 
-Stan na: 2026-11-03. Roboczy przegląd na podstawie [93 wymagań systemowych](../01-zakres-systemu.md), [mapy 17 obszarów](pokrycie-funkcjonalne.md) i [macierzy wariantów silnika](../architecture/macierz-wariantow-silnika.md). Źródłem zatwierdzonych funkcji pozostaje rejestr SYS i ADR.
+Stan na: 2026-11-03. Roboczy przegląd na podstawie [94 wymagań systemowych](../01-zakres-systemu.md), [mapy 17 obszarów](pokrycie-funkcjonalne.md) i [macierzy wariantów silnika](../architecture/macierz-wariantow-silnika.md). Źródłem zatwierdzonych funkcji pozostaje rejestr SYS i ADR.
 
 ## Ile pozostało
 
@@ -13,7 +13,7 @@ Lista określa pozostałą pracę nad zamknięciem zakresu. Wskazanie tematu do 
 | Pakiet | Co sprawdzić i doprecyzować | Wynik pozwalający zamknąć pakiet |
 | --- | --- | --- |
 | F01 — Komplet funkcji silnikowych | Sprawdzić komplet wymaganych pomiarów i sterowania dla 2T/4T, gaźnika z/bez TPS i TPI/TBI, w tym IAC i power valve. Brakujące funkcje lub wyłączenia wymagają potwierdzenia na podstawie dokumentacji enduro. | Macierz funkcji dla wariantów i jawny zakres docelowej obsługi. |
-| F02 — Mapy, konfiguracja i strojenie | Ustalić zawartość trzech zestawów map oraz operacje dopuszczone przy pracującym silniku: edycję, przesyłanie, zapis i zmianę krytycznej konfiguracji. Przełączanie zestawów podczas pracy jest już przyjęte. | Tabela operacji i warunków ich dopuszczenia. |
+| F02 — Mapy, konfiguracja i strojenie | Ustalić zawartość trzech zestawów map oraz operacje dopuszczone przy pracującym silniku: edycję, przesyłanie, zapis i zmianę krytycznej konfiguracji. Przełączanie zestawów oraz strojenie na żywo wybranych wartości z Windows są przyjęte (SYS-028/094); warunki i utrwalanie pozostają otwarte. | Tabela operacji i warunków ich dopuszczenia. |
 | F03 — Ochrona i reakcje na usterki | Domknąć zachowanie przy utracie istotnych pomiarów, problemach z zasilaniem i restarcie oraz reakcje chroniące silnik. Zachować uzgodnione STOP, rozruch, przewrócenie i działanie bez HMI/CAN. | Macierz sytuacja → reakcja → warunek powrotu. |
 | F04 — Akcesoria i dodatkowe I/O | Określić zastosowania i potrzebną liczbę dodatkowych funkcji wejść/wyjść oraz brakujące zachowanie klaksonu i wyjść konfigurowalnych po utracie HMI/CAN lub restarcie. Prądy i stopnie mocy wyznaczymy w architekturze. | Zamknięta lista funkcji I/O i stanów odbiorników. |
 | F05 — Funkcje i obsługa HMI | Potwierdzić minimalny zestaw danych/ekranów, obsługę menu i map przyciskami, priorytet ostrzeżeń oraz zasady ich prezentacji w ekranach użytkownika. Fizyczne przyciski i edytowalne ekrany są już przyjęte. | Opis ekranów, poleceń i scenariuszy obsługi. |
@@ -55,4 +55,4 @@ Asystent przygotowuje dane, obliczenia i propozycje. Ważne komponenty i istotne
 | Mechanika, PCB i instalacja | Cele użytkowe F08; pomiary, obudowy, złącza i layout w etapach 3/7/8. |
 | Zachowanie przy uszkodzeniach | F03/F07. |
 
-Stan wszystkich F01–F08: oczekuje przeglądu zamykającego. Nie wyznaczono procentu kompletności; zakończenie etapu wynika z wyników pakietów i bramki G0.
+Stan: **F01 i F02 w opracowaniu**, F03–F08 oczekują przeglądu zamykającego. Dla F01 przygotowano [funkcje wariantów i pierwszy przydział zasobów](../architecture/macierz-wariantow-silnika.md); modele, parametry i zgodność pozostają otwarte. Dla F02 zapisano odpowiedź A na pytanie 101 w [ADR-011](../decisions/adr-011-strojenie-na-zywo.md). Żaden pakiet nie jest jeszcze zamknięty. Nie wyznaczono procentu kompletności; zakończenie etapu wynika z wyników pakietów i bramki G0.
