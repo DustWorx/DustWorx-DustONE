@@ -20,3 +20,5 @@ Konfiguracja zasilania uwzględnia osobne profile ochrony AGM/LiFePO4 według SY
 Strojenie na żywo jest przyjęte w SYS-094: wybrane wartości map można zmieniać podczas pracy silnika. ECU rozstrzyga zastosowanie, a aplikacja ma odzwierciedlać rzeczywisty stan; zakres, walidacja i utrwalanie pozostają do specyfikacji: [ADR-011](../../docs/decisions/adr-011-strojenie-na-zywo.md).
 
 Edytor obsługuje maks. trzy niezależne, kompletne zestawy uzgodnionych map jednej konfiguracji silnika (SYS-028). Reguły operacji rozwijamy w [specyfikacji map](../../docs/interfaces/mapy-i-konfiguracja.md).
+
+SYS-095: trwały zapis zmian map wymaga wyraźnego polecenia użytkownika i zgaszonego silnika. ECU rozstrzyga dopuszczenie; samo zastosowanie zmian na żywo nie utrwala ich automatycznie. [Specyfikacja F02](../../docs/interfaces/mapy-i-konfiguracja.md).

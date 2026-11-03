@@ -25,3 +25,5 @@ SYS-092: osobne profile ochrony akumulatorów AGM i LiFePO4 przy wspólnym sprz�
 SYS-094 wymaga przyjmowania i stosowania zmian wybranych wartości map podczas pracy silnika. Zakres, walidację, moment zastosowania, utrwalanie i zachowanie po utracie sesji/zasilania określimy przed implementacją: [ADR-011](../../docs/decisions/adr-011-strojenie-na-zywo.md).
 
 SYS-028 określa maks. trzy niezależne, kompletne zestawy uzgodnionych map jednej konfiguracji silnika. Przydział pamięci i obsługę edycji rozwijamy według [specyfikacji map](../../docs/interfaces/mapy-i-konfiguracja.md).
+
+SYS-095: ECU dopuszcza trwały zapis zmian map wyłącznie przy zgaszonym silniku i po wyraźnym poleceniu użytkownika z Windows. Strojenie na żywo nie uruchamia automatycznego utrwalania. Potwierdzenie zatrzymania, warunki zasilania, przerwanie zapisu i równoczesny rozruch wymagają specyfikacji w [F02](../../docs/interfaces/mapy-i-konfiguracja.md).

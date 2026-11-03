@@ -1,6 +1,6 @@
 # DustONE — ścieżka projektu, status i odpowiedzialności
 
-Stan na: 2026-11-03. Ocena głównej gałęzi, materiałów roboczych oraz uzgodnień właściciela do pytania 102. Ścieżka projektu i warunki postoju z PR #17/#18 są scalone. Dokument aktualizujemy przy istotnej odpowiedzi lub decyzji, wykonanej pracy, wyniku próby, zmianie zakresu i przeglądzie etapu; wraz z wymaganiami, ADR, interfejsami i weryfikacją.
+Stan na: 2026-11-03. Ocena głównej gałęzi, materiałów roboczych oraz uzgodnień właściciela do pytania 103. Ścieżka projektu i warunki postoju z PR #17/#18 są scalone. Dokument aktualizujemy przy istotnej odpowiedzi lub decyzji, wykonanej pracy, wyniku próby, zmianie zakresu i przeglądzie etapu; wraz z wymaganiami, ADR, interfejsami i weryfikacją.
 
 ## Aktualne miejsce w procesie
 
@@ -8,13 +8,13 @@ Stan na: 2026-11-03. Ocena głównej gałęzi, materiałów roboczych oraz uzgod
 
 | Obszar | Stan potwierdzony dokumentacją |
 | --- | --- |
-| Wymagania systemowe | 94 wymagania SYS-001–094; pierwszy przydział do bloków i grup weryfikacji gotowy, kryteria i procedury do rozwinięcia. |
-| Decyzje | 11 zapisów ADR-001–011; ostatni obejmuje strojenie na żywo i niezależne, kompletne zestawy map. |
+| Wymagania systemowe | 95 wymagań SYS-001–095; pierwszy przydział do bloków i grup weryfikacji gotowy, kryteria i procedury do rozwinięcia. |
+| Decyzje | 11 zapisów ADR-001–011; ostatni obejmuje niezależne zestawy, strojenie na żywo oraz trwały zapis na polecenie przy zgaszonym silniku. |
 | Zakres wariantów | Macierz 6 wariantów silnika; jest planem obsługi, nie potwierdzeniem zgodności modeli. |
 | Pierwsza jednostka | Beta 300 RR Racing 2015; analiza dokumentów i zdjęć, bez raportów pomiarowych instalacji. |
 | Architektura | Pierwszy diagram blokowy, funkcje sześciu wariantów i przydział zasobów gotowe jako wersje robocze. Modele, parametry i liczbowe bilanse pozostają otwarte. |
 | Schematy, BOM, PCB i mechanika | W repozytorium brak projektu wykonawczego i zatwierdzonego kompletnego BOM ECU/HMI. |
-| Kod i próby produktu | W repozytorium brak implementacji firmware/Windows i raportów prób DustONE. Istnieją plany, szablon procedury i przydział 94 wymagań do 13 grup weryfikacji. |
+| Kod i próby produktu | W repozytorium brak implementacji firmware/Windows i raportów prób DustONE. Istnieją plany, szablon procedury i przydział 95 wymagań do 13 grup weryfikacji. |
 
 Podstawy: [wymagania](requirements/README.md), [decyzje](decisions/README.md), [macierz silników](architecture/macierz-wariantow-silnika.md), [I/O](interfaces/wstepna-lista-io.md) i [weryfikacja](verification/README.md). Liczba wymagań i pytań nie jest procentem wykonania produktu.
 
@@ -28,7 +28,7 @@ Etapy częściowo prowadzimy równolegle. Wyjście z etapu wynika z gotowych rez
 | 2. Zakres funkcjonalny | Funkcje, wyłączenia, warianty i reguły użytkowania ECU/HMI/Windows. | W trakcie domykania: F01/F02 w opracowaniu; 8 pakietów nadal otwartych. | G0: przyjęta baza zakresu, rozstrzygnięte decyzje produktowe i jawne otwarte parametry techniczne. |
 | 3. Inwentaryzacja i dane | Osprzęt, sygnały, obciążenia, zasilanie i przestrzeń montażowa. | Częściowo: dokumenty i zdjęcia Bety; pomiary przed nami. | Dane wystarczają do projektowania odpowiedniego bloku; braki innych wariantów mają plan pozyskania. |
 | 4. Architektura | Diagramy blokowe, I/O dla wariantów, zasoby, zasilanie, interfejsy i stany awaryjne. | Pierwszy diagram i funkcjonalny przydział zasobów gotowe do przeglądu; dane i bilanse otwarte. | G1: uzasadniony podział bloków, bilanse, granice interfejsów i zamknięte niewiadome wpływające na projektowane bloki. |
-| 5. Plan weryfikacji | Powiązanie wymaganie → blok → metoda → kryterium → próba → dowód. | Pierwszy przydział 94 SYS do bloków i 13 grup gotowy; szczegółowe kryteria i procedury otwarte. | Wymagania mają przydzieloną metodę i etap; procedura wykonawcza jest gotowa przed daną próbą. |
+| 5. Plan weryfikacji | Powiązanie wymaganie → blok → metoda → kryterium → próba → dowód. | Pierwszy przydział 95 SYS do bloków i 13 grup gotowy; szczegółowe kryteria i procedury otwarte. | Wymagania mają przydzieloną metodę i etap; procedura wykonawcza jest gotowa przed daną próbą. |
 | 6. Komponenty i schematy | Wspólny wybór ważnych części, obliczenia, biblioteki, schematy i BOM. | Projekt wykonawczy nie rozpoczęty. | Przyjęte części, zweryfikowane symbole/footprinty, obliczenia i przegląd schematów/ERC. |
 | 7. Mechanika i instalacja | Obudowy, mocowania, uszczelnienia, złącza i nowa wiązka. | Wymagania wstępne; projekt wykonawczy przed nami. | Zgodność z miejscem montażu, dostępem, złączami, ciepłem i wymaganiami środowiskowymi. |
 | 8. PCB w Fusion | Warstwy, rozmieszczenie, routing, zasilanie/masy i eksporty produkcyjne. | Nie rozpoczęto; CAD wykonuje właściciel przy wsparciu asystenta. | G2: przegląd schematu/BOM/bibliotek, ERC/DRC, mechaniki i planu uruchomienia; gotowy komplet do wykonania. |
@@ -51,8 +51,8 @@ Parametry wyliczane z osprzętu, charakterystyki czujników, wartości elementó
 | --- | --- | --- |
 | W01 — Architektura blokowa | Pierwsza wersja robocza gotowa. | [Diagram i bloki](architecture/blokowa-systemu.md); G1 pozostaje otwarta. |
 | W02 — Funkcje i zasoby wariantów | Pierwsza macierz gotowa; bilans liczbowy w przygotowaniu danych. | [Macierz](architecture/macierz-wariantow-silnika.md); uzupełnić modele, parametry i jednoczesność kanałów. |
-| W03 — Powiązanie wymagań i weryfikacji | Pierwszy przydział gotowy. | [94 SYS → blok → 13 grup](verification/macierz-wymagan.md); kryteria/procedury i dowody przed nami. |
-| W04 — Domknięcie F01/F02 | W opracowaniu; strojenie na żywo i maks. trzy pełne, niezależne zestawy przyjęte w SYS-094/028. | Modele referencyjne oraz lista map i reguły edycji/utrwalania; [specyfikacja F02](interfaces/mapy-i-konfiguracja.md). |
+| W03 — Powiązanie wymagań i weryfikacji | Pierwszy przydział gotowy. | [95 SYS → blok → 13 grup](verification/macierz-wymagan.md); kryteria/procedury i dowody przed nami. |
+| W04 — Domknięcie F01/F02 | W opracowaniu; zestawy, strojenie na żywo i trwały zapis na polecenie przy zgaszonym silniku przyjęte w SYS-028/094/095. | Modele referencyjne, lista map oraz zachowanie zmian po utracie sesji/restarcie i warunki techniczne zapisu; [specyfikacja F02](interfaces/mapy-i-konfiguracja.md). |
 | W05 — Inwentaryzacja Bety | Plan jest; brak wyników pomiarowych. | Uzupełnić dane według [planu INV](verification/beta-2015-plan-inwentaryzacji.md) i przygotować właściwe procedury pomiarowe. |
 | W06 — Bilanse przed wyborem komponentów | Dane wejściowe niekompletne. | Prądy/ciepło, czasy, pamięć, interfejsy i budżet snu; dopiero potem porównanie kandydatów. |
 
