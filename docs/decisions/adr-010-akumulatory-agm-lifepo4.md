@@ -10,6 +10,8 @@ Rozważono także ograniczenie platformy do AGM. [Porównanie](../architecture/a
 
 Uzupełnienie z 2026-11-03: w odpowiedzi A na pytanie 96 właściciel przyjął minimum 4 tygodnie postoju bez doładowania z rezerwą na rozruch (SYS-093). Warunki początkowe i brakujące parametry opisuje [budżet energii postoju](../architecture/budzet-energii-postoju.md).
 
+Doprecyzowanie z odpowiedzi B na pytanie 97: dla motocykla z rozrusznikiem i kopniakiem, jak Beta, wystarcza po postoju rozruch kopniakiem; bateria nadal zasila ECU i niezbędny osprzęt. Kryterium konfiguracji bez kopniaka pozostaje do uzgodnienia. Doprecyzowano SYS-093, zachowując jego identyfikator.
+
 ## Konsekwencje i ograniczenia
 
 - Wspólny wariant sprzętowy ma obsługiwać oba typy bez zmiany obsady. Tor zasilania, jego ochronę i pomiar dobierzemy do uzgodnionych warunków; wykonalność potwierdzimy analizą i próbami.
