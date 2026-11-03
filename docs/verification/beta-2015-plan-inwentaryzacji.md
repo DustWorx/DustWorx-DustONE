@@ -1,6 +1,6 @@
 # Beta 300 RR Racing 2015 — plan inwentaryzacji
 
-Data: 2026-10-18. Status: plan wstępny; nie wykonano pomiarów. Cel: dane do [listy I/O](../interfaces/wstepna-lista-io.md), zasilania i integracji, a nie potwierdzenie zgodności gotowego ECU.
+Data opracowania: 2026-10-18. Aktualizacja: 2026-11-03. Status: plan wstępny; nie wykonano pomiarów. Cel: dane do [listy I/O](../interfaces/wstepna-lista-io.md), zasilania i integracji, a nie potwierdzenie zgodności gotowego ECU.
 
 ## Dostępne wyposażenie
 
@@ -20,6 +20,8 @@ Nie potwierdzono dostępności sondy różnicowej/izolowanej ani prądowej. Samo
 Zapłon: [karta modułu Kokusan CU7542](../interfaces/beta-modul-zaplonowy-kokusan-cu7542.md) zawiera odczyt zdjęć IMG_3020.JPG i IMG_3021.JPG oraz deklarowane 8 przewodów starego złącza. Z IMG_3019.JPG odczytano [oznaczenia cewki RC01 / IG5128 / 140822](../interfaces/beta-cewka-zaplonowa-ig5128.md). Parametry cewki i źródła synchronizacji pozostają otwarte. Projektujemy nową wiązkę i nowe złącze ECU (SYS-045); INV-01/03 dotyczą rozpoznania zachowywanych elementów, a nie odtwarzania całego pinoutu starego CDI.
 
 Właściciel potwierdził 2026-10-18, że sterownik wentylatora wykonał samodzielnie i zastosował czujnik [B57301K0103A001](../interfaces/beta-czujnik-temperatury-b57301k0103a001.md). Sterowanie obecnie automatyczne, bez ręcznego włącznika. Według właściciela czujnik jest w króćcu/adapterze przewodu łączącego obie chłodnice, a końcówka ma bezpośredni kontakt z płynem. W INV-01 zebrać schemat modułu, oznaczenia wentylatora, przebieg i kierunek przepływu w miejscu adaptera oraz połączenia; sprawdzić wykonanie montażu. Następnie ocenić wykorzystanie NTC do pomiaru temperatury płynu, zabezpieczenia i prądy roboczy/rozruchowy wentylatora (INV-06). Dokumentacja czujnika jest rozpoznana; nie przeprowadzono weryfikacji montażu ani pomiarów.
+
+Akumulator: [referencja katalogowa i deklaracje właściciela](../interfaces/beta-2015-analiza-dokumentacji.md#akumulator) obejmują odpowiedzi na pytania 93/94 i dane Bety oraz producenta akumulatora. Korzystamy z nich w dalszej analizie; etykieta nie jest warunkiem kontynuowania ustaleń. Przy próbach INV-04 odnotować identyfikację użytej sztuki, jej stan i warunki, a następnie zmierzyć zachowanie zasilania. Dane nominalne nie zastępują tych prób.
 
 | Etap | Zakres | Wynik |
 | --- | --- | --- |

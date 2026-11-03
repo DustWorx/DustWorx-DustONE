@@ -1,6 +1,6 @@
 # Oszczędzanie energii po zgaszeniu silnika
 
-Data: 2026-11-01. Podstawa: odpowiedzi właściciela na pytania 87 i 90, A na pytania 88, 89 i 91 oraz B na pytanie 92, [SYS-083–091](../01-zakres-systemu.md), [ADR-009](../decisions/adr-009-oszczedzanie-energii.md). Zakres funkcjonalny wskazany przez właściciela; parametry i reguły szczegółowe do projektu.
+Data opracowania: 2026-11-01. Aktualizacja: 2026-11-03. Podstawa: odpowiedzi właściciela na pytania 87 i 90, A na pytania 88, 89 i 91 oraz B na pytanie 92, [SYS-083–091](../01-zakres-systemu.md), [ADR-009](../decisions/adr-009-oszczedzanie-energii.md). Zakres funkcjonalny wskazany przez właściciela; parametry i reguły szczegółowe do projektu.
 
 ## Przyjęty zakres
 
@@ -11,6 +11,8 @@ Data: 2026-11-01. Podstawa: odpowiedzi właściciela na pytania 87 i 90, A na py
 - Po zwolnieniu odcięcia mijania/drogowe i dodatkowe odbiorniki użytkownika czekają na nowe polecenie HMI (SYS-088). Pozycyjne wracają według automatyki. Funkcje ochrony silnika, w tym wentylator, kierują się aktualnym zapotrzebowaniem i własnymi zabezpieczeniami (SYS-089, odpowiedź właściciela na pytanie 90). Poprzednie ręczne wymuszenie wentylatora nie wraca automatycznie.
 - Jawnie włączony tryb serwisowy pozwala zwolnić odcięcie bez pracy silnika przy potwierdzonym stabilnym zasilaniu warsztatowym (SYS-090, odpowiedź A na pytanie 91). Sam kabel PC nie wystarcza, a zabezpieczenia wyjść pozostają aktywne. Zwolnienie odcięcia dopuszcza wykonanie testów; samo nie załącza wyjść.
 - Nadal obowiązują: automatyczne pozycyjne po uruchomieniu z uwzględnieniem aktywnego odcięcia (SYS-082/087), wyłączenie oświetlenia przed prawidłowym snem (SYS-081) oraz niezależność ECU od HMI. To osobny stan pracy przed snem, nie zastępstwo koordynowanego usypiania.
+
+Dane motocykla testowego: [referencja akumulatora — AGM 12 V, 4 Ah](../interfaces/beta-2015-analiza-dokumentacji.md#akumulator), na podstawie odpowiedzi właściciela na pytania 93/94 i dokumentacji katalogowej. To punkt wyjścia do pierwszej analizy i prób. Po [porównaniu AGM i LiFePO4](akumulatory-agm-lifepo4-porownanie.md) właściciel wybrał w pytaniu 95 oba typy na wspólnej PCB, z osobnymi profilami i testami zgodności (SYS-092, [ADR-010](../decisions/adr-010-akumulatory-agm-lifepo4.md)). Progi odcięcia/powrotu i pozostałe parametry profili nie są jeszcze dobrane.
 
 ## Rekomendacje i decyzje otwarte
 
