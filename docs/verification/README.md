@@ -27,3 +27,5 @@ Przygotowano [wstępny plan inwentaryzacji Bety Racing 2015](beta-2015-plan-inwe
 Przeanalizowano instrukcję i suplement dostarczone przez właściciela: [wyniki i braki danych](../interfaces/beta-2015-analiza-dokumentacji.md). Rozbieżność oznaczenia rocznika suplementu i wyposażenia TPS wymaga porównania z motocyklem; schemat nie jest jeszcze zweryfikowaną mapą jego złączy.
 
 SYS-092 obejmuje osobne testy zgodności AGM i LiFePO4. [Plan prób zasilania](../architecture/akumulatory-agm-lifepo4-porownanie.md) wskazuje zakres do uszczegółowienia dla obu typów; próby Bety z AGM nie potwierdzają zgodności LiFePO4. Procedury wykonawcze i kryteria powstaną po ustaleniu modeli, granic i stanowisk.
+
+SYS-093 wymaga potwierdzenia rezerwy na rozruch po minimum 4 tygodniach postoju bez doładowania. [Plan weryfikacji postoju](../architecture/budzet-energii-postoju.md) obejmuje pomiar całego poboru, bilans i próbę zestawu ECU/HMI z reprezentatywnymi akumulatorami AGM/LiFePO4. Temperatury, pojemności, metoda i mierzalne kryteria rozruchu pozostają do ustalenia; nie ma wyników prób.

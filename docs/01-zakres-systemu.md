@@ -106,6 +106,7 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-090 | Jawnie włączony tryb serwisowy umożliwia zwolnienie odcięcia oszczędzania bez pracy silnika po potwierdzeniu stabilnego zasilania warsztatowego, do testów odbiorników z aplikacji Windows. Samo podłączenie PC nie zwalnia odcięcia. Zabezpieczenia wyjść pozostają aktywne; parametry kwalifikacji, uprawnienia i cykl życia trybu wymagają specyfikacji. |
 | SYS-091 | Po potwierdzonej utracie sesji Windows podczas aktywnego testu wyjścia ECU nie przyjmuje nowych testów, a rozpoczęty test może dokończyć pracę do wcześniej ustalonego limitu nadzorowanego w ECU. Utrata sesji nie wydłuża limitu. Po zakończeniu testu ECU wycofuje wyjątek serwisowy i wraca do normalnego sterowania. Zabezpieczenia oraz właściwe warunki przerwania pozostają nadrzędne. |
 | SYS-092 | ECU obsługuje zasilanie z motocyklowych akumulatorów AGM oraz LiFePO4 w instalacjach klasy 12 V na wspólnej PCB, bez zmiany obsady komponentów. Oba typy mają osobne profile ochrony akumulatora i podlegają testom zgodności. Modele akumulatorów, zgodne konfiguracje regulatorów, zakresy napięć i temperatur oraz parametry profili wymagają specyfikacji i weryfikacji. |
+| SYS-093 | Po prawidłowym uśpieniu ECU i HMI motocykl ma zachować rezerwę na rozruch po co najmniej 4 tygodniach (28 dniach) postoju bez doładowania i korzystania z motocykla. Warunkiem początkowym jest sprawny, naładowany akumulator zgodny z projektem. Wymaganie obejmuje zatwierdzone konfiguracje AGM i LiFePO4; temperatury, minimalna pojemność, metoda i kryteria rozruchu oraz wynikowy budżet prądu czuwania wymagają określenia i testów. |
 
 ## 3. Podział odpowiedzialności
 
@@ -321,6 +322,10 @@ Dla wybranych modeli przed doborem interfejsów PCB należy zinwentaryzować i s
 ### Akumulatory AGM i LiFePO4 — ustalenie właściciela z 2026-11-03
 
 Po porównaniu wariantów w pytaniu 95 właściciel wybrał A: AGM i LiFePO4, wspólna PCB, osobne profile ochrony i testy zgodności (SYS-092). [ADR-010](decisions/adr-010-akumulatory-agm-lifepo4.md) zapisuje zatwierdzenie i konsekwencje; [porównanie oraz plan prób](architecture/akumulatory-agm-lifepo4-porownanie.md) pozostawiają wartości parametrów i dobór komponentów do projektu. Typ AGM w Becie jest pierwszą konfiguracją testową, a nie ograniczeniem platformy.
+
+### Postój bez doładowania — ustalenie właściciela z 2026-11-03
+
+W odpowiedzi A na pytanie 96 właściciel wybrał minimalnie 4 tygodnie postoju z zachowaniem rezerwy na rozruch, przy sprawnym i początkowo naładowanym akumulatorze, ECU/HMI w uśpieniu i braku korzystania z motocykla (SYS-093). Temperatury, minimalna pojemność i kryteria rozruchu wymagają doprecyzowania. [Budżet energii oraz plan weryfikacji](architecture/budzet-energii-postoju.md) wiążą ten cel z poborem całego systemu i późniejszą próbą produktu.
 
 ### Pożądana funkcja: rozruch kopniakiem przy osłabionym akumulatorze
 

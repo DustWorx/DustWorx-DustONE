@@ -8,6 +8,8 @@ W pytaniu 95 właściciel najpierw poprosił o porównanie wpływu na elektronik
 
 Rozważono także ograniczenie platformy do AGM. [Porównanie](../architecture/akumulatory-agm-lifepo4-porownanie.md) zachowuje tę alternatywę i uzasadnienie rekomendacji: szersza zgodność z konfiguracjami enduro przy projektowanej wspólnej PCB, kosztem dodatkowej kwalifikacji profili i prób.
 
+Uzupełnienie z 2026-11-03: w odpowiedzi A na pytanie 96 właściciel przyjął minimum 4 tygodnie postoju bez doładowania z rezerwą na rozruch (SYS-093). Warunki początkowe i brakujące parametry opisuje [budżet energii postoju](../architecture/budzet-energii-postoju.md).
+
 ## Konsekwencje i ograniczenia
 
 - Wspólny wariant sprzętowy ma obsługiwać oba typy bez zmiany obsady. Tor zasilania, jego ochronę i pomiar dobierzemy do uzgodnionych warunków; wykonalność potwierdzimy analizą i próbami.

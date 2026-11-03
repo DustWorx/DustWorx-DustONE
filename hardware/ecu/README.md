@@ -15,3 +15,5 @@ Dobór MCU i interfejsów programowania musi również uwzględnić [SYS-078 i A
 Tor przedniego koła musi umożliwiać wykrywanie obrotów podczas snu i wybudzanie ECU do naliczania ODO także przy zgaszonym silniku (SYS-075/079, [I/O](../../docs/interfaces/wstepna-lista-io.md)). Czujnik, interfejs i elementy dobierzemy wspólnie; uwzględnić pobór w śnie i obsługę początku ruchu.
 
 SYS-092 wymaga obsługi AGM i motocyklowych LiFePO4 na wspólnej PCB bez zmiany obsady. Zakres wejścia, ochrona, pomiar i budżet czuwania wymagają obliczeń oraz prób dla uzgodnionych konfiguracji; komponenty wybieramy wspólnie. [ADR-010 i plan weryfikacji](../../docs/decisions/adr-010-akumulatory-agm-lifepo4.md).
+
+Budżet poboru ECU, zasilanego z niego HMI i torów czuwania musi wynikać z celu minimum 4 tygodni postoju bez doładowania z rezerwą na rozruch (SYS-093). Limit prądu i warunki pomiaru są do wyliczenia po ustaleniu baterii, temperatur i kryteriów rozruchu: [analiza i plan prób](../../docs/architecture/budzet-energii-postoju.md).
