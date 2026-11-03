@@ -60,7 +60,7 @@ W odpowiedzi na pytanie 93 właściciel wskazał AGM, a na pytanie 94 potwierdzi
 
 [Katalog zastosowań BS Battery 2025](https://bs-battery.com/wp-content/uploads/2025/05/1-CATALOG25_EN_WithApplicationList_V2_LD.pdf) przypisuje modelom Beta Enduro / Enduro Racing RR 300 (2T), roczniki 2013–2016, akumulator BTX5L-BS, numer BS 300618. [Karta producenta BTX5L-BS](https://bs-battery.com/usa/product/btx5l-bs/) podaje AGM/VRLA, 12 V, 4 Ah przy rozładowaniu 10-godzinnym, 4,2 Ah przy 20-godzinnym oraz CCA 80 A. To katalogowy punkt odniesienia dla zgodnego produktu; nie potwierdza marki ani aktualnej sprawności sztuki w motocyklu.
 
-Wartości katalogowe służą do wstępnej analizy zasilania. Progi oszczędzania i minimalne napięcie pracy ECU wymagają doboru oraz prób według BETA-P01 / INV-04; nie wyznaczamy ich z samej pojemności ani CCA. Zakres typów akumulatorów dla całej platformy pozostaje otwarty.
+Wartości katalogowe służą do wstępnej analizy zasilania. Progi oszczędzania i minimalne napięcie pracy ECU wymagają doboru oraz prób według BETA-P01 / INV-04; nie wyznaczamy ich z samej pojemności ani CCA. Dla całej platformy właściciel zatwierdził później AGM i LiFePO4 na wspólnej PCB, z osobnymi profilami i testami zgodności ([SYS-092 i ADR-010](../decisions/adr-010-akumulatory-agm-lifepo4.md)); zgodne modele, regulatory i parametry pozostają do projektu.
 
 ## 4. Brakujące dane i proponowane punkty pomiarowe
 

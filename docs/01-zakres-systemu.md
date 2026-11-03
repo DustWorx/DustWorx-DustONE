@@ -26,7 +26,7 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-010 | Aplikacja umożliwia aktualizację oprogramowania ECU i HMI. |
 | SYS-011 | Development tool w aplikacji Windows umożliwia podgląd danych i logów, testy wejść/wyjść oraz analizę, wysyłanie i rejestrowanie ramek CAN. Debugowanie kodu przez debugger procesora odbywa się w osobnym środowisku programistycznym. |
 | SYS-012 | ECU obsługuje silniki z gaźnikiem oraz z wtryskiem paliwa. Rodzaje i parametry układów wtryskowych pozostają do ustalenia. |
-| SYS-013 | ECU jest przeznaczone do instalacji motocykla z akumulatorem o napięciu nominalnym 12 V. Zakres napięć pracy i zachowanie podczas rozruchu pozostają do określenia. |
+| SYS-013 | ECU jest przeznaczone do instalacji elektrycznej motocykla klasy 12 V, z akumulatorem AGM lub LiFePO4 według SYS-092. Zakres napięć pracy i zachowanie podczas rozruchu pozostają do określenia. |
 | SYS-014 | ECU obsługuje silniki z gaźnikiem bez TPS oraz z gaźnikiem z TPS (czujnikiem położenia przepustnicy). |
 | SYS-015 | Wspólna PCB ECU zawiera sprzęt do obsługi wariantów gaźnikowych oraz wtrysku TPI/TBI, bez przeróbek PCB ani wymiany obsady komponentów między zastosowaniami. Warianty 2T podlegają warunkom smarowania SYS-032 i SYS-033. Modele, roczniki i parametry elektryczne pozostają do określenia; zgodność konwersji TPI nie została potwierdzona. |
 | SYS-016 | Przyciski obsługi HMI oraz przełączniki kierownicy sterujące akcesoriami, np. światłami i kierunkowskazami, są podłączone do HMI. HMI przekazuje żądania sterowania akcesoriami do ECU przez CAN, a ECU steruje odbiornikami. START i STOP mają niezależne od HMI połączenia według SYS-048 i SYS-037. |
@@ -105,6 +105,7 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-089 | Po wyjściu z oszczędzania uzgodnione automatyczne funkcje ochrony silnika, w tym wentylator, działają według aktualnego zapotrzebowania i własnych zabezpieczeń, bez wymogu nowego polecenia HMI. Ręczne wymuszenie wentylatora nie jest automatycznie przywracane; automatyka temperatury działa niezależnie od tego wymuszenia. Nadal obowiązują ograniczenia właściwe dla danej funkcji, w tym SYS-060/061 po zgaszeniu silnika. |
 | SYS-090 | Jawnie włączony tryb serwisowy umożliwia zwolnienie odcięcia oszczędzania bez pracy silnika po potwierdzeniu stabilnego zasilania warsztatowego, do testów odbiorników z aplikacji Windows. Samo podłączenie PC nie zwalnia odcięcia. Zabezpieczenia wyjść pozostają aktywne; parametry kwalifikacji, uprawnienia i cykl życia trybu wymagają specyfikacji. |
 | SYS-091 | Po potwierdzonej utracie sesji Windows podczas aktywnego testu wyjścia ECU nie przyjmuje nowych testów, a rozpoczęty test może dokończyć pracę do wcześniej ustalonego limitu nadzorowanego w ECU. Utrata sesji nie wydłuża limitu. Po zakończeniu testu ECU wycofuje wyjątek serwisowy i wraca do normalnego sterowania. Zabezpieczenia oraz właściwe warunki przerwania pozostają nadrzędne. |
+| SYS-092 | ECU obsługuje zasilanie z motocyklowych akumulatorów AGM oraz LiFePO4 w instalacjach klasy 12 V na wspólnej PCB, bez zmiany obsady komponentów. Oba typy mają osobne profile ochrony akumulatora i podlegają testom zgodności. Modele akumulatorów, zgodne konfiguracje regulatorów, zakresy napięć i temperatur oraz parametry profili wymagają specyfikacji i weryfikacji. |
 
 ## 3. Podział odpowiedzialności
 
@@ -317,13 +318,17 @@ Właściciel potwierdził nową wiązkę motocykla i nowe złącze ECU, dobrane 
 
 Dla wybranych modeli przed doborem interfejsów PCB należy zinwentaryzować i sprawdzić parametry czujników, cewek, wtryskiwaczy oraz pozostałych elementów wykonawczych. Wynik analizy ma wskazywać elementy zachowywane, potrzebne adaptacje i ewentualne wymiany wraz z uzasadnieniem.
 
+### Akumulatory AGM i LiFePO4 — ustalenie właściciela z 2026-11-03
+
+Po porównaniu wariantów w pytaniu 95 właściciel wybrał A: AGM i LiFePO4, wspólna PCB, osobne profile ochrony i testy zgodności (SYS-092). [ADR-010](decisions/adr-010-akumulatory-agm-lifepo4.md) zapisuje zatwierdzenie i konsekwencje; [porównanie oraz plan prób](architecture/akumulatory-agm-lifepo4-porownanie.md) pozostawiają wartości parametrów i dobór komponentów do projektu. Typ AGM w Becie jest pierwszą konfiguracją testową, a nie ograniczeniem platformy.
+
 ### Pożądana funkcja: rozruch kopniakiem przy osłabionym akumulatorze
 
 Intencja właściciela: umożliwić rozruch silnika kopniakiem, gdy podłączony akumulator 12 V nie wystarcza do użycia rozrusznika, ale nadal zasila elektronikę. Praca bez energii z akumulatora nie jest wymagana w ramach tej funkcji.
 
 Status: funkcja pożądana, do analizy wykonalności i określenia mierzalnych kryteriów. Nie jest jeszcze gwarantowaną zdolnością systemu. Ocena ma objąć cały tor rozruchu: ECU, czujniki, zapłon oraz — przy wtrysku — układ paliwowy. Wariant gaźnikowy i wtryskowy należy ocenić oddzielnie.
 
-Do ustalenia: minimalne napięcie i dostępny prąd pod obciążeniem, chemia i stan akumulatora, temperatura, obciążenia aktywne podczas rozruchu oraz warunki mechaniczne rozruchu. Nie przyjmujemy arbitralnego progu 12 V jako granicy działania rozrusznika. Napięcie spoczynkowe nie zastępuje oceny pod obciążeniem: [Yuasa — badanie akumulatora ołowiowego](https://www.yuasabatteries.com.au/resources/expert-advice/how-to-test-a-lead-acid-battery).
+Do ustalenia: minimalne napięcie i dostępny prąd pod obciążeniem, modele i profile AGM/LiFePO4 według SYS-092, stan akumulatora, temperatura, obciążenia aktywne podczas rozruchu oraz warunki mechaniczne rozruchu. Nie przyjmujemy arbitralnego progu 12 V jako granicy działania rozrusznika. Napięcie spoczynkowe nie zastępuje oceny pod obciążeniem: [Yuasa — badanie akumulatora ołowiowego](https://www.yuasabatteries.com.au/resources/expert-advice/how-to-test-a-lead-acid-battery).
 
 ## 4. Decyzje potrzebne przed doborem sprzętu
 
@@ -339,7 +344,7 @@ Do ustalenia: minimalne napięcie i dostępny prąd pod obciążeniem, chemia i 
 | Układ paliwowy | Rodzaj układu wtryskowego, liczba i parametry wtryskiwaczy, sterowanie pompą paliwa. Dla 2T warunek pracy na mieszance według SYS-033; konwersja TPI wymaga osobnej oceny. |
 | Smarowanie 2T | Pompa dozująca olej wyłączona z ECU (SYS-032). Montaż po przystosowaniu silnika do mieszanki (SYS-033); sposób i walidacja konwersji TPI pozostają otwarte. |
 | Zawór wydechowy 2T | Sterowanie elektronicznym power valve wymagane według SYS-034. Do określenia: typ napędu i interfejs, parametry zasilania i sterowania, sygnały położenia, kalibracja, diagnostyka oraz zachowanie przy usterce. |
-| Instalacja | Akumulator nominalnie 12 V (SYS-013). Do określenia: zakres napięć, chemia akumulatora i warunki rozruchu. Pożądany rozruch kopniakiem z osłabionym, podłączonym akumulatorem; rozruch bez energii z akumulatora nie jest wymagany. |
+| Instalacja | Instalacja klasy 12 V z AGM lub LiFePO4, wspólna PCB i osobne profile (SYS-013/092). Do określenia: zgodne modele i regulatory, zakres napięć, parametry profili i warunki rozruchu. Pożądany rozruch kopniakiem z osłabionym, podłączonym akumulatorem; rozruch bez energii z akumulatora nie jest wymagany. |
 | Akcesoria | Zakres rozszerzony według SYS-004. Przednie i tylne pozycyjne włączają się automatycznie po uruchomieniu silnika; mijania i drogowe uruchamia użytkownik z HMI (SYS-082). Do określenia: liczba niezależnych kanałów i wyjść konfigurowalnych, prądy robocze i rozruchowe, sterowanie bezpośrednie lub przez przekaźniki/styczniki, zabezpieczenia i diagnostyka wyjść. |
 | Pomiary | Dodatkowy zakres według SYS-029–SYS-031: ciśnienie atmosferyczne i temperatura na PCB, tor ciśnienia paliwa oraz wejście ciśnienia oleju 0/1. Temperatura dolotu pochodzi z IAT, temperatura PCB jest osobnym pomiarem ECU. Do określenia: parametry, czujniki, dokładność, zabezpieczenia, kalibracja i diagnostyka. EGT i lambda są pomiarami zewnętrznymi podczas strojenia. |
 | HMI | Odczyt przełączników kierownicy i polecenia do ECU przez CAN (SYS-016); menu i ekrany obsługiwane fizycznymi przyciskami, ekran bez dotyku (SYS-017). Główny panel zastępujący licznik (SYS-018). Do ustalenia: ekran, liczba i rodzaje wejść przycisków, szczegółowy zakres danych prezentowanych z ECU, trwałość danych przebiegu i ograniczenia zasobów ekranów. Zakres personalizacji według SYS-008; do określenia edytor, format projektu ekranów oraz prezentacja ostrzeżeń w układach użytkownika. |

@@ -20,4 +20,4 @@ Analizy architektoniczne:
 - [Wyjścia akcesoriów — porównanie realizacji](wyjscia-akcesoriow-porownanie.md): preferowany kierunek to SmartFET-y na PCB ECU; podział i parametry kanałów oraz wykonalność pełnej integracji pozostają do analizy.
 - [Chronione liczniki motogodzin i ODO](chronione-liczniki.md): zatwierdzone dane i ograniczenia użytkownika, wpływ na sprzęt/firmware oraz plan prób; inicjalizacja, migracja i mechanizmy ochrony otwarte.
 - [Oszczędzanie energii po zgaszeniu silnika](oszczedzanie-energii.md): przejście na pozycyjne, nadzór akumulatora, wyłączenie zbędnych odbiorników, rekomendacje i plan prób (SYS-083/084).
-- [Akumulatory AGM i LiFePO4 — porównanie zakresu](akumulatory-agm-lifepo4-porownanie.md): wpływ na wspólną PCB, profile, zgodność ładowania i testy; analiza po odpowiedzi C na pytanie 95, wybór zakresu pozostaje otwarty.
+- [Akumulatory AGM i LiFePO4 — porównanie zakresu](akumulatory-agm-lifepo4-porownanie.md): po porównaniu właściciel wybrał oba typy na wspólnej PCB, z osobnymi profilami i testami zgodności (SYS-092, ADR-010); parametry i dobór toru pozostają otwarte.

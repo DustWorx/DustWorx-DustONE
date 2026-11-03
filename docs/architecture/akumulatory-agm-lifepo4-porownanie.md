@@ -1,6 +1,6 @@
 # Akumulatory AGM i LiFePO4 — porównanie zakresu
 
-Data: 2026-11-03. Status: analiza do decyzji właściciela; odpowiedź C na pytanie 95 zleca porównanie, nie zatwierdza obsługi obu typów. Powiązania: [zakres systemu](../01-zakres-systemu.md), [zarządzanie energią](oszczedzanie-energii.md), [referencja Bety](../interfaces/beta-2015-analiza-dokumentacji.md#akumulator). Nie wybrano komponentów ani parametrów zasilania.
+Data: 2026-11-03. Status: po porównaniu właściciel w pytaniu 95 wybrał A — obsługę obu typów na wspólnej PCB, z osobnymi profilami i testami zgodności ([SYS-092 i ADR-010](../decisions/adr-010-akumulatory-agm-lifepo4.md)). Realizacja i parametry pozostają do projektu. Powiązania: [zakres systemu](../01-zakres-systemu.md), [zarządzanie energią](oszczedzanie-energii.md), [referencja Bety](../interfaces/beta-2015-analiza-dokumentacji.md#akumulator). Nie wybrano komponentów ani parametrów zasilania.
 
 ## Punkt odniesienia
 
@@ -26,9 +26,9 @@ Profil ochrony ECU ogranicza odbiorniki DustONE; nie zastępuje zgodnego układu
 
 Zabezpieczenia zależą od modelu. Przykładowo [EarthX ETX](https://earthxbatteries.com/our-batteries/battery-charging/) odłącza obciążenie przy nadmiernym rozładowaniu; nie przypisujemy tej funkcji każdemu LiFePO4 ani BSLi-02. Gdy na zaciskach nie ma dostępnej energii, wybudzenie ECU przez START, koło, HMI lub kabel PC nie może samo zapewnić zasilania. Funkcja kopniaka dotyczy osłabionej, nadal zasilającej baterii; wariant pracy bez jej energii nie jest wymagany. Charakter powrotu zasilania oraz możliwych przepięć wymaga oceny konkretnego generatora/regulatora.
 
-## Plan weryfikacji po wyborze zakresu
+## Plan weryfikacji do uszczegółowienia
 
-To zakres do późniejszych procedur, bez wykonanych prób. Przed testem ustalimy połączenia, temperatury, obciążenia, granice i dowody według [zasad weryfikacji](../verification/README.md).
+Plan obejmuje oba typy zgodnie z SYS-092. To zakres do późniejszych procedur, bez wykonanych prób. Przed testem ustalimy połączenia, temperatury, obciążenia, granice i dowody według [zasad weryfikacji](../verification/README.md).
 
 | Próba / etap | AGM | Dodatkowo przy LiFePO4 | Powiązanie |
 | --- | --- | --- | --- |
@@ -41,8 +41,8 @@ To zakres do późniejszych procedur, bez wykonanych prób. Przed testem ustalim
 
 Zakłócenia i utratę zasilania przygotujemy najpierw na stanowisku z kontrolowanym źródłem i obciążeniem. Nie jest to polecenie odłączania akumulatora od pracującego motocykla. Wspólne testy logiki można współdzielić, ale próby granic zasilania i bilansu energii trzeba wykonać dla każdego deklarowanego zakresu.
 
-## Rekomendacja do uzgodnienia
+## Decyzja właściciela i dalszy projekt
 
-Obsługa AGM i motocyklowych LiFePO4 na tej samej PCB, z jawnym profilem i kwalifikacją konkretnych konfiguracji. Najpierw wykorzystać obecną Betę z AGM, a walidację LiFePO4 przygotować na osobnym akumulatorze/stanowisku. Ostateczny dobór toru, komponentów i zgodnych modeli przeprowadzimy wspólnie.
+Właściciel zatwierdził obsługę AGM i motocyklowych LiFePO4 na tej samej PCB, z osobnymi profilami ochrony i testami zgodności. Wybór i utrwalanie profilu oraz kwalifikacja konkretnych konfiguracji wymagają projektu. Najpierw wykorzystać obecną Betę z AGM, a walidację LiFePO4 przygotować na osobnym akumulatorze/stanowisku. Ostateczny dobór toru, komponentów i zgodnych modeli przeprowadzimy wspólnie.
 
-Decyzja po porównaniu, modele referencyjne LiFePO4, zakres temperatur/napięć, dopuszczalny prąd czuwania, czas postoju i mierzalne kryteria pozostają otwarte. Odpowiedź C nie dodaje nowego wymagania systemowego.
+Modele referencyjne LiFePO4, zakres temperatur/napięć, dopuszczalny prąd czuwania, czas postoju i mierzalne kryteria pozostają otwarte. Zatwierdzenie po porównaniu zapisuje ADR-010; sama wcześniejsza odpowiedź C dotyczyła przygotowania analizy.
