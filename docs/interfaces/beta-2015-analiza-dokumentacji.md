@@ -1,6 +1,6 @@
 # Beta RR 300 Racing 2015 - analiza dokumentacji
 
-Data: 2026-10-18. Status: analiza dokumentów i deklaracji właściciela; bez oględzin i pomiarów motocykla. Powiązania: [lista I/O](wstepna-lista-io.md), [plan inwentaryzacji](../verification/beta-2015-plan-inwentaryzacji.md).
+Data opracowania: 2026-10-18. Aktualizacja: 2026-11-03. Status: analiza dokumentów i deklaracji właściciela; bez oględzin i pomiarów motocykla. Powiązania: [lista I/O](wstepna-lista-io.md), [plan inwentaryzacji](../verification/beta-2015-plan-inwentaryzacji.md).
 
 ## 1. Źródła i zgodność
 
@@ -34,7 +34,7 @@ Zauważono błąd angielskiej legendy B: pozycje 21 i 24 powtarzają błędne ok
 
 | Element / funkcja | Numer A, s. 24-25 | Numer B, s. 4-6 | Dane dokumentowe / brakujące |
 | --- | --- | --- | --- |
-| Akumulator | 26; zaciski 25/32 | 29; zaciski 28/33 | W obu legendach 12 V, 4 Ah; aktualny model i chemia do sprawdzenia. |
+| Akumulator | 26; zaciski 25/32 | 29; zaciski 28/33 | Dokumenty A/B: 12 V, 4 Ah. Według właściciela (odpowiedź na pytanie 93) obecnie zamontowany jest AGM. Producent, pełny model i pojemność obecnego akumulatora do sprawdzenia; 4 Ah z instrukcji nie jest potwierdzeniem jego pojemności. |
 | Generator / regulator | 27 / 18 | 30 / 18 | Oznaczenia, uzwojenia, prostowanie i przebiegi do identyfikacji. |
 | Moduł zapłonowy / cewka / świeca | 33 / 34 / 35 | 35 / 36 / 37 | Zdjęcia: [Kokusan CU7542, etykieta Beta 026400038 300](beta-modul-zaplonowy-kokusan-cu7542.md) oraz [cewka IG5128](beta-cewka-zaplonowa-ig5128.md). Parametry energii i sterowania do ustalenia; nowa wiązka i złącze ECU według SYS-045. |
 | Przekaźnik / silnik rozrusznika | 31 / 30 | 31 / 32 | Prąd cewki, tłumienie przepięć i tor dużego prądu do ustalenia. |
