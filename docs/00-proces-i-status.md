@@ -1,6 +1,6 @@
 # DustONE — ścieżka projektu, status i odpowiedzialności
 
-Stan na: 2026-11-03. Ocena głównej gałęzi, materiałów roboczych oraz uzgodnień właściciela do pytania 101. Ścieżka projektu i warunki postoju z PR #17/#18 są scalone. Dokument aktualizujemy przy istotnej odpowiedzi lub decyzji, wykonanej pracy, wyniku próby, zmianie zakresu i przeglądzie etapu; wraz z wymaganiami, ADR, interfejsami i weryfikacją.
+Stan na: 2026-11-03. Ocena głównej gałęzi, materiałów roboczych oraz uzgodnień właściciela do pytania 102. Ścieżka projektu i warunki postoju z PR #17/#18 są scalone. Dokument aktualizujemy przy istotnej odpowiedzi lub decyzji, wykonanej pracy, wyniku próby, zmianie zakresu i przeglądzie etapu; wraz z wymaganiami, ADR, interfejsami i weryfikacją.
 
 ## Aktualne miejsce w procesie
 
@@ -9,7 +9,7 @@ Stan na: 2026-11-03. Ocena głównej gałęzi, materiałów roboczych oraz uzgod
 | Obszar | Stan potwierdzony dokumentacją |
 | --- | --- |
 | Wymagania systemowe | 94 wymagania SYS-001–094; pierwszy przydział do bloków i grup weryfikacji gotowy, kryteria i procedury do rozwinięcia. |
-| Decyzje | 11 zapisów ADR-001–011; ostatni zatwierdza strojenie na żywo z Windows. |
+| Decyzje | 11 zapisów ADR-001–011; ostatni obejmuje strojenie na żywo i niezależne, kompletne zestawy map. |
 | Zakres wariantów | Macierz 6 wariantów silnika; jest planem obsługi, nie potwierdzeniem zgodności modeli. |
 | Pierwsza jednostka | Beta 300 RR Racing 2015; analiza dokumentów i zdjęć, bez raportów pomiarowych instalacji. |
 | Architektura | Pierwszy diagram blokowy, funkcje sześciu wariantów i przydział zasobów gotowe jako wersje robocze. Modele, parametry i liczbowe bilanse pozostają otwarte. |
@@ -52,7 +52,7 @@ Parametry wyliczane z osprzętu, charakterystyki czujników, wartości elementó
 | W01 — Architektura blokowa | Pierwsza wersja robocza gotowa. | [Diagram i bloki](architecture/blokowa-systemu.md); G1 pozostaje otwarta. |
 | W02 — Funkcje i zasoby wariantów | Pierwsza macierz gotowa; bilans liczbowy w przygotowaniu danych. | [Macierz](architecture/macierz-wariantow-silnika.md); uzupełnić modele, parametry i jednoczesność kanałów. |
 | W03 — Powiązanie wymagań i weryfikacji | Pierwszy przydział gotowy. | [94 SYS → blok → 13 grup](verification/macierz-wymagan.md); kryteria/procedury i dowody przed nami. |
-| W04 — Domknięcie F01/F02 | W opracowaniu; strojenie na żywo przyjęte w SYS-094. | Modele referencyjne i reguły zestawów/edycji/utrwalania; [ADR-011](decisions/adr-011-strojenie-na-zywo.md). |
+| W04 — Domknięcie F01/F02 | W opracowaniu; strojenie na żywo i maks. trzy pełne, niezależne zestawy przyjęte w SYS-094/028. | Modele referencyjne oraz lista map i reguły edycji/utrwalania; [specyfikacja F02](interfaces/mapy-i-konfiguracja.md). |
 | W05 — Inwentaryzacja Bety | Plan jest; brak wyników pomiarowych. | Uzupełnić dane według [planu INV](verification/beta-2015-plan-inwentaryzacji.md) i przygotować właściwe procedury pomiarowe. |
 | W06 — Bilanse przed wyborem komponentów | Dane wejściowe niekompletne. | Prądy/ciepło, czasy, pamięć, interfejsy i budżet snu; dopiero potem porównanie kandydatów. |
 

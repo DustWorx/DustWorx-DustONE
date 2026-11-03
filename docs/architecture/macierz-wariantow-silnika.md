@@ -67,7 +67,7 @@ Wspólne dla platformy pozostają także funkcje motocykla: START/STOP, dwa hamu
 | Pomiary | Zestaw funkcji z listy I/O, w tym barometr i temperatura ECU na PCB. | Liczba ADC/pinów/zasilaczy czujników, rozdzielczość i błędy torów. |
 | Akcesoria i HMI | Zdefiniowane funkcje oraz sterowany tor zasilania HMI. | Liczba wyjść, prądy, podział high-side/low-side, ciepło i granice awaryjne. |
 | CAN i PC | CAN ECU–HMI oraz jeden przewodowy punkt standardowej obsługi obu urządzeń. | Liczba kontrolerów/transceiverów/interfejsów, przepustowość i lokalizacja mostka. |
-| Mapy, dane i zegar | Maks. trzy zestawy, strojenie na żywo SYS-094, DTC i chronione liczniki. | Wielkości pamięci, organizacja dostępu i zapisów, zasoby czasowe oraz mechanizmy ochrony. |
+| Mapy, dane i zegar | Maks. trzy niezależne, kompletne zestawy uzgodnionych map (SYS-028), strojenie na żywo SYS-094, DTC i chronione liczniki. | Wielkości pamięci, organizacja dostępu i zapisów, zasoby czasowe oraz mechanizmy ochrony. |
 
 To wejście do bilansu, nie liczbowy bilans MCU ani pinout. Najpierw uzupełniamy parametry i jednoczesność, następnie porównujemy procesory i układy z właścicielem.
 

@@ -23,3 +23,5 @@ SYS-090: jawny tryb serwisowy dopuszcza zwolnienie odcięcia do testów bez prac
 SYS-092: osobne profile ochrony akumulatorów AGM i LiFePO4 przy wspólnym sprzęcie. Do projektu: parametry, wybór i zapis profilu oraz jego współpraca z istniejącymi zasadami oszczędzania i serwisu. Zatwierdzenie i otwarte szczegóły: [ADR-010](../../docs/decisions/adr-010-akumulatory-agm-lifepo4.md).
 
 SYS-094 wymaga przyjmowania i stosowania zmian wybranych wartości map podczas pracy silnika. Zakres, walidację, moment zastosowania, utrwalanie i zachowanie po utracie sesji/zasilania określimy przed implementacją: [ADR-011](../../docs/decisions/adr-011-strojenie-na-zywo.md).
+
+SYS-028 określa maks. trzy niezależne, kompletne zestawy uzgodnionych map jednej konfiguracji silnika. Przydział pamięci i obsługę edycji rozwijamy według [specyfikacji map](../../docs/interfaces/mapy-i-konfiguracja.md).

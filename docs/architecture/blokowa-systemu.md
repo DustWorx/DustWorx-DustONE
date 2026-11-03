@@ -79,7 +79,7 @@ ID są oznaczeniami architektury, bez przydziału konkretnych układów scalonyc
 - START i STOP pozostają niezależne od HMI/CAN. Ruch koła wybudza ECU do naliczania ODO i HMI do prezentacji; nie jest żądaniem rozruchu (SYS-037/048/079/080).
 - Normalny sen pozostawia zasilanie HMI z ECU włączone. Awaryjne odłączenie części aktywnej nie może pozbawić przycisków funkcji wybudzania (SYS-064–066). Potrzebna jest analiza domen zasilania; nie wybrano jeszcze rozwiązania.
 - Wspólna, jednakowo obsadzona PCB obsługuje uzgodnione warianty. [Macierz wariantów i zasobów](macierz-wariantow-silnika.md) jest podstawą przydziału I/O; jeden kanał zapłonu nie oznacza jednego wspólnego stopnia mocy CDI/TCI.
-- Maksymalnie trzy zestawy map, ich przełączanie oraz strojenie na żywo mają odrębne reguły. [ADR-011](../decisions/adr-011-strojenie-na-zywo.md) zatwierdza zmianę wybranych wartości podczas pracy, pozostawiając zakres, walidację i utrwalanie do projektu.
+- Maksymalnie trzy niezależne, kompletne zestawy uzgodnionych map, ich przełączanie oraz strojenie na żywo mają odrębne reguły. [ADR-011](../decisions/adr-011-strojenie-na-zywo.md) zatwierdza strukturę zestawów i zmianę wybranych wartości podczas pracy. Listę map, walidację i utrwalanie rozwijamy w [specyfikacji F02](../interfaces/mapy-i-konfiguracja.md).
 - Chronione liczniki i polityka firmware obowiązują także przy diagnostyce, testach I/O, aktualizacji i odzyskiwaniu (SYS-074–078). Wymiana HMI nie tworzy nowego źródła liczników.
 - Reakcje na CAN, światła, wentylator i niskie napięcie mają już częściowo uzgodnione reguły. Dokumentami źródłowymi pozostają [sen](usypianie-ecu-hmi.md), [oszczędzanie](oszczedzanie-energii.md) i rejestr SYS.
 

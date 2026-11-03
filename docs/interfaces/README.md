@@ -15,6 +15,8 @@ Wybudzanie: przyciski obsługi HMI wybudzają HMI i ECU; podłączenie komputera
 
 Usypianie koordynuje ECU po upływie bezczynności i spełnieniu warunków SYS-059. HMI potwierdza przyjęcie polecenia aplikacyjną ramką CAN, kończy nadawanie i zasypia; następnie zasypia ECU (SYS-062/063). Przyciski, próby rozruchu i rzeczywista aktywność użytkownika w HMI odnawiają czas; sam cykliczny odczyt danych go nie odnawia. [Normalna sekwencja ECU–HMI](../architecture/usypianie-ecu-hmi.md) określa uzgodniony przebieg; formaty, czasy i wyjątki pozostają otwarte.
 
+[Mapy i konfiguracja — operacje F02](mapy-i-konfiguracja.md): niezależne, kompletne zestawy, przełączanie i strojenie na żywo oraz jawne otwarte reguły zapisu/edycji. Specyfikacja jest robocza.
+
 Specyfikacje i przyszłe pliki maszynowe, np. DBC lub schematy danych, przechowujemy razem w tym katalogu.
 
 Opracowania referencyjne:
