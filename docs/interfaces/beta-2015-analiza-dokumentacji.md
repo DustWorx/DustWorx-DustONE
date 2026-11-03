@@ -4,10 +4,11 @@ Data opracowania: 2026-10-18. Aktualizacja: 2026-11-03. Status: analiza dokument
 
 ## 1. Źródła i zgodność
 
-| ID | Plik dostarczony przez właściciela | Rozpoznana zawartość | Zastosowanie |
+| ID | Dokument i źródło | Rozpoznana zawartość | Zastosowanie |
 | --- | --- | --- | --- |
 | A | `2015 RR 2 stroke Owners Manual.pdf` | 70 stron, RR 250-300 2T, kod 026440130 000 na s. 1. Instrukcja użytkownika, nie pełna instrukcja serwisowa. | Schemat s. 24, legenda s. 25, dane silnika s. 22-23, licznik s. 14. Przypisanie do MY2015 wynika z przekazanego pliku; zgodność z egzemplarzem wymaga sprawdzenia. |
 | B | `2015 racing addition supplement-2 stroke.pdf` | 6 stron; w treści powtarza się oznaczenie RR2T Racing my'14. Schemat s. 4, legenda s. 5-6. | Materiał porównawczy MY2014. Nazwa pliku nie potwierdza zastosowania do Racing 2015. |
+| C | [Katalog części RR 2T 2015 — Beta Motor Polska](https://betamotorpolska.pl/wp-content/uploads/2019/09/2015-RR-2-Stroke-Parts-Diagram.pdf), sprawdzony 2026-11-03 | 60 stron; okładka wymienia RR 2T Enduro i Enduro Racing 2015, 250/300 cc. | Sprawdzono okładkę i wpis akumulatora: Tav.40, s. 51, poz. 6, numer 1115416 000. |
 
 Numery stron poniżej liczymy od 1; dla cytowanych stron odpowiadają numeracji drukowanej. Identyfikacja kopii SHA-256:
 
@@ -34,7 +35,7 @@ Zauważono błąd angielskiej legendy B: pozycje 21 i 24 powtarzają błędne ok
 
 | Element / funkcja | Numer A, s. 24-25 | Numer B, s. 4-6 | Dane dokumentowe / brakujące |
 | --- | --- | --- | --- |
-| Akumulator | 26; zaciski 25/32 | 29; zaciski 28/33 | Dokumenty A/B: 12 V, 4 Ah. Według właściciela (odpowiedź na pytanie 93) obecnie zamontowany jest AGM. Producent, pełny model i pojemność obecnego akumulatora do sprawdzenia; 4 Ah z instrukcji nie jest potwierdzeniem jego pojemności. |
+| Akumulator | 26; zaciski 25/32 | 29; zaciski 28/33 | Dokumenty A/B: 12 V, 4 Ah. Katalog C: Tav.40, s. 51, poz. 6 — 1115416 000 (1115416000). Deklaracje właściciela i [parametry referencyjne](#akumulator) poniżej. |
 | Generator / regulator | 27 / 18 | 30 / 18 | Oznaczenia, uzwojenia, prostowanie i przebiegi do identyfikacji. |
 | Moduł zapłonowy / cewka / świeca | 33 / 34 / 35 | 35 / 36 / 37 | Zdjęcia: [Kokusan CU7542, etykieta Beta 026400038 300](beta-modul-zaplonowy-kokusan-cu7542.md) oraz [cewka IG5128](beta-cewka-zaplonowa-ig5128.md). Parametry energii i sterowania do ustalenia; nowa wiązka i złącze ECU według SYS-045. |
 | Przekaźnik / silnik rozrusznika | 31 / 30 | 31 / 32 | Prąd cewki, tłumienie przepięć i tor dużego prądu do ustalenia. |
@@ -52,6 +53,14 @@ Zauważono błąd angielskiej legendy B: pozycje 21 i 24 powtarzają błędne ok
 A s. 22 wskazuje gaźnik PWK 36S AG; A s. 23 opisuje odśrodkowy zawór wydechowy ze sprężynami. Są to dane instrukcji, nie wyniki oględzin Racing 2015. Mechaniczny zawór w wariancie zgodnym z A nie pozwoli zweryfikować wymaganego elektronicznego power valve na tym motocyklu.
 
 Moce lamp są danymi nominalnymi, nie parametrami kanałów SmartFET. Do wstępnego bilansu: 35 W / 12 V = ok. 2,92 A dla jednego włókna, 10 W / 12 V = ok. 0,83 A dla lampy kierunkowskazu. Rzeczywiste napięcie, prąd załączania, temperatura i równoczesność wymagają danych z egzemplarza.
+
+### Akumulator
+
+W odpowiedzi na pytanie 93 właściciel wskazał AGM, a na pytanie 94 potwierdził zgodność zamontowanego akumulatora z dokumentacją Bety i polecił oprzeć identyfikację na katalogu. Do analizy motocykla testowego przyjmujemy zatem AGM 12 V, 4 Ah. Numer części Bety wynika z katalogu C; producent konkretnej zamontowanej sztuki nie został odczytany.
+
+[Katalog zastosowań BS Battery 2025](https://bs-battery.com/wp-content/uploads/2025/05/1-CATALOG25_EN_WithApplicationList_V2_LD.pdf) przypisuje modelom Beta Enduro / Enduro Racing RR 300 (2T), roczniki 2013–2016, akumulator BTX5L-BS, numer BS 300618. [Karta producenta BTX5L-BS](https://bs-battery.com/usa/product/btx5l-bs/) podaje AGM/VRLA, 12 V, 4 Ah przy rozładowaniu 10-godzinnym, 4,2 Ah przy 20-godzinnym oraz CCA 80 A. To katalogowy punkt odniesienia dla zgodnego produktu; nie potwierdza marki ani aktualnej sprawności sztuki w motocyklu.
+
+Wartości katalogowe służą do wstępnej analizy zasilania. Progi oszczędzania i minimalne napięcie pracy ECU wymagają doboru oraz prób według BETA-P01 / INV-04; nie wyznaczamy ich z samej pojemności ani CCA. Zakres typów akumulatorów dla całej platformy pozostaje otwarty.
 
 ## 4. Brakujące dane i proponowane punkty pomiarowe
 

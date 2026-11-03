@@ -12,7 +12,7 @@ Data opracowania: 2026-11-01. Aktualizacja: 2026-11-03. Podstawa: odpowiedzi wł
 - Jawnie włączony tryb serwisowy pozwala zwolnić odcięcie bez pracy silnika przy potwierdzonym stabilnym zasilaniu warsztatowym (SYS-090, odpowiedź A na pytanie 91). Sam kabel PC nie wystarcza, a zabezpieczenia wyjść pozostają aktywne. Zwolnienie odcięcia dopuszcza wykonanie testów; samo nie załącza wyjść.
 - Nadal obowiązują: automatyczne pozycyjne po uruchomieniu z uwzględnieniem aktywnego odcięcia (SYS-082/087), wyłączenie oświetlenia przed prawidłowym snem (SYS-081) oraz niezależność ECU od HMI. To osobny stan pracy przed snem, nie zastępstwo koordynowanego usypiania.
 
-Dane motocykla testowego: [typ obecnego akumulatora potwierdzony przez właściciela w odpowiedzi na pytanie 93](../interfaces/beta-2015-analiza-dokumentacji.md#3-tabela-osprzętu-i-odniesień-do-schematów). To dane do pierwszej analizy i prób; zakres obsługiwanych typów akumulatorów dla całej platformy pozostaje otwarty. Progi odcięcia i powrotu nie są jeszcze dobrane.
+Dane motocykla testowego: [referencja akumulatora — AGM 12 V, 4 Ah](../interfaces/beta-2015-analiza-dokumentacji.md#akumulator), na podstawie odpowiedzi właściciela na pytania 93/94 i dokumentacji katalogowej. To punkt wyjścia do pierwszej analizy i prób; zakres obsługiwanych typów akumulatorów dla całej platformy pozostaje otwarty. Progi odcięcia i powrotu nie są jeszcze dobrane.
 
 ## Rekomendacje i decyzje otwarte
 

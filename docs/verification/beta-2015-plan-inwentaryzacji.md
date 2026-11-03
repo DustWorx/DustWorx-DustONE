@@ -21,7 +21,7 @@ Zapłon: [karta modułu Kokusan CU7542](../interfaces/beta-modul-zaplonowy-kokus
 
 Właściciel potwierdził 2026-10-18, że sterownik wentylatora wykonał samodzielnie i zastosował czujnik [B57301K0103A001](../interfaces/beta-czujnik-temperatury-b57301k0103a001.md). Sterowanie obecnie automatyczne, bez ręcznego włącznika. Według właściciela czujnik jest w króćcu/adapterze przewodu łączącego obie chłodnice, a końcówka ma bezpośredni kontakt z płynem. W INV-01 zebrać schemat modułu, oznaczenia wentylatora, przebieg i kierunek przepływu w miejscu adaptera oraz połączenia; sprawdzić wykonanie montażu. Następnie ocenić wykorzystanie NTC do pomiaru temperatury płynu, zabezpieczenia i prądy roboczy/rozruchowy wentylatora (INV-06). Dokumentacja czujnika jest rozpoznana; nie przeprowadzono weryfikacji montażu ani pomiarów.
 
-Akumulator: [stan identyfikacji w karcie osprzętu](../interfaces/beta-2015-analiza-dokumentacji.md#3-tabela-osprzętu-i-odniesień-do-schematów) uzupełniono na podstawie odpowiedzi właściciela na pytanie 93. W INV-01 pozostają do zebrania producent, pełny model i pojemność z etykiety; późniejsze próby INV-04 mają określić zachowanie zasilania. Sama deklaracja typu nie zamyka inwentaryzacji ani nie zastępuje pomiarów.
+Akumulator: [referencja katalogowa i deklaracje właściciela](../interfaces/beta-2015-analiza-dokumentacji.md#akumulator) obejmują odpowiedzi na pytania 93/94 i dane Bety oraz producenta akumulatora. Korzystamy z nich w dalszej analizie; etykieta nie jest warunkiem kontynuowania ustaleń. Przy próbach INV-04 odnotować identyfikację użytej sztuki, jej stan i warunki, a następnie zmierzyć zachowanie zasilania. Dane nominalne nie zastępują tych prób.
 
 | Etap | Zakres | Wynik |
 | --- | --- | --- |
