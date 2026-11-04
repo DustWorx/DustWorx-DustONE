@@ -1,6 +1,6 @@
 # Macierz wariantów silnika — dane do architektury
 
-Stan na: 2026-11-03. Status: roboczy podział funkcji, wariantów i zasobów; nie lista zatwierdzonych zgodności. Podstawa: [wymagania systemu](../01-zakres-systemu.md). Wspólna, jednakowo obsadzona PCB ma pokrywać uzgodnione warianty; zmienia się konfiguracja i dopuszczalna wiązka.
+Stan na: 2026-11-04. Część funkcjonalna służy bieżącemu F01. Przydział zasobów i bilanse są materiałem wstępnym na etap 4 w kolejce; tabela nie jest listą zatwierdzonych zgodności. Podstawa: [wymagania systemu](../01-zakres-systemu.md). Wspólna, jednakowo obsadzona PCB ma pokrywać uzgodnione warianty; zmienia się konfiguracja i dopuszczalna wiązka.
 
 | Wariant | Podstawa / jednostka referencyjna | Dane decydujące o sprzęcie |
 | --- | --- | --- |
@@ -47,6 +47,8 @@ Oznaczenia: **R** — funkcja wymagana w tym wariancie; **W** — obsługa, jeż
 | IAC z napędem krokowym według SYS-071 | — | — | — | W | — | — |
 | Tor wartości ciśnienia paliwa | — | — | — | W | W | W |
 | Binarne ciśnienie oleju, zgodnie z wyposażeniem | W | W | W | W | W | W |
+
+Przegląd F01: [wejście MAP](../interfaces/cisnienie-dolotu-map.md) na podstawie potwierdzonego przykładu Bety RR 350 EFI 2016. Zakres obsługi MAP jest propozycją; nie wybrano czujnika, parametrów ani liczby kanałów.
 
 Faza 4T jest opcjonalna w konfiguracjach niewykorzystujących tego sygnału; dopuszczone strategie bez fazy muszą być określone i sprawdzone. Symbol W/D nie potwierdza danego typu osprzętu w enduro. Każdy taki przypadek wymaga źródła model/rocznik przed przyjęciem parametrów sprzętu. Wiersz pomiarów ciśnienia nie ustanawia nowego wymagania MAP ani pomiaru skrzyni korbowej.
 

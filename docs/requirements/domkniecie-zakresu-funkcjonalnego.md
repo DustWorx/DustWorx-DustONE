@@ -1,25 +1,33 @@
 # Domknięcie zakresu funkcjonalnego
 
-Stan na: 2026-11-03. Roboczy przegląd na podstawie [95 wymagań systemowych](../01-zakres-systemu.md), [mapy 17 obszarów](pokrycie-funkcjonalne.md) i [macierzy wariantów silnika](../architecture/macierz-wariantow-silnika.md). Źródłem zatwierdzonych funkcji pozostaje rejestr SYS i ADR.
+Stan na: 2026-11-04. Roboczy przegląd na podstawie [95 wymagań systemowych](../01-zakres-systemu.md), [mapy 17 obszarów](pokrycie-funkcjonalne.md) i [macierzy wariantów silnika](../architecture/macierz-wariantow-silnika.md). Źródłem zatwierdzonych funkcji pozostaje rejestr SYS i ADR.
 
 ## Ile pozostało
 
 Do końcowego przeglądu zakresu grupujemy **8 pakietów F01–F08**, a następnie wykonujemy przegląd zamykający G0 z [ścieżki projektu](../00-proces-i-status.md). Każdy pakiet może zawierać kilka decyzji; liczba pakietów nie jest liczbą kolejnych pytań. Wiele funkcji wewnątrz pakietów jest już uzgodnionych.
 
+Aktywny jest **F01**. Pakiety realizujemy kolejno **F01 → F02 → F03 → F04 → F05 → F06 → F07 → F08**, a następnie wykonujemy G0. Przechodzimy dalej po zapisanym zamknięciu bieżącego pakietu zgodnie z [procesem](../00-proces-i-status.md).
+
 Lista określa pozostałą pracę nad zamknięciem zakresu. Wskazanie tematu do przeglądu nie zatwierdza nowej funkcji ani nie oznacza gotowej realizacji.
 
 ## Pakiety do domknięcia
 
-| Pakiet | Co sprawdzić i doprecyzować | Wynik pozwalający zamknąć pakiet |
-| --- | --- | --- |
-| F01 — Komplet funkcji silnikowych | Sprawdzić komplet wymaganych pomiarów i sterowania dla 2T/4T, gaźnika z/bez TPS i TPI/TBI, w tym IAC i power valve. Brakujące funkcje lub wyłączenia wymagają potwierdzenia na podstawie dokumentacji enduro. | Macierz funkcji dla wariantów i jawny zakres docelowej obsługi. |
-| F02 — Mapy, konfiguracja i strojenie | Ustalić listę map w niezależnych zestawach oraz operacje dopuszczone przy pracującym silniku: edycję, przesyłanie, zapis i zmianę krytycznej konfiguracji. Maks. trzy niezależne zestawy, przełączanie i strojenie na żywo są przyjęte (SYS-028/094). Trwały zapis tylko na jawne polecenie przy zgaszonym silniku (SYS-095). [Specyfikacja operacji](../interfaces/mapy-i-konfiguracja.md): pozostałe warunki, utrata sesji i restart otwarte. | Tabela operacji i warunków ich dopuszczenia. |
-| F03 — Ochrona i reakcje na usterki | Domknąć zachowanie przy utracie istotnych pomiarów, problemach z zasilaniem i restarcie oraz reakcje chroniące silnik. Zachować uzgodnione STOP, rozruch, przewrócenie i działanie bez HMI/CAN. | Macierz sytuacja → reakcja → warunek powrotu. |
-| F04 — Akcesoria i dodatkowe I/O | Określić zastosowania i potrzebną liczbę dodatkowych funkcji wejść/wyjść oraz brakujące zachowanie klaksonu i wyjść konfigurowalnych po utracie HMI/CAN lub restarcie. Prądy i stopnie mocy wyznaczymy w architekturze. | Zamknięta lista funkcji I/O i stanów odbiorników. |
-| F05 — Funkcje i obsługa HMI | Potwierdzić minimalny zestaw danych/ekranów, obsługę menu i map przyciskami, priorytet ostrzeżeń oraz zasady ich prezentacji w ekranach użytkownika. Fizyczne przyciski i edytowalne ekrany są już przyjęte. | Opis ekranów, poleceń i scenariuszy obsługi. |
-| F06 — Windows, serwis i development tool | Domknąć scenariusze konfiguracji, strojenia z pomiarami zewnętrznymi, importu/eksportu oraz dopuszczenia testów I/O i wysyłania CAN przy różnych stanach pojazdu. Podstawowy zakres narzędzi i zachowanie testu po utracie sesji są przyjęte. | Lista przypadków użycia i warunków wykonania poleceń. |
-| F07 — Diagnostyka, aktualizacje i dostęp | Przejrzeć przyjęty rdzeń DTC/liczników i domknąć wyjątki użytkowe, odzyskiwanie po nieudanej aktualizacji, role twórcy/serwisu/użytkownika oraz politykę firmware HMI. Mechanizmy pamięci i ochrony dobierzemy później. | Reguły dostępu, utrzymania danych i odzyskiwania urządzeń. |
-| F08 — Warunki użytkowania i cele działania | Przyjąć granice pracy podczas jazdy i cele użytkowe potrzebne do projektowania ECU/HMI. Postój 4 tygodnie przy −10°C…+40°C, minimum 3 Ah AGM / 2 Ah LiFePO4 oraz podstawowe warunki wodne są już ustalone. | Zestaw warunków pracy i celów do przypisania kryteriom testowym. |
+| Pakiet | Status | Co sprawdzić i doprecyzować | Wynik pozwalający zamknąć pakiet |
+| --- | --- | --- | --- |
+| F01 — Komplet funkcji silnikowych | Aktywny | Sprawdzić komplet wymaganych pomiarów i sterowania dla 2T/4T, gaźnika z/bez TPS i TPI/TBI, w tym IAC i power valve. Brakujące funkcje lub wyłączenia wymagają potwierdzenia na podstawie dokumentacji enduro. Bieżący przegląd: [wejście MAP na podstawie Bety EFI](../interfaces/cisnienie-dolotu-map.md), propozycja przed decyzją. | Macierz funkcji dla wariantów i jawny zakres docelowej obsługi. |
+| F02 — Mapy, konfiguracja i strojenie | W kolejce | Ustalić listę map w niezależnych zestawach oraz operacje dopuszczone przy pracującym silniku: edycję, przesyłanie, zapis i zmianę krytycznej konfiguracji. Maks. trzy niezależne zestawy, przełączanie i strojenie na żywo są przyjęte (SYS-028/094). Trwały zapis tylko na jawne polecenie przy zgaszonym silniku (SYS-095). [Specyfikacja operacji](../interfaces/mapy-i-konfiguracja.md): po utracie Windows zastosowane wartości pozostają aktywne; ponowne połączenie, restart i pozostałe warunki otwarte. | Tabela operacji i warunków ich dopuszczenia. |
+| F03 — Ochrona i reakcje na usterki | W kolejce | Domknąć zachowanie przy utracie istotnych pomiarów, problemach z zasilaniem i restarcie oraz reakcje chroniące silnik. Zachować uzgodnione STOP, rozruch, przewrócenie i działanie bez HMI/CAN. | Macierz sytuacja → reakcja → warunek powrotu. |
+| F04 — Akcesoria i dodatkowe I/O | W kolejce | Określić zastosowania i potrzebną liczbę dodatkowych funkcji wejść/wyjść oraz brakujące zachowanie klaksonu i wyjść konfigurowalnych po utracie HMI/CAN lub restarcie. Prądy i stopnie mocy wyznaczymy w architekturze. | Zamknięta lista funkcji I/O i stanów odbiorników. |
+| F05 — Funkcje i obsługa HMI | W kolejce | Potwierdzić minimalny zestaw danych/ekranów, obsługę menu i map przyciskami, priorytet ostrzeżeń oraz zasady ich prezentacji w ekranach użytkownika. Fizyczne przyciski i edytowalne ekrany są już przyjęte. | Opis ekranów, poleceń i scenariuszy obsługi. |
+| F06 — Windows, serwis i development tool | W kolejce | Domknąć scenariusze konfiguracji, strojenia z pomiarami zewnętrznymi, importu/eksportu oraz dopuszczenia testów I/O i wysyłania CAN przy różnych stanach pojazdu. Podstawowy zakres narzędzi i zachowanie testu po utracie sesji są przyjęte. | Lista przypadków użycia i warunków wykonania poleceń. |
+| F07 — Diagnostyka, aktualizacje i dostęp | W kolejce | Przejrzeć przyjęty rdzeń DTC/liczników i domknąć wyjątki użytkowe, odzyskiwanie po nieudanej aktualizacji, role twórcy/serwisu/użytkownika oraz politykę firmware HMI. Mechanizmy pamięci i ochrony dobierzemy później. | Reguły dostępu, utrzymania danych i odzyskiwania urządzeń. |
+| F08 — Warunki użytkowania i cele działania | W kolejce | Przyjąć granice pracy podczas jazdy i cele użytkowe potrzebne do projektowania ECU/HMI. Postój 4 tygodnie przy −10°C…+40°C, minimum 3 Ah AGM / 2 Ah LiFePO4 oraz podstawowe warunki wodne są już ustalone. | Zestaw warunków pracy i celów do przypisania kryteriom testowym. |
+
+## Bieżący pakiet F01
+
+Przyjęte już funkcje: wspólna PCB 2T/4T i warianty gaźnik/wtrysk, jeden kanał CDI/TCI, wał VR/Hall i dodatkowa faza Hall, elektroniczny power valve oraz IAC krokowy w odpowiednich konfiguracjach. Zachowujemy przyjęte wyłączenia; nie otwieramy tych decyzji ponownie bez nowego powodu.
+
+Bieżący temat: obsługa [MAP](../interfaces/cisnienie-dolotu-map.md), oczekuje decyzji. Następnie kończymy przegląd kompletności pomiarów i sterowania na podstawie dokumentacji enduro oraz macierz funkcja × wariant. F01 zamykamy po rozstrzygnięciu luk funkcjonalnych i zapisaniu zakresu/wyłączeń. Parametry osprzętu i potwierdzenie zgodności trafiają jawnie do etapów 3–4 i późniejszych prób.
 
 ## Jak zamykamy pakiet
 
@@ -31,7 +39,7 @@ Pakiet zamykamy po zapisaniu decyzji lub jawnego wyłączenia, źródła oraz po
 
 Liczby wynikające z obliczeń i danych osprzętu rozwijamy w architekturze: zakresy elektryczne, prądy, czasy, rozdzielczości map, zasoby pamięci/procesorów, parametry CAN i formaty danych. Schematy, wartości elementów, zabezpieczenia, footprinty, złącza, warstwy i routing należą do kolejnych etapów projektu.
 
-Asystent przygotowuje dane, obliczenia i propozycje. Ważne komponenty i istotne kompromisy wybieramy wspólnie, zgodnie z [modelem współpracy](../00-proces-i-status.md). Domknięcie funkcji może przebiegać równolegle z pierwszą architekturą i inwentaryzacją; parametry wpływające na dany blok muszą być ustalone przed jego zamrożeniem.
+Bieżący pakiet obejmuje dane i analizy potrzebne do rozstrzygnięcia jego zakresu. Wpływ na późniejsze etapy zapisujemy w ich dokumentach i kolejce. Inwentaryzację, architekturę, obliczenia i dobór części prowadzimy po dojściu do właściwego etapu. Ważne komponenty i kompromisy wybieramy wspólnie, zgodnie z [modelem współpracy](../00-proces-i-status.md).
 
 ## Powiązanie z mapą 17 obszarów
 
@@ -55,4 +63,4 @@ Asystent przygotowuje dane, obliczenia i propozycje. Ważne komponenty i istotne
 | Mechanika, PCB i instalacja | Cele użytkowe F08; pomiary, obudowy, złącza i layout w etapach 3/7/8. |
 | Zachowanie przy uszkodzeniach | F03/F07. |
 
-Stan: **F01 i F02 w opracowaniu**, F03–F08 oczekują przeglądu zamykającego. Dla F01 przygotowano [funkcje wariantów i pierwszy przydział zasobów](../architecture/macierz-wariantow-silnika.md); modele, parametry i zgodność pozostają otwarte. Dla F02 zapisano odpowiedzi A na pytania 101–103 w [ADR-011](../decisions/adr-011-strojenie-na-zywo.md). Żaden pakiet nie jest jeszcze zamknięty. Nie wyznaczono procentu kompletności; zakończenie etapu wynika z wyników pakietów i bramki G0.
+Stan: **F01 aktywny; F02–F08 w kolejce**. Wcześniejsze decyzje map 101–104 pozostają zapisane w [ADR-011](../decisions/adr-011-strojenie-na-zywo.md); F02 podejmiemy po zamknięciu F01. Żaden pakiet nie otrzymał jeszcze statusu zamkniętego. Zakończenie etapu wynika z zamknięcia pakietów i G0.
