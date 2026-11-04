@@ -28,7 +28,9 @@ SYS-028 określa maks. trzy niezależne, kompletne zestawy uzgodnionych map jedn
 
 SYS-095: ECU dopuszcza trwały zapis zmian map wyłącznie przy zgaszonym silniku i po wyraźnym poleceniu użytkownika z Windows. Strojenie na żywo nie uruchamia automatycznego utrwalania. Potwierdzenie zatrzymania, warunki zasilania, przerwanie zapisu i równoczesny rozruch wymagają specyfikacji w [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 
-SYS-102: ECU egzekwuje przyjmowanie i wdrażanie krytycznej konfiguracji wyłącznie przy zgaszonym silniku i na wyraźne polecenie. Przez całą operację blokuje rozrusznik, zapłon i wtrysk; samo podłączenie PC nie uruchamia blokady. Dopuszczone strojenie map na żywo jest zachowane. Lista pól, zwalnianie blokad i przerwanie operacji wymagają specyfikacji: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
+SYS-102: ECU egzekwuje przyjmowanie i wdrażanie krytycznej konfiguracji wyłącznie przy zgaszonym silniku i na wyraźne polecenie. Przez całą operację blokuje rozrusznik, zapłon i wtrysk; samo podłączenie PC nie uruchamia blokady. Dopuszczone strojenie map na żywo jest zachowane. Lista pól, realizacja blokad i reakcje po rozpoczęciu wdrażania wymagają specyfikacji: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
+
+SYS-103: po potwierdzonej utracie Windows przed odebraniem całości krytycznej konfiguracji i przed wdrożeniem ECU anuluje transfer, zachowuje poprawną i nienaruszoną dotychczasową konfigurację oraz zwalnia blokady operacji. Rozruch wymaga nowej świadomej próby; samo zwolnienie blokad go nie uruchamia. Detekcja/czasy oraz utrata sesji po rozpoczęciu wdrażania pozostają do określenia: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 
 SYS-101: ECU przyjmuje robocze zmiany wybranych wartości aktywnego i nieaktywnych zestawów podczas pracy silnika. Edycja nie przełącza zestawu; zmiany nieaktywnego wpływają na silnik dopiero po jego świadomym wybraniu. Trwały zapis nadal podlega SYS-095. Szczegóły: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 
