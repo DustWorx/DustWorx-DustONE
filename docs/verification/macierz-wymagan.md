@@ -1,6 +1,6 @@
 # Macierz wymagań, bloków i weryfikacji
 
-Stan na: 2026-11-04. **Materiał wstępny dla etapu 5 w kolejce — przydział 106 wymagań do 13 grup.** Treść wymagań ma jedno miejsce źródłowe w [rejestrze SYS](../01-zakres-systemu.md), a ID bloków w [architekturze](../architecture/blokowa-systemu.md).
+Stan na: 2026-11-04. **Materiał wstępny dla etapu 5 w kolejce — przydział 107 wymagań do 13 grup.** Treść wymagań ma jedno miejsce źródłowe w [rejestrze SYS](../01-zakres-systemu.md), a ID bloków w [architekturze](../architecture/blokowa-systemu.md).
 
 Wszystkie wymagania pozostają **niezweryfikowane na produkcie**. Poniższe powiązanie nie jest kompletem procedur ani potwierdzeniem kompletności funkcji. Dla każdej próby rozwijamy: wariant/model i konfigurację, rewizje HW/FW/aplikacji, metodę, mierzalne kryteria, wyposażenie/połączenia, kroki, warunki przerwania oraz dowód wyniku. Wymaganie może mieć kilka bloków i prób.
 
@@ -16,7 +16,7 @@ Wszystkie wymagania pozostają **niezweryfikowane na produkcie**. Poniższe powi
 | V06 | Zasilanie, wybudzanie i sen | Bilans, pomiary całego zestawu i próby konfiguracji akumulator/regulator/temperatura. | Wymagane wybudzenia, sen, sterowanie zasilaniem HMI, blokada snu z PC i rezerwa na rozruch po 28 dniach; po przerwaniu zmiany konfiguracji zasilaniem odtworzenie tylko kompletnych poprawnych danych i stan blokad według SYS-106. | Domeny/napięcia, prądy, czasy, modele i stan baterii, kryteria rozruchu oraz kompletne warunki prób. |
 | V07 | CAN, role i autonomia | Stanowisko ECU–HMI, wymuszanie usterek komunikacji i integracja. | ECU działa bez HMI; realizuje rzeczywiste stany/odmowy i uzgodnione reakcje po utracie łączności; poprawna sekwencja snu. | Protokół, częstotliwości i czasy, kryteria utraty/powrotu, odzyskiwanie magistrali. |
 | V08 | HMI i edytowalne ekrany | Przegląd scenariuszy oraz rzeczywiste HMI z konfiguracjami ekranów. | Obsługa przyciskami, odczyt danych/ostrzeżeń, szablony i układy użytkownika zgodnie z zakresem. | Ekrany/menu, priorytety, limity zasobów, czytelność i czasy. |
-| V09 | Windows i operacje serwisowe | Testy aplikacji/protokołu, potem ECU–HMI–Windows. | Jeden punkt obsługi obu urządzeń, konfiguracja/strojenie, narzędzia I/O/CAN i dopuszczanie poleceń w ustalonych stanach; trwały zapis map tylko na jawne polecenie przy zgaszonym silniku; po utracie Windows wartości zastosowane na żywo pozostają aktywne bez automatycznego utrwalania. | Przypadki użycia, interfejs, uprawnienia, parametry map, krytyczna konfiguracja, detekcja przerwanego transferu i potwierdzanie samodzielnie dokończonego wdrożenia po utracie sesji, detekcja/powrót sesji, powrót po błędzie konfiguracji, dostęp serwisowy bez poprawnych danych i stany końcowe. |
+| V09 | Windows i operacje serwisowe | Testy aplikacji/protokołu, potem ECU–HMI–Windows. | Jeden punkt obsługi obu urządzeń, konfiguracja/strojenie, narzędzia I/O/CAN i dopuszczanie poleceń w ustalonych stanach; pełny zestaw map przyjmowany i roboczo zastępowany tylko przy zgaszonym silniku; trwały zapis map tylko na jawne polecenie przy zgaszonym silniku; po utracie Windows wartości zastosowane na żywo pozostają aktywne bez automatycznego utrwalania. | Przypadki użycia, interfejs, uprawnienia, parametry map, krytyczna konfiguracja, detekcja przerwanego transferu i potwierdzanie samodzielnie dokończonego wdrożenia po utracie sesji, detekcja/powrót sesji, powrót po błędzie konfiguracji, dostęp serwisowy bez poprawnych danych i stany końcowe. |
 | V10 | DTC, czas i trwałość | Wymuszanie usterek, cykle pracy/zaniki zasilania, odczyt i eksport. | DTC/freeze frame, pierwsze/ostatnie wystąpienie, licznik, ważność czasu, wygaszanie i ręczne kasowanie według SYS-019–025. | Katalog, kryteria detekcji, pełna pamięć, tolerancja utraty danych, sposób i dokładność czasu. |
 | V11 | Motogodziny, ODO i dostęp | Wzorce czasu/impulsów, cykle snu/zasilania, próby ról i migracji. | Naliczanie we właściwych warunkach, ODO bez HMI/pracy silnika, trwałość i odrzucenie niedozwolonej korekty; rejestr operacji uprawnionych. | Dokładność, kalibracja koła, zapis po zaniku, model zagrożeń i autoryzacja. |
 | V12 | Firmware, aktualizacja i odzyskiwanie | Przegląd mechanizmów, testy wersji/uprawnień i przerwanych aktualizacji. | Zatwierdzony firmware ECU w trybie użytkowym, zachowany dostęp twórców, aktualizacja obu urządzeń i ochrona danych. | Polityka HMI/starszych wersji, tryby, drogi odzyskiwania, zachowanie po przerwaniu. |
@@ -134,6 +134,7 @@ Próby dobieramy do wymagania; pełna grupa nie jest automatycznie obowiązkowa 
 | SYS-104 | ECU-CTRL, ECU-IN, ECU-OUT, ECU-DATA, ECU-COM, WIN-APP | V04, V09 |
 | SYS-105 | ECU-CTRL, ECU-IN, ECU-OUT, ECU-DATA, ECU-COM, WIN-APP | V04, V09 |
 | SYS-106 | ECU-PWR, ECU-CTRL, ECU-IN, ECU-OUT, ECU-DATA, ECU-COM, WIN-APP | V04, V06, V09 |
+| SYS-107 | ECU-CTRL, ECU-IN, ECU-DATA, ECU-COM, WIN-APP | V02, V09 |
 
 ## Sposób utrzymania
 

@@ -33,6 +33,8 @@ SYS-105: po błędzie sprawdzania/wdrażania ECU automatycznie wraca do poprzedn
 
 SYS-106: po zaniku zasilania podczas zmiany krytycznej konfiguracji ECU odtwarza wyłącznie kompletną i poprawną nową konfigurację po trwałym potwierdzeniu wdrożenia przez ECU, inaczej poprzednią poprawną. Po sprawdzeniu dopuszcza nową świadomą próbę rozruchu bez połączenia lub potwierdzenia Windows. Bez poprawnych danych pozostają blokady i dostęp do naprawy konfiguracji. Szczegóły: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 
+SYS-107: przesłanie i robocze zastąpienie pełnego zestawu map w ECU wymaga zgaszonego silnika, w ramach tej samej konfiguracji silnika. Przygotowanie pliku lokalnie jest odrębną czynnością. Podczas pracy pozostaje edycja dopuszczonych wybranych wartości aktywnego i nieaktywnych zestawów. Brak automatycznego trwałego zapisu; obowiązuje SYS-095. Szczegóły: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
+
 SYS-101: Windows może przesyłać do ECU robocze zmiany wybranych wartości aktywnego i nieaktywnych zestawów podczas pracy silnika. Edycja nie przełącza zestawu; nieaktywny zaczyna wpływać na silnik dopiero po jego świadomym wybraniu. Obowiązuje SYS-095 dla trwałego zapisu. Szczegóły: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 
 SYS-099: wybór zestawu po restarcie realizuje ECU, również bez HMI/PC; jest to ostatnio wybrany prawidłowy zestaw spośród trwale zapisanych. Aplikacja po połączeniu odczytuje rzeczywisty stan. Po prawidłowym śnie/wybudzeniu niezapisane zmiany zostają odrzucone zgodnie z SYS-100. Uzgodnienie po powrocie sesji i walidacja danych pozostają do określenia w [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
