@@ -4,9 +4,9 @@ Stan na: 2026-11-04. Roboczy przegląd na podstawie [98 wymagań systemowych](..
 
 ## Ile pozostało
 
-Z 8 pakietów **F01 został zamknięty w zakresie funkcji; pozostaje 7 pakietów F02–F08**, a następnie przegląd zamykający G0 z [ścieżki projektu](../00-proces-i-status.md). Każdy pakiet może zawierać kilka decyzji; liczba pakietów nie jest liczbą kolejnych pytań. Wiele funkcji wewnątrz pakietów jest już uzgodnionych.
+Przegląd obejmuje **8 pakietów F01–F08**, a następnie G0. Po przeglądzie asystenta właściciel poprosił o kontrolę pełnego F01 przed przejściem do F02; F01 jest bieżącym pakietem kontroli z [ścieżki projektu](../00-proces-i-status.md). Każdy pakiet może zawierać kilka decyzji; liczba pakietów nie jest liczbą kolejnych pytań. Wiele funkcji wewnątrz pakietów jest już uzgodnionych.
 
-Aktywny jest **F02**, po zapisanym zamknięciu F01 z 2026-11-04. Pakiety realizujemy kolejno **F01 → F02 → F03 → F04 → F05 → F06 → F07 → F08**, a następnie wykonujemy G0. Przechodzimy dalej po zapisanym zamknięciu bieżącego pakietu zgodnie z [procesem](../00-proces-i-status.md).
+Aktywny jest **F01 — kontrola ustaleń przez właściciela**. Wynik przeglądu asystenta z 2026-11-04 jest zachowany; F02 wrócił do kolejki na czas kontroli. Pakiety realizujemy kolejno **F01 → F02 → F03 → F04 → F05 → F06 → F07 → F08**, a następnie wykonujemy G0. Przechodzimy dalej po zapisanym zamknięciu bieżącego pakietu zgodnie z [procesem](../00-proces-i-status.md).
 
 Lista określa pozostałą pracę nad zamknięciem zakresu. Wskazanie tematu do przeglądu nie zatwierdza nowej funkcji ani nie oznacza gotowej realizacji.
 
@@ -14,8 +14,8 @@ Lista określa pozostałą pracę nad zamknięciem zakresu. Wskazanie tematu do 
 
 | Pakiet | Status | Co sprawdzić i doprecyzować | Wynik pozwalający zamknąć pakiet |
 | --- | --- | --- | --- |
-| F01 — Komplet funkcji silnikowych | Zamknięty: 2026-11-04 | Zakres pomiarów i sterowania przyjęty dla jednocylindrowych 2T/4T chłodzonych cieczą, w klasach gaźnik/wtrysk. Wyłączenia i techniczne dane przekazane dalej. | [Wynik przeglądu](f01-sterowanie-silnikiem.md) oraz macierz funkcji dla wariantów. |
-| F02 — Mapy, konfiguracja i strojenie | Aktywny | Ustalić listę map w niezależnych zestawach oraz operacje dopuszczone przy pracującym silniku: edycję, przesyłanie, zapis i zmianę krytycznej konfiguracji. Maks. trzy niezależne zestawy, przełączanie i strojenie na żywo są przyjęte (SYS-028/094). Trwały zapis tylko na jawne polecenie przy zgaszonym silniku (SYS-095). [Specyfikacja operacji](../interfaces/mapy-i-konfiguracja.md): po utracie Windows zastosowane wartości pozostają aktywne; ponowne połączenie, restart i pozostałe warunki otwarte. | Tabela operacji i warunków ich dopuszczenia. |
+| F01 — Komplet funkcji silnikowych | Aktywny | [Podsumowanie kontrolne](f01-podsumowanie-kontrolne.md): zakres, pomiary, sterowanie, wyłączenia i kwestie techniczne przekazane dalej. | Zakończona kontrola ustaleń właściciela, zapis uwag i spójny zakres. |
+| F02 — Mapy, konfiguracja i strojenie | W kolejce | Ustalić listę map w niezależnych zestawach oraz operacje dopuszczone przy pracującym silniku: edycję, przesyłanie, zapis i zmianę krytycznej konfiguracji. Maks. trzy niezależne zestawy, przełączanie i strojenie na żywo są przyjęte (SYS-028/094). Trwały zapis tylko na jawne polecenie przy zgaszonym silniku (SYS-095). [Specyfikacja operacji](../interfaces/mapy-i-konfiguracja.md): po utracie Windows zastosowane wartości pozostają aktywne; ponowne połączenie, restart i pozostałe warunki otwarte. | Tabela operacji i warunków ich dopuszczenia. |
 | F03 — Ochrona i reakcje na usterki | W kolejce | Domknąć zachowanie przy utracie istotnych pomiarów, problemach z zasilaniem i restarcie oraz reakcje chroniące silnik. Zachować uzgodnione STOP, rozruch, przewrócenie i działanie bez HMI/CAN. | Macierz sytuacja → reakcja → warunek powrotu. |
 | F04 — Akcesoria i dodatkowe I/O | W kolejce | Określić zastosowania i potrzebną liczbę dodatkowych funkcji wejść/wyjść oraz brakujące zachowanie klaksonu i wyjść konfigurowalnych po utracie HMI/CAN lub restarcie. Prądy i stopnie mocy wyznaczymy w architekturze. | Zamknięta lista funkcji I/O i stanów odbiorników. |
 | F05 — Funkcje i obsługa HMI | W kolejce | Potwierdzić minimalny zestaw danych/ekranów, obsługę menu i map przyciskami, priorytet ostrzeżeń oraz zasady ich prezentacji w ekranach użytkownika. Fizyczne przyciski i edytowalne ekrany są już przyjęte. | Opis ekranów, poleceń i scenariuszy obsługi. |
@@ -23,11 +23,11 @@ Lista określa pozostałą pracę nad zamknięciem zakresu. Wskazanie tematu do 
 | F07 — Diagnostyka, aktualizacje i dostęp | W kolejce | Przejrzeć przyjęty rdzeń DTC/liczników i domknąć wyjątki użytkowe, odzyskiwanie po nieudanej aktualizacji, role twórcy/serwisu/użytkownika oraz politykę firmware HMI. Mechanizmy pamięci i ochrony dobierzemy później. | Reguły dostępu, utrzymania danych i odzyskiwania urządzeń. |
 | F08 — Warunki użytkowania i cele działania | W kolejce | Przyjąć granice pracy podczas jazdy i cele użytkowe potrzebne do projektowania ECU/HMI. Postój 4 tygodnie przy −10°C…+40°C, minimum 3 Ah AGM / 2 Ah LiFePO4 oraz podstawowe warunki wodne są już ustalone. | Zestaw warunków pracy i celów do przypisania kryteriom testowym. |
 
-## Wynik F01 i bieżący F02
+## Kontrola F01 przed F02
 
-**F01 zamknięty 2026-11-04 na podstawie przeglądu prowadzącego inżynierię**, po zapisaniu przyjętych pomiarów, sterowania, wyłączeń i macierzy wariantów. Podstawa: dotychczasowe wymagania i decyzje właściciela, w tym A na 105/106 oraz B na 107. [Przegląd pomiarów](f01-pomiary-silnika.md) i [przegląd sterowania](f01-sterowanie-silnikiem.md) wskazują rezultat i przekazanie do etapów 3–6. Zgodność modeli, wykonalność konwersji TPI, parametry i testy nie zostały potwierdzone tym zamknięciem.
+Przegląd prowadzącego inżynierię z 2026-11-04 jest zapisany w kartach [pomiarów](f01-pomiary-silnika.md) i [sterowania](f01-sterowanie-silnikiem.md). Na prośbę właściciela wracamy do kontroli pełnego zakresu przed F02. [Podsumowanie kontrolne](f01-podsumowanie-kontrolne.md) zbiera ustalenia bez zmiany wymagań.
 
-**F02 jest jedynym aktywnym pakietem.** Domykamy operacje na mapach i konfiguracji ECU według [specyfikacji F02](../interfaces/mapy-i-konfiguracja.md). F03–F08 pozostają w kolejce.
+F02 oczekuje. Pytanie 108 nie otrzymało odpowiedzi o wyborze zestawu po restarcie; odpowiedź właściciela była poleceniem kontroli F01. Ewentualne korekty zakresu z tego przeglądu zapisujemy wraz z ich wpływem na dalsze etapy.
 
 ## Jak zamykamy pakiet
 
@@ -63,4 +63,4 @@ Bieżący pakiet obejmuje dane i analizy potrzebne do rozstrzygnięcia jego zakr
 | Mechanika, PCB i instalacja | Cele użytkowe F08; pomiary, obudowy, złącza i layout w etapach 3/7/8. |
 | Zachowanie przy uszkodzeniach | F03/F07. |
 
-Stan: **1 pakiet zamknięty (F01), 1 aktywny (F02), 6 w kolejce (F03–F08)**. Decyzje map 101–104 pozostają zapisane w [ADR-011](../decisions/adr-011-strojenie-na-zywo.md). Etap 2 trwa do zamknięcia wszystkich pakietów i G0.
+Stan: **F01 aktywny w kontroli właściciela, F02–F08 w kolejce**; wcześniejszy wynik przeglądu F01 pozostaje zachowany. Decyzje map 101–104 pozostają zapisane w [ADR-011](../decisions/adr-011-strojenie-na-zywo.md). Etap 2 trwa do zamknięcia wszystkich pakietów i G0.

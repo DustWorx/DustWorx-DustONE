@@ -1,6 +1,6 @@
 # Macierz wariantów silnika — dane do architektury
 
-Stan na: 2026-11-04. Część funkcjonalna stanowi wynik zamkniętego F01. Zakres obejmuje wyłącznie silniki chłodzone cieczą (SYS-098). Przydział zasobów i bilanse są materiałem wstępnym na etap 4 w kolejce; tabela nie jest listą zatwierdzonych zgodności. Podstawa: [wymagania systemu](../01-zakres-systemu.md). Wspólna, jednakowo obsadzona PCB ma pokrywać uzgodnione warianty; zmienia się konfiguracja i dopuszczalna wiązka.
+Stan na: 2026-11-04. Część funkcjonalna stanowi wynik przeglądu asystenta, obecnie poddany kontroli właściciela w F01. Zakres obejmuje wyłącznie silniki chłodzone cieczą (SYS-098). Przydział zasobów i bilanse są materiałem wstępnym na etap 4 w kolejce; tabela nie jest listą zatwierdzonych zgodności. Podstawa: [wymagania systemu](../01-zakres-systemu.md). Wspólna, jednakowo obsadzona PCB ma pokrywać uzgodnione warianty; zmienia się konfiguracja i dopuszczalna wiązka.
 
 | Wariant | Podstawa / jednostka referencyjna | Dane decydujące o sprzęcie |
 | --- | --- | --- |
@@ -88,4 +88,4 @@ To wejście do bilansu, nie liczbowy bilans MCU ani pinout. Najpierw uzupełniam
 
 Warianty silnika są alternatywnymi konfiguracjami jednego ECU: nie sumujemy ich automatycznie. Współdzielenie zasobów wolno przyjąć dopiero po wykazaniu zgodności wszystkich dopuszczonych trybów, w tym rozruchu, serwisu i resetu, oraz właściwego stanu nieużywanych wyjść.
 
-Stan: F01 zamknięty w zakresie funkcji; [wynik przeglądu i przekazanie danych](../requirements/f01-sterowanie-silnikiem.md). Modele poza Betą, parametry, prądy/liczby fizycznych kanałów, algorytmy i bilanse pozostają na etapy 3–4. G1 pozostaje otwarta; zgodności modeli jeszcze nie potwierdzono.
+Stan: [wynik przeglądu asystenta](../requirements/f01-sterowanie-silnikiem.md) pozostaje zachowany; trwa [kontrola właściciela F01](../requirements/f01-podsumowanie-kontrolne.md). Modele poza Betą, parametry, prądy/liczby fizycznych kanałów, algorytmy i bilanse pozostają na etapy 3–4. G1 pozostaje otwarta; zgodności modeli jeszcze nie potwierdzono.

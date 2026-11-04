@@ -383,7 +383,7 @@ Do ustalenia: minimalne napięcie i dostępny prąd pod obciążeniem, modele i 
 
 Przygotowano robocze materiały: [listę funkcji wejść/wyjść](interfaces/wstepna-lista-io.md), [macierz wariantów silnika](architecture/macierz-wariantow-silnika.md) i [plan inwentaryzacji Bety 300 RR Racing 2015](verification/beta-2015-plan-inwentaryzacji.md). Nie są one zatwierdzonym pinoutem ani potwierdzeniem zgodności sprzętu.
 
-Przygotowano pierwszą [architekturę blokową](architecture/blokowa-systemu.md), funkcjonalny przydział zasobów w macierzy wariantów i [macierz SYS → blok → grupa weryfikacji](verification/macierz-wymagan.md). F01 zamknięto w zakresie funkcji; aktywny jest etap 2, pakiet F02: mapy i konfiguracja ECU, według [kolejności procesu](00-proces-i-status.md). Kolejne pakiety podejmujemy po zamknięciu poprzedniego; inwentaryzacja, architektura, bilanse i procedury wykonawcze oczekują we właściwych etapach. Zapisujemy tam wpływ decyzji. Ważne komponenty wybierzemy wspólnie po dojściu do etapu doboru i uzyskaniu jego danych.
+Przygotowano pierwszą [architekturę blokową](architecture/blokowa-systemu.md), funkcjonalny przydział zasobów w macierzy wariantów i [macierz SYS → blok → grupa weryfikacji](verification/macierz-wymagan.md). Aktywny jest etap 2: [kontrola ustaleń F01 przez właściciela](requirements/f01-podsumowanie-kontrolne.md) przed przejściem do F02, zgodnie z [kolejnością procesu](00-proces-i-status.md). Kolejne pakiety podejmujemy po zamknięciu poprzedniego; inwentaryzacja, architektura, bilanse i procedury wykonawcze oczekują we właściwych etapach. Zapisujemy tam wpływ decyzji. Ważne komponenty wybierzemy wspólnie po dojściu do etapu doboru i uzyskaniu jego danych.
 
 ## 6. Sposób realizacji i współpracy
 
