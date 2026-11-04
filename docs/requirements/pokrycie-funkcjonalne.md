@@ -1,12 +1,12 @@
 # Mapa obszarów i otwartych tematów
 
-Status: roboczy plan przeglądu, uzupełniony 2026-11-03. Źródłem treści wymagań pozostaje [zakres systemu](../01-zakres-systemu.md). Mapa zawiera wybrane powiązania z rejestru SYS-001–097; nie oznacza kompletności funkcji ani ich weryfikacji. Ogólne wymaganie może potrzebować wielu wymagań szczegółowych. Poniższe pytania techniczne i tematy do oceny nie stanowią zatwierdzenia nowych funkcji.
+Status: roboczy plan przeglądu, uzupełniony 2026-11-03. Źródłem treści wymagań pozostaje [zakres systemu](../01-zakres-systemu.md). Mapa zawiera wybrane powiązania z rejestru SYS-001–098; nie oznacza kompletności funkcji ani ich weryfikacji. Ogólne wymaganie może potrzebować wielu wymagań szczegółowych. Poniższe pytania techniczne i tematy do oceny nie stanowią zatwierdzenia nowych funkcji.
 
 ## Obszary przeglądu
 
 | Obszar | Powiązane wymagania | Otwarte tematy do analizy i decyzji |
 | --- | --- | --- |
-| Warianty i ograniczenia platformy | SYS-001, SYS-002, SYS-012, SYS-014, SYS-015, SYS-032, SYS-033, SYS-038, SYS-042 | Jednostki referencyjne, obroty i pozostałe granice pracy; zgodność zachowywanego osprzętu; wykonalność konwersji TPI na mieszankę. Zachować jawne wyłączenia funkcji. |
+| Warianty i ograniczenia platformy | SYS-001, SYS-002, SYS-012, SYS-014, SYS-015, SYS-032, SYS-033, SYS-038, SYS-042, SYS-098 | Jednostki referencyjne, obroty i pozostałe granice pracy; zgodność zachowywanego osprzętu; wykonalność konwersji TPI na mieszankę. Zachować jawne wyłączenia funkcji. |
 | Zapłon i synchronizacja | SYS-001, SYS-002, SYS-015 | Czujniki i znaczniki wału/wałka, rozpoznanie fazy i rozruch kopniakiem; obsługiwane rodzaje zapłonu, cewki, kanały, energia i czasy; utrata synchronizacji. |
 | Paliwo i strategie silnikowe | SYS-007, SYS-012, SYS-015, SYS-028, SYS-029, SYS-030, SYS-031, SYS-033 | Liczba i typy wtryskiwaczy, parametry pompy; kryteria sterowania w stanach pracy silnika. Zakres regulacji biegu jałowego i dodatkowych strategii do oceny przed wyborem wymaganych wyjść i zasobów. |
 | Konfiguracja i mapy | SYS-003, SYS-007, SYS-028, SYS-047, SYS-094, SYS-095 | Zawartość i osie map, zakresy ustawień, walidacja, przełączanie i strojenie na żywo podczas pracy; warunki stosowania/utrwalania zmian i zgodność konfiguracji z wariantem sprzętu/firmware. |
@@ -31,4 +31,4 @@ Status: roboczy plan przeglądu, uzupełniony 2026-11-03. Źródłem treści wym
 - Uzgodnienie zapisujemy w wymaganiu lub decyzji z identyfikowalnym źródłem. Dobór realizacji i kryteriów wykonuje się dalej dla każdego bloku; pytanie do właściciela jest jedną z metod uzupełnienia danych, obok analizy dokumentacji i pomiarów.
 - Przed zamknięciem architektury i wydaniem PCB sprawdzamy każdą pozycję, jej wpływ na I/O i zasoby oraz pozostałe luki. Przed testami wymagania muszą być powiązane z metodą, kryteriami i procedurami według [zasad weryfikacji](../verification/README.md).
 
-Aktualny stan: częściowe uzgodnienia we wszystkich powyższych obszarach; żaden wiersz nie oznacza zakończonego pełnego przeglądu. Przygotowano [początkowy przydział SYS → blok → grupa weryfikacji](../verification/macierz-wymagan.md). Mierzalne kryteria, procedury, dowody i przegląd stosownych norm pozostają do rozwinięcia. Zmiany zakresu wymagają aktualizacji mapy i oceny wpływu.
+Aktualny stan: F01 zamknięto w zakresie funkcji silnikowych; F02 jest aktywny. Obszary współdzielone z F03–F08 wymagają dalszych przeglądów w kolejności pakietów. Mapa obszarów nie jest potwierdzeniem działania produktu. Przygotowano [początkowy przydział SYS → blok → grupa weryfikacji](../verification/macierz-wymagan.md). Mierzalne kryteria, procedury, dowody i przegląd stosownych norm pozostają do rozwinięcia. Zmiany zakresu wymagają aktualizacji mapy i oceny wpływu.

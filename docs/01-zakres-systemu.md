@@ -111,6 +111,7 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-095 | Trwały zapis zmian map w ECU jest dopuszczony wyłącznie przy zgaszonym silniku, po wyraźnym poleceniu użytkownika z aplikacji Windows. ECU egzekwuje warunki dopuszczenia zapisu. Stosowanie zmian podczas strojenia na żywo według SYS-094 nie powoduje ich automatycznego trwałego zapisu. Metoda potwierdzenia zatrzymania silnika, warunki zasilania i zachowanie przy przerwaniu zapisu wymagają specyfikacji. |
 | SYS-096 | Wspólna PCB ECU umożliwia odczyt MAP, czyli ciśnienia bezwzględnego w kolektorze dolotowym, z kompatybilnego czujnika OEM lub dodatkowego. Konfiguracje niewymagające tego pomiaru mogą pracować bez podłączonego czujnika. Zgodne czujniki, parametry elektryczne i pomiarowe oraz sposób wykorzystania w danej konfiguracji wymagają specyfikacji. |
 | SYS-097 | Wspólna PCB ECU umożliwia odczyt ciśnienia gazów w skrzyni korbowej silnika 2T (CCPS) z kompatybilnego czujnika. Konfiguracje niewymagające tego pomiaru mogą działać bez podłączonego czujnika. Zgodne czujniki, źródło i sposób poboru ciśnienia, parametry elektryczne i pomiarowe oraz wykorzystanie w danej konfiguracji wymagają specyfikacji. Wyłączenie sterowania dozownikiem oleju 2T według SYS-032/033 pozostaje w mocy. |
+| SYS-098 | Docelowy zakres silnikowy ECU obejmuje wyłącznie jednocylindrowe silniki 2T i 4T chłodzone cieczą. Silniki chłodzone powietrzem pozostają poza zakresem tej platformy. Wymagany pomiar temperatury płynu chłodzącego określa SYS-044. |
 
 ## 3. Podział odpowiedzialności
 
@@ -180,6 +181,10 @@ Do określenia przed projektem torów: interfejs i zakres czujnika paliwa, pozio
 **Podział temperatur potwierdzony przez właściciela:** do kompensacji wtrysku wykorzystujemy fabryczny lub zewnętrzny IAT, a temperaturę na PCB traktujemy jako osobny pomiar ECU (SYS-030, SYS-031). Parametry IAT i sposób pomiaru temperatury ECU określimy przy doborze interfejsów i komponentów. Uzasadnienie rozdzielenia: wpływ temperatury płytki i samonagrzewania na pomiar ilustruje [dokumentacja Bosch BME280, uwaga 7 do dokładności temperatury](https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bme280-ds002.pdf); przywołanie dokumentu nie jest wyborem komponentu.
 
 Zakres podstawowych czujników dla docelowych układów wtryskowych określimy osobno. Przykładowo [KTM EXC TBI MY2024](https://www.ktm.com/en-ca/2024-enduro-range-press-kit.html) wykorzystuje m.in. temperaturę powietrza, ciśnienie otoczenia i ciśnienie w skrzyni korbowej; samo wskazanie barometru nie definiuje kompletnego zestawu sygnałów sterowania.
+
+### Zakres chłodzenia — ustalenie właściciela z 2026-11-04
+
+W odpowiedzi B na pytanie 107 właściciel ograniczył platformę do silników chłodzonych cieczą, z pomiarem temperatury płynu. Zakres zapisuje SYS-098 i [ADR-012](decisions/adr-012-zakres-chlodzenia-ciecza.md); nie rozszerzamy pomiaru na silniki chłodzone powietrzem.
 
 ### MAP — ustalenie właściciela z 2026-11-04
 
@@ -378,7 +383,7 @@ Do ustalenia: minimalne napięcie i dostępny prąd pod obciążeniem, modele i 
 
 Przygotowano robocze materiały: [listę funkcji wejść/wyjść](interfaces/wstepna-lista-io.md), [macierz wariantów silnika](architecture/macierz-wariantow-silnika.md) i [plan inwentaryzacji Bety 300 RR Racing 2015](verification/beta-2015-plan-inwentaryzacji.md). Nie są one zatwierdzonym pinoutem ani potwierdzeniem zgodności sprzętu.
 
-Przygotowano pierwszą [architekturę blokową](architecture/blokowa-systemu.md), funkcjonalny przydział zasobów w macierzy wariantów i [macierz SYS → blok → grupa weryfikacji](verification/macierz-wymagan.md). Aktywny jest etap 2, pakiet F01: komplet funkcji silnikowych według [kolejności procesu](00-proces-i-status.md). Kolejne pakiety podejmujemy po zamknięciu poprzedniego; inwentaryzacja, architektura, bilanse i procedury wykonawcze oczekują we właściwych etapach. Zapisujemy tam wpływ decyzji. Ważne komponenty wybierzemy wspólnie po dojściu do etapu doboru i uzyskaniu jego danych.
+Przygotowano pierwszą [architekturę blokową](architecture/blokowa-systemu.md), funkcjonalny przydział zasobów w macierzy wariantów i [macierz SYS → blok → grupa weryfikacji](verification/macierz-wymagan.md). F01 zamknięto w zakresie funkcji; aktywny jest etap 2, pakiet F02: mapy i konfiguracja ECU, według [kolejności procesu](00-proces-i-status.md). Kolejne pakiety podejmujemy po zamknięciu poprzedniego; inwentaryzacja, architektura, bilanse i procedury wykonawcze oczekują we właściwych etapach. Zapisujemy tam wpływ decyzji. Ważne komponenty wybierzemy wspólnie po dojściu do etapu doboru i uzyskaniu jego danych.
 
 ## 6. Sposób realizacji i współpracy
 

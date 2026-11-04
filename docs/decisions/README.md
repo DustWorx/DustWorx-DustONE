@@ -17,6 +17,7 @@ Właściciel projektu wskazał `DustWorx/DustWorx-DustONE` jako repozytorium dok
 - [ADR-009 — oświetlenie i oszczędzanie energii po zgaszeniu](adr-009-oszczedzanie-energii.md)
 - [ADR-010 — akumulatory AGM i LiFePO4 na wspólnej PCB](adr-010-akumulatory-agm-lifepo4.md)
 - [ADR-011 — niezależne zestawy map i strojenie na żywo](adr-011-strojenie-na-zywo.md)
+- [ADR-012 — zakres silników chłodzonych cieczą](adr-012-zakres-chlodzenia-ciecza.md)
 
 ## Kolejne decyzje
 

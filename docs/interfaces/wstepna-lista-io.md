@@ -22,7 +22,7 @@ Wiązkę i złącze ECU projektujemy od nowa (SYS-045), według potrzebnych funk
 | MAP — ciśnienie bezwzględne w dolocie | Wejście pomiarowe ECU; czujnik OEM lub dodatkowy | SYS-096 | Konfiguracje niewymagające MAP pracują bez czujnika. Modele, zasilanie/sygnał, zakres, dokładność, filtracja i diagnostyka do późniejszej specyfikacji; w T-MAP zachować także IAT. [Karta MAP](cisnienie-dolotu-map.md). |
 | Ciśnienie gazów w skrzyni korbowej 2T — CCPS | Wejście pomiarowe ECU; zgodnie z konfiguracją | SYS-097 | Konfiguracje niewymagające pomiaru pracują bez czujnika. Model, pobór ciśnienia, sygnał/zasilanie, zakres/dynamika, dokładność i diagnostyka do specyfikacji. Współdzielenie zasobów z MAP wymaga analizy; [karta CCPS](cisnienie-skrzyni-korbowej.md). |
 | IAT | Wejście ECU | SYS-031 | Czujniki referencyjne, charakterystyki i sposób podłączenia. |
-| Temperatura płynu chłodzącego | Wejście pomiarowe ECU; dane do HMI | SYS-044 | Czujniki OEM lub dodatkowe, charakterystyki, zakres, dokładność i montaż. Sam termowłącznik nie zapewnia pomiaru wartości. |
+| Temperatura płynu chłodzącego | Wejście pomiarowe ECU; dane do HMI | SYS-044, 098 | Czujniki OEM lub dodatkowe, charakterystyki, zakres, dokładność i montaż. Sam termowłącznik nie zapewnia pomiaru wartości. |
 | Ciśnienie paliwa | Wejście pomiarowe ECU | SYS-029 | Zakres ciśnienia, sygnał, zasilanie i wymagana dokładność. |
 | Czujnik rezerwy paliwa | Opcjonalny tor odczytu ECU; stan do HMI | SYS-073 | Zgodne modele, rodzaj sygnału, zasilanie/ewentualne pobudzenie, pomiar, filtracja i diagnostyka do określenia. Odróżnić stan rezerwy, usterkę i konfigurację bez czujnika; nie zakładać zwykłego wejścia 0/1 bez analizy czujnika. |
 | Ciśnienie oleju obecne/brak | Wejście binarne ECU | SYS-029 | Polaryzacja, poziomy, czujnik/wyłącznik i diagnostyka przewodów. |
@@ -56,7 +56,6 @@ Poniższe pozycje nie są nowymi zatwierdzonymi wymaganiami właściciela.
 
 | Tor | Cel analizy | Do określenia |
 | --- | --- | --- |
-| Temperatura dla różnych sposobów chłodzenia | Domknięcie zakresu pomiarów F01 | Temperatura płynu jest przyjęta w SYS-044. Zakres dla silników chłodzonych powietrzem pozostaje do decyzji; [przegląd pomiarów](../requirements/f01-pomiary-silnika.md). Funkcje ochronne i kryteria wracają w F03. |
 | Pomiar wartości napięcia zasilania do dodatkowych zastosowań | Diagnostyka i kompensacja zależna od napięcia | Zakres, dokładność i częstotliwość do analizy; nadzór wymagany do odcięcia wentylatora ujęto wyżej jako funkcję potwierdzoną. |
 
 ## Zasilanie i komunikacja

@@ -1,6 +1,6 @@
 # Macierz wariantów silnika — dane do architektury
 
-Stan na: 2026-11-04. Część funkcjonalna służy bieżącemu F01. Przydział zasobów i bilanse są materiałem wstępnym na etap 4 w kolejce; tabela nie jest listą zatwierdzonych zgodności. Podstawa: [wymagania systemu](../01-zakres-systemu.md). Wspólna, jednakowo obsadzona PCB ma pokrywać uzgodnione warianty; zmienia się konfiguracja i dopuszczalna wiązka.
+Stan na: 2026-11-04. Część funkcjonalna stanowi wynik zamkniętego F01. Zakres obejmuje wyłącznie silniki chłodzone cieczą (SYS-098). Przydział zasobów i bilanse są materiałem wstępnym na etap 4 w kolejce; tabela nie jest listą zatwierdzonych zgodności. Podstawa: [wymagania systemu](../01-zakres-systemu.md). Wspólna, jednakowo obsadzona PCB ma pokrywać uzgodnione warianty; zmienia się konfiguracja i dopuszczalna wiązka.
 
 | Wariant | Podstawa / jednostka referencyjna | Dane decydujące o sprzęcie |
 | --- | --- | --- |
@@ -49,7 +49,7 @@ Oznaczenia: **R** — funkcja wymagana w tym wariancie; **W** — obsługa, jeż
 | Tor wartości ciśnienia paliwa | — | — | — | W | W | W |
 | Binarne ciśnienie oleju, zgodnie z wyposażeniem | W | W | W | W | W | W |
 
-F01: [MAP](../interfaces/cisnienie-dolotu-map.md) przyjęto w SYS-096, odpowiedź A na pytanie 105. Użycie zależy od konfiguracji; nie wybrano czujnika, parametrów ani liczby fizycznych kanałów. [CCPS](../interfaces/cisnienie-skrzyni-korbowej.md) przyjęto w SYS-097. Zakres chłodzenia silników i odpowiedniego pomiaru temperatury pozostaje do decyzji w [przeglądzie pomiarów F01](../requirements/f01-pomiary-silnika.md).
+F01: [MAP](../interfaces/cisnienie-dolotu-map.md) przyjęto w SYS-096, odpowiedź A na pytanie 105. Użycie zależy od konfiguracji; nie wybrano czujnika, parametrów ani liczby fizycznych kanałów. [CCPS](../interfaces/cisnienie-skrzyni-korbowej.md) przyjęto w SYS-097. Zakres ograniczono do chłodzenia cieczą z pomiarem temperatury płynu (SYS-044/098), odpowiedź B na pytanie 107; [przegląd pomiarów](../requirements/f01-pomiary-silnika.md).
 
 Faza 4T jest opcjonalna w konfiguracjach niewykorzystujących tego sygnału; dopuszczone strategie bez fazy muszą być określone i sprawdzone. Symbol W/D nie potwierdza danego typu osprzętu w enduro. Każdy taki przypadek wymaga źródła model/rocznik przed przyjęciem parametrów sprzętu. MAP i CCPS są przyjętymi możliwościami według SYS-096/097; nie wybrano liczby kanałów ani fizycznego podziału torów.
 
@@ -88,4 +88,4 @@ To wejście do bilansu, nie liczbowy bilans MCU ani pinout. Najpierw uzupełniam
 
 Warianty silnika są alternatywnymi konfiguracjami jednego ECU: nie sumujemy ich automatycznie. Współdzielenie zasobów wolno przyjąć dopiero po wykazaniu zgodności wszystkich dopuszczonych trybów, w tym rozruchu, serwisu i resetu, oraz właściwego stanu nieużywanych wyjść.
 
-Stan: funkcje rozpisane; modele poza Betą, prądy/liczby kanałów oraz wartości bilansów pozostają otwarte. Status nie oznacza zakończenia F01 ani G1.
+Stan: F01 zamknięty w zakresie funkcji; [wynik przeglądu i przekazanie danych](../requirements/f01-sterowanie-silnikiem.md). Modele poza Betą, parametry, prądy/liczby fizycznych kanałów, algorytmy i bilanse pozostają na etapy 3–4. G1 pozostaje otwarta; zgodności modeli jeszcze nie potwierdzono.

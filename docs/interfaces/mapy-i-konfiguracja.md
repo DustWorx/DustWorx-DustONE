@@ -1,6 +1,6 @@
 # Mapy i konfiguracja — operacje F02
 
-Stan na: 2026-11-04. **F02 w kolejce po F01; wcześniejsze ustalenia zachowane.** Wymagania źródłowe: SYS-003/007/028/047/094/095 w [rejestrze systemu](../01-zakres-systemu.md). Podstawa decyzji: [ADR-011](../decisions/adr-011-strojenie-na-zywo.md), odpowiedzi A na pytania 101–104.
+Stan na: 2026-11-04. **F02 aktywny po zamknięciu F01; wcześniejsze ustalenia zachowane.** Wymagania źródłowe: SYS-003/007/028/047/094/095 w [rejestrze systemu](../01-zakres-systemu.md). Podstawa decyzji: [ADR-011](../decisions/adr-011-strojenie-na-zywo.md), odpowiedzi A na pytania 101–104.
 
 ## Zatwierdzona podstawa
 

@@ -22,4 +22,4 @@ Analizy architektoniczne:
 - [Oszczędzanie energii po zgaszeniu silnika](oszczedzanie-energii.md): przejście na pozycyjne, nadzór akumulatora, wyłączenie zbędnych odbiorników, rekomendacje i plan prób (SYS-083/084).
 - [Akumulatory AGM i LiFePO4 — porównanie zakresu](akumulatory-agm-lifepo4-porownanie.md): po porównaniu właściciel wybrał oba typy na wspólnej PCB, z osobnymi profilami i testami zgodności (SYS-092, ADR-010); parametry i dobór toru pozostają otwarte.
 - [Budżet energii podczas postoju](budzet-energii-postoju.md): minimum 4 tygodnie bez doładowania z rezerwą na rozruch (SYS-093); warunki, limit prądu i procedury do opracowania.
-- [ADR-011 — strojenie na żywo](../decisions/adr-011-strojenie-na-zywo.md): Windows może stosować zmiany wybranych wartości map podczas pracy silnika; zapis i utrata sesji mają przyjęte reguły. Pozostałe ustalenia F02 oczekują po F01.
+- [ADR-011 — strojenie na żywo](../decisions/adr-011-strojenie-na-zywo.md): Windows może stosować zmiany wybranych wartości map podczas pracy silnika; zapis i utrata sesji mają przyjęte reguły. F02 jest aktywny po zamknięciu F01; projekt architektury nadal oczekuje w etapie 4.
