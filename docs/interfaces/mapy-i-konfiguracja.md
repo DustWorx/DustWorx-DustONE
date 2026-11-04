@@ -1,6 +1,6 @@
 # Mapy i konfiguracja — operacje F02
 
-Stan na: 2026-11-04. **F02 w kolejce do zakończenia kontroli F01; wcześniejsze ustalenia zachowane.** Pytanie 108 o wybór zestawu po restarcie nie otrzymało odpowiedzi produktowej. Wymagania źródłowe: SYS-003/007/028/047/094/095 w [rejestrze systemu](../01-zakres-systemu.md). Podstawa decyzji: [ADR-011](../decisions/adr-011-strojenie-na-zywo.md), odpowiedzi A na pytania 101–104.
+Stan na: 2026-11-04. **F02 aktywny po zakończeniu kontroli F01 przez właściciela; wcześniejsze ustalenia zachowane.** Pierwsze otwarte ustalenie: pytanie 108 — wybór zestawu po ponownym uruchomieniu ECU. Wymagania źródłowe: SYS-003/007/028/047/094/095 w [rejestrze systemu](../01-zakres-systemu.md). Podstawa decyzji: [ADR-011](../decisions/adr-011-strojenie-na-zywo.md), odpowiedzi A na pytania 101–104.
 
 ## Zatwierdzona podstawa
 

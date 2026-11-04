@@ -2,9 +2,11 @@
 
 Stan na: 2026-11-04. Ocena głównej gałęzi, materiałów roboczych oraz uzgodnień właściciela do pytania 107. Ścieżka projektu i warunki postoju z PR #17/#18 są scalone. Dokument aktualizujemy przy istotnej odpowiedzi lub decyzji, wykonanej pracy, wyniku próby, zmianie zakresu i przeglądzie etapu; wraz z wymaganiami, ADR, interfejsami i weryfikacją.
 
+Kontrola pełnego F01 została zakończona: właściciel potwierdził zgodność podsumowania i polecił dalszą pracę (2026-11-04). Źródło kontroli: [przyjęte podsumowanie F01](requirements/f01-podsumowanie-kontrolne.md). Potwierdzenie dotyczy F01; wybór z pytania 108 pozostaje nierozstrzygnięty.
+
 ## Aktualne miejsce w procesie
 
-**Aktywny etap: 2 — zakres funkcjonalny. Aktywny temat: kontrola ustaleń F01 przez właściciela przed przejściem do F02.** Na prośbę właściciela wracamy do F01; wynik przeglądu asystenta z 2026-11-04 pozostaje zachowany. F02–F08 i etapy 3–12 oczekują w kolejce. Wcześniejsze wymagania, decyzje i materiały robocze pozostają zachowane; nie oznaczają formalnego rozpoczęcia ani zamknięcia dalszych etapów.
+**Aktywny etap: 2 — zakres funkcjonalny. F01 zamknięty po kontroli właściciela 2026-11-04; aktywny pakiet: F02 — mapy, konfiguracja i strojenie ECU.** F03–F08 i etapy 3–12 oczekują w kolejce. Wcześniejsze wymagania, decyzje i materiały robocze pozostają zachowane; nie oznaczają formalnego rozpoczęcia ani zamknięcia dalszych etapów.
 
 | Obszar | Stan potwierdzony dokumentacją |
 | --- | --- |
@@ -33,7 +35,7 @@ Statusy: **aktywny**, **w kolejce**, **zamknięty**. Istniejący szkic oznaczamy
 | Etap | Główny rezultat | Bieżący status | Warunek zakończenia / przejścia |
 | --- | --- | --- | --- |
 | 1. Organizacja | Repozytorium, struktura, zasady zmian i decyzji. | Zamknięty: 2026-11-04. Dokumentację utrzymujemy. | Uzgodnienia i źródła mają miejsce w repozytorium, zmiany są wersjonowane. |
-| 2. Zakres funkcjonalny | Funkcje, wyłączenia, warianty i reguły użytkowania ECU/HMI/Windows. | F01 aktywny: kontrola ustaleń. F02–F08 w kolejce. | G0: przyjęta baza zakresu, rozstrzygnięte decyzje produktowe i jawne otwarte parametry techniczne. |
+| 2. Zakres funkcjonalny | Funkcje, wyłączenia, warianty i reguły użytkowania ECU/HMI/Windows. | F01 zamknięty; aktywny F02. F03–F08 w kolejce. | G0: przyjęta baza zakresu, rozstrzygnięte decyzje produktowe i jawne otwarte parametry techniczne. |
 | 3. Inwentaryzacja i dane | Osprzęt, sygnały, obciążenia, zasilanie i przestrzeń montażowa. | W kolejce po G0; istnieją dokumenty/zdjęcia i plan INV, bez wyników pomiarów. | Dane wystarczają do projektowania odpowiedniego bloku; braki innych wariantów mają plan pozyskania. |
 | 4. Architektura | Diagramy blokowe, I/O dla wariantów, zasoby, zasilanie, interfejsy i stany awaryjne. | W kolejce po etapie 3; zachowane wstępne szkice diagramu i zasobów. | G1: uzasadniony podział bloków, bilanse, granice interfejsów i zamknięte niewiadome wpływające na projektowane bloki. |
 | 5. Plan weryfikacji | Powiązanie wymaganie → blok → metoda → kryterium → próba → dowód. | W kolejce po etapie 4; zachowane szablon i wstępny przydział wymagań. | Wymagania mają przydzieloną metodę i etap; procedura wykonawcza jest gotowa przed daną próbą. |
@@ -49,7 +51,7 @@ Projekt wspólnej PCB obejmuje docelowy uzgodniony zakres 2T/4T bez zmian obsady
 
 ## Co pozostało w funkcjonalności
 
-**F01 jest w kontroli właściciela; F02–F08 oczekują.** Po kontroli wracamy do zamknięcia pakietu i dalszej kolejności, a na końcu wykonujemy G0. Ich treść i wynik wymagany do zamknięcia opisuje [rejestr domknięcia zakresu](requirements/domkniecie-zakresu-funkcjonalnego.md). Pakiet może zawierać kilka decyzji; część jego funkcji jest już uzgodniona. Jest to roboczy plan domknięcia obecnego zakresu, aktualizowany przy ujawnieniu nowych luk.
+**F01 zamknięty; pozostaje 7 pakietów F02–F08** oraz przegląd zamykający G0. Ich treść i wynik wymagany do zamknięcia opisuje [rejestr domknięcia zakresu](requirements/domkniecie-zakresu-funkcjonalnego.md). Pakiet może zawierać kilka decyzji; część jego funkcji jest już uzgodniona. Jest to roboczy plan domknięcia obecnego zakresu, aktualizowany przy ujawnieniu nowych luk.
 
 Parametry wyliczane z osprzętu, charakterystyki czujników, wartości elementów, konkretne procesory i układy, formaty CAN oraz layout rozwijamy w odpowiednich etapach architektury i projektu wykonawczego. Ważne komponenty nadal wybieramy wspólnie.
 
@@ -57,14 +59,14 @@ Parametry wyliczane z osprzętu, charakterystyki czujników, wartości elementó
 
 | Zadanie | Status | Materiał / warunek podjęcia |
 | --- | --- | --- |
-| W04 — Zakres funkcjonalny: F01 | Aktywny: kontrola ustaleń na prośbę właściciela. | [Pełne podsumowanie kontrolne](requirements/f01-podsumowanie-kontrolne.md); wcześniejsze przeglądy i dane przekazane dalej pozostają zachowane. |
-| F02 — Mapy, konfiguracja i strojenie ECU | W kolejce do zakończenia kontroli F01. | Ustalenia 101–104 zachowane w [specyfikacji](interfaces/mapy-i-konfiguracja.md). Pytanie 108 o zestaw po restarcie nie ma odpowiedzi produktowej. |
+| W04 — Zakres funkcjonalny: F01 | Zamknięty po kontroli właściciela: 2026-11-04. | [Pomiary](requirements/f01-pomiary-silnika.md), [przegląd sterowania i wynik zamknięcia](requirements/f01-sterowanie-silnikiem.md); dane techniczne przekazane do kolejki etapów 3–6. |
+| F02 — Mapy, konfiguracja i strojenie ECU | Aktywny po zamknięciu F01. | Ustalenia 101–104 zachowane; rozwijamy [tabelę operacji i warunków](interfaces/mapy-i-konfiguracja.md). Pierwsze otwarte pytanie: 108 — wybór zestawu po restarcie ECU. |
 | W05 — Inwentaryzacja Bety | W kolejce, etap 3. | Zachowany [plan INV](verification/beta-2015-plan-inwentaryzacji.md); brak wyników pomiarowych. |
 | W01/W02 — Architektura i zasoby | W kolejce, etap 4. | Zachowane [diagram](architecture/blokowa-systemu.md) i [macierz wariantów](architecture/macierz-wariantow-silnika.md); bez zamkniętych bilansów. |
 | W03 — Weryfikacja wymagań | W kolejce, etap 5. | Zachowany [przydział 98 SYS do grup](verification/macierz-wymagan.md); kryteria, procedury i dowody do rozwinięcia. |
 | W06 — Bilanse i wybór komponentów | W kolejce, etapy 4 i 6. | Wymagane wejściowe parametry; ważne komponenty wybierzemy wspólnie. |
 
-**Najbliższy rezultat: kontrola kompletnego podsumowania F01 i zapis ewentualnych uwag właściciela.** Wymagania nie zostały zmienione samym powrotem do kontroli. F02 podejmiemy po zakończeniu tego przeglądu; pytanie 108 pozostaje nierozstrzygnięte. Konkrety osprzętu, w tym wykonalność konwersji TPI, mają właścicieli i etapy w [przekazaniu F01](requirements/f01-sterowanie-silnikiem.md). Parametry elektryczne, bilanse i procedury wykonawcze pozostają w kolejce właściwych etapów.
+**Najbliższy rezultat: tabela operacji i warunków F02**, rozwijająca przyjęte zestawy i strojenie na żywo. F01 ma zapisany wynik zamknięcia na poziomie funkcji, bez deklaracji zgodności modeli ani gotowości sprzętu. Konkrety osprzętu, w tym wykonalność konwersji TPI, mają właścicieli i etapy w [przekazaniu F01](requirements/f01-sterowanie-silnikiem.md). Parametry elektryczne, bilanse i procedury wykonawcze pozostają w kolejce właściwych etapów.
 
 ## Warunki przechodzenia dalej
 

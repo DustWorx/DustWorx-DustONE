@@ -1,6 +1,6 @@
 # F01 — przegląd sterowania i zamknięcie zakresu funkcji
 
-Stan na: 2026-11-04. **Wynik przeglądu prowadzącego inżynierię; aktualnie F01 w kontroli właściciela przed F02.** Wcześniejsze zamknięcie zakresu przez asystenta nastąpiło po przeglądzie i zapisaniu przyjętych decyzji właściciela, w tym pytań 105–107. Wynik łączy [pomiary](f01-pomiary-silnika.md), [macierz funkcji i wariantów](../architecture/macierz-wariantow-silnika.md), wymagania i wyłączenia.
+Stan na: 2026-11-04. **F01 zamknięty w zakresie funkcji po przeglądzie inżynierskim i kontroli właściciela.** Właściciel potwierdził zgodność [pełnego podsumowania](f01-podsumowanie-kontrolne.md) i dalszą pracę 2026-11-04; zapisane decyzje obejmują m.in. pytania 105–107. Wynik łączy [pomiary](f01-pomiary-silnika.md), [macierz funkcji i wariantów](../architecture/macierz-wariantow-silnika.md), wymagania i wyłączenia.
 
 ## Przyjęte sterowanie
 
@@ -35,4 +35,4 @@ TPI pozostaje celem zakresu z warunkami SYS-015/033: wykonalność konwersji sma
 | Komponenty i obwody | Etap 6: ważne części wybieramy wspólnie, po spełnieniu warunków poprzednich etapów. |
 | Weryfikacja produktu | Procedury etapu 5 i dowody z późniejszych prób; wymagania pozostają niezweryfikowane na produkcie. |
 
-Nowa luka ujawniona w późniejszym etapie wymaga zapisu przyczyny i formalnego powrotu do zakresu zgodnie z procesem. **Bieżąca praca: [kontrola pełnego F01](f01-podsumowanie-kontrolne.md) na prośbę właściciela. F02 oczekuje do jej zakończenia.**
+Nowa luka ujawniona w późniejszym etapie wymaga zapisu przyczyny i formalnego powrotu do zakresu zgodnie z procesem. **Następny pakiet: F02 — mapy, konfiguracja i strojenie ECU.**

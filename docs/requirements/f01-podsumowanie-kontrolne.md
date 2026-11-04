@@ -1,6 +1,6 @@
 # F01 — podsumowanie kontrolne ustaleń
 
-Stan na: 2026-11-04. **Kontrola F01 przez właściciela przed przejściem do F02.** Pytanie 108 nie ma odpowiedzi produktowej. Podsumowanie nie zmienia wymagań; źródłem pozostaje [rejestr SYS](../01-zakres-systemu.md) i [ADR](../decisions/README.md).
+Stan na: 2026-11-04. **Kontrola F01 zakończona; właściciel potwierdził zgodność całości i dalszą pracę. F01 zamknięty 2026-11-04.** Pytanie 108 nie ma odpowiedzi produktowej. Podsumowanie nie zmienia wymagań; źródłem pozostaje [rejestr SYS](../01-zakres-systemu.md) i [ADR](../decisions/README.md).
 
 ## 1. Zakres silników i integracji
 
@@ -76,4 +76,4 @@ Poza zakresem pozostają: chłodzenie powietrzem, ride-by-wire, dwa niezależne 
 - Etap 6: wspólny wybór ważnych komponentów i obwodów. MCU, czujniki na PCB i drivery nie zostały wybrane przez zamknięcie zakresu funkcji.
 - Testy: asystent przygotowuje właściwe procedury i kryteria, właściciel wykonuje próby. Brak wyników produktu; wymagania pozostają niezweryfikowane na wykonanym ECU.
 
-Na prośbę właściciela trwa kontrola ustaleń F01. F02 oczekuje. Korekty z przeglądu zapisujemy z wpływem na wymagania i dalsze etapy.
+Właściciel potwierdził zgodność całego F01 i polecił kontynuację w rozmowie 2026-11-04. Kontrolę zakończono bez zmiany wymagań; F02 jest aktywny zgodnie z kolejnością procesu. Pytanie 108 pozostaje do rozstrzygnięcia.
