@@ -40,6 +40,8 @@ SYS-106: po zaniku zasilania podczas zmiany krytycznej konfiguracji ECU odtwarza
 
 SYS-107: pełny zestaw map, w ramach tej samej konfiguracji silnika, ECU przyjmuje i roboczo zastępuje tylko przy zgaszonym silniku. Warunek egzekwuje ECU. Na żywo pozostaje edycja dopuszczonych wybranych wartości według SYS-094/101; trwały zapis nadal podlega SYS-095. Walidacja, spójność, reakcje na próbę rozruchu i przerwanie do specyfikacji: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 
+SYS-108: ECU dopuszcza trwały zapis wybranego kompletnego zestawu map, aktywnego lub nieaktywnego, zachowując pozostałe dane robocze i trwale zapisane, oraz zapis wszystkich skonfigurowanych jednym poleceniem. Każdy zapis podlega SYS-095. Spójność przerwanego zapisu całej grupy, mechanizmy pamięci i potwierdzanie wyniku do specyfikacji: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
+
 SYS-101: ECU przyjmuje robocze zmiany wybranych wartości aktywnego i nieaktywnych zestawów podczas pracy silnika. Edycja nie przełącza zestawu; zmiany nieaktywnego wpływają na silnik dopiero po jego świadomym wybraniu. Trwały zapis nadal podlega SYS-095. Szczegóły: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 
 SYS-099: po restarcie ECU aktywuje ostatnio wybrany prawidłowy zestaw spośród trwale zapisanych, także bez HMI. Zapamiętanie wyboru i zapis wartości map mają odrębne reguły; brak automatycznego utrwalania edycji na żywo. SYS-100 wymaga po prawidłowym śnie/wybudzeniu odrzucenia roboczej edycji i użycia trwale zapisanych wartości, bez automatycznego utrwalania. Mechanizm pamięci wyboru, walidacja, gotowość do rozruchu i przerwana sekwencja snu są do projektu: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).

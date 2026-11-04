@@ -35,6 +35,8 @@ SYS-106: po zaniku zasilania podczas zmiany krytycznej konfiguracji ECU odtwarza
 
 SYS-107: przesłanie i robocze zastąpienie pełnego zestawu map w ECU wymaga zgaszonego silnika, w ramach tej samej konfiguracji silnika. Przygotowanie pliku lokalnie jest odrębną czynnością. Podczas pracy pozostaje edycja dopuszczonych wybranych wartości aktywnego i nieaktywnych zestawów. Brak automatycznego trwałego zapisu; obowiązuje SYS-095. Szczegóły: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 
+SYS-108: aplikacja może zażądać trwałego zapisu wybranego kompletnego zestawu, aktywnego lub nieaktywnego, bez utrwalania roboczych zmian pozostałych, albo wszystkich skonfigurowanych zestawów jednym poleceniem. Obowiązują zgaszony silnik i wyraźne polecenie użytkownika według SYS-095. Spójność wyniku przerwanego zapisu całej grupy pozostaje do wyboru. Szczegóły: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
+
 SYS-101: Windows może przesyłać do ECU robocze zmiany wybranych wartości aktywnego i nieaktywnych zestawów podczas pracy silnika. Edycja nie przełącza zestawu; nieaktywny zaczyna wpływać na silnik dopiero po jego świadomym wybraniu. Obowiązuje SYS-095 dla trwałego zapisu. Szczegóły: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 
 SYS-099: wybór zestawu po restarcie realizuje ECU, również bez HMI/PC; jest to ostatnio wybrany prawidłowy zestaw spośród trwale zapisanych. Aplikacja po połączeniu odczytuje rzeczywisty stan. Po prawidłowym śnie/wybudzeniu niezapisane zmiany zostają odrzucone zgodnie z SYS-100. Uzgodnienie po powrocie sesji i walidacja danych pozostają do określenia w [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
