@@ -1,13 +1,13 @@
 # Mapy i konfiguracja — operacje F02
 
-Stan na: 2026-11-04. **F02 aktywny po zakończeniu kontroli F01 przez właściciela; wcześniejsze ustalenia zachowane.** Pytanie 108 rozstrzygnięte: ostatnio wybrany prawidłowy zestaw po restarcie. Pytanie 109 rozstrzygnięte: po prawidłowym śnie/wybudzeniu odrzucamy edycję roboczą i wczytujemy trwale zapisane wartości. Bieżący temat: przesyłanie zmian do nieaktywnego zestawu podczas pracy silnika. Wymagania źródłowe: SYS-003/007/028/047/094/095/099/100 w [rejestrze systemu](../01-zakres-systemu.md). Podstawa decyzji: [ADR-011](../decisions/adr-011-strojenie-na-zywo.md), odpowiedzi A na pytania 101–104 i 108–109.
+Stan na: 2026-11-04. **F02 aktywny po zakończeniu kontroli F01 przez właściciela; wcześniejsze ustalenia zachowane.** Pytanie 108 rozstrzygnięte: ostatnio wybrany prawidłowy zestaw po restarcie. Pytanie 109 rozstrzygnięte: po prawidłowym śnie/wybudzeniu odrzucamy edycję roboczą i wczytujemy trwale zapisane wartości. Pytanie 110 rozstrzygnięte: robocza edycja aktywnego i nieaktywnych zestawów podczas pracy, bez przełączania wskutek edycji. Bieżący temat: warunki zmiany krytycznej konfiguracji silnika. Wymagania źródłowe: SYS-003/007/028/047/094/095/099/100/101 w [rejestrze systemu](../01-zakres-systemu.md). Podstawa decyzji: [ADR-011](../decisions/adr-011-strojenie-na-zywo.md), odpowiedzi A na pytania 101–104 i 108–110.
 
 ## Zatwierdzona podstawa
 
 - Dla jednej konfiguracji silnika ECU przechowuje maksymalnie trzy niezależne, kompletne zestawy uzgodnionych map. Zestawy mają własne wartości map, np. zapłonu i paliwa dla wtrysku.
 - Aktywny zestaw można przełączać z HMI także podczas pracy silnika.
 - Po ponownym uruchomieniu ECU aktywuje ostatnio wybrany prawidłowy zestaw spośród trwale zapisanych, również bez HMI. ECU zapamiętuje wybór (SYS-099).
-- Windows umożliwia zastosowanie zmian wybranych wartości map podczas pracy silnika.
+- Windows umożliwia przesyłanie roboczych zmian wybranych wartości map aktywnego i nieaktywnych zestawów podczas pracy silnika. Edycja nie przełącza zestawu; zmiany nieaktywnego zestawu wpływają na silnik dopiero po jego świadomym wybraniu (SYS-101).
 - Po utracie połączenia z Windows ostatnio zastosowane wartości pozostają aktywne w bieżącej pracy ECU, bez automatycznego trwałego zapisu.
 - Trwały zapis zmian wymaga wyraźnego polecenia użytkownika z Windows i zgaszonego silnika. ECU egzekwuje warunki; strojenie na żywo nie uruchamia automatycznego trwałego zapisu.
 - Po prawidłowym śnie i wybudzeniu, także bez restartu, ECU odrzuca niezapisane zmiany i korzysta z trwale zapisanych wartości wybranego zestawu. Nie wykonuje automatycznego trwałego zapisu (SYS-100).
@@ -20,7 +20,7 @@ Stan na: 2026-11-04. **F02 aktywny po zakończeniu kontroli F01 przez właścici
 | Operacja | Co przyjęto | Co pozostaje do określenia |
 | --- | --- | --- |
 | Wybór zestawu z HMI | Dopuszczony także podczas pracy silnika; po restarcie wybierany jest ostatnio wybrany prawidłowy zestaw (SYS-099). | Warunki i moment/spójność przełączenia, potwierdzenie, mechanizm zapamiętywania wyboru i walidacja. |
-| Edycja z Windows i zastosowanie zmian | Strojenie na żywo wybranych wartości jest w zakresie. | Lista pól, zakresy, walidacja, częstotliwość i moment zastosowania, edycja aktywnego/nieaktywnego zestawu. |
+| Edycja z Windows i zastosowanie zmian | Dopuszczona robocza edycja wybranych wartości aktywnego i nieaktywnych zestawów podczas pracy. Sama edycja nie przełącza zestawu; zmiany nieaktywnego zestawu wpływają na silnik dopiero po jego świadomym wybraniu (SYS-101). | Lista pól, zakresy, walidacja, częstotliwość i spójny moment zastosowania danych. |
 | Trwałe zapisanie zmian w ECU | Tylko przy zgaszonym silniku, na wyraźne polecenie użytkownika z Windows; warunki egzekwuje ECU (SYS-095). | Potwierdzanie zatrzymania silnika, warunki zasilania, spójność/przerwanie zapisu, reakcja na próbę rozruchu lub ruch wału w trakcie operacji. |
 | Przesłanie pełnego zestawu i konfiguracji | Aplikacja konfiguruje i stroi ECU. | Warunki zastosowania całego zestawu, zgodność z silnikiem/FW i blokady krytycznej konfiguracji. |
 | Utrata sesji Windows | ECU zachowuje ostatnio zastosowane wartości map w bieżącej pracy, bez automatycznego trwałego zapisu (SYS-094). | Detekcja utraty sesji, odczyt/uzgodnienie danych po ponownym połączeniu i ponowienie polecenia. |
@@ -37,8 +37,8 @@ Status „otwarte” oznacza brak zatwierdzonej reguły danej operacji; nie upra
 
 Rozwinięcie grup V02/V09 z [macierzy wymagań](../verification/macierz-wymagan.md):
 
-1. Odrębne dane trzech zestawów; edycja jednego zachowuje wartości pozostałych.
-2. Wybór zestawu, odczyt faktycznie aktywnych danych i dopuszczona zmiana podczas pracy.
+1. Odrębne dane trzech zestawów; podczas pracy silnika edycja wybranych wartości aktywnego oraz nieaktywnych zestawów zachowuje wartości pozostałych zestawów i nie zmienia aktywnego wyboru. Zmiany nieaktywnego zestawu nie wpływają na bieżące sterowanie.
+2. Świadomy wybór wcześniej edytowanego nieaktywnego zestawu podczas pracy: sterowanie korzysta z jego zmienionych wartości; odczyt potwierdza faktycznie aktywny zestaw i dane. Robocza edycja nie powoduje automatycznego trwałego zapisu.
 3. Odrzucenie niezgodnych danych oraz sprawdzenie wpływu zmiany na czas sterowania.
 4. Dopuszczenie trwałego zapisu na jawne polecenie przy zgaszonym silniku oraz odrzucenie żądania podczas pracy. Brak automatycznego trwałego zapisu zmian zastosowanych na żywo.
 5. Utrata sesji po zastosowaniu zmian: wartości pozostają aktywne, a trwały zapis nie jest wykonywany automatycznie.

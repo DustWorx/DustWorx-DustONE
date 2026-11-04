@@ -1,6 +1,6 @@
 # Macierz wymagań, bloków i weryfikacji
 
-Stan na: 2026-11-04. **Materiał wstępny dla etapu 5 w kolejce — przydział 100 wymagań do 13 grup.** Treść wymagań ma jedno miejsce źródłowe w [rejestrze SYS](../01-zakres-systemu.md), a ID bloków w [architekturze](../architecture/blokowa-systemu.md).
+Stan na: 2026-11-04. **Materiał wstępny dla etapu 5 w kolejce — przydział 101 wymagań do 13 grup.** Treść wymagań ma jedno miejsce źródłowe w [rejestrze SYS](../01-zakres-systemu.md), a ID bloków w [architekturze](../architecture/blokowa-systemu.md).
 
 Wszystkie wymagania pozostają **niezweryfikowane na produkcie**. Poniższe powiązanie nie jest kompletem procedur ani potwierdzeniem kompletności funkcji. Dla każdej próby rozwijamy: wariant/model i konfigurację, rewizje HW/FW/aplikacji, metodę, mierzalne kryteria, wyposażenie/połączenia, kroki, warunki przerwania oraz dowód wyniku. Wymaganie może mieć kilka bloków i prób.
 
@@ -9,7 +9,7 @@ Wszystkie wymagania pozostają **niezweryfikowane na produkcie**. Poniższe powi
 | Grupa | Zakres | Metoda i etap | Kierunek kryterium akceptacji | Otwarte dane przed wykonaniem |
 | --- | --- | --- | --- | --- |
 | V01 | Synchronizacja | Analiza, generator/symulator i stanowisko; później silnik. | Sygnały wału VR/Hall i dodatkowej fazy Hall rozpoznawane zgodnie z przyjętymi dekoderami; granice i utrata synchronizacji. | Modele, zakres prędkości/amplitud, dokładność i czasy reakcji. |
-| V02 | Sterowanie silnikiem i mapy | Analiza osprzętu, testy bloków/stanowiska i właściwy silnik. | Zapłon/wtrysk/napędy działają zgodnie z konfiguracją; pełne zestawy mają niezależne wartości. Zgodność zestawu, przełączanie i strojenie na żywo nie zakłócają wymaganej pracy. | Cewki, wtryskiwacze/napędy, strategie, tolerancje czasowe, reguły map i walidacja smarowania 2T. |
+| V02 | Sterowanie silnikiem i mapy | Analiza osprzętu, testy bloków/stanowiska i właściwy silnik. | Zapłon/wtrysk/napędy działają zgodnie z konfiguracją; pełne zestawy mają niezależne wartości. Robocza edycja aktywnego i nieaktywnych zestawów nie przełącza zestawu; zmiany nieaktywnego wpływają na silnik dopiero po jego świadomym wybraniu. Zgodność zestawu, przełączanie i strojenie na żywo nie zakłócają wymaganej pracy. | Cewki, wtryskiwacze/napędy, strategie, tolerancje czasowe, reguły map i walidacja smarowania 2T. |
 | V03 | Pomiary i wejścia | Analiza błędów, wzorce/symulatory i rzeczywiste czujniki. | Prawidłowe wartości/stany oraz rozróżnianie braku wyposażenia i usterek według konfiguracji. | Charakterystyki, dokładności, zakresy, progi i diagnostyka wejść. |
 | V04 | START, STOP i przewrócenie | Stanowisko, następnie kontrolowane próby właściwego motocykla. | START podczas przytrzymania, odcięcia i ponowienie, STOP bez HMI/CAN, zatrzymanie po przewróceniu i świadomy ponowny rozruch. | Warunki/czasy, kryterium pracy silnika i przewrócenia, tor STOP, połączenia stanowiska. |
 | V05 | Akcesoria i ochrona energii | Symulacja stanów, stanowisko obciążeń i integracja. | Światła, hamulce, kierunkowskazy, klakson, wentylator i wyjścia realizują przyjęte stany, priorytety i odcięcia. | Prądy, temperatury, progi/czasy, brakujące stany po usterkach/resecie i lista dodatkowych odbiorników. |
@@ -128,6 +128,7 @@ Próby dobieramy do wymagania; pełna grupa nie jest automatycznie obowiązkowa 
 | SYS-098 | SYS-INST, ECU-IN, ECU-CTRL | V03, V13 |
 | SYS-099 | ECU-CTRL, ECU-DATA | V07, V09 |
 | SYS-100 | ECU-CTRL, ECU-DATA, ECU-WAKE | V06, V09 |
+| SYS-101 | ECU-CTRL, ECU-DATA, ECU-COM, WIN-APP | V02, V09 |
 
 ## Sposób utrzymania
 

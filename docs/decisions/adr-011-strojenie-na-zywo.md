@@ -14,7 +14,7 @@ Windows umożliwia zmianę wybranych wartości map podczas pracy silnika. Dopusz
 
 W odpowiedzi **A na pytanie 102** właściciel przyjął maksymalnie trzy niezależne, kompletne zestawy uzgodnionych map dla jednej konfiguracji silnika: „Trzy niezależne, kompletne zestawy uzgodnionych map — np. zapłonu i paliwa w silniku wtryskowym”. Rozważanym wariantem była wspólna baza z trzema profilami korekt.
 
-Doprecyzowanie zapisano w istniejącym SYS-028. Powiązania: SYS-007, SYS-028, SYS-047, SYS-094, SYS-095, SYS-099 i SYS-100. Reguły operacji rozwijamy w [specyfikacji map i konfiguracji](../interfaces/mapy-i-konfiguracja.md).
+Doprecyzowanie zapisano w istniejącym SYS-028. Powiązania: SYS-007, SYS-028, SYS-047, SYS-094, SYS-095, SYS-099, SYS-100 i SYS-101. Reguły operacji rozwijamy w [specyfikacji map i konfiguracji](../interfaces/mapy-i-konfiguracja.md).
 
 W odpowiedzi **A na pytanie 103** właściciel przyjął: „Trwały zapis tylko przy zgaszonym silniku, na wyraźne polecenie użytkownika”. Regułę zapisano jako SYS-095. Rozważany wariant zapisu na polecenie również podczas pracy silnika nie został wybrany.
 
@@ -24,6 +24,8 @@ W odpowiedzi **A na pytanie 108** (2026-11-04) właściciel przyjął: „Ostatn
 
 W odpowiedzi **A na pytanie 109** (2026-11-04) właściciel przyjął powrót do trwale zapisanych wartości po zwykłym śnie/wybudzeniu i odrzucenie niezapisanych zmian (SYS-100), bez automatycznego trwałego zapisu. Rozważane zachowanie roboczych wartości przez sen nie jest wymaganiem.
 
+W odpowiedzi **A na pytanie 110** (2026-11-04) właściciel przyjął: „Tak — można zmieniać robocze wartości aktywnego i nieaktywnych zestawów; edycja nie przełącza zestawu”. Zmiany nieaktywnego zestawu wpływają na silnik dopiero po jego świadomym wybraniu (SYS-101). Wariant ograniczenia edycji podczas pracy do aktywnego zestawu nie został wybrany. Trwały zapis nadal podlega SYS-095.
+
 ## Skutki i sprawy otwarte
 
 - Architektura ECU, protokołu i Windows ma uwzględnić przyjmowanie, sprawdzanie i stosowanie zmian bez zakłócenia sterowania silnikiem.
@@ -32,8 +34,8 @@ W odpowiedzi **A na pytanie 109** (2026-11-04) właściciel przyjął powrót do
 - Potwierdzanie zatrzymania, warunki zasilania, integralność/przerwanie zapisu i reakcja na rozpoczęcie rozruchu podczas operacji wymagają projektu. Utrata sesji zachowuje zastosowane wartości w bieżącej pracy. Restart aktywuje ostatnio wybrany prawidłowy zestaw z trwale zapisanych danych. Po prawidłowym śnie/wybudzeniu obowiązuje powrót do zapisanych wartości. Cofanie edycji w bieżącej pracy, ponowne połączenie, szczegóły sekwencji i walidacja danych wyboru pozostają otwarte.
 - Zapamiętanie wyboru zestawu nie oznacza automatycznego utrwalenia zmienianych wartości map. Sposób i moment zapisu identyfikatora wyboru określimy w projekcie z zachowaniem reguł danych.
 - Każdy z maksymalnie trzech zestawów zawiera własne wartości uzgodnionych map. Konkretna lista map i wspólnych parametrów konfiguracji nadal wymaga specyfikacji F02.
-- Rozmiar i organizacja danych mają uwzględniać niezależne zestawy oraz strojenie na żywo; potrzebna pamięć, przepustowość i granice czasowe wymagają obliczeń przed wyborem MCU i protokołu.
+- Rozmiar i organizacja danych mają uwzględniać niezależne zestawy, roboczą edycję aktywnego i nieaktywnych zestawów oraz strojenie na żywo. Potrzebna pamięć, przepustowość i granice czasowe wymagają obliczeń przed wyborem MCU i protokołu; nie przesądzamy sposobu przechowywania roboczych danych.
 
 ## Weryfikacja
 
-Plan obejmie odrębne wartości zestawów i edycję jednego bez zmiany pozostałych, a także zmianę dozwolonej wartości podczas pracy, potwierdzenie danych aktywnych, odrzucenie danych niedopuszczonych i wpływ na czas sterowania. Sprawdzimy dopuszczenie trwałego zapisu na polecenie przy zgaszonym silniku i odrzucenie go podczas pracy oraz brak automatycznego utrwalania zmian na żywo. Sprawdzimy zachowanie zastosowanych wartości po utracie sesji i brak automatycznego utrwalenia. Sprawdzimy odtworzenie ostatniego prawidłowego wyboru po restarcie z HMI i bez HMI. Sprawdzimy odrzucenie roboczej edycji po prawidłowym śnie/wybudzeniu bez automatycznego trwałego zapisu. Oddzielnie sprawdzimy przerwanie sekwencji snu, ponowne połączenie, przełączenie zestawu, błędne dane i próbę rozruchu podczas zapisu według przyjętych później reguł. Najpierw stanowisko/symulator, następnie właściwa konfiguracja silnika; procedury i kryteria wykonawcze powstaną po określeniu tych reguł. Brak implementacji i wyników prób.
+Plan obejmie odrębne wartości zestawów i edycję jednego bez zmiany pozostałych, a także zmianę dozwolonej wartości podczas pracy, potwierdzenie danych aktywnych, odrzucenie danych niedopuszczonych i wpływ na czas sterowania. Edycja aktywnego i nieaktywnych zestawów nie może sama przełączyć zestawu; zmiany nieaktywnego zestawu mają wpływać na silnik dopiero po jego świadomym wybraniu. Sprawdzimy dopuszczenie trwałego zapisu na polecenie przy zgaszonym silniku i odrzucenie go podczas pracy oraz brak automatycznego utrwalania zmian na żywo. Sprawdzimy zachowanie zastosowanych wartości po utracie sesji i brak automatycznego utrwalenia. Sprawdzimy odtworzenie ostatniego prawidłowego wyboru po restarcie z HMI i bez HMI. Sprawdzimy odrzucenie roboczej edycji po prawidłowym śnie/wybudzeniu bez automatycznego trwałego zapisu. Oddzielnie sprawdzimy przerwanie sekwencji snu, ponowne połączenie, przełączenie zestawu, błędne dane i próbę rozruchu podczas zapisu według przyjętych później reguł. Najpierw stanowisko/symulator, następnie właściwa konfiguracja silnika; procedury i kryteria wykonawcze powstaną po określeniu tych reguł. Brak implementacji i wyników prób.
