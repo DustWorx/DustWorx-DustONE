@@ -27,6 +27,8 @@ SYS-102: krytyczną konfigurację można przygotować lokalnie podczas pracy sil
 
 SYS-103: po utracie Windows w nieukończonym transferze krytycznej konfiguracji, przed wdrożeniem, ECU samodzielnie anuluje transfer i zwalnia jego blokady przy poprawnej, nienaruszonej dotychczasowej konfiguracji. Rozruch wymaga nowej świadomej próby. Szczegóły: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 
+SYS-104: po odebraniu kompletu danych i przyjęciu wyraźnego polecenia wdrożenia ECU przy prawidłowym zasilaniu kończy sprawdzanie/wdrożenie samodzielnie mimo utraty Windows. Po potwierdzonym powodzeniu zwalnia blokady bez oczekiwania na powrót aplikacji; rozruch wymaga nowej świadomej próby. Błędy i zanik zasilania pozostają do określenia. Szczegóły: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
+
 SYS-101: Windows może przesyłać do ECU robocze zmiany wybranych wartości aktywnego i nieaktywnych zestawów podczas pracy silnika. Edycja nie przełącza zestawu; nieaktywny zaczyna wpływać na silnik dopiero po jego świadomym wybraniu. Obowiązuje SYS-095 dla trwałego zapisu. Szczegóły: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 
 SYS-099: wybór zestawu po restarcie realizuje ECU, również bez HMI/PC; jest to ostatnio wybrany prawidłowy zestaw spośród trwale zapisanych. Aplikacja po połączeniu odczytuje rzeczywisty stan. Po prawidłowym śnie/wybudzeniu niezapisane zmiany zostają odrzucone zgodnie z SYS-100. Uzgodnienie po powrocie sesji i walidacja danych pozostają do określenia w [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
