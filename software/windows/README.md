@@ -27,9 +27,11 @@ SYS-102: krytyczną konfigurację można przygotować lokalnie podczas pracy sil
 
 SYS-103: po utracie Windows w nieukończonym transferze krytycznej konfiguracji, przed wdrożeniem, ECU samodzielnie anuluje transfer i zwalnia jego blokady przy poprawnej, nienaruszonej dotychczasowej konfiguracji. Rozruch wymaga nowej świadomej próby. Szczegóły: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 
-SYS-104: po odebraniu kompletu danych i przyjęciu wyraźnego polecenia wdrożenia ECU przy prawidłowym zasilaniu kończy sprawdzanie/wdrożenie samodzielnie mimo utraty Windows. Po potwierdzonym powodzeniu zwalnia blokady bez oczekiwania na powrót aplikacji; rozruch wymaga nowej świadomej próby. Błędy podlegają SYS-105; powrót po zaniku zasilania pozostaje do określenia. Szczegóły: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
+SYS-104: po odebraniu kompletu danych i przyjęciu wyraźnego polecenia wdrożenia ECU przy prawidłowym zasilaniu kończy sprawdzanie/wdrożenie samodzielnie mimo utraty Windows. Po potwierdzonym powodzeniu zwalnia blokady bez oczekiwania na powrót aplikacji; rozruch wymaga nowej świadomej próby. Błędy podlegają SYS-105, a powrót po zaniku zasilania SYS-106. Szczegóły: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 
 SYS-105: po błędzie sprawdzania/wdrażania ECU automatycznie wraca do poprzedniej potwierdzonej poprawnej konfiguracji i zwalnia blokady operacji bez oczekiwania na potwierdzenie z Windows. Rozruch wymaga nowej świadomej próby. Bez poprawnych danych blokady pozostają, a aplikacja zachowuje dostęp do naprawy konfiguracji. Szczegóły: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
+
+SYS-106: po zaniku zasilania podczas zmiany krytycznej konfiguracji ECU odtwarza wyłącznie kompletną i poprawną nową konfigurację po trwałym potwierdzeniu wdrożenia przez ECU, inaczej poprzednią poprawną. Po sprawdzeniu dopuszcza nową świadomą próbę rozruchu bez połączenia lub potwierdzenia Windows. Bez poprawnych danych pozostają blokady i dostęp do naprawy konfiguracji. Szczegóły: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 
 SYS-101: Windows może przesyłać do ECU robocze zmiany wybranych wartości aktywnego i nieaktywnych zestawów podczas pracy silnika. Edycja nie przełącza zestawu; nieaktywny zaczyna wpływać na silnik dopiero po jego świadomym wybraniu. Obowiązuje SYS-095 dla trwałego zapisu. Szczegóły: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 
