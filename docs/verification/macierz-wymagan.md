@@ -1,6 +1,6 @@
 # Macierz wymagań, bloków i weryfikacji
 
-Stan na: 2026-11-04. **Materiał wstępny dla etapu 5 w kolejce — przydział 99 wymagań do 13 grup.** Treść wymagań ma jedno miejsce źródłowe w [rejestrze SYS](../01-zakres-systemu.md), a ID bloków w [architekturze](../architecture/blokowa-systemu.md).
+Stan na: 2026-11-04. **Materiał wstępny dla etapu 5 w kolejce — przydział 100 wymagań do 13 grup.** Treść wymagań ma jedno miejsce źródłowe w [rejestrze SYS](../01-zakres-systemu.md), a ID bloków w [architekturze](../architecture/blokowa-systemu.md).
 
 Wszystkie wymagania pozostają **niezweryfikowane na produkcie**. Poniższe powiązanie nie jest kompletem procedur ani potwierdzeniem kompletności funkcji. Dla każdej próby rozwijamy: wariant/model i konfigurację, rewizje HW/FW/aplikacji, metodę, mierzalne kryteria, wyposażenie/połączenia, kroki, warunki przerwania oraz dowód wyniku. Wymaganie może mieć kilka bloków i prób.
 
@@ -127,6 +127,7 @@ Próby dobieramy do wymagania; pełna grupa nie jest automatycznie obowiązkowa 
 | SYS-097 | ECU-IN, ECU-CTRL | V03 |
 | SYS-098 | SYS-INST, ECU-IN, ECU-CTRL | V03, V13 |
 | SYS-099 | ECU-CTRL, ECU-DATA | V07, V09 |
+| SYS-100 | ECU-CTRL, ECU-DATA, ECU-WAKE | V06, V09 |
 
 ## Sposób utrzymania
 
