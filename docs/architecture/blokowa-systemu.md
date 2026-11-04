@@ -1,6 +1,6 @@
 # Architektura blokowa DustONE
 
-Stan na: 2026-11-04. **Materiał wstępny dla etapu 4, który oczekuje w kolejce**, wyprowadzona z [wymagań SYS-001–098](../01-zakres-systemu.md) i przyjętych ADR. Podział poniżej porządkuje projektowanie; nie wybiera komponentów, liczby pinów, protokołu PC ani topologii stopni mocy. G1 pozostaje otwarta.
+Stan na: 2026-11-04. **Materiał wstępny dla etapu 4, który oczekuje w kolejce**, wyprowadzona z [wymagań SYS-001–099](../01-zakres-systemu.md) i przyjętych ADR. Podział poniżej porządkuje projektowanie; nie wybiera komponentów, liczby pinów, protokołu PC ani topologii stopni mocy. G1 pozostaje otwarta.
 
 Zakres silnikowy: jeden cylinder, 2T/4T i wyłącznie chłodzenie cieczą według SYS-098. Rozwinięcie projektu blokowego pozostaje w kolejce etapu 4.
 
@@ -81,7 +81,7 @@ ID są oznaczeniami architektury, bez przydziału konkretnych układów scalonyc
 - START i STOP pozostają niezależne od HMI/CAN. Ruch koła wybudza ECU do naliczania ODO i HMI do prezentacji; nie jest żądaniem rozruchu (SYS-037/048/079/080).
 - Normalny sen pozostawia zasilanie HMI z ECU włączone. Awaryjne odłączenie części aktywnej nie może pozbawić przycisków funkcji wybudzania (SYS-064–066). Potrzebna jest analiza domen zasilania; nie wybrano jeszcze rozwiązania.
 - Wspólna, jednakowo obsadzona PCB obsługuje uzgodnione warianty. [Macierz wariantów i zasobów](macierz-wariantow-silnika.md) jest podstawą przydziału I/O; jeden kanał zapłonu nie oznacza jednego wspólnego stopnia mocy CDI/TCI.
-- Maksymalnie trzy niezależne, kompletne zestawy uzgodnionych map, ich przełączanie oraz strojenie na żywo mają odrębne reguły. [ADR-011](../decisions/adr-011-strojenie-na-zywo.md) zatwierdza strukturę zestawów i zmianę wybranych wartości podczas pracy. Utrata Windows zachowuje ostatnio zastosowane wartości w bieżącej pracy ECU (SYS-094), bez automatycznego utrwalania. Trwały zapis wymaga jawnego polecenia i zgaszonego silnika (SYS-095). Listę map, walidację i warunki techniczne zapisu rozwijamy w [specyfikacji F02](../interfaces/mapy-i-konfiguracja.md).
+- Maksymalnie trzy niezależne, kompletne zestawy uzgodnionych map, ich przełączanie oraz strojenie na żywo mają odrębne reguły. [ADR-011](../decisions/adr-011-strojenie-na-zywo.md) zatwierdza strukturę zestawów i zmianę wybranych wartości podczas pracy. Utrata Windows zachowuje ostatnio zastosowane wartości w bieżącej pracy ECU (SYS-094), bez automatycznego utrwalania. Trwały zapis wymaga jawnego polecenia i zgaszonego silnika (SYS-095). Po restarcie ECU wybiera ostatnio wybrany prawidłowy zestaw spośród trwale zapisanych, bez zależności od HMI (SYS-099). Listę map, walidację i warunki techniczne zapisu rozwijamy w [specyfikacji F02](../interfaces/mapy-i-konfiguracja.md).
 - Chronione liczniki i polityka firmware obowiązują także przy diagnostyce, testach I/O, aktualizacji i odzyskiwaniu (SYS-074–078). Wymiana HMI nie tworzy nowego źródła liczników.
 - Reakcje na CAN, światła, wentylator i niskie napięcie mają już częściowo uzgodnione reguły. Dokumentami źródłowymi pozostają [sen](usypianie-ecu-hmi.md), [oszczędzanie](oszczedzanie-energii.md) i rejestr SYS.
 

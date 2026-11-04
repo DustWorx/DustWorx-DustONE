@@ -1,6 +1,6 @@
 # F01 — podsumowanie kontrolne ustaleń
 
-Stan na: 2026-11-04. **Kontrola F01 zakończona; właściciel potwierdził zgodność całości i dalszą pracę. F01 zamknięty 2026-11-04.** Pytanie 108 nie ma odpowiedzi produktowej. Podsumowanie nie zmienia wymagań; źródłem pozostaje [rejestr SYS](../01-zakres-systemu.md) i [ADR](../decisions/README.md).
+Stan na: 2026-11-04. **Kontrola F01 zakończona; właściciel potwierdził zgodność całości i dalszą pracę. F01 zamknięty 2026-11-04.** Reguły map i konfiguracji są rozwijane odrębnie w F02. Podsumowanie nie zmienia wymagań; źródłem pozostaje [rejestr SYS](../01-zakres-systemu.md) i [ADR](../decisions/README.md).
 
 ## 1. Zakres silników i integracji
 
@@ -70,10 +70,10 @@ Poza zakresem pozostają: chłodzenie powietrzem, ride-by-wire, dwa niezależne 
 
 ## 6. Przekazanie do dalszych pakietów i etapów
 
-- F02: szczegółowa zawartość map i operacje konfiguracji/edycji. Ustalenia 101–104 są zachowane; **wybór zestawu po restarcie z pytania 108 pozostaje nierozstrzygnięty**.
+- F02: szczegółowa zawartość map i operacje konfiguracji/edycji. Ustalenia 101–104 są zachowane; aktualne reguły F02, w tym późniejsze odpowiedzi, mają źródło w [specyfikacji map](../interfaces/mapy-i-konfiguracja.md).
 - F03/F04: pełne reakcje na usterki, wyjątki rozruchu, ochrona oraz reguły akcesoriów. Przyjęte już funkcje i reguły pozostają w wymaganiach.
 - Etapy 3–4: modele referencyjne, parametry czujników/cewek/napędów, liczby i jednoczesność kanałów, dekodery, algorytmy, prądy, energia, czasy i bilanse.
 - Etap 6: wspólny wybór ważnych komponentów i obwodów. MCU, czujniki na PCB i drivery nie zostały wybrane przez zamknięcie zakresu funkcji.
 - Testy: asystent przygotowuje właściwe procedury i kryteria, właściciel wykonuje próby. Brak wyników produktu; wymagania pozostają niezweryfikowane na wykonanym ECU.
 
-Właściciel potwierdził zgodność całego F01 i polecił kontynuację w rozmowie 2026-11-04. Kontrolę zakończono bez zmiany wymagań; F02 jest aktywny zgodnie z kolejnością procesu. Pytanie 108 pozostaje do rozstrzygnięcia.
+Właściciel potwierdził zgodność całego F01 i polecił kontynuację w rozmowie 2026-11-04. Kontrolę zakończono bez zmiany wymagań; F02 jest aktywny zgodnie z kolejnością procesu. Dalsze decyzje F02 są zapisywane w jego specyfikacji.

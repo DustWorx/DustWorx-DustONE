@@ -1,6 +1,6 @@
 # Domknięcie zakresu funkcjonalnego
 
-Stan na: 2026-11-04. Roboczy przegląd na podstawie [98 wymagań systemowych](../01-zakres-systemu.md), [mapy 17 obszarów](pokrycie-funkcjonalne.md) i [macierzy wariantów silnika](../architecture/macierz-wariantow-silnika.md). Źródłem zatwierdzonych funkcji pozostaje rejestr SYS i ADR.
+Stan na: 2026-11-04. Roboczy przegląd na podstawie [99 wymagań systemowych](../01-zakres-systemu.md), [mapy 17 obszarów](pokrycie-funkcjonalne.md) i [macierzy wariantów silnika](../architecture/macierz-wariantow-silnika.md). Źródłem zatwierdzonych funkcji pozostaje rejestr SYS i ADR.
 
 ## Ile pozostało
 
@@ -15,7 +15,7 @@ Lista określa pozostałą pracę nad zamknięciem zakresu. Wskazanie tematu do 
 | Pakiet | Status | Co sprawdzić i doprecyzować | Wynik pozwalający zamknąć pakiet |
 | --- | --- | --- | --- |
 | F01 — Komplet funkcji silnikowych | Zamknięty: 2026-11-04 | Zakres pomiarów i sterowania przyjęty dla jednocylindrowych 2T/4T chłodzonych cieczą, w klasach gaźnik/wtrysk. Wyłączenia i techniczne dane przekazane dalej. | [Wynik przeglądu](f01-sterowanie-silnikiem.md) oraz macierz funkcji dla wariantów. |
-| F02 — Mapy, konfiguracja i strojenie | Aktywny | Ustalić listę map w niezależnych zestawach oraz operacje dopuszczone przy pracującym silniku: edycję, przesyłanie, zapis i zmianę krytycznej konfiguracji. Maks. trzy niezależne zestawy, przełączanie i strojenie na żywo są przyjęte (SYS-028/094). Trwały zapis tylko na jawne polecenie przy zgaszonym silniku (SYS-095). [Specyfikacja operacji](../interfaces/mapy-i-konfiguracja.md): po utracie Windows zastosowane wartości pozostają aktywne; ponowne połączenie, restart i pozostałe warunki otwarte. | Tabela operacji i warunków ich dopuszczenia. |
+| F02 — Mapy, konfiguracja i strojenie | Aktywny | Ustalić listę map w niezależnych zestawach oraz operacje dopuszczone przy pracującym silniku: edycję, przesyłanie, zapis i zmianę krytycznej konfiguracji. Maks. trzy niezależne zestawy, przełączanie i strojenie na żywo są przyjęte (SYS-028/094). Trwały zapis tylko na jawne polecenie przy zgaszonym silniku (SYS-095). [Specyfikacja operacji](../interfaces/mapy-i-konfiguracja.md): po utracie Windows zastosowane wartości pozostają aktywne; po restarcie wraca ostatnio wybrany prawidłowy zestaw z zapisanych danych (SYS-099); zwykły sen, ponowne połączenie i pozostałe warunki otwarte. | Tabela operacji i warunków ich dopuszczenia. |
 | F03 — Ochrona i reakcje na usterki | W kolejce | Domknąć zachowanie przy utracie istotnych pomiarów, problemach z zasilaniem i restarcie oraz reakcje chroniące silnik. Zachować uzgodnione STOP, rozruch, przewrócenie i działanie bez HMI/CAN. | Macierz sytuacja → reakcja → warunek powrotu. |
 | F04 — Akcesoria i dodatkowe I/O | W kolejce | Określić zastosowania i potrzebną liczbę dodatkowych funkcji wejść/wyjść oraz brakujące zachowanie klaksonu i wyjść konfigurowalnych po utracie HMI/CAN lub restarcie. Prądy i stopnie mocy wyznaczymy w architekturze. | Zamknięta lista funkcji I/O i stanów odbiorników. |
 | F05 — Funkcje i obsługa HMI | W kolejce | Potwierdzić minimalny zestaw danych/ekranów, obsługę menu i map przyciskami, priorytet ostrzeżeń oraz zasady ich prezentacji w ekranach użytkownika. Fizyczne przyciski i edytowalne ekrany są już przyjęte. | Opis ekranów, poleceń i scenariuszy obsługi. |
@@ -27,7 +27,7 @@ Lista określa pozostałą pracę nad zamknięciem zakresu. Wskazanie tematu do 
 
 **F01 zamknięty 2026-11-04 po przeglądzie inżynierskim i kontroli właściciela.** Właściciel potwierdził zgodność [pełnego podsumowania F01](f01-podsumowanie-kontrolne.md) i polecił kontynuację. Zakres zamknięto po zapisaniu przyjętych pomiarów, sterowania, wyłączeń i macierzy wariantów. Podstawa: dotychczasowe wymagania i decyzje właściciela, w tym A na 105/106 oraz B na 107. [Przegląd pomiarów](f01-pomiary-silnika.md) i [przegląd sterowania](f01-sterowanie-silnikiem.md) wskazują rezultat i przekazanie do etapów 3–6. Zgodność modeli, wykonalność konwersji TPI, parametry i testy nie zostały potwierdzone tym zamknięciem.
 
-**F02 jest jedynym aktywnym pakietem.** Pytanie 108 o wybór zestawu po restarcie jest nadal otwarte. Domykamy operacje na mapach i konfiguracji ECU według [specyfikacji F02](../interfaces/mapy-i-konfiguracja.md). F03–F08 pozostają w kolejce.
+**F02 jest jedynym aktywnym pakietem.** Pytanie 108 rozstrzygnięto odpowiedzią A (SYS-099). Bieżąca decyzja dotyczy niezapisanych wartości przy zwykłym śnie i wybudzeniu. Domykamy operacje na mapach i konfiguracji ECU według [specyfikacji F02](../interfaces/mapy-i-konfiguracja.md). F03–F08 pozostają w kolejce.
 
 ## Jak zamykamy pakiet
 

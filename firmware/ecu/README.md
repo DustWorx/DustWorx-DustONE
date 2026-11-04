@@ -27,3 +27,5 @@ SYS-094: przyjmowanie i stosowanie zmian wybranych wartości map podczas pracy s
 SYS-028 określa maks. trzy niezależne, kompletne zestawy uzgodnionych map jednej konfiguracji silnika. Przydział pamięci i obsługę edycji rozwijamy według [specyfikacji map](../../docs/interfaces/mapy-i-konfiguracja.md).
 
 SYS-095: ECU dopuszcza trwały zapis zmian map wyłącznie przy zgaszonym silniku i po wyraźnym poleceniu użytkownika z Windows. Strojenie na żywo nie uruchamia automatycznego utrwalania. Potwierdzenie zatrzymania, warunki zasilania, przerwanie zapisu i równoczesny rozruch wymagają specyfikacji w [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
+
+SYS-099: po restarcie ECU aktywuje ostatnio wybrany prawidłowy zestaw spośród trwale zapisanych, także bez HMI. Zapamiętanie wyboru i zapis wartości map mają odrębne reguły; brak automatycznego utrwalania edycji na żywo. Mechanizm pamięci wyboru, walidacja i zwykły sen/wybudzenie są do projektu: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
