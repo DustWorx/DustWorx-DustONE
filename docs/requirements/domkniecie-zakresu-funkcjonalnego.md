@@ -1,6 +1,6 @@
 # Domknięcie zakresu funkcjonalnego
 
-Stan na: 2026-11-04. Roboczy przegląd na podstawie [95 wymagań systemowych](../01-zakres-systemu.md), [mapy 17 obszarów](pokrycie-funkcjonalne.md) i [macierzy wariantów silnika](../architecture/macierz-wariantow-silnika.md). Źródłem zatwierdzonych funkcji pozostaje rejestr SYS i ADR.
+Stan na: 2026-11-04. Roboczy przegląd na podstawie [96 wymagań systemowych](../01-zakres-systemu.md), [mapy 17 obszarów](pokrycie-funkcjonalne.md) i [macierzy wariantów silnika](../architecture/macierz-wariantow-silnika.md). Źródłem zatwierdzonych funkcji pozostaje rejestr SYS i ADR.
 
 ## Ile pozostało
 
@@ -14,7 +14,7 @@ Lista określa pozostałą pracę nad zamknięciem zakresu. Wskazanie tematu do 
 
 | Pakiet | Status | Co sprawdzić i doprecyzować | Wynik pozwalający zamknąć pakiet |
 | --- | --- | --- | --- |
-| F01 — Komplet funkcji silnikowych | Aktywny | Sprawdzić komplet wymaganych pomiarów i sterowania dla 2T/4T, gaźnika z/bez TPS i TPI/TBI, w tym IAC i power valve. Brakujące funkcje lub wyłączenia wymagają potwierdzenia na podstawie dokumentacji enduro. Bieżący przegląd: [wejście MAP na podstawie Bety EFI](../interfaces/cisnienie-dolotu-map.md), propozycja przed decyzją. | Macierz funkcji dla wariantów i jawny zakres docelowej obsługi. |
+| F01 — Komplet funkcji silnikowych | Aktywny | Sprawdzić komplet wymaganych pomiarów i sterowania dla 2T/4T, gaźnika z/bez TPS i TPI/TBI, w tym IAC i power valve. Brakujące funkcje lub wyłączenia wymagają potwierdzenia na podstawie dokumentacji enduro. MAP przyjęto w SYS-096; kolejny przegląd: [ciśnienie skrzyni korbowej 2T](../interfaces/cisnienie-skrzyni-korbowej.md), propozycja przed decyzją. | Macierz funkcji dla wariantów i jawny zakres docelowej obsługi. |
 | F02 — Mapy, konfiguracja i strojenie | W kolejce | Ustalić listę map w niezależnych zestawach oraz operacje dopuszczone przy pracującym silniku: edycję, przesyłanie, zapis i zmianę krytycznej konfiguracji. Maks. trzy niezależne zestawy, przełączanie i strojenie na żywo są przyjęte (SYS-028/094). Trwały zapis tylko na jawne polecenie przy zgaszonym silniku (SYS-095). [Specyfikacja operacji](../interfaces/mapy-i-konfiguracja.md): po utracie Windows zastosowane wartości pozostają aktywne; ponowne połączenie, restart i pozostałe warunki otwarte. | Tabela operacji i warunków ich dopuszczenia. |
 | F03 — Ochrona i reakcje na usterki | W kolejce | Domknąć zachowanie przy utracie istotnych pomiarów, problemach z zasilaniem i restarcie oraz reakcje chroniące silnik. Zachować uzgodnione STOP, rozruch, przewrócenie i działanie bez HMI/CAN. | Macierz sytuacja → reakcja → warunek powrotu. |
 | F04 — Akcesoria i dodatkowe I/O | W kolejce | Określić zastosowania i potrzebną liczbę dodatkowych funkcji wejść/wyjść oraz brakujące zachowanie klaksonu i wyjść konfigurowalnych po utracie HMI/CAN lub restarcie. Prądy i stopnie mocy wyznaczymy w architekturze. | Zamknięta lista funkcji I/O i stanów odbiorników. |
@@ -27,7 +27,7 @@ Lista określa pozostałą pracę nad zamknięciem zakresu. Wskazanie tematu do 
 
 Przyjęte już funkcje: wspólna PCB 2T/4T i warianty gaźnik/wtrysk, jeden kanał CDI/TCI, wał VR/Hall i dodatkowa faza Hall, elektroniczny power valve oraz IAC krokowy w odpowiednich konfiguracjach. Zachowujemy przyjęte wyłączenia; nie otwieramy tych decyzji ponownie bez nowego powodu.
 
-Bieżący temat: obsługa [MAP](../interfaces/cisnienie-dolotu-map.md), oczekuje decyzji. Następnie kończymy przegląd kompletności pomiarów i sterowania na podstawie dokumentacji enduro oraz macierz funkcja × wariant. F01 zamykamy po rozstrzygnięciu luk funkcjonalnych i zapisaniu zakresu/wyłączeń. Parametry osprzętu i potwierdzenie zgodności trafiają jawnie do etapów 3–4 i późniejszych prób.
+Temat [MAP](../interfaces/cisnienie-dolotu-map.md): zakres funkcjonalny zamknięty 2026-11-04, odpowiedź A na pytanie 105, SYS-096. Bieżący temat: [pomiar ciśnienia skrzyni korbowej 2T](../interfaces/cisnienie-skrzyni-korbowej.md), oczekuje decyzji. Następnie kończymy przegląd kompletności pomiarów i sterowania na podstawie dokumentacji enduro oraz macierz funkcja × wariant. F01 zamykamy po rozstrzygnięciu luk funkcjonalnych i zapisaniu zakresu/wyłączeń. Parametry osprzętu i potwierdzenie zgodności trafiają jawnie do etapów 3–4 i późniejszych prób.
 
 ## Jak zamykamy pakiet
 
