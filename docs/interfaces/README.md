@@ -22,7 +22,8 @@ Specyfikacje i przyszłe pliki maszynowe, np. DBC lub schematy danych, przechowu
 Opracowania referencyjne:
 
 - [Ciśnienie dolotu MAP — przegląd F01](cisnienie-dolotu-map.md): zakres przyjęty w SYS-096; parametry i komponenty do późniejszego projektu.
-- [Ciśnienie skrzyni korbowej 2T](cisnienie-skrzyni-korbowej.md): przykład KTM 300 EXC TPI 2020; propozycja kolejnej funkcji pomiarowej w F01.
+- [Ciśnienie skrzyni korbowej 2T](cisnienie-skrzyni-korbowej.md): zakres przyjęty w SYS-097; parametry i podział torów do późniejszego projektu.
+- [Przegląd pomiarów silnika F01](../requirements/f01-pomiary-silnika.md): przyjęte funkcje i pozostający do decyzji zakres chłodzenia/temperatury.
 
 - [Moduł zapłonowy Kokusan CU7542 w Becie](beta-modul-zaplonowy-kokusan-cu7542.md): odczyty zdjęć, numer Beta 026400038 300 oraz dane do analizy zapłonu.
 - [Cewka zapłonowa IG5128 w Becie](beta-cewka-zaplonowa-ig5128.md): odczyty zdjęcia, odniesienia katalogowe i parametry potrzebne do projektu stopnia zapłonowego.

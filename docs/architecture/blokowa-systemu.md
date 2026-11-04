@@ -1,6 +1,6 @@
 # Architektura blokowa DustONE
 
-Stan na: 2026-11-04. **Materiał wstępny dla etapu 4, który oczekuje w kolejce**, wyprowadzona z [wymagań SYS-001–096](../01-zakres-systemu.md) i przyjętych ADR. Podział poniżej porządkuje projektowanie; nie wybiera komponentów, liczby pinów, protokołu PC ani topologii stopni mocy. G1 pozostaje otwarta.
+Stan na: 2026-11-04. **Materiał wstępny dla etapu 4, który oczekuje w kolejce**, wyprowadzona z [wymagań SYS-001–097](../01-zakres-systemu.md) i przyjętych ADR. Podział poniżej porządkuje projektowanie; nie wybiera komponentów, liczby pinów, protokołu PC ani topologii stopni mocy. G1 pozostaje otwarta.
 
 ## Granice systemu
 
@@ -60,7 +60,7 @@ Diagram pokazuje zależności funkcjonalne. Strzałki zasilania nie są kompletn
 | --- | --- | --- |
 | ECU-PWR | Przyjęcie instalacji klasy 12 V, ochrona i dystrybucja energii, nadzór napięcia, kontrola zasilania HMI. | Zakresy napięć, rozruch i zakłócenia, prądy/temperatury, profile AGM/LiFePO4 i domeny zasilania. |
 | ECU-WAKE | Obsługa źródeł wybudzania, koordynacja snu, blokady snu przy PC i wymaganych zadaniach. | Detekcja kopania, pierwszych impulsów koła, przycisków HMI i PC; pobór, opóźnienia, zasilanie HMI po awaryjnym odłączeniu części aktywnej. |
-| ECU-IN | Synchronizacja, pomiary analogowe/cyfrowe (w tym MAP według SYS-096), sensory na PCB oraz wejścia START, hamulców i pozostałych funkcji. | Modele osprzętu, zakresy, zasilanie, charakterystyki, dokładności, częstotliwości, zabezpieczenia i diagnostyka. |
+| ECU-IN | Synchronizacja, pomiary analogowe/cyfrowe (w tym MAP/CCPS według SYS-096/097), sensory na PCB oraz wejścia START, hamulców i pozostałych funkcji. | Modele osprzętu, zakresy, zasilanie, charakterystyki, dokładności, częstotliwości, zabezpieczenia i diagnostyka. |
 | ECU-CTRL | Sterowanie czasowe silnikiem, reguły rozruchu/STOP/przewrócenia, automatyka akcesoriów i kontrola dopuszczenia poleceń. | Strategie i granice czasu, obciążenie obliczeniowe, reakcje na usterki i restart, warunki strojenia na żywo. |
 | ECU-OUT | Jeden kanał zapłonu w trybie CDI lub TCI/IDI, wtrysk, pompa, power valve/IAC oraz wyjścia akcesoriów. | Rodzaje i liczby kanałów, jednoczesność, prądy/energia/czasy, granica stopni mocy i diagnostyka. SmartFET jest preferencją dla akcesoriów, nie wyborem konkretnego układu. |
 | ECU-DATA | Właściciel konfiguracji i map, chronionych liczników, DTC/freeze frame, czasu rzeczywistego i ważności czasu. | Pojemność, trwałość i spójność zapisów, zakres utraty danych przy zaniku zasilania, reguły dostępu, odtwarzanie i obsługa pełnej pamięci. |

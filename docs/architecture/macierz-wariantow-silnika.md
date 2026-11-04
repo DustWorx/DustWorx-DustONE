@@ -42,16 +42,16 @@ Oznaczenia: **R** — funkcja wymagana w tym wariancie; **W** — obsługa, jeż
 | IAT do kompensacji wtrysku | — | — | — | R | R | R |
 | Barometr na PCB do kompensacji wtrysku | — | — | — | R | R | R |
 | MAP z czujnika zewnętrznego, zgodnie z konfiguracją | W | W | W | W | W | W |
-| Inne pomiary ciśnienia potrzebne strategii | D | D | D | D | D | D |
+| Ciśnienie skrzyni korbowej 2T — CCPS, zgodnie z konfiguracją | W | W | — | — | W | W |
 | Pomiar temperatury płynu w silniku chłodzonym cieczą | R | R | R | R | R | R |
 | Elektroniczny power valve, jeżeli występuje | W | W | — | — | W | W |
 | IAC z napędem krokowym według SYS-071 | — | — | — | W | — | — |
 | Tor wartości ciśnienia paliwa | — | — | — | W | W | W |
 | Binarne ciśnienie oleju, zgodnie z wyposażeniem | W | W | W | W | W | W |
 
-F01: [MAP](../interfaces/cisnienie-dolotu-map.md) przyjęto w SYS-096, odpowiedź A na pytanie 105. Użycie zależy od konfiguracji; nie wybrano czujnika, parametrów ani liczby fizycznych kanałów. [Pomiar skrzyni korbowej 2T](../interfaces/cisnienie-skrzyni-korbowej.md) jest kolejną propozycją do rozstrzygnięcia.
+F01: [MAP](../interfaces/cisnienie-dolotu-map.md) przyjęto w SYS-096, odpowiedź A na pytanie 105. Użycie zależy od konfiguracji; nie wybrano czujnika, parametrów ani liczby fizycznych kanałów. [CCPS](../interfaces/cisnienie-skrzyni-korbowej.md) przyjęto w SYS-097. Zakres chłodzenia silników i odpowiedniego pomiaru temperatury pozostaje do decyzji w [przeglądzie pomiarów F01](../requirements/f01-pomiary-silnika.md).
 
-Faza 4T jest opcjonalna w konfiguracjach niewykorzystujących tego sygnału; dopuszczone strategie bez fazy muszą być określone i sprawdzone. Symbol W/D nie potwierdza danego typu osprzętu w enduro. Każdy taki przypadek wymaga źródła model/rocznik przed przyjęciem parametrów sprzętu. MAP jest wymagane jako możliwość sprzętowa według SYS-096. Wiersz innych ciśnień nie zatwierdza pomiaru skrzyni korbowej.
+Faza 4T jest opcjonalna w konfiguracjach niewykorzystujących tego sygnału; dopuszczone strategie bez fazy muszą być określone i sprawdzone. Symbol W/D nie potwierdza danego typu osprzętu w enduro. Każdy taki przypadek wymaga źródła model/rocznik przed przyjęciem parametrów sprzętu. MAP i CCPS są przyjętymi możliwościami według SYS-096/097; nie wybrano liczby kanałów ani fizycznego podziału torów.
 
 Wspólne dla platformy pozostają także funkcje motocykla: START/STOP, dwa hamulce, koło i ODO, wykrywanie przewrócenia, napięcie akumulatora, temperatura ECU, opcjonalne sprzęgło/biegi/rezerwa, CAN, HMI i serwis. Ich zakres określa [lista I/O](../interfaces/wstepna-lista-io.md). Obecność funkcji na PCB nie oznacza obowiązku podłączenia każdego opcjonalnego czujnika.
 

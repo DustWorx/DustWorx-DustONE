@@ -20,6 +20,7 @@ Wiązkę i złącze ECU projektujemy od nowa (SYS-045), według potrzebnych funk
 | Regulacja powietrza biegu jałowego IAC | Wyjścia sterujące napędem krokowym; aktywne w odpowiednich konfiguracjach 4T | SYS-071 | Modele napędów, uzwojenia, prądy, zasilanie, zakres ruchu i kalibracja, liczba linii sterowania, stopień mocy, pozycja przy rozruchu/sen i diagnostyka do określenia. Konfiguracje bez IAC pracują bez napędu. |
 | TPS | Wejście ECU; zależnie od wyposażenia | SYS-014, 038 | Typ sygnału, poziomy, zasilanie i kalibracja; obsługa wariantu bez TPS. |
 | MAP — ciśnienie bezwzględne w dolocie | Wejście pomiarowe ECU; czujnik OEM lub dodatkowy | SYS-096 | Konfiguracje niewymagające MAP pracują bez czujnika. Modele, zasilanie/sygnał, zakres, dokładność, filtracja i diagnostyka do późniejszej specyfikacji; w T-MAP zachować także IAT. [Karta MAP](cisnienie-dolotu-map.md). |
+| Ciśnienie gazów w skrzyni korbowej 2T — CCPS | Wejście pomiarowe ECU; zgodnie z konfiguracją | SYS-097 | Konfiguracje niewymagające pomiaru pracują bez czujnika. Model, pobór ciśnienia, sygnał/zasilanie, zakres/dynamika, dokładność i diagnostyka do specyfikacji. Współdzielenie zasobów z MAP wymaga analizy; [karta CCPS](cisnienie-skrzyni-korbowej.md). |
 | IAT | Wejście ECU | SYS-031 | Czujniki referencyjne, charakterystyki i sposób podłączenia. |
 | Temperatura płynu chłodzącego | Wejście pomiarowe ECU; dane do HMI | SYS-044 | Czujniki OEM lub dodatkowe, charakterystyki, zakres, dokładność i montaż. Sam termowłącznik nie zapewnia pomiaru wartości. |
 | Ciśnienie paliwa | Wejście pomiarowe ECU | SYS-029 | Zakres ciśnienia, sygnał, zasilanie i wymagana dokładność. |
@@ -55,8 +56,7 @@ Poniższe pozycje nie są nowymi zatwierdzonymi wymaganiami właściciela.
 
 | Tor | Cel analizy | Do określenia |
 | --- | --- | --- |
-| Inne zastosowania temperatury silnika | Ocena kompensacji i funkcji ochronnych poza uzgodnionym sterowaniem wentylatorem | Potrzebne funkcje i kryteria do ustalenia. Pomiar płynu i sterowanie wentylatorem są już wymagane według SYS-043/044. |
-| Inne ciśnienia wymagane przez strategie wtrysku | Ustalenie kompletnego zestawu sygnałów | MAP przyjęto w SYS-096. [Pomiar skrzyni korbowej 2T](cisnienie-skrzyni-korbowej.md) pozostaje propozycją w bieżącym F01; interfejsy i wykorzystanie wymagają analizy jednostek. |
+| Temperatura dla różnych sposobów chłodzenia | Domknięcie zakresu pomiarów F01 | Temperatura płynu jest przyjęta w SYS-044. Zakres dla silników chłodzonych powietrzem pozostaje do decyzji; [przegląd pomiarów](../requirements/f01-pomiary-silnika.md). Funkcje ochronne i kryteria wracają w F03. |
 | Pomiar wartości napięcia zasilania do dodatkowych zastosowań | Diagnostyka i kompensacja zależna od napięcia | Zakres, dokładność i częstotliwość do analizy; nadzór wymagany do odcięcia wentylatora ujęto wyżej jako funkcję potwierdzoną. |
 
 ## Zasilanie i komunikacja

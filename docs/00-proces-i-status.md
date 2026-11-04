@@ -1,6 +1,6 @@
 # DustONE — ścieżka projektu, status i odpowiedzialności
 
-Stan na: 2026-11-04. Ocena głównej gałęzi, materiałów roboczych oraz uzgodnień właściciela do pytania 105. Ścieżka projektu i warunki postoju z PR #17/#18 są scalone. Dokument aktualizujemy przy istotnej odpowiedzi lub decyzji, wykonanej pracy, wyniku próby, zmianie zakresu i przeglądzie etapu; wraz z wymaganiami, ADR, interfejsami i weryfikacją.
+Stan na: 2026-11-04. Ocena głównej gałęzi, materiałów roboczych oraz uzgodnień właściciela do pytania 106. Ścieżka projektu i warunki postoju z PR #17/#18 są scalone. Dokument aktualizujemy przy istotnej odpowiedzi lub decyzji, wykonanej pracy, wyniku próby, zmianie zakresu i przeglądzie etapu; wraz z wymaganiami, ADR, interfejsami i weryfikacją.
 
 ## Aktualne miejsce w procesie
 
@@ -8,13 +8,13 @@ Stan na: 2026-11-04. Ocena głównej gałęzi, materiałów roboczych oraz uzgod
 
 | Obszar | Stan potwierdzony dokumentacją |
 | --- | --- |
-| Wymagania systemowe | 96 wymagań SYS-001–096; pierwszy przydział do bloków i grup weryfikacji gotowy, kryteria i procedury do rozwinięcia. |
+| Wymagania systemowe | 97 wymagań SYS-001–097; pierwszy przydział do bloków i grup weryfikacji gotowy, kryteria i procedury do rozwinięcia. |
 | Decyzje | 11 zapisów ADR-001–011; ostatni obejmuje zestawy, strojenie, trwały zapis i zachowanie zastosowanych wartości po utracie Windows. |
 | Zakres wariantów | Macierz 6 wariantów silnika; jest planem obsługi, nie potwierdzeniem zgodności modeli. |
 | Pierwsza jednostka | Beta 300 RR Racing 2015; analiza dokumentów i zdjęć, bez raportów pomiarowych instalacji. |
 | Architektura | Pierwszy diagram blokowy, funkcje sześciu wariantów i przydział zasobów gotowe jako wersje robocze. Modele, parametry i liczbowe bilanse pozostają otwarte. |
 | Schematy, BOM, PCB i mechanika | W repozytorium brak projektu wykonawczego i zatwierdzonego kompletnego BOM ECU/HMI. |
-| Kod i próby produktu | W repozytorium brak implementacji firmware/Windows i raportów prób DustONE. Istnieją plany, szablon procedury i przydział 96 wymagań do 13 grup weryfikacji. |
+| Kod i próby produktu | W repozytorium brak implementacji firmware/Windows i raportów prób DustONE. Istnieją plany, szablon procedury i przydział 97 wymagań do 13 grup weryfikacji. |
 
 Podstawy: [wymagania](requirements/README.md), [decyzje](decisions/README.md), [macierz silników](architecture/macierz-wariantow-silnika.md), [I/O](interfaces/wstepna-lista-io.md) i [weryfikacja](verification/README.md). Liczba wymagań i pytań nie jest procentem wykonania produktu.
 
@@ -57,11 +57,11 @@ Parametry wyliczane z osprzętu, charakterystyki czujników, wartości elementó
 
 | Zadanie | Status | Materiał / warunek podjęcia |
 | --- | --- | --- |
-| W04 — Zakres funkcjonalny: F01 | Aktywny, w etapie 2. | MAP: zakres funkcji zamknięty (SYS-096). Bieżący temat: [ciśnienie skrzyni korbowej 2T](interfaces/cisnienie-skrzyni-korbowej.md); dalej kompletność pomiarów i sterowania. |
+| W04 — Zakres funkcjonalny: F01 | Aktywny, w etapie 2. | MAP i CCPS: zakres funkcji zamknięty (SYS-096/097). Bieżący temat: zakres chłodzenia i pomiaru temperatury w [przeglądzie pomiarów](requirements/f01-pomiary-silnika.md); dalej kompletność sterowania. |
 | F02 — Mapy, konfiguracja i strojenie | W kolejce po zamknięciu F01. | Ustalenia 101–104 zachowane w [specyfikacji F02](interfaces/mapy-i-konfiguracja.md); dalszy przegląd później. |
 | W05 — Inwentaryzacja Bety | W kolejce, etap 3. | Zachowany [plan INV](verification/beta-2015-plan-inwentaryzacji.md); brak wyników pomiarowych. |
 | W01/W02 — Architektura i zasoby | W kolejce, etap 4. | Zachowane [diagram](architecture/blokowa-systemu.md) i [macierz wariantów](architecture/macierz-wariantow-silnika.md); bez zamkniętych bilansów. |
-| W03 — Weryfikacja wymagań | W kolejce, etap 5. | Zachowany [przydział 96 SYS do grup](verification/macierz-wymagan.md); kryteria, procedury i dowody do rozwinięcia. |
+| W03 — Weryfikacja wymagań | W kolejce, etap 5. | Zachowany [przydział 97 SYS do grup](verification/macierz-wymagan.md); kryteria, procedury i dowody do rozwinięcia. |
 | W06 — Bilanse i wybór komponentów | W kolejce, etapy 4 i 6. | Wymagane wejściowe parametry; ważne komponenty wybierzemy wspólnie. |
 
 **Najbliższy rezultat: zamknięcie F01 zgodnie z kryteriami [pakietu funkcjonalnego](requirements/domkniecie-zakresu-funkcjonalnego.md).** Analizujemy potrzebne pomiary i napędy na podstawie dokumentacji enduro. Po zamknięciu F01 przejdziemy do F02. Parametry elektryczne, bilanse i procedury wykonawcze pozostają w kolejce właściwych etapów.
