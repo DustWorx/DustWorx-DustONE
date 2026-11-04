@@ -23,6 +23,8 @@ Edytor obsługuje maks. trzy niezależne, kompletne zestawy uzgodnionych map jed
 
 SYS-095: trwały zapis zmian map wymaga wyraźnego polecenia użytkownika i zgaszonego silnika. ECU rozstrzyga dopuszczenie; samo zastosowanie zmian na żywo nie utrwala ich automatycznie. [Specyfikacja F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 
+SYS-102: krytyczną konfigurację można przygotować lokalnie podczas pracy silnika, ale transfer do ECU i wdrożenie wymagają jego zgaszenia oraz wyraźnego polecenia. ECU egzekwuje warunki i blokuje rozrusznik, zapłon i wtrysk przez całą operację. Dopuszczone strojenie wartości map na żywo pozostaje dostępne. Szczegóły: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
+
 SYS-101: Windows może przesyłać do ECU robocze zmiany wybranych wartości aktywnego i nieaktywnych zestawów podczas pracy silnika. Edycja nie przełącza zestawu; nieaktywny zaczyna wpływać na silnik dopiero po jego świadomym wybraniu. Obowiązuje SYS-095 dla trwałego zapisu. Szczegóły: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 
 SYS-099: wybór zestawu po restarcie realizuje ECU, również bez HMI/PC; jest to ostatnio wybrany prawidłowy zestaw spośród trwale zapisanych. Aplikacja po połączeniu odczytuje rzeczywisty stan. Po prawidłowym śnie/wybudzeniu niezapisane zmiany zostają odrzucone zgodnie z SYS-100. Uzgodnienie po powrocie sesji i walidacja danych pozostają do określenia w [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
