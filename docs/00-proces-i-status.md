@@ -1,6 +1,6 @@
 # DustONE — ścieżka projektu, status i odpowiedzialności
 
-Stan na: 2026-11-04. Ocena głównej gałęzi, materiałów roboczych oraz uzgodnień właściciela do pytania 110. Ścieżka projektu i warunki postoju z PR #17/#18 są scalone. Dokument aktualizujemy przy istotnej odpowiedzi lub decyzji, wykonanej pracy, wyniku próby, zmianie zakresu i przeglądzie etapu; wraz z wymaganiami, ADR, interfejsami i weryfikacją.
+Stan na: 2026-11-04. Ocena głównej gałęzi, materiałów roboczych oraz uzgodnień właściciela do pytania 111 (odpowiedź B: porównanie przed decyzją). Ścieżka projektu i warunki postoju z PR #17/#18 są scalone. Dokument aktualizujemy przy istotnej odpowiedzi lub decyzji, wykonanej pracy, wyniku próby, zmianie zakresu i przeglądzie etapu; wraz z wymaganiami, ADR, interfejsami i weryfikacją.
 
 Kontrola pełnego F01 została zakończona: właściciel potwierdził zgodność podsumowania i polecił dalszą pracę (2026-11-04). Źródło kontroli: [przyjęte podsumowanie F01](requirements/f01-podsumowanie-kontrolne.md). Potwierdzenie dotyczy F01. Późniejsza odpowiedź A na pytanie 108 określiła ostatnio wybrany prawidłowy zestaw po restarcie ECU (SYS-099).
 
@@ -60,7 +60,7 @@ Parametry wyliczane z osprzętu, charakterystyki czujników, wartości elementó
 | Zadanie | Status | Materiał / warunek podjęcia |
 | --- | --- | --- |
 | W04 — Zakres funkcjonalny: F01 | Zamknięty po kontroli właściciela: 2026-11-04. | [Pomiary](requirements/f01-pomiary-silnika.md), [przegląd sterowania i wynik zamknięcia](requirements/f01-sterowanie-silnikiem.md); dane techniczne przekazane do kolejki etapów 3–6. |
-| F02 — Mapy, konfiguracja i strojenie ECU | Aktywny po zamknięciu F01. | Ustalenia 101–104 i 108–110 zachowane; rozwijamy [tabelę operacji i warunków](interfaces/mapy-i-konfiguracja.md). Edycja aktywnego i nieaktywnych zestawów podczas pracy przyjęta (SYS-101). Bieżący temat: zmiana krytycznej konfiguracji silnika. |
+| F02 — Mapy, konfiguracja i strojenie ECU | Aktywny po zamknięciu F01. | Ustalenia 101–104 i 108–110 zachowane; rozwijamy [tabelę operacji i warunków](interfaces/mapy-i-konfiguracja.md). Edycja aktywnego i nieaktywnych zestawów podczas pracy przyjęta (SYS-101). Bieżący temat: zmiana krytycznej konfiguracji silnika. Po odpowiedzi B na pytanie 111 przygotowano porównanie wariantów w specyfikacji F02; oczekujemy wyboru właściciela. |
 | W05 — Inwentaryzacja Bety | W kolejce, etap 3. | Zachowany [plan INV](verification/beta-2015-plan-inwentaryzacji.md); brak wyników pomiarowych. |
 | W01/W02 — Architektura i zasoby | W kolejce, etap 4. | Zachowane [diagram](architecture/blokowa-systemu.md) i [macierz wariantów](architecture/macierz-wariantow-silnika.md); bez zamkniętych bilansów. |
 | W03 — Weryfikacja wymagań | W kolejce, etap 5. | Zachowany [przydział 101 SYS do grup](verification/macierz-wymagan.md); kryteria, procedury i dowody do rozwinięcia. |

@@ -27,7 +27,7 @@ Lista określa pozostałą pracę nad zamknięciem zakresu. Wskazanie tematu do 
 
 **F01 zamknięty 2026-11-04 po przeglądzie inżynierskim i kontroli właściciela.** Właściciel potwierdził zgodność [pełnego podsumowania F01](f01-podsumowanie-kontrolne.md) i polecił kontynuację. Zakres zamknięto po zapisaniu przyjętych pomiarów, sterowania, wyłączeń i macierzy wariantów. Podstawa: dotychczasowe wymagania i decyzje właściciela, w tym A na 105/106 oraz B na 107. [Przegląd pomiarów](f01-pomiary-silnika.md) i [przegląd sterowania](f01-sterowanie-silnikiem.md) wskazują rezultat i przekazanie do etapów 3–6. Zgodność modeli, wykonalność konwersji TPI, parametry i testy nie zostały potwierdzone tym zamknięciem.
 
-**F02 jest jedynym aktywnym pakietem.** Pytania 108–110 rozstrzygnięto odpowiedziami A (SYS-099–101). Bieżąca decyzja dotyczy warunków zmiany krytycznej konfiguracji silnika. Domykamy operacje na mapach i konfiguracji ECU według [specyfikacji F02](../interfaces/mapy-i-konfiguracja.md). F03–F08 pozostają w kolejce.
+**F02 jest jedynym aktywnym pakietem.** Pytania 108–110 rozstrzygnięto odpowiedziami A (SYS-099–101). Bieżąca decyzja dotyczy warunków zmiany krytycznej konfiguracji silnika. Po odpowiedzi B na pytanie 111 przygotowano w specyfikacji F02 porównanie transferu/wdrożenia po zgaszeniu, dodatkowej kopii roboczej i wdrażania podczas pracy. Wybór pozostaje otwarty; rekomendowany wariant A nie jest jeszcze wymaganiem. Domykamy operacje na mapach i konfiguracji ECU według [specyfikacji F02](../interfaces/mapy-i-konfiguracja.md). F03–F08 pozostają w kolejce.
 
 ## Jak zamykamy pakiet
 
