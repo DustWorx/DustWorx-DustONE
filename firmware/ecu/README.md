@@ -50,6 +50,8 @@ SYS-112 określa kasowanie flagi w bieżącym statusie po potwierdzeniu poprawno
 
 SYS-113 wymaga dokończenia przyjętego trwałego zapisu po odłączeniu Windows, przy komplecie danych i prawidłowym zasilaniu. ECU zatwierdza zapis po weryfikacji sumy i danych.
 
+SYS-114 określa anulowanie nieukończonego transferu zestawu po utracie Windows i zachowanie dotychczasowych map.
+
 SYS-101: ECU przyjmuje robocze zmiany wybranych wartości aktywnego i nieaktywnych zestawów podczas pracy silnika. Edycja nie przełącza zestawu; zmiany nieaktywnego wpływają na silnik dopiero po jego świadomym wybraniu. Trwały zapis nadal podlega SYS-095. Szczegóły: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 
 SYS-099: po restarcie ECU aktywuje ostatnio wybrany prawidłowy zestaw spośród trwale zapisanych, także bez HMI. Zapamiętanie wyboru i zapis wartości map mają odrębne reguły; brak automatycznego utrwalania edycji na żywo. SYS-100 wymaga po prawidłowym śnie/wybudzeniu odrzucenia roboczej edycji i użycia trwale zapisanych wartości, bez automatycznego utrwalania. Mechanizm pamięci wyboru, walidacja, gotowość do rozruchu i przerwana sekwencja snu są do projektu: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
