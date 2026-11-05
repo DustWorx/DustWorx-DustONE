@@ -1,6 +1,6 @@
 # Wstępna lista funkcji wejść i wyjść
 
-Data: 2026-10-18. Status: materiał roboczy do architektury, bez zatwierdzonego pinoutu i liczby kanałów. Podstawa: [wymagania systemu](../01-zakres-systemu.md).
+Stan na: 2026-11-03. Status: materiał roboczy do architektury, bez zatwierdzonego pinoutu i liczby kanałów. Przydział funkcji do wariantów i zasobów: [macierz silników](../architecture/macierz-wariantow-silnika.md). Podstawa: [wymagania systemu](../01-zakres-systemu.md).
 
 Wiersz oznacza funkcję, nie pojedynczy pin ani kanał. Kanałów nie sumujemy przed analizą jednoczesnej pracy, wariantów silnika i współdzielenia zasobów. „Opcjonalny czujnik” oznacza możliwość pracy bez niego, przy zachowaniu wymaganej obsługi sprzętowej na PCB.
 
@@ -19,8 +19,10 @@ Wiązkę i złącze ECU projektujemy od nowa (SYS-045), według potrzebnych funk
 | Elektroniczny zawór wydechowy 2T | Sterowanie ECU i ewentualne wejścia zwrotne | SYS-034 | Typ napędu, zasilanie, interfejs, zakres ruchu i sygnały położenia. |
 | Regulacja powietrza biegu jałowego IAC | Wyjścia sterujące napędem krokowym; aktywne w odpowiednich konfiguracjach 4T | SYS-071 | Modele napędów, uzwojenia, prądy, zasilanie, zakres ruchu i kalibracja, liczba linii sterowania, stopień mocy, pozycja przy rozruchu/sen i diagnostyka do określenia. Konfiguracje bez IAC pracują bez napędu. |
 | TPS | Wejście ECU; zależnie od wyposażenia | SYS-014, 038 | Typ sygnału, poziomy, zasilanie i kalibracja; obsługa wariantu bez TPS. |
+| MAP — ciśnienie bezwzględne w dolocie | Wejście pomiarowe ECU; czujnik OEM lub dodatkowy | SYS-096 | Konfiguracje niewymagające MAP pracują bez czujnika. Modele, zasilanie/sygnał, zakres, dokładność, filtracja i diagnostyka do późniejszej specyfikacji; w T-MAP zachować także IAT. [Karta MAP](cisnienie-dolotu-map.md). |
+| Ciśnienie gazów w skrzyni korbowej 2T — CCPS | Wejście pomiarowe ECU; zgodnie z konfiguracją | SYS-097 | Konfiguracje niewymagające pomiaru pracują bez czujnika. Model, pobór ciśnienia, sygnał/zasilanie, zakres/dynamika, dokładność i diagnostyka do specyfikacji. Współdzielenie zasobów z MAP wymaga analizy; [karta CCPS](cisnienie-skrzyni-korbowej.md). |
 | IAT | Wejście ECU | SYS-031 | Czujniki referencyjne, charakterystyki i sposób podłączenia. |
-| Temperatura płynu chłodzącego | Wejście pomiarowe ECU; dane do HMI | SYS-044 | Czujniki OEM lub dodatkowe, charakterystyki, zakres, dokładność i montaż. Sam termowłącznik nie zapewnia pomiaru wartości. |
+| Temperatura płynu chłodzącego | Wejście pomiarowe ECU; dane do HMI | SYS-044, 098 | Czujniki OEM lub dodatkowe, charakterystyki, zakres, dokładność i montaż. Sam termowłącznik nie zapewnia pomiaru wartości. |
 | Ciśnienie paliwa | Wejście pomiarowe ECU | SYS-029 | Zakres ciśnienia, sygnał, zasilanie i wymagana dokładność. |
 | Czujnik rezerwy paliwa | Opcjonalny tor odczytu ECU; stan do HMI | SYS-073 | Zgodne modele, rodzaj sygnału, zasilanie/ewentualne pobudzenie, pomiar, filtracja i diagnostyka do określenia. Odróżnić stan rezerwy, usterkę i konfigurację bez czujnika; nie zakładać zwykłego wejścia 0/1 bez analizy czujnika. |
 | Ciśnienie oleju obecne/brak | Wejście binarne ECU | SYS-029 | Polaryzacja, poziomy, czujnik/wyłącznik i diagnostyka przewodów. |
@@ -54,9 +56,6 @@ Poniższe pozycje nie są nowymi zatwierdzonymi wymaganiami właściciela.
 
 | Tor | Cel analizy | Do określenia |
 | --- | --- | --- |
-| Faza cyklu 4T | Ocena potrzeby dodatkowego sygnału synchronizacji | Strategia sterowania i źródło fazy; nie zakładamy obowiązkowego czujnika wałka. |
-| Inne zastosowania temperatury silnika | Ocena kompensacji i funkcji ochronnych poza uzgodnionym sterowaniem wentylatorem | Potrzebne funkcje i kryteria do ustalenia. Pomiar płynu i sterowanie wentylatorem są już wymagane według SYS-043/044. |
-| Ciśnienia wymagane przez wybrane strategie wtrysku | Ustalenie kompletnego zestawu sygnałów | Potrzeba MAP/ciśnienia skrzyni korbowej i interfejsy dla konkretnych jednostek. |
 | Pomiar wartości napięcia zasilania do dodatkowych zastosowań | Diagnostyka i kompensacja zależna od napięcia | Zakres, dokładność i częstotliwość do analizy; nadzór wymagany do odcięcia wentylatora ujęto wyżej jako funkcję potwierdzoną. |
 
 ## Zasilanie i komunikacja

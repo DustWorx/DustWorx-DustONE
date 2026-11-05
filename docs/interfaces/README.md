@@ -15,9 +15,16 @@ Wybudzanie: przyciski obsługi HMI wybudzają HMI i ECU; podłączenie komputera
 
 Usypianie koordynuje ECU po upływie bezczynności i spełnieniu warunków SYS-059. HMI potwierdza przyjęcie polecenia aplikacyjną ramką CAN, kończy nadawanie i zasypia; następnie zasypia ECU (SYS-062/063). Przyciski, próby rozruchu i rzeczywista aktywność użytkownika w HMI odnawiają czas; sam cykliczny odczyt danych go nie odnawia. [Normalna sekwencja ECU–HMI](../architecture/usypianie-ecu-hmi.md) określa uzgodniony przebieg; formaty, czasy i wyjątki pozostają otwarte.
 
+[Mapy i konfiguracja — operacje F02](mapy-i-konfiguracja.md): niezależne, kompletne zestawy, przełączanie i strojenie na żywo oraz jawne otwarte reguły zapisu/edycji. Specyfikacja jest robocza.
+
 Specyfikacje i przyszłe pliki maszynowe, np. DBC lub schematy danych, przechowujemy razem w tym katalogu.
 
 Opracowania referencyjne:
+
+- [Ciśnienie dolotu MAP — przegląd F01](cisnienie-dolotu-map.md): zakres przyjęty w SYS-096; parametry i komponenty do późniejszego projektu.
+- [Ciśnienie skrzyni korbowej 2T](cisnienie-skrzyni-korbowej.md): zakres przyjęty w SYS-097; parametry i podział torów do późniejszego projektu.
+- [Przegląd pomiarów silnika F01](../requirements/f01-pomiary-silnika.md): zakres zamknięty, chłodzenie wyłącznie cieczą.
+- [Przegląd sterowania i zamknięcie F01](../requirements/f01-sterowanie-silnikiem.md): przyjęte funkcje i przekazanie danych do kolejnych pakietów/etapów.
 
 - [Moduł zapłonowy Kokusan CU7542 w Becie](beta-modul-zaplonowy-kokusan-cu7542.md): odczyty zdjęć, numer Beta 026400038 300 oraz dane do analizy zapłonu.
 - [Cewka zapłonowa IG5128 w Becie](beta-cewka-zaplonowa-ig5128.md): odczyty zdjęcia, odniesienia katalogowe i parametry potrzebne do projektu stopnia zapłonowego.

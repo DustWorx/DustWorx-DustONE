@@ -1,60 +1,72 @@
 # DustONE — ścieżka projektu, status i odpowiedzialności
 
-Stan na: 2026-11-03. Ocena głównej gałęzi, bieżącej dokumentacji oraz uzgodnień właściciela do pytania 100. Ostatnie doprecyzowanie warunków postoju znajduje się w [aktualizacji SYS-093](https://github.com/DustWorx/DustWorx-DustONE/pull/17). Dokument aktualizujemy po przeglądach etapów i istotnych zmianach zakresu.
+Stan na: 2026-11-04. Ocena głównej gałęzi, materiałów roboczych oraz uzgodnień właściciela do pytania 117 (wybór A: trwały zapis wybranego zestawu lub wszystkich skonfigurowanych jednym poleceniem). Ścieżka projektu i warunki postoju z PR #17/#18 są scalone. Dokument aktualizujemy przy istotnej odpowiedzi lub decyzji, wykonanej pracy, wyniku próby, zmianie zakresu i przeglądzie etapu; wraz z wymaganiami, ADR, interfejsami i weryfikacją.
+
+Kontrola pełnego F01 została zakończona: właściciel potwierdził zgodność podsumowania i polecił dalszą pracę (2026-11-04). Źródło kontroli: [przyjęte podsumowanie F01](requirements/f01-podsumowanie-kontrolne.md). Potwierdzenie dotyczy F01. Późniejsza odpowiedź A na pytanie 108 określiła ostatnio wybrany prawidłowy zestaw po restarcie ECU (SYS-099).
 
 ## Aktualne miejsce w procesie
 
-**Główny zakres funkcji jest opisany; trwa jego domykanie i przygotowanie architektury systemu.** Równolegle potrzebujemy danych z inwentaryzacji Bety. Formalne zakończenie zakresu wymaga przeglądu opisanych niżej pakietów, a następnie bramki G0.
+**Aktywny etap: 2 — zakres funkcjonalny. F01 zamknięty po kontroli właściciela 2026-11-04; aktywny pakiet: F02 — mapy, konfiguracja i strojenie ECU.** F03–F08 i etapy 3–12 oczekują w kolejce. Wcześniejsze wymagania, decyzje i materiały robocze pozostają zachowane; nie oznaczają formalnego rozpoczęcia ani zamknięcia dalszych etapów.
 
 | Obszar | Stan potwierdzony dokumentacją |
 | --- | --- |
-| Wymagania systemowe | 93 wymagania SYS-001–093; będą rozwijane w wymagania bloków i przypadki testowe. |
-| Decyzje | 10 zapisów ADR-001–010, z podstawą uzgodnień. |
+| Wymagania systemowe | 108 wymagań SYS-001–108; pierwszy przydział do bloków i grup weryfikacji gotowy, kryteria i procedury do rozwinięcia. |
+| Decyzje | 12 zapisów ADR-001–012; ostatni ogranicza platformę do silników chłodzonych cieczą. |
 | Zakres wariantów | Macierz 6 wariantów silnika; jest planem obsługi, nie potwierdzeniem zgodności modeli. |
 | Pierwsza jednostka | Beta 300 RR Racing 2015; analiza dokumentów i zdjęć, bez raportów pomiarowych instalacji. |
-| Architektura | Przyjęte role ECU/HMI/Windows, ważne stany pracy i wstępna lista funkcji I/O; pełna architektura i bilanse przed nami. |
+| Architektura | Pierwszy diagram blokowy, funkcje sześciu wariantów i przydział zasobów gotowe jako wersje robocze. Modele, parametry i liczbowe bilanse pozostają otwarte. |
 | Schematy, BOM, PCB i mechanika | W repozytorium brak projektu wykonawczego i zatwierdzonego kompletnego BOM ECU/HMI. |
-| Kod i próby produktu | W repozytorium brak implementacji firmware/Windows i raportów prób DustONE. Istnieją plany oraz szablon procedury. |
+| Kod i próby produktu | W repozytorium brak implementacji firmware/Windows i raportów prób DustONE. Istnieją plany, szablon procedury i przydział 108 wymagań do 13 grup weryfikacji. |
 
 Podstawy: [wymagania](requirements/README.md), [decyzje](decisions/README.md), [macierz silników](architecture/macierz-wariantow-silnika.md), [I/O](interfaces/wstepna-lista-io.md) i [weryfikacja](verification/README.md). Liczba wymagań i pytań nie jest procentem wykonania produktu.
 
 ## Etapy i warunki zakończenia
 
-Etapy częściowo prowadzimy równolegle. Wyjście z etapu wynika z gotowych rezultatów i przeglądu, a działanie produktu potwierdzają późniejsze dowody z prób.
+Ustalenie właściciela z 2026-11-04: **prowadzimy etapy i tematy kolejno, zamykając bieżący przed rozpoczęciem następnego**. Obowiązuje kolejność etapów 1–12, a w etapie 2: F01 → F02 → F03 → F04 → F05 → F06 → F07 → F08 → G0.
+
+- W danym momencie aktywny jest jeden pakiet. Kolejny rozpoczynamy po spełnieniu kryteriów zakończenia i zapisaniu wyniku poprzedniego.
+- Wpływ bieżącej decyzji na dalszy etap zapisujemy w odpowiednim dokumencie i kolejce; nie rozpoczynamy z tego powodu jego projektowania.
+- Analiza źródeł potrzebna do określenia bieżącej funkcji należy do tego pakietu. Parametry, obliczenia i wykonanie rozwijamy na przypisanym późniejszym etapie.
+- Zamknięcie zapisujemy z datą, rezultatem, podstawą decyzji i jawnymi danymi przekazanymi dalej. Nierozstrzygnięta decyzja o zakresie nie staje się zamknięta przez przeniesienie do kolejki.
+- Gdy późniejsze ustalenie wymaga korekty zamkniętego wyniku, zapisujemy przyczynę i jawnie wracamy do tego miejsca, bez równoległego prowadzenia obu tematów.
+
+Statusy: **aktywny**, **w kolejce**, **zamknięty**. Istniejący szkic oznaczamy osobno jako materiał wstępny; nie nadaje on statusu zamknięcia etapu. Zatwierdzenie wymagania i potwierdzenie działania produktu pozostają odrębnymi stanami.
 
 | Etap | Główny rezultat | Bieżący status | Warunek zakończenia / przejścia |
 | --- | --- | --- | --- |
-| 1. Organizacja | Repozytorium, struktura, zasady zmian i decyzji. | Baza gotowa; utrzymanie ciągłe. | Uzgodnienia i źródła mają miejsce w repozytorium, zmiany są wersjonowane. |
-| 2. Zakres funkcjonalny | Funkcje, wyłączenia, warianty i reguły użytkowania ECU/HMI/Windows. | W trakcie domykania: 8 pakietów przeglądu. | G0: przyjęta baza zakresu, rozstrzygnięte decyzje produktowe i jawne otwarte parametry techniczne. |
-| 3. Inwentaryzacja i dane | Osprzęt, sygnały, obciążenia, zasilanie i przestrzeń montażowa. | Częściowo: dokumenty i zdjęcia Bety; pomiary przed nami. | Dane wystarczają do projektowania odpowiedniego bloku; braki innych wariantów mają plan pozyskania. |
-| 4. Architektura | Diagramy blokowe, I/O dla wariantów, zasoby, zasilanie, interfejsy i stany awaryjne. | Wstępne ustalenia; pełna architektura otwarta. | G1: uzasadniony podział bloków, bilanse, granice interfejsów i zamknięte niewiadome wpływające na projektowane bloki. |
-| 5. Plan weryfikacji | Powiązanie wymaganie → blok → metoda → kryterium → próba → dowód. | Proces, szablon i częściowe plany gotowe; pełna macierz otwarta. | Wymagania mają przydzieloną metodę i etap; procedura wykonawcza jest gotowa przed daną próbą. |
-| 6. Komponenty i schematy | Wspólny wybór ważnych części, obliczenia, biblioteki, schematy i BOM. | Projekt wykonawczy nie rozpoczęty. | Przyjęte części, zweryfikowane symbole/footprinty, obliczenia i przegląd schematów/ERC. |
-| 7. Mechanika i instalacja | Obudowy, mocowania, uszczelnienia, złącza i nowa wiązka. | Wymagania wstępne; projekt wykonawczy przed nami. | Zgodność z miejscem montażu, dostępem, złączami, ciepłem i wymaganiami środowiskowymi. |
-| 8. PCB w Fusion | Warstwy, rozmieszczenie, routing, zasilanie/masy i eksporty produkcyjne. | Nie rozpoczęto; CAD wykonuje właściciel przy wsparciu asystenta. | G2: przegląd schematu/BOM/bibliotek, ERC/DRC, mechaniki i planu uruchomienia; gotowy komplet do wykonania. |
-| 9. Firmware i Windows | Sterowanie, CAN, HMI, mapy, diagnostyka, aktualizacja i narzędzia. | Zakres opisany; brak kodu w repozytorium. | Funkcje i interfejsy zaimplementowane oraz sprawdzone na właściwym poziomie. Rozwój może zaczynać się na symulatorach i stanowiskach. |
-| 10. Prototypy i uruchomienie | PCB, montaż, kontrola wykonania i uruchamianie blokami. | Nie rozpoczęto. | G3: podstawowe zasilanie, komunikacja i I/O sprawdzone według procedur; gotowość do prób systemowych. |
-| 11. Weryfikacja i walidacja | Testy bloków i systemu, stanowiska, motocykle oraz dobrane próby środowiskowe/EMC. | Plany części prób; brak wyników produktu. | Dowody dla przyjętego zakresu i konfiguracji, zarejestrowane niezgodności oraz ograniczenia. |
-| 12. Korekty i wydanie prototypu | Poprawki, regresja, instrukcje i wersjonowany zakres działania. | Przed nami. | G4: przegląd wyników, potwierdzone konfiguracje, komplet wersji i jawne ograniczenia wydania. |
+| 1. Organizacja | Repozytorium, struktura, zasady zmian i decyzji. | Zamknięty: 2026-11-04. Dokumentację utrzymujemy. | Uzgodnienia i źródła mają miejsce w repozytorium, zmiany są wersjonowane. |
+| 2. Zakres funkcjonalny | Funkcje, wyłączenia, warianty i reguły użytkowania ECU/HMI/Windows. | F01 zamknięty; aktywny F02. F03–F08 w kolejce. | G0: przyjęta baza zakresu, rozstrzygnięte decyzje produktowe i jawne otwarte parametry techniczne. |
+| 3. Inwentaryzacja i dane | Osprzęt, sygnały, obciążenia, zasilanie i przestrzeń montażowa. | W kolejce po G0; istnieją dokumenty/zdjęcia i plan INV, bez wyników pomiarów. | Dane wystarczają do projektowania odpowiedniego bloku; braki innych wariantów mają plan pozyskania. |
+| 4. Architektura | Diagramy blokowe, I/O dla wariantów, zasoby, zasilanie, interfejsy i stany awaryjne. | W kolejce po etapie 3; zachowane wstępne szkice diagramu i zasobów. | G1: uzasadniony podział bloków, bilanse, granice interfejsów i zamknięte niewiadome wpływające na projektowane bloki. |
+| 5. Plan weryfikacji | Powiązanie wymaganie → blok → metoda → kryterium → próba → dowód. | W kolejce po etapie 4; zachowane szablon i wstępny przydział wymagań. | Wymagania mają przydzieloną metodę i etap; procedura wykonawcza jest gotowa przed daną próbą. |
+| 6. Komponenty i schematy | Wspólny wybór ważnych części, obliczenia, biblioteki, schematy i BOM. | W kolejce; brak projektu wykonawczego. | Przyjęte części, zweryfikowane symbole/footprinty, obliczenia i przegląd schematów/ERC. |
+| 7. Mechanika i instalacja | Obudowy, mocowania, uszczelnienia, złącza i nowa wiązka. | W kolejce; zapisane wstępne potrzeby. | Zgodność z miejscem montażu, dostępem, złączami, ciepłem i wymaganiami środowiskowymi. |
+| 8. PCB w Fusion | Warstwy, rozmieszczenie, routing, zasilanie/masy i eksporty produkcyjne. | W kolejce; CAD wykona właściciel przy wsparciu asystenta. | G2: przegląd schematu/BOM/bibliotek, ERC/DRC, mechaniki i planu uruchomienia; gotowy komplet do wykonania. |
+| 9. Firmware i Windows | Sterowanie, CAN, HMI, mapy, diagnostyka, aktualizacja i narzędzia. | W kolejce; brak kodu w repozytorium. | Funkcje i interfejsy zaimplementowane oraz sprawdzone na właściwym poziomie. |
+| 10. Prototypy i uruchomienie | PCB, montaż, kontrola wykonania i uruchamianie blokami. | W kolejce; nie rozpoczęto. | G3: podstawowe zasilanie, komunikacja i I/O sprawdzone według procedur; gotowość do prób systemowych. |
+| 11. Weryfikacja i walidacja | Testy bloków i systemu, stanowiska, motocykle oraz dobrane próby środowiskowe/EMC. | W kolejce; brak wyników produktu. | Dowody dla przyjętego zakresu i konfiguracji, zarejestrowane niezgodności oraz ograniczenia. |
+| 12. Korekty i wydanie prototypu | Poprawki, regresja, instrukcje i wersjonowany zakres działania. | W kolejce; nie rozpoczęto. | G4: przegląd wyników, potwierdzone konfiguracje, komplet wersji i jawne ograniczenia wydania. |
 
 Projekt wspólnej PCB obejmuje docelowy uzgodniony zakres 2T/4T bez zmian obsady. Uruchamianie i firmware rozwijamy etapami od Bety; pozostałe warianty wymagają własnych analiz, stanowisk i prób.
 
 ## Co pozostało w funkcjonalności
 
-Pozostaje **8 pakietów końcowego przeglądu F01–F08** oraz przegląd zamykający G0. Ich treść i wynik wymagany do zamknięcia opisuje [rejestr domknięcia zakresu](requirements/domkniecie-zakresu-funkcjonalnego.md). Pakiet może zawierać kilka decyzji; część jego funkcji jest już uzgodniona. Jest to roboczy plan domknięcia obecnego zakresu, aktualizowany przy ujawnieniu nowych luk.
+**F01 zamknięty; pozostaje 7 pakietów F02–F08** oraz przegląd zamykający G0. Ich treść i wynik wymagany do zamknięcia opisuje [rejestr domknięcia zakresu](requirements/domkniecie-zakresu-funkcjonalnego.md). Pakiet może zawierać kilka decyzji; część jego funkcji jest już uzgodniona. Jest to roboczy plan domknięcia obecnego zakresu, aktualizowany przy ujawnieniu nowych luk.
 
 Parametry wyliczane z osprzętu, charakterystyki czujników, wartości elementów, konkretne procesory i układy, formaty CAN oraz layout rozwijamy w odpowiednich etapach architektury i projektu wykonawczego. Ważne komponenty nadal wybieramy wspólnie.
 
-## Najbliższy krok rozwoju
+## Bieżąca praca i kolejka
 
-**Pierwsza pełna architektura blokowa, rozwijana równolegle z domknięciem zakresu i inwentaryzacją.** Najbliższy pakiet pracy asystenta:
+| Zadanie | Status | Materiał / warunek podjęcia |
+| --- | --- | --- |
+| W04 — Zakres funkcjonalny: F01 | Zamknięty po kontroli właściciela: 2026-11-04. | [Pomiary](requirements/f01-pomiary-silnika.md), [przegląd sterowania i wynik zamknięcia](requirements/f01-sterowanie-silnikiem.md); dane techniczne przekazane do kolejki etapów 3–6. |
+| F02 — Mapy, konfiguracja i strojenie ECU | Aktywny po zamknięciu F01. | Ustalenia 101–104 i 108–117 zachowane; rozwijamy [tabelę operacji i warunków](interfaces/mapy-i-konfiguracja.md). Edycja aktywnego i nieaktywnych zestawów podczas pracy przyjęta (SYS-101). Wariant A po porównaniu do pytania 111 przyjęty: transfer/wdrożenie krytycznej konfiguracji tylko po zgaszeniu, z blokadami przez całą operację (SYS-102). Po utracie Windows przed wdrożeniem niepełny transfer jest anulowany, a blokady zwalniane przy poprawnej dotychczasowej konfiguracji; rozruch wymaga nowej próby (SYS-103). SYS-104 przyjęty: przy komplecie danych, przyjętym poleceniu i prawidłowym zasilaniu ECU kończy samodzielnie; blokady zwalnia po powodzeniu, a rozruch wymaga nowej świadomej próby. SYS-105 przyjęty: po błędzie automatyczny powrót do poprzedniej potwierdzonej poprawnej konfiguracji i zwolnienie blokad; bez poprawnych danych blokady i dostęp serwisowy pozostają. SYS-106 przyjęty: po powrocie zasilania tylko kompletna poprawna konfiguracja i nowa świadoma próba bez Windows; bez poprawnych danych blokady i dostęp serwisowy. SYS-107 przyjęty: pełny zestaw map tylko przy zgaszonym silniku, na żywo dopuszczone wybrane wartości. SYS-108 przyjęty: zapis wybranego kompletnego zestawu, aktywnego lub nieaktywnego, oraz wszystkich skonfigurowanych jednym poleceniem. Bieżący temat: spójność polecenia „zapisz wszystkie” po przerwaniu zasilania. |
+| W05 — Inwentaryzacja Bety | W kolejce, etap 3. | Zachowany [plan INV](verification/beta-2015-plan-inwentaryzacji.md); brak wyników pomiarowych. |
+| W01/W02 — Architektura i zasoby | W kolejce, etap 4. | Zachowane [diagram](architecture/blokowa-systemu.md) i [macierz wariantów](architecture/macierz-wariantow-silnika.md); bez zamkniętych bilansów. |
+| W03 — Weryfikacja wymagań | W kolejce, etap 5. | Zachowany [przydział 108 SYS do grup](verification/macierz-wymagan.md); kryteria, procedury i dowody do rozwinięcia. |
+| W06 — Bilanse i wybór komponentów | W kolejce, etapy 4 i 6. | Wymagane wejściowe parametry; ważne komponenty wybierzemy wspólnie. |
 
-1. Diagram ECU–HMI–Windows z blokami zasilania, czuwania, sterowania silnikiem, I/O, danych/RTC, CAN i obsługi serwisowej.
-2. Macierz funkcji i I/O dla wariantów, z jednoczesnością obciążeń, potrzebnymi zasobami i listą danych do potwierdzenia.
-3. Przygotowanie inwentaryzacji i właściwych pomiarów Bety według [planu INV](verification/beta-2015-plan-inwentaryzacji.md); dla pozostałych wariantów analiza modeli i źródeł OEM.
-4. Rozwijana macierz wymagań i weryfikacji oraz rejestr niewiadomych przypisanych do bloków.
-
-Po wstępnych bilansach i rozpoznaniu interfejsów przedstawimy kandydatów MCU, zasilania, transceiverów i driverów do wspólnego wyboru. Firmware/CAN/Windows mogą być rozwijane równolegle po określeniu interfejsów. Próba 28-dniowa może trwać równolegle z innymi pracami po uzyskaniu stabilnego snu i gotowych kryteriów.
+**Najbliższy rezultat: tabela operacji i warunków F02**, rozwijająca przyjęte zestawy i strojenie na żywo. F01 ma zapisany wynik zamknięcia na poziomie funkcji, bez deklaracji zgodności modeli ani gotowości sprzętu. Konkrety osprzętu, w tym wykonalność konwersji TPI, mają właścicieli i etapy w [przekazaniu F01](requirements/f01-sterowanie-silnikiem.md). Parametry elektryczne, bilanse i procedury wykonawcze pozostają w kolejce właściwych etapów.
 
 ## Warunki przechodzenia dalej
 
@@ -66,7 +78,7 @@ Po wstępnych bilansach i rozpoznaniu interfejsów przedstawimy kandydatów MCU,
 | G3 — próby systemowe | Kontrolowane uruchomienie zasilania i bloków, gotowe stanowiska/procedury, znane limity oraz zapisane wyniki dopuszczające kolejne próby. |
 | G4 — wydanie prototypu | Potwierdzony zakres działania dla właściwych rewizji i konfiguracji, regresja, dokumentacja oraz lista ograniczeń i prac pozostałych. |
 
-Projekt pojedynczego bloku może ruszyć po uzyskaniu jego danych wejściowych. Zamrożenie PCB wymaga rozstrzygnięcia kwestii wpływających na wspólny sprzęt. Status uzgodnionego wymagania i status zweryfikowanego produktu prowadzimy oddzielnie.
+Projekt wykonawczy bloków rozpoczynamy w etapie 6 po zakończeniu wcześniejszych etapów i uzyskaniu danych wejściowych. Zamrożenie PCB wymaga rozstrzygnięcia kwestii wpływających na wspólny sprzęt. Status uzgodnionego wymagania i status zweryfikowanego produktu prowadzimy oddzielnie.
 
 ## Najważniejsze niewiadome do następnego etapu
 
@@ -107,7 +119,7 @@ Pytania wynikają z celów właściciela i wcześniejszych odpowiedzi, scenarius
 
 Ustalenie właściciela z 2026-11-01: przed pytaniem o nową funkcję silnika lub osprzętu sprawdzamy jej występowanie w motocyklach enduro odpowiadających celowi DustONE. Przedstawiamy konkretny model, rocznik, źródło producenta i potwierdzony sposób realizacji oraz znaczenie dla wspólnej PCB. Funkcje wynikające bezpośrednio z celów właściciela oznaczamy jako takie. [Zasada weryfikacji i przykład IAC](requirements/weryfikacja-funkcji-enduro.md) określa sposób dokumentowania podstaw pytania. Brak potwierdzenia pozostaje jawną luką; sam opis funkcji w uniwersalnym ECU nie potwierdza wyposażenia enduro.
 
-Najpierw określamy decyzje wpływające na sprzęt i wspólną PCB. Szczegóły niezależne od sprzętu można rozwijać później. Pytania pojedyncze z propozycjami służą ustalaniu preferencji, zakresu, brakujących informacji oraz wspólnemu wyborowi ważnych komponentów po przedstawieniu porównania. Obliczenia i propozycje rozwiązań technicznych przygotowuje asystent z uzasadnieniem; właściciel aktywnie uczestniczy w doborze części według powyższej zasady.
+Przed pytaniem wskazujemy aktywny pakiet i cel. Przechodzimy do następnego pakietu dopiero po zapisanym zamknięciu poprzedniego; wpływ na późniejsze tematy odkładamy do ich kolejki. Najpierw określamy decyzje wpływające na sprzęt i wspólną PCB. Szczegóły niezależne od sprzętu można rozwijać później. Pytania pojedyncze z propozycjami służą ustalaniu preferencji, zakresu, brakujących informacji oraz wspólnemu wyborowi ważnych komponentów po przedstawieniu porównania. Obliczenia i propozycje rozwiązań technicznych przygotowuje asystent z uzasadnieniem; właściciel aktywnie uczestniczy w doborze części według powyższej zasady.
 
 Kompletność sprawdzamy według [mapy obszarów i otwartych tematów](requirements/pokrycie-funkcjonalne.md), a nie liczby zadanych pytań. Dla każdego obszaru przeglądamy normalną pracę, rozruch/wyłączenie, granice, brak opcjonalnego wyposażenia, usterki oraz serwis i aktualizację, odpowiednio do jego roli. Zapisujemy wymagania przyjęte, wyłączenia i kwestie otwarte. Każda istotna decyzja otrzymuje źródło; wymagania łączymy dalej z blokiem realizującym i weryfikacją.
 

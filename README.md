@@ -2,7 +2,7 @@
 
 System sterowania motocyklem: ECU dla silników jednocylindrowych 2T/4T na wspólnej platformie sprzętowej, HMI po CAN oraz aplikacja Windows do konfiguracji, strojenia, diagnostyki, aktualizacji i prac rozwojowych.
 
-**Etap:** domykanie zakresu funkcjonalnego, inwentaryzacja i wstępna architektura. [Ścieżka projektu i aktualny status](docs/00-proces-i-status.md) opisują etapy, warunki ich zakończenia i najbliższe rezultaty.
+**Aktywny etap:** 2 — zakres funkcjonalny. **F01 zamknięty w zakresie funkcji. Aktywny pakiet:** F02 — mapy i konfiguracja ECU. Pozostałe pakiety i etapy oczekują w kolejce. [Ścieżka projektu i aktualny status](docs/00-proces-i-status.md) opisują etapy, warunki ich zakończenia i najbliższe rezultaty.
 
 ## Dokumentacja
 

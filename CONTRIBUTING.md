@@ -10,6 +10,10 @@
 - Wersję roboczą oznaczamy jako roboczą. Nie dopisujemy „final”, „final2” ani numerów kopii do nazw; historię zapewnia Git.
 - Normy i rozbudowane elementy procesu wprowadzamy, gdy wynikają z zastosowania produktu lub dają konkretną wartość. Nie deklarujemy zgodności bez podstaw i weryfikacji.
 
+## Kolejność pracy
+
+Ustalenie właściciela z 2026-11-04: etapy i pakiety prowadzimy kolejno, zamykając bieżący przed następnym. Aktywny jest jeden pakiet; wpływ na dalszy etap zapisujemy w jego kolejce. Aktualną kolejność, kryteria zamknięcia i status utrzymujemy w [dokumencie procesowym](docs/00-proces-i-status.md).
+
 ## Zmiany w repozytorium
 
 - `main` przechowuje aktualną, spójną wersję projektu. Dokumenty robocze mogą się tam znajdować, jeżeli mają jawny status.

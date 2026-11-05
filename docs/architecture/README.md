@@ -2,7 +2,7 @@
 
 Miejsce na architekturę całego systemu, ECU, HMI i aplikacji Windows: podział odpowiedzialności, diagramy blokowe, przepływy danych i zachowanie przy awariach.
 
-Stan: architektura docelowa do opracowania po określeniu silników referencyjnych, zasilania oraz listy wejść i wyjść. Procesory i interfejsy sprzętowe nie zostały jeszcze wybrane; narzędzie EDA określono w zakresie systemu.
+Stan na 2026-11-04: **etap 4 oczekuje w kolejce**. Zachowano wstępną [architekturę blokową](blokowa-systemu.md), funkcjonalny przydział zasobów i jednoczesności w [macierzy wariantów](macierz-wariantow-silnika.md) oraz [przydział SYS do bloków i grup weryfikacji](../verification/macierz-wymagan.md). To materiały robocze. Modele referencyjne poza Betą, parametry, liczbowe bilanse i G1 pozostają otwarte; procesory i układy wybierzemy wspólnie po ustaleniu danych bloku.
 
 Zatwierdzona podstawa: [ADR-002 — samodzielność ECU](../decisions/adr-002-samodzielnosc-ecu.md). ECU pozostaje właścicielem danych i działa bez HMI; HMI odczytuje dane i wysyła żądania. Nieobecność HMI ani utrata CAN ECU–HMI nie wyłącza silnika. Przyciski obsługi HMI pozostają w HMI; START ma osobne wejście ECU, a STOP niezależny obwód gaszenia (SYS-016/037/048). Szczegóły reakcji akcesoriów i protokołu pozostają otwarte (SYS-046/047).
 
@@ -22,3 +22,4 @@ Analizy architektoniczne:
 - [Oszczędzanie energii po zgaszeniu silnika](oszczedzanie-energii.md): przejście na pozycyjne, nadzór akumulatora, wyłączenie zbędnych odbiorników, rekomendacje i plan prób (SYS-083/084).
 - [Akumulatory AGM i LiFePO4 — porównanie zakresu](akumulatory-agm-lifepo4-porownanie.md): po porównaniu właściciel wybrał oba typy na wspólnej PCB, z osobnymi profilami i testami zgodności (SYS-092, ADR-010); parametry i dobór toru pozostają otwarte.
 - [Budżet energii podczas postoju](budzet-energii-postoju.md): minimum 4 tygodnie bez doładowania z rezerwą na rozruch (SYS-093); warunki, limit prądu i procedury do opracowania.
+- [ADR-011 — strojenie na żywo](../decisions/adr-011-strojenie-na-zywo.md): Windows może stosować zmiany wybranych wartości map podczas pracy silnika; zapis i utrata sesji mają przyjęte reguły. F02 jest aktywny po zamknięciu F01; projekt architektury nadal oczekuje w etapie 4.
