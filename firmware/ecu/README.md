@@ -46,6 +46,8 @@ SYS-110 obejmuje blokadę rozrusznika, zapłonu i wtrysku oraz odrzucenie zwykł
 
 SYS-111 określa reakcję na błędną sumę trwałego zapisu map przy zachowanym zasilaniu. ECU odrzuca pakiet, odtwarza robocze wartości objętych zestawów z poprzedniego poprawnego zapisu i udostępnia flagę wyniku po odzyskaniu danych. [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 
+SYS-112 określa kasowanie flagi w bieżącym statusie po potwierdzeniu poprawności kolejnego trwałego zapisu map.
+
 SYS-101: ECU przyjmuje robocze zmiany wybranych wartości aktywnego i nieaktywnych zestawów podczas pracy silnika. Edycja nie przełącza zestawu; zmiany nieaktywnego wpływają na silnik dopiero po jego świadomym wybraniu. Trwały zapis nadal podlega SYS-095. Szczegóły: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 
 SYS-099: po restarcie ECU aktywuje ostatnio wybrany prawidłowy zestaw spośród trwale zapisanych, także bez HMI. Zapamiętanie wyboru i zapis wartości map mają odrębne reguły; brak automatycznego utrwalania edycji na żywo. SYS-100 wymaga po prawidłowym śnie/wybudzeniu odrzucenia roboczej edycji i użycia trwale zapisanych wartości, bez automatycznego utrwalania. Mechanizm pamięci wyboru, walidacja, gotowość do rozruchu i przerwana sekwencja snu są do projektu: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
