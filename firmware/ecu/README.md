@@ -42,6 +42,8 @@ SYS-107: pełny zestaw map, w ramach tej samej konfiguracji silnika, ECU przyjmu
 
 SYS-108: ECU dopuszcza trwały zapis wybranego kompletnego zestawu map, aktywnego lub nieaktywnego, zachowując pozostałe dane robocze i trwale zapisane, oraz zapis wszystkich skonfigurowanych jednym poleceniem. Każdy zapis podlega SYS-095. Po zaniku zasilania w trakcie zapisu wszystkich zestawów ECU wybiera jedną wersję całej grupy według sumy i kompletności pakietu (SYS-109). Mechanizm pamięci doprecyzujemy w projekcie. [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 
+SYS-110 obejmuje blokadę rozrusznika, zapłonu i wtrysku oraz odrzucenie zwykłych poleceń kierowcy od przyjęcia pełnej podmiany zestawu lub trwałego zapisu map. Po sprawdzeniu sumy poprawnych danych ECU zwalnia blokady operacji. Rozruch wymaga nowej świadomej próby. [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
+
 SYS-101: ECU przyjmuje robocze zmiany wybranych wartości aktywnego i nieaktywnych zestawów podczas pracy silnika. Edycja nie przełącza zestawu; zmiany nieaktywnego wpływają na silnik dopiero po jego świadomym wybraniu. Trwały zapis nadal podlega SYS-095. Szczegóły: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 
 SYS-099: po restarcie ECU aktywuje ostatnio wybrany prawidłowy zestaw spośród trwale zapisanych, także bez HMI. Zapamiętanie wyboru i zapis wartości map mają odrębne reguły; brak automatycznego utrwalania edycji na żywo. SYS-100 wymaga po prawidłowym śnie/wybudzeniu odrzucenia roboczej edycji i użycia trwale zapisanych wartości, bez automatycznego utrwalania. Mechanizm pamięci wyboru, walidacja, gotowość do rozruchu i przerwana sekwencja snu są do projektu: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
