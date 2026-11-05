@@ -40,7 +40,17 @@ SYS-106: po zaniku zasilania podczas zmiany krytycznej konfiguracji ECU odtwarza
 
 SYS-107: pełny zestaw map, w ramach tej samej konfiguracji silnika, ECU przyjmuje i roboczo zastępuje tylko przy zgaszonym silniku. Warunek egzekwuje ECU. Na żywo pozostaje edycja dopuszczonych wybranych wartości według SYS-094/101; trwały zapis nadal podlega SYS-095. Walidacja, spójność, reakcje na próbę rozruchu i przerwanie do specyfikacji: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 
-SYS-108: ECU dopuszcza trwały zapis wybranego kompletnego zestawu map, aktywnego lub nieaktywnego, zachowując pozostałe dane robocze i trwale zapisane, oraz zapis wszystkich skonfigurowanych jednym poleceniem. Każdy zapis podlega SYS-095. Spójność przerwanego zapisu całej grupy, mechanizmy pamięci i potwierdzanie wyniku do specyfikacji: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
+SYS-108: ECU dopuszcza trwały zapis wybranego kompletnego zestawu map, aktywnego lub nieaktywnego, zachowując pozostałe dane robocze i trwale zapisane, oraz zapis wszystkich skonfigurowanych jednym poleceniem. Każdy zapis podlega SYS-095. Po zaniku zasilania w trakcie zapisu wszystkich zestawów ECU wybiera jedną wersję całej grupy według sumy i kompletności pakietu (SYS-109). Mechanizm pamięci doprecyzujemy w projekcie. [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
+
+SYS-110 obejmuje blokadę rozrusznika, zapłonu i wtrysku oraz odrzucenie zwykłych poleceń kierowcy od przyjęcia pełnej podmiany zestawu lub trwałego zapisu map. Po sprawdzeniu sumy poprawnych danych ECU zwalnia blokady operacji. Rozruch wymaga nowej świadomej próby. [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
+
+SYS-111 określa reakcję na błędną sumę trwałego zapisu map przy zachowanym zasilaniu. ECU odrzuca pakiet, odtwarza robocze wartości objętych zestawów z poprzedniego poprawnego zapisu i udostępnia flagę wyniku po odzyskaniu danych. [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
+
+SYS-112 określa kasowanie flagi w bieżącym statusie po potwierdzeniu poprawności kolejnego trwałego zapisu map.
+
+SYS-113 wymaga dokończenia przyjętego trwałego zapisu po odłączeniu Windows, przy komplecie danych i prawidłowym zasilaniu. ECU zatwierdza zapis po weryfikacji sumy i danych.
+
+SYS-114 określa anulowanie nieukończonego transferu zestawu po utracie Windows i zachowanie dotychczasowych map.
 
 SYS-101: ECU przyjmuje robocze zmiany wybranych wartości aktywnego i nieaktywnych zestawów podczas pracy silnika. Edycja nie przełącza zestawu; zmiany nieaktywnego wpływają na silnik dopiero po jego świadomym wybraniu. Trwały zapis nadal podlega SYS-095. Szczegóły: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 

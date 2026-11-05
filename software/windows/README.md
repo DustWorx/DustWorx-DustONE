@@ -35,7 +35,17 @@ SYS-106: po zaniku zasilania podczas zmiany krytycznej konfiguracji ECU odtwarza
 
 SYS-107: przesłanie i robocze zastąpienie pełnego zestawu map w ECU wymaga zgaszonego silnika, w ramach tej samej konfiguracji silnika. Przygotowanie pliku lokalnie jest odrębną czynnością. Podczas pracy pozostaje edycja dopuszczonych wybranych wartości aktywnego i nieaktywnych zestawów. Brak automatycznego trwałego zapisu; obowiązuje SYS-095. Szczegóły: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 
-SYS-108: aplikacja może zażądać trwałego zapisu wybranego kompletnego zestawu, aktywnego lub nieaktywnego, bez utrwalania roboczych zmian pozostałych, albo wszystkich skonfigurowanych zestawów jednym poleceniem. Obowiązują zgaszony silnik i wyraźne polecenie użytkownika według SYS-095. Spójność wyniku przerwanego zapisu całej grupy pozostaje do wyboru. Szczegóły: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
+SYS-108: aplikacja może zażądać trwałego zapisu wybranego kompletnego zestawu, aktywnego lub nieaktywnego, bez utrwalania roboczych zmian pozostałych, albo wszystkich skonfigurowanych zestawów jednym poleceniem. Obowiązują zgaszony silnik i wyraźne polecenie użytkownika według SYS-095. Po zaniku zasilania ECU odtwarza jedną kompletną wersję grupy (SYS-109). Plik Windows może zawierać sekcje zestawów i map. Format należy do projektu danych. [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
+
+SYS-110 wiąże przyjęcie pełnej podmiany zestawu lub trwałego zapisu map z blokadą rozruchu w ECU. Aplikacja obsługuje dane i status operacji. ECU samodzielnie kończy blokadę po potwierdzeniu poprawnych danych. [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
+
+SYS-111 udostępnia w statusie operacji flagę błędnej sumy kontrolnej pakietu map. Windows może odczytać ją po przywróceniu poprzednich wartości przez ECU. [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
+
+Status z ECU zgodny z SYS-112 odzwierciedla skasowanie flagi po kolejnym zweryfikowanym trwałym zapisie map.
+
+Po utracie sesji przyjęty trwały zapis map z kompletem danych kończy i weryfikuje ECU (SYS-113).
+
+Po anulowaniu nieukończonego transferu map kolejny transfer wymaga przesłania kompletu danych od początku (SYS-114).
 
 SYS-101: Windows może przesyłać do ECU robocze zmiany wybranych wartości aktywnego i nieaktywnych zestawów podczas pracy silnika. Edycja nie przełącza zestawu; nieaktywny zaczyna wpływać na silnik dopiero po jego świadomym wybraniu. Obowiązuje SYS-095 dla trwałego zapisu. Szczegóły: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 
