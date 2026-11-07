@@ -45,3 +45,9 @@ W odpowiedzi na pytanie 79 z 2026-11-01 właściciel przyjął opcjonalny odczyt
 Instrukcja Beta RR 125/200/250/300 2T Standard/Race MY2020 wymienia łączny licznik godzin oraz dwa dodatkowe, kasowalne liczniki A/B: [dokument producenta, s. 25 oraz 28–29](https://betausa.com/content/SUPPORT_PDF%27s/2020%20Beta%20RR%202-Stroke%20Owners%20Manual.pdf).
 
 W odpowiedzi na pytanie 80 i doprecyzowaniu z 2026-11-01 właściciel wybrał całkowite motogodziny oraz ODO, oba odporne na manipulację i bez ustawiania, korekty lub kasowania przez użytkownika końcowego. Zakres zapisują SYS-074–076 i ADR-007 w [PR #11](https://github.com/DustWorx/DustWorx-DustONE/pull/11). Liczniki pomocnicze A/B nie wchodzą do ustalenia. To również jawne wymaganie właściciela, niezależne od sposobu działania fabrycznego wyświetlacza. W odpowiedzi A na pytanie 81 tego samego dnia właściciel zatwierdził chronioną procedurę producenta/serwisu do inicjalizacji nowego ECU i przenoszenia udokumentowanych wartości, z rejestrem każdej operacji. SYS-077 i doprecyzowanie ADR-007 zapisano w [PR #12](https://github.com/DustWorx/DustWorx-DustONE/pull/12). Kryteria naliczania, dokładność, trwałość, mechanizmy ochrony oraz szczegóły tej procedury wymagają projektu.
+
+## Przykład — mapy elektronicznego zaworu wydechowego 2T
+
+KTM opisuje zastosowanie TBI i elektronicznego zaworu wydechowego w gamie EXC 2T MY2024, obejmującej 300 EXC HARDENDURO. [Materiał KTM o gamie EXC MY2024](https://www.ktm.com/en-ca/ktm-world/stories/the-2024-ktm-exc-roars-through-lesotho.html).
+
+W dokumentacji narzędzia strojenia TSP ERM dla KTM 2T TBI opisano osobne korekty położenia zaworu dla białego i zielonego trybu. W DustONE sterowanie zaworem jest przyjęte w SYS-034. Przypisanie jego mapy do zestawu lub danych wspólnych jest otwartą decyzją F02. [Instrukcja TSP ERM, sekcja 6.4, s. 25](https://www.tsp-erm.com/wp-content/uploads/user_guide/ERM-User-Guide-KTM-2T.pdf#page=25).
