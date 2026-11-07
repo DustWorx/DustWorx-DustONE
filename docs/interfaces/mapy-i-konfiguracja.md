@@ -1,6 +1,6 @@
 # Mapy i konfiguracja — operacje F02
 
-Stan na 2026-11-07. **F02 aktywny po zakończeniu kontroli F01 przez właściciela.** Przyjęto ustalenia 101–104 i 108–127. SYS-118 rozdziela przełączane mapy i wspólne nastawy strojenia. Bieżący temat to przypisanie mapy elektronicznego zaworu wydechowego 2T do zestawu lub danych wspólnych. Wymagania SYS-003/007/028/047/094/095/099/100/101/102/103/104/105/106/107/108/109/110/111/112/113/114/115/116/117/118 zawiera [rejestr systemu](../01-zakres-systemu.md). Decyzje zebrano w [ADR-011](../decisions/adr-011-strojenie-na-zywo.md).
+Stan na 2026-11-07. **F02 aktywny po zakończeniu kontroli F01 przez właściciela.** Przyjęto ustalenia 101–104 i 108–128. SYS-119 przypisuje mapę elektronicznego zaworu wydechowego 2T do każdego zestawu w wyposażonych konfiguracjach. Bieżący temat to wykorzystanie TPS w mapie zapłonu wariantów gaźnikowych. Wymagania SYS-003/007/028/047/094/095/099/100/101/102/103/104/105/106/107/108/109/110/111/112/113/114/115/116/117/118/119 zawiera [rejestr systemu](../01-zakres-systemu.md). Decyzje zebrano w [ADR-011](../decisions/adr-011-strojenie-na-zywo.md).
 
 ## Zatwierdzona podstawa
 
@@ -28,6 +28,7 @@ Stan na 2026-11-07. **F02 aktywny po zakończeniu kontroli F01 przez właścicie
 - ECU stosuje grupę roboczych zmian wartości map z jednego polecenia jako całość. Przy błędzie sprawdzenia odrzuca całe polecenie i udostępnia przyczynę w Windows (SYS-116).
 - Przy zgaszonym silniku ECU na polecenie z Windows przywraca wybrany zestaw z poprawnego trwałego zapisu do pamięci roboczej (SYS-117).
 - Przełączenie zestawu wybiera jego mapy. Pojedyncze nastawy strojenia są wspólne w ramach konfiguracji silnika (SYS-118).
+- Każdy zestaw w konfiguracji 2T z elektronicznym zaworem wydechowym ma własną mapę położenia zadanego zaworu (SYS-119).
 - ECU jest właścicielem danych i rozstrzyga wykonanie żądań. Odczyt i edycja w Windows oraz wybór w HMI muszą odzwierciedlać rzeczywiste dane ECU.
 
 „Kompletny zestaw” oznacza komplet map uzgodnionych dla danej konfiguracji. Lista map, osie i wielkości tabel pozostają do specyfikacji. Pojedyncze nastawy strojenia są wspólne według SYS-118. Obsługa paliwa dotyczy odpowiednich konfiguracji wtryskowych; nie dodajemy sterowania wtryskiem do wariantu gaźnikowego.
@@ -36,7 +37,7 @@ Stan na 2026-11-07. **F02 aktywny po zakończeniu kontroli F01 przez właścicie
 
 | Operacja | Co przyjęto | Co pozostaje do określenia |
 | --- | --- | --- |
-| Wybór zestawu z HMI | Dopuszczony także podczas pracy silnika; po restarcie wybierany jest ostatnio wybrany prawidłowy zestaw (SYS-099). ECU używa map wybranego zestawu razem z nastawami wspólnymi (SYS-118). | Warunki i moment/spójność przełączenia, potwierdzenie, mechanizm zapamiętywania wyboru i walidacja. |
+| Wybór zestawu z HMI | Dopuszczony także podczas pracy silnika; po restarcie wybierany jest ostatnio wybrany prawidłowy zestaw (SYS-099). ECU używa map wybranego zestawu razem z nastawami wspólnymi (SYS-118). W wyposażonym 2T wybiera także mapę zaworu wydechowego (SYS-119). | Warunki i moment/spójność przełączenia, potwierdzenie, mechanizm zapamiętywania wyboru i walidacja. |
 | Edycja z Windows i zastosowanie zmian | Dopuszczona robocza edycja wybranych wartości aktywnego i nieaktywnych zestawów podczas pracy. Sama edycja nie przełącza zestawu; zmiany nieaktywnego zestawu wpływają na silnik dopiero po jego świadomym wybraniu (SYS-101). Poprawna grupa zmian z jednego polecenia obowiązuje jako całość. Przy błędzie ECU odrzuca całe polecenie i podaje przyczynę (SYS-116). | Lista pól, zakresy, kryteria sprawdzania danych, częstotliwość i moment zastosowania grupy. |
 | Przywrócenie zapisanego zestawu do pamięci roboczej | Jawne polecenie z Windows przy zgaszonym silniku. ECU sprawdza zapis i odtwarza tylko robocze wartości wybranego zestawu. Brak zapisu lub błędne dane skutkują odrzuceniem z podaniem przyczyny (SYS-117). Obowiązują blokady SYS-110. | Kryteria sprawdzania zapisu, sposób zgłoszenia wyniku i realizacja blokad. |
 | Trwałe zapisanie zmian w ECU | ECU zapisuje wybrany kompletny zestaw albo wszystkie skonfigurowane zestawy na jedno polecenie (SYS-108). Warunki dopuszczenia wynikają z SYS-095, a blokada operacji z SYS-110. | Potwierdzanie zatrzymania, warunki zasilania, mechanizm zapisu, reakcje na przerwanie i raportowanie wyniku. |
@@ -134,7 +135,9 @@ Odpowiedź A na pytanie 126 (2026-11-07) wprowadza jawne przywrócenie wybranego
 
 Odpowiedź A na pytanie 127 (2026-11-07) ustala, że przełączany zestaw zawiera mapy sterowania silnikiem, a pojedyncze nastawy strojenia są wspólne dla wszystkich zestawów danej konfiguracji (SYS-118). Przykładem nastawy wspólnej są docelowe obroty biegu jałowego, jeśli dany wariant udostępnia taką nastawę. Zapis zestawów (SYS-108) i przywrócenie zestawu (SYS-117) obejmują dane map.
 
-**Bieżący temat F02 to przypisanie mapy elektronicznego zaworu wydechowego 2T do zestawu lub danych wspólnych.** [Przykłady enduro](../requirements/weryfikacja-funkcji-enduro.md).
+W odpowiedzi A na pytanie 128 (2026-11-07) właściciel przyjął osobną mapę położenia zadanego elektronicznego zaworu wydechowego dla każdego zestawu w wyposażonych konfiguracjach 2T (SYS-119). Przełączenie wybiera tę mapę wraz z pozostałymi mapami zestawu. Osie mapy zaworu, moment zastosowania i reakcję napędu na zmianę położenia zadanego rozwiniemy w projekcie. [Przykłady enduro](../requirements/weryfikacja-funkcji-enduro.md).
+
+**Bieżący temat F02 to wykorzystanie TPS w mapie zapłonu wariantów gaźnikowych.**
 
 ## Przewidywana weryfikacja
 
@@ -165,5 +168,6 @@ Rozwinięcie grup V02/V04/V06/V09 z [macierzy wymagań](../verification/macierz-
 23. SYS-116. Na stanowisku wysłać jedno polecenie z kilkoma rozróżnialnymi zmianami, z których jedna jest niedopuszczalna. Sprawdzić zachowanie poprzednich wartości i przyczynę odrzucenia w Windows. Następnie wysłać poprawną grupę. Potwierdzić jednoczesne zastosowanie wszystkich jej wartości z perspektywy sterowania i odczytu map. Powtórzyć dla edycji aktywnego i nieaktywnego zestawu podczas pracy. Sprawdzić wybór zestawu według SYS-101 i trwałe dane według SYS-095.
 24. SYS-117. Przygotować różne wartości robocze i zapisane w co najmniej dwóch zestawach. Przy zgaszonym silniku zlecić przywrócenie jednego zestawu, osobno aktywnego i nieaktywnego. Porównać jego wartości robocze z zapisem. Sprawdzić pozostałe zestawy, trwałe dane, aktywny wybór, zachowanie bieżącej sesji ECU oraz blokady według SYS-110. Sprawdzić odrzucenie żądania przy pracującym silniku. Przy zgaszonym silniku osobno zasymulować brak zapisu i błąd sprawdzenia zapisu. W obu przypadkach potwierdzić zachowanie wartości roboczych i zgłoszenie przyczyny odrzucenia.
 25. SYS-118. Przygotować dwa zestawy z różnymi wartościami map oraz nastawę wspólną w wybranej konfiguracji. Przełączyć zestawy z HMI w obu kierunkach i potwierdzić używanie map aktywnego zestawu oraz tej samej nastawy wspólnej. Przy zgaszonym silniku wykonać zapis jednego zestawu, zapis wszystkich oraz przywrócenie wybranego. Po każdej operacji porównać wartości map i nastawy wspólnej z oczekiwanym stanem.
+26. SYS-119. W konfiguracji 2T z elektronicznym zaworem przygotować dwa zestawy z różnymi mapami położenia zadanego i co najmniej jedną inną różniącą się mapą silnika. Przy tych samych symulowanych sygnałach wejściowych przełączyć zestawy z HMI w obu kierunkach. Sprawdzić, czy ECU wyznacza położenie zadane z mapy wybranego zestawu i jednocześnie wybiera jego pozostałe mapy. Sprawdzić działanie zestawów w wariancie bez elektronicznego zaworu według SYS-034.
 
 Kryteria liczbowe, połączenia, kroki i warunki przerwania powstaną przed wykonaniem prób. Brak implementacji i wyników produktu.

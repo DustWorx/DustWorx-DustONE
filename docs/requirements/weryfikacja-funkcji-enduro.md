@@ -50,4 +50,8 @@ W odpowiedzi na pytanie 80 i doprecyzowaniu z 2026-11-01 właściciel wybrał ca
 
 KTM opisuje zastosowanie TBI i elektronicznego zaworu wydechowego w gamie EXC 2T MY2024, obejmującej 300 EXC HARDENDURO. [Materiał KTM o gamie EXC MY2024](https://www.ktm.com/en-ca/ktm-world/stories/the-2024-ktm-exc-roars-through-lesotho.html).
 
-W dokumentacji narzędzia strojenia TSP ERM dla KTM 2T TBI opisano osobne korekty położenia zaworu dla białego i zielonego trybu. W DustONE sterowanie zaworem jest przyjęte w SYS-034. Przypisanie jego mapy do zestawu lub danych wspólnych jest otwartą decyzją F02. [Instrukcja TSP ERM, sekcja 6.4, s. 25](https://www.tsp-erm.com/wp-content/uploads/user_guide/ERM-User-Guide-KTM-2T.pdf#page=25).
+W dokumentacji narzędzia strojenia TSP ERM dla KTM 2T TBI opisano osobne korekty położenia zaworu dla białego i zielonego trybu. W DustONE sterowanie zaworem jest przyjęte w SYS-034. W odpowiedzi A na pytanie 128 (2026-11-07) właściciel przyjął odrębną mapę zaworu dla każdego zestawu wyposażonej konfiguracji 2T (SYS-119). [Instrukcja TSP ERM, sekcja 6.4, s. 25](https://www.tsp-erm.com/wp-content/uploads/user_guide/ERM-User-Guide-KTM-2T.pdf#page=25).
+
+## Przykład — TPS w mapie zapłonu gaźnikowego enduro
+
+W instrukcji Yamaha WR450F MY2003 opisano zapłon CDI, który wyznacza kąt zapłonu z prędkości obrotowej silnika oraz otwarcia przepustnicy mierzonego przez TPS. W DustONE decyzja F02 dotyczy użycia TPS jako osi mapy zapłonu w wyposażonych wariantach gaźnikowych. Brak TPS w referencyjnej Becie potwierdził właściciel w odpowiedzi na pytanie 45. [Instrukcja serwisowa Yamaha WR450F MY2003, rozdział Map-Controlled CDI Unit](https://www.manualslib.mx/manual/564547/Yamaha-Wr450F-2003.html?page=644).
