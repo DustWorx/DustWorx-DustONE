@@ -1,6 +1,6 @@
 # Mapy i konfiguracja — operacje F02
 
-Stan na 2026-11-07. **F02 aktywny po zakończeniu kontroli F01 przez właściciela.** Przyjęto ustalenia 101–104 i 108–128. SYS-119 przypisuje mapę elektronicznego zaworu wydechowego 2T do każdego zestawu w wyposażonych konfiguracjach. Bieżący temat to wykorzystanie TPS w mapie zapłonu wariantów gaźnikowych. Wymagania SYS-003/007/028/047/094/095/099/100/101/102/103/104/105/106/107/108/109/110/111/112/113/114/115/116/117/118/119 zawiera [rejestr systemu](../01-zakres-systemu.md). Decyzje zebrano w [ADR-011](../decisions/adr-011-strojenie-na-zywo.md).
+Stan na 2026-11-07. **F02 aktywny po zakończeniu kontroli F01 przez właściciela.** Przyjęto ustalenia 101–104 i 108–129. SYS-120 określa osie bazowej mapy zapłonu dla gaźnika. Bieżący temat to zachowanie zapłonu w gaźnikowej konfiguracji po potwierdzonej usterce TPS. Wymagania SYS-003/007/028/047/094/095/099/100/101/102/103/104/105/106/107/108/109/110/111/112/113/114/115/116/117/118/119/120 zawiera [rejestr systemu](../01-zakres-systemu.md). Decyzje zebrano w [ADR-011](../decisions/adr-011-strojenie-na-zywo.md).
 
 ## Zatwierdzona podstawa
 
@@ -29,6 +29,7 @@ Stan na 2026-11-07. **F02 aktywny po zakończeniu kontroli F01 przez właścicie
 - Przy zgaszonym silniku ECU na polecenie z Windows przywraca wybrany zestaw z poprawnego trwałego zapisu do pamięci roboczej (SYS-117).
 - Przełączenie zestawu wybiera jego mapy. Pojedyncze nastawy strojenia są wspólne w ramach konfiguracji silnika (SYS-118).
 - Każdy zestaw w konfiguracji 2T z elektronicznym zaworem wydechowym ma własną mapę położenia zadanego zaworu (SYS-119).
+- Dla gaźnika bez TPS zestaw zawiera bazową krzywą zapłonu od obrotów, a dla gaźnika z TPS mapę od obrotów i położenia przepustnicy (SYS-120).
 - ECU jest właścicielem danych i rozstrzyga wykonanie żądań. Odczyt i edycja w Windows oraz wybór w HMI muszą odzwierciedlać rzeczywiste dane ECU.
 
 „Kompletny zestaw” oznacza komplet map uzgodnionych dla danej konfiguracji. Lista map, osie i wielkości tabel pozostają do specyfikacji. Pojedyncze nastawy strojenia są wspólne według SYS-118. Obsługa paliwa dotyczy odpowiednich konfiguracji wtryskowych; nie dodajemy sterowania wtryskiem do wariantu gaźnikowego.
@@ -137,7 +138,11 @@ Odpowiedź A na pytanie 127 (2026-11-07) ustala, że przełączany zestaw zawier
 
 W odpowiedzi A na pytanie 128 (2026-11-07) właściciel przyjął osobną mapę położenia zadanego elektronicznego zaworu wydechowego dla każdego zestawu w wyposażonych konfiguracjach 2T (SYS-119). Przełączenie wybiera tę mapę wraz z pozostałymi mapami zestawu. Osie mapy zaworu, moment zastosowania i reakcję napędu na zmianę położenia zadanego rozwiniemy w projekcie. [Przykłady enduro](../requirements/weryfikacja-funkcji-enduro.md).
 
-**Bieżący temat F02 to wykorzystanie TPS w mapie zapłonu wariantów gaźnikowych.**
+## Bazowa mapa zapłonu gaźnika
+
+Odpowiedź A na pytanie 129 (2026-11-07) ustala bazową krzywą wyprzedzenia zapłonu według obrotów w konfiguracji bez TPS i mapę według obrotów oraz położenia przepustnicy w konfiguracji z TPS (SYS-120). Każdy zestaw ma własne wartości bazowe. Referencyjna Beta korzysta z wariantu bez TPS. Zasada dotyczy normalnej pracy obu konfiguracji. Punkty osi, rozdzielczość i sposób wyznaczania wartości pomiędzy punktami określimy w projekcie. [Przykłady enduro](../requirements/weryfikacja-funkcji-enduro.md).
+
+**Bieżący temat F02 to zachowanie zapłonu w gaźnikowej konfiguracji po potwierdzonej usterce TPS.**
 
 ## Przewidywana weryfikacja
 
@@ -169,5 +174,6 @@ Rozwinięcie grup V02/V04/V06/V09 z [macierzy wymagań](../verification/macierz-
 24. SYS-117. Przygotować różne wartości robocze i zapisane w co najmniej dwóch zestawach. Przy zgaszonym silniku zlecić przywrócenie jednego zestawu, osobno aktywnego i nieaktywnego. Porównać jego wartości robocze z zapisem. Sprawdzić pozostałe zestawy, trwałe dane, aktywny wybór, zachowanie bieżącej sesji ECU oraz blokady według SYS-110. Sprawdzić odrzucenie żądania przy pracującym silniku. Przy zgaszonym silniku osobno zasymulować brak zapisu i błąd sprawdzenia zapisu. W obu przypadkach potwierdzić zachowanie wartości roboczych i zgłoszenie przyczyny odrzucenia.
 25. SYS-118. Przygotować dwa zestawy z różnymi wartościami map oraz nastawę wspólną w wybranej konfiguracji. Przełączyć zestawy z HMI w obu kierunkach i potwierdzić używanie map aktywnego zestawu oraz tej samej nastawy wspólnej. Przy zgaszonym silniku wykonać zapis jednego zestawu, zapis wszystkich oraz przywrócenie wybranego. Po każdej operacji porównać wartości map i nastawy wspólnej z oczekiwanym stanem.
 26. SYS-119. W konfiguracji 2T z elektronicznym zaworem przygotować dwa zestawy z różnymi mapami położenia zadanego i co najmniej jedną inną różniącą się mapą silnika. Przy tych samych symulowanych sygnałach wejściowych przełączyć zestawy z HMI w obu kierunkach. Sprawdzić, czy ECU wyznacza położenie zadane z mapy wybranego zestawu i jednocześnie wybiera jego pozostałe mapy. Sprawdzić działanie zestawów w wariancie bez elektronicznego zaworu według SYS-034.
+27. SYS-120. Na stanowisku przygotować rozróżnialne wartości zapłonu w dwóch zestawach. W wariancie gaźnikowym bez TPS zmieniać symulowane obroty i sprawdzić bazowy kąt z krzywej aktywnego zestawu przy niepodłączonym TPS. W wariancie z TPS zmienić położenie przepustnicy przy stałych obrotach oraz obroty przy stałym położeniu. Porównać bazowy kąt z mapą i powtórzyć próby po przełączeniu zestawu.
 
 Kryteria liczbowe, połączenia, kroki i warunki przerwania powstaną przed wykonaniem prób. Brak implementacji i wyników produktu.

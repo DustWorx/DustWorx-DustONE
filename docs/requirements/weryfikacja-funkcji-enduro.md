@@ -54,4 +54,8 @@ W dokumentacji narzędzia strojenia TSP ERM dla KTM 2T TBI opisano osobne korekt
 
 ## Przykład — TPS w mapie zapłonu gaźnikowego enduro
 
-W instrukcji Yamaha WR450F MY2003 opisano zapłon CDI, który wyznacza kąt zapłonu z prędkości obrotowej silnika oraz otwarcia przepustnicy mierzonego przez TPS. W DustONE decyzja F02 dotyczy użycia TPS jako osi mapy zapłonu w wyposażonych wariantach gaźnikowych. Brak TPS w referencyjnej Becie potwierdził właściciel w odpowiedzi na pytanie 45. [Instrukcja serwisowa Yamaha WR450F MY2003, rozdział Map-Controlled CDI Unit](https://www.manualslib.mx/manual/564547/Yamaha-Wr450F-2003.html?page=644).
+W instrukcji Yamaha WR450F MY2003 opisano zapłon CDI, który wyznacza kąt zapłonu z prędkości obrotowej silnika oraz otwarcia przepustnicy mierzonego przez TPS. W odpowiedzi A na pytanie 129 (2026-11-07) właściciel przyjął dla gaźnika krzywą obrotową bez TPS albo mapę od obrotów i położenia przepustnicy z TPS (SYS-120). Brak TPS w referencyjnej Becie potwierdził właściciel w odpowiedzi na pytanie 45. [Instrukcja serwisowa Yamaha WR450F MY2003, rozdział Map-Controlled CDI Unit](https://www.manualslib.mx/manual/564547/Yamaha-Wr450F-2003.html?page=644).
+
+## Przykład — praca po wykryciu usterki TPS
+
+Instrukcja wtryskowej Yamaha WR450FB MY2012 przewiduje rozruch i jazdę w trybie awaryjnym po wykryciu przerwy lub zwarcia obwodu TPS. To przykład zachowania motocykla enduro po utracie sygnału. Reakcja w gaźnikowym wariancie DustONE korzystającym z TPS jest otwartą decyzją F02. [Instrukcja serwisowa Yamaha WR450FB, nr 1DX-28199-10, kod 15, s. 9-37](https://www.motopetersburg.ru/docs/yamaha-wr450FB-2012-2015-owners-service-manual.pdf).

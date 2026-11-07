@@ -57,6 +57,8 @@ Zakres danych przełączanego zestawu obejmuje mapy. Pojedyncze nastawy strojeni
 
 W konfiguracji 2T z elektronicznym zaworem wydechowym dane zestawu obejmują jego mapę położenia zadanego (SYS-119).
 
+Zestawy map zapłonu gaźnika używają krzywej obrotowej w wariancie bez TPS i mapy od obrotów oraz położenia przepustnicy w wariancie z TPS (SYS-120).
+
 SYS-101: Windows może przesyłać do ECU robocze zmiany wybranych wartości aktywnego i nieaktywnych zestawów podczas pracy silnika. Edycja nie przełącza zestawu; nieaktywny zaczyna wpływać na silnik dopiero po jego świadomym wybraniu. Obowiązuje SYS-095 dla trwałego zapisu. Szczegóły: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 
 SYS-099: wybór zestawu po restarcie realizuje ECU, również bez HMI/PC; jest to ostatnio wybrany prawidłowy zestaw spośród trwale zapisanych. Aplikacja po połączeniu odczytuje rzeczywisty stan. Po prawidłowym śnie/wybudzeniu niezapisane zmiany zostają odrzucone zgodnie z SYS-100. Uzgodnienie po powrocie sesji i walidacja danych pozostają do określenia w [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
