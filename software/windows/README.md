@@ -49,6 +49,8 @@ Po anulowaniu nieukończonego transferu map kolejny transfer wymaga przesłania 
 
 Po ponownym połączeniu z działającym ECU Windows może odczytać stan map roboczych i zapisanych, flagę błędu sumy oraz status operacji rozpoczętej przed rozłączeniem (SYS-115).
 
+Dla polecenia z grupą zmian wartości map wynik ECU dotyczy całej grupy. Przy odrzuceniu Windows może odczytać przyczynę (SYS-116).
+
 SYS-101: Windows może przesyłać do ECU robocze zmiany wybranych wartości aktywnego i nieaktywnych zestawów podczas pracy silnika. Edycja nie przełącza zestawu; nieaktywny zaczyna wpływać na silnik dopiero po jego świadomym wybraniu. Obowiązuje SYS-095 dla trwałego zapisu. Szczegóły: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 
 SYS-099: wybór zestawu po restarcie realizuje ECU, również bez HMI/PC; jest to ostatnio wybrany prawidłowy zestaw spośród trwale zapisanych. Aplikacja po połączeniu odczytuje rzeczywisty stan. Po prawidłowym śnie/wybudzeniu niezapisane zmiany zostają odrzucone zgodnie z SYS-100. Uzgodnienie po powrocie sesji i walidacja danych pozostają do określenia w [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
