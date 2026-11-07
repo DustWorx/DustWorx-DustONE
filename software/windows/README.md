@@ -51,6 +51,8 @@ Po ponownym połączeniu z działającym ECU Windows może odczytać stan map ro
 
 Dla polecenia z grupą zmian wartości map wynik ECU dotyczy całej grupy. Przy odrzuceniu Windows może odczytać przyczynę (SYS-116).
 
+Windows może zlecić przywrócenie zapisanej wersji wybranego zestawu do pamięci roboczej ECU. Warunek zgaszonego silnika sprawdza ECU (SYS-117).
+
 SYS-101: Windows może przesyłać do ECU robocze zmiany wybranych wartości aktywnego i nieaktywnych zestawów podczas pracy silnika. Edycja nie przełącza zestawu; nieaktywny zaczyna wpływać na silnik dopiero po jego świadomym wybraniu. Obowiązuje SYS-095 dla trwałego zapisu. Szczegóły: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 
 SYS-099: wybór zestawu po restarcie realizuje ECU, również bez HMI/PC; jest to ostatnio wybrany prawidłowy zestaw spośród trwale zapisanych. Aplikacja po połączeniu odczytuje rzeczywisty stan. Po prawidłowym śnie/wybudzeniu niezapisane zmiany zostają odrzucone zgodnie z SYS-100. Uzgodnienie po powrocie sesji i walidacja danych pozostają do określenia w [F02](../../docs/interfaces/mapy-i-konfiguracja.md).

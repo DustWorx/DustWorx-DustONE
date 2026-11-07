@@ -1,6 +1,6 @@
 # Mapy i konfiguracja — operacje F02
 
-Stan na 2026-11-07. **F02 aktywny po zakończeniu kontroli F01 przez właściciela.** Przyjęto ustalenia 101–104 i 108–125. SYS-116 określa grupowe stosowanie zmian wartości map. Bieżący temat to cofnięcie niezapisanych zmian wybranego zestawu map. Wymagania SYS-003/007/028/047/094/095/099/100/101/102/103/104/105/106/107/108/109/110/111/112/113/114/115/116 zawiera [rejestr systemu](../01-zakres-systemu.md). Decyzje zebrano w [ADR-011](../decisions/adr-011-strojenie-na-zywo.md).
+Stan na 2026-11-07. **F02 aktywny po zakończeniu kontroli F01 przez właściciela.** Przyjęto ustalenia 101–104 i 108–126. SYS-117 określa przywrócenie zapisanej wersji wybranego zestawu przy zgaszonym silniku. Bieżący temat to zakres danych należących do zestawu map. Wymagania SYS-003/007/028/047/094/095/099/100/101/102/103/104/105/106/107/108/109/110/111/112/113/114/115/116/117 zawiera [rejestr systemu](../01-zakres-systemu.md). Decyzje zebrano w [ADR-011](../decisions/adr-011-strojenie-na-zywo.md).
 
 ## Zatwierdzona podstawa
 
@@ -26,6 +26,7 @@ Stan na 2026-11-07. **F02 aktywny po zakończeniu kontroli F01 przez właścicie
 - Po utracie Windows podczas nieukończonego transferu do roboczej podmiany ECU odrzuca odebraną część i zachowuje dotychczasowe poprawne mapy (SYS-114).
 - Po ponownym połączeniu Windows z działającym ECU można odczytać bieżący stan map roboczych i zapisanych, flagę błędu sumy oraz status operacji rozpoczętej przed rozłączeniem (SYS-115).
 - ECU stosuje grupę roboczych zmian wartości map z jednego polecenia jako całość. Przy błędzie sprawdzenia odrzuca całe polecenie i udostępnia przyczynę w Windows (SYS-116).
+- Przy zgaszonym silniku ECU na polecenie z Windows przywraca wybrany zestaw z poprawnego trwałego zapisu do pamięci roboczej (SYS-117).
 - ECU jest właścicielem danych i rozstrzyga wykonanie żądań. Odczyt i edycja w Windows oraz wybór w HMI muszą odzwierciedlać rzeczywiste dane ECU.
 
 „Kompletny zestaw” oznacza komplet map uzgodnionych dla danej konfiguracji. Lista map, osie, wielkości tabel i podział między mapy a wspólne parametry silnika pozostają do specyfikacji. Obsługa paliwa dotyczy odpowiednich konfiguracji wtryskowych; nie dodajemy sterowania wtryskiem do wariantu gaźnikowego.
@@ -36,6 +37,7 @@ Stan na 2026-11-07. **F02 aktywny po zakończeniu kontroli F01 przez właścicie
 | --- | --- | --- |
 | Wybór zestawu z HMI | Dopuszczony także podczas pracy silnika; po restarcie wybierany jest ostatnio wybrany prawidłowy zestaw (SYS-099). | Warunki i moment/spójność przełączenia, potwierdzenie, mechanizm zapamiętywania wyboru i walidacja. |
 | Edycja z Windows i zastosowanie zmian | Dopuszczona robocza edycja wybranych wartości aktywnego i nieaktywnych zestawów podczas pracy. Sama edycja nie przełącza zestawu; zmiany nieaktywnego zestawu wpływają na silnik dopiero po jego świadomym wybraniu (SYS-101). Poprawna grupa zmian z jednego polecenia obowiązuje jako całość. Przy błędzie ECU odrzuca całe polecenie i podaje przyczynę (SYS-116). | Lista pól, zakresy, kryteria sprawdzania danych, częstotliwość i moment zastosowania grupy. |
+| Przywrócenie zapisanego zestawu do pamięci roboczej | Jawne polecenie z Windows przy zgaszonym silniku. ECU sprawdza zapis i odtwarza tylko robocze wartości wybranego zestawu. Brak zapisu lub błędne dane skutkują odrzuceniem z podaniem przyczyny (SYS-117). Obowiązują blokady SYS-110. | Kryteria sprawdzania zapisu, sposób zgłoszenia wyniku i realizacja blokad. |
 | Trwałe zapisanie zmian w ECU | ECU zapisuje wybrany kompletny zestaw albo wszystkie skonfigurowane zestawy na jedno polecenie (SYS-108). Warunki dopuszczenia wynikają z SYS-095, a blokada operacji z SYS-110. | Potwierdzanie zatrzymania, warunki zasilania, mechanizm zapisu, reakcje na przerwanie i raportowanie wyniku. |
 | Utrata Windows podczas przyjętego trwałego zapisu map | Z kompletem danych i przy prawidłowym zasilaniu ECU kończy zapis samodzielnie. Zatwierdzenie wymaga zgodnej sumy i poprawnych danych odczytanych po zapisie (SYS-113). Błąd sumy przy dostępnym poprzednim poprawnym zapisie podlega SYS-111. | Wykrycie utraty sesji. Status po powrocie połączenia podlega SYS-115. |
 | Powrót zasilania po przerwaniu zapisu wszystkich zestawów | ECU przyjmuje nową grupę po sprawdzeniu sumy całego pakietu, kompletności i zgodności z konfiguracją silnika. W razie błędu odtwarza całą poprzednią poprawną grupę (SYS-109). | Format, zapis sumy oczekiwanej i sposób zachowania poprzedniej wersji. |
@@ -123,7 +125,11 @@ Odpowiedź A na pytanie 124 (2026-11-07) określa zakres odczytu po rozłączeni
 
 Odpowiedź A na pytanie 125 (2026-11-07) określa wspólne sprawdzenie i zastosowanie zmian z jednego polecenia (SYS-116). ECU udostępnia sterowaniu poprzednie wartości do chwili zastosowania całej poprawnej grupy. Przy błędzie dotychczasowe wartości pozostają w użyciu, a Windows otrzymuje przyczynę odrzucenia. Zakres edycji podczas pracy i warunki trwałego zapisu wynikają z SYS-094/101 i SYS-095. Kryteria sprawdzania oraz moment zastosowania grupy wymagają określenia.
 
-**Bieżący temat F02 to cofnięcie niezapisanych zmian wybranego zestawu map.**
+## Przywrócenie zapisanego zestawu
+
+Odpowiedź A na pytanie 126 (2026-11-07) wprowadza jawne przywrócenie wybranego zestawu z Windows po zgaszeniu silnika, przy włączonym ECU (SYS-117). ECU sprawdza zapisaną wersję i wczytuje ją jako wartości robocze wybranego zestawu. Źródłem jest zapis już przechowywany w ECU. Przy braku zapisu lub błędzie sprawdzenia ECU zachowuje dotychczasowe wartości i zgłasza przyczynę odrzucenia. Przywrócenie jest pełną roboczą podmianą, więc stosuje blokady i ponowne dopuszczenie rozruchu według SYS-110.
+
+**Bieżący temat F02 to zakres danych należących do zestawu map.**
 
 ## Przewidywana weryfikacja
 
@@ -152,5 +158,6 @@ Rozwinięcie grup V02/V04/V06/V09 z [macierzy wymagań](../verification/macierz-
 21. SYS-114. Przygotować poprawne mapy robocze różniące się od zapisanych. Przy zgaszonym silniku rozpocząć transfer pełnego zestawu i odłączyć Windows przed jego końcem. Sprawdzić anulowanie, zachowanie map roboczych i trwale zapisanych oraz wyboru zestawu. Zweryfikować zwolnienie blokad po potwierdzeniu poprawnych danych i wymóg nowej próby rozruchu (SYS-110). Po powrocie połączenia potwierdzić, że do roboczej podmiany trzeba przesłać zestaw od początku.
 22. SYS-115. Przy ciągłej pracy ECU odłączyć Windows w trakcie zapisu i przywrócić połączenie przed jego zakończeniem. Sprawdzić status „w toku”. W osobnych próbach przywrócić połączenie po poprawnym zapisie, anulowaniu niepełnego transferu oraz błędzie sumy zapisu zakończonym odzyskaniem poprzednich map. W każdej próbie sprawdzić zgodność zgłoszonego statusu z przebiegiem operacji oraz odczytać mapy robocze, zapisane i flagę błędu według SYS-111 i SYS-112.
 23. SYS-116. Na stanowisku wysłać jedno polecenie z kilkoma rozróżnialnymi zmianami, z których jedna jest niedopuszczalna. Sprawdzić zachowanie poprzednich wartości i przyczynę odrzucenia w Windows. Następnie wysłać poprawną grupę. Potwierdzić jednoczesne zastosowanie wszystkich jej wartości z perspektywy sterowania i odczytu map. Powtórzyć dla edycji aktywnego i nieaktywnego zestawu podczas pracy. Sprawdzić wybór zestawu według SYS-101 i trwałe dane według SYS-095.
+24. SYS-117. Przygotować różne wartości robocze i zapisane w co najmniej dwóch zestawach. Przy zgaszonym silniku zlecić przywrócenie jednego zestawu, osobno aktywnego i nieaktywnego. Porównać jego wartości robocze z zapisem. Sprawdzić pozostałe zestawy, trwałe dane, aktywny wybór, zachowanie bieżącej sesji ECU oraz blokady według SYS-110. Sprawdzić odrzucenie żądania przy pracującym silniku. Przy zgaszonym silniku osobno zasymulować brak zapisu i błąd sprawdzenia zapisu. W obu przypadkach potwierdzić zachowanie wartości roboczych i zgłoszenie przyczyny odrzucenia.
 
 Kryteria liczbowe, połączenia, kroki i warunki przerwania powstaną przed wykonaniem prób. Brak implementacji i wyników produktu.
