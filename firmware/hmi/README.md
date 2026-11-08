@@ -8,4 +8,4 @@ Po wykryciu obrotów przedniego koła ECU wybudza również HMI (SYS-080). Nalic
 
 SYS-086: przy próbie włączenia odbiornika objętego aktywnym odcięciem oszczędzania, przy zgaszonym silniku HMI wyświetla odmowę i informację „Wymagane uruchomienie silnika”. Źródłem decyzji jest ECU (SYS-085); panel nie znosi blokady lokalną zmianą stanu. Gdy silnik już pracuje, a warunek napięcia/czasu z SYS-087 nadal nie jest spełniony, HMI powinno przedstawiać aktualny powód dalszej blokady. Proponowany opis: „Oczekiwanie na stabilne zasilanie”. Aktualność statusów, kodowanie przyczyny i dokładny opis tego stanu wymagają specyfikacji: [analiza i plan prób](../../docs/architecture/oszczedzanie-energii.md).
 
-HMI wyświetla przyczynę odrzucenia zmiany zestawu map otrzymaną z ECU podczas pracy awaryjnej (SYS-135). Szczegóły scenariusza i próby zawiera [specyfikacja F02](../../docs/interfaces/mapy-i-konfiguracja.md).
+HMI wyświetla przyczynę odrzucenia zmiany zestawu map otrzymaną z ECU po usterce wymagającej pracy awaryjnej lub zatrzymania silnika (SYS-135 i SYS-137). Szczegóły scenariusza i próby zawiera [specyfikacja F02](../../docs/interfaces/mapy-i-konfiguracja.md).
