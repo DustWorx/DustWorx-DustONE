@@ -1,6 +1,6 @@
 # Mapy i konfiguracja — operacje F02
 
-Stan na 2026-11-08. **F02 aktywny po zakończeniu kontroli F01 przez właściciela.** Przyjęto ustalenia 101–104 i 108–142. SYS-133 określa regułę domyślną po utracie jedynego pomiaru obciążenia oraz warunki dopuszczenia wyjątku. Bieżący temat to dopuszczalny zakres wyjątku po utracie jedynego pomiaru obciążenia, w tym możliwość rozruchu. Wymagania SYS-003/007/028/047/094/095/099/100/101/102/103/104/105/106/107/108/109/110/111/112/113/114/115/116/117/118/119/120/121/122/123/124/125/126/127/128/129/130/131/132/133 zawiera [rejestr systemu](../01-zakres-systemu.md). Decyzje zebrano w [ADR-011](../decisions/adr-011-strojenie-na-zywo.md).
+Stan na 2026-11-08. **F02 aktywny po zakończeniu kontroli F01 przez właściciela.** Przyjęto ustalenia 101–104 i 108–143. SYS-134 ustala odrębne dopuszczenie rozruchu dla wyjątku po utracie jedynego pomiaru. Bieżący temat to obsługa żądania zmiany zestawu map podczas pracy na kalibracji awaryjnej. Wymagania SYS-003/007/028/047/094/095/099/100/101/102/103/104/105/106/107/108/109/110/111/112/113/114/115/116/117/118/119/120/121/122/123/124/125/126/127/128/129/130/131/132/133/134 zawiera [rejestr systemu](../01-zakres-systemu.md). Decyzje zebrano w [ADR-011](../decisions/adr-011-strojenie-na-zywo.md).
 
 ## Zatwierdzona podstawa
 
@@ -43,6 +43,7 @@ Stan na 2026-11-08. **F02 aktywny po zakończeniu kontroli F01 przez właścicie
 - Przy jednej potwierdzonej usterce pomiaru obciążenia ECU dopuszcza rozruch na kalibracji właściwej dla tej usterki, zweryfikowanej do rozruchu, gdy pozostałe wymagane sygnały są wiarygodne i spełnione są pozostałe warunki. ECU zgłasza usterkę (SYS-131).
 - Przy utracie obu wymaganych pomiarów ECU realizuje kontrolowane zatrzymanie i blokuje rozruch. Po zatrzymaniu i odzyskaniu jednego pomiaru ECU dopuszcza nową świadomą próbę, jeśli spełniono warunki SYS-131 dla pozostałej usterki (SYS-132).
 - Po utracie jedynego wymaganego pomiaru obciążenia ECU domyślnie zatrzymuje pracujący silnik i blokuje rozruch. Wyjątek dla konkretnego silnika wymaga dokumentacji OEM i potwierdzenia na DustONE (SYS-133).
+- Rozruch w ramach wyjątku wymaga dokumentacji OEM dotyczącej rozruchu, odrębnej próby na DustONE oraz spełnienia pozostałych warunków rozruchu (SYS-134).
 - ECU jest właścicielem danych i rozstrzyga wykonanie żądań. Odczyt i edycja w Windows oraz wybór w HMI muszą odzwierciedlać rzeczywiste dane ECU.
 
 „Kompletny zestaw” oznacza komplet map uzgodnionych dla danej konfiguracji. Lista map, osie i wielkości tabel pozostają do specyfikacji. Pojedyncze nastawy strojenia są wspólne według SYS-118. Obsługa paliwa dotyczy odpowiednich konfiguracji wtryskowych; nie dodajemy sterowania wtryskiem do wariantu gaźnikowego.
@@ -191,7 +192,9 @@ Odpowiedź A na pytanie 141 (2026-11-08) obejmuje stan, w którym zarówno TPS, 
 
 Odpowiedź B na pytanie 142 (2026-11-08) ustala dla profilu z jednym wymaganym pomiarem obciążenia kontrolowane zatrzymanie i blokadę rozruchu do odzyskania wiarygodnego pomiaru. Wyjątek można dopuścić dla konkretnego silnika po potwierdzeniu zakresu przez dokumentację OEM i próby DustONE (SYS-133). Reguła domyślna obowiązuje do udokumentowanego dopuszczenia wyjątku.
 
-**Bieżący temat F02 to dopuszczalny zakres wyjątku po utracie jedynego pomiaru obciążenia, w tym możliwość rozruchu.**
+Odpowiedź A na pytanie 143 (2026-11-08) ustala osobne dopuszczenie rozruchu dla wyjątku według SYS-133. Dokumentacja OEM musi obejmować rozruch bez tego pomiaru, a odrębna próba na DustONE ma go potwierdzić. Wyjątek ograniczony do dalszej pracy pozostawia blokadę rozruchu do odzyskania wiarygodnego pomiaru (SYS-134).
+
+**Bieżący temat F02 to obsługa żądania zmiany zestawu map podczas pracy na kalibracji awaryjnej.**
 
 ## Przewidywana weryfikacja
 
@@ -237,5 +240,6 @@ Rozwinięcie grup V02/V04/V06/V09 z [macierzy wymagań](../verification/macierz-
 38. SYS-131. Na stanowisku wykonać osobne próby rozruchu z potwierdzoną usterką TPS i właściwego pomiaru ciśnienia w profilu według SYS-127. Przy wiarygodnych pozostałych sygnałach i spełnionych pozostałych warunkach sprawdzić dopuszczenie rozruchu, sterowanie dawką i zapłonem według właściwej kalibracji zweryfikowanej do rozruchu oraz zgłoszenie usterki. Sprawdzić odmowę uruchomienia osobno z kalibracją zweryfikowaną wyłącznie do pracy już uruchomionego silnika i przy aktywnej blokadzie rozruchu mimo poprawnej kalibracji rozruchowej.
 39. SYS-132. Na stanowisku zasymulować utratę obu pomiarów podczas pracy nominalnej oraz osobno utratę pozostałego pomiaru podczas pracy awaryjnej. Sprawdzić kontrolowane zatrzymanie według kryteriów profilu i blokadę rozruchu, gdy oba pomiary są niewiarygodne. Po zatrzymaniu w osobnych próbach przywrócić wiarygodność tylko TPS oraz tylko pomiaru ciśnienia. Przy spełnieniu SYS-131 potwierdzić rozruch wyłącznie na nową świadomą próbę. Sprawdzić utrzymanie blokady, gdy dla nadal uszkodzonego pomiaru kalibracja nie jest zweryfikowana do rozruchu.
 40. SYS-133. Na stanowisku zasymulować usterkę jedynego wymaganego pomiaru w profilu bez dopuszczonego wyjątku. Sprawdzić kontrolowane zatrzymanie oraz blokadę rozruchu do potwierdzenia wiarygodności pomiaru. Po jej odzyskaniu sprawdzić dopuszczenie nowej próby przy spełnieniu pozostałych warunków. Przy zgłoszeniu wyjątku zweryfikować zgodność konfiguracji silnika, dokumentację OEM i wyniki prób DustONE dla proponowanego zakresu. Sprawdzić działanie reguły domyślnej w przypadku braku każdego z dwóch dowodów z osobna.
+41. SYS-134. Dla kandydata do wyjątku obejmującego rozruch sprawdzić dokumentację OEM dotyczącą rozruchu bez pomiaru i wykonać odrębną próbę rozruchu na DustONE w granicach proponowanego dopuszczenia. Na stanowisku sprawdzić dopuszczenie nowej świadomej próby po spełnieniu wszystkich warunków. Powtórzyć z wyjątkiem obejmującym wyłącznie dalszą pracę, z brakiem każdego z dowodów dla rozruchu z osobna oraz z aktywną blokadą mimo dopuszczonego wyjątku rozruchowego. W każdym z tych przypadków rozruch ma pozostać zablokowany.
 
 Kryteria liczbowe, połączenia, kroki i warunki przerwania powstaną przed wykonaniem prób. Brak implementacji i wyników produktu.
