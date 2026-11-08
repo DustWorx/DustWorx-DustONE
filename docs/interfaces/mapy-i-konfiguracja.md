@@ -1,6 +1,6 @@
 # Mapy i konfiguracja — operacje F02
 
-Stan na 2026-11-08. **F02 aktywny po zakończeniu kontroli F01 przez właściciela.** Przyjęto ustalenia 101–104 i 108–133. SYS-124 określa dopuszczenie rozruchu gaźnika z usterką TPS. Bieżący temat to wybór osi obciążenia bazowej mapy dawki paliwa we wtrysku 2T i 4T. Wymagania SYS-003/007/028/047/094/095/099/100/101/102/103/104/105/106/107/108/109/110/111/112/113/114/115/116/117/118/119/120/121/122/123/124 zawiera [rejestr systemu](../01-zakres-systemu.md). Decyzje zebrano w [ADR-011](../decisions/adr-011-strojenie-na-zywo.md).
+Stan na 2026-11-08. **F02 aktywny po zakończeniu kontroli F01 przez właściciela.** Przyjęto ustalenia 101–104 i 108–134. SYS-125 określa wybór osi obciążenia bazowej mapy dawki paliwa. Bieżący temat to wspólny lub osobny wybór źródła obciążenia dla map zapłonu i paliwa we wtrysku. Wymagania SYS-003/007/028/047/094/095/099/100/101/102/103/104/105/106/107/108/109/110/111/112/113/114/115/116/117/118/119/120/121/122/123/124/125 zawiera [rejestr systemu](../01-zakres-systemu.md). Decyzje zebrano w [ADR-011](../decisions/adr-011-strojenie-na-zywo.md).
 
 ## Zatwierdzona podstawa
 
@@ -34,6 +34,7 @@ Stan na 2026-11-08. **F02 aktywny po zakończeniu kontroli F01 przez właścicie
 - Krzywa awaryjna po usterce TPS jest wspólna dla wszystkich zestawów tej samej konfiguracji silnika (SYS-122).
 - Odzyskanie wiarygodnego TPS podczas pracy na krzywej awaryjnej prowadzi do powrotu do mapy z TPS przy następnym rozruchu z wiarygodnym sygnałem (SYS-123).
 - Rozruch gaźnika z potwierdzoną usterką TPS jest dopuszczony na krzywej awaryjnej zweryfikowanej do rozruchu po spełnieniu pozostałych warunków. ECU zgłasza usterkę (SYS-124).
+- We wtrysku 2T i 4T bazowa mapa dawki paliwa ma osie obrotów i obciążenia. Wspólna konfiguracja silnika wybiera TPS albo MAP jako źródło obciążenia (SYS-125).
 - ECU jest właścicielem danych i rozstrzyga wykonanie żądań. Odczyt i edycja w Windows oraz wybór w HMI muszą odzwierciedlać rzeczywiste dane ECU.
 
 „Kompletny zestaw” oznacza komplet map uzgodnionych dla danej konfiguracji. Lista map, osie i wielkości tabel pozostają do specyfikacji. Pojedyncze nastawy strojenia są wspólne według SYS-118. Obsługa paliwa dotyczy odpowiednich konfiguracji wtryskowych; nie dodajemy sterowania wtryskiem do wariantu gaźnikowego.
@@ -158,7 +159,13 @@ Odpowiedź A na pytanie 133 (2026-11-08) dopuszcza rozruch z potwierdzoną uster
 
 Kryteria detekcji, granice pracy i potwierdzenie krzywej dla rozruchu oraz pracy rozwiniemy na etapach architektury i weryfikacji. Sposób raportowania usterki należy do F07. [Przykłady enduro](../requirements/weryfikacja-funkcji-enduro.md).
 
-**Bieżący temat F02 to wybór osi obciążenia bazowej mapy dawki paliwa we wtrysku 2T i 4T.**
+## Bazowa mapa dawki paliwa dla wtrysku
+
+Odpowiedź A na pytanie 134 (2026-11-08) ustala dwie osie bazowej mapy dawki paliwa we wtrysku 2T i 4T. Pierwszą jest prędkość obrotowa. Źródłem drugiej jest położenie przepustnicy (TPS) albo ciśnienie bezwzględne w dolocie (MAP według SYS-096), zgodnie z pomiarami dostępnymi w konfiguracji i strategią strojenia. Wybór źródła jest wspólny dla zestawów konfiguracji. Każdy zestaw zawiera własne wartości mapy bazowej w wybranej osi (SYS-125).
+
+Kompensacje dawki i reakcję na utratę wiarygodności wybranego sygnału rozpatrujemy oddzielnie. Punkty osi, rozdzielczość i sposób wyznaczania wartości pomiędzy punktami określimy w projekcie. [Przykłady enduro](../requirements/weryfikacja-funkcji-enduro.md).
+
+**Bieżący temat F02 to wspólny lub osobny wybór źródła obciążenia dla map zapłonu i paliwa we wtrysku.**
 
 ## Przewidywana weryfikacja
 
@@ -195,5 +202,6 @@ Rozwinięcie grup V02/V04/V06/V09 z [macierzy wymagań](../verification/macierz-
 29. SYS-122. Przygotować jedną zweryfikowaną krzywą awaryjną i dwa zestawy o różnych mapach bazowych zapłonu. W osobnych próbach wybrać każdy zestaw, po czym zasymulować potwierdzoną usterkę TPS przy tych samych obrotach i prawidłowej synchronizacji wału. Potwierdzić zgodność kąta z tą samą krzywą awaryjną w obu próbach. Po każdej operacji zapisu jednego zestawu, zapisu wszystkich i przywrócenia wybranego odczytać dane krzywej awaryjnej i porównać je ze stanem sprzed operacji.
 30. SYS-123. Na stanowisku wywołać usterkę TPS podczas pracy silnika gaźnikowego i potwierdzić przejście na krzywą awaryjną. Przy prawidłowej synchronizacji wału przywrócić wiarygodny sygnał TPS. Sprawdzić używanie krzywej awaryjnej do zatrzymania silnika, także przy zmianach położenia przepustnicy. Po potwierdzonym zatrzymaniu zainicjować nową próbę rozruchu z wiarygodnym TPS i wciąż zasilanym ECU. Potwierdzić powrót do mapy zapłonu z TPS z aktywnego zestawu.
 31. SYS-124. Przed rozruchem zasymulować potwierdzoną usterkę TPS i przygotować wspólną krzywą zweryfikowaną również do rozruchu. Przy spełnionych pozostałych warunkach sprawdzić zapłon z krzywej po synchronizacji wału, zgłoszenie usterki i uruchomienie. W konfiguracji z obiema metodami sprawdzić rozrusznik oraz kopniak osobno. Powtórzyć przy krzywej niedopuszczonej do rozruchu oraz z aktywną blokadą rozruchu. W obu przypadkach potwierdzić odmowę uruchomienia.
+32. SYS-125. Na stanowisku sprawdzić oba źródła osi obciążenia dla reprezentatywnych konfiguracji wtryskowych 2T i 4T. Przy stałych obrotach zmienić sygnał wybranego czujnika, a przy stałym obciążeniu zmienić obroty. Porównać wyznaczoną dawkę bazową przed kompensacjami z mapą. Przełączyć zestaw i potwierdzić wybór jego danych oraz użycie źródła obciążenia z tej samej konfiguracji.
 
 Kryteria liczbowe, połączenia, kroki i warunki przerwania powstaną przed wykonaniem prób. Brak implementacji i wyników produktu.

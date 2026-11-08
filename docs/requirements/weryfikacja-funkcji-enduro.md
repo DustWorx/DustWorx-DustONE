@@ -62,4 +62,6 @@ Instrukcja wtryskowej Yamaha WR450FB MY2012 przewiduje rozruch i jazdę w trybie
 
 ## Przykład — sygnały do wyznaczania bazowej dawki paliwa
 
-Instrukcja serwisowa Suzuki RMX450Z opisuje wyznaczanie bazowego czasu wtrysku z obrotów silnika, ciśnienia powietrza w dolocie (MAP) i położenia przepustnicy (TPS). Model wprowadzono w gamie MY2010. W DustONE wybór drugiej osi bazowej mapy dawki paliwa jest otwartą decyzją F02. [Instrukcja serwisowa Suzuki RMX450Z, s. 1A-1](https://www.manualslib.com/manual/3338852/Suzuki-Rmx450z.html) · [Raport Suzuki 2010](https://www.globalsuzuki.com/ir/library/annualreport/pdf/2010/2010-1.pdf).
+Instrukcja serwisowa Suzuki RMX450Z opisuje wyznaczanie bazowego czasu wtrysku z obrotów silnika, ciśnienia powietrza w dolocie (MAP) i położenia przepustnicy (TPS). Model wprowadzono w gamie MY2010. W odpowiedzi A na pytanie 134 (2026-11-08) właściciel przyjął w DustONE wybór TPS albo MAP jako drugiej osi mapy dawki paliwa na poziomie konfiguracji silnika (SYS-125). [Instrukcja serwisowa Suzuki RMX450Z, s. 1A-1](https://www.manualslib.com/manual/3338852/Suzuki-Rmx450z.html) · [Raport Suzuki 2010](https://www.globalsuzuki.com/ir/library/annualreport/pdf/2010/2010-1.pdf).
+
+Dla KTM 2T TBI instrukcja TSP ERM opisuje tabele korekt paliwa i zapłonu z tymi samymi rodzajami osi, obrotami i położeniem przepustnicy. Wspólne lub osobne źródło obciążenia bazowych map DustONE jest otwartą decyzją F02. [Instrukcja TSP ERM, sekcja 6.4, s. 25](https://www.tsp-erm.com/wp-content/uploads/user_guide/ERM-User-Guide-KTM-2T.pdf#page=25).
