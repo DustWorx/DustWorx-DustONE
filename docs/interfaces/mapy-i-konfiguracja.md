@@ -1,6 +1,6 @@
 # Mapy i konfiguracja — operacje F02
 
-Stan na 2026-11-08. **F02 aktywny po zakończeniu kontroli F01 przez właściciela.** Przyjęto ustalenia 101–104 i 108–135. SYS-126 ustala wspólne źródło obciążenia bazowych map paliwa i zapłonu we wtrysku. Bieżący temat to praca wtrysku po usterce używanego źródła obciążenia, gdy dostępny jest drugi pomiar. Wymagania SYS-003/007/028/047/094/095/099/100/101/102/103/104/105/106/107/108/109/110/111/112/113/114/115/116/117/118/119/120/121/122/123/124/125/126 zawiera [rejestr systemu](../01-zakres-systemu.md). Decyzje zebrano w [ADR-011](../decisions/adr-011-strojenie-na-zywo.md).
+Stan na 2026-11-08. **F02 aktywny po zakończeniu kontroli F01 przez właściciela.** Przyjęto ustalenia 101–104 i 108–135. SYS-126 ustala wspólne źródło obciążenia bazowych map paliwa i zapłonu we wtrysku. Bieżący temat to doprecyzowanie wykorzystania TPS i pomiaru ciśnienia przy wyznaczaniu bazowej dawki paliwa. Wymagania SYS-003/007/028/047/094/095/099/100/101/102/103/104/105/106/107/108/109/110/111/112/113/114/115/116/117/118/119/120/121/122/123/124/125/126 zawiera [rejestr systemu](../01-zakres-systemu.md). Decyzje zebrano w [ADR-011](../decisions/adr-011-strojenie-na-zywo.md).
 
 ## Zatwierdzona podstawa
 
@@ -168,7 +168,13 @@ Odpowiedź A na pytanie 135 (2026-11-08) przypisuje to samo źródło obciążen
 
 Kompensacje i reakcję na utratę wiarygodności wybranego sygnału rozpatrujemy oddzielnie. Punkty osi, rozdzielczość i sposób wyznaczania wartości pomiędzy punktami określimy w projekcie. [Przykłady enduro](../requirements/weryfikacja-funkcji-enduro.md).
 
-**Bieżący temat F02 to praca wtrysku po usterce używanego źródła obciążenia, gdy dostępny jest drugi pomiar.**
+### Rola TPS i pomiaru ciśnienia w normalnej pracy — do rozstrzygnięcia
+
+W doprecyzowaniu pytania 136 właściciel wskazał konfiguracje, w których TPS i odpowiedni pomiar ciśnienia uczestniczą jednocześnie w wyznaczaniu dawki. SYS-125 i SYS-126 opisują jedną oś obciążenia wybieraną w konfiguracji. Do rozstrzygnięcia jest, czy zachowujemy ją jako format bazowych map wszystkich profili, czy dopuszczamy też model bazowej dawki wykorzystujący oba pomiary w profilach, które tego wymagają. MAP (SYS-096) dotyczy dolotu, a CCPS (SYS-097) ciśnienia gazów w skrzyni korbowej 2T. Źródła OEM opisują użycie sygnałów. Strukturę kalibracji dobierzemy do danej jednostki. [Przykłady enduro](../requirements/weryfikacja-funkcji-enduro.md).
+
+Decyzja o kontynuowaniu pracy po usterce sygnału nastąpi po doprecyzowaniu normalnej strategii. Każdy przypadek utraty używanego sygnału wymaga sprawdzenia, jakie wiarygodne pomiary zostają dostępne i czy można dla nich zweryfikować kalibrację zastępczą. Możliwość użycia drugiego pomiaru wraz ze zweryfikowanymi mapami awaryjnymi pozostaje propozycją.
+
+**Bieżący temat F02 to doprecyzowanie wykorzystania TPS i pomiaru ciśnienia przy wyznaczaniu bazowej dawki paliwa.**
 
 ## Przewidywana weryfikacja
 
