@@ -61,7 +61,7 @@ Zestawy map zapłonu gaźnika używają krzywej obrotowej w wariancie bez TPS i 
 
 Konfiguracja gaźnikowa korzystająca z TPS uwzględnia zweryfikowaną krzywą awaryjną od obrotów (SYS-121). Krzywa należy do danych wspólnych konfiguracji (SYS-122). Sposób jej przygotowania i zapisu wymaga doprecyzowania.
 
-W konfiguracji wtryskowej wybiera się TPS albo MAP jako źródło osi obciążenia bazowej mapy dawki paliwa. Wybrane źródło jest wspólne dla zestawów tej konfiguracji (SYS-125).
+W konfiguracji wtryskowej wybiera się TPS albo MAP jako źródło osi obciążenia bazowej mapy dawki paliwa. Wybrane źródło jest wspólne dla bazowych map paliwa i zapłonu we wszystkich zestawach tej konfiguracji (SYS-125 i SYS-126).
 
 SYS-101: Windows może przesyłać do ECU robocze zmiany wybranych wartości aktywnego i nieaktywnych zestawów podczas pracy silnika. Edycja nie przełącza zestawu; nieaktywny zaczyna wpływać na silnik dopiero po jego świadomym wybraniu. Obowiązuje SYS-095 dla trwałego zapisu. Szczegóły: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 
