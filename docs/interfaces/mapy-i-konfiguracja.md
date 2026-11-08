@@ -1,6 +1,6 @@
 # Mapy i konfiguracja — operacje F02
 
-Stan na 2026-11-08. **F02 aktywny po zakończeniu kontroli F01 przez właściciela.** Przyjęto ustalenia 101–104 i 108–135. SYS-126 ustala wspólne źródło obciążenia bazowych map paliwa i zapłonu we wtrysku. Bieżący temat to doprecyzowanie wykorzystania TPS i pomiaru ciśnienia przy wyznaczaniu bazowej dawki paliwa. Wymagania SYS-003/007/028/047/094/095/099/100/101/102/103/104/105/106/107/108/109/110/111/112/113/114/115/116/117/118/119/120/121/122/123/124/125/126 zawiera [rejestr systemu](../01-zakres-systemu.md). Decyzje zebrano w [ADR-011](../decisions/adr-011-strojenie-na-zywo.md).
+Stan na 2026-11-08. **F02 aktywny po zakończeniu kontroli F01 przez właściciela.** Przyjęto ustalenia 101–104 i 108–136. SYS-127 przypisuje wymagane pomiary obciążenia i ich role do profilu silnika. Bieżący temat to praca wtrysku po usterce jednego z dwóch nominalnie wymaganych pomiarów obciążenia. Wymagania SYS-003/007/028/047/094/095/099/100/101/102/103/104/105/106/107/108/109/110/111/112/113/114/115/116/117/118/119/120/121/122/123/124/125/126/127 zawiera [rejestr systemu](../01-zakres-systemu.md). Decyzje zebrano w [ADR-011](../decisions/adr-011-strojenie-na-zywo.md).
 
 ## Zatwierdzona podstawa
 
@@ -34,8 +34,9 @@ Stan na 2026-11-08. **F02 aktywny po zakończeniu kontroli F01 przez właścicie
 - Krzywa awaryjna po usterce TPS jest wspólna dla wszystkich zestawów tej samej konfiguracji silnika (SYS-122).
 - Odzyskanie wiarygodnego TPS podczas pracy na krzywej awaryjnej prowadzi do powrotu do mapy z TPS przy następnym rozruchu z wiarygodnym sygnałem (SYS-123).
 - Rozruch gaźnika z potwierdzoną usterką TPS jest dopuszczony na krzywej awaryjnej zweryfikowanej do rozruchu po spełnieniu pozostałych warunków. ECU zgłasza usterkę (SYS-124).
-- We wtrysku 2T i 4T bazowa mapa dawki paliwa ma osie obrotów i obciążenia. Wspólna konfiguracja silnika wybiera TPS albo MAP jako źródło obciążenia (SYS-125).
-- W konfiguracjach wtryskowych jedno ustawienie TPS albo MAP określa źródło obciążenia zarówno dla bazowej mapy paliwa, jak i bazowej mapy zapłonu. Każdy zestaw zawiera własne wartości obu map (SYS-125 i SYS-126).
+- Gdy bazowa dawka we wtrysku używa jednego pomiaru obciążenia, jej mapa ma osie obrotów i obciążenia. Dla profilu z samym TPS drugą osią jest położenie przepustnicy (SYS-125).
+- W profilu z jednym wymaganym pomiarem obciążenia bazowe mapy paliwa i zapłonu używają wspólnego źródła określonego w konfiguracji (SYS-125 i SYS-126).
+- Profil, w którym sterowanie OEM wykorzystuje TPS i właściwy pomiar ciśnienia, wymaga obu do pracy nominalnej. Wykorzystanie sygnałów wynika z ich ról w danej jednostce (SYS-127).
 - ECU jest właścicielem danych i rozstrzyga wykonanie żądań. Odczyt i edycja w Windows oraz wybór w HMI muszą odzwierciedlać rzeczywiste dane ECU.
 
 „Kompletny zestaw” oznacza komplet map uzgodnionych dla danej konfiguracji. Lista map, osie i wielkości tabel pozostają do specyfikacji. Pojedyncze nastawy strojenia są wspólne według SYS-118. Obsługa paliwa dotyczy odpowiednich konfiguracji wtryskowych; nie dodajemy sterowania wtryskiem do wariantu gaźnikowego.
@@ -162,19 +163,17 @@ Kryteria detekcji, granice pracy i potwierdzenie krzywej dla rozruchu oraz pracy
 
 ## Bazowe mapy paliwa i zapłonu dla wtrysku
 
-Odpowiedź A na pytanie 134 (2026-11-08) ustala dwie osie bazowej mapy dawki paliwa we wtrysku 2T i 4T. Pierwszą jest prędkość obrotowa. Źródłem drugiej jest położenie przepustnicy (TPS) albo ciśnienie bezwzględne w dolocie (MAP według SYS-096), zgodnie z pomiarami dostępnymi w konfiguracji i strategią strojenia. Wybór źródła jest wspólny dla zestawów konfiguracji. Każdy zestaw zawiera własne wartości mapy bazowej w wybranej osi (SYS-125).
+Ustalenia z pytań 134 i 135 opisują strategię z jednym pomiarem obciążenia. Gdy bazowa dawka używa jednego źródła, jej mapa ma osie obrotów i obciążenia. W profilu z TPS jako jedynym pomiarem obciążenia drugą osią jest położenie przepustnicy. Dla profili z jednym wymaganym pomiarem bazowa mapa zapłonu używa tego samego źródła co mapa paliwa. Wartości obu map należą do poszczególnych zestawów, a źródło wynika ze wspólnej konfiguracji silnika (SYS-125 i SYS-126).
 
-Odpowiedź A na pytanie 135 (2026-11-08) przypisuje to samo źródło obciążenia bazowej mapie zapłonu (SYS-126). ECU wyznacza bazową dawkę i bazowy kąt z map aktywnego zestawu według obrotów i tego samego wybranego pomiaru.
+Punkty osi, rozdzielczość i sposób wyznaczania wartości pomiędzy punktami określimy w projekcie.
 
-Kompensacje i reakcję na utratę wiarygodności wybranego sygnału rozpatrujemy oddzielnie. Punkty osi, rozdzielczość i sposób wyznaczania wartości pomiędzy punktami określimy w projekcie. [Przykłady enduro](../requirements/weryfikacja-funkcji-enduro.md).
+### Rola TPS i pomiaru ciśnienia w pracy nominalnej
 
-### Rola TPS i pomiaru ciśnienia w normalnej pracy — do rozstrzygnięcia
+W odpowiedzi na doprecyzowanie pytania 136 (2026-11-08) właściciel ustalił wymagania według fabrycznego sterowania danego silnika. Gdy OEM wykorzystuje TPS i pomiar ciśnienia, profil DustONE wymaga obu w pracy nominalnej i określa ich zastosowanie w obliczeniach. MAP (SYS-096) dotyczy dolotu, a CCPS (SYS-097) ciśnienia gazów w skrzyni korbowej 2T. Zależnie od silnika oba pomiary mogą uczestniczyć w wyznaczaniu bazowej dawki. Liczba osi, udział poszczególnych sygnałów w dawce i zapłonie oraz model kalibracji wymagają danych danej jednostki i późniejszej weryfikacji (SYS-127). [Przykłady enduro](../requirements/weryfikacja-funkcji-enduro.md).
 
-W doprecyzowaniu pytania 136 właściciel wskazał konfiguracje, w których TPS i odpowiedni pomiar ciśnienia uczestniczą jednocześnie w wyznaczaniu dawki. SYS-125 i SYS-126 opisują jedną oś obciążenia wybieraną w konfiguracji. Do rozstrzygnięcia jest, czy zachowujemy ją jako format bazowych map wszystkich profili, czy dopuszczamy też model bazowej dawki wykorzystujący oba pomiary w profilach, które tego wymagają. MAP (SYS-096) dotyczy dolotu, a CCPS (SYS-097) ciśnienia gazów w skrzyni korbowej 2T. Źródła OEM opisują użycie sygnałów. Strukturę kalibracji dobierzemy do danej jednostki. [Przykłady enduro](../requirements/weryfikacja-funkcji-enduro.md).
+Następna decyzja dotyczy potwierdzonej usterki TPS albo pomiaru ciśnienia w profilu, który używa obu w pracy nominalnej. Warunki rozważanej pracy awaryjnej obejmują wiarygodne pozostałe pomiary i zweryfikowaną kalibrację dla konkretnej utraty sygnału.
 
-Decyzja o kontynuowaniu pracy po usterce sygnału nastąpi po doprecyzowaniu normalnej strategii. Każdy przypadek utraty używanego sygnału wymaga sprawdzenia, jakie wiarygodne pomiary zostają dostępne i czy można dla nich zweryfikować kalibrację zastępczą. Możliwość użycia drugiego pomiaru wraz ze zweryfikowanymi mapami awaryjnymi pozostaje propozycją.
-
-**Bieżący temat F02 to doprecyzowanie wykorzystania TPS i pomiaru ciśnienia przy wyznaczaniu bazowej dawki paliwa.**
+**Bieżący temat F02 to praca wtrysku po usterce jednego z dwóch nominalnie wymaganych pomiarów obciążenia.**
 
 ## Przewidywana weryfikacja
 
@@ -211,7 +210,8 @@ Rozwinięcie grup V02/V04/V06/V09 z [macierzy wymagań](../verification/macierz-
 29. SYS-122. Przygotować jedną zweryfikowaną krzywą awaryjną i dwa zestawy o różnych mapach bazowych zapłonu. W osobnych próbach wybrać każdy zestaw, po czym zasymulować potwierdzoną usterkę TPS przy tych samych obrotach i prawidłowej synchronizacji wału. Potwierdzić zgodność kąta z tą samą krzywą awaryjną w obu próbach. Po każdej operacji zapisu jednego zestawu, zapisu wszystkich i przywrócenia wybranego odczytać dane krzywej awaryjnej i porównać je ze stanem sprzed operacji.
 30. SYS-123. Na stanowisku wywołać usterkę TPS podczas pracy silnika gaźnikowego i potwierdzić przejście na krzywą awaryjną. Przy prawidłowej synchronizacji wału przywrócić wiarygodny sygnał TPS. Sprawdzić używanie krzywej awaryjnej do zatrzymania silnika, także przy zmianach położenia przepustnicy. Po potwierdzonym zatrzymaniu zainicjować nową próbę rozruchu z wiarygodnym TPS i wciąż zasilanym ECU. Potwierdzić powrót do mapy zapłonu z TPS z aktywnego zestawu.
 31. SYS-124. Przed rozruchem zasymulować potwierdzoną usterkę TPS i przygotować wspólną krzywą zweryfikowaną również do rozruchu. Przy spełnionych pozostałych warunkach sprawdzić zapłon z krzywej po synchronizacji wału, zgłoszenie usterki i uruchomienie. W konfiguracji z obiema metodami sprawdzić rozrusznik oraz kopniak osobno. Powtórzyć przy krzywej niedopuszczonej do rozruchu oraz z aktywną blokadą rozruchu. W obu przypadkach potwierdzić odmowę uruchomienia.
-32. SYS-125. Na stanowisku sprawdzić oba źródła osi obciążenia dla reprezentatywnych konfiguracji wtryskowych 2T i 4T. Przy stałych obrotach zmienić sygnał wybranego czujnika, a przy stałym obciążeniu zmienić obroty. Porównać wyznaczoną dawkę bazową przed kompensacjami z mapą. Przełączyć zestaw i potwierdzić wybór jego danych oraz użycie źródła obciążenia z tej samej konfiguracji.
-33. SYS-126. Na stanowisku przygotować rozróżnialne wartości obu map. Przy stałych obrotach zmieniać niezależnie TPS i MAP. Osobno dla ustawienia TPS i MAP porównać bazową dawkę i bazowy kąt zapłonu przed kompensacjami z mapami dla wybranego sygnału. Powtórzyć w reprezentatywnych konfiguracjach wtryskowych 2T i 4T oraz po przełączeniu zestawu.
+32. SYS-125. Na stanowisku sprawdzić reprezentatywne profile wtrysku 2T i 4T, w których dawka bazowa korzysta z jednego pomiaru obciążenia. Dla profilu z samym TPS sprawdzić dwie osie, prędkość obrotową i położenie przepustnicy. Sprawdzić również profil korzystający z pomiaru ciśnienia jako osi obciążenia, jeśli jest wśród konfiguracji referencyjnych. Zmieniać osobno obroty i wybrany sygnał. Porównać dawkę bazową z mapą przed kompensacjami oraz po przełączeniu zestawu.
+33. SYS-126. W profilu z jednym wymaganym pomiarem obciążenia przygotować rozróżnialne wartości obu map. Przy stałych obrotach zmienić sygnał wybranego czujnika. Porównać bazową dawkę i bazowy kąt zapłonu przed kompensacjami z mapami dla tego samego źródła. Powtórzyć po przełączeniu zestawu.
+34. SYS-127. Powiązać pomiary i ich role z dokumentacją referencyjną wybranych jednostek. Sprawdzić nominalną pracę profilu z samym TPS na mapie o dwóch osiach. W reprezentatywnych profilach używających TPS i MAP albo TPS i CCPS zmieniać każdy pomiar osobno w warunkach właściwych dla jego roli i sprawdzić udział w obliczeniach. Potwierdzić wymaganie wiarygodności obu sygnałów dla pracy nominalnej. Reakcje awaryjne obejmie osobna próba.
 
 Kryteria liczbowe, połączenia, kroki i warunki przerwania powstaną przed wykonaniem prób. Brak implementacji i wyników produktu.

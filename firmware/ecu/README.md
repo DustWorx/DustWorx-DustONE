@@ -72,9 +72,11 @@ SYS-123 określa utrzymanie krzywej awaryjnej do zatrzymania silnika i powrót d
 
 SYS-124 określa warunki rozruchu gaźnika na krzywej awaryjnej przy potwierdzonej usterce TPS i zgłoszenie tej usterki.
 
-SYS-125 określa bazową mapę dawki dla wtrysku według obrotów i źródła obciążenia wybranego w konfiguracji spośród TPS i MAP.
+SYS-125 określa dwie osie bazowej mapy dawki w strategii z jednym pomiarem obciążenia.
 
-SYS-126 określa bazową mapę zapłonu we wtrysku i wspólny wybór źródła obciążenia dla map paliwa i zapłonu.
+SYS-126 określa bazowy zapłon we wtrysku i wspólne źródło obciążenia w profilach z jednym wymaganym pomiarem.
+
+SYS-127 uzależnia wymagane pomiary obciążenia i ich udział w pracy nominalnej od konfiguracji referencyjnego silnika.
 
 SYS-101: ECU przyjmuje robocze zmiany wybranych wartości aktywnego i nieaktywnych zestawów podczas pracy silnika. Edycja nie przełącza zestawu; zmiany nieaktywnego wpływają na silnik dopiero po jego świadomym wybraniu. Trwały zapis nadal podlega SYS-095. Szczegóły: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 
