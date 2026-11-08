@@ -1,6 +1,6 @@
 # Mapy i konfiguracja — operacje F02
 
-Stan na 2026-11-08. **F02 aktywny po zakończeniu kontroli F01 przez właściciela.** Przyjęto ustalenia 101–104 i 108–130. SYS-121 określa awaryjną pracę zapłonu gaźnika po usterce TPS. Bieżący temat to przypisanie krzywej awaryjnej do konfiguracji silnika lub do zestawu map. Wymagania SYS-003/007/028/047/094/095/099/100/101/102/103/104/105/106/107/108/109/110/111/112/113/114/115/116/117/118/119/120/121 zawiera [rejestr systemu](../01-zakres-systemu.md). Decyzje zebrano w [ADR-011](../decisions/adr-011-strojenie-na-zywo.md).
+Stan na 2026-11-08. **F02 aktywny po zakończeniu kontroli F01 przez właściciela.** Przyjęto ustalenia 101–104 i 108–131. SYS-122 przypisuje krzywą awaryjną zapłonu do konfiguracji silnika. Bieżący temat to powrót do mapy zapłonu z TPS po odzyskaniu wiarygodnego sygnału. Wymagania SYS-003/007/028/047/094/095/099/100/101/102/103/104/105/106/107/108/109/110/111/112/113/114/115/116/117/118/119/120/121/122 zawiera [rejestr systemu](../01-zakres-systemu.md). Decyzje zebrano w [ADR-011](../decisions/adr-011-strojenie-na-zywo.md).
 
 ## Zatwierdzona podstawa
 
@@ -31,6 +31,7 @@ Stan na 2026-11-08. **F02 aktywny po zakończeniu kontroli F01 przez właścicie
 - Każdy zestaw w konfiguracji 2T z elektronicznym zaworem wydechowym ma własną mapę położenia zadanego zaworu (SYS-119).
 - Dla gaźnika bez TPS zestaw zawiera bazową krzywą zapłonu od obrotów, a dla gaźnika z TPS mapę od obrotów i położenia przepustnicy (SYS-120).
 - Po potwierdzonej usterce TPS podczas pracy gaźnikowego silnika ECU zgłasza błąd i przy prawidłowej synchronizacji wału korzysta ze zweryfikowanej krzywej awaryjnej od obrotów (SYS-121).
+- Krzywa awaryjna po usterce TPS jest wspólna dla wszystkich zestawów tej samej konfiguracji silnika (SYS-122).
 - ECU jest właścicielem danych i rozstrzyga wykonanie żądań. Odczyt i edycja w Windows oraz wybór w HMI muszą odzwierciedlać rzeczywiste dane ECU.
 
 „Kompletny zestaw” oznacza komplet map uzgodnionych dla danej konfiguracji. Lista map, osie i wielkości tabel pozostają do specyfikacji. Pojedyncze nastawy strojenia są wspólne według SYS-118. Obsługa paliwa dotyczy odpowiednich konfiguracji wtryskowych; nie dodajemy sterowania wtryskiem do wariantu gaźnikowego.
@@ -147,9 +148,11 @@ Odpowiedź A na pytanie 129 (2026-11-07) ustala bazową krzywą wyprzedzenia zap
 
 Odpowiedź A na pytanie 130 (2026-11-08) ustala kontynuowanie pracy silnika gaźnikowego na zweryfikowanej krzywej awaryjnej po potwierdzeniu usterki używanego TPS, przy prawidłowej synchronizacji wału. ECU wyznacza wyprzedzenie z obrotów i zgłasza usterkę (SYS-121). Obowiązują granice pracy danej konfiguracji i przewodowy STOP według SYS-037. Normalną pracę konfiguracji bez TPS opisuje SYS-120.
 
-Przypisanie krzywej do konfiguracji lub zestawu, powrót do mapy z TPS i rozruch z aktywną usterką pozostają do określenia w F02. Kryteria detekcji, granice pracy i potwierdzenie krzywej dla konfiguracji rozwiniemy na etapach architektury i weryfikacji. Sposób raportowania usterki należy do F07. [Przykłady enduro](../requirements/weryfikacja-funkcji-enduro.md).
+Odpowiedź A na pytanie 131 (2026-11-08) ustala jedną krzywą awaryjną dla wszystkich zestawów danej konfiguracji (SYS-122). Krzywa jest częścią danych wspólnych konfiguracji. Zapis i przywrócenie zestawu obejmują mapy według SYS-108 i SYS-117.
 
-**Bieżący temat F02 to przypisanie krzywej awaryjnej do konfiguracji silnika lub do zestawu map.**
+Powrót do mapy z TPS i rozruch z aktywną usterką pozostają do określenia w F02. Kryteria detekcji, granice pracy i potwierdzenie krzywej dla konfiguracji rozwiniemy na etapach architektury i weryfikacji. Sposób raportowania usterki należy do F07. [Przykłady enduro](../requirements/weryfikacja-funkcji-enduro.md).
+
+**Bieżący temat F02 to powrót do mapy zapłonu z TPS po odzyskaniu wiarygodnego sygnału.**
 
 ## Przewidywana weryfikacja
 
@@ -183,5 +186,6 @@ Rozwinięcie grup V02/V04/V06/V09 z [macierzy wymagań](../verification/macierz-
 26. SYS-119. W konfiguracji 2T z elektronicznym zaworem przygotować dwa zestawy z różnymi mapami położenia zadanego i co najmniej jedną inną różniącą się mapą silnika. Przy tych samych symulowanych sygnałach wejściowych przełączyć zestawy z HMI w obu kierunkach. Sprawdzić, czy ECU wyznacza położenie zadane z mapy wybranego zestawu i jednocześnie wybiera jego pozostałe mapy. Sprawdzić działanie zestawów w wariancie bez elektronicznego zaworu według SYS-034.
 27. SYS-120. Na stanowisku przygotować rozróżnialne wartości zapłonu w dwóch zestawach. W wariancie gaźnikowym bez TPS zmieniać symulowane obroty i sprawdzić bazowy kąt z krzywej aktywnego zestawu przy niepodłączonym TPS. W wariancie z TPS zmienić położenie przepustnicy przy stałych obrotach oraz obroty przy stałym położeniu. Porównać bazowy kąt z mapą i powtórzyć próby po przełączeniu zestawu.
 28. SYS-121. Na stanowisku zasymulować pracę wariantu gaźnikowego z wiarygodnym TPS i prawidłową synchronizacją wału. Następnie zasymulować usterkę TPS. Po jej potwierdzeniu sprawdzić zgłoszenie usterki, wybór zweryfikowanej krzywej awaryjnej i wyznaczanie kąta zapłonu dla kilku dopuszczalnych wartości obrotów. Sprawdzić przebieg impulsów zapłonowych podczas zmiany źródła oraz warunki dopuszczenia pracy, w tym reakcję na przewodowy STOP. Rozwinąć próbę po ustaleniu progów, granic i kryteriów przejścia.
+29. SYS-122. Przygotować jedną zweryfikowaną krzywą awaryjną i dwa zestawy o różnych mapach bazowych zapłonu. W osobnych próbach wybrać każdy zestaw, po czym zasymulować potwierdzoną usterkę TPS przy tych samych obrotach i prawidłowej synchronizacji wału. Potwierdzić zgodność kąta z tą samą krzywą awaryjną w obu próbach. Po każdej operacji zapisu jednego zestawu, zapisu wszystkich i przywrócenia wybranego odczytać dane krzywej awaryjnej i porównać je ze stanem sprzed operacji.
 
 Kryteria liczbowe, połączenia, kroki i warunki przerwania powstaną przed wykonaniem prób. Brak implementacji i wyników produktu.

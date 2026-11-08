@@ -59,7 +59,7 @@ W konfiguracji 2T z elektronicznym zaworem wydechowym dane zestawu obejmują jeg
 
 Zestawy map zapłonu gaźnika używają krzywej obrotowej w wariancie bez TPS i mapy od obrotów oraz położenia przepustnicy w wariancie z TPS (SYS-120).
 
-Konfiguracja gaźnikowa korzystająca z TPS uwzględnia zweryfikowaną krzywą awaryjną od obrotów (SYS-121). Sposób przygotowania i zapisu tej krzywej wymaga doprecyzowania.
+Konfiguracja gaźnikowa korzystająca z TPS uwzględnia zweryfikowaną krzywą awaryjną od obrotów (SYS-121). Krzywa należy do danych wspólnych konfiguracji (SYS-122). Sposób jej przygotowania i zapisu wymaga doprecyzowania.
 
 SYS-101: Windows może przesyłać do ECU robocze zmiany wybranych wartości aktywnego i nieaktywnych zestawów podczas pracy silnika. Edycja nie przełącza zestawu; nieaktywny zaczyna wpływać na silnik dopiero po jego świadomym wybraniu. Obowiązuje SYS-095 dla trwałego zapisu. Szczegóły: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 
