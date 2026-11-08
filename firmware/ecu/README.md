@@ -100,6 +100,8 @@ SYS-137 określa wymuszenie „Standard” i blokadę zmiany zestawu z HMI dla p
 
 SYS-138 wymaga zachowania wymuszonego wyboru „Standard” po restarcie ECU. ECU używa prawidłowego, trwale zapisanego zestawu po spełnieniu warunków pracy nominalnej.
 
+SYS-139 wymaga zgłoszenia błędu i blokady rozruchu przy braku poprawnego wymuszonego zestawu „Standard” po restarcie, także przy dostępnym innym poprawnym zestawie.
+
 SYS-101: ECU przyjmuje robocze zmiany wybranych wartości aktywnego i nieaktywnych zestawów podczas pracy silnika. Edycja nie przełącza zestawu; zmiany nieaktywnego wpływają na silnik dopiero po jego świadomym wybraniu. Trwały zapis nadal podlega SYS-095. Szczegóły: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 
 SYS-099: po restarcie ECU aktywuje ostatnio wybrany prawidłowy zestaw spośród trwale zapisanych, także bez HMI. Zapamiętanie wyboru i zapis wartości map mają odrębne reguły; brak automatycznego utrwalania edycji na żywo. SYS-100 wymaga po prawidłowym śnie/wybudzeniu odrzucenia roboczej edycji i użycia trwale zapisanych wartości, bez automatycznego utrwalania. Mechanizm pamięci wyboru, walidacja, gotowość do rozruchu i przerwana sekwencja snu są do projektu: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
