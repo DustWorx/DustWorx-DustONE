@@ -58,4 +58,4 @@ W instrukcji Yamaha WR450F MY2003 opisano zapłon CDI, który wyznacza kąt zap�
 
 ## Przykład — praca po wykryciu usterki TPS
 
-Instrukcja wtryskowej Yamaha WR450FB MY2012 przewiduje rozruch i jazdę w trybie awaryjnym po wykryciu przerwy lub zwarcia obwodu TPS. To przykład zachowania motocykla enduro po utracie sygnału. Reakcja w gaźnikowym wariancie DustONE korzystającym z TPS jest otwartą decyzją F02. [Instrukcja serwisowa Yamaha WR450FB, nr 1DX-28199-10, kod 15, s. 9-37](https://www.motopetersburg.ru/docs/yamaha-wr450FB-2012-2015-owners-service-manual.pdf).
+Instrukcja wtryskowej Yamaha WR450FB MY2012 przewiduje rozruch i jazdę w trybie awaryjnym po wykryciu przerwy lub zwarcia obwodu TPS. To przykład zachowania motocykla enduro po utracie sygnału. W odpowiedzi A na pytanie 130 (2026-11-08) właściciel przyjął dla gaźnikowego DustONE zgłoszenie usterki i awaryjną pracę zapłonu na zweryfikowanej krzywej od obrotów (SYS-121). [Instrukcja serwisowa Yamaha WR450FB, nr 1DX-28199-10, kod 15, s. 9-37](https://www.motopetersburg.ru/docs/yamaha-wr450FB-2012-2015-owners-service-manual.pdf).
