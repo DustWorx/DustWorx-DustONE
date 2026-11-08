@@ -1,6 +1,6 @@
 # Mapy i konfiguracja — operacje F02
 
-Stan na 2026-11-08. **F02 aktywny po zakończeniu kontroli F01 przez właściciela.** Przyjęto ustalenia 101–104 i 108–140. SYS-131 określa dopuszczenie rozruchu wtrysku przy pojedynczej usterce pomiaru obciążenia. Bieżący temat to zachowanie wtrysku po utracie wszystkich wymaganych pomiarów obciążenia. Wymagania SYS-003/007/028/047/094/095/099/100/101/102/103/104/105/106/107/108/109/110/111/112/113/114/115/116/117/118/119/120/121/122/123/124/125/126/127/128/129/130/131 zawiera [rejestr systemu](../01-zakres-systemu.md). Decyzje zebrano w [ADR-011](../decisions/adr-011-strojenie-na-zywo.md).
+Stan na 2026-11-08. **F02 aktywny po zakończeniu kontroli F01 przez właściciela.** Przyjęto ustalenia 101–104 i 108–141. SYS-132 określa reakcję po utracie obu wymaganych pomiarów i warunek ponownego rozruchu. Bieżący temat to reakcja wtrysku na utratę sygnału w profilu z jednym wymaganym pomiarem obciążenia. Wymagania SYS-003/007/028/047/094/095/099/100/101/102/103/104/105/106/107/108/109/110/111/112/113/114/115/116/117/118/119/120/121/122/123/124/125/126/127/128/129/130/131/132 zawiera [rejestr systemu](../01-zakres-systemu.md). Decyzje zebrano w [ADR-011](../decisions/adr-011-strojenie-na-zywo.md).
 
 ## Zatwierdzona podstawa
 
@@ -41,6 +41,7 @@ Stan na 2026-11-08. **F02 aktywny po zakończeniu kontroli F01 przez właścicie
 - Dopuszczenie profilu wtrysku wymaga osobnej weryfikacji reakcji na awarię TPS i pomiaru ciśnienia. Dla usterki bez zweryfikowanej kalibracji ECU realizuje kontrolowane zatrzymanie (SYS-129).
 - Po odzyskaniu wiarygodnych pomiarów w trakcie pracy ECU pozostaje na kalibracji awaryjnej do zatrzymania silnika. Przy kolejnym rozruchu z wiarygodnymi wymaganymi pomiarami wraca do sterowania nominalnego (SYS-130).
 - Przy jednej potwierdzonej usterce pomiaru obciążenia ECU dopuszcza rozruch na kalibracji właściwej dla tej usterki, zweryfikowanej do rozruchu, gdy pozostałe wymagane sygnały są wiarygodne i spełnione są pozostałe warunki. ECU zgłasza usterkę (SYS-131).
+- Przy utracie obu wymaganych pomiarów ECU realizuje kontrolowane zatrzymanie i blokuje rozruch. Po zatrzymaniu i odzyskaniu jednego pomiaru ECU dopuszcza nową świadomą próbę, jeśli spełniono warunki SYS-131 dla pozostałej usterki (SYS-132).
 - ECU jest właścicielem danych i rozstrzyga wykonanie żądań. Odczyt i edycja w Windows oraz wybór w HMI muszą odzwierciedlać rzeczywiste dane ECU.
 
 „Kompletny zestaw” oznacza komplet map uzgodnionych dla danej konfiguracji. Lista map, osie i wielkości tabel pozostają do specyfikacji. Pojedyncze nastawy strojenia są wspólne według SYS-118. Obsługa paliwa dotyczy odpowiednich konfiguracji wtryskowych; nie dodajemy sterowania wtryskiem do wariantu gaźnikowego.
@@ -185,7 +186,9 @@ Odpowiedź A na pytanie 139 (2026-11-08) ustala zakończenie bieżącej pracy si
 
 Odpowiedź A na pytanie 140 (2026-11-08) dopuszcza rozruch przy pojedynczej usterce TPS albo pomiaru ciśnienia w profilu wymagającym obu. Kalibracja dla tej usterki wymaga weryfikacji również do rozruchu. Zastosowanie kalibracji podlega pozostałym warunkom rozruchu, w tym blokadom SYS-102 i SYS-110 (SYS-131).
 
-**Bieżący temat F02 to zachowanie wtrysku po utracie wszystkich wymaganych pomiarów obciążenia.**
+Odpowiedź A na pytanie 141 (2026-11-08) obejmuje stan, w którym zarówno TPS, jak i pomiar ciśnienia są niewiarygodne. ECU zatrzymuje silnik w kontrolowany sposób i blokuje rozruch. Po zatrzymaniu powrót jednego wiarygodnego sygnału pozwala dopuścić nową świadomą próbę po sprawdzeniu warunków SYS-131 dla pozostającej usterki (SYS-132).
+
+**Bieżący temat F02 to reakcja wtrysku na utratę sygnału w profilu z jednym wymaganym pomiarem obciążenia.**
 
 ## Przewidywana weryfikacja
 
@@ -229,5 +232,6 @@ Rozwinięcie grup V02/V04/V06/V09 z [macierzy wymagań](../verification/macierz-
 36. SYS-129. Dla profilu wtryskowego wymagającego TPS i pomiaru ciśnienia sprawdzić, czy dokumentacja dopuszczenia zawiera wyniki dla każdej pojedynczej usterki. Na stanowisku zasymulować każdą z nich w profilu, w którym dla danego przypadku brakuje zweryfikowanej kalibracji. Sprawdzić zgłoszenie usterki i kontrolowane zatrzymanie według kryteriów przyjętych dla profilu. Dla przypadków z dopuszczoną kalibracją zastosować próbę SYS-128. Brak dowodu dla jednego z przypadków wstrzymuje dopuszczenie profilu do jazdy.
 37. SYS-130. Osobno dla utraty TPS i właściwego pomiaru ciśnienia doprowadzić ECU na stanowisku do pracy na kalibracji awaryjnej według SYS-128. Przywrócić wiarygodny sygnał podczas pracy i sprawdzić, czy dawka i zapłon nadal wynikają z kalibracji awaryjnej. Zatrzymać silnik przy zachowanym zasilaniu ECU i sprawdzić użycie sterowania nominalnego przy kolejnym rozruchu z wiarygodnymi pomiarami. W oddzielnej próbie sprawdzić, że sterowanie nominalne nie zostaje wybrane, gdy przy kolejnej próbie rozruchu wymagany pomiar nadal jest niewiarygodny.
 38. SYS-131. Na stanowisku wykonać osobne próby rozruchu z potwierdzoną usterką TPS i właściwego pomiaru ciśnienia w profilu według SYS-127. Przy wiarygodnych pozostałych sygnałach i spełnionych pozostałych warunkach sprawdzić dopuszczenie rozruchu, sterowanie dawką i zapłonem według właściwej kalibracji zweryfikowanej do rozruchu oraz zgłoszenie usterki. Sprawdzić odmowę uruchomienia osobno z kalibracją zweryfikowaną wyłącznie do pracy już uruchomionego silnika i przy aktywnej blokadzie rozruchu mimo poprawnej kalibracji rozruchowej.
+39. SYS-132. Na stanowisku zasymulować utratę obu pomiarów podczas pracy nominalnej oraz osobno utratę pozostałego pomiaru podczas pracy awaryjnej. Sprawdzić kontrolowane zatrzymanie według kryteriów profilu i blokadę rozruchu, gdy oba pomiary są niewiarygodne. Po zatrzymaniu w osobnych próbach przywrócić wiarygodność tylko TPS oraz tylko pomiaru ciśnienia. Przy spełnieniu SYS-131 potwierdzić rozruch wyłącznie na nową świadomą próbę. Sprawdzić utrzymanie blokady, gdy dla nadal uszkodzonego pomiaru kalibracja nie jest zweryfikowana do rozruchu.
 
 Kryteria liczbowe, połączenia, kroki i warunki przerwania powstaną przed wykonaniem prób. Brak implementacji i wyników produktu.
