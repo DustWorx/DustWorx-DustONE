@@ -1,6 +1,6 @@
 # Mapy i konfiguracja — operacje F02
 
-Stan na 2026-11-08. **F02 aktywny po zakończeniu kontroli F01 przez właściciela.** Przyjęto ustalenia 101–104 i 108–138. SYS-129 określa warunki dopuszczenia profilu wtrysku i reakcję przy braku kalibracji awaryjnej. Bieżący temat to powrót wtrysku do pracy nominalnej po odzyskaniu wiarygodnych pomiarów obciążenia. Wymagania SYS-003/007/028/047/094/095/099/100/101/102/103/104/105/106/107/108/109/110/111/112/113/114/115/116/117/118/119/120/121/122/123/124/125/126/127/128/129 zawiera [rejestr systemu](../01-zakres-systemu.md). Decyzje zebrano w [ADR-011](../decisions/adr-011-strojenie-na-zywo.md).
+Stan na 2026-11-08. **F02 aktywny po zakończeniu kontroli F01 przez właściciela.** Przyjęto ustalenia 101–104 i 108–139. SYS-130 określa powrót wtrysku do sterowania nominalnego po pracy awaryjnej. Bieżący temat to dopuszczenie rozruchu wtrysku z potwierdzoną usterką jednego z wymaganych pomiarów obciążenia. Wymagania SYS-003/007/028/047/094/095/099/100/101/102/103/104/105/106/107/108/109/110/111/112/113/114/115/116/117/118/119/120/121/122/123/124/125/126/127/128/129/130 zawiera [rejestr systemu](../01-zakres-systemu.md). Decyzje zebrano w [ADR-011](../decisions/adr-011-strojenie-na-zywo.md).
 
 ## Zatwierdzona podstawa
 
@@ -39,6 +39,7 @@ Stan na 2026-11-08. **F02 aktywny po zakończeniu kontroli F01 przez właścicie
 - Profil, w którym sterowanie OEM wykorzystuje TPS i właściwy pomiar ciśnienia, wymaga obu do pracy nominalnej. Wykorzystanie sygnałów wynika z ich ról w danej jednostce (SYS-127).
 - Po potwierdzonej usterce jednego z dwóch wymaganych pomiarów obciążenia ECU zgłasza usterkę i kontynuuje pracę, gdy pozostałe wymagane sygnały są wiarygodne i dostępna jest zweryfikowana kalibracja dla tej utraty (SYS-128).
 - Dopuszczenie profilu wtrysku wymaga osobnej weryfikacji reakcji na awarię TPS i pomiaru ciśnienia. Dla usterki bez zweryfikowanej kalibracji ECU realizuje kontrolowane zatrzymanie (SYS-129).
+- Po odzyskaniu wiarygodnych pomiarów w trakcie pracy ECU pozostaje na kalibracji awaryjnej do zatrzymania silnika. Przy kolejnym rozruchu z wiarygodnymi wymaganymi pomiarami wraca do sterowania nominalnego (SYS-130).
 - ECU jest właścicielem danych i rozstrzyga wykonanie żądań. Odczyt i edycja w Windows oraz wybór w HMI muszą odzwierciedlać rzeczywiste dane ECU.
 
 „Kompletny zestaw” oznacza komplet map uzgodnionych dla danej konfiguracji. Lista map, osie i wielkości tabel pozostają do specyfikacji. Pojedyncze nastawy strojenia są wspólne według SYS-118. Obsługa paliwa dotyczy odpowiednich konfiguracji wtryskowych; nie dodajemy sterowania wtryskiem do wariantu gaźnikowego.
@@ -179,7 +180,9 @@ Odpowiedź A na pytanie 137 (2026-11-08) ustala zgłoszenie usterki i kontynuowa
 
 Odpowiedź A na pytanie 138 (2026-11-08) ustala weryfikację reakcji na obie pojedyncze usterki przed dopuszczeniem profilu do jazdy. Dla każdej usterki weryfikujemy pracę na właściwej kalibracji według SYS-128 albo kontrolowane zatrzymanie, gdy brakuje zweryfikowanej kalibracji dla tej usterki (SYS-129). Sekwencję i kryteria kontrolowanego zatrzymania określimy w projekcie oraz procedurze prób.
 
-**Bieżący temat F02 to powrót wtrysku do pracy nominalnej po odzyskaniu wiarygodnych pomiarów obciążenia.**
+Odpowiedź A na pytanie 139 (2026-11-08) ustala zakończenie bieżącej pracy silnika na kalibracji awaryjnej mimo odzyskania sygnału. Sterowanie nominalne wraca przy następnym uruchomieniu, jeśli wymagane pomiary są wtedy wiarygodne (SYS-130).
+
+**Bieżący temat F02 to dopuszczenie rozruchu wtrysku z potwierdzoną usterką jednego z wymaganych pomiarów obciążenia.**
 
 ## Przewidywana weryfikacja
 
@@ -221,5 +224,6 @@ Rozwinięcie grup V02/V04/V06/V09 z [macierzy wymagań](../verification/macierz-
 34. SYS-127. Powiązać pomiary i ich role z dokumentacją referencyjną wybranych jednostek. Sprawdzić nominalną pracę profilu z samym TPS na mapie o dwóch osiach. W reprezentatywnych profilach używających TPS i MAP albo TPS i CCPS zmieniać każdy pomiar osobno w warunkach właściwych dla jego roli i sprawdzić udział w obliczeniach. Potwierdzić wymaganie wiarygodności obu sygnałów dla pracy nominalnej. Reakcje awaryjne obejmie osobna próba.
 35. SYS-128. W reprezentatywnych profilach wtrysku z TPS i MAP albo TPS i CCPS zasymulować pracę nominalną przy wiarygodnych sygnałach. W osobnych próbach wywołać i potwierdzić usterkę TPS lub pomiaru ciśnienia, zachowując pozostałe wymagane sygnały. W każdej próbie sprawdzić zgłoszenie usterki, wybór zweryfikowanej kalibracji właściwej dla tej utraty i kontynuowanie pracy w jej dopuszczonym zakresie. Porównać dawkę i zapłon z oczekiwanym wynikiem kalibracji. Kryteria czasowe przejścia i granice pracy określić przed próbą.
 36. SYS-129. Dla profilu wtryskowego wymagającego TPS i pomiaru ciśnienia sprawdzić, czy dokumentacja dopuszczenia zawiera wyniki dla każdej pojedynczej usterki. Na stanowisku zasymulować każdą z nich w profilu, w którym dla danego przypadku brakuje zweryfikowanej kalibracji. Sprawdzić zgłoszenie usterki i kontrolowane zatrzymanie według kryteriów przyjętych dla profilu. Dla przypadków z dopuszczoną kalibracją zastosować próbę SYS-128. Brak dowodu dla jednego z przypadków wstrzymuje dopuszczenie profilu do jazdy.
+37. SYS-130. Osobno dla utraty TPS i właściwego pomiaru ciśnienia doprowadzić ECU na stanowisku do pracy na kalibracji awaryjnej według SYS-128. Przywrócić wiarygodny sygnał podczas pracy i sprawdzić, czy dawka i zapłon nadal wynikają z kalibracji awaryjnej. Zatrzymać silnik przy zachowanym zasilaniu ECU i sprawdzić użycie sterowania nominalnego przy kolejnym rozruchu z wiarygodnymi pomiarami. W oddzielnej próbie sprawdzić, że sterowanie nominalne nie zostaje wybrane, gdy przy kolejnej próbie rozruchu wymagany pomiar nadal jest niewiarygodny.
 
 Kryteria liczbowe, połączenia, kroki i warunki przerwania powstaną przed wykonaniem prób. Brak implementacji i wyników produktu.
