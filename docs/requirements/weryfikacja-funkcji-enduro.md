@@ -68,7 +68,7 @@ Dla KTM 2T TBI instrukcja TSP ERM opisuje tabele korekt paliwa i zapłonu z tymi
 
 ## Przykład — usterka źródła obciążenia we wtrysku
 
-Instrukcja wtryskowej Yamaha WR450FB MY2012 opisuje możliwość rozruchu i jazdy w trybie awaryjnym osobno dla przerwy lub zwarcia w obwodzie MAP oraz TPS. W DustONE praca nominalna używa pomiarów wymaganych dla profilu według SYS-127. Kontynuowanie pracy po utracie jednego z dwóch wymaganych pomiarów pozostaje otwartą decyzją F02. [Instrukcja serwisowa Yamaha WR450FB, nr 1DX-28199-10, kody 13 i 15, s. 9-35 i 9-37](https://www.motopetersburg.ru/docs/yamaha-wr450FB-2012-2015-owners-service-manual.pdf).
+Instrukcja wtryskowej Yamaha WR450FB MY2012 opisuje możliwość rozruchu i jazdy w trybie awaryjnym osobno dla przerwy lub zwarcia w obwodzie MAP oraz TPS. W DustONE praca nominalna używa pomiarów wymaganych dla profilu według SYS-127. W odpowiedzi A na pytanie 137 (2026-11-08) właściciel przyjął kontynuowanie pracy po pojedynczej usterce na zweryfikowanej kalibracji, gdy pozostałe wymagane sygnały są wiarygodne (SYS-128). [Instrukcja serwisowa Yamaha WR450FB, nr 1DX-28199-10, kody 13 i 15, s. 9-35 i 9-37](https://www.motopetersburg.ru/docs/yamaha-wr450FB-2012-2015-owners-service-manual.pdf).
 
 ## Przykład — TPS i ciśnienie w enduro 2T
 
