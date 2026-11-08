@@ -47,6 +47,22 @@ Po utracie sesji przyjęty trwały zapis map z kompletem danych kończy i weryfi
 
 Po anulowaniu nieukończonego transferu map kolejny transfer wymaga przesłania kompletu danych od początku (SYS-114).
 
+Po ponownym połączeniu z działającym ECU Windows może odczytać stan map roboczych i zapisanych, flagę błędu sumy oraz status operacji rozpoczętej przed rozłączeniem (SYS-115).
+
+Dla polecenia z grupą zmian wartości map wynik ECU dotyczy całej grupy. Przy odrzuceniu Windows może odczytać przyczynę (SYS-116).
+
+Windows może zlecić przywrócenie zapisanej wersji wybranego zestawu do pamięci roboczej ECU. Warunek zgaszonego silnika sprawdza ECU (SYS-117).
+
+Zakres danych przełączanego zestawu obejmuje mapy. Pojedyncze nastawy strojenia są wspólne dla wszystkich zestawów (SYS-118).
+
+W konfiguracji 2T z elektronicznym zaworem wydechowym dane zestawu obejmują jego mapę położenia zadanego (SYS-119).
+
+Zestawy map zapłonu gaźnika używają krzywej obrotowej w wariancie bez TPS i mapy od obrotów oraz położenia przepustnicy w wariancie z TPS (SYS-120).
+
+Konfiguracja gaźnikowa korzystająca z TPS uwzględnia zweryfikowaną krzywą awaryjną od obrotów (SYS-121). Krzywa należy do danych wspólnych konfiguracji (SYS-122). Sposób jej przygotowania i zapisu wymaga doprecyzowania.
+
+W konfiguracji wtryskowej wybiera się TPS albo MAP jako źródło osi obciążenia bazowej mapy dawki paliwa. Wybrane źródło jest wspólne dla bazowych map paliwa i zapłonu we wszystkich zestawach tej konfiguracji (SYS-125 i SYS-126).
+
 SYS-101: Windows może przesyłać do ECU robocze zmiany wybranych wartości aktywnego i nieaktywnych zestawów podczas pracy silnika. Edycja nie przełącza zestawu; nieaktywny zaczyna wpływać na silnik dopiero po jego świadomym wybraniu. Obowiązuje SYS-095 dla trwałego zapisu. Szczegóły: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 
 SYS-099: wybór zestawu po restarcie realizuje ECU, również bez HMI/PC; jest to ostatnio wybrany prawidłowy zestaw spośród trwale zapisanych. Aplikacja po połączeniu odczytuje rzeczywisty stan. Po prawidłowym śnie/wybudzeniu niezapisane zmiany zostają odrzucone zgodnie z SYS-100. Uzgodnienie po powrocie sesji i walidacja danych pozostają do określenia w [F02](../../docs/interfaces/mapy-i-konfiguracja.md).

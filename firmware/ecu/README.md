@@ -52,6 +52,30 @@ SYS-113 wymaga dokończenia przyjętego trwałego zapisu po odłączeniu Windows
 
 SYS-114 określa anulowanie nieukończonego transferu zestawu po utracie Windows i zachowanie dotychczasowych map.
 
+SYS-115 wymaga udostępnienia bieżącego stanu map, flagi błędu sumy i statusu operacji po ponownym połączeniu Windows z działającym ECU.
+
+SYS-116 wymaga stosowania całej poprawnej grupy roboczych zmian jako jednej aktualizacji. Przy błędzie ECU odrzuca całe polecenie i udostępnia przyczynę.
+
+SYS-117 określa przywrócenie wybranego zestawu do pamięci roboczej z poprawnego zapisu, przy zgaszonym silniku i blokadach według SYS-110.
+
+SYS-118 rozdziela mapy aktywnego zestawu od pojedynczych nastaw wspólnych dla konfiguracji silnika.
+
+SYS-119 określa wybór mapy położenia zadanego elektronicznego zaworu wydechowego wraz z pozostałymi mapami aktywnego zestawu w wyposażonych konfiguracjach 2T.
+
+SYS-120 określa bazowy zapłon gaźnika z aktywnego zestawu według obrotów bez TPS albo według obrotów i położenia przepustnicy z TPS.
+
+SYS-121 określa zgłoszenie usterki TPS i awaryjny zapłon gaźnika ze zweryfikowanej krzywej zależnej od obrotów, przy prawidłowej synchronizacji wału.
+
+SYS-122 przypisuje krzywą awaryjną do konfiguracji silnika jako wspólną dla jej zestawów map.
+
+SYS-123 określa utrzymanie krzywej awaryjnej do zatrzymania silnika i powrót do mapy z TPS przy następnym rozruchu z wiarygodnym sygnałem.
+
+SYS-124 określa warunki rozruchu gaźnika na krzywej awaryjnej przy potwierdzonej usterce TPS i zgłoszenie tej usterki.
+
+SYS-125 określa bazową mapę dawki dla wtrysku według obrotów i źródła obciążenia wybranego w konfiguracji spośród TPS i MAP.
+
+SYS-126 określa bazową mapę zapłonu we wtrysku i wspólny wybór źródła obciążenia dla map paliwa i zapłonu.
+
 SYS-101: ECU przyjmuje robocze zmiany wybranych wartości aktywnego i nieaktywnych zestawów podczas pracy silnika. Edycja nie przełącza zestawu; zmiany nieaktywnego wpływają na silnik dopiero po jego świadomym wybraniu. Trwały zapis nadal podlega SYS-095. Szczegóły: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 
 SYS-099: po restarcie ECU aktywuje ostatnio wybrany prawidłowy zestaw spośród trwale zapisanych, także bez HMI. Zapamiętanie wyboru i zapis wartości map mają odrębne reguły; brak automatycznego utrwalania edycji na żywo. SYS-100 wymaga po prawidłowym śnie/wybudzeniu odrzucenia roboczej edycji i użycia trwale zapisanych wartości, bez automatycznego utrwalania. Mechanizm pamięci wyboru, walidacja, gotowość do rozruchu i przerwana sekwencja snu są do projektu: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
