@@ -14,7 +14,7 @@ Windows umożliwia zmianę wybranych wartości map podczas pracy silnika. Dopusz
 
 W odpowiedzi **A na pytanie 102** właściciel przyjął maksymalnie trzy niezależne, kompletne zestawy uzgodnionych map dla jednej konfiguracji silnika: „Trzy niezależne, kompletne zestawy uzgodnionych map — np. zapłonu i paliwa w silniku wtryskowym”. Rozważanym wariantem była wspólna baza z trzema profilami korekt.
 
-Doprecyzowanie zapisano w istniejącym SYS-028. Powiązania: SYS-007, SYS-028, SYS-047, SYS-094, SYS-095, SYS-099, SYS-100, SYS-101, SYS-102, SYS-103, SYS-104, SYS-105, SYS-106, SYS-107, SYS-108, SYS-109, SYS-110, SYS-111, SYS-112, SYS-113, SYS-114, SYS-115, SYS-116, SYS-117, SYS-118, SYS-119, SYS-120, SYS-121, SYS-122, SYS-123, SYS-124, SYS-125, SYS-126, SYS-127, SYS-128, SYS-129, SYS-130, SYS-131, SYS-132, SYS-133, SYS-134, SYS-135, SYS-136, SYS-137, SYS-138, SYS-139, SYS-140, SYS-141, SYS-142, SYS-143, SYS-144, SYS-145, SYS-146, SYS-147, SYS-148, SYS-149, SYS-150, SYS-151 i SYS-152. Reguły operacji rozwijamy w [specyfikacji map i konfiguracji](../interfaces/mapy-i-konfiguracja.md).
+Doprecyzowanie zapisano w istniejącym SYS-028. Powiązania: SYS-007, SYS-028, SYS-047, SYS-094, SYS-095, SYS-099, SYS-100, SYS-101, SYS-102, SYS-103, SYS-104, SYS-105, SYS-106, SYS-107, SYS-108, SYS-109, SYS-110, SYS-111, SYS-112, SYS-113, SYS-114, SYS-115, SYS-116, SYS-117, SYS-118, SYS-119, SYS-120, SYS-121, SYS-122, SYS-123, SYS-124, SYS-125, SYS-126, SYS-127, SYS-128, SYS-129, SYS-130, SYS-131, SYS-132, SYS-133, SYS-134, SYS-135, SYS-136, SYS-137, SYS-138, SYS-139, SYS-140, SYS-141, SYS-142, SYS-143, SYS-144, SYS-145, SYS-146, SYS-147, SYS-148, SYS-149, SYS-150, SYS-151, SYS-152 i SYS-153. Reguły operacji rozwijamy w [specyfikacji map i konfiguracji](../interfaces/mapy-i-konfiguracja.md).
 
 W odpowiedzi **A na pytanie 103** właściciel przyjął: „Trwały zapis tylko przy zgaszonym silniku, na wyraźne polecenie użytkownika”. Regułę zapisano jako SYS-095. Rozważany wariant zapisu na polecenie również podczas pracy silnika nie został wybrany.
 
@@ -128,7 +128,7 @@ W odpowiedzi **A na pytanie 159** (2026-11-09) właściciel zatwierdził odtworz
 
 W odpowiedzi **A na pytanie 160** (2026-11-09) właściciel zatwierdził zachowanie pierwotnego terminu wygaśnięcia przy ponownym wyborze tego samego oczekującego zestawu. HMI nadal pokazuje oczekiwanie (SYS-151).
 
-W odpowiedzi na **pytanie 161** (2026-11-09) właściciel przyjął przywrócenie ustawień fabrycznych przy zmianie profilu, aby konfigurować ECU jak nowe urządzenie (SYS-152). Reset użytkownika zachowuje chronione liczniki zgodnie z SYS-076/077. Do rozstrzygnięcia pozostają zakres uprawnień serwisu przy przenoszeniu używanego ECU, ewentualne włączenie kasowania DTC zgodnie z SYS-025, zatwierdzenie nowego profilu przy braku „Standard” i skutki przerwania resetu.
+W odpowiedzi na **pytanie 161** (2026-11-09) właściciel przyjął przywrócenie ustawień fabrycznych przy zmianie profilu, aby konfigurować ECU jak nowe urządzenie (SYS-152). Reset użytkownika zachowuje chronione liczniki zgodnie z SYS-076/077. Chronioną operację producenta przy przełożeniu używanego ECU określa SYS-153 oraz [ADR-007](adr-007-chronione-liczniki.md). Do rozstrzygnięcia pozostają postępowanie z historią DTC i freeze frame przy resecie według SYS-025, zatwierdzenie nowego profilu przy braku „Standard” i skutki przerwania resetu.
 
 ## Skutki i sprawy otwarte
 
