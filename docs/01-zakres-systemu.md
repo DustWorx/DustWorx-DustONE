@@ -168,6 +168,7 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-152 | Przy zmianie profilu silnika użytkownik zleca i wyraźnie potwierdza przywrócenie ustawień fabrycznych ECU w aplikacji Windows. ECU wykonuje operację przy zgaszonym silniku z blokadami według SYS-102. Po ukończeniu resetu ECU przechodzi do stanu pierwszej konfiguracji z fabrycznymi wartościami nastaw użytkowych. Usuwa poprzednią konfigurację użytkową, w tym profil silnika, robocze i trwale zapisane zestawy map oraz wybór zestawu. Przy braku potwierdzonej poprawnej konfiguracji ECU utrzymuje blokady rozrusznika, zapłonu i wtrysku oraz dostęp do konfiguracji z Windows według SYS-105. Reset w trybie użytkownika zachowuje całkowite ODO i motogodziny zgodnie z SYS-076/077. |
 | SYS-153 | Przy przeniesieniu używanego ECU do innego motocykla chroniona procedura umożliwia zmianę całkowitego ODO, całkowitych motogodzin lub obu wartości. Operacja jest dostępna wyłącznie producentowi projektu. ECU sprawdza uprawnienie producenta niezależnie od użytego narzędzia. Każda wykonana operacja jest rejestrowana. Ochronę w trybie użytkownika określają SYS-076 i SYS-152. Warunki dopuszczenia, dane wejściowe, autoryzacja i zakres rejestru wymagają specyfikacji. |
 | SYS-154 | Potwierdzenie resetu profilu według SYS-152 wprost obejmuje skasowanie historii DTC i powiązanych zamrożonych ramek. Windows udostępnia opcjonalny eksport tej historii przed kasowaniem według SYS-025. Po otrzymaniu potwierdzonego polecenia ECU usuwa historię DTC i powiązane freeze frame w ramach resetu razem z dotychczasowym profilem i mapami. Do czasu wymaganego potwierdzenia oraz w przypadku anulowania przed przyjęciem polecenia ECU zachowuje profil, mapy i historię. |
+| SYS-155 | Windows zleca reset profilu według SYS-152/154. ECU utrwala przyjęcie potwierdzonego polecenia przed rozpoczęciem czyszczenia i wykonuje całą operację samodzielnie, również po utracie sesji Windows. Jeśli po ponownym uruchomieniu ECU rozpoznaje trwale przyjęty, niedokończony reset, samodzielnie go wznawia i kończy bez ponownego polecenia z Windows. Rozrusznik, zapłon i wtrysk pozostają zablokowane od przyjęcia resetu do zakończenia operacji i potwierdzenia poprawnej konfiguracji. Po ukończeniu resetu ECU udostępnia stan pierwszej konfiguracji według SYS-152. |
 
 ## 3. Podział odpowiedzialności
 
@@ -381,6 +382,8 @@ W odpowiedzi A na pytanie 160 (2026-11-09) właściciel zatwierdził zachowanie 
 W odpowiedzi na pytanie 161 (2026-11-09) właściciel wybrał czysty start przy zmianie profilu silnika. ECU przywraca ustawienia fabryczne i przygotowuje się do ponownej konfiguracji zgodnie z SYS-152. Zasady chronionych liczników określają SYS-076/077. Szczegóły i kwestie otwarte opisuje [F02](interfaces/mapy-i-konfiguracja.md).
 
 W odpowiedzi B na pytanie 163 (2026-11-09) właściciel zatwierdził kasowanie historii DTC i zamrożonych ramek razem z profilem po wyraźnym potwierdzeniu obejmującym historię. Eksport jest dostępny przed kasowaniem (SYS-154).
+
+W odpowiedzi na pytanie 164 (2026-11-09) właściciel wskazał, że Windows inicjuje reset, a ECU realizuje go samodzielnie. Reguła obejmuje dokończenie trwale przyjętego resetu po powrocie zasilania (SYS-155).
 
 ### Wspólne połączenie z aplikacją Windows — ustalenie właściciela
 
