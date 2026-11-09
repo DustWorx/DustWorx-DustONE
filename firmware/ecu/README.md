@@ -72,9 +72,39 @@ SYS-123 określa utrzymanie krzywej awaryjnej do zatrzymania silnika i powrót d
 
 SYS-124 określa warunki rozruchu gaźnika na krzywej awaryjnej przy potwierdzonej usterce TPS i zgłoszenie tej usterki.
 
-SYS-125 określa bazową mapę dawki dla wtrysku według obrotów i źródła obciążenia wybranego w konfiguracji spośród TPS i MAP.
+SYS-125 określa dwie osie bazowej mapy dawki w strategii z jednym pomiarem obciążenia.
 
-SYS-126 określa bazową mapę zapłonu we wtrysku i wspólny wybór źródła obciążenia dla map paliwa i zapłonu.
+SYS-126 określa bazowy zapłon we wtrysku i wspólne źródło obciążenia w profilach z jednym wymaganym pomiarem.
+
+SYS-127 uzależnia wymagane pomiary obciążenia i ich udział w pracy nominalnej od konfiguracji referencyjnego silnika.
+
+SYS-128 określa zgłoszenie pojedynczej usterki wymaganego TPS lub pomiaru ciśnienia oraz kontynuowanie pracy na zweryfikowanej kalibracji właściwej dla tej utraty.
+
+SYS-129 określa kontrolowane zatrzymanie wtrysku przy pojedynczej usterce wymaganego pomiaru, gdy brakuje zweryfikowanej kalibracji właściwej dla tej usterki.
+
+SYS-130 określa pozostanie na kalibracji awaryjnej do zatrzymania silnika i powrót do sterowania nominalnego przy następnym uruchomieniu z wiarygodnymi pomiarami.
+
+SYS-131 dopuszcza rozruch wtrysku z pojedynczą usterką na kalibracji zweryfikowanej do rozruchu, z zachowaniem pozostałych warunków i zgłoszeniem usterki.
+
+SYS-132 określa kontrolowane zatrzymanie i blokadę rozruchu przy utracie obu pomiarów obciążenia. Po odzyskaniu jednego pomiaru i zatrzymaniu nowa próba rozruchu podlega SYS-131.
+
+SYS-133 domyślnie wymaga kontrolowanego zatrzymania i blokady rozruchu po utracie jedynego wymaganego pomiaru obciążenia. Wyjątek dla konkretnego silnika podlega udokumentowaniu przez OEM i weryfikacji na DustONE.
+
+SYS-134 wymaga osobnego dopuszczenia rozruchu bez jedynego pomiaru w ramach wyjątku według SYS-133. Przy wyjątku dotyczącym wyłącznie dalszej pracy ECU utrzymuje blokadę rozruchu do potwierdzenia wiarygodności pomiaru.
+
+SYS-135 przypisuje ECU odrzucenie żądania zmiany zestawu map podczas pracy awaryjnej po usterce TPS lub pomiaru ciśnienia i przekazanie przyczyny do HMI.
+
+SYS-136 określa automatyczny wybór „Standard” do pracy nominalnej po usterce wymaganego TPS albo pomiaru ciśnienia. W pracy awaryjnej ECU stosuje zweryfikowaną kalibrację dla danej usterki.
+
+SYS-137 określa wymuszenie „Standard” i blokadę zmiany zestawu z HMI dla potwierdzonych usterek wymagających pracy awaryjnej lub zatrzymania silnika.
+
+SYS-138 wymaga zachowania wymuszonego wyboru „Standard” po restarcie ECU. ECU używa prawidłowego, trwale zapisanego zestawu po spełnieniu warunków pracy nominalnej.
+
+SYS-139 wymaga zgłoszenia błędu i blokady rozruchu przy braku poprawnego wymuszonego zestawu „Standard” po restarcie, także przy dostępnym innym poprawnym zestawie.
+
+SYS-140 wymaga zgłoszenia błędu zestawu wybranego przez kierowcę przy restarcie i dopuszcza rozruch na poprawnym zapisanym „Standard” tej konfiguracji przy spełnieniu pozostałych warunków.
+
+SYS-141 wymaga zgłoszenia błędu i blokady rozruchu przy odrzuceniu po restarcie wszystkich wersji zestawu kierowcy i „Standard”. Blokada obowiązuje do potwierdzenia poprawnego zapisu jednego z tych zestawów, także przy dostępnym trzecim zestawie.
 
 SYS-101: ECU przyjmuje robocze zmiany wybranych wartości aktywnego i nieaktywnych zestawów podczas pracy silnika. Edycja nie przełącza zestawu; zmiany nieaktywnego wpływają na silnik dopiero po jego świadomym wybraniu. Trwały zapis nadal podlega SYS-095. Szczegóły: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 
