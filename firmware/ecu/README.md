@@ -36,6 +36,8 @@ SYS-104: z kompletem danych i przyjętym wyraźnym poleceniem wdrożenia ECU prz
 
 SYS-105: po błędzie sprawdzania/wdrażania ECU automatycznie wraca do poprzedniej konfiguracji, jeżeli może ją odtworzyć i potwierdzić jej poprawność; zwalnia blokady operacji, a rozruch wymaga nowej świadomej próby. Bez żadnej potwierdzonej poprawnej konfiguracji utrzymuje blokady rozrusznika, zapłonu i wtrysku oraz dostęp do naprawy konfiguracji z Windows. Mechanizm powrotu i walidacji do projektu: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 
+Zgodnie z SYS-152 po potwierdzonym resecie przy zmianie profilu ECU usuwa poprzednią konfigurację użytkową i mapy, przywraca fabryczne nastawy i udostępnia pierwszą konfigurację z Windows. W trybie użytkownika zachowuje całkowite ODO i motogodziny. Blokady rozruchu przy braku poprawnej konfiguracji wynikają z SYS-105.
+
 SYS-106: po zaniku zasilania podczas zmiany krytycznej konfiguracji ECU odtwarza tylko kompletną i poprawną konfigurację: nową po trwałym potwierdzeniu wdrożenia przez ECU, inaczej poprzednią poprawną. Po sprawdzeniu zwalnia blokady operacji bez Windows i dopuszcza nową świadomą próbę rozruchu. Bez poprawnych danych pozostają blokady i dostęp serwisowy. Mechanizm trwałego potwierdzenia, odtwarzania i ponownego dopuszczenia rozruchu do projektu: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 
 SYS-107: pełny zestaw map, w ramach tej samej konfiguracji silnika, ECU przyjmuje i roboczo zastępuje tylko przy zgaszonym silniku. Warunek egzekwuje ECU. Na żywo pozostaje edycja dopuszczonych wybranych wartości według SYS-094/101; trwały zapis nadal podlega SYS-095. Walidacja, spójność, reakcje na próbę rozruchu i przerwanie do specyfikacji: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).

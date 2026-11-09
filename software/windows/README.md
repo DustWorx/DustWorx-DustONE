@@ -25,6 +25,8 @@ SYS-095: trwały zapis zmian map wymaga wyraźnego polecenia użytkownika i zgas
 
 SYS-102: krytyczną konfigurację można przygotować lokalnie podczas pracy silnika, ale transfer do ECU i wdrożenie wymagają jego zgaszenia oraz wyraźnego polecenia. ECU egzekwuje warunki i blokuje rozrusznik, zapłon i wtrysk przez całą operację. Dopuszczone strojenie wartości map na żywo pozostaje dostępne. Szczegóły: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 
+SYS-152 wymaga jawnego polecenia i potwierdzenia resetu ustawień przy zmianie profilu silnika. Windows zleca przywrócenie ustawień fabrycznych i umożliwia konfigurację ECU po resecie. ECU egzekwuje warunki resetu, blokady i ochronę liczników. Szczegóły opisuje [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
+
 SYS-103: po utracie Windows w nieukończonym transferze krytycznej konfiguracji, przed wdrożeniem, ECU samodzielnie anuluje transfer i zwalnia jego blokady przy poprawnej, nienaruszonej dotychczasowej konfiguracji. Rozruch wymaga nowej świadomej próby. Szczegóły: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 
 SYS-104: po odebraniu kompletu danych i przyjęciu wyraźnego polecenia wdrożenia ECU przy prawidłowym zasilaniu kończy sprawdzanie/wdrożenie samodzielnie mimo utraty Windows. Po potwierdzonym powodzeniu zwalnia blokady bez oczekiwania na powrót aplikacji; rozruch wymaga nowej świadomej próby. Błędy podlegają SYS-105, a powrót po zaniku zasilania SYS-106. Szczegóły: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
