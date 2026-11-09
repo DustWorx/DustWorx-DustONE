@@ -4,6 +4,8 @@ Data: 2026-10-25. Status: uzgodniony normalny przebieg ze stale włączonym zasi
 
 ## Uzgodniony przebieg
 
+W docelowej instalacji enduro bez stacyjki wejście zasilania ECU pozostaje podłączone do akumulatora od pracy silnika przez zgaszenie i sen do kolejnego wybudzenia (SYS-054).
+
 ECU jest koordynatorem. Przy zgaszonym silniku i odłączonym PC oczekuje na upływ konfigurowalnego czasu bezczynności i zakończenie wymaganych zadań, w tym obsługi wentylatora. HMI pozostaje aktywne do polecenia ECU.
 
 Przed prawidłowym wejściem ECU w sen światła przednie i tylne pozycyjne są wyłączane. Po wybudzeniu ze zgaszonym silnikiem pozostają wyłączone do przyjęcia polecenia włączenia z HMI, także przy wybudzeniu ruchem koła; nie wracają automatycznie do stanu sprzed snu (SYS-081, odpowiedź A na pytanie 85 z 2026-11-01). Po potwierdzonym uruchomieniu silnika ECU włącza automatycznie przednie i tylne pozycyjne; mijania i drogowe włącza użytkownik z HMI (SYS-082, odpowiedź na pytanie 86 z 2026-11-01). Automatyka pozycyjnych działa także bez HMI. Po zatrzymaniu silnika włączone mijania/drogowe przechodzą w przednie i tylne pozycyjne, z możliwością ręcznego włączenia z HMI (SYS-083). Przy niskim napięciu przed uśpieniem ECU uruchamia oszczędzanie i wyłącza pozycyjne oraz wskazane zbędne odbiorniki (SYS-084). ECU odrzuca zwykłe ponowne żądania włączenia odbiorników objętych odcięciem, a HMI przy zgaszonym silniku informuje o wymaganym uruchomieniu (SYS-085/086). Wyjście w normalnym użytkowaniu wymaga potwierdzonej pracy silnika i napięcia powyżej progu powrotu przez ustalony czas; automatyczne żądanie pozycyjnych nie omija aktywnego odcięcia (SYS-087). Po wyjściu mijania/drogowe i dodatkowe odbiorniki użytkownika czekają na nowe polecenie, a ochrona silnika i wentylator działają według aktualnych potrzeb i własnych zabezpieczeń (SYS-088/089). Szczegółowa lista odbiorników i parametry pozostają do ustalenia: [analiza i plan prób](oszczedzanie-energii.md). Stany po resecie i zaniku zasilania nadal wymagają specyfikacji.
@@ -54,6 +56,8 @@ Formaty i identyfikatory ramek, oznaczenie bieżącej próby, czasy odpowiedzi i
 [Porównanie timeoutu, resetu i kontroli zasilania](brak-potwierdzenia-uspienia-hmi.md) zachowuje uzasadnienie wyboru i rozważone alternatywy.
 
 ## Proponowana weryfikacja
+
+Dla SYS-054/059 wykonać próbę w instalacji stanowiskowej bez stacyjki, przy stale podłączonym akumulatorze. Po zatrzymaniu silnika przewodowym STOP potwierdzić utrzymanie zasilania na wejściu ECU. Przy odłączonym PC i po zakończeniu zadań sprawdzić automatyczne uśpienie ECU i HMI po skonfigurowanym czasie oraz kolejne wybudzenie przy zachowanym zasilaniu.
 
 Dla SYS-082 rozpocząć ze światłami wyłączonymi i bez żądania HMI: samo wybudzenie przy zgaszonym silniku pozostawia światła wyłączone, a potwierdzone uruchomienie włącza przednie i tylne pozycyjne. Mijania i drogowe mają włączyć się po odpowiednim poleceniu użytkownika z HMI. Powtórzyć automatyczne włączenie pozycyjnych przy opóźnionym oraz niedostępnym HMI. Zweryfikować oddzielne funkcje logiczne; ich połączenia, prądy i dozwolone kombinacje dla konkretnych lamp określić przed próbami.
 

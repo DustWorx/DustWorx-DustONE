@@ -6,7 +6,7 @@ Stan: brak implementacji. Procesor, język, środowisko budowania i organizacja 
 
 Po rozpoczęciu implementacji ten dokument opisuje budowanie, uruchamianie i testowanie komponentu. Testy jednostkowe przechowujemy przy kodzie.
 
-ECU nalicza i przechowuje [chronione całkowite motogodziny i ODO](../../docs/architecture/chronione-liczniki.md), SYS-074–077. Ochronę egzekwuje firmware i architektura sprzętu, obejmując protokół, narzędzia testowe, pamięć, bootloader i odzyskiwanie. Chroniona procedura producenta/serwisu ma umożliwiać inicjalizację nowego ECU i przenoszenie udokumentowanych wartości, z rejestrem każdej operacji. Szczegóły autoryzacji i konkretne mechanizmy pozostają do projektu; nie przyjęto nieodwracalnego blokowania debuggera.
+ECU nalicza i przechowuje [chronione całkowite motogodziny i ODO](../../docs/architecture/chronione-liczniki.md), SYS-074–077. Ochronę egzekwuje firmware i architektura sprzętu, obejmując protokół, narzędzia testowe, pamięć, bootloader i odzyskiwanie. Chroniona procedura producenta/serwisu ma umożliwiać inicjalizację nowego ECU i przenoszenie udokumentowanych wartości, z rejestrem każdej operacji. Przy przeniesieniu używanego ECU do innego motocykla firmware egzekwuje odrębne uprawnienie producenta do zmiany liczników i zapewnia rejestr operacji według SYS-153. Szczegóły autoryzacji i konkretne mechanizmy pozostają do projektu; nie przyjęto nieodwracalnego blokowania debuggera.
 
 [SYS-078 i ADR-008](../../docs/decisions/adr-008-dostep-do-firmware-ecu.md) określają dostęp do firmware: w trybie użytkowym wyłącznie wersje zatwierdzone przez producenta projektu, z zachowaniem programowania i debugowania dla twórców. Kontrolę trzeba zaprojektować po stronie ECU, obejmując uruchamianie, aktualizację, programowanie i odzyskiwanie zgodnie z uzgodnionym modelem zagrożeń. Autoryzacja dostępu rozwojowego, polityka starszych wersji i przejść między trybami są otwarte.
 
@@ -35,6 +35,10 @@ SYS-103: po potwierdzonej utracie Windows przed odebraniem całości krytycznej 
 SYS-104: z kompletem danych i przyjętym wyraźnym poleceniem wdrożenia ECU przy prawidłowym zasilaniu samodzielnie kończy sprawdzanie/wdrożenie mimo utraty Windows. Blokady operacji zwalnia dopiero po potwierdzonym powodzeniu; rozruch wymaga nowej świadomej próby. Błędy podlegają SYS-105, a powrót po zaniku zasilania SYS-106: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 
 SYS-105: po błędzie sprawdzania/wdrażania ECU automatycznie wraca do poprzedniej konfiguracji, jeżeli może ją odtworzyć i potwierdzić jej poprawność; zwalnia blokady operacji, a rozruch wymaga nowej świadomej próby. Bez żadnej potwierdzonej poprawnej konfiguracji utrzymuje blokady rozrusznika, zapłonu i wtrysku oraz dostęp do naprawy konfiguracji z Windows. Mechanizm powrotu i walidacji do projektu: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
+
+Zgodnie z SYS-152 po potwierdzonym resecie przy zmianie profilu ECU usuwa poprzednią konfigurację użytkową i mapy, przywraca fabryczne nastawy i udostępnia pierwszą konfigurację z Windows. W trybie użytkownika zachowuje całkowite ODO i motogodziny. Blokady rozruchu przy braku poprawnej konfiguracji wynikają z SYS-105. Potwierdzenie obejmujące historię DTC umożliwia usunięcie jej w ramach tego samego resetu według SYS-154. Według SYS-155 ECU trwale przyjmuje reset przed czyszczeniem i wykonuje go samodzielnie. Po powrocie zasilania wznawia przyjęty reset z aktywnymi blokadami rozrusznika, zapłonu i wtrysku.
+
+Według SYS-156 ECU trwale przechowuje nieaktywny projekt po resecie i udostępnia go Windows po restarcie. Dopiero zgodny „Standard”, jawne wdrożenie i potwierdzenie poprawnego zapisu kompletnego profilu pozwalają zwolnić blokady pierwszej konfiguracji.
 
 SYS-106: po zaniku zasilania podczas zmiany krytycznej konfiguracji ECU odtwarza tylko kompletną i poprawną konfigurację: nową po trwałym potwierdzeniu wdrożenia przez ECU, inaczej poprzednią poprawną. Po sprawdzeniu zwalnia blokady operacji bez Windows i dopuszcza nową świadomą próbę rozruchu. Bez poprawnych danych pozostają blokady i dostęp serwisowy. Mechanizm trwałego potwierdzenia, odtwarzania i ponownego dopuszczenia rozruchu do projektu: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 
@@ -105,6 +109,26 @@ SYS-139 wymaga zgłoszenia błędu i blokady rozruchu przy braku poprawnego wymu
 SYS-140 wymaga zgłoszenia błędu zestawu wybranego przez kierowcę przy restarcie i dopuszcza rozruch na poprawnym zapisanym „Standard” tej konfiguracji przy spełnieniu pozostałych warunków.
 
 SYS-141 wymaga zgłoszenia błędu i blokady rozruchu przy odrzuceniu po restarcie wszystkich wersji zestawu kierowcy i „Standard”. Blokada obowiązuje do potwierdzenia poprawnego zapisu jednego z tych zestawów, także przy dostępnym trzecim zestawie.
+
+SYS-142 wymaga trwałego zapamiętania „Standard” wybranego zastępczo po błędzie zestawu kierowcy. Powrót do odzyskanego zestawu wymaga nowego wyboru kierowcy.
+
+SYS-143 określa przyjęcie poprawnego żądania podczas jazdy, przekazanie statusu oczekiwania do HMI i wykonanie zmiany w dopuszczonym momencie tej jazdy.
+
+SYS-144 wymaga odmierzenia limitu od przyjęcia oczekującego żądania, jego wygaśnięcia po upływie limitu i przekazania wyniku do HMI.
+
+SYS-145 określa zastąpienie oczekującego wyboru nowym poprawnym żądaniem, odmierzenie limitu od jego przyjęcia i przekazanie aktualnego oczekującego wyboru do HMI.
+
+SYS-146 wymaga anulowania oczekującej zmiany po wyborze aktywnego zestawu i przekazania potwierdzenia do HMI.
+
+SYS-147 wymaga anulowania oczekującej zmiany przy wymuszeniu „Standard” po usterce i nowego wyboru kierowcy po powrocie do pracy nominalnej.
+
+SYS-148 określa zachowanie przyjętego żądania po utracie łączności z HMI i wykonanie go w dopuszczonym momencie przed upływem pierwotnego limitu.
+
+SYS-149 określa wykonanie poprawnego wyboru na postoju przy zgaszonym silniku i zasilanym ECU, także dla nadal ważnego żądania z jazdy.
+
+SYS-150 wymaga zakończenia ważności oczekującego żądania i odtworzenia ostatnio zastosowanego zestawu z poprawnego zapisu po restarcie ECU.
+
+SYS-151 wymaga zachowania pierwotnego terminu oczekiwania po ponownym wyborze tego samego oczekującego zestawu.
 
 SYS-101: ECU przyjmuje robocze zmiany wybranych wartości aktywnego i nieaktywnych zestawów podczas pracy silnika. Edycja nie przełącza zestawu; zmiany nieaktywnego wpływają na silnik dopiero po jego świadomym wybraniu. Trwały zapis nadal podlega SYS-095. Szczegóły: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 

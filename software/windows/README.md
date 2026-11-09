@@ -9,7 +9,7 @@ Jedna aplikacja obsługująca ECU oraz HMI, z obszarami:
 
 Stan: brak implementacji. Technologia aplikacji i fizyczne połączenie z urządzeniami pozostają do ustalenia.
 
-Całkowite motogodziny i ODO są udostępniane użytkownikowi końcowemu do odczytu, bez ustawiania, korekty lub kasowania, także w diagnostyce i development tool. Ochrona musi być egzekwowana przez ECU, a nie wyłącznie interfejs aplikacji. Odrębne uprawnienie producenta/serwisu obejmuje chronioną inicjalizację nowego ECU i przenoszenie udokumentowanych wartości, z rejestrem każdej operacji; szczegóły dostępu są otwarte. Zasady i otwarte decyzje: [chronione liczniki](../../docs/architecture/chronione-liczniki.md), SYS-074–077.
+Całkowite motogodziny i ODO są udostępniane użytkownikowi końcowemu do odczytu, bez ustawiania, korekty lub kasowania, także w diagnostyce i development tool. Ochrona musi być egzekwowana przez ECU, a nie wyłącznie interfejs aplikacji. Odrębne uprawnienie producenta/serwisu obejmuje chronioną inicjalizację nowego ECU i przenoszenie udokumentowanych wartości, z rejestrem każdej operacji. Operację zmiany liczników w używanym ECU przenoszonym do innego motocykla zastrzeżono dla producenta (SYS-153). Sposób dostępu pozostaje do projektu. Zasady i otwarte decyzje: [chronione liczniki](../../docs/architecture/chronione-liczniki.md), SYS-074–077.
 
 Aktualizacja ECU w trybie użytkowym ma dopuszczać wyłącznie firmware zatwierdzony przez producenta projektu ([SYS-078 i ADR-008](../../docs/decisions/adr-008-dostep-do-firmware-ecu.md)). Sama kontrola pliku przez aplikację nie zastępuje egzekwowania polityki w ECU. Dostęp rozwojowy twórców do programowania i debugowania pozostaje wymagany; szczegóły autoryzacji są otwarte. Decyzja nie określa jeszcze polityki firmware HMI.
 
@@ -24,6 +24,10 @@ Edytor obsługuje maks. trzy niezależne, kompletne zestawy uzgodnionych map jed
 SYS-095: trwały zapis zmian map wymaga wyraźnego polecenia użytkownika i zgaszonego silnika. ECU rozstrzyga dopuszczenie; samo zastosowanie zmian na żywo nie utrwala ich automatycznie. [Specyfikacja F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 
 SYS-102: krytyczną konfigurację można przygotować lokalnie podczas pracy silnika, ale transfer do ECU i wdrożenie wymagają jego zgaszenia oraz wyraźnego polecenia. ECU egzekwuje warunki i blokuje rozrusznik, zapłon i wtrysk przez całą operację. Dopuszczone strojenie wartości map na żywo pozostaje dostępne. Szczegóły: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
+
+SYS-152 wymaga jawnego polecenia i potwierdzenia resetu ustawień przy zmianie profilu silnika. Windows zleca przywrócenie ustawień fabrycznych i umożliwia konfigurację ECU po resecie. ECU egzekwuje warunki resetu, blokady i ochronę liczników. Potwierdzenie resetu wprost wymienia usunięcie historii DTC i zamrożonych ramek. Przed kasowaniem aplikacja udostępnia opcjonalny eksport (SYS-154). Po trwałym przyjęciu polecenia przez ECU wykonanie resetu jest niezależne od Windows, również po powrocie zasilania (SYS-155). Szczegóły opisuje [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
+
+Według SYS-156 aplikacja umożliwia zapis ustawień jako nieaktywnego projektu w ECU, jego odczyt po restarcie, uzupełnienie o zgodny „Standard” i zlecenie wdrożenia kompletnego profilu. ECU rozstrzyga aktywację i dopuszczenie rozruchu.
 
 SYS-103: po utracie Windows w nieukończonym transferze krytycznej konfiguracji, przed wdrożeniem, ECU samodzielnie anuluje transfer i zwalnia jego blokady przy poprawnej, nienaruszonej dotychczasowej konfiguracji. Rozruch wymaga nowej świadomej próby. Szczegóły: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 

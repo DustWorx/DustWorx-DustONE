@@ -1,6 +1,6 @@
 # F01 — podsumowanie kontrolne ustaleń
 
-Stan na: 2026-11-04. **Kontrola F01 zakończona; właściciel potwierdził zgodność całości i dalszą pracę. F01 zamknięty 2026-11-04.** Reguły map i konfiguracji są rozwijane odrębnie w F02. Podsumowanie nie zmienia wymagań; źródłem pozostaje [rejestr SYS](../01-zakres-systemu.md) i [ADR](../decisions/README.md).
+Stan na: 2026-11-04. **Kontrola F01 zakończona; właściciel potwierdził zgodność całości i dalszą pracę. F01 zamknięty 2026-11-04.** Reguły map i konfiguracji należą do F02. Podsumowanie nie zmienia wymagań; źródłem pozostaje [rejestr SYS](../01-zakres-systemu.md) i [ADR](../decisions/README.md).
 
 ## 1. Zakres silników i integracji
 
@@ -76,4 +76,4 @@ Poza zakresem pozostają: chłodzenie powietrzem, ride-by-wire, dwa niezależne 
 - Etap 6: wspólny wybór ważnych komponentów i obwodów. MCU, czujniki na PCB i drivery nie zostały wybrane przez zamknięcie zakresu funkcji.
 - Testy: asystent przygotowuje właściwe procedury i kryteria, właściciel wykonuje próby. Brak wyników produktu; wymagania pozostają niezweryfikowane na wykonanym ECU.
 
-Właściciel potwierdził zgodność całego F01 i polecił kontynuację w rozmowie 2026-11-04. Kontrolę zakończono bez zmiany wymagań; F02 jest aktywny zgodnie z kolejnością procesu. Dalsze decyzje F02 są zapisywane w jego specyfikacji.
+Właściciel potwierdził zgodność całego F01 i polecił kontynuację w rozmowie 2026-11-04. Po zakończeniu kontroli rozpoczęto F02 zgodnie z kolejnością procesu. Wynik zapisano w [karcie F02](f02-przeglad-zakresu.md).

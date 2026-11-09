@@ -9,3 +9,21 @@ Po wykryciu obrotów przedniego koła ECU wybudza również HMI (SYS-080). Nalic
 SYS-086: przy próbie włączenia odbiornika objętego aktywnym odcięciem oszczędzania, przy zgaszonym silniku HMI wyświetla odmowę i informację „Wymagane uruchomienie silnika”. Źródłem decyzji jest ECU (SYS-085); panel nie znosi blokady lokalną zmianą stanu. Gdy silnik już pracuje, a warunek napięcia/czasu z SYS-087 nadal nie jest spełniony, HMI powinno przedstawiać aktualny powód dalszej blokady. Proponowany opis: „Oczekiwanie na stabilne zasilanie”. Aktualność statusów, kodowanie przyczyny i dokładny opis tego stanu wymagają specyfikacji: [analiza i plan prób](../../docs/architecture/oszczedzanie-energii.md).
 
 HMI wyświetla przyczynę odrzucenia zmiany zestawu map otrzymaną z ECU po usterce wymagającej pracy awaryjnej lub zatrzymania silnika (SYS-135 i SYS-137). Szczegóły scenariusza i próby zawiera [specyfikacja F02](../../docs/interfaces/mapy-i-konfiguracja.md).
+
+Przy odłożonym przełączeniu zestawu w czasie jazdy HMI pokazuje oczekiwanie i wskazuje faktycznie aktywny zestaw według stanu otrzymanego z ECU (SYS-143).
+
+Po otrzymaniu statusu wygaśnięcia żądania HMI informuje kierowcę o konieczności ponownego wyboru zestawu (SYS-144).
+
+Po zastąpieniu oczekującego żądania HMI wskazuje aktualny oczekujący zestaw według statusu ECU (SYS-145).
+
+Po potwierdzeniu przez ECU HMI informuje o anulowaniu zmiany i pokazuje aktywny zestaw (SYS-146).
+
+HMI aktualizuje status oczekującego wyboru na podstawie informacji z ECU o anulowaniu przy wymuszeniu „Standard” po usterce (SYS-147).
+
+Po odzyskaniu łączności HMI odczytuje z ECU aktywny zestaw i bieżący stan oczekiwania na przełączenie (SYS-148).
+
+Na postoju przy zgaszonym silniku HMI przekazuje wybór do zasilanego ECU i pokazuje faktycznie zastosowany zestaw (SYS-149).
+
+Po restarcie ECU HMI odczytuje faktycznie aktywny zestaw i bieżący stan oczekiwania z ECU (SYS-150).
+
+Po ponownym wyborze tego samego oczekującego zestawu HMI nadal pokazuje oczekiwanie według danych ECU. Termin wygaśnięcia pozostaje pierwotny (SYS-151).
