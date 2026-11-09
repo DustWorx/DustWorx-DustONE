@@ -23,3 +23,5 @@ HMI aktualizuje status oczekującego wyboru na podstawie informacji z ECU o anul
 Po odzyskaniu łączności HMI odczytuje z ECU aktywny zestaw i bieżący stan oczekiwania na przełączenie (SYS-148).
 
 Na postoju przy zgaszonym silniku HMI przekazuje wybór do zasilanego ECU i pokazuje faktycznie zastosowany zestaw (SYS-149).
+
+Po restarcie ECU HMI odczytuje faktycznie aktywny zestaw i bieżący stan oczekiwania z ECU (SYS-150).
