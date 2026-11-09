@@ -19,3 +19,5 @@ Po zastąpieniu oczekującego żądania HMI wskazuje aktualny oczekujący zestaw
 Po potwierdzeniu przez ECU HMI informuje o anulowaniu zmiany i pokazuje aktywny zestaw (SYS-146).
 
 HMI aktualizuje status oczekującego wyboru na podstawie informacji z ECU o anulowaniu przy wymuszeniu „Standard” po usterce (SYS-147).
+
+Po odzyskaniu łączności HMI odczytuje z ECU aktywny zestaw i bieżący stan oczekiwania na przełączenie (SYS-148).
