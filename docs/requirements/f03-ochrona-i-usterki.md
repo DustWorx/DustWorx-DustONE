@@ -4,7 +4,8 @@ Stan na 2026-11-09. **F03 aktywny po zamknięciu F02.** Macierz robocza łączy 
 
 | Zdarzenie lub temat | Przyjęta reakcja i warunek powrotu | Do rozstrzygnięcia w F03 | Plan prób |
 | --- | --- | --- | --- |
-| Utrata synchronizacji wału podczas pracy | Przyjęto obsługę czujników VR i Hall (SYS-069). | Pierwsza decyzja dotyczy wznowienia sterowania po odzyskaniu synchronizacji (pytanie 167). | V01, V02, V04 |
+| Utrata synchronizacji wału podczas pracy | ECU odcina zapłon oraz wtrysk w wyposażonych profilach. Odzyskanie sygnału podczas dalszego obrotu utrzymuje odcięcie. Powrót wymaga zatrzymania, nowej świadomej próby rozruchu i ponownej wiarygodnej synchronizacji (SYS-157). | Wymaganie przyjęte. Kryteria rozpoznania zdarzeń do projektu. | V01, V02, V04 |
+| Utrata uzyskanej synchronizacji wału podczas rozruchu elektrycznego | Obowiązują warunki START i limity rozrusznika według SYS-048/049. | Czy zakończyć bieżącą próbę po utracie synchronizacji przed potwierdzeniem pracy silnika (pytanie 168). | V01, V04 |
 | Utrata sygnału fazy w profilu 4T, który go używa | Przyjęto osobne wejście Hall (SYS-070). | Reakcja i warunek powrotu zależnie od profilu. | V01, V02 |
 | Przewodowy STOP i START | STOP działa przy awarii HMI lub CAN. START działa podczas przytrzymania z uzgodnionymi odcięciami i wymaganiem nowej próby po odcięciu (SYS-037/048/049). | Reakcje na usterki torów, zbieg poleceń i warunki odblokowania. | V04 |
 | Potwierdzone przewrócenie | ECU wyłącza silnik. Po postawieniu i spełnieniu warunków bezpieczeństwa rozruch wymaga świadomej próby (SYS-039/040). | Warunki zadziałania i powrotu odpowiednie dla enduro. | V04 |
@@ -13,10 +14,18 @@ Stan na 2026-11-09. **F03 aktywny po zamknięciu F02.** Macierz robocza łączy 
 | Chłodzenie i pozostałe pomiary ochronne | Przyjęto pomiar płynu i automatykę wentylatora oraz wejścia ciśnienia paliwa i binarne oleju (SYS-029/043/044/060). | Reakcje na niedostępny pomiar i na warunki poza dopuszczalnym zakresem w wyposażonych profilach. | V02, V03, V05 |
 | Zasilanie i restart ECU | Przyjęto zasilanie bez stacyjki, zasady oszczędzania i odrębne reguły odtwarzania konfiguracji oraz map (SYS-054/084–089/106/109/155). | Reakcje ochronne podczas pracy silnika i warunki ponownego dopuszczenia po restarcie. | V04, V06 |
 
-## Pytanie 167 — powrót po utracie synchronizacji wału
+## Utrata synchronizacji wału podczas pracy
 
 Instrukcja serwisowa Beta 250/300 RR MY2020 opisuje czujnik pick-up przy układzie zapłonu. Katalog części Beta RR 390–480 EFI MY2016 pokazuje pick-up w zespole koła magnesowego. Źródła potwierdzają zastosowanie w enduro 2T oraz 4T. [Beta 250/300 RR MY2020, rozdz. 3.11](https://betausa.com/content/SUPPORT_PDF%27s/2020%20Beta%20250%20RR%20%26%20300%20RR%20Service%20Manual.pdf), [Beta RR 390–480 EFI MY2016, katalog części](https://betausa.com/content/SUPPORT_PDF%27s/2016%20390-480%20RR%204-stroke%20and%20Race%20Edition.pdf).
 
-W obu proponowanych wariantach po potwierdzonej utracie synchronizacji ECU wyłącza zapłon i wtrysk tam, gdzie występuje. Wariant A utrzymuje odcięcie do zatrzymania silnika i świadomej nowej próby rozruchu ze sprawną synchronizacją. Wariant B pozwala wznowić sterowanie po wiarygodnej ponownej synchronizacji podczas dalszego obrotu silnika, jeśli pozostałe warunki bezpieczeństwa są spełnione. Po zatrzymaniu również w wariancie B potrzebna jest nowa próba. Warunki rozpoznania utraty, odzyskania oraz zatrzymania określimy dla przyjętej strategii.
+W odpowiedzi A na pytanie 167 (2026-11-09) właściciel przyjął odcięcie zapłonu i wtrysku po potwierdzonej utracie synchronizacji. ECU utrzymuje odcięcie, gdy sygnał wróci przed zatrzymaniem. Po zatrzymaniu wznowienie jest możliwe w nowej świadomej próbie START lub kopniakiem, odpowiednio do wyposażenia, z wiarygodną synchronizacją i przy spełnieniu pozostałych warunków rozruchu (SYS-157). Zapis usterki i wymuszenie „Standard” podlegają SYS-019 i SYS-137. Kryteria rozpoznania zatrzymania, nowej próby i wiarygodności synchronizacji określimy w projekcie.
 
-Do zaplanowania na stanowisku są potwierdzona utrata i powrót synchronizacji podczas obrotu oraz po zatrzymaniu, obserwacja wyjść i sprawdzenie zachowania przy aktywnym STOP. Po decyzji ustalimy kryteria i przypadki dla właściwych profili. [Macierz weryfikacji](../verification/macierz-wymagan.md).
+### Plan próby SYS-157
+
+1. Na stanowisku odwzorować pracę silnika z poprawnym sygnałem wału. Potwierdzić utratę synchronizacji i obserwować wyjścia zapłonu oraz wtrysku odpowiednio do profilu. Przywrócić prawidłowy sygnał przed zatrzymaniem wału. Oczekiwane jest utrzymanie odcięcia.
+2. Odwzorować zatrzymanie. Sprawdzić utrzymanie odcięcia bez nowej próby, w tym z przytrzymanym wcześniej START. W oddzielnych próbach zainicjować nowy rozruch przez START i kopniak zgodnie z wyposażeniem. Sprawdzić dopuszczenie sterowania po wiarygodnej synchronizacji oraz utrzymanie odcięcia przy braku wiarygodnej synchronizacji i osobno przy aktywnym STOP.
+3. Powtórzyć na reprezentatywnych profilach gaźnikowych i wtryskowych oraz dla przewidzianych wejść wału. Metody wymuszenia i czasy reakcji dobrać do profilu. [Macierz weryfikacji](../verification/macierz-wymagan.md).
+
+## Pytanie 168 — utrata synchronizacji podczas rozruchu elektrycznego
+
+Bieżący przypadek obejmuje potwierdzoną utratę już uzyskanej synchronizacji, gdy START jest nadal wciśnięty, a ECU jeszcze nie potwierdziło pracy silnika. Wybór dotyczy odcięcia rozrusznika albo kontynuacji tej próby do uzgodnionego limitu. Rozrusznik i pick-up są udokumentowane w enduro Beta 250/300 RR MY2020. [Instrukcja serwisowa Betamotor, rozdz. 2.4.4 i 2.5](https://betausa.com/content/SUPPORT_PDF%27s/2020%20Beta%20250%20RR%20%26%20300%20RR%20Service%20Manual.pdf).

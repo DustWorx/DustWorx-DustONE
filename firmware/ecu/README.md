@@ -68,6 +68,8 @@ SYS-119 określa wybór mapy położenia zadanego elektronicznego zaworu wydecho
 
 SYS-120 określa bazowy zapłon gaźnika z aktywnego zestawu według obrotów bez TPS albo według obrotów i położenia przepustnicy z TPS.
 
+SYS-157 wymaga odcięcia zapłonu, a w profilach wtryskowych także wtrysku, po potwierdzonej utracie synchronizacji wału podczas pracy. Powrót sterowania wymaga zatrzymania i nowej świadomej próby ze zweryfikowaną synchronizacją. [Macierz F03](../../docs/requirements/f03-ochrona-i-usterki.md).
+
 SYS-121 określa zgłoszenie usterki TPS i awaryjny zapłon gaźnika ze zweryfikowanej krzywej zależnej od obrotów, przy prawidłowej synchronizacji wału.
 
 SYS-122 przypisuje krzywą awaryjną do konfiguracji silnika jako wspólną dla jej zestawów map.
