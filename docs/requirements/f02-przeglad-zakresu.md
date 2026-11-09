@@ -1,6 +1,6 @@
 # F02 — przegląd map, konfiguracji i strojenia
 
-Stan na 2026-11-09. **Gotowy do kontroli właściciela.** F02 obejmuje decyzje 101–104 i 108–165. Po akceptacji karty zapisujemy zamknięcie pakietu w [statusie projektu](../00-proces-i-status.md). [Rejestr SYS](../01-zakres-systemu.md), [operacje i przypadki prób](../interfaces/mapy-i-konfiguracja.md) oraz [ADR-011](../decisions/adr-011-strojenie-na-zywo.md) zawierają szczegóły.
+Stan na 2026-11-09. **F02 zamknięty w zakresie funkcji.** Właściciel potwierdził zgodność karty odpowiedzią A na pytanie 166 w dniu 2026-11-09. Przyjęty zakres obejmuje decyzje 101–104 i 108–165. [Status projektu](../00-proces-i-status.md) rejestruje zamknięcie oraz otwarcie F03. [Rejestr SYS](../01-zakres-systemu.md), [operacje i przypadki prób](../interfaces/mapy-i-konfiguracja.md) oraz [ADR-011](../decisions/adr-011-strojenie-na-zywo.md) zawierają szczegóły.
 
 ## Przyjęty zakres
 

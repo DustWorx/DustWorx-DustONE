@@ -8,6 +8,6 @@ Wymaganie szczegółowe powinno mieć identyfikator, jednoznaczną treść, źr�
 
 Robocza [mapa obszarów i otwartych tematów](pokrycie-funkcjonalne.md) służy do kontroli zakresu pytań i przeglądów. [Model współpracy](../00-proces-i-status.md) określa podział pracy i podstawę pytań.
 
-F01 zamknięty po [kontroli właściciela](f01-podsumowanie-kontrolne.md); aktywna [karta F02 do kontroli właściciela](f02-przeglad-zakresu.md). F03–F08 oczekują. Pakiety zamykamy kolejno. Domknięcie zakresu funkcjonalnego prowadzimy według [8 pakietów F01–F08](domkniecie-zakresu-funkcjonalnego.md) i bramki G0 ze [ścieżki projektu](../00-proces-i-status.md). Otwarte parametry realizacji rozwijamy w etapach architektury i projektu wykonawczego.
+Zamknięto [F01](f01-podsumowanie-kontrolne.md) i [F02](f02-przeglad-zakresu.md) po kontroli właściciela. Aktywny jest [F03 — ochrona i reakcje na usterki](f03-ochrona-i-usterki.md). F04–F08 oczekują. Pakiety zamykamy kolejno. Domknięcie zakresu funkcjonalnego prowadzimy według [8 pakietów F01–F08](domkniecie-zakresu-funkcjonalnego.md) i bramki G0 ze [ścieżki projektu](../00-proces-i-status.md). Otwarte parametry realizacji rozwijamy w etapach architektury i projektu wykonawczego.
 
 [Macierz SYS → blok → grupa weryfikacji](../verification/macierz-wymagan.md) zawiera pierwszy przydział wszystkich 156 wymagań. Przydział i zatwierdzenie treści są odrębne od późniejszego potwierdzenia na produkcie.
