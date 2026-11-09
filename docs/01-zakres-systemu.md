@@ -169,6 +169,7 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-153 | Przy przeniesieniu używanego ECU do innego motocykla chroniona procedura umożliwia zmianę całkowitego ODO, całkowitych motogodzin lub obu wartości. Operacja jest dostępna wyłącznie producentowi projektu. ECU sprawdza uprawnienie producenta niezależnie od użytego narzędzia. Każda wykonana operacja jest rejestrowana. Ochronę w trybie użytkownika określają SYS-076 i SYS-152. Warunki dopuszczenia, dane wejściowe, autoryzacja i zakres rejestru wymagają specyfikacji. |
 | SYS-154 | Potwierdzenie resetu profilu według SYS-152 wprost obejmuje skasowanie historii DTC i powiązanych zamrożonych ramek. Windows udostępnia opcjonalny eksport tej historii przed kasowaniem według SYS-025. Po otrzymaniu potwierdzonego polecenia ECU usuwa historię DTC i powiązane freeze frame w ramach resetu razem z dotychczasowym profilem i mapami. Do czasu wymaganego potwierdzenia oraz w przypadku anulowania przed przyjęciem polecenia ECU zachowuje profil, mapy i historię. |
 | SYS-155 | Windows zleca reset profilu według SYS-152/154. ECU utrwala przyjęcie potwierdzonego polecenia przed rozpoczęciem czyszczenia i wykonuje całą operację samodzielnie, również po utracie sesji Windows. Jeśli po ponownym uruchomieniu ECU rozpoznaje trwale przyjęty, niedokończony reset, samodzielnie go wznawia i kończy bez ponownego polecenia z Windows. Rozrusznik, zapłon i wtrysk pozostają zablokowane od przyjęcia resetu do zakończenia operacji i potwierdzenia poprawnej konfiguracji. Po ukończeniu resetu ECU udostępnia stan pierwszej konfiguracji według SYS-152. |
+| SYS-156 | Po resecie profilu według SYS-152 ECU może na polecenie z Windows trwale zapisać ustawienia nowego silnika jako nieaktywny projekt przed dostarczeniem zestawu „Standard”. ECU udostępnia projekt po restarcie i umożliwia uzupełnienie go o zgodny zestaw „Standard” w kolejnej sesji Windows. ECU aktywuje profil na wyraźne polecenie wdrożenia według SYS-102 po sprawdzeniu kompletności ustawień i zgodności zestawu „Standard” oraz trwałym zatwierdzeniu całości według SYS-106. Do poprawnej aktywacji obowiązują blokady rozrusznika, zapłonu i wtrysku według SYS-152/155. |
 
 ## 3. Podział odpowiedzialności
 
@@ -384,6 +385,8 @@ W odpowiedzi na pytanie 161 (2026-11-09) właściciel wybrał czysty start przy 
 W odpowiedzi B na pytanie 163 (2026-11-09) właściciel zatwierdził kasowanie historii DTC i zamrożonych ramek razem z profilem po wyraźnym potwierdzeniu obejmującym historię. Eksport jest dostępny przed kasowaniem (SYS-154).
 
 W odpowiedzi na pytanie 164 (2026-11-09) właściciel wskazał, że Windows inicjuje reset, a ECU realizuje go samodzielnie. Reguła obejmuje dokończenie trwale przyjętego resetu po powrocie zasilania (SYS-155).
+
+W odpowiedzi B na pytanie 165 (2026-11-09) właściciel zatwierdził trwały zapis ustawień jako nieaktywnego projektu, który przetrwa restart i może zostać uzupełniony o zestaw „Standard” w kolejnej sesji Windows (SYS-156).
 
 ### Wspólne połączenie z aplikacją Windows — ustalenie właściciela
 

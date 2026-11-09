@@ -27,6 +27,8 @@ SYS-102: krytyczną konfigurację można przygotować lokalnie podczas pracy sil
 
 SYS-152 wymaga jawnego polecenia i potwierdzenia resetu ustawień przy zmianie profilu silnika. Windows zleca przywrócenie ustawień fabrycznych i umożliwia konfigurację ECU po resecie. ECU egzekwuje warunki resetu, blokady i ochronę liczników. Potwierdzenie resetu wprost wymienia usunięcie historii DTC i zamrożonych ramek. Przed kasowaniem aplikacja udostępnia opcjonalny eksport (SYS-154). Po trwałym przyjęciu polecenia przez ECU wykonanie resetu jest niezależne od Windows, również po powrocie zasilania (SYS-155). Szczegóły opisuje [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 
+Według SYS-156 aplikacja umożliwia zapis ustawień jako nieaktywnego projektu w ECU, jego odczyt po restarcie, uzupełnienie o zgodny „Standard” i zlecenie wdrożenia kompletnego profilu. ECU rozstrzyga aktywację i dopuszczenie rozruchu.
+
 SYS-103: po utracie Windows w nieukończonym transferze krytycznej konfiguracji, przed wdrożeniem, ECU samodzielnie anuluje transfer i zwalnia jego blokady przy poprawnej, nienaruszonej dotychczasowej konfiguracji. Rozruch wymaga nowej świadomej próby. Szczegóły: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 
 SYS-104: po odebraniu kompletu danych i przyjęciu wyraźnego polecenia wdrożenia ECU przy prawidłowym zasilaniu kończy sprawdzanie/wdrożenie samodzielnie mimo utraty Windows. Po potwierdzonym powodzeniu zwalnia blokady bez oczekiwania na powrót aplikacji; rozruch wymaga nowej świadomej próby. Błędy podlegają SYS-105, a powrót po zaniku zasilania SYS-106. Szczegóły: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
