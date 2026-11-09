@@ -25,3 +25,5 @@ Po odzyskaniu łączności HMI odczytuje z ECU aktywny zestaw i bieżący stan o
 Na postoju przy zgaszonym silniku HMI przekazuje wybór do zasilanego ECU i pokazuje faktycznie zastosowany zestaw (SYS-149).
 
 Po restarcie ECU HMI odczytuje faktycznie aktywny zestaw i bieżący stan oczekiwania z ECU (SYS-150).
+
+Po ponownym wyborze tego samego oczekującego zestawu HMI nadal pokazuje oczekiwanie według danych ECU. Termin wygaśnięcia pozostaje pierwotny (SYS-151).
