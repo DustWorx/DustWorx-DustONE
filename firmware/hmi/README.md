@@ -13,3 +13,5 @@ HMI wyświetla przyczynę odrzucenia zmiany zestawu map otrzymaną z ECU po uste
 Przy odłożonym przełączeniu zestawu w czasie jazdy HMI pokazuje oczekiwanie i wskazuje faktycznie aktywny zestaw według stanu otrzymanego z ECU (SYS-143).
 
 Po otrzymaniu statusu wygaśnięcia żądania HMI informuje kierowcę o konieczności ponownego wyboru zestawu (SYS-144).
+
+Po zastąpieniu oczekującego żądania HMI wskazuje aktualny oczekujący zestaw według statusu ECU (SYS-145).
