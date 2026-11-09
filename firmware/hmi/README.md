@@ -15,3 +15,5 @@ Przy odłożonym przełączeniu zestawu w czasie jazdy HMI pokazuje oczekiwanie 
 Po otrzymaniu statusu wygaśnięcia żądania HMI informuje kierowcę o konieczności ponownego wyboru zestawu (SYS-144).
 
 Po zastąpieniu oczekującego żądania HMI wskazuje aktualny oczekujący zestaw według statusu ECU (SYS-145).
+
+Po potwierdzeniu przez ECU HMI informuje o anulowaniu zmiany i pokazuje aktywny zestaw (SYS-146).
