@@ -81,7 +81,7 @@ Próby dobieramy do wymagania; pełna grupa nie jest automatycznie obowiązkowa 
 | SYS-051 | ECU-IN, ECU-CTRL, ECU-OUT | V05, V07 |
 | SYS-052 | ECU-CTRL, ECU-OUT, ECU-COM | V05, V07 |
 | SYS-053 | ECU-CTRL, ECU-OUT, ECU-COM | V05, V07 |
-| SYS-054 | ECU-WAKE, ECU-CTRL, HMI-PWR | V04, V06 |
+| SYS-054 | ECU-PWR, ECU-WAKE, ECU-CTRL, HMI-PWR | V04, V06 |
 | SYS-055 | ECU-WAKE, HMI-PWR, HMI-UI | V06 |
 | SYS-056 | ECU-COM, ECU-WAKE, HMI-PWR | V06, V09 |
 | SYS-057 | ECU-COM, ECU-WAKE, ECU-CTRL, HMI-PWR | V06, V09 |

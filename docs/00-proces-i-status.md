@@ -86,7 +86,7 @@ Projekt wykonawczy bloków rozpoczynamy w etapie 6 po zakończeniu wcześniejszy
 | --- | --- |
 | TPI i smarowanie mieszanką | Ocena wykonalności dla konkretnych jednostek zgodnie z macierzą wariantów; warunek przed deklaracją zgodności. |
 | Wspólny sprzęt i kompaktowość | Parametry CDI/TCI, czujników i napędów, jednoczesność I/O, prądy oraz ciepło — etapy 3–6. |
-| Wybudzanie i rezerwa energii | Powiązać kopniak/koło/HMI, normalne zasilanie HMI w śnie oraz 4 tygodnie postoju przy −10°C…+40°C dla minimum 3 Ah AGM / 2 Ah LiFePO4 — bilans i próby. |
+| Wybudzanie i rezerwa energii | Bazowa instalacja enduro bez stacyjki ma stałe zasilanie ECU z akumulatora i [automatyczne usypianie ECU/HMI](architecture/usypianie-ecu-hmi.md) (SYS-054/059). W architekturze zasilania uwzględnić kopniak, ruch koła, HMI, zasilanie HMI w śnie i rezerwę po 4 tygodniach postoju przy −10°C…+40°C dla minimum 3 Ah AGM / 2 Ah LiFePO4. |
 | Pokrycie poza Betą | Zaplanować reprezentatywne stanowiska i jednostki 4T/TPI/TBI; wyniki Bety potwierdzają jej konfigurację. |
 
 ## Zakres prowadzenia inżynierii

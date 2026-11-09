@@ -75,6 +75,8 @@ Stan na 2026-11-09. **F02 aktywny po zakończeniu kontroli F01 przez właścicie
 
 Zapamiętanie identyfikatora zestawu jest odrębne od trwałego zapisu jego edytowanych wartości. Z SYS-095/099 wynika odtworzenie po restarcie trwale zapisanych danych, bez automatycznego odtwarzania nieutrwalonej edycji. Zwykły sen/wybudzenie ma przyjętą regułę SYS-100: nie wymagamy zachowania roboczych edycji map przez sen. Tryby pamięci i MCU pozostają do późniejszego wyboru. W bieżącej pracy po utracie Windows wartości pozostają aktywne według SYS-094; samo zgaszenie silnika lub żądanie snu nie zastępuje zakończonej sekwencji snu i wybudzenia.
 
+W normalnej obsłudze ECU i HMI przechodzą w [skoordynowany sen](../architecture/usypianie-ecu-hmi.md) przy zachowanym zasilaniu z akumulatora (SYS-054/059).
+
 Testy wyjść po utracie sesji podlegają odrębnej regule SYS-091; zachowanie wartości map nie wydłuża ich limitów.
 
 Status „otwarte” oznacza brak zatwierdzonej reguły danej operacji; nie uprawnia do dopuszczenia jej w każdym stanie pojazdu. Dobór pamięci, buforów, formatu danych i interfejsu wynika z tych reguł oraz bilansów, a ważne komponenty wybieramy wspólnie.
