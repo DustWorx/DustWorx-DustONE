@@ -52,6 +52,8 @@ W odpowiedzi **A na pytanie 188** (2026-11-11) właściciel zatwierdził zachowa
 
 W odpowiedzi **B na pytanie 189** (2026-11-11) właściciel zatwierdził zachowanie zakończonych standardowych prób i ponowienie przerwanej próby w tym samym miejscu limitu po zaniku zasilania (SYS-179). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-179).
 
+W odpowiedzi **A na pytanie 190** (2026-11-11) właściciel zatwierdził zamknięcie serii po potwierdzeniu gotowości i okresie stabilnej pracy ECU. Ponowne zawieszenie w tym okresie podlega limitowi bieżącej serii (SYS-180). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-180).
+
 ## Konsekwencje
 
 - Dane i pomiary wymagane do autonomicznego sterowania silnikiem oraz jego zabezpieczeń muszą być dostępne ECU bez udziału HMI. Uwzględnić to przy wyborze miejsca podłączenia czujników.

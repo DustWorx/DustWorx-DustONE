@@ -13,7 +13,7 @@ Stan na 2026-11-11. **F03 aktywny po zamknięciu F02.** Macierz robocza łączy 
 | Brak HMI albo CAN | ECU działa samodzielnie, a reakcje akcesoriów są odrębne (SYS-046/050–053). | Zależności od pozostałych stanów ochronnych. | V07 |
 | Usterka TPS lub pomiaru ciśnienia używanego do określenia obciążenia | Przyjęto reguły kalibracji awaryjnej, kontrolowanego zatrzymania, powrotu i wymuszenia „Standard” (SYS-121–142). | Powiązać z pozostałymi blokadami F03. [Zakres F02](f02-przeglad-zakresu.md) opisuje przyjęte przypadki. | V02, V03, V04 |
 | Chłodzenie i pozostałe pomiary ochronne | Przyjęto pomiar płynu i automatykę wentylatora oraz wejścia ciśnienia paliwa i binarne oleju (SYS-029/043/044/060). | Reakcje na niedostępny pomiar i na warunki poza dopuszczalnym zakresem w wyposażonych profilach. | V02, V03, V05 |
-| Zasilanie i restart ECU | Zasilanie bez stacyjki, zasady oszczędzania i odtwarzania danych (SYS-054/084–089/106/109/155). Po zawieszeniu nadzór odcina wyjścia i inicjuje reset (SYS-169). Powrót sterowania i zapis DTC określają SYS-170–172. Standardowe uruchamianie i samodzielne odzyskiwanie mają osobne limity. Po wyczerpaniu limitu odzyskiwania ECU udostępnia naprawę z Windows (SYS-173–176). Po zaniku zasilania przed rozpoczęciem naprawy ECU wraca bezpośrednio do trybu naprawy i utrzymuje odcięcie (SYS-177). Po zaniku zasilania ECU odtwarza wykorzystanie limitu odzyskiwania i zalicza przerwaną próbę jeden raz (SYS-178). Po zaniku zasilania ECU zachowuje zakończone standardowe próby i ponawia przerwaną w tym samym miejscu limitu (SYS-179). | Kryterium zakończenia serii prób po zgłoszeniu gotowości ECU (pytanie 190). | V01, V04, V06, V10, V12, V13 |
+| Zasilanie i restart ECU | Zasilanie bez stacyjki, zasady oszczędzania i odtwarzania danych (SYS-054/084–089/106/109/155). Po zawieszeniu nadzór odcina wyjścia i inicjuje reset (SYS-169). Powrót sterowania i zapis DTC określają SYS-170–172. Standardowe uruchamianie i samodzielne odzyskiwanie mają osobne limity. Po wyczerpaniu limitu odzyskiwania ECU udostępnia naprawę z Windows (SYS-173–176). Po zaniku zasilania przed rozpoczęciem naprawy ECU wraca bezpośrednio do trybu naprawy i utrzymuje odcięcie (SYS-177). Po zaniku zasilania ECU odtwarza wykorzystanie limitu odzyskiwania i zalicza przerwaną próbę jeden raz (SYS-178). Po zaniku zasilania ECU zachowuje zakończone standardowe próby i ponawia przerwaną w tym samym miejscu limitu (SYS-179). Seria prób kończy się po potwierdzeniu gotowości i stabilnej pracy przez ustalony czas (SYS-180). | Wznowienie zapłonu i wtrysku po zaniku zasilania podczas pracy silnika (pytanie 191). | V01, V04, V06, V10, V12, V13 |
 
 ## Utrata synchronizacji wału podczas pracy
 
@@ -192,7 +192,7 @@ W odpowiedzi A na pytanie 183 (2026-11-11) właściciel zatwierdził limit autom
 
 1. Na stanowisku z obciążeniami zastępczymi wymusić reset nadzoru i ponawiać zawieszenie przed potwierdzeniem zakończenia uruchamiania. Zarejestrować liczbę automatycznych prób i stan wyjść. Potwierdzić odcięcie zapłonu, rozrusznika i wtrysku w wyposażonym profilu przez całą sekwencję.
 2. Po osiągnięciu ustalonego limitu utrzymać usterkę i stabilne zasilanie. Sprawdzić zakończenie standardowych prób i utrzymanie odcięcia przy przejściu do odzyskiwania, również przy wciśniętym START. Przed próbą określić kryterium zakończenia uruchamiania, liczbę prób i czas obserwacji po osiągnięciu limitu.
-3. W przebiegu kontrolnym umożliwić ukończenie uruchamiania przed limitem. Potwierdzić zakończenie sekwencji resetów i dopuszczenie wyjść zgodnie z SYS-170 i SYS-171. [Macierz weryfikacji](../verification/macierz-wymagan.md).
+3. W przebiegu kontrolnym potwierdzić gotowość i stabilną pracę według SYS-180 przed wyczerpaniem limitu. Sprawdzić zakończenie sekwencji i dopuszczenie wyjść zgodnie z SYS-170 i SYS-171. [Macierz weryfikacji](../verification/macierz-wymagan.md).
 
 ## Automatyczne odzyskiwanie ECU po osiągnięciu limitu
 
@@ -214,13 +214,13 @@ W odpowiedzi A na pytanie 185 (2026-11-11) właściciel zatwierdził samodzielne
 
 ## Limit samodzielnych prób odzyskania ECU
 
-W odpowiedzi B na pytanie 186 (2026-11-11) właściciel zatwierdził osobny limit kilku samodzielnych prób odzyskania. ECU ponawia odzyskiwanie do potwierdzenia gotowości albo do wyczerpania limitu. Po wyczerpaniu limitu bez odzyskania gotowości ECU kończy automatyczne próby i udostępnia naprawę z Windows według SYS-175. Odcięcie wyjść podlega SYS-174 (SYS-176).
+W odpowiedzi B na pytanie 186 (2026-11-11) właściciel zatwierdził osobny limit kilku samodzielnych prób odzyskania. ECU ponawia odzyskiwanie do zakończenia serii powodzeniem według SYS-180 albo do wyczerpania limitu. Po wyczerpaniu limitu bez odzyskania gotowości ECU kończy automatyczne próby i udostępnia naprawę z Windows według SYS-175. Odcięcie wyjść podlega SYS-174 (SYS-176).
 
 ### Plan próby SYS-176
 
 1. Na stanowisku wymusić wejście do odzyskiwania według SYS-174 i niepowodzenie pierwszej samodzielnej próby. Potwierdzić, że ECU rozpoczyna kolejną samodzielną próbę w granicach osobnego limitu i utrzymuje odcięcie. Zarejestrować próby standardowego uruchomienia i próby odzyskiwania, aby sprawdzić oba limity.
 2. Wymusić niepowodzenie kolejnych prób aż do wyczerpania limitu. Potwierdzić zakończenie automatycznych prób, utrzymanie odcięcia i dostęp do naprawy przez Windows według [planu SYS-175](#plan-próby-sys-175).
-3. W przebiegu kontrolnym umożliwić potwierdzenie gotowości w kolejnej próbie, w tym przy ostatniej dozwolonej próbie. Sprawdzić zakończenie sekwencji i warunki nowego rozruchu według SYS-174. Wartość limitu i kryteria powodzenia oraz niepowodzenia określić przed próbą. [Macierz weryfikacji](../verification/macierz-wymagan.md).
+3. W przebiegu kontrolnym umożliwić potwierdzenie gotowości i stabilnej pracy według SYS-180 w kolejnej próbie, w tym przy ostatniej dozwolonej. Sprawdzić zakończenie sekwencji i warunki nowego rozruchu według SYS-174. Wartość limitu i kryteria powodzenia oraz niepowodzenia określić przed próbą. [Macierz weryfikacji](../verification/macierz-wymagan.md).
 
 ## Powrót zasilania przed rozpoczęciem naprawy z Windows
 
@@ -252,6 +252,16 @@ W odpowiedzi B na pytanie 189 (2026-11-11) właściciel zatwierdził zachowanie 
 2. Powtórzyć z jednym lub kilkoma zanikami zasilania podczas ostatniej dozwolonej próby. Po każdym powrocie sprawdzić ponowienie tej próby oraz stan wyjść na obciążeniach zastępczych od chwili zasilenia.
 3. Umożliwić zakończenie ponawianej ostatniej próby niepowodzeniem przy stabilnym zasilaniu. Potwierdzić jej zaliczenie i samoczynne rozpoczęcie odzyskiwania według SYS-174. Przed próbami ustalić kryterium zakończenia standardowej próby i sposób obserwacji limitu. [Macierz weryfikacji](../verification/macierz-wymagan.md).
 
-## Pytanie 190 — zakończenie serii po zgłoszeniu gotowości ECU
+## Zakończenie serii po potwierdzeniu gotowości i stabilnej pracy ECU
 
-Do ustalenia pozostaje kryterium zamknięcia bieżącej serii standardowych prób lub samodzielnego odzyskiwania. Rozpatrujemy potwierdzenie gotowości albo potwierdzenie gotowości połączone z ustalonym okresem stabilnej pracy ECU.
+W odpowiedzi A na pytanie 190 (2026-11-11) właściciel zatwierdził wymaganie potwierdzenia gotowości i ustalonego okresu stabilnej pracy przed zamknięciem serii standardowych prób lub samodzielnego odzyskiwania. Zawieszenie w tym okresie jest niepowodzeniem próby w bieżącej serii. Po wyczerpaniu limitu standardowych prób bez powodzenia ECU uruchamia odzyskiwanie według SYS-174. Po wyczerpaniu limitu odzyskiwania bez powodzenia udostępnia naprawę z Windows według SYS-175 i SYS-176 (SYS-180).
+
+### Plan próby SYS-180
+
+1. Powtórzyć dla standardowego uruchamiania według [planu SYS-173](#plan-próby-sys-173) i samodzielnego odzyskiwania według [planu SYS-176](#plan-próby-sys-176). Po potwierdzeniu gotowości zapewnić stabilną pracę. Sprawdzić utrzymanie bieżącej serii i odcięcia w czasie potwierdzania stabilności oraz zakończenie serii po upływie ustalonego okresu.
+2. Wymusić kolejne zawieszenie tuż przed upływem okresu stabilności. Potwierdzić zaliczenie niepowodzenia do bieżącej serii oraz zastosowanie pozostałego limitu. Powtórzyć dla ostatniej dozwolonej próby i potwierdzić przejście do odzyskiwania po standardowych próbach albo do naprawy z Windows po próbach odzyskania.
+3. Po potwierdzonym zakończeniu serii wymusić kolejne zawieszenie i sprawdzić rozpoczęcie nowej serii. Przed próbami określić okres stabilności, obserwowane stany i kryteria ich potwierdzenia. [Macierz weryfikacji](../verification/macierz-wymagan.md).
+
+## Pytanie 191 — wznowienie sterowania po zaniku zasilania podczas pracy silnika
+
+Do rozstrzygnięcia pozostaje moment ponownego dopuszczenia zapłonu i wtrysku, gdy zasilanie ECU wróci podczas dalszego obrotu wału, a ECU potwierdzi poprawną konfigurację i odzyska wiarygodną synchronizację.
