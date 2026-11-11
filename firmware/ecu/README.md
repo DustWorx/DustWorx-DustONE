@@ -110,6 +110,8 @@ Według SYS-176 odzyskiwanie ma osobny limit kilku prób. ECU kończy sekwencję
 
 Według SYS-177 ECU po zaniku zasilania w stanie oczekiwania na naprawę odtwarza ten stan i bezpośrednio udostępnia tryb naprawy z Windows. Odcięcie obowiązuje od chwili powrotu zasilania.
 
+Według SYS-178 po zaniku zasilania w trakcie samodzielnej próby ECU odtwarza wykorzystanie limitu i zalicza przerwaną próbę jeden raz. Po wyczerpaniu limitu udostępnia naprawę z Windows.
+
 SYS-121 określa zgłoszenie usterki TPS i awaryjny zapłon gaźnika ze zweryfikowanej krzywej zależnej od obrotów, przy prawidłowej synchronizacji wału.
 
 SYS-122 przypisuje krzywą awaryjną do konfiguracji silnika jako wspólną dla jej zestawów map.
