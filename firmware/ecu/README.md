@@ -102,6 +102,8 @@ Według SYS-172 ECU zapisuje DTC i zamrożoną ramkę po potwierdzeniu resetu na
 
 Według SYS-173 nadzór ogranicza automatyczne próby uruchomienia przy powtarzających się resetach przed ukończeniem startu ECU. Kryterium zakończenia uruchamiania będzie wejściem do projektu komunikacji firmware z nadzorem.
 
+Według SYS-174 ECU po limicie standardowych prób samoczynnie rozpoczyna odzyskiwanie przy utrzymanym odcięciu zapłonu, wtrysku i rozrusznika. Powrót do rozruchu podlega SYS-170 i SYS-171. Mechanizm uruchamiania odzyskiwania wymaga projektu.
+
 SYS-121 określa zgłoszenie usterki TPS i awaryjny zapłon gaźnika ze zweryfikowanej krzywej zależnej od obrotów, przy prawidłowej synchronizacji wału.
 
 SYS-122 przypisuje krzywą awaryjną do konfiguracji silnika jako wspólną dla jej zestawów map.

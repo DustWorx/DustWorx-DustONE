@@ -13,7 +13,7 @@ Stan na 2026-11-11. **F03 aktywny po zamknięciu F02.** Macierz robocza łączy 
 | Brak HMI albo CAN | ECU działa samodzielnie, a reakcje akcesoriów są odrębne (SYS-046/050–053). | Zależności od pozostałych stanów ochronnych. | V07 |
 | Usterka TPS lub pomiaru ciśnienia używanego do określenia obciążenia | Przyjęto reguły kalibracji awaryjnej, kontrolowanego zatrzymania, powrotu i wymuszenia „Standard” (SYS-121–142). | Powiązać z pozostałymi blokadami F03. [Zakres F02](f02-przeglad-zakresu.md) opisuje przyjęte przypadki. | V02, V03, V04 |
 | Chłodzenie i pozostałe pomiary ochronne | Przyjęto pomiar płynu i automatykę wentylatora oraz wejścia ciśnienia paliwa i binarne oleju (SYS-029/043/044/060). | Reakcje na niedostępny pomiar i na warunki poza dopuszczalnym zakresem w wyposażonych profilach. | V02, V03, V05 |
-| Zasilanie i restart ECU | Przyjęto zasilanie bez stacyjki, zasady oszczędzania i odrębne reguły odtwarzania konfiguracji oraz map (SYS-054/084–089/106/109/155). Niezależny nadzór po wykryciu zawieszenia wymusza odcięcie wyjść i osobno inicjuje reset (SYS-169). Po resecie odcięcie zapłonu i wtrysku trwa do zatrzymania wału i nowej świadomej próby z wiarygodną synchronizacją (SYS-170). ECU odrzuca START przed potwierdzeniem zatrzymania wału i wymaga nowego naciśnięcia po zatrzymaniu (SYS-171). Ramka DTC po potwierdzonym resecie zawiera przyczynę i dostępne dane zdarzenia (SYS-172). Powtarzające się resety przed ukończeniem startu podlegają limitowi prób, a po jego osiągnięciu nadzór utrzymuje odcięcie (SYS-173). | Zlecenie pojedynczej próby uruchomienia ECU po osiągnięciu limitu (pytanie 184). | V01, V04, V06, V10, V13 |
+| Zasilanie i restart ECU | Przyjęto zasilanie bez stacyjki, zasady oszczędzania i odrębne reguły odtwarzania konfiguracji oraz map (SYS-054/084–089/106/109/155). Niezależny nadzór po wykryciu zawieszenia wymusza odcięcie wyjść i osobno inicjuje reset (SYS-169). Po resecie odcięcie zapłonu i wtrysku trwa do zatrzymania wału i nowej świadomej próby z wiarygodną synchronizacją (SYS-170). ECU odrzuca START przed potwierdzeniem zatrzymania wału i wymaga nowego naciśnięcia po zatrzymaniu (SYS-171). Ramka DTC po potwierdzonym resecie zawiera przyczynę i dostępne dane zdarzenia (SYS-172). Powtarzające się resety przed ukończeniem startu podlegają limitowi standardowych prób (SYS-173). Po osiągnięciu limitu ECU samoczynnie rozpoczyna odzyskiwanie przy utrzymanym odcięciu (SYS-174). | Pierwsze działanie automatycznego odzyskiwania (pytanie 185). | V01, V04, V06, V10, V12, V13 |
 
 ## Utrata synchronizacji wału podczas pracy
 
@@ -186,14 +186,23 @@ W odpowiedzi na pytanie 182 (2026-11-11) właściciel ustalił zapis przyczyny r
 
 ## Powtarzające się resety nadzoru podczas uruchamiania ECU
 
-W odpowiedzi A na pytanie 183 (2026-11-11) właściciel zatwierdził limit automatycznych prób uruchomienia, gdy nadzór ponownie resetuje ECU przed zakończeniem uruchamiania. Zapłon, rozrusznik i wtrysk w wyposażonych profilach pozostają odcięte w trakcie prób. Po osiągnięciu limitu nadzór przerywa automatyczne próby i utrzymuje odcięcie także przy niezakończonym uruchomieniu głównego firmware (SYS-173).
+W odpowiedzi A na pytanie 183 (2026-11-11) właściciel zatwierdził limit automatycznych prób standardowego uruchomienia głównego firmware, gdy nadzór ponownie resetuje ECU przed zakończeniem uruchamiania. Zapłon, rozrusznik i wtrysk w wyposażonych profilach pozostają odcięte w trakcie prób. Po osiągnięciu limitu nadzór przerywa standardowe próby i utrzymuje odcięcie także przy niezakończonym uruchomieniu głównego firmware (SYS-173). ECU rozpoczyna odzyskiwanie według SYS-174.
 
 ### Plan próby SYS-173
 
 1. Na stanowisku z obciążeniami zastępczymi wymusić reset nadzoru i ponawiać zawieszenie przed potwierdzeniem zakończenia uruchamiania. Zarejestrować liczbę automatycznych prób i stan wyjść. Potwierdzić odcięcie zapłonu, rozrusznika i wtrysku w wyposażonym profilu przez całą sekwencję.
-2. Po osiągnięciu ustalonego limitu utrzymać usterkę i stabilne zasilanie. Sprawdzić zakończenie automatycznych prób oraz utrzymanie odcięcia, również przy wciśniętym START. Przed próbą określić kryterium zakończenia uruchamiania, liczbę prób i czas obserwacji po osiągnięciu limitu.
+2. Po osiągnięciu ustalonego limitu utrzymać usterkę i stabilne zasilanie. Sprawdzić zakończenie standardowych prób i utrzymanie odcięcia przy przejściu do odzyskiwania, również przy wciśniętym START. Przed próbą określić kryterium zakończenia uruchamiania, liczbę prób i czas obserwacji po osiągnięciu limitu.
 3. W przebiegu kontrolnym umożliwić ukończenie uruchamiania przed limitem. Potwierdzić zakończenie sekwencji resetów i dopuszczenie wyjść zgodnie z SYS-170 i SYS-171. [Macierz weryfikacji](../verification/macierz-wymagan.md).
 
-## Pytanie 184 — zlecenie uruchomienia ECU po osiągnięciu limitu
+## Automatyczne odzyskiwanie ECU po osiągnięciu limitu
 
-Do ustalenia pozostaje sposób zlecenia pojedynczej próby uruchomienia ECU po wstrzymaniu automatycznych prób według SYS-173. Rozpatrujemy świadomą sekwencję przewodowym START dostępną w terenie i wariant wymagający przewodowego dostępu serwisowego z Windows.
+W odpowiedzi na pytanie 184 (2026-11-11) właściciel wskazał potrzebę automatycznego odzyskiwania ECU. Po osiągnięciu limitu standardowych prób ECU samoczynnie rozpoczyna odzyskiwanie przy odciętym zapłonie, rozruszniku i wtrysku w wyposażonych profilach (SYS-174). Powrót do rozruchu po pomyślnym odzyskaniu podlega SYS-170 i SYS-171. Zasady dopuszczania firmware określa SYS-078.
+
+### Plan próby SYS-174
+
+1. Na stanowisku z obciążeniami zastępczymi doprowadzić do osiągnięcia limitu według [planu SYS-173](#plan-próby-sys-173), przy odłączonym HMI i komputerze oraz zwolnionych przyciskach. Potwierdzić samoczynne rozpoczęcie odzyskiwania przy niezakończonym uruchomieniu głównego firmware.
+2. Zarejestrować stan wyjść od ostatniej standardowej próby przez cały przebieg odzyskiwania. Powtórzyć z naciśnięciem START w czasie odzyskiwania i sprawdzić utrzymanie odcięcia. Po pomyślnym odzyskaniu zweryfikować warunki nowego rozruchu według SYS-170 i SYS-171. Szczegóły przebiegów określić po wyborze działań odzyskiwania. [Macierz weryfikacji](../verification/macierz-wymagan.md).
+
+## Pytanie 185 — pierwsze działanie automatycznego odzyskiwania ECU
+
+Do rozstrzygnięcia pozostaje, czy ECU najpierw podejmuje samodzielną próbę przywrócenia gotowości i udostępnia serwis po jej niepowodzeniu, czy od razu udostępnia tryb serwisowy do naprawy z Windows. Szczegóły odzyskiwania firmware będą wejściem do F07.
