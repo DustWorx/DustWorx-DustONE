@@ -13,7 +13,7 @@ Stan na 2026-11-11. **F03 aktywny po zamknięciu F02.** Macierz robocza łączy 
 | Brak HMI albo CAN | ECU działa samodzielnie, a reakcje akcesoriów są odrębne (SYS-046/050–053). | Zależności od pozostałych stanów ochronnych. | V07 |
 | Usterka TPS lub pomiaru ciśnienia używanego do określenia obciążenia | Przyjęto reguły kalibracji awaryjnej, kontrolowanego zatrzymania, powrotu i wymuszenia „Standard” (SYS-121–142). | Powiązać z pozostałymi blokadami F03. [Zakres F02](f02-przeglad-zakresu.md) opisuje przyjęte przypadki. | V02, V03, V04 |
 | Chłodzenie i pozostałe pomiary ochronne | Przyjęto pomiar płynu i automatykę wentylatora oraz wejścia ciśnienia paliwa i binarne oleju (SYS-029/043/044/060). | Reakcje na niedostępny pomiar i na warunki poza dopuszczalnym zakresem w wyposażonych profilach. | V02, V03, V05 |
-| Zasilanie i restart ECU | Przyjęto zasilanie bez stacyjki, zasady oszczędzania i odrębne reguły odtwarzania konfiguracji oraz map (SYS-054/084–089/106/109/155). Niezależny nadzór po wykryciu zawieszenia wymusza odcięcie wyjść i osobno inicjuje reset (SYS-169). Po resecie odcięcie zapłonu i wtrysku trwa do zatrzymania wału i nowej świadomej próby z wiarygodną synchronizacją (SYS-170). ECU odrzuca START przed potwierdzeniem zatrzymania wału i wymaga nowego naciśnięcia po zatrzymaniu (SYS-171). Ramka DTC po potwierdzonym resecie zawiera przyczynę i dostępne dane zdarzenia (SYS-172). | Reakcja na powtarzające się resety przed zakończeniem uruchamiania ECU (pytanie 183). | V01, V04, V06, V10, V13 |
+| Zasilanie i restart ECU | Przyjęto zasilanie bez stacyjki, zasady oszczędzania i odrębne reguły odtwarzania konfiguracji oraz map (SYS-054/084–089/106/109/155). Niezależny nadzór po wykryciu zawieszenia wymusza odcięcie wyjść i osobno inicjuje reset (SYS-169). Po resecie odcięcie zapłonu i wtrysku trwa do zatrzymania wału i nowej świadomej próby z wiarygodną synchronizacją (SYS-170). ECU odrzuca START przed potwierdzeniem zatrzymania wału i wymaga nowego naciśnięcia po zatrzymaniu (SYS-171). Ramka DTC po potwierdzonym resecie zawiera przyczynę i dostępne dane zdarzenia (SYS-172). Powtarzające się resety przed ukończeniem startu podlegają limitowi prób, a po jego osiągnięciu nadzór utrzymuje odcięcie (SYS-173). | Zlecenie pojedynczej próby uruchomienia ECU po osiągnięciu limitu (pytanie 184). | V01, V04, V06, V10, V13 |
 
 ## Utrata synchronizacji wału podczas pracy
 
@@ -184,6 +184,16 @@ W odpowiedzi na pytanie 182 (2026-11-11) właściciel ustalił zapis przyczyny r
 2. Powtórzyć z potwierdzoną przyczyną resetu oraz częściowo dostępnymi danymi, a następnie z samą przyczyną. Sprawdzić zapis DTC i ramki oraz oznaczenie niedostępności. Objąć także przypadek niewiarygodnego czasu rzeczywistego zgodnie z SYS-021.
 3. W przebiegu kontrolnym wywołać ponowne uruchomienie z innej przyczyny. Sprawdzić, czy zapis DTC zawieszenia powstaje wyłącznie po potwierdzeniu zadziałania nadzoru. [Macierz weryfikacji](../verification/macierz-wymagan.md).
 
-## Pytanie 183 — powtarzające się resety nadzoru podczas uruchamiania ECU
+## Powtarzające się resety nadzoru podczas uruchamiania ECU
 
-Do rozstrzygnięcia pozostaje reakcja, gdy nadzór kolejny raz resetuje ECU przed zakończeniem uruchamiania. Rozpatrujemy ograniczenie liczby automatycznych prób lub kontynuowanie prób do zakończenia uruchamiania. Obie propozycje przewidują utrzymanie odcięcia podczas tej sekwencji.
+W odpowiedzi A na pytanie 183 (2026-11-11) właściciel zatwierdził limit automatycznych prób uruchomienia, gdy nadzór ponownie resetuje ECU przed zakończeniem uruchamiania. Zapłon, rozrusznik i wtrysk w wyposażonych profilach pozostają odcięte w trakcie prób. Po osiągnięciu limitu nadzór przerywa automatyczne próby i utrzymuje odcięcie także przy niezakończonym uruchomieniu głównego firmware (SYS-173).
+
+### Plan próby SYS-173
+
+1. Na stanowisku z obciążeniami zastępczymi wymusić reset nadzoru i ponawiać zawieszenie przed potwierdzeniem zakończenia uruchamiania. Zarejestrować liczbę automatycznych prób i stan wyjść. Potwierdzić odcięcie zapłonu, rozrusznika i wtrysku w wyposażonym profilu przez całą sekwencję.
+2. Po osiągnięciu ustalonego limitu utrzymać usterkę i stabilne zasilanie. Sprawdzić zakończenie automatycznych prób oraz utrzymanie odcięcia, również przy wciśniętym START. Przed próbą określić kryterium zakończenia uruchamiania, liczbę prób i czas obserwacji po osiągnięciu limitu.
+3. W przebiegu kontrolnym umożliwić ukończenie uruchamiania przed limitem. Potwierdzić zakończenie sekwencji resetów i dopuszczenie wyjść zgodnie z SYS-170 i SYS-171. [Macierz weryfikacji](../verification/macierz-wymagan.md).
+
+## Pytanie 184 — zlecenie uruchomienia ECU po osiągnięciu limitu
+
+Do ustalenia pozostaje sposób zlecenia pojedynczej próby uruchomienia ECU po wstrzymaniu automatycznych prób według SYS-173. Rozpatrujemy świadomą sekwencję przewodowym START dostępną w terenie i wariant wymagający przewodowego dostępu serwisowego z Windows.

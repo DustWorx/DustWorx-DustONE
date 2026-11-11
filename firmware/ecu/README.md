@@ -100,6 +100,8 @@ Według SYS-171 ECU po resecie nadzoru odrzuca START naciśnięty przed potwierd
 
 Według SYS-172 ECU zapisuje DTC i zamrożoną ramkę po potwierdzeniu resetu nadzoru. Ramka zawiera przyczynę resetu i wiarygodne dane związane ze zdarzeniem w zakresie ich dostępności.
 
+Według SYS-173 nadzór ogranicza automatyczne próby uruchomienia przy powtarzających się resetach przed ukończeniem startu ECU. Kryterium zakończenia uruchamiania będzie wejściem do projektu komunikacji firmware z nadzorem.
+
 SYS-121 określa zgłoszenie usterki TPS i awaryjny zapłon gaźnika ze zweryfikowanej krzywej zależnej od obrotów, przy prawidłowej synchronizacji wału.
 
 SYS-122 przypisuje krzywą awaryjną do konfiguracji silnika jako wspólną dla jej zestawów map.

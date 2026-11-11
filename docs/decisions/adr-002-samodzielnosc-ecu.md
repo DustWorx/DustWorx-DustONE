@@ -38,6 +38,8 @@ W odpowiedzi **A na pytanie 181** (2026-11-11) właściciel zatwierdził odrzuce
 
 W odpowiedzi na **pytanie 182** (2026-11-11) właściciel ustalił zapis przyczyny i dostępnych danych zdarzenia w zamrożonej ramce po potwierdzonym resecie nadzoru (SYS-172). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-172).
 
+W odpowiedzi **A na pytanie 183** (2026-11-11) właściciel zatwierdził limit automatycznych prób uruchomienia po powtarzających się resetach nadzoru i utrzymanie odcięcia po osiągnięciu limitu (SYS-173). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-173).
+
 ## Konsekwencje
 
 - Dane i pomiary wymagane do autonomicznego sterowania silnikiem oraz jego zabezpieczeń muszą być dostępne ECU bez udziału HMI. Uwzględnić to przy wyborze miejsca podłączenia czujników.
