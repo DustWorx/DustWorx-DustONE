@@ -42,6 +42,8 @@ W odpowiedzi **A na pytanie 183** (2026-11-11) właściciel zatwierdził limit a
 
 W odpowiedzi na **pytanie 184** (2026-11-11) właściciel wskazał automatyczne odzyskiwanie ECU. Po limicie standardowych prób ECU samoczynnie rozpoczyna odzyskiwanie przy utrzymanym odcięciu (SYS-174). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-174).
 
+W odpowiedzi **A na pytanie 185** (2026-11-11) właściciel zatwierdził samodzielne odzyskiwanie gotowości ECU, a po jego niepowodzeniu udostępnienie naprawy z Windows (SYS-175). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-175).
+
 ## Konsekwencje
 
 - Dane i pomiary wymagane do autonomicznego sterowania silnikiem oraz jego zabezpieczeń muszą być dostępne ECU bez udziału HMI. Uwzględnić to przy wyborze miejsca podłączenia czujników.
