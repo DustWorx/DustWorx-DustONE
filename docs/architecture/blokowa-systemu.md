@@ -1,6 +1,6 @@
 # Architektura blokowa DustONE
 
-Stan na: 2026-11-09. **Materiał wstępny dla etapu 4, który oczekuje w kolejce**, wyprowadzona z [wymagań SYS-001–150](../01-zakres-systemu.md) i przyjętych ADR. Podział poniżej porządkuje projektowanie; nie wybiera komponentów, liczby pinów, protokołu PC ani topologii stopni mocy. G1 pozostaje otwarta. Uzupełnienie z 2026-11-11 obejmuje odcięcie przez STOP (SYS-167–168) i przez niezależny nadzór oraz wznowienie i diagnostykę po resecie oraz limit prób oraz odzyskiwanie (SYS-169–175).
+Stan na: 2026-11-09. **Materiał wstępny dla etapu 4, który oczekuje w kolejce**, wyprowadzona z [wymagań SYS-001–150](../01-zakres-systemu.md) i przyjętych ADR. Podział poniżej porządkuje projektowanie; nie wybiera komponentów, liczby pinów, protokołu PC ani topologii stopni mocy. G1 pozostaje otwarta. Uzupełnienie z 2026-11-11 obejmuje odcięcie przez STOP (SYS-167–168), reakcje nadzoru, powrót po resecie i odzyskiwanie (SYS-169–176).
 
 Zakres silnikowy: jeden cylinder, 2T/4T i wyłącznie chłodzenie cieczą według SYS-098. Rozwinięcie projektu blokowego pozostaje w kolejce etapu 4.
 
@@ -60,7 +60,7 @@ flowchart LR
     SERVICE <-->|"dostęp do obu urządzeń"| COM
 ```
 
-Diagram pokazuje zależności funkcjonalne. Strzałki zasilania nie są kompletnym schematem szyn; wszystkie bloki wymagają właściwego zasilania. Droga standardowej obsługi obu urządzeń przez ECU-COM jest kandydatem do projektu. Miejsce złącza, interfejs PC i ewentualny mostek pozostają otwarte; SYS-027 nie przesądza USB w ECU. Ścieżki STOP pokazują odczyt stanu i odcięcie zapłonu, wtrysku oraz rozrusznika niezależne od głównego firmware (SYS-167–168). Niezależny nadzór wymusza odcięcie tych wyjść i osobno inicjuje reset (SYS-169). Warunki wznowienia zapłonu i wtrysku po resecie określa SYS-170, a warunki załączenia rozrusznika określa SYS-171. Nadzór egzekwuje limit standardowych prób uruchomienia według SYS-173. ECU po limicie samoczynnie rozpoczyna odzyskiwanie według SYS-174, a po niepowodzeniu samodzielnego odzyskiwania udostępnia naprawę z Windows według SYS-175. Realizacja torów odcięcia i nadzoru jest wejściem do etapu 4.
+Diagram pokazuje zależności funkcjonalne. Strzałki zasilania nie są kompletnym schematem szyn; wszystkie bloki wymagają właściwego zasilania. Droga standardowej obsługi obu urządzeń przez ECU-COM jest kandydatem do projektu. Miejsce złącza, interfejs PC i ewentualny mostek pozostają otwarte; SYS-027 nie przesądza USB w ECU. Ścieżki STOP pokazują odczyt stanu i odcięcie zapłonu, wtrysku oraz rozrusznika niezależne od głównego firmware (SYS-167–168). Niezależny nadzór wymusza odcięcie tych wyjść i osobno inicjuje reset (SYS-169). Warunki wznowienia zapłonu i wtrysku po resecie określa SYS-170, a warunki załączenia rozrusznika określa SYS-171. Nadzór egzekwuje limit standardowych prób uruchomienia według SYS-173. ECU po limicie samoczynnie rozpoczyna odzyskiwanie według SYS-174. Po wyczerpaniu osobnego limitu samodzielnych prób bez gotowości udostępnia naprawę z Windows według SYS-175 i SYS-176. Realizacja torów odcięcia i nadzoru jest wejściem do etapu 4.
 
 ## Bloki i zadania
 

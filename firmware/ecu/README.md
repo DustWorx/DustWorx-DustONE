@@ -106,6 +106,8 @@ Według SYS-174 ECU po limicie standardowych prób samoczynnie rozpoczyna odzysk
 
 Według SYS-175 ECU najpierw podejmuje samodzielne odzyskiwanie gotowości. Po niepowodzeniu udostępnia przewodowy tryb naprawy dla Windows także przy nieuruchomionym głównym firmware.
 
+Według SYS-176 odzyskiwanie ma osobny limit kilku prób. ECU kończy sekwencję po potwierdzeniu gotowości albo przechodzi do naprawy z Windows po wyczerpaniu limitu. Wartość limitu i kryteria zakończenia próby wymagają projektu.
+
 SYS-121 określa zgłoszenie usterki TPS i awaryjny zapłon gaźnika ze zweryfikowanej krzywej zależnej od obrotów, przy prawidłowej synchronizacji wału.
 
 SYS-122 przypisuje krzywą awaryjną do konfiguracji silnika jako wspólną dla jej zestawów map.

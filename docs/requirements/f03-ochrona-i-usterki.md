@@ -13,7 +13,7 @@ Stan na 2026-11-11. **F03 aktywny po zamknięciu F02.** Macierz robocza łączy 
 | Brak HMI albo CAN | ECU działa samodzielnie, a reakcje akcesoriów są odrębne (SYS-046/050–053). | Zależności od pozostałych stanów ochronnych. | V07 |
 | Usterka TPS lub pomiaru ciśnienia używanego do określenia obciążenia | Przyjęto reguły kalibracji awaryjnej, kontrolowanego zatrzymania, powrotu i wymuszenia „Standard” (SYS-121–142). | Powiązać z pozostałymi blokadami F03. [Zakres F02](f02-przeglad-zakresu.md) opisuje przyjęte przypadki. | V02, V03, V04 |
 | Chłodzenie i pozostałe pomiary ochronne | Przyjęto pomiar płynu i automatykę wentylatora oraz wejścia ciśnienia paliwa i binarne oleju (SYS-029/043/044/060). | Reakcje na niedostępny pomiar i na warunki poza dopuszczalnym zakresem w wyposażonych profilach. | V02, V03, V05 |
-| Zasilanie i restart ECU | Przyjęto zasilanie bez stacyjki, zasady oszczędzania i odrębne reguły odtwarzania konfiguracji oraz map (SYS-054/084–089/106/109/155). Niezależny nadzór po wykryciu zawieszenia wymusza odcięcie wyjść i osobno inicjuje reset (SYS-169). Po resecie odcięcie zapłonu i wtrysku trwa do zatrzymania wału i nowej świadomej próby z wiarygodną synchronizacją (SYS-170). ECU odrzuca START przed potwierdzeniem zatrzymania wału i wymaga nowego naciśnięcia po zatrzymaniu (SYS-171). Ramka DTC po potwierdzonym resecie zawiera przyczynę i dostępne dane zdarzenia (SYS-172). Powtarzające się resety przed ukończeniem startu podlegają limitowi standardowych prób (SYS-173). Po osiągnięciu limitu ECU samoczynnie rozpoczyna odzyskiwanie przy utrzymanym odcięciu (SYS-174). ECU samodzielnie podejmuje odzyskiwanie gotowości, a po niepowodzeniu udostępnia naprawę z Windows (SYS-175). | Liczba samodzielnych prób odzyskania przed naprawą z Windows (pytanie 186). | V01, V04, V06, V10, V12, V13 |
+| Zasilanie i restart ECU | Zasilanie bez stacyjki, zasady oszczędzania i odtwarzania danych (SYS-054/084–089/106/109/155). Po zawieszeniu nadzór odcina wyjścia i inicjuje reset (SYS-169). Powrót sterowania i zapis DTC określają SYS-170–172. Standardowe uruchamianie i samodzielne odzyskiwanie mają osobne limity. Po wyczerpaniu limitu odzyskiwania ECU udostępnia naprawę z Windows (SYS-173–176). | Powrót zasilania przed rozpoczęciem naprawy z Windows (pytanie 187). | V01, V04, V06, V10, V12, V13 |
 
 ## Utrata synchronizacji wału podczas pracy
 
@@ -205,13 +205,23 @@ W odpowiedzi na pytanie 184 (2026-11-11) właściciel wskazał potrzebę automat
 
 ## Samodzielne odzyskiwanie ECU i naprawa z Windows
 
-W odpowiedzi A na pytanie 185 (2026-11-11) właściciel zatwierdził samodzielne odzyskiwanie gotowości ECU jako pierwszy krok po wejściu według SYS-174. Po niepowodzeniu ECU udostępnia przewodową naprawę z Windows także przy nieuruchomionym głównym firmware. Odcięcie i warunki nowego rozruchu obowiązują według SYS-174 (SYS-175). Reguły naprawy i kryteria gotowości firmware są wejściem do F07.
+W odpowiedzi A na pytanie 185 (2026-11-11) właściciel zatwierdził samodzielne odzyskiwanie gotowości ECU jako pierwszy krok po wejściu według SYS-174. Po wyczerpaniu limitu samodzielnych prób bez odzyskania gotowości ECU udostępnia przewodową naprawę z Windows także przy nieuruchomionym głównym firmware (SYS-176). Odcięcie i warunki nowego rozruchu obowiązują według SYS-174 (SYS-175). Reguły naprawy i kryteria gotowości firmware są wejściem do F07.
 
 ### Plan próby SYS-175
 
 1. Doprowadzić do wejścia w odzyskiwanie według [planu SYS-174](#plan-próby-sys-174). Przy odłączonym HMI i komputerze umożliwić skuteczne samodzielne odzyskanie. Potwierdzić powrót ECU do gotowości i warunki nowej próby rozruchu według SYS-174.
-2. Powtórzyć z wymuszonym niepowodzeniem samodzielnego odzyskiwania i nieuruchomionym głównym firmware. Podłączyć przewodowo komputer z aplikacją Windows, potwierdzić rozpoznanie trybu naprawy oraz wykonać reprezentatywną operację naprawy określoną w F07. Na obciążeniach zastępczych sprawdzić utrzymanie odcięcia do potwierdzonego odzyskania. [Macierz weryfikacji](../verification/macierz-wymagan.md).
+2. Powtórzyć z wyczerpaniem limitu samodzielnych prób według SYS-176 i nieuruchomionym głównym firmware. Podłączyć przewodowo komputer z aplikacją Windows, potwierdzić rozpoznanie trybu naprawy oraz wykonać reprezentatywną operację naprawy określoną w F07. Na obciążeniach zastępczych sprawdzić utrzymanie odcięcia do potwierdzonego odzyskania. [Macierz weryfikacji](../verification/macierz-wymagan.md).
 
-## Pytanie 186 — liczba samodzielnych prób odzyskania przed naprawą z Windows
+## Limit samodzielnych prób odzyskania ECU
 
-Do ustalenia pozostaje, czy pierwsze niepowodzenie samodzielnej próby prowadzi do trybu naprawy z Windows, czy ECU może ponowić odzyskiwanie do osobnego limitu.
+W odpowiedzi B na pytanie 186 (2026-11-11) właściciel zatwierdził osobny limit kilku samodzielnych prób odzyskania. ECU ponawia odzyskiwanie do potwierdzenia gotowości albo do wyczerpania limitu. Po wyczerpaniu limitu bez odzyskania gotowości ECU kończy automatyczne próby i udostępnia naprawę z Windows według SYS-175. Odcięcie wyjść podlega SYS-174 (SYS-176).
+
+### Plan próby SYS-176
+
+1. Na stanowisku wymusić wejście do odzyskiwania według SYS-174 i niepowodzenie pierwszej samodzielnej próby. Potwierdzić, że ECU rozpoczyna kolejną samodzielną próbę w granicach osobnego limitu i utrzymuje odcięcie. Zarejestrować próby standardowego uruchomienia i próby odzyskiwania, aby sprawdzić oba limity.
+2. Wymusić niepowodzenie kolejnych prób aż do wyczerpania limitu. Potwierdzić zakończenie automatycznych prób, utrzymanie odcięcia i dostęp do naprawy przez Windows według [planu SYS-175](#plan-próby-sys-175).
+3. W przebiegu kontrolnym umożliwić potwierdzenie gotowości w kolejnej próbie, w tym przy ostatniej dozwolonej próbie. Sprawdzić zakończenie sekwencji i warunki nowego rozruchu według SYS-174. Wartość limitu i kryteria powodzenia oraz niepowodzenia określić przed próbą. [Macierz weryfikacji](../verification/macierz-wymagan.md).
+
+## Pytanie 187 — powrót zasilania przed rozpoczęciem naprawy z Windows
+
+Do ustalenia pozostaje zachowanie po zaniku i powrocie zasilania, gdy ECU już udostępniło naprawę z Windows po wyczerpaniu prób, a operacja naprawy jeszcze się nie rozpoczęła. Rozpatrujemy powrót do trybu naprawy albo nową sekwencję standardowego uruchamiania i samodzielnego odzyskiwania.
