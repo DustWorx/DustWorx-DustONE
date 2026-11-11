@@ -179,6 +179,7 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-163 | Wybudzone ECU nadzoruje przewodowy obwód STOP. Rozpoznaje zwolniony i naciśnięty przycisk w sprawnym obwodzie oraz wykrywa przerwę w obwodzie także przy zwolnionym przycisku. Nadzór działa lokalnie w ECU, niezależnie od HMI i komunikacji CAN. Parametry wykrywania i miejsca wymuszania przerwy wymagają określenia w projekcie i planie prób. |
 | SYS-164 | Po potwierdzeniu przerwy w obwodzie przewodowego STOP ECU zgłasza i zapisuje DTC z zamrożoną ramką według SYS-019. Sama przerwa wywołuje wyłącznie reakcję diagnostyczną. ECU kontynuuje bieżące sterowanie silnikiem i dopuszcza nową świadomą próbę rozruchu przy utrzymującej się przerwie, jeżeli pozostałe warunki rozruchu są spełnione. |
 | SYS-165 | Wybudzone ECU wykrywa zwarcie przewodu sygnałowego STOP do masy jako odrębny stan usterki. Rozróżnia je od naciśnięcia sprawnego przycisku oraz od pozostałych stanów nadzorowanych według SYS-163. Nadzór działa niezależnie od HMI i komunikacji CAN. Kryteria wykrywania i miejsca wymuszania zwarcia określą projekt toru i plan prób. |
+| SYS-166 | Po potwierdzeniu zwarcia przewodu sygnałowego STOP do masy według SYS-165 ECU zgłasza i zapisuje DTC odpowiadający zwarciu wraz z zamrożoną ramką według SYS-019. Samo zwarcie wywołuje wyłącznie reakcję diagnostyczną. ECU kontynuuje bieżące sterowanie silnikiem i dopuszcza nową świadomą próbę rozruchu przy utrzymującym się zwarciu, jeżeli pozostałe warunki rozruchu są spełnione. |
 
 ## 3. Podział odpowiedzialności
 
@@ -251,6 +252,8 @@ W odpowiedzi A na pytanie 173 (2026-11-11) właściciel zatwierdził nadzór prz
 W odpowiedzi na pytanie 174 (2026-11-11) właściciel ustalił reakcję diagnostyczną na przerwę. ECU zgłasza DTC, kontynuuje pracę silnika i dopuszcza nową próbę rozruchu przy utrzymującej się przerwie oraz spełnionych pozostałych warunkach (SYS-164). [Plan próby F03](requirements/f03-ochrona-i-usterki.md#plan-próby-sys-164).
 
 W odpowiedzi A na pytanie 175 (2026-11-11) właściciel zatwierdził wykrywanie zwarcia przewodu sygnałowego STOP do masy jako odrębnej usterki. ECU rozróżnia zwarcie od naciśnięcia sprawnego przycisku (SYS-165). [Plan próby F03](requirements/f03-ochrona-i-usterki.md#plan-próby-sys-165).
+
+W odpowiedzi A na pytanie 176 (2026-11-11) właściciel zatwierdził reakcję diagnostyczną na zwarcie przewodu STOP do masy. ECU zgłasza DTC i dopuszcza dalszą pracę oraz nową próbę rozruchu przy spełnieniu pozostałych warunków, również przy utrzymującym się zwarciu (SYS-166). [Plan próby F03](requirements/f03-ochrona-i-usterki.md#plan-próby-sys-166).
 
 Proponowana weryfikacja SYS-048/049: na stanowisku sprawdzić zakończenie sterowania po puszczeniu START, po zasymulowaniu potwierdzonej pracy silnika i po upływie ustalonego limitu kręcenia. Po obu automatycznych odcięciach podtrzymany START nie może ponownie załączyć rozrusznika; po puszczeniu i ponownym naciśnięciu obowiązują warunki dopuszczenia rozruchu. Powtórzyć próby przy odłączonym HMI. Mierzalne czasy reakcji i warunki symulacji określić przed próbami; testów nie wykonano.
 
