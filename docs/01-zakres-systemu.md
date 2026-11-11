@@ -192,6 +192,7 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-176 | W jednej sekwencji odzyskiwania według SYS-174 ECU stosuje osobny limit samodzielnych prób, obejmujący więcej niż jedną próbę. Po niepowodzeniu ponawia odzyskiwanie w granicach tego limitu i kończy sekwencję po potwierdzeniu gotowości. Po wyczerpaniu limitu bez odzyskania gotowości kończy automatyczne próby i udostępnia naprawę z Windows według SYS-175. Odcięcie wyjść podlega SYS-174. Wartość limitu i kryteria zakończenia próby wymagają określenia w projekcie. |
 | SYS-177 | Po wyczerpaniu limitu samodzielnych prób według SYS-176 ECU zachowuje stan oczekiwania na naprawę z Windows przy zaniku zasilania przed rozpoczęciem naprawy. Po powrocie zasilania ECU bezpośrednio udostępnia przewodowy tryb naprawy według SYS-175. Od chwili przywrócenia zasilania utrzymuje odcięcie według SYS-174. |
 | SYS-178 | Gdy zasilanie zaniknie podczas samodzielnej próby odzyskania, ECU po powrocie zasilania odtwarza wykorzystanie limitu według SYS-176. Przerwana próba zajmuje dokładnie jedno miejsce w limicie. ECU kontynuuje odzyskiwanie w granicach pozostałego limitu, a po jego wyczerpaniu udostępnia tryb naprawy z Windows według SYS-175. Od chwili powrotu zasilania utrzymuje odcięcie według SYS-174. |
+| SYS-179 | Gdy zasilanie zaniknie podczas standardowej próby uruchomienia głównego firmware w sekwencji według SYS-173, ECU po powrocie zasilania odtwarza liczbę zakończonych prób i ponawia przerwaną próbę w ramach tego samego miejsca w limicie. Zalicza ją po zakończeniu według kryteriów SYS-173. Od chwili powrotu zasilania ECU utrzymuje odcięcie według SYS-173. Po wyczerpaniu limitu bez potwierdzenia gotowości rozpoczyna odzyskiwanie według SYS-174. |
 
 ## 3. Podział odpowiedzialności
 
@@ -290,6 +291,8 @@ W odpowiedzi B na pytanie 186 (2026-11-11) właściciel zatwierdził osobny limi
 W odpowiedzi A na pytanie 187 (2026-11-11) właściciel zatwierdził bezpośredni powrót do trybu naprawy z Windows po zaniku zasilania przed rozpoczęciem naprawy. ECU zachowuje stan oczekiwania i utrzymuje odcięcie po powrocie zasilania (SYS-177). [Plan próby F03](requirements/f03-ochrona-i-usterki.md#plan-próby-sys-177).
 
 W odpowiedzi A na pytanie 188 (2026-11-11) właściciel zatwierdził odtworzenie wykorzystania limitu samodzielnych prób po zaniku zasilania i zaliczenie przerwanej próby (SYS-178). [Plan próby F03](requirements/f03-ochrona-i-usterki.md#plan-próby-sys-178).
+
+W odpowiedzi B na pytanie 189 (2026-11-11) właściciel zatwierdził zachowanie liczby zakończonych standardowych prób po zaniku zasilania i ponowienie przerwanej próby w ramach tego samego miejsca w limicie (SYS-179). [Plan próby F03](requirements/f03-ochrona-i-usterki.md#plan-próby-sys-179).
 
 Proponowana weryfikacja SYS-048/049: na stanowisku sprawdzić zakończenie sterowania po puszczeniu START, po zasymulowaniu potwierdzonej pracy silnika i po upływie ustalonego limitu kręcenia. Po obu automatycznych odcięciach podtrzymany START nie może ponownie załączyć rozrusznika; po puszczeniu i ponownym naciśnięciu obowiązują warunki dopuszczenia rozruchu. Powtórzyć próby przy odłączonym HMI. Mierzalne czasy reakcji i warunki symulacji określić przed próbami; testów nie wykonano.
 

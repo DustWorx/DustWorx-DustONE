@@ -50,6 +50,8 @@ W odpowiedzi **A na pytanie 187** (2026-11-11) właściciel zatwierdził bezpoś
 
 W odpowiedzi **A na pytanie 188** (2026-11-11) właściciel zatwierdził zachowanie wykorzystania limitu samodzielnych prób po zaniku zasilania, wliczając przerwaną próbę (SYS-178). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-178).
 
+W odpowiedzi **B na pytanie 189** (2026-11-11) właściciel zatwierdził zachowanie zakończonych standardowych prób i ponowienie przerwanej próby w tym samym miejscu limitu po zaniku zasilania (SYS-179). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-179).
+
 ## Konsekwencje
 
 - Dane i pomiary wymagane do autonomicznego sterowania silnikiem oraz jego zabezpieczeń muszą być dostępne ECU bez udziału HMI. Uwzględnić to przy wyborze miejsca podłączenia czujników.
