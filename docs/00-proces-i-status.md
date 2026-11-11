@@ -10,13 +10,13 @@ Kontrola pełnego F01 została zakończona: właściciel potwierdził zgodność
 
 | Obszar | Stan potwierdzony dokumentacją |
 | --- | --- |
-| Wymagania systemowe | 162 wymagania SYS-001–162; pierwszy przydział do bloków i grup weryfikacji gotowy, kryteria i procedury do rozwinięcia. |
+| Wymagania systemowe | 163 wymagania SYS-001–163; pierwszy przydział do bloków i grup weryfikacji gotowy, kryteria i procedury do rozwinięcia. |
 | Decyzje | 12 zapisów ADR-001–012; ostatni ogranicza platformę do silników chłodzonych cieczą. |
 | Zakres wariantów | Macierz 6 wariantów silnika; jest planem obsługi, nie potwierdzeniem zgodności modeli. |
 | Pierwsza jednostka | Beta 300 RR Racing 2015; analiza dokumentów i zdjęć, bez raportów pomiarowych instalacji. |
 | Architektura | Pierwszy diagram blokowy, funkcje sześciu wariantów i przydział zasobów gotowe jako wersje robocze. Modele, parametry i liczbowe bilanse pozostają otwarte. |
 | Schematy, BOM, PCB i mechanika | W repozytorium brak projektu wykonawczego i zatwierdzonego kompletnego BOM ECU/HMI. |
-| Kod i próby produktu | W repozytorium brak implementacji firmware/Windows i raportów prób DustONE. Istnieją plany, szablon procedury i przydział 162 wymagań do 13 grup weryfikacji. |
+| Kod i próby produktu | W repozytorium brak implementacji firmware/Windows i raportów prób DustONE. Istnieją plany, szablon procedury i przydział 163 wymagań do 13 grup weryfikacji. |
 
 Podstawy: [wymagania](requirements/README.md), [decyzje](decisions/README.md), [macierz silników](architecture/macierz-wariantow-silnika.md), [I/O](interfaces/wstepna-lista-io.md) i [weryfikacja](verification/README.md). Liczba wymagań i pytań nie jest procentem wykonania produktu.
 
@@ -61,13 +61,13 @@ Parametry wyliczane z osprzętu, charakterystyki czujników, wartości elementó
 | --- | --- | --- |
 | W04 — Zakres funkcjonalny: F01 | Zamknięty po kontroli właściciela: 2026-11-04. | [Pomiary](requirements/f01-pomiary-silnika.md), [przegląd sterowania i wynik zamknięcia](requirements/f01-sterowanie-silnikiem.md); dane techniczne przekazane do kolejki etapów 3–6. |
 | F02 — Mapy, konfiguracja i strojenie ECU | Zamknięty po akceptacji właściciela 2026-11-09. | Odpowiedź A na pytanie 166. [Karta F02](requirements/f02-przeglad-zakresu.md) zawiera przyjęty zakres, plan weryfikacji i przekazanie. |
-| F03 — Ochrona i reakcje na usterki | Aktywny po zamknięciu F02. | [Macierz reakcji F03](requirements/f03-ochrona-i-usterki.md). Po utracie synchronizacji podczas pracy ECU wznawia zapłon i wtrysk wyłącznie w nowej świadomej próbie rozruchu po zatrzymaniu i odzyskaniu synchronizacji (SYS-157). Utrata uzyskanej synchronizacji podczas rozruchu elektrycznego kończy próbę. Kolejna wymaga zatrzymania silnika oraz zwolnienia i ponownego naciśnięcia START (SYS-158). Potwierdzona utrata synchronizacji podczas rozruchu kopniakiem kończy próbę. Sterowanie można wznowić po zatrzymaniu wału w nowej świadomej próbie z wiarygodną synchronizacją (SYS-159). Przy aktywnym STOP naciśnięcie START na zgaszonym silniku pozostawia rozrusznik wyłączony. Po zwolnieniu STOP wymagana jest nowa próba START (SYS-160). Naciśnięcie STOP w trakcie rozruchu elektrycznego wyłącza rozrusznik i kończy próbę. Po zwolnieniu STOP potrzebne jest nowe naciśnięcie START (SYS-161). Po użyciu STOP podczas pracy odcięcie trwa do zatrzymania wału. Wznowienie wymaga zwolnionego STOP i nowej świadomej próby z wiarygodną synchronizacją (SYS-162). Następny przypadek to wykrywanie przerwy przewodu STOP przy zwolnionym przycisku. |
+| F03 — Ochrona i reakcje na usterki | Aktywny po zamknięciu F02. | [Macierz reakcji F03](requirements/f03-ochrona-i-usterki.md). Po utracie synchronizacji podczas pracy ECU wznawia zapłon i wtrysk wyłącznie w nowej świadomej próbie rozruchu po zatrzymaniu i odzyskaniu synchronizacji (SYS-157). Utrata uzyskanej synchronizacji podczas rozruchu elektrycznego kończy próbę. Kolejna wymaga zatrzymania silnika oraz zwolnienia i ponownego naciśnięcia START (SYS-158). Potwierdzona utrata synchronizacji podczas rozruchu kopniakiem kończy próbę. Sterowanie można wznowić po zatrzymaniu wału w nowej świadomej próbie z wiarygodną synchronizacją (SYS-159). Przy aktywnym STOP naciśnięcie START na zgaszonym silniku pozostawia rozrusznik wyłączony. Po zwolnieniu STOP wymagana jest nowa próba START (SYS-160). Naciśnięcie STOP w trakcie rozruchu elektrycznego wyłącza rozrusznik i kończy próbę. Po zwolnieniu STOP potrzebne jest nowe naciśnięcie START (SYS-161). Po użyciu STOP podczas pracy odcięcie trwa do zatrzymania wału. Wznowienie wymaga zwolnionego STOP i nowej świadomej próby z wiarygodną synchronizacją (SYS-162). Wybudzone ECU nadzoruje przewodowy STOP i rozróżnia zwolniony przycisk od przerwy w obwodzie (SYS-163). Następny przypadek to reakcja na potwierdzoną przerwę w obwodzie STOP podczas pracy silnika. |
 | W05 — Inwentaryzacja Bety | W kolejce, etap 3. | Zachowany [plan INV](verification/beta-2015-plan-inwentaryzacji.md); brak wyników pomiarowych. |
 | W01/W02 — Architektura i zasoby | W kolejce, etap 4. | Zachowane [diagram](architecture/blokowa-systemu.md) i [macierz wariantów](architecture/macierz-wariantow-silnika.md); bez zamkniętych bilansów. |
-| W03 — Weryfikacja wymagań | W kolejce, etap 5. | Zachowany [przydział 162 SYS do grup](verification/macierz-wymagan.md); kryteria, procedury i dowody do rozwinięcia. |
+| W03 — Weryfikacja wymagań | W kolejce, etap 5. | Zachowany [przydział 163 SYS do grup](verification/macierz-wymagan.md); kryteria, procedury i dowody do rozwinięcia. |
 | W06 — Bilanse i wybór komponentów | W kolejce, etapy 4 i 6. | Wymagane wejściowe parametry; ważne komponenty wybierzemy wspólnie. |
 
-**Najbliższy krok to decyzja o wykrywaniu przerwy w obwodzie przewodowego STOP.** Przyjęte reakcje i plan prób są w [macierzy F03](requirements/f03-ochrona-i-usterki.md). Konkrety osprzętu, w tym wykonalność konwersji TPI, mają właścicieli i etapy w [przekazaniu F01](requirements/f01-sterowanie-silnikiem.md). Parametry elektryczne, bilanse i procedury wykonawcze pozostają w kolejce właściwych etapów.
+**Najbliższy krok to ustalenie reakcji na potwierdzoną przerwę w obwodzie STOP podczas pracy silnika.** Przyjęte reakcje i plan prób są w [macierzy F03](requirements/f03-ochrona-i-usterki.md). Konkrety osprzętu, w tym wykonalność konwersji TPI, mają właścicieli i etapy w [przekazaniu F01](requirements/f01-sterowanie-silnikiem.md). Parametry elektryczne, bilanse i procedury wykonawcze pozostają w kolejce właściwych etapów.
 
 ## Warunki przechodzenia dalej
 

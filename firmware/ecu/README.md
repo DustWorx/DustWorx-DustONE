@@ -80,6 +80,8 @@ Według SYS-161 przewodowy STOP wykryty podczas kręcenia wyłącza rozrusznik i
 
 Według SYS-162 zwolnienie przewodowego STOP przy nadal obracającym się wale utrzymuje odcięcie. Ponowne dopuszczenie zapłonu i wtrysku wymaga zatrzymania wału i nowej świadomej próby z wiarygodną synchronizacją.
 
+Według SYS-163 wybudzone ECU rozróżnia zwolniony i naciśnięty przycisk STOP w sprawnym obwodzie oraz przerwę w obwodzie. Nadzór działa niezależnie od HMI i CAN. [Macierz F03](../../docs/requirements/f03-ochrona-i-usterki.md).
+
 SYS-121 określa zgłoszenie usterki TPS i awaryjny zapłon gaźnika ze zweryfikowanej krzywej zależnej od obrotów, przy prawidłowej synchronizacji wału.
 
 SYS-122 przypisuje krzywą awaryjną do konfiguracji silnika jako wspólną dla jej zestawów map.

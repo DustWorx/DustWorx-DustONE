@@ -176,6 +176,7 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-160 | Gdy kierowca naciska START przy zgaszonym silniku i aktywnym przewodowym STOP, ECU utrzymuje rozrusznik i zapłon wyłączone. W profilach wtryskowych utrzymuje również odcięcie wtrysku. Po zwolnieniu STOP rozruch elektryczny wymaga nowego naciśnięcia START oraz spełnienia pozostałych warunków rozruchu. Jeżeli START nadal jest przytrzymany w chwili zwolnienia STOP, kierowca musi go puścić przed ponowieniem. |
 | SYS-161 | W trakcie rozruchu elektrycznego, gdy rozrusznik już kręci i ECU jeszcze nie potwierdziło pracy silnika, wykrycie aktywnego przewodowego STOP kończy bieżącą próbę. ECU wyłącza rozrusznik i zapłon. W profilach wtryskowych odcina także wtrysk. Po zwolnieniu STOP ponowne włączenie rozrusznika wymaga nowego naciśnięcia START i spełnienia pozostałych warunków rozruchu. Jeżeli START jest nadal przytrzymany, kierowca musi go puścić przed ponowieniem. |
 | SYS-162 | Po wykryciu aktywnego przewodowego STOP podczas pracy silnika ECU odcina zapłon. W profilach wtryskowych odcina także wtrysk. Odcięcie trwa również po zwolnieniu STOP podczas dalszego obrotu wału. Ponowne dopuszczenie zapłonu i wtrysku wymaga zwolnionego STOP, potwierdzonego zatrzymania wału oraz nowej świadomej próby rozruchu z wiarygodną synchronizacją i spełnionymi pozostałymi warunkami rozruchu. |
+| SYS-163 | Wybudzone ECU nadzoruje przewodowy obwód STOP. Rozpoznaje zwolniony i naciśnięty przycisk w sprawnym obwodzie oraz wykrywa przerwę w obwodzie także przy zwolnionym przycisku. Nadzór działa lokalnie w ECU, niezależnie od HMI i komunikacji CAN. Parametry wykrywania i miejsca wymuszania przerwy wymagają określenia w projekcie i planie prób. |
 
 ## 3. Podział odpowiedzialności
 
@@ -242,6 +243,8 @@ W odpowiedzi A na pytanie 170 (2026-11-11) właściciel zatwierdził blokadę ro
 W odpowiedzi A na pytanie 171 (2026-11-11) właściciel zatwierdził wyłączenie rozrusznika po wykryciu przewodowego STOP w trakcie kręcenia. ECU kończy próbę. Po zwolnieniu STOP kolejna próba wymaga nowego naciśnięcia START (SYS-161).
 
 W odpowiedzi A na pytanie 172 (2026-11-11) właściciel zatwierdził utrzymanie odcięcia zapłonu i wtrysku po zwolnieniu przewodowego STOP przed zatrzymaniem wału. Wznowienie wymaga nowej świadomej próby po zatrzymaniu, z wiarygodną synchronizacją (SYS-162).
+
+W odpowiedzi A na pytanie 173 (2026-11-11) właściciel zatwierdził nadzór przewodowego STOP w wybudzonym ECU. ECU rozpoznaje przerwę w obwodzie także przy zwolnionym przycisku (SYS-163).
 
 Proponowana weryfikacja SYS-048/049: na stanowisku sprawdzić zakończenie sterowania po puszczeniu START, po zasymulowaniu potwierdzonej pracy silnika i po upływie ustalonego limitu kręcenia. Po obu automatycznych odcięciach podtrzymany START nie może ponownie załączyć rozrusznika; po puszczeniu i ponownym naciśnięciu obowiązują warunki dopuszczenia rozruchu. Powtórzyć próby przy odłączonym HMI. Mierzalne czasy reakcji i warunki symulacji określić przed próbami; testów nie wykonano.
 
