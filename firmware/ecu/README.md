@@ -84,6 +84,8 @@ Według SYS-163 wybudzone ECU rozróżnia zwolniony i naciśnięty przycisk STOP
 
 SYS-164 wymaga zapisu DTC z zamrożoną ramką przy potwierdzonej przerwie w STOP. ECU kontynuuje pracę i dopuszcza nową próbę rozruchu przy spełnieniu pozostałych warunków.
 
+Według SYS-165 ECU klasyfikuje zwarcie przewodu sygnałowego STOP do masy jako stan usterki odrębny od naciśnięcia sprawnego przycisku i pozostałych stanów według SYS-163.
+
 SYS-121 określa zgłoszenie usterki TPS i awaryjny zapłon gaźnika ze zweryfikowanej krzywej zależnej od obrotów, przy prawidłowej synchronizacji wału.
 
 SYS-122 przypisuje krzywą awaryjną do konfiguracji silnika jako wspólną dla jej zestawów map.

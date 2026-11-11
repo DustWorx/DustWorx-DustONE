@@ -22,6 +22,8 @@ W odpowiedzi **A na pytanie 173** (2026-11-11) właściciel zatwierdził nadzór
 
 W odpowiedzi na **pytanie 174** (2026-11-11) właściciel ustalił reakcję diagnostyczną na przerwę w obwodzie STOP. ECU zgłasza DTC, kontynuuje sterowanie silnikiem i dopuszcza nową próbę rozruchu przy spełnieniu pozostałych warunków (SYS-164). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-164).
 
+W odpowiedzi **A na pytanie 175** (2026-11-11) właściciel zatwierdził odrębne rozpoznawanie zwarcia przewodu sygnałowego STOP do masy. Wybudzone ECU odróżnia je od naciśnięcia sprawnego przycisku niezależnie od HMI i CAN (SYS-165). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-165).
+
 ## Konsekwencje
 
 - Dane i pomiary wymagane do autonomicznego sterowania silnikiem oraz jego zabezpieczeń muszą być dostępne ECU bez udziału HMI. Uwzględnić to przy wyborze miejsca podłączenia czujników.
