@@ -46,6 +46,8 @@ W odpowiedzi **A na pytanie 185** (2026-11-11) właściciel zatwierdził samodzi
 
 W odpowiedzi **B na pytanie 186** (2026-11-11) właściciel zatwierdził osobny limit kilku samodzielnych prób odzyskania. Po jego wyczerpaniu bez odzyskania gotowości ECU udostępnia naprawę z Windows (SYS-176). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-176).
 
+W odpowiedzi **A na pytanie 187** (2026-11-11) właściciel zatwierdził bezpośredni powrót do trybu naprawy z Windows i utrzymanie odcięcia po zaniku zasilania przed rozpoczęciem naprawy (SYS-177). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-177).
+
 ## Konsekwencje
 
 - Dane i pomiary wymagane do autonomicznego sterowania silnikiem oraz jego zabezpieczeń muszą być dostępne ECU bez udziału HMI. Uwzględnić to przy wyborze miejsca podłączenia czujników.

@@ -13,7 +13,7 @@ Stan na 2026-11-11. **F03 aktywny po zamknięciu F02.** Macierz robocza łączy 
 | Brak HMI albo CAN | ECU działa samodzielnie, a reakcje akcesoriów są odrębne (SYS-046/050–053). | Zależności od pozostałych stanów ochronnych. | V07 |
 | Usterka TPS lub pomiaru ciśnienia używanego do określenia obciążenia | Przyjęto reguły kalibracji awaryjnej, kontrolowanego zatrzymania, powrotu i wymuszenia „Standard” (SYS-121–142). | Powiązać z pozostałymi blokadami F03. [Zakres F02](f02-przeglad-zakresu.md) opisuje przyjęte przypadki. | V02, V03, V04 |
 | Chłodzenie i pozostałe pomiary ochronne | Przyjęto pomiar płynu i automatykę wentylatora oraz wejścia ciśnienia paliwa i binarne oleju (SYS-029/043/044/060). | Reakcje na niedostępny pomiar i na warunki poza dopuszczalnym zakresem w wyposażonych profilach. | V02, V03, V05 |
-| Zasilanie i restart ECU | Zasilanie bez stacyjki, zasady oszczędzania i odtwarzania danych (SYS-054/084–089/106/109/155). Po zawieszeniu nadzór odcina wyjścia i inicjuje reset (SYS-169). Powrót sterowania i zapis DTC określają SYS-170–172. Standardowe uruchamianie i samodzielne odzyskiwanie mają osobne limity. Po wyczerpaniu limitu odzyskiwania ECU udostępnia naprawę z Windows (SYS-173–176). | Powrót zasilania przed rozpoczęciem naprawy z Windows (pytanie 187). | V01, V04, V06, V10, V12, V13 |
+| Zasilanie i restart ECU | Zasilanie bez stacyjki, zasady oszczędzania i odtwarzania danych (SYS-054/084–089/106/109/155). Po zawieszeniu nadzór odcina wyjścia i inicjuje reset (SYS-169). Powrót sterowania i zapis DTC określają SYS-170–172. Standardowe uruchamianie i samodzielne odzyskiwanie mają osobne limity. Po wyczerpaniu limitu odzyskiwania ECU udostępnia naprawę z Windows (SYS-173–176). Po zaniku zasilania przed rozpoczęciem naprawy ECU wraca bezpośrednio do trybu naprawy i utrzymuje odcięcie (SYS-177). | Rozliczenie limitu po zaniku zasilania podczas samodzielnej próby odzyskania (pytanie 188). | V01, V04, V06, V10, V12, V13 |
 
 ## Utrata synchronizacji wału podczas pracy
 
@@ -222,6 +222,16 @@ W odpowiedzi B na pytanie 186 (2026-11-11) właściciel zatwierdził osobny limi
 2. Wymusić niepowodzenie kolejnych prób aż do wyczerpania limitu. Potwierdzić zakończenie automatycznych prób, utrzymanie odcięcia i dostęp do naprawy przez Windows według [planu SYS-175](#plan-próby-sys-175).
 3. W przebiegu kontrolnym umożliwić potwierdzenie gotowości w kolejnej próbie, w tym przy ostatniej dozwolonej próbie. Sprawdzić zakończenie sekwencji i warunki nowego rozruchu według SYS-174. Wartość limitu i kryteria powodzenia oraz niepowodzenia określić przed próbą. [Macierz weryfikacji](../verification/macierz-wymagan.md).
 
-## Pytanie 187 — powrót zasilania przed rozpoczęciem naprawy z Windows
+## Powrót zasilania przed rozpoczęciem naprawy z Windows
 
-Do ustalenia pozostaje zachowanie po zaniku i powrocie zasilania, gdy ECU już udostępniło naprawę z Windows po wyczerpaniu prób, a operacja naprawy jeszcze się nie rozpoczęła. Rozpatrujemy powrót do trybu naprawy albo nową sekwencję standardowego uruchamiania i samodzielnego odzyskiwania.
+W odpowiedzi A na pytanie 187 (2026-11-11) właściciel zatwierdził zachowanie stanu oczekiwania na naprawę przy zaniku zasilania. Po powrocie zasilania ECU bezpośrednio udostępnia tryb naprawy z Windows. Odcięcie według SYS-174 obowiązuje od chwili przywrócenia zasilania (SYS-177).
+
+### Plan próby SYS-177
+
+1. Na stanowisku wyczerpać limit według [planu SYS-176](#plan-próby-sys-176) i potwierdzić dostępność trybu naprawy. Przed wykonaniem operacji naprawy odłączyć komputer i HMI oraz wymusić całkowity zanik zasilania ECU.
+2. Przywrócić zasilanie i rejestrować sekwencję uruchamiania oraz stan wyjść na obciążeniach zastępczych od chwili powrotu zasilania. Potwierdzić bezpośredni powrót do trybu naprawy i utrzymanie odcięcia. Powtórzyć z przytrzymanym START.
+3. Podłączyć przewodowo komputer i potwierdzić dostępność trybu naprawy. Przed rozpoczęciem naprawy odłączyć komputer, powtórzyć cykl zasilania i sprawdzić ponowne odtworzenie stanu. [Macierz weryfikacji](../verification/macierz-wymagan.md).
+
+## Pytanie 188 — limit prób po zaniku zasilania w trakcie samodzielnego odzyskiwania
+
+Do ustalenia pozostaje rozliczenie limitu, gdy zasilanie zanika podczas samodzielnej próby odzyskania przed przejściem do trybu naprawy. Rozpatrujemy zachowanie wykorzystanych prób z zaliczeniem przerwanej próby, zachowanie wykorzystanych prób z możliwością powtórzenia przerwanej próby oraz przywrócenie pełnego limitu.

@@ -24,6 +24,8 @@ Nadzór i tor uruchamiania ECU muszą umożliwić wyzwolenie odzyskiwania po lim
 
 Tor obsługi przewodowej musi umożliwić naprawę z Windows po niepowodzeniu samodzielnego odzyskiwania przy nieuruchomionym głównym firmware (SYS-175). [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-175).
 
+Projekt pamięci i uruchamiania ECU ma umożliwiać odtworzenie stanu oczekiwania na naprawę po zaniku zasilania oraz odcięcie od chwili jego powrotu (SYS-177). [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-177).
+
 Dobór MCU, pamięci i zasilania musi uwzględnić [chronione motogodziny i ODO](../../docs/architecture/chronione-liczniki.md), SYS-074–076: trwałość zapisu, utratę zasilania, ochronę dostępu i mechanizmy uruchamiania/aktualizacji. Konkretne mechanizmy i ważne komponenty wybieramy wspólnie z właścicielem po ustaleniu granic ochrony.
 
 Dobór MCU i interfejsów programowania musi również uwzględnić [SYS-078 i ADR-008](../../docs/decisions/adr-008-dostep-do-firmware-ecu.md): w trybie użytkowym tylko firmware zatwierdzony przez producenta oraz zachowany dostęp rozwojowy twórców. Sposób autoryzacji i przejścia między trybami wymaga projektu; nie wybrano układów, algorytmów ani nieodwracalnych blokad.
