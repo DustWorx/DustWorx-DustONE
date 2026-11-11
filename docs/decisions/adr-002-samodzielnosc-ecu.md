@@ -1,6 +1,6 @@
 # ADR-002 — samodzielność ECU i HMI jako klient
 
-Data decyzji 2026-10-25. Uzupełnienie 2026-11-11. Zatwierdzono samodzielność ECU, reakcje na przewodowy STOP przy rozruchu i pracy silnika oraz nadzór i reakcję na przerwę w obwodzie STOP. Szczegóły realizacji są do określenia.
+Data decyzji 2026-10-25. Uzupełnienie 2026-11-11 obejmuje nadzór obwodu STOP i działanie odcięcia przy zawieszeniu głównego firmware ECU. Szczegóły realizacji są do określenia.
 
 ## Problem i opcje
 
@@ -25,6 +25,8 @@ W odpowiedzi na **pytanie 174** (2026-11-11) właściciel ustalił reakcję diag
 W odpowiedzi **A na pytanie 175** (2026-11-11) właściciel zatwierdził odrębne rozpoznawanie zwarcia przewodu sygnałowego STOP do masy. Wybudzone ECU odróżnia je od naciśnięcia sprawnego przycisku niezależnie od HMI i CAN (SYS-165). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-165).
 
 W odpowiedzi **A na pytanie 176** (2026-11-11) właściciel zatwierdził zapis DTC z zamrożoną ramką po potwierdzonym zwarciu STOP do masy. ECU kontynuuje sterowanie i dopuszcza nowy rozruch przy spełnieniu pozostałych warunków (SYS-166). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-166).
+
+W odpowiedzi **A na pytanie 177** (2026-11-11) właściciel zatwierdził działanie sprawnego przewodowego STOP przy zawieszeniu głównego firmware ECU. Naciśnięcie STOP wymusza odcięcie zapłonu oraz wtrysku w wyposażonych profilach (SYS-167). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-167).
 
 ## Konsekwencje
 

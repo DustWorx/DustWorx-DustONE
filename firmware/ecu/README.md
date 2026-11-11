@@ -88,6 +88,8 @@ Według SYS-165 ECU klasyfikuje zwarcie przewodu sygnałowego STOP do masy jako 
 
 SYS-166 wymaga zapisu DTC z zamrożoną ramką po potwierdzonym zwarciu STOP do masy. ECU kontynuuje pracę i dopuszcza nową próbę rozruchu przy spełnieniu pozostałych warunków.
 
+SYS-167 wymaga działania odcięcia zapłonu i wtrysku przez STOP przy zawieszeniu głównego firmware. Po użyciu STOP podczas pracy silnika firmware uwzględnia warunki ponownego dopuszczenia sterowania według SYS-162.
+
 SYS-121 określa zgłoszenie usterki TPS i awaryjny zapłon gaźnika ze zweryfikowanej krzywej zależnej od obrotów, przy prawidłowej synchronizacji wału.
 
 SYS-122 przypisuje krzywą awaryjną do konfiguracji silnika jako wspólną dla jej zestawów map.
