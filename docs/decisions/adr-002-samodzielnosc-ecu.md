@@ -1,6 +1,6 @@
 # ADR-002 — samodzielność ECU i HMI jako klient
 
-Data decyzji 2026-10-25. Uzupełnienie 2026-11-11. Zatwierdzono samodzielność ECU oraz blokadę rozrusznika po naciśnięciu START przy aktywnym STOP. Szczegóły realizacji są do określenia.
+Data decyzji 2026-10-25. Uzupełnienie 2026-11-11. Zatwierdzono samodzielność ECU oraz reakcje rozrusznika na przewodowy STOP przed rozpoczęciem i w trakcie kręcenia. Szczegóły realizacji są do określenia.
 
 ## Problem i opcje
 
@@ -13,6 +13,8 @@ Właściciel projektu w odpowiedzi na pytanie 55 z 2026-10-25 wskazał, że ECU 
 ECU samodzielnie steruje silnikiem i jego zabezpieczeniami, zarządza konfiguracją, mapami, diagnostyką oraz danymi eksploatacyjnymi motocykla. HMI jest klientem: prezentuje dane i przekazuje żądania użytkownika. ECU rozstrzyga wykonanie żądania i podaje rzeczywisty stan. Obecność HMI nie jest warunkiem pracy ECU; sama utrata HMI/CAN nie gasi silnika. Powiązania: [SYS-046 i SYS-047](../01-zakres-systemu.md).
 
 W odpowiedzi **A na pytanie 170** (2026-11-11) właściciel zatwierdził utrzymanie wyłączonego rozrusznika przy naciśnięciu START na zgaszonym silniku z aktywnym przewodowym STOP. Po zwolnieniu STOP wymagane jest nowe naciśnięcie START (SYS-160). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md).
+
+W odpowiedzi **A na pytanie 171** (2026-11-11) właściciel zatwierdził odłączenie rozrusznika po wykryciu przewodowego STOP podczas kręcenia. ECU kończy próbę. Po zwolnieniu STOP potrzebne jest nowe naciśnięcie START (SYS-161). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md).
 
 ## Konsekwencje
 

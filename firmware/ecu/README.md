@@ -76,6 +76,8 @@ Według SYS-159 potwierdzona utrata synchronizacji podczas rozruchu kopniakiem p
 
 Według SYS-160 naciśnięcie START przy zgaszonym silniku i aktywnym przewodowym STOP utrzymuje rozrusznik wyłączony. Po zwolnieniu STOP potrzebne jest nowe naciśnięcie START. [Macierz F03](../../docs/requirements/f03-ochrona-i-usterki.md).
 
+Według SYS-161 przewodowy STOP wykryty podczas kręcenia wyłącza rozrusznik i kończy próbę. Po zwolnieniu STOP ECU wymaga ponownego naciśnięcia START.
+
 SYS-121 określa zgłoszenie usterki TPS i awaryjny zapłon gaźnika ze zweryfikowanej krzywej zależnej od obrotów, przy prawidłowej synchronizacji wału.
 
 SYS-122 przypisuje krzywą awaryjną do konfiguracji silnika jako wspólną dla jej zestawów map.
