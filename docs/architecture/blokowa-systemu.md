@@ -1,6 +1,6 @@
 # Architektura blokowa DustONE
 
-Stan na: 2026-11-09. **Materiał wstępny dla etapu 4, który oczekuje w kolejce**, wyprowadzona z [wymagań SYS-001–150](../01-zakres-systemu.md) i przyjętych ADR. Podział poniżej porządkuje projektowanie; nie wybiera komponentów, liczby pinów, protokołu PC ani topologii stopni mocy. G1 pozostaje otwarta. Uzupełnienie z 2026-11-11 obejmuje odcięcie przez STOP według SYS-167.
+Stan na: 2026-11-09. **Materiał wstępny dla etapu 4, który oczekuje w kolejce**, wyprowadzona z [wymagań SYS-001–150](../01-zakres-systemu.md) i przyjętych ADR. Podział poniżej porządkuje projektowanie; nie wybiera komponentów, liczby pinów, protokołu PC ani topologii stopni mocy. G1 pozostaje otwarta. Uzupełnienie z 2026-11-11 obejmuje odcięcie przez STOP według SYS-167 i SYS-168.
 
 Zakres silnikowy: jeden cylinder, 2T/4T i wyłącznie chłodzenie cieczą według SYS-098. Rozwinięcie projektu blokowego pozostaje w kolejce etapu 4.
 
@@ -10,7 +10,7 @@ Zakres silnikowy: jeden cylinder, 2T/4T i wyłącznie chłodzenie cieczą wedłu
 flowchart LR
     BAT["Akumulator / zasilacz 12 V"]
     SENS["Czujniki silnika, koła i motocykla"]
-    ACT["Zapłon, wtrysk, pompa, napędy i akcesoria"]
+    ACT["Zapłon, wtrysk, rozrusznik, pompa, napędy i akcesoria"]
     START["START — osobny przewód"]
     STOP["STOP — osobny obwód"]
     KICK["Zdarzenie kopania — detekcja do projektu"]
@@ -39,7 +39,7 @@ flowchart LR
     START --> WAKE
     START --> CTRL
     STOP -->|"odczyt i nadzór"| IN
-    STOP -->|"odcięcie zapłonu i wtrysku (SYS-167)"| OUT
+    STOP -->|"odcięcie zapłonu, wtrysku i rozrusznika (SYS-167–168)"| OUT
     KICK -.-> WAKE
     IN -.->|"tor ruchu koła musi działać także w śnie"| WAKE
     WAKE --> CTRL
@@ -55,7 +55,7 @@ flowchart LR
     SERVICE <-->|"dostęp do obu urządzeń"| COM
 ```
 
-Diagram pokazuje zależności funkcjonalne. Strzałki zasilania nie są kompletnym schematem szyn; wszystkie bloki wymagają właściwego zasilania. Droga standardowej obsługi obu urządzeń przez ECU-COM jest kandydatem do projektu. Miejsce złącza, interfejs PC i ewentualny mostek pozostają otwarte; SYS-027 nie przesądza USB w ECU. Ścieżki STOP pokazują odczyt stanu i odcięcie zapłonu oraz wtrysku niezależne od głównego firmware (SYS-167). Realizacja toru odcięcia jest wejściem do etapu 4.
+Diagram pokazuje zależności funkcjonalne. Strzałki zasilania nie są kompletnym schematem szyn; wszystkie bloki wymagają właściwego zasilania. Droga standardowej obsługi obu urządzeń przez ECU-COM jest kandydatem do projektu. Miejsce złącza, interfejs PC i ewentualny mostek pozostają otwarte; SYS-027 nie przesądza USB w ECU. Ścieżki STOP pokazują odczyt stanu i odcięcie zapłonu, wtrysku oraz rozrusznika niezależne od głównego firmware (SYS-167–168). Realizacja toru odcięcia jest wejściem do etapu 4.
 
 ## Bloki i zadania
 
@@ -65,7 +65,7 @@ Diagram pokazuje zależności funkcjonalne. Strzałki zasilania nie są kompletn
 | ECU-WAKE | Obsługa źródeł wybudzania, koordynacja snu, blokady snu przy PC i wymaganych zadaniach. | Detekcja kopania, pierwszych impulsów koła, przycisków HMI i PC; pobór, opóźnienia, zasilanie HMI po awaryjnym odłączeniu części aktywnej. |
 | ECU-IN | Synchronizacja, pomiary analogowe/cyfrowe (w tym MAP/CCPS według SYS-096/097), sensory na PCB oraz wejścia START, STOP, hamulców i pozostałych funkcji. | Modele osprzętu, zakresy, zasilanie, charakterystyki, dokładności, częstotliwości, zabezpieczenia i diagnostyka. |
 | ECU-CTRL | Sterowanie czasowe silnikiem, reguły rozruchu/STOP/przewrócenia, automatyka akcesoriów i kontrola dopuszczenia poleceń. | Strategie i granice czasu, obciążenie obliczeniowe, reakcje na usterki i restart, warunki strojenia na żywo. |
-| ECU-OUT | Jeden kanał zapłonu w trybie CDI lub TCI/IDI, wtrysk, pompa, power valve/IAC oraz wyjścia akcesoriów. Odcięcie zapłonu i wtrysku przez STOP według SYS-167. | Rodzaje i liczby kanałów, jednoczesność, prądy/energia/czasy, granica stopni mocy i diagnostyka. SmartFET jest preferencją dla akcesoriów, nie wyborem konkretnego układu. |
+| ECU-OUT | Jeden kanał zapłonu w trybie CDI lub TCI/IDI, wtrysk, sterowanie rozrusznikiem, pompa, power valve/IAC oraz wyjścia akcesoriów. Odcięcie zapłonu, wtrysku i rozrusznika przez STOP według SYS-167–168. | Rodzaje i liczby kanałów, jednoczesność, prądy/energia/czasy, granica stopni mocy i diagnostyka. SmartFET jest preferencją dla akcesoriów, nie wyborem konkretnego układu. |
 | ECU-DATA | Właściciel konfiguracji i map, chronionych liczników, DTC/freeze frame, czasu rzeczywistego i ważności czasu. | Pojemność, trwałość i spójność zapisów, zakres utraty danych przy zaniku zasilania, reguły dostępu, odtwarzanie i obsługa pełnej pamięci. |
 | ECU-COM | CAN ECU–HMI oraz logiczna obsługa konfiguracji, danych, diagnostyki, aktualizacji i development tool. | Interfejs PC, przepustowość, wersjonowanie, sesje/uprawnienia, formaty danych i odzyskiwanie. |
 | HMI-PWR | Zasilanie z ECU, normalny sen na polecenie ECU i wybudzanie przyciskami. | Pobór i gotowość, działanie wybudzania także po awaryjnym odłączeniu części aktywnej, sterowanie ekranem. |

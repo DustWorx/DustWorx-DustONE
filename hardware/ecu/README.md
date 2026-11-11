@@ -10,6 +10,8 @@ Wymagania i otwarte decyzje: [zakres systemu](../../docs/01-zakres-systemu.md). 
 
 SYS-167 jest wejściem do projektu torów zapłonu i wtrysku. Sprawny przewodowy STOP musi wymusić odcięcie także przy zawieszonym głównym firmware. Projekt ma uwzględnić zapłon CDI i TCI/IDI, tory wtrysku oraz warunki wznowienia według SYS-162. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-167).
 
+SYS-168 rozszerza wymaganie odcięcia przez STOP na tor wykonawczy rozrusznika. Odłączenie działa przy zawieszonym głównym firmware i przytrzymanym START. Wymaganie uwzględnić przy projektowaniu toru rozrusznika. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-168).
+
 Dobór MCU, pamięci i zasilania musi uwzględnić [chronione motogodziny i ODO](../../docs/architecture/chronione-liczniki.md), SYS-074–076: trwałość zapisu, utratę zasilania, ochronę dostępu i mechanizmy uruchamiania/aktualizacji. Konkretne mechanizmy i ważne komponenty wybieramy wspólnie z właścicielem po ustaleniu granic ochrony.
 
 Dobór MCU i interfejsów programowania musi również uwzględnić [SYS-078 i ADR-008](../../docs/decisions/adr-008-dostep-do-firmware-ecu.md): w trybie użytkowym tylko firmware zatwierdzony przez producenta oraz zachowany dostęp rozwojowy twórców. Sposób autoryzacji i przejścia między trybami wymaga projektu; nie wybrano układów, algorytmów ani nieodwracalnych blokad.

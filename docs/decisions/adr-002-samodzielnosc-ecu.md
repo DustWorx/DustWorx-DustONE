@@ -28,6 +28,8 @@ W odpowiedzi **A na pytanie 176** (2026-11-11) właściciel zatwierdził zapis D
 
 W odpowiedzi **A na pytanie 177** (2026-11-11) właściciel zatwierdził działanie sprawnego przewodowego STOP przy zawieszeniu głównego firmware ECU. Naciśnięcie STOP wymusza odcięcie zapłonu oraz wtrysku w wyposażonych profilach (SYS-167). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-167).
 
+W odpowiedzi **A na pytanie 178** (2026-11-11) właściciel zatwierdził odłączenie rozrusznika przez sprawny przewodowy STOP również przy zawieszeniu głównego firmware i przytrzymanym START (SYS-168). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-168).
+
 ## Konsekwencje
 
 - Dane i pomiary wymagane do autonomicznego sterowania silnikiem oraz jego zabezpieczeń muszą być dostępne ECU bez udziału HMI. Uwzględnić to przy wyborze miejsca podłączenia czujników.

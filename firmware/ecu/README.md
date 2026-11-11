@@ -90,6 +90,8 @@ SYS-166 wymaga zapisu DTC z zamrożoną ramką po potwierdzonym zwarciu STOP do 
 
 SYS-167 wymaga działania odcięcia zapłonu i wtrysku przez STOP przy zawieszeniu głównego firmware. Po użyciu STOP podczas pracy silnika firmware uwzględnia warunki ponownego dopuszczenia sterowania według SYS-162.
 
+SYS-168 wymaga odłączenia rozrusznika przez STOP przy zawieszonym głównym firmware i przytrzymanym START. Nowa próba po odzyskaniu działania wymaga zwolnienia STOP oraz puszczenia i ponownego naciśnięcia START według SYS-161.
+
 SYS-121 określa zgłoszenie usterki TPS i awaryjny zapłon gaźnika ze zweryfikowanej krzywej zależnej od obrotów, przy prawidłowej synchronizacji wału.
 
 SYS-122 przypisuje krzywą awaryjną do konfiguracji silnika jako wspólną dla jej zestawów map.
