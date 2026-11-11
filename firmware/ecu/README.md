@@ -74,6 +74,8 @@ Według SYS-158 potwierdzona utrata wcześniej uzyskanej synchronizacji podczas 
 
 Według SYS-159 potwierdzona utrata synchronizacji podczas rozruchu kopniakiem przed rozpoznaniem pracy silnika kończy próbę. Odcięcie zapłonu i wtrysku trwa do zatrzymania wału i dopuszczenia nowej świadomej próby z wiarygodną synchronizacją.
 
+Według SYS-160 naciśnięcie START przy zgaszonym silniku i aktywnym przewodowym STOP utrzymuje rozrusznik wyłączony. Po zwolnieniu STOP potrzebne jest nowe naciśnięcie START. [Macierz F03](../../docs/requirements/f03-ochrona-i-usterki.md).
+
 SYS-121 określa zgłoszenie usterki TPS i awaryjny zapłon gaźnika ze zweryfikowanej krzywej zależnej od obrotów, przy prawidłowej synchronizacji wału.
 
 SYS-122 przypisuje krzywą awaryjną do konfiguracji silnika jako wspólną dla jej zestawów map.

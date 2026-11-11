@@ -8,7 +8,7 @@ Stan na 2026-11-11. **F03 aktywny po zamknięciu F02.** Macierz robocza łączy 
 | Utrata uzyskanej synchronizacji wału podczas rozruchu elektrycznego | Potwierdzona utrata przed rozpoznaniem pracy silnika kończy próbę. ECU wyłącza rozrusznik także przy przytrzymanym START. Ponowna próba wymaga zatrzymania, zwolnienia i ponownego naciśnięcia START (SYS-158). | Wymaganie przyjęte. Kryteria utraty synchronizacji i zatrzymania do projektu. | V01, V04 |
 | Utrata uzyskanej synchronizacji wału podczas rozruchu kopniakiem | Potwierdzona utrata kończy próbę. Powrót sygnału przy dalszym obrocie utrzymuje odcięcie zapłonu i wtrysku. Wznowienie wymaga zatrzymania wału i nowej próby z wiarygodną synchronizacją (SYS-159). | Wymaganie przyjęte. Kryteria zatrzymania i rozpoznania nowej próby do projektu. | V01, V02, V04 |
 | Utrata sygnału fazy w profilu 4T, który go używa | Przyjęto osobne wejście Hall (SYS-070). | Reakcja i warunek powrotu zależnie od profilu. | V01, V02 |
-| Przewodowy STOP i START | STOP działa przy awarii HMI lub CAN. START działa podczas przytrzymania z uzgodnionymi odcięciami i wymaganiem nowej próby po odcięciu (SYS-037/048/049). | Jednoczesne naciśnięcie STOP i START przy zgaszonym silniku (pytanie 170). Reakcje na usterki torów i warunki odblokowania. | V04 |
+| Przewodowy STOP i START | STOP działa przy awarii HMI lub CAN. START działa podczas przytrzymania z uzgodnionymi odcięciami i wymaganiem nowej próby po odcięciu (SYS-037/048/049). Naciśnięcie START przy aktywnym STOP utrzymuje rozrusznik wyłączony. Zwolnienie STOP wymaga nowego START (SYS-160). | Naciśnięcie STOP podczas kręcenia (pytanie 171). Reakcje na usterki torów i warunki odblokowania. | V04 |
 | Potwierdzone przewrócenie | ECU wyłącza silnik. Po postawieniu i spełnieniu warunków bezpieczeństwa rozruch wymaga świadomej próby (SYS-039/040). | Warunki zadziałania i powrotu odpowiednie dla enduro. | V04 |
 | Brak HMI albo CAN | ECU działa samodzielnie, a reakcje akcesoriów są odrębne (SYS-046/050–053). | Zależności od pozostałych stanów ochronnych. | V07 |
 | Usterka TPS lub pomiaru ciśnienia używanego do określenia obciążenia | Przyjęto reguły kalibracji awaryjnej, kontrolowanego zatrzymania, powrotu i wymuszenia „Standard” (SYS-121–142). | Powiązać z pozostałymi blokadami F03. [Zakres F02](f02-przeglad-zakresu.md) opisuje przyjęte przypadki. | V02, V03, V04 |
@@ -51,6 +51,18 @@ W odpowiedzi A na pytanie 169 właściciel przyjął przerwanie próby kopniakie
 2. Odwzorować zatrzymanie wału, a następnie nową świadomą próbę kopniakiem. Sprawdzić, czy ECU dopuszcza sterowanie po wiarygodnej synchronizacji. W osobnych przebiegach sprawdzić utrzymanie odcięcia przy sygnale niewiarygodnym oraz przy aktywnym STOP.
 3. Użyć reprezentatywnych profili z kopniakiem i właściwych sygnałów czujnika wału. Kryteria potwierdzenia zatrzymania, rozpoznania nowej próby i czasy reakcji określić przed wykonaniem prób. [Macierz weryfikacji](../verification/macierz-wymagan.md).
 
-## Pytanie 170 — jednoczesne naciśnięcie STOP i START
+## Naciśnięcie START przy aktywnym STOP
 
-Przy zgaszonym silniku kierowca trzyma przewodowy STOP i naciska START. Wybór dotyczy zachowania rozrusznika w trakcie aktywnego STOP. W obu proponowanych wariantach zapłon i wtrysk są zablokowane. Schemat elektryczny Beta RR 250/300 Race 2T MY2025 pokazuje przyciski STOP i START oraz rozrusznik. [Instrukcja Betamotor, schemat elektryczny RR 250–300](https://betausa.com/content/2025-Owner%20manual-RR-RACE-2T.rev.pdf#page=17).
+Schemat elektryczny Beta RR 250/300 Race 2T MY2025 pokazuje przyciski STOP i START oraz rozrusznik. [Instrukcja Betamotor, schemat elektryczny RR 250–300](https://betausa.com/content/2025-Owner%20manual-RR-RACE-2T.rev.pdf#page=17).
+
+W odpowiedzi A na pytanie 170 (2026-11-11) właściciel zatwierdził blokadę rozrusznika przy naciśnięciu START na zgaszonym silniku z aktywnym przewodowym STOP. Po zwolnieniu STOP do rozruchu potrzebne jest nowe naciśnięcie START. Przytrzymanie wcześniej naciśniętego START utrzymuje rozrusznik wyłączony (SYS-160).
+
+### Plan próby SYS-160
+
+1. Na stanowisku odwzorować zgaszony silnik i spełnić pozostałe warunki rozruchu. Nacisnąć przewodowy STOP, następnie nacisnąć i przytrzymać START. Potwierdzić wyłączone wyjście rozrusznika oraz blokadę zapłonu i wtrysku odpowiednio do profilu.
+2. Zwolnić STOP przy nadal przytrzymanym START. Sprawdzić utrzymanie wyłączonego rozrusznika. Zwolnić i ponownie nacisnąć START. Potwierdzić dopuszczenie rozruchu zgodnie z pozostałymi warunkami.
+3. Powtórzyć przy nieobecnym HMI oraz przy przerwanej komunikacji CAN z HMI. Czasy reakcji i wyposażenie stanowiska określić przed próbą. [Macierz weryfikacji](../verification/macierz-wymagan.md).
+
+## Pytanie 171 — naciśnięcie STOP podczas kręcenia
+
+Kierowca nadal trzyma START, a rozrusznik już kręci i ECU jeszcze nie potwierdziło pracy silnika. Następnie kierowca naciska przewodowy STOP. Wybór dotyczy chwili wyłączenia rozrusznika podczas aktywnego STOP. Odcięcie zapłonu i wtrysku obowiązuje w obu proponowanych wariantach.
