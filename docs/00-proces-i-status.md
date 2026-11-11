@@ -1,6 +1,6 @@
 # DustONE — ścieżka projektu, status i odpowiedzialności
 
-Stan na 2026-11-09. Zamknięcie F02 i aktualna praca w F03 są w tabeli bieżącej pracy. Ścieżka projektu i warunki postoju z PR #17/#18 są scalone. Dokument aktualizujemy przy istotnej odpowiedzi lub decyzji, wykonanej pracy, wyniku próby, zmianie zakresu i przeglądzie etapu; wraz z wymaganiami, ADR, interfejsami i weryfikacją.
+Stan na 2026-11-11. Zamknięcie F02 i aktualna praca w F03 są w tabeli bieżącej pracy. Ścieżka projektu i warunki postoju z PR #17/#18 są scalone. Dokument aktualizujemy przy istotnej odpowiedzi lub decyzji, wykonanej pracy, wyniku próby, zmianie zakresu i przeglądzie etapu; wraz z wymaganiami, ADR, interfejsami i weryfikacją.
 
 Kontrola pełnego F01 została zakończona: właściciel potwierdził zgodność podsumowania i polecił dalszą pracę (2026-11-04). Źródło kontroli: [przyjęte podsumowanie F01](requirements/f01-podsumowanie-kontrolne.md). Potwierdzenie dotyczy F01. Późniejsza odpowiedź A na pytanie 108 określiła ostatnio wybrany prawidłowy zestaw po restarcie ECU (SYS-099).
 
@@ -10,13 +10,13 @@ Kontrola pełnego F01 została zakończona: właściciel potwierdził zgodność
 
 | Obszar | Stan potwierdzony dokumentacją |
 | --- | --- |
-| Wymagania systemowe | 158 wymagań SYS-001–158; pierwszy przydział do bloków i grup weryfikacji gotowy, kryteria i procedury do rozwinięcia. |
+| Wymagania systemowe | 159 wymagań SYS-001–159; pierwszy przydział do bloków i grup weryfikacji gotowy, kryteria i procedury do rozwinięcia. |
 | Decyzje | 12 zapisów ADR-001–012; ostatni ogranicza platformę do silników chłodzonych cieczą. |
 | Zakres wariantów | Macierz 6 wariantów silnika; jest planem obsługi, nie potwierdzeniem zgodności modeli. |
 | Pierwsza jednostka | Beta 300 RR Racing 2015; analiza dokumentów i zdjęć, bez raportów pomiarowych instalacji. |
 | Architektura | Pierwszy diagram blokowy, funkcje sześciu wariantów i przydział zasobów gotowe jako wersje robocze. Modele, parametry i liczbowe bilanse pozostają otwarte. |
 | Schematy, BOM, PCB i mechanika | W repozytorium brak projektu wykonawczego i zatwierdzonego kompletnego BOM ECU/HMI. |
-| Kod i próby produktu | W repozytorium brak implementacji firmware/Windows i raportów prób DustONE. Istnieją plany, szablon procedury i przydział 158 wymagań do 13 grup weryfikacji. |
+| Kod i próby produktu | W repozytorium brak implementacji firmware/Windows i raportów prób DustONE. Istnieją plany, szablon procedury i przydział 159 wymagań do 13 grup weryfikacji. |
 
 Podstawy: [wymagania](requirements/README.md), [decyzje](decisions/README.md), [macierz silników](architecture/macierz-wariantow-silnika.md), [I/O](interfaces/wstepna-lista-io.md) i [weryfikacja](verification/README.md). Liczba wymagań i pytań nie jest procentem wykonania produktu.
 
@@ -61,13 +61,13 @@ Parametry wyliczane z osprzętu, charakterystyki czujników, wartości elementó
 | --- | --- | --- |
 | W04 — Zakres funkcjonalny: F01 | Zamknięty po kontroli właściciela: 2026-11-04. | [Pomiary](requirements/f01-pomiary-silnika.md), [przegląd sterowania i wynik zamknięcia](requirements/f01-sterowanie-silnikiem.md); dane techniczne przekazane do kolejki etapów 3–6. |
 | F02 — Mapy, konfiguracja i strojenie ECU | Zamknięty po akceptacji właściciela 2026-11-09. | Odpowiedź A na pytanie 166. [Karta F02](requirements/f02-przeglad-zakresu.md) zawiera przyjęty zakres, plan weryfikacji i przekazanie. |
-| F03 — Ochrona i reakcje na usterki | Aktywny po zamknięciu F02. | [Macierz reakcji F03](requirements/f03-ochrona-i-usterki.md). Po utracie synchronizacji podczas pracy ECU wznawia zapłon i wtrysk wyłącznie w nowej świadomej próbie rozruchu po zatrzymaniu i odzyskaniu synchronizacji (SYS-157). Utrata uzyskanej synchronizacji podczas rozruchu elektrycznego kończy próbę. Kolejna wymaga zatrzymania silnika oraz zwolnienia i ponownego naciśnięcia START (SYS-158). Następny przypadek to utrata uzyskanej synchronizacji podczas rozruchu kopniakiem. |
+| F03 — Ochrona i reakcje na usterki | Aktywny po zamknięciu F02. | [Macierz reakcji F03](requirements/f03-ochrona-i-usterki.md). Po utracie synchronizacji podczas pracy ECU wznawia zapłon i wtrysk wyłącznie w nowej świadomej próbie rozruchu po zatrzymaniu i odzyskaniu synchronizacji (SYS-157). Utrata uzyskanej synchronizacji podczas rozruchu elektrycznego kończy próbę. Kolejna wymaga zatrzymania silnika oraz zwolnienia i ponownego naciśnięcia START (SYS-158). Potwierdzona utrata synchronizacji podczas rozruchu kopniakiem kończy próbę. Sterowanie można wznowić po zatrzymaniu wału w nowej świadomej próbie z wiarygodną synchronizacją (SYS-159). Następny przypadek to jednoczesne naciśnięcie przewodowych STOP i START. |
 | W05 — Inwentaryzacja Bety | W kolejce, etap 3. | Zachowany [plan INV](verification/beta-2015-plan-inwentaryzacji.md); brak wyników pomiarowych. |
 | W01/W02 — Architektura i zasoby | W kolejce, etap 4. | Zachowane [diagram](architecture/blokowa-systemu.md) i [macierz wariantów](architecture/macierz-wariantow-silnika.md); bez zamkniętych bilansów. |
-| W03 — Weryfikacja wymagań | W kolejce, etap 5. | Zachowany [przydział 158 SYS do grup](verification/macierz-wymagan.md); kryteria, procedury i dowody do rozwinięcia. |
+| W03 — Weryfikacja wymagań | W kolejce, etap 5. | Zachowany [przydział 159 SYS do grup](verification/macierz-wymagan.md); kryteria, procedury i dowody do rozwinięcia. |
 | W06 — Bilanse i wybór komponentów | W kolejce, etapy 4 i 6. | Wymagane wejściowe parametry; ważne komponenty wybierzemy wspólnie. |
 
-**Najbliższy krok to reakcja na utratę synchronizacji podczas rozruchu kopniakiem.** Reakcje podczas pracy i rozruchu elektrycznego oraz ich próby są w [macierzy F03](requirements/f03-ochrona-i-usterki.md). Konkrety osprzętu, w tym wykonalność konwersji TPI, mają właścicieli i etapy w [przekazaniu F01](requirements/f01-sterowanie-silnikiem.md). Parametry elektryczne, bilanse i procedury wykonawcze pozostają w kolejce właściwych etapów.
+**Najbliższy krok to ustalenie reakcji rozrusznika przy jednoczesnym STOP i START.** Zasady utraty synchronizacji podczas pracy i obu rodzajów rozruchu oraz plan prób są w [macierzy F03](requirements/f03-ochrona-i-usterki.md). Konkrety osprzętu, w tym wykonalność konwersji TPI, mają właścicieli i etapy w [przekazaniu F01](requirements/f01-sterowanie-silnikiem.md). Parametry elektryczne, bilanse i procedury wykonawcze pozostają w kolejce właściwych etapów.
 
 ## Warunki przechodzenia dalej
 

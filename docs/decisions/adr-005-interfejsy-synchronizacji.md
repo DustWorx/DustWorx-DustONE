@@ -1,6 +1,6 @@
 # ADR-005 — interfejsy synchronizacji silnika
 
-Data decyzji 2026-11-01. Uzupełnienie 2026-11-09. Zatwierdzono zakres wejść wału i fazy 4T oraz reakcje na utratę synchronizacji podczas pracy i rozruchu elektrycznego. Parametry i realizacja są otwarte.
+Data decyzji 2026-11-01. Uzupełnienie 2026-11-11. Zatwierdzono zakres wejść wału i fazy 4T oraz reakcje na utratę synchronizacji podczas pracy oraz rozruchu elektrycznego i kopniakiem. Parametry i realizacja są otwarte.
 
 ## Problem i opcje
 
@@ -16,11 +16,13 @@ W odpowiedzi **A na pytanie 167** (2026-11-09) właściciel zatwierdził odcięc
 
 W odpowiedzi **A na pytanie 168** (2026-11-09) właściciel zatwierdził wyłączenie rozrusznika po potwierdzonej utracie wcześniej uzyskanej synchronizacji przed rozpoznaniem pracy silnika. Nowa próba elektryczna wymaga zatrzymania oraz zwolnienia i ponownego naciśnięcia START. Zapłon i wtrysk w nowej próbie wymagają wiarygodnej synchronizacji (SYS-158). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md).
 
+W odpowiedzi **A na pytanie 169** właściciel zatwierdził przerwanie próby kopniakiem po potwierdzonej utracie synchronizacji. ECU utrzymuje odcięcie po powrocie sygnału podczas dalszego obrotu wału. Wznowienie wymaga zatrzymania wału i nowej świadomej próby z wiarygodną synchronizacją (SYS-159, zapis z 2026-11-11). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md).
+
 ## Konsekwencje i otwarte dane
 
 - Uwzględnić odpowiednie tory wejściowe i ewentualne zasilanie czujnika, zabezpieczenia, filtrację oraz zasoby czasowe procesora. Liczba pinów i topologia nie zostały wybrane.
 - Ustalić modele referencyjne, zakresy i polaryzację sygnałów, interfejsy mas, zasilanie, progi i opóźnienia. Dla VR uwzględnić zakres amplitud od kopania/rozruchu do maksymalnych obrotów; dla Halla także rodzaj wyjścia i wymagane podciąganie.
-- Zakresy wejść są odrębne: wał VR/Hall (SYS-069), faza 4T tylko Hall z wyjściem cyfrowym (SYS-070). Układy znaczników, ich odniesienie do GMP, obsługiwane dekodery oraz kryteria wykrycia utraty i odzyskania synchronizacji pozostają do określenia. Rozruch kopniakiem i utrata fazy są w F03. Nie przyjęto automatycznego rozpoznawania rodzaju czujnika.
+- Zakresy wejść są odrębne: wał VR/Hall (SYS-069), faza 4T tylko Hall z wyjściem cyfrowym (SYS-070). Układy znaczników, ich odniesienie do GMP, obsługiwane dekodery oraz kryteria wykrycia utraty i odzyskania synchronizacji pozostają do określenia. Reakcję po utracie fazy prowadzimy w F03. Nie przyjęto automatycznego rozpoznawania rodzaju czujnika.
 - Układy wejściowe i ważne elementy wybieramy wspólnie z właścicielem po analizie i porównaniu.
 
 ## Proponowana weryfikacja

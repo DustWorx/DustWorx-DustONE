@@ -1,14 +1,14 @@
 # F03 — ochrona i reakcje na usterki
 
-Stan na 2026-11-09. **F03 aktywny po zamknięciu F02.** Macierz robocza łączy zdarzenie, reakcję i warunek powrotu. Zatwierdzone wymagania są w [rejestrze SYS](../01-zakres-systemu.md). Kolejność pakietów określa [status projektu](../00-proces-i-status.md).
+Stan na 2026-11-11. **F03 aktywny po zamknięciu F02.** Macierz robocza łączy zdarzenie, reakcję i warunek powrotu. Zatwierdzone wymagania są w [rejestrze SYS](../01-zakres-systemu.md). Kolejność pakietów określa [status projektu](../00-proces-i-status.md).
 
 | Zdarzenie lub temat | Przyjęta reakcja i warunek powrotu | Do rozstrzygnięcia w F03 | Plan prób |
 | --- | --- | --- | --- |
 | Utrata synchronizacji wału podczas pracy | ECU odcina zapłon oraz wtrysk w wyposażonych profilach. Odzyskanie sygnału podczas dalszego obrotu utrzymuje odcięcie. Powrót wymaga zatrzymania, nowej świadomej próby rozruchu i ponownej wiarygodnej synchronizacji (SYS-157). | Wymaganie przyjęte. Kryteria rozpoznania zdarzeń do projektu. | V01, V02, V04 |
 | Utrata uzyskanej synchronizacji wału podczas rozruchu elektrycznego | Potwierdzona utrata przed rozpoznaniem pracy silnika kończy próbę. ECU wyłącza rozrusznik także przy przytrzymanym START. Ponowna próba wymaga zatrzymania, zwolnienia i ponownego naciśnięcia START (SYS-158). | Wymaganie przyjęte. Kryteria utraty synchronizacji i zatrzymania do projektu. | V01, V04 |
-| Utrata uzyskanej synchronizacji wału podczas rozruchu kopniakiem | Przyjęto wybudzanie i rozruch kopniakiem według SYS-013/054. | Powrót zapłonu i wtrysku w tej samej lub nowej próbie (pytanie 169). | V01, V02, V04 |
+| Utrata uzyskanej synchronizacji wału podczas rozruchu kopniakiem | Potwierdzona utrata kończy próbę. Powrót sygnału przy dalszym obrocie utrzymuje odcięcie zapłonu i wtrysku. Wznowienie wymaga zatrzymania wału i nowej próby z wiarygodną synchronizacją (SYS-159). | Wymaganie przyjęte. Kryteria zatrzymania i rozpoznania nowej próby do projektu. | V01, V02, V04 |
 | Utrata sygnału fazy w profilu 4T, który go używa | Przyjęto osobne wejście Hall (SYS-070). | Reakcja i warunek powrotu zależnie od profilu. | V01, V02 |
-| Przewodowy STOP i START | STOP działa przy awarii HMI lub CAN. START działa podczas przytrzymania z uzgodnionymi odcięciami i wymaganiem nowej próby po odcięciu (SYS-037/048/049). | Reakcje na usterki torów, zbieg poleceń i warunki odblokowania. | V04 |
+| Przewodowy STOP i START | STOP działa przy awarii HMI lub CAN. START działa podczas przytrzymania z uzgodnionymi odcięciami i wymaganiem nowej próby po odcięciu (SYS-037/048/049). | Jednoczesne naciśnięcie STOP i START przy zgaszonym silniku (pytanie 170). Reakcje na usterki torów i warunki odblokowania. | V04 |
 | Potwierdzone przewrócenie | ECU wyłącza silnik. Po postawieniu i spełnieniu warunków bezpieczeństwa rozruch wymaga świadomej próby (SYS-039/040). | Warunki zadziałania i powrotu odpowiednie dla enduro. | V04 |
 | Brak HMI albo CAN | ECU działa samodzielnie, a reakcje akcesoriów są odrębne (SYS-046/050–053). | Zależności od pozostałych stanów ochronnych. | V07 |
 | Usterka TPS lub pomiaru ciśnienia używanego do określenia obciążenia | Przyjęto reguły kalibracji awaryjnej, kontrolowanego zatrzymania, powrotu i wymuszenia „Standard” (SYS-121–142). | Powiązać z pozostałymi blokadami F03. [Zakres F02](f02-przeglad-zakresu.md) opisuje przyjęte przypadki. | V02, V03, V04 |
@@ -39,6 +39,18 @@ W odpowiedzi A na pytanie 168 (2026-11-09) właściciel przyjął wyłączenie r
 2. Przywrócić sygnał przed zatrzymaniem. Zwolnić i ponownie nacisnąć START podczas obrotu. Sprawdzić utrzymanie odcięcia, także gdy naciśnięcie trwa przez zatrzymanie. Osobno sprawdzić stan po zatrzymaniu bez zwolnienia pierwotnego START.
 3. Po potwierdzonym zatrzymaniu zwolnić i ponownie nacisnąć START. Sprawdzić dopuszczenie nowej próby przy spełnionych pozostałych warunkach oraz dopuszczenie zapłonu i wtrysku po uzyskaniu wiarygodnej synchronizacji. Powtórzyć bez wiarygodnej synchronizacji i potwierdzić utrzymanie odcięcia wyjść silnikowych. [Macierz weryfikacji](../verification/macierz-wymagan.md).
 
-## Pytanie 169 — utrata synchronizacji podczas rozruchu kopniakiem
+## Utrata synchronizacji podczas rozruchu kopniakiem
 
-Przypadek dotyczy utraty już uzyskanej synchronizacji, gdy wał nadal obraca się po kopnięciu, a ECU jeszcze nie rozpoznało pracy silnika. Wybór dotyczy wznowienia zapłonu i wtrysku w tej samej próbie po odzyskaniu wiarygodnej synchronizacji albo utrzymania odcięcia do zatrzymania i nowej próby. Betamotor dokumentuje opcjonalny kopniak w Beta 250/300 RR MY2020. [Instrukcja serwisowa Betamotor, rozdz. 3.7](https://betausa.com/content/SUPPORT_PDF%27s/2020%20Beta%20250%20RR%20%26%20300%20RR%20Service%20Manual.pdf).
+Betamotor dokumentuje opcjonalny kopniak w Beta 250/300 RR MY2020. [Instrukcja serwisowa Betamotor, rozdz. 3.7](https://betausa.com/content/SUPPORT_PDF%27s/2020%20Beta%20250%20RR%20%26%20300%20RR%20Service%20Manual.pdf).
+
+W odpowiedzi A na pytanie 169 właściciel przyjął przerwanie próby kopniakiem po potwierdzonej utracie wcześniej uzyskanej synchronizacji przed rozpoznaniem pracy silnika. Powrót sygnału, gdy wał jeszcze się obraca, utrzymuje odcięcie zapłonu i wtrysku w profilach wtryskowych. ECU dopuszcza je ponownie po potwierdzonym zatrzymaniu wału w nowej świadomej próbie z wiarygodną synchronizacją i przy spełnionych pozostałych warunkach rozruchu (SYS-159, zapis z 2026-11-11).
+
+### Plan próby SYS-159
+
+1. Na stanowisku odwzorować obrót wału wywołany kopnięciem. Doprowadzić do uzyskania synchronizacji, a następnie wymusić potwierdzoną utratę przed rozpoznaniem pracy silnika. Przywrócić poprawny przebieg podczas dalszego obrotu i sprawdzić utrzymanie odcięcia zapłonu oraz wtrysku odpowiednio do profilu.
+2. Odwzorować zatrzymanie wału, a następnie nową świadomą próbę kopniakiem. Sprawdzić, czy ECU dopuszcza sterowanie po wiarygodnej synchronizacji. W osobnych przebiegach sprawdzić utrzymanie odcięcia przy sygnale niewiarygodnym oraz przy aktywnym STOP.
+3. Użyć reprezentatywnych profili z kopniakiem i właściwych sygnałów czujnika wału. Kryteria potwierdzenia zatrzymania, rozpoznania nowej próby i czasy reakcji określić przed wykonaniem prób. [Macierz weryfikacji](../verification/macierz-wymagan.md).
+
+## Pytanie 170 — jednoczesne naciśnięcie STOP i START
+
+Przy zgaszonym silniku kierowca trzyma przewodowy STOP i naciska START. Wybór dotyczy zachowania rozrusznika w trakcie aktywnego STOP. W obu proponowanych wariantach zapłon i wtrysk są zablokowane. Schemat elektryczny Beta RR 250/300 Race 2T MY2025 pokazuje przyciski STOP i START oraz rozrusznik. [Instrukcja Betamotor, schemat elektryczny RR 250–300](https://betausa.com/content/2025-Owner%20manual-RR-RACE-2T.rev.pdf#page=17).

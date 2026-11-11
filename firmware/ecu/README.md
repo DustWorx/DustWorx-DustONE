@@ -72,6 +72,8 @@ SYS-157 wymaga odcięcia zapłonu, a w profilach wtryskowych także wtrysku, po 
 
 Według SYS-158 potwierdzona utrata wcześniej uzyskanej synchronizacji podczas rozruchu elektrycznego przed rozpoznaniem pracy silnika kończy próbę. Firmware odłącza rozrusznik także przy trzymanym START. Kolejna próba wymaga zatrzymania, zwolnienia i nowego naciśnięcia START.
 
+Według SYS-159 potwierdzona utrata synchronizacji podczas rozruchu kopniakiem przed rozpoznaniem pracy silnika kończy próbę. Odcięcie zapłonu i wtrysku trwa do zatrzymania wału i dopuszczenia nowej świadomej próby z wiarygodną synchronizacją.
+
 SYS-121 określa zgłoszenie usterki TPS i awaryjny zapłon gaźnika ze zweryfikowanej krzywej zależnej od obrotów, przy prawidłowej synchronizacji wału.
 
 SYS-122 przypisuje krzywą awaryjną do konfiguracji silnika jako wspólną dla jej zestawów map.
