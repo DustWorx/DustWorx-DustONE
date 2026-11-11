@@ -185,6 +185,7 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-169 | Po wykryciu zawieszenia głównego firmware niezależny nadzór ECU wymusza odcięcie zapłonu i odłączenie rozrusznika. W profilach wtryskowych wymusza także odcięcie wtrysku. Odcięcie działa niezależnie od wykonania resetu i od naciśnięcia STOP. Nadzór inicjuje reset ECU odrębnym działaniem. Przy nieskutecznym resecie wyjścia pozostają wyłączone w czasie zawieszenia. |
 | SYS-170 | Po resecie zainicjowanym przez niezależny nadzór według SYS-169 ECU utrzymuje odcięcie zapłonu, a w profilach wtryskowych także wtrysku, przy nadal obracającym się wale również po odzyskaniu wiarygodnej synchronizacji. ECU ponownie dopuszcza zapłon i wtrysk dopiero w nowej świadomej próbie rozruchu po potwierdzonym zatrzymaniu wału, z wiarygodną synchronizacją i przy spełnieniu pozostałych warunków rozruchu. |
 | SYS-171 | Po resecie zainicjowanym przez nadzór według SYS-169 ECU utrzymuje rozrusznik wyłączony i odrzuca naciśnięcia START przed potwierdzeniem zatrzymania wału. Ponowne załączenie rozrusznika wymaga nowego naciśnięcia START po potwierdzonym zatrzymaniu oraz spełnienia pozostałych warunków rozruchu. Jeżeli START pozostaje wciśnięty, kierowca musi go puścić przed ponowieniem. |
+| SYS-172 | Po ponownym uruchomieniu ECU rejestruje DTC i zamrożoną ramkę według SYS-019, gdy potwierdzi reset wywołany przez niezależny nadzór po wykryciu zawieszenia głównego firmware według SYS-169. Ramka zawiera potwierdzoną przyczynę resetu oraz dostępne, wiarygodne dane związane ze zdarzeniem. ECU oznacza niedostępność części lub całości danych dodatkowych i zachowuje przyczynę resetu. Zasady zapisu czasu określa SYS-021. |
 
 ## 3. Podział odpowiedzialności
 
@@ -269,6 +270,8 @@ W odpowiedzi A na pytanie 179 (2026-11-11) właściciel zatwierdził samoczynne 
 W odpowiedzi A na pytanie 180 (2026-11-11) właściciel zatwierdził utrzymanie odcięcia zapłonu i wtrysku po resecie nadzoru przy obracającym się wale. Powrót sterowania wymaga zatrzymania wału i nowej świadomej próby z wiarygodną synchronizacją (SYS-170). [Plan próby F03](requirements/f03-ochrona-i-usterki.md#plan-próby-sys-170).
 
 W odpowiedzi A na pytanie 181 (2026-11-11) właściciel zatwierdził odrzucenie START naciśniętego po resecie nadzoru, ale przed potwierdzeniem zatrzymania wału. Rozrusznik może zostać załączony po nowym naciśnięciu START po zatrzymaniu, przy spełnieniu pozostałych warunków (SYS-171). [Plan próby F03](requirements/f03-ochrona-i-usterki.md#plan-próby-sys-171).
+
+W odpowiedzi na pytanie 182 (2026-11-11) właściciel ustalił zapis przyczyny potwierdzonego resetu nadzoru oraz dostępnych danych związanych ze zdarzeniem (SYS-172). [Plan próby F03](requirements/f03-ochrona-i-usterki.md#plan-próby-sys-172).
 
 Proponowana weryfikacja SYS-048/049: na stanowisku sprawdzić zakończenie sterowania po puszczeniu START, po zasymulowaniu potwierdzonej pracy silnika i po upływie ustalonego limitu kręcenia. Po obu automatycznych odcięciach podtrzymany START nie może ponownie załączyć rozrusznika; po puszczeniu i ponownym naciśnięciu obowiązują warunki dopuszczenia rozruchu. Powtórzyć próby przy odłączonym HMI. Mierzalne czasy reakcji i warunki symulacji określić przed próbami; testów nie wykonano.
 

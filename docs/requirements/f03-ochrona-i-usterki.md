@@ -13,7 +13,7 @@ Stan na 2026-11-11. **F03 aktywny po zamknięciu F02.** Macierz robocza łączy 
 | Brak HMI albo CAN | ECU działa samodzielnie, a reakcje akcesoriów są odrębne (SYS-046/050–053). | Zależności od pozostałych stanów ochronnych. | V07 |
 | Usterka TPS lub pomiaru ciśnienia używanego do określenia obciążenia | Przyjęto reguły kalibracji awaryjnej, kontrolowanego zatrzymania, powrotu i wymuszenia „Standard” (SYS-121–142). | Powiązać z pozostałymi blokadami F03. [Zakres F02](f02-przeglad-zakresu.md) opisuje przyjęte przypadki. | V02, V03, V04 |
 | Chłodzenie i pozostałe pomiary ochronne | Przyjęto pomiar płynu i automatykę wentylatora oraz wejścia ciśnienia paliwa i binarne oleju (SYS-029/043/044/060). | Reakcje na niedostępny pomiar i na warunki poza dopuszczalnym zakresem w wyposażonych profilach. | V02, V03, V05 |
-| Zasilanie i restart ECU | Przyjęto zasilanie bez stacyjki, zasady oszczędzania i odrębne reguły odtwarzania konfiguracji oraz map (SYS-054/084–089/106/109/155). Niezależny nadzór po wykryciu zawieszenia wymusza odcięcie wyjść i osobno inicjuje reset (SYS-169). Po resecie odcięcie zapłonu i wtrysku trwa do zatrzymania wału i nowej świadomej próby z wiarygodną synchronizacją (SYS-170). ECU odrzuca START przed potwierdzeniem zatrzymania wału i wymaga nowego naciśnięcia po zatrzymaniu (SYS-171). | Dane zamrożonej ramki po potwierdzonym resecie nadzoru (pytanie 182). | V01, V04, V06, V13 |
+| Zasilanie i restart ECU | Przyjęto zasilanie bez stacyjki, zasady oszczędzania i odrębne reguły odtwarzania konfiguracji oraz map (SYS-054/084–089/106/109/155). Niezależny nadzór po wykryciu zawieszenia wymusza odcięcie wyjść i osobno inicjuje reset (SYS-169). Po resecie odcięcie zapłonu i wtrysku trwa do zatrzymania wału i nowej świadomej próby z wiarygodną synchronizacją (SYS-170). ECU odrzuca START przed potwierdzeniem zatrzymania wału i wymaga nowego naciśnięcia po zatrzymaniu (SYS-171). Ramka DTC po potwierdzonym resecie zawiera przyczynę i dostępne dane zdarzenia (SYS-172). | Reakcja na powtarzające się resety przed zakończeniem uruchamiania ECU (pytanie 183). | V01, V04, V06, V10, V13 |
 
 ## Utrata synchronizacji wału podczas pracy
 
@@ -174,6 +174,16 @@ W odpowiedzi A na pytanie 181 (2026-11-11) właściciel zatwierdził odrzucenie 
 2. Puścić START i nacisnąć ponownie po potwierdzonym zatrzymaniu wału. Przy spełnionych pozostałych warunkach potwierdzić załączenie rozrusznika oraz dopuszczenie zapłonu i wtrysku zgodnie z SYS-170 po odzyskaniu wiarygodnej synchronizacji.
 3. Powtórzyć próbę z START przytrzymanym od chwili poprzedzającej reset. Sprawdzić wymóg nowego naciśnięcia po potwierdzeniu zatrzymania. Przed próbą określić kryterium zatrzymania i punkty pomiarowe. [Macierz weryfikacji](../verification/macierz-wymagan.md).
 
-## Pytanie 182 — zamrożona ramka po potwierdzonym resecie nadzoru
+## Zamrożona ramka po potwierdzonym resecie nadzoru
 
-Do ustalenia pozostają dane zamrożonej ramki DTC, gdy po resecie ECU potwierdzi zadziałanie nadzoru po zawieszeniu głównego firmware, a dane z chwili zawieszenia są niedostępne. Rozpatrujemy ostatnie wiarygodne dane sprzed resetu i dane z ponownego uruchomienia, z oznaczeniem chwili ich pobrania. Rejestrację i zasady czasu określają SYS-019 i SYS-021.
+W odpowiedzi na pytanie 182 (2026-11-11) właściciel ustalił zapis przyczyny resetu i dostępnych danych związanych ze zdarzeniem. Po potwierdzeniu resetu nadzoru według SYS-169 ECU zapisuje DTC i zamrożoną ramkę. Przy braku wiarygodnych danych dodatkowych ramka zawiera przyczynę resetu i oznaczenie niedostępności danych. Informację o czasie i jego ważności stosujemy według SYS-021 (SYS-172).
+
+### Plan próby SYS-172
+
+1. Na stanowisku wymusić reset nadzoru według SYS-169 z dostępnymi, znanymi danymi związanymi ze zdarzeniem. Po ponownym uruchomieniu odczytać DTC i zamrożoną ramkę. Sprawdzić zgodność przyczyny, wartości danych i informacji o czasie z przebiegiem próby.
+2. Powtórzyć z potwierdzoną przyczyną resetu oraz częściowo dostępnymi danymi, a następnie z samą przyczyną. Sprawdzić zapis DTC i ramki oraz oznaczenie niedostępności. Objąć także przypadek niewiarygodnego czasu rzeczywistego zgodnie z SYS-021.
+3. W przebiegu kontrolnym wywołać ponowne uruchomienie z innej przyczyny. Sprawdzić, czy zapis DTC zawieszenia powstaje wyłącznie po potwierdzeniu zadziałania nadzoru. [Macierz weryfikacji](../verification/macierz-wymagan.md).
+
+## Pytanie 183 — powtarzające się resety nadzoru podczas uruchamiania ECU
+
+Do rozstrzygnięcia pozostaje reakcja, gdy nadzór kolejny raz resetuje ECU przed zakończeniem uruchamiania. Rozpatrujemy ograniczenie liczby automatycznych prób lub kontynuowanie prób do zakończenia uruchamiania. Obie propozycje przewidują utrzymanie odcięcia podczas tej sekwencji.

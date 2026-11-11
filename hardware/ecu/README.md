@@ -16,6 +16,8 @@ SYS-169 wymaga odcięcia zapłonu, wtrysku i toru rozrusznika przez niezależny 
 
 Tory wykonawcze muszą umożliwić utrzymanie odcięcia po skutecznym resecie zgodnie z SYS-170 dla zapłonu i wtrysku oraz z SYS-171 dla rozrusznika. [Próba zapłonu i wtrysku](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-170), [próba rozrusznika](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-171).
 
+Wybór nadzoru i MCU musi uwzględniać możliwość potwierdzenia przyczyny resetu po uruchomieniu ECU według SYS-172. Dostępność dodatkowych danych zdarzenia zależy od projektu nadzoru i pamięci. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-172).
+
 Dobór MCU, pamięci i zasilania musi uwzględnić [chronione motogodziny i ODO](../../docs/architecture/chronione-liczniki.md), SYS-074–076: trwałość zapisu, utratę zasilania, ochronę dostępu i mechanizmy uruchamiania/aktualizacji. Konkretne mechanizmy i ważne komponenty wybieramy wspólnie z właścicielem po ustaleniu granic ochrony.
 
 Dobór MCU i interfejsów programowania musi również uwzględnić [SYS-078 i ADR-008](../../docs/decisions/adr-008-dostep-do-firmware-ecu.md): w trybie użytkowym tylko firmware zatwierdzony przez producenta oraz zachowany dostęp rozwojowy twórców. Sposób autoryzacji i przejścia między trybami wymaga projektu; nie wybrano układów, algorytmów ani nieodwracalnych blokad.

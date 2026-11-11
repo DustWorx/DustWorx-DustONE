@@ -98,6 +98,8 @@ Według SYS-170 ECU po takim resecie utrzymuje odcięcie zapłonu i wtrysku przy
 
 Według SYS-171 ECU po resecie nadzoru odrzuca START naciśnięty przed potwierdzeniem zatrzymania wału. Załączenie rozrusznika wymaga nowego naciśnięcia po zatrzymaniu i spełnienia pozostałych warunków rozruchu.
 
+Według SYS-172 ECU zapisuje DTC i zamrożoną ramkę po potwierdzeniu resetu nadzoru. Ramka zawiera przyczynę resetu i wiarygodne dane związane ze zdarzeniem w zakresie ich dostępności.
+
 SYS-121 określa zgłoszenie usterki TPS i awaryjny zapłon gaźnika ze zweryfikowanej krzywej zależnej od obrotów, przy prawidłowej synchronizacji wału.
 
 SYS-122 przypisuje krzywą awaryjną do konfiguracji silnika jako wspólną dla jej zestawów map.
