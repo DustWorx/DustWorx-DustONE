@@ -13,7 +13,7 @@ Stan na 2026-11-11. **F03 aktywny po zamknięciu F02.** Macierz robocza łączy 
 | Brak HMI albo CAN | ECU działa samodzielnie, a reakcje akcesoriów są odrębne (SYS-046/050–053). | Zależności od pozostałych stanów ochronnych. | V07 |
 | Usterka TPS lub pomiaru ciśnienia używanego do określenia obciążenia | Przyjęto reguły kalibracji awaryjnej, kontrolowanego zatrzymania, powrotu i wymuszenia „Standard” (SYS-121–142). | Powiązać z pozostałymi blokadami F03. [Zakres F02](f02-przeglad-zakresu.md) opisuje przyjęte przypadki. | V02, V03, V04 |
 | Chłodzenie i pozostałe pomiary ochronne | Przyjęto pomiar płynu i automatykę wentylatora oraz wejścia ciśnienia paliwa i binarne oleju (SYS-029/043/044/060). | Reakcje na niedostępny pomiar i na warunki poza dopuszczalnym zakresem w wyposażonych profilach. | V02, V03, V05 |
-| Zasilanie i restart ECU | Przyjęto zasilanie bez stacyjki, zasady oszczędzania i odrębne reguły odtwarzania konfiguracji oraz map (SYS-054/084–089/106/109/155). Niezależny nadzór po wykryciu zawieszenia wymusza odcięcie wyjść i osobno inicjuje reset (SYS-169). Po resecie odcięcie zapłonu i wtrysku trwa do zatrzymania wału i nowej świadomej próby z wiarygodną synchronizacją (SYS-170). | Nowe naciśnięcie START przed zatrzymaniem wału po resecie nadzoru (pytanie 181). | V01, V04, V06, V13 |
+| Zasilanie i restart ECU | Przyjęto zasilanie bez stacyjki, zasady oszczędzania i odrębne reguły odtwarzania konfiguracji oraz map (SYS-054/084–089/106/109/155). Niezależny nadzór po wykryciu zawieszenia wymusza odcięcie wyjść i osobno inicjuje reset (SYS-169). Po resecie odcięcie zapłonu i wtrysku trwa do zatrzymania wału i nowej świadomej próby z wiarygodną synchronizacją (SYS-170). ECU odrzuca START przed potwierdzeniem zatrzymania wału i wymaga nowego naciśnięcia po zatrzymaniu (SYS-171). | Dane zamrożonej ramki po potwierdzonym resecie nadzoru (pytanie 182). | V01, V04, V06, V13 |
 
 ## Utrata synchronizacji wału podczas pracy
 
@@ -164,6 +164,16 @@ W odpowiedzi A na pytanie 180 (2026-11-11) właściciel zatwierdził utrzymanie 
 2. Odwzorować potwierdzone zatrzymanie wału. Sprawdzić utrzymanie odcięcia do nowej świadomej próby. Wykonać nową próbę przez START albo kopniak, odpowiednio do wyposażenia. Potwierdzić dopuszczenie zapłonu i wtrysku przy wiarygodnej synchronizacji i spełnionych pozostałych warunkach.
 3. Powtórzyć nową próbę bez wiarygodnej synchronizacji i sprawdzić utrzymanie odcięcia. Przed próbami ustalić kryteria zatrzymania wału i rozpoznania nowej próby. [Macierz weryfikacji](../verification/macierz-wymagan.md).
 
-## Pytanie 181 — nowe naciśnięcie START przed zatrzymaniem wału po resecie nadzoru
+## START przed zatrzymaniem wału po resecie nadzoru
 
-Do ustalenia pozostaje obsługa nowego naciśnięcia START, gdy ECU już działa po resecie nadzoru, ale wał nadal się obraca. Rozpatrujemy odrzucenie żądania oraz zachowanie go do zatrzymania wału, jeśli kierowca nadal trzyma START i spełnione są pozostałe warunki.
+W odpowiedzi A na pytanie 181 (2026-11-11) właściciel zatwierdził odrzucenie START naciśniętego przed potwierdzeniem zatrzymania wału po resecie nadzoru. ECU dopuszcza załączenie rozrusznika po nowym naciśnięciu START wykonanym po potwierdzonym zatrzymaniu i przy spełnieniu pozostałych warunków. Wciśnięty START trzeba najpierw puścić (SYS-171).
+
+### Plan próby SYS-171
+
+1. Na stanowisku z obciążeniem zastępczym toru rozrusznika odwzorować obrót wału i reset według SYS-169. Po przywróceniu działania ECU nacisnąć START przy nadal obracającym się wale. Potwierdzić wyłączenie rozrusznika. Utrzymać START przez zatrzymanie wału i sprawdzić, czy rozrusznik pozostaje wyłączony po potwierdzeniu zatrzymania.
+2. Puścić START i nacisnąć ponownie po potwierdzonym zatrzymaniu wału. Przy spełnionych pozostałych warunkach potwierdzić załączenie rozrusznika oraz dopuszczenie zapłonu i wtrysku zgodnie z SYS-170 po odzyskaniu wiarygodnej synchronizacji.
+3. Powtórzyć próbę z START przytrzymanym od chwili poprzedzającej reset. Sprawdzić wymóg nowego naciśnięcia po potwierdzeniu zatrzymania. Przed próbą określić kryterium zatrzymania i punkty pomiarowe. [Macierz weryfikacji](../verification/macierz-wymagan.md).
+
+## Pytanie 182 — zamrożona ramka po potwierdzonym resecie nadzoru
+
+Do ustalenia pozostają dane zamrożonej ramki DTC, gdy po resecie ECU potwierdzi zadziałanie nadzoru po zawieszeniu głównego firmware, a dane z chwili zawieszenia są niedostępne. Rozpatrujemy ostatnie wiarygodne dane sprzed resetu i dane z ponownego uruchomienia, z oznaczeniem chwili ich pobrania. Rejestrację i zasady czasu określają SYS-019 i SYS-021.

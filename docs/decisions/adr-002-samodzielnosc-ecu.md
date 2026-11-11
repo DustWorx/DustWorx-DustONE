@@ -34,6 +34,8 @@ W odpowiedzi **A na pytanie 179** (2026-11-11) właściciel zatwierdził samoczy
 
 W odpowiedzi **A na pytanie 180** (2026-11-11) właściciel zatwierdził wznowienie zapłonu i wtrysku po resecie nadzoru dopiero po zatrzymaniu wału, w nowej świadomej próbie rozruchu z wiarygodną synchronizacją (SYS-170). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-170).
 
+W odpowiedzi **A na pytanie 181** (2026-11-11) właściciel zatwierdził odrzucenie START przed potwierdzeniem zatrzymania wału po resecie nadzoru. Rozrusznik można załączyć po nowym naciśnięciu START wykonanym po zatrzymaniu (SYS-171). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-171).
+
 ## Konsekwencje
 
 - Dane i pomiary wymagane do autonomicznego sterowania silnikiem oraz jego zabezpieczeń muszą być dostępne ECU bez udziału HMI. Uwzględnić to przy wyborze miejsca podłączenia czujników.

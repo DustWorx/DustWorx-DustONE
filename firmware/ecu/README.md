@@ -96,6 +96,8 @@ Według SYS-169 niezależny nadzór po wykryciu zawieszenia głównego firmware 
 
 Według SYS-170 ECU po takim resecie utrzymuje odcięcie zapłonu i wtrysku przy obracającym się wale, również po odzyskaniu synchronizacji. Powrót sterowania wymaga potwierdzonego zatrzymania i nowej świadomej próby z wiarygodną synchronizacją oraz spełnienia pozostałych warunków.
 
+Według SYS-171 ECU po resecie nadzoru odrzuca START naciśnięty przed potwierdzeniem zatrzymania wału. Załączenie rozrusznika wymaga nowego naciśnięcia po zatrzymaniu i spełnienia pozostałych warunków rozruchu.
+
 SYS-121 określa zgłoszenie usterki TPS i awaryjny zapłon gaźnika ze zweryfikowanej krzywej zależnej od obrotów, przy prawidłowej synchronizacji wału.
 
 SYS-122 przypisuje krzywą awaryjną do konfiguracji silnika jako wspólną dla jej zestawów map.
