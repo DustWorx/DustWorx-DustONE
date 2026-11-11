@@ -32,6 +32,8 @@ W odpowiedzi **A na pytanie 178** (2026-11-11) właściciel zatwierdził odłąc
 
 W odpowiedzi **A na pytanie 179** (2026-11-11) właściciel zatwierdził samoczynne odcięcie zapłonu, wtrysku i rozrusznika po wykryciu zawieszenia głównego firmware. Nadzór wymusza odcięcie niezależnie od resetu i osobno inicjuje reset (SYS-169). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-169).
 
+W odpowiedzi **A na pytanie 180** (2026-11-11) właściciel zatwierdził wznowienie zapłonu i wtrysku po resecie nadzoru dopiero po zatrzymaniu wału, w nowej świadomej próbie rozruchu z wiarygodną synchronizacją (SYS-170). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-170).
+
 ## Konsekwencje
 
 - Dane i pomiary wymagane do autonomicznego sterowania silnikiem oraz jego zabezpieczeń muszą być dostępne ECU bez udziału HMI. Uwzględnić to przy wyborze miejsca podłączenia czujników.

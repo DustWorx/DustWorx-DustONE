@@ -92,7 +92,9 @@ SYS-167 wymaga działania odcięcia zapłonu i wtrysku przez STOP przy zawieszen
 
 SYS-168 wymaga odłączenia rozrusznika przez STOP przy zawieszonym głównym firmware i przytrzymanym START. Nowa próba po odzyskaniu działania wymaga zwolnienia STOP oraz puszczenia i ponownego naciśnięcia START według SYS-161.
 
-Według SYS-169 niezależny nadzór po wykryciu zawieszenia głównego firmware odcina zapłon, wtrysk i rozrusznik oraz osobno inicjuje reset. Warunki ponownego dopuszczenia sterowania po takim resecie są kolejną decyzją F03.
+Według SYS-169 niezależny nadzór po wykryciu zawieszenia głównego firmware odcina zapłon, wtrysk i rozrusznik oraz osobno inicjuje reset.
+
+Według SYS-170 ECU po takim resecie utrzymuje odcięcie zapłonu i wtrysku przy obracającym się wale, również po odzyskaniu synchronizacji. Powrót sterowania wymaga potwierdzonego zatrzymania i nowej świadomej próby z wiarygodną synchronizacją oraz spełnienia pozostałych warunków.
 
 SYS-121 określa zgłoszenie usterki TPS i awaryjny zapłon gaźnika ze zweryfikowanej krzywej zależnej od obrotów, przy prawidłowej synchronizacji wału.
 

@@ -183,6 +183,7 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-167 | Naciśnięcie sprawnego przewodowego STOP wymusza odcięcie zapłonu niezależnie od działania głównego firmware ECU, również przy jego zawieszeniu. W profilach wtryskowych wymusza także odcięcie wtrysku. Po użyciu STOP podczas pracy silnika ponowne dopuszczenie sterowania podlega SYS-162. |
 | SYS-168 | Podczas rozruchu elektrycznego naciśnięcie sprawnego przewodowego STOP kończy próbę i odłącza rozrusznik niezależnie od działania głównego firmware ECU, także przy jego zawieszeniu i przytrzymanym START. Kolejna próba wymaga zwolnienia STOP, puszczenia i ponownego naciśnięcia START oraz spełnienia pozostałych warunków według SYS-161. |
 | SYS-169 | Po wykryciu zawieszenia głównego firmware niezależny nadzór ECU wymusza odcięcie zapłonu i odłączenie rozrusznika. W profilach wtryskowych wymusza także odcięcie wtrysku. Odcięcie działa niezależnie od wykonania resetu i od naciśnięcia STOP. Nadzór inicjuje reset ECU odrębnym działaniem. Przy nieskutecznym resecie wyjścia pozostają wyłączone w czasie zawieszenia. |
+| SYS-170 | Po resecie zainicjowanym przez niezależny nadzór według SYS-169 ECU utrzymuje odcięcie zapłonu, a w profilach wtryskowych także wtrysku, przy nadal obracającym się wale również po odzyskaniu wiarygodnej synchronizacji. ECU ponownie dopuszcza zapłon i wtrysk dopiero w nowej świadomej próbie rozruchu po potwierdzonym zatrzymaniu wału, z wiarygodną synchronizacją i przy spełnieniu pozostałych warunków rozruchu. |
 
 ## 3. Podział odpowiedzialności
 
@@ -263,6 +264,8 @@ W odpowiedzi A na pytanie 177 (2026-11-11) właściciel zatwierdził odcięcie z
 W odpowiedzi A na pytanie 178 (2026-11-11) właściciel zatwierdził odłączenie rozrusznika przez sprawny STOP niezależnie od głównego firmware, także przy zawieszeniu i przytrzymanym START (SYS-168). [Plan próby F03](requirements/f03-ochrona-i-usterki.md#plan-próby-sys-168).
 
 W odpowiedzi A na pytanie 179 (2026-11-11) właściciel zatwierdził samoczynne odcięcie zapłonu, wtrysku i rozrusznika przez niezależny nadzór po wykryciu zawieszenia głównego firmware. Odcięcie działa niezależnie od resetu, który nadzór inicjuje odrębnie (SYS-169). [Plan próby F03](requirements/f03-ochrona-i-usterki.md#plan-próby-sys-169).
+
+W odpowiedzi A na pytanie 180 (2026-11-11) właściciel zatwierdził utrzymanie odcięcia zapłonu i wtrysku po resecie nadzoru przy obracającym się wale. Powrót sterowania wymaga zatrzymania wału i nowej świadomej próby z wiarygodną synchronizacją (SYS-170). [Plan próby F03](requirements/f03-ochrona-i-usterki.md#plan-próby-sys-170).
 
 Proponowana weryfikacja SYS-048/049: na stanowisku sprawdzić zakończenie sterowania po puszczeniu START, po zasymulowaniu potwierdzonej pracy silnika i po upływie ustalonego limitu kręcenia. Po obu automatycznych odcięciach podtrzymany START nie może ponownie załączyć rozrusznika; po puszczeniu i ponownym naciśnięciu obowiązują warunki dopuszczenia rozruchu. Powtórzyć próby przy odłączonym HMI. Mierzalne czasy reakcji i warunki symulacji określić przed próbami; testów nie wykonano.
 

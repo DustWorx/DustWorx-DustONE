@@ -14,6 +14,8 @@ SYS-168 rozszerza wymaganie odcięcia przez STOP na tor wykonawczy rozrusznika. 
 
 SYS-169 wymaga odcięcia zapłonu, wtrysku i toru rozrusznika przez niezależny nadzór przy zawieszeniu głównego firmware. Odcięcie działa również przy nieskutecznym resecie. Nadzór inicjuje reset jako odrębne działanie. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-169).
 
+Tor odcięcia zapłonu i wtrysku musi umożliwić utrzymanie blokady po skutecznym resecie aż do spełnienia warunków SYS-170. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-170).
+
 Dobór MCU, pamięci i zasilania musi uwzględnić [chronione motogodziny i ODO](../../docs/architecture/chronione-liczniki.md), SYS-074–076: trwałość zapisu, utratę zasilania, ochronę dostępu i mechanizmy uruchamiania/aktualizacji. Konkretne mechanizmy i ważne komponenty wybieramy wspólnie z właścicielem po ustaleniu granic ochrony.
 
 Dobór MCU i interfejsów programowania musi również uwzględnić [SYS-078 i ADR-008](../../docs/decisions/adr-008-dostep-do-firmware-ecu.md): w trybie użytkowym tylko firmware zatwierdzony przez producenta oraz zachowany dostęp rozwojowy twórców. Sposób autoryzacji i przejścia między trybami wymaga projektu; nie wybrano układów, algorytmów ani nieodwracalnych blokad.

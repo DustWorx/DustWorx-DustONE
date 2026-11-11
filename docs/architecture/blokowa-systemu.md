@@ -1,6 +1,6 @@
 # Architektura blokowa DustONE
 
-Stan na: 2026-11-09. **Materiał wstępny dla etapu 4, który oczekuje w kolejce**, wyprowadzona z [wymagań SYS-001–150](../01-zakres-systemu.md) i przyjętych ADR. Podział poniżej porządkuje projektowanie; nie wybiera komponentów, liczby pinów, protokołu PC ani topologii stopni mocy. G1 pozostaje otwarta. Uzupełnienie z 2026-11-11 obejmuje odcięcie przez STOP (SYS-167–168) i przez niezależny nadzór (SYS-169).
+Stan na: 2026-11-09. **Materiał wstępny dla etapu 4, który oczekuje w kolejce**, wyprowadzona z [wymagań SYS-001–150](../01-zakres-systemu.md) i przyjętych ADR. Podział poniżej porządkuje projektowanie; nie wybiera komponentów, liczby pinów, protokołu PC ani topologii stopni mocy. G1 pozostaje otwarta. Uzupełnienie z 2026-11-11 obejmuje odcięcie przez STOP (SYS-167–168) i przez niezależny nadzór oraz wznowienie po resecie (SYS-169–170).
 
 Zakres silnikowy: jeden cylinder, 2T/4T i wyłącznie chłodzenie cieczą według SYS-098. Rozwinięcie projektu blokowego pozostaje w kolejce etapu 4.
 
@@ -60,7 +60,7 @@ flowchart LR
     SERVICE <-->|"dostęp do obu urządzeń"| COM
 ```
 
-Diagram pokazuje zależności funkcjonalne. Strzałki zasilania nie są kompletnym schematem szyn; wszystkie bloki wymagają właściwego zasilania. Droga standardowej obsługi obu urządzeń przez ECU-COM jest kandydatem do projektu. Miejsce złącza, interfejs PC i ewentualny mostek pozostają otwarte; SYS-027 nie przesądza USB w ECU. Ścieżki STOP pokazują odczyt stanu i odcięcie zapłonu, wtrysku oraz rozrusznika niezależne od głównego firmware (SYS-167–168). Niezależny nadzór wymusza odcięcie tych wyjść i osobno inicjuje reset (SYS-169). Realizacja torów odcięcia i nadzoru jest wejściem do etapu 4.
+Diagram pokazuje zależności funkcjonalne. Strzałki zasilania nie są kompletnym schematem szyn; wszystkie bloki wymagają właściwego zasilania. Droga standardowej obsługi obu urządzeń przez ECU-COM jest kandydatem do projektu. Miejsce złącza, interfejs PC i ewentualny mostek pozostają otwarte; SYS-027 nie przesądza USB w ECU. Ścieżki STOP pokazują odczyt stanu i odcięcie zapłonu, wtrysku oraz rozrusznika niezależne od głównego firmware (SYS-167–168). Niezależny nadzór wymusza odcięcie tych wyjść i osobno inicjuje reset (SYS-169). Warunki wznowienia zapłonu i wtrysku po resecie określa SYS-170. Realizacja torów odcięcia i nadzoru jest wejściem do etapu 4.
 
 ## Bloki i zadania
 
@@ -69,7 +69,7 @@ Diagram pokazuje zależności funkcjonalne. Strzałki zasilania nie są kompletn
 | ECU-PWR | Przyjęcie instalacji klasy 12 V, ochrona i dystrybucja energii, nadzór napięcia, kontrola zasilania HMI i niezależny nadzór głównego firmware według SYS-169. | Zakresy napięć, rozruch i zakłócenia, prądy/temperatury, profile AGM/LiFePO4 i domeny zasilania. |
 | ECU-WAKE | Obsługa źródeł wybudzania, koordynacja snu, blokady snu przy PC i wymaganych zadaniach. | Detekcja kopania, pierwszych impulsów koła, przycisków HMI i PC; pobór, opóźnienia, zasilanie HMI po awaryjnym odłączeniu części aktywnej. |
 | ECU-IN | Synchronizacja, pomiary analogowe/cyfrowe (w tym MAP/CCPS według SYS-096/097), sensory na PCB oraz wejścia START, STOP, hamulców i pozostałych funkcji. | Modele osprzętu, zakresy, zasilanie, charakterystyki, dokładności, częstotliwości, zabezpieczenia i diagnostyka. |
-| ECU-CTRL | Sterowanie czasowe silnikiem, reguły rozruchu/STOP/przewrócenia, automatyka akcesoriów i kontrola dopuszczenia poleceń. | Strategie i granice czasu, obciążenie obliczeniowe, reakcje na usterki i restart, warunki strojenia na żywo. |
+| ECU-CTRL | Sterowanie czasowe silnikiem, reguły rozruchu/STOP/przewrócenia, wznowienie zapłonu i wtrysku po resecie nadzoru (SYS-170), automatyka akcesoriów i kontrola dopuszczenia poleceń. | Strategie i granice czasu, obciążenie obliczeniowe, reakcje na usterki i restart, warunki strojenia na żywo. |
 | ECU-OUT | Jeden kanał zapłonu w trybie CDI lub TCI/IDI, wtrysk, sterowanie rozrusznikiem, pompa, power valve/IAC oraz wyjścia akcesoriów. Odcięcie zapłonu, wtrysku i rozrusznika przez STOP (SYS-167–168) i niezależny nadzór (SYS-169). | Rodzaje i liczby kanałów, jednoczesność, prądy/energia/czasy, granica stopni mocy i diagnostyka. SmartFET jest preferencją dla akcesoriów, nie wyborem konkretnego układu. |
 | ECU-DATA | Właściciel konfiguracji i map, chronionych liczników, DTC/freeze frame, czasu rzeczywistego i ważności czasu. | Pojemność, trwałość i spójność zapisów, zakres utraty danych przy zaniku zasilania, reguły dostępu, odtwarzanie i obsługa pełnej pamięci. |
 | ECU-COM | CAN ECU–HMI oraz logiczna obsługa konfiguracji, danych, diagnostyki, aktualizacji i development tool. | Interfejs PC, przepustowość, wersjonowanie, sesje/uprawnienia, formaty danych i odzyskiwanie. |

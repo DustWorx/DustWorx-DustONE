@@ -13,7 +13,7 @@ Stan na 2026-11-11. **F03 aktywny po zamknięciu F02.** Macierz robocza łączy 
 | Brak HMI albo CAN | ECU działa samodzielnie, a reakcje akcesoriów są odrębne (SYS-046/050–053). | Zależności od pozostałych stanów ochronnych. | V07 |
 | Usterka TPS lub pomiaru ciśnienia używanego do określenia obciążenia | Przyjęto reguły kalibracji awaryjnej, kontrolowanego zatrzymania, powrotu i wymuszenia „Standard” (SYS-121–142). | Powiązać z pozostałymi blokadami F03. [Zakres F02](f02-przeglad-zakresu.md) opisuje przyjęte przypadki. | V02, V03, V04 |
 | Chłodzenie i pozostałe pomiary ochronne | Przyjęto pomiar płynu i automatykę wentylatora oraz wejścia ciśnienia paliwa i binarne oleju (SYS-029/043/044/060). | Reakcje na niedostępny pomiar i na warunki poza dopuszczalnym zakresem w wyposażonych profilach. | V02, V03, V05 |
-| Zasilanie i restart ECU | Przyjęto zasilanie bez stacyjki, zasady oszczędzania i odrębne reguły odtwarzania konfiguracji oraz map (SYS-054/084–089/106/109/155). Niezależny nadzór po wykryciu zawieszenia wymusza odcięcie wyjść i osobno inicjuje reset (SYS-169). | Wznowienie sterowania po resecie nadzoru przy obracającym się wale (pytanie 180). | V04, V06, V13 |
+| Zasilanie i restart ECU | Przyjęto zasilanie bez stacyjki, zasady oszczędzania i odrębne reguły odtwarzania konfiguracji oraz map (SYS-054/084–089/106/109/155). Niezależny nadzór po wykryciu zawieszenia wymusza odcięcie wyjść i osobno inicjuje reset (SYS-169). Po resecie odcięcie zapłonu i wtrysku trwa do zatrzymania wału i nowej świadomej próby z wiarygodną synchronizacją (SYS-170). | Nowe naciśnięcie START przed zatrzymaniem wału po resecie nadzoru (pytanie 181). | V01, V04, V06, V13 |
 
 ## Utrata synchronizacji wału podczas pracy
 
@@ -154,6 +154,16 @@ W odpowiedzi A na pytanie 179 (2026-11-11) właściciel zatwierdził samoczynne 
 2. Powtórzyć próbę z wymuszoną nieskutecznością resetu na stanowisku, tak aby polecenie sterowania z zawieszonego firmware pozostało aktywne. Sprawdzić, czy nadzór sygnalizuje reset, a obciążenia pozostają wyłączone przez czas zawieszenia.
 3. Objąć zapłon CDI i TCI/IDI, wyjście wtrysku w wyposażonym profilu oraz tor rozrusznika przy przytrzymanym START. Przed próbą określić metodę wymuszania zawieszenia, punkty pomiarowe i dopuszczalny czas odcięcia. [Macierz weryfikacji](../verification/macierz-wymagan.md).
 
-## Pytanie 180 — wznowienie sterowania po resecie zainicjowanym przez nadzór
+## Wznowienie sterowania po resecie zainicjowanym przez nadzór
 
-Do rozstrzygnięcia pozostaje ponowne dopuszczenie zapłonu i wtrysku, gdy ECU odzyskało działanie po resecie, a wał nadal się obraca i synchronizacja jest wiarygodna.
+W odpowiedzi A na pytanie 180 (2026-11-11) właściciel zatwierdził utrzymanie odcięcia zapłonu i wtrysku po resecie nadzoru także wtedy, gdy ECU odzyskało wiarygodną synchronizację przy nadal obracającym się wale. Po potwierdzonym zatrzymaniu wału ECU dopuszcza sterowanie w nowej świadomej próbie rozruchu z wiarygodną synchronizacją i przy spełnieniu pozostałych warunków (SYS-170).
+
+### Plan próby SYS-170
+
+1. Na stanowisku z obciążeniami zastępczymi odwzorować pracę silnika, zainicjować reset według SYS-169 i przez cały reset podawać wiarygodne sygnały obracającego się wału oraz fazy, jeśli profil jej wymaga. Potwierdzić utrzymanie odcięcia zapłonu i wtrysku po odzyskaniu działania ECU i synchronizacji.
+2. Odwzorować potwierdzone zatrzymanie wału. Sprawdzić utrzymanie odcięcia do nowej świadomej próby. Wykonać nową próbę przez START albo kopniak, odpowiednio do wyposażenia. Potwierdzić dopuszczenie zapłonu i wtrysku przy wiarygodnej synchronizacji i spełnionych pozostałych warunkach.
+3. Powtórzyć nową próbę bez wiarygodnej synchronizacji i sprawdzić utrzymanie odcięcia. Przed próbami ustalić kryteria zatrzymania wału i rozpoznania nowej próby. [Macierz weryfikacji](../verification/macierz-wymagan.md).
+
+## Pytanie 181 — nowe naciśnięcie START przed zatrzymaniem wału po resecie nadzoru
+
+Do ustalenia pozostaje obsługa nowego naciśnięcia START, gdy ECU już działa po resecie nadzoru, ale wał nadal się obraca. Rozpatrujemy odrzucenie żądania oraz zachowanie go do zatrzymania wału, jeśli kierowca nadal trzyma START i spełnione są pozostałe warunki.
