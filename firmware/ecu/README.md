@@ -78,6 +78,8 @@ Według SYS-160 naciśnięcie START przy zgaszonym silniku i aktywnym przewodowy
 
 Według SYS-161 przewodowy STOP wykryty podczas kręcenia wyłącza rozrusznik i kończy próbę. Po zwolnieniu STOP ECU wymaga ponownego naciśnięcia START.
 
+Według SYS-162 zwolnienie przewodowego STOP przy nadal obracającym się wale utrzymuje odcięcie. Ponowne dopuszczenie zapłonu i wtrysku wymaga zatrzymania wału i nowej świadomej próby z wiarygodną synchronizacją.
+
 SYS-121 określa zgłoszenie usterki TPS i awaryjny zapłon gaźnika ze zweryfikowanej krzywej zależnej od obrotów, przy prawidłowej synchronizacji wału.
 
 SYS-122 przypisuje krzywą awaryjną do konfiguracji silnika jako wspólną dla jej zestawów map.

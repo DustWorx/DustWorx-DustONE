@@ -175,6 +175,7 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-159 | Jeżeli podczas rozruchu kopniakiem ECU potwierdzi utratę wcześniej uzyskanej synchronizacji wału, zanim rozpozna pracę silnika, kończy bieżącą próbę i odcina zapłon, a w profilach wtryskowych także wtrysk. Odcięcie trwa również po powrocie sygnału podczas dalszego obrotu wału. Ponowne dopuszczenie zapłonu i wtrysku wymaga potwierdzonego zatrzymania wału, nowej świadomej próby rozruchu z wiarygodną synchronizacją oraz spełnienia pozostałych warunków rozruchu. |
 | SYS-160 | Gdy kierowca naciska START przy zgaszonym silniku i aktywnym przewodowym STOP, ECU utrzymuje rozrusznik i zapłon wyłączone. W profilach wtryskowych utrzymuje również odcięcie wtrysku. Po zwolnieniu STOP rozruch elektryczny wymaga nowego naciśnięcia START oraz spełnienia pozostałych warunków rozruchu. Jeżeli START nadal jest przytrzymany w chwili zwolnienia STOP, kierowca musi go puścić przed ponowieniem. |
 | SYS-161 | W trakcie rozruchu elektrycznego, gdy rozrusznik już kręci i ECU jeszcze nie potwierdziło pracy silnika, wykrycie aktywnego przewodowego STOP kończy bieżącą próbę. ECU wyłącza rozrusznik i zapłon. W profilach wtryskowych odcina także wtrysk. Po zwolnieniu STOP ponowne włączenie rozrusznika wymaga nowego naciśnięcia START i spełnienia pozostałych warunków rozruchu. Jeżeli START jest nadal przytrzymany, kierowca musi go puścić przed ponowieniem. |
+| SYS-162 | Po wykryciu aktywnego przewodowego STOP podczas pracy silnika ECU odcina zapłon. W profilach wtryskowych odcina także wtrysk. Odcięcie trwa również po zwolnieniu STOP podczas dalszego obrotu wału. Ponowne dopuszczenie zapłonu i wtrysku wymaga zwolnionego STOP, potwierdzonego zatrzymania wału oraz nowej świadomej próby rozruchu z wiarygodną synchronizacją i spełnionymi pozostałymi warunkami rozruchu. |
 
 ## 3. Podział odpowiedzialności
 
@@ -239,6 +240,8 @@ W odpowiedzi na pytanie 56 i późniejszym doprecyzowaniu z 2026-10-25 właścic
 W odpowiedzi A na pytanie 170 (2026-11-11) właściciel zatwierdził blokadę rozrusznika przy naciśnięciu START na zgaszonym silniku, gdy aktywny jest przewodowy STOP. Po zwolnieniu STOP rozruch wymaga nowego naciśnięcia START (SYS-160). [Macierz F03](requirements/f03-ochrona-i-usterki.md).
 
 W odpowiedzi A na pytanie 171 (2026-11-11) właściciel zatwierdził wyłączenie rozrusznika po wykryciu przewodowego STOP w trakcie kręcenia. ECU kończy próbę. Po zwolnieniu STOP kolejna próba wymaga nowego naciśnięcia START (SYS-161).
+
+W odpowiedzi A na pytanie 172 (2026-11-11) właściciel zatwierdził utrzymanie odcięcia zapłonu i wtrysku po zwolnieniu przewodowego STOP przed zatrzymaniem wału. Wznowienie wymaga nowej świadomej próby po zatrzymaniu, z wiarygodną synchronizacją (SYS-162).
 
 Proponowana weryfikacja SYS-048/049: na stanowisku sprawdzić zakończenie sterowania po puszczeniu START, po zasymulowaniu potwierdzonej pracy silnika i po upływie ustalonego limitu kręcenia. Po obu automatycznych odcięciach podtrzymany START nie może ponownie załączyć rozrusznika; po puszczeniu i ponownym naciśnięciu obowiązują warunki dopuszczenia rozruchu. Powtórzyć próby przy odłączonym HMI. Mierzalne czasy reakcji i warunki symulacji określić przed próbami; testów nie wykonano.
 

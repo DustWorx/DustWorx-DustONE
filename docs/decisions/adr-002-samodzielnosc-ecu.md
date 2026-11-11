@@ -1,6 +1,6 @@
 # ADR-002 — samodzielność ECU i HMI jako klient
 
-Data decyzji 2026-10-25. Uzupełnienie 2026-11-11. Zatwierdzono samodzielność ECU oraz reakcje rozrusznika na przewodowy STOP przed rozpoczęciem i w trakcie kręcenia. Szczegóły realizacji są do określenia.
+Data decyzji 2026-10-25. Uzupełnienie 2026-11-11. Zatwierdzono samodzielność ECU oraz reakcje na przewodowy STOP przy rozruchu elektrycznym i podczas pracy silnika. Szczegóły realizacji są do określenia.
 
 ## Problem i opcje
 
@@ -15,6 +15,8 @@ ECU samodzielnie steruje silnikiem i jego zabezpieczeniami, zarządza konfigurac
 W odpowiedzi **A na pytanie 170** (2026-11-11) właściciel zatwierdził utrzymanie wyłączonego rozrusznika przy naciśnięciu START na zgaszonym silniku z aktywnym przewodowym STOP. Po zwolnieniu STOP wymagane jest nowe naciśnięcie START (SYS-160). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md).
 
 W odpowiedzi **A na pytanie 171** (2026-11-11) właściciel zatwierdził odłączenie rozrusznika po wykryciu przewodowego STOP podczas kręcenia. ECU kończy próbę. Po zwolnieniu STOP potrzebne jest nowe naciśnięcie START (SYS-161). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md).
+
+W odpowiedzi **A na pytanie 172** (2026-11-11) właściciel zatwierdził utrzymanie odcięcia po zwolnieniu STOP podczas obrotu wału. Powrót sterowania wymaga zatrzymania wału i nowej świadomej próby rozruchu z wiarygodną synchronizacją (SYS-162). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md).
 
 ## Konsekwencje
 
