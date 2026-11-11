@@ -10,13 +10,13 @@ Kontrola pełnego F01 została zakończona: właściciel potwierdził zgodność
 
 | Obszar | Stan potwierdzony dokumentacją |
 | --- | --- |
-| Wymagania systemowe | 168 wymagań SYS-001–168; pierwszy przydział do bloków i grup weryfikacji gotowy, kryteria i procedury do rozwinięcia. |
+| Wymagania systemowe | 169 wymagań SYS-001–169; pierwszy przydział do bloków i grup weryfikacji gotowy, kryteria i procedury do rozwinięcia. |
 | Decyzje | 12 zapisów ADR-001–012; ostatni ogranicza platformę do silników chłodzonych cieczą. |
 | Zakres wariantów | Macierz 6 wariantów silnika; jest planem obsługi, nie potwierdzeniem zgodności modeli. |
 | Pierwsza jednostka | Beta 300 RR Racing 2015; analiza dokumentów i zdjęć, bez raportów pomiarowych instalacji. |
 | Architektura | Pierwszy diagram blokowy, funkcje sześciu wariantów i przydział zasobów gotowe jako wersje robocze. Modele, parametry i liczbowe bilanse pozostają otwarte. |
 | Schematy, BOM, PCB i mechanika | W repozytorium brak projektu wykonawczego i zatwierdzonego kompletnego BOM ECU/HMI. |
-| Kod i próby produktu | W repozytorium brak implementacji firmware/Windows i raportów prób DustONE. Istnieją plany, szablon procedury i przydział 168 wymagań do 13 grup weryfikacji. |
+| Kod i próby produktu | W repozytorium brak implementacji firmware/Windows i raportów prób DustONE. Istnieją plany, szablon procedury i przydział 169 wymagań do 13 grup weryfikacji. |
 
 Podstawy: [wymagania](requirements/README.md), [decyzje](decisions/README.md), [macierz silników](architecture/macierz-wariantow-silnika.md), [I/O](interfaces/wstepna-lista-io.md) i [weryfikacja](verification/README.md). Liczba wymagań i pytań nie jest procentem wykonania produktu.
 
@@ -61,13 +61,13 @@ Parametry wyliczane z osprzętu, charakterystyki czujników, wartości elementó
 | --- | --- | --- |
 | W04 — Zakres funkcjonalny: F01 | Zamknięty po kontroli właściciela: 2026-11-04. | [Pomiary](requirements/f01-pomiary-silnika.md), [przegląd sterowania i wynik zamknięcia](requirements/f01-sterowanie-silnikiem.md); dane techniczne przekazane do kolejki etapów 3–6. |
 | F02 — Mapy, konfiguracja i strojenie ECU | Zamknięty po akceptacji właściciela 2026-11-09. | Odpowiedź A na pytanie 166. [Karta F02](requirements/f02-przeglad-zakresu.md) zawiera przyjęty zakres, plan weryfikacji i przekazanie. |
-| F03 — Ochrona i reakcje na usterki | Aktywny po zamknięciu F02. | Ustalono reakcje na utratę synchronizacji wału przy pracy i rozruchu (SYS-157–159), priorytet STOP względem START i warunki wznowienia sterowania (SYS-160–162) oraz wykrywanie przerwy i zwarcia do masy z reakcją diagnostyczną (SYS-163–166). Sprawny STOP wymusza odcięcie zapłonu, wtrysku i rozrusznika niezależnie od głównego firmware (SYS-167–168). Do ustalenia samoczynne odcięcie wyjść po wykryciu zawieszenia głównego firmware. [Macierz reakcji F03](requirements/f03-ochrona-i-usterki.md). |
+| F03 — Ochrona i reakcje na usterki | Aktywny po zamknięciu F02. | Ustalono reakcje na utratę synchronizacji wału przy pracy i rozruchu (SYS-157–159), priorytet STOP względem START i warunki wznowienia sterowania (SYS-160–162) oraz wykrywanie przerwy i zwarcia do masy z reakcją diagnostyczną (SYS-163–166). Sprawny STOP wymusza odcięcie zapłonu, wtrysku i rozrusznika niezależnie od głównego firmware (SYS-167–168). Po wykryciu zawieszenia nadzór wymusza odcięcie wyjść niezależnie od resetu i osobno inicjuje reset (SYS-169). Do ustalenia warunek wznowienia zapłonu i wtrysku po resecie nadzoru przy nadal obracającym się wale. [Macierz reakcji F03](requirements/f03-ochrona-i-usterki.md). |
 | W05 — Inwentaryzacja Bety | W kolejce, etap 3. | Zachowany [plan INV](verification/beta-2015-plan-inwentaryzacji.md); brak wyników pomiarowych. |
 | W01/W02 — Architektura i zasoby | W kolejce, etap 4. | Zachowane [diagram](architecture/blokowa-systemu.md) i [macierz wariantów](architecture/macierz-wariantow-silnika.md); bez zamkniętych bilansów. |
-| W03 — Weryfikacja wymagań | W kolejce, etap 5. | Zachowany [przydział 168 SYS do grup](verification/macierz-wymagan.md); kryteria, procedury i dowody do rozwinięcia. |
+| W03 — Weryfikacja wymagań | W kolejce, etap 5. | Zachowany [przydział 169 SYS do grup](verification/macierz-wymagan.md); kryteria, procedury i dowody do rozwinięcia. |
 | W06 — Bilanse i wybór komponentów | W kolejce, etapy 4 i 6. | Wymagane wejściowe parametry; ważne komponenty wybierzemy wspólnie. |
 
-**Najbliższy krok to ustalenie samoczynnego odcięcia wyjść po wykryciu zawieszenia głównego firmware ECU.** Przyjęte reakcje i plan prób są w [macierzy F03](requirements/f03-ochrona-i-usterki.md). Konkrety osprzętu, w tym wykonalność konwersji TPI, mają właścicieli i etapy w [przekazaniu F01](requirements/f01-sterowanie-silnikiem.md). Parametry elektryczne, bilanse i procedury wykonawcze pozostają w kolejce właściwych etapów.
+**Najbliższy krok to ustalenie, kiedy po resecie nadzoru ECU może wznowić zapłon i wtrysk przy obracającym się wale.** Przyjęte reakcje i plan prób są w [macierzy F03](requirements/f03-ochrona-i-usterki.md). Konkrety osprzętu, w tym wykonalność konwersji TPI, mają właścicieli i etapy w [przekazaniu F01](requirements/f01-sterowanie-silnikiem.md). Parametry elektryczne, bilanse i procedury wykonawcze pozostają w kolejce właściwych etapów.
 
 ## Warunki przechodzenia dalej
 

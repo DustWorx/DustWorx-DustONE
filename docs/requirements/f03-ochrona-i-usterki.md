@@ -13,7 +13,7 @@ Stan na 2026-11-11. **F03 aktywny po zamknięciu F02.** Macierz robocza łączy 
 | Brak HMI albo CAN | ECU działa samodzielnie, a reakcje akcesoriów są odrębne (SYS-046/050–053). | Zależności od pozostałych stanów ochronnych. | V07 |
 | Usterka TPS lub pomiaru ciśnienia używanego do określenia obciążenia | Przyjęto reguły kalibracji awaryjnej, kontrolowanego zatrzymania, powrotu i wymuszenia „Standard” (SYS-121–142). | Powiązać z pozostałymi blokadami F03. [Zakres F02](f02-przeglad-zakresu.md) opisuje przyjęte przypadki. | V02, V03, V04 |
 | Chłodzenie i pozostałe pomiary ochronne | Przyjęto pomiar płynu i automatykę wentylatora oraz wejścia ciśnienia paliwa i binarne oleju (SYS-029/043/044/060). | Reakcje na niedostępny pomiar i na warunki poza dopuszczalnym zakresem w wyposażonych profilach. | V02, V03, V05 |
-| Zasilanie i restart ECU | Przyjęto zasilanie bez stacyjki, zasady oszczędzania i odrębne reguły odtwarzania konfiguracji oraz map (SYS-054/084–089/106/109/155). | Samoczynne odcięcie wyjść po wykryciu zawieszenia głównego firmware (pytanie 179). Warunki ponownego dopuszczenia po restarcie. | V04, V06 |
+| Zasilanie i restart ECU | Przyjęto zasilanie bez stacyjki, zasady oszczędzania i odrębne reguły odtwarzania konfiguracji oraz map (SYS-054/084–089/106/109/155). Niezależny nadzór po wykryciu zawieszenia wymusza odcięcie wyjść i osobno inicjuje reset (SYS-169). | Wznowienie sterowania po resecie nadzoru przy obracającym się wale (pytanie 180). | V04, V06, V13 |
 
 ## Utrata synchronizacji wału podczas pracy
 
@@ -144,6 +144,16 @@ W odpowiedzi A na pytanie 178 (2026-11-11) właściciel zatwierdził odłączeni
 2. Zwolnić STOP i przywrócić działanie ECU przy nadal wciśniętym START. Potwierdzić utrzymanie wyłączenia oraz dopuszczenie nowej próby po puszczeniu i ponownym naciśnięciu START przy spełnieniu pozostałych warunków. Podczas próby zweryfikować również odcięcie zapłonu i wtrysku według SYS-167.
 3. Powtórzyć bez HMI. Metodę wymuszania zawieszenia dobrać tak, aby odróżnić zadziałanie STOP od reakcji nadzoru. Punkty pomiarowe i dopuszczalny czas odłączenia określić przed próbą dla wybranego toru. [Macierz weryfikacji](../verification/macierz-wymagan.md).
 
-## Pytanie 179 — samoczynne odcięcie po wykryciu zawieszenia głównego firmware ECU
+## Samoczynne odcięcie po wykryciu zawieszenia głównego firmware ECU
 
-Do rozstrzygnięcia pozostaje sposób wymuszenia stanu wyłączonego na wyjściach zapłonu, wtrysku i rozrusznika po wykryciu zawieszenia przez niezależny nadzór, bez naciśnięcia STOP. Rozpatrujemy odcięcie niezależne od resetu albo odcięcie wymuszone przez stan wyjść w trakcie resetu.
+W odpowiedzi A na pytanie 179 (2026-11-11) właściciel zatwierdził samoczynne odcięcie zapłonu, wtrysku i rozrusznika przez niezależny nadzór ECU. Po wykryciu zawieszenia odcięcie działa bez naciśnięcia STOP i niezależnie od skuteczności resetu. Nadzór osobno inicjuje reset (SYS-169).
+
+### Plan próby SYS-169
+
+1. Na stanowisku z obciążeniami zastępczymi odwzorować pracę silnika i rozruch elektryczny w osobnych przebiegach. Pozostawić STOP zwolniony. Wymusić zawieszenie przy aktywnym poleceniu sterowania. Potwierdzić samoczynne odcięcie właściwych wyjść i zainicjowanie resetu przez nadzór. Zarejestrować wykrycie zawieszenia, sygnał resetu i stan obciążeń.
+2. Powtórzyć próbę z wymuszoną nieskutecznością resetu na stanowisku, tak aby polecenie sterowania z zawieszonego firmware pozostało aktywne. Sprawdzić, czy nadzór sygnalizuje reset, a obciążenia pozostają wyłączone przez czas zawieszenia.
+3. Objąć zapłon CDI i TCI/IDI, wyjście wtrysku w wyposażonym profilu oraz tor rozrusznika przy przytrzymanym START. Przed próbą określić metodę wymuszania zawieszenia, punkty pomiarowe i dopuszczalny czas odcięcia. [Macierz weryfikacji](../verification/macierz-wymagan.md).
+
+## Pytanie 180 — wznowienie sterowania po resecie zainicjowanym przez nadzór
+
+Do rozstrzygnięcia pozostaje ponowne dopuszczenie zapłonu i wtrysku, gdy ECU odzyskało działanie po resecie, a wał nadal się obraca i synchronizacja jest wiarygodna.

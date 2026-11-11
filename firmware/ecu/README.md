@@ -92,6 +92,8 @@ SYS-167 wymaga działania odcięcia zapłonu i wtrysku przez STOP przy zawieszen
 
 SYS-168 wymaga odłączenia rozrusznika przez STOP przy zawieszonym głównym firmware i przytrzymanym START. Nowa próba po odzyskaniu działania wymaga zwolnienia STOP oraz puszczenia i ponownego naciśnięcia START według SYS-161.
 
+Według SYS-169 niezależny nadzór po wykryciu zawieszenia głównego firmware odcina zapłon, wtrysk i rozrusznik oraz osobno inicjuje reset. Warunki ponownego dopuszczenia sterowania po takim resecie są kolejną decyzją F03.
+
 SYS-121 określa zgłoszenie usterki TPS i awaryjny zapłon gaźnika ze zweryfikowanej krzywej zależnej od obrotów, przy prawidłowej synchronizacji wału.
 
 SYS-122 przypisuje krzywą awaryjną do konfiguracji silnika jako wspólną dla jej zestawów map.

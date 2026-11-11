@@ -1,6 +1,6 @@
 # ADR-002 — samodzielność ECU i HMI jako klient
 
-Data decyzji 2026-10-25. Uzupełnienie 2026-11-11 obejmuje nadzór obwodu STOP i działanie odcięcia przy zawieszeniu głównego firmware ECU. Szczegóły realizacji są do określenia.
+Data decyzji 2026-10-25. Uzupełnienie 2026-11-11 obejmuje nadzór obwodu STOP oraz odcięcie przez STOP i niezależny nadzór przy zawieszeniu głównego firmware ECU. Szczegóły realizacji są do określenia.
 
 ## Problem i opcje
 
@@ -29,6 +29,8 @@ W odpowiedzi **A na pytanie 176** (2026-11-11) właściciel zatwierdził zapis D
 W odpowiedzi **A na pytanie 177** (2026-11-11) właściciel zatwierdził działanie sprawnego przewodowego STOP przy zawieszeniu głównego firmware ECU. Naciśnięcie STOP wymusza odcięcie zapłonu oraz wtrysku w wyposażonych profilach (SYS-167). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-167).
 
 W odpowiedzi **A na pytanie 178** (2026-11-11) właściciel zatwierdził odłączenie rozrusznika przez sprawny przewodowy STOP również przy zawieszeniu głównego firmware i przytrzymanym START (SYS-168). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-168).
+
+W odpowiedzi **A na pytanie 179** (2026-11-11) właściciel zatwierdził samoczynne odcięcie zapłonu, wtrysku i rozrusznika po wykryciu zawieszenia głównego firmware. Nadzór wymusza odcięcie niezależnie od resetu i osobno inicjuje reset (SYS-169). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-169).
 
 ## Konsekwencje
 
