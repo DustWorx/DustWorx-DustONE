@@ -1,6 +1,6 @@
 # Architektura blokowa DustONE
 
-Stan na: 2026-11-09. **Materiał wstępny dla etapu 4, który oczekuje w kolejce**, wyprowadzona z [wymagań SYS-001–150](../01-zakres-systemu.md) i przyjętych ADR. Podział poniżej porządkuje projektowanie; nie wybiera komponentów, liczby pinów, protokołu PC ani topologii stopni mocy. G1 pozostaje otwarta. Uzupełnienie z 2026-11-11 obejmuje odcięcie przez STOP (SYS-167–168), reakcje nadzoru, powrót po resecie i odzyskiwanie (SYS-169–180). Uzupełnienie z 2026-11-12 obejmuje powrót zasilania po przerwaniu pracy lub rozruchu (SYS-181–183) oraz sterowanie wentylatorem po usterce pomiaru płynu (SYS-184).
+**Wstępna architektura dla etapu 4.** Bazowy podział bloków z 2026-11-09 oparto na [wymaganiach SYS-001–150](../01-zakres-systemu.md) i przyjętych ADR. Komponenty, liczba pinów, protokół PC i topologie stopni mocy pozostają do ustalenia w projekcie. G1 pozostaje otwarta. Uzupełnienie z 2026-11-11 obejmuje odcięcie przez STOP (SYS-167–168), reakcje nadzoru, powrót po resecie i odzyskiwanie (SYS-169–180). Uzupełnienie z 2026-11-12 obejmuje powrót zasilania po przerwaniu pracy lub rozruchu (SYS-181–183) oraz sterowanie wentylatorem po usterce pomiaru płynu (SYS-184).
 
 Zakres silnikowy: jeden cylinder, 2T/4T i wyłącznie chłodzenie cieczą według SYS-098. Rozwinięcie projektu blokowego pozostaje w kolejce etapu 4.
 
