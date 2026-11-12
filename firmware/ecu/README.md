@@ -124,6 +124,8 @@ Według SYS-183 po zaniku zasilania podczas rozpoczętej próby kopniakiem i pow
 
 Według SYS-184 potwierdzona usterka pomiaru temperatury płynu powoduje zapis DTC z zamrożoną ramką. W wyposażonym profilu ECU lokalnie włącza sprawny wentylator podczas pracy silnika przy utrzymującej się potwierdzonej usterce. Po potwierdzeniu zatrzymania silnika kończy to wymuszenie także przy włączonym chłodzeniu po zgaszeniu (SYS-185). Przy zgaszonym silniku ECU przyjmuje ręczne żądanie z HMI przy potwierdzonej usterce zgodnie z SYS-186. Egzekwuje limit czasu i odcięcie napięciowe według SYS-061 oraz zabezpieczenia wyjścia. Przy potwierdzeniu usterki podczas automatycznego chłodzenia po zgaszeniu wycofuje żądanie automatyczne. Ręczne żądanie może podtrzymać pracę na warunkach SYS-186 (SYS-187). Po odzyskaniu wiarygodnego pomiaru automatyczne chłodzenie może wrócić według SYS-188, z zachowaniem pierwotnego terminu zakończenia.
 
+Przy potwierdzonym przegrzaniu podczas pracy silnika z wiarygodnego pomiaru ECU przekazuje stan do HMI i prowadzi sterowanie według bieżącego profilu oraz obowiązujących zabezpieczeń (SYS-189).
+
 SYS-121 określa zgłoszenie usterki TPS i awaryjny zapłon gaźnika ze zweryfikowanej krzywej zależnej od obrotów, przy prawidłowej synchronizacji wału.
 
 SYS-122 przypisuje krzywą awaryjną do konfiguracji silnika jako wspólną dla jej zestawów map.

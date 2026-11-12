@@ -27,3 +27,5 @@ W odpowiedzi A na pytanie 196 (2026-11-12) właściciel dopuścił ręczne włą
 W odpowiedzi A na pytanie 197 (2026-11-12) właściciel zatwierdził zakończenie trwającego chłodzenia automatycznego po zgaszeniu silnika, gdy ECU potwierdzi usterkę pomiaru temperatury płynu (SYS-187). Aktywne ręczne żądanie może nadal podtrzymywać pracę wentylatora zgodnie z SYS-186. [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-187).
 
 W odpowiedzi A na pytanie 198 (2026-11-12) właściciel dopuścił ponowne uruchomienie automatycznego chłodzenia w tym samym postoju po odzyskaniu wiarygodnego pomiaru, gdy aktualna temperatura wymaga chłodzenia, napięcie dopuszcza pracę, a pierwotny limit czasu pozostaje ważny. Wznowienie wykorzystuje pozostały czas pierwotnego limitu (SYS-188). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-188).
+
+W odpowiedzi A na pytanie 199 (2026-11-12) właściciel wybrał ostrzeżenie na HMI po potwierdzeniu przegrzania przy wiarygodnym pomiarze podczas pracy silnika. Decyzję o zatrzymaniu z powodu przegrzania podejmuje kierowca (SYS-189). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-189).

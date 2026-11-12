@@ -202,6 +202,7 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-186 | Przy zgaszonym silniku, wybudzonym ECU i potwierdzonej usterce pomiaru temperatury płynu ECU dopuszcza ręczne włączenie sprawnego wentylatora na żądanie z HMI. ECU egzekwuje limit czasu i odcięcie przy niskim napięciu według SYS-061 oraz zabezpieczenia wyjścia. Po potwierdzeniu utraty komunikacji z HMI stosuje SYS-053. |
 | SYS-187 | Jeżeli podczas automatycznego chłodzenia po zgaszeniu silnika według SYS-060 ECU potwierdzi usterkę pomiaru temperatury płynu, wycofuje żądanie automatycznego chłodzenia. Dopuszczone ręczne żądanie może nadal podtrzymywać pracę wentylatora według SYS-186. |
 | SYS-188 | Po zakończeniu automatycznego chłodzenia według SYS-187 ECU ponownie uruchamia je w tym samym postoju, jeżeli funkcja jest włączona, pomiar temperatury odzyskał potwierdzoną wiarygodność, aktualna temperatura wymaga chłodzenia, napięcie dopuszcza pracę wentylatora i pierwotny limit czasu jeszcze nie upłynął. Po wznowieniu nadal obowiązuje pierwotny termin zakończenia chłodzenia według SYS-060. |
+| SYS-189 | Gdy ECU potwierdzi przegrzanie podczas pracy silnika na podstawie wiarygodnego pomiaru temperatury płynu, przekazuje stan przegrzania do HMI, a HMI ostrzega kierowcę. ECU kontynuuje sterowanie silnikiem według bieżącego profilu w granicach obowiązujących zabezpieczeń. Decyzję o zatrzymaniu z powodu przegrzania podejmuje kierowca. Kryteria potwierdzenia przegrzania wymagają określenia dla właściwego układu chłodzenia i miejsca pomiaru. |
 
 ## 3. Podział odpowiedzialności
 
@@ -320,6 +321,8 @@ W odpowiedzi A na pytanie 196 (2026-11-12) właściciel dopuścił ręczne włą
 W odpowiedzi A na pytanie 197 (2026-11-12) właściciel zatwierdził zakończenie trwającego chłodzenia automatycznego po zgaszeniu silnika, gdy ECU potwierdzi usterkę pomiaru temperatury płynu (SYS-187). Aktywne ręczne żądanie może nadal podtrzymywać pracę wentylatora zgodnie z SYS-186. [Plan próby F03](requirements/f03-ochrona-i-usterki.md#plan-próby-sys-187).
 
 W odpowiedzi A na pytanie 198 (2026-11-12) właściciel dopuścił ponowne uruchomienie automatycznego chłodzenia w tym samym postoju po odzyskaniu wiarygodnego pomiaru, gdy aktualna temperatura wymaga chłodzenia, napięcie dopuszcza pracę, a pierwotny limit czasu pozostaje ważny. Wznowienie wykorzystuje pozostały czas pierwotnego limitu (SYS-188). [Plan próby F03](requirements/f03-ochrona-i-usterki.md#plan-próby-sys-188).
+
+W odpowiedzi A na pytanie 199 (2026-11-12) właściciel wybrał ostrzeżenie na HMI po potwierdzeniu przegrzania przy wiarygodnym pomiarze podczas pracy silnika. Decyzję o zatrzymaniu z powodu przegrzania podejmuje kierowca (SYS-189). [Plan próby F03](requirements/f03-ochrona-i-usterki.md#plan-próby-sys-189).
 
 Proponowana weryfikacja SYS-048/049: na stanowisku sprawdzić zakończenie sterowania po puszczeniu START, po zasymulowaniu potwierdzonej pracy silnika i po upływie ustalonego limitu kręcenia. Po obu automatycznych odcięciach podtrzymany START nie może ponownie załączyć rozrusznika; po puszczeniu i ponownym naciśnięciu obowiązują warunki dopuszczenia rozruchu. Powtórzyć próby przy odłączonym HMI. Mierzalne czasy reakcji i warunki symulacji określić przed próbami; testów nie wykonano.
 
