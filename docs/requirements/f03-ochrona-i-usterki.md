@@ -12,7 +12,7 @@ Stan na 2026-11-12. **F03 aktywny po zamknięciu F02.** Macierz robocza łączy 
 | Potwierdzone przewrócenie | ECU wyłącza silnik. Po postawieniu i spełnieniu warunków bezpieczeństwa rozruch wymaga świadomej próby (SYS-039/040). | Warunki zadziałania i powrotu odpowiednie dla enduro. | V04 |
 | Brak HMI albo CAN | ECU działa samodzielnie, a reakcje akcesoriów są odrębne (SYS-046/050–053). | Zależności od pozostałych stanów ochronnych. | V07 |
 | Usterka TPS lub pomiaru ciśnienia używanego do określenia obciążenia | Przyjęto reguły kalibracji awaryjnej, kontrolowanego zatrzymania, powrotu i wymuszenia „Standard” (SYS-121–142). | Powiązać z pozostałymi blokadami F03. [Zakres F02](f02-przeglad-zakresu.md) opisuje przyjęte przypadki. | V02, V03, V04 |
-| Chłodzenie i pozostałe pomiary ochronne | Przyjęto pomiar płynu i automatykę wentylatora oraz wejścia ciśnienia paliwa i binarne oleju (SYS-029/043/044/060). Przy usterce pomiaru temperatury płynu ECU automatycznie włącza wentylator podczas pracy silnika i zapisuje DTC (SYS-184). Po potwierdzeniu zatrzymania kończy to wymuszenie przy nadal aktywnej usterce (SYS-185). | Dopuszczenie ręcznego włączenia z HMI przy zgaszonym silniku i aktywnej usterce (pytanie 196). Reakcje na pozostałe niedostępne pomiary i warunki poza dopuszczalnym zakresem. | V02, V03, V05, V10 |
+| Chłodzenie i pozostałe pomiary ochronne | Przyjęto pomiar płynu i automatykę wentylatora oraz wejścia ciśnienia paliwa i binarne oleju (SYS-029/043/044/060). Przy usterce pomiaru temperatury płynu ECU automatycznie włącza wentylator podczas pracy silnika i zapisuje DTC (SYS-184). Po potwierdzeniu zatrzymania kończy to wymuszenie przy nadal aktywnej usterce (SYS-185). Przy zgaszonym silniku i potwierdzonej usterce ECU dopuszcza ręczne włączenie z HMI z limitami i zabezpieczeniami (SYS-186). | Zakończenie albo kontynuacja automatycznego chłodzenia po zgaszeniu, gdy usterka pojawia się w trakcie jego pracy (pytanie 197). Reakcje na pozostałe niedostępne pomiary i warunki poza dopuszczalnym zakresem. | V02, V03, V05, V10 |
 | Zasilanie i restart ECU | Zasilanie bez stacyjki, zasady oszczędzania i odtwarzania danych (SYS-054/084–089/106/109/155). Odcięcie, restart i zapis DTC po zawieszeniu określają SYS-169–172. Limity, odzyskiwanie i powrót po przerwaniu prób określają SYS-173–180. Przyjęto reakcje na zanik zasilania podczas pracy silnika oraz rozruchu elektrycznego i kopniakiem (SYS-181–183). | Kryteria wykrywania zdarzeń, czasy i realizacja do projektu. | V01, V04, V06, V10, V12, V13 |
 
 ## Utrata synchronizacji wału podczas pracy
@@ -314,6 +314,16 @@ W odpowiedzi A na pytanie 195 (2026-11-12) właściciel zatwierdził zakończeni
 2. Odwzorować zatrzymanie silnika. Po jego potwierdzeniu sprawdzić wycofanie wymuszenia awaryjnego i wyłączenie wyjścia wentylatora.
 3. Wykonać próbę z wyłączoną i włączoną funkcją chłodzenia po zgaszeniu. W wariancie z włączoną funkcją zapewnić napięcie powyżej progu odcięcia i dostępny limit czasu, aby zweryfikować, że samo zatrzymanie kończy wymuszenie. Powtórzyć bez łączności z HMI. Kryterium potwierdzenia zatrzymania i dopuszczalny czas reakcji określić przed próbą. [Macierz weryfikacji](../verification/macierz-wymagan.md).
 
-## Pytanie 196 — ręczne włączenie wentylatora przy zgaszonym silniku i usterce pomiaru
+## Ręczne włączenie wentylatora przy zgaszonym silniku i usterce pomiaru
 
-Do ustalenia pozostaje, czy dopuścić ręczne włączenie wentylatora z HMI przy zgaszonym silniku i utrzymującej się usterce pomiaru temperatury płynu. Limity czasu i napięcia ręcznego wymuszenia określa SYS-061.
+W odpowiedzi A na pytanie 196 (2026-11-12) właściciel dopuścił ręczne włączenie sprawnego wentylatora z HMI przy zgaszonym silniku, wybudzonym ECU i nadal potwierdzonej usterce pomiaru temperatury płynu. Obowiązują limit czasu, odcięcie przy niskim napięciu (SYS-061) oraz zabezpieczenia wyjścia (SYS-186).
+
+### Plan próby SYS-186
+
+1. Na stanowisku użyć ECU i HMI ze sprawnym torem wentylatora. Odwzorować zgaszony silnik, wybudzone ECU, potwierdzoną usterkę pomiaru i warunki zasilania dopuszczające włączenie. Przy braku żądania automatyki zlecić włączenie z HMI i potwierdzić pracę wentylatora.
+2. Przy utrzymanej usterce sprawdzić osobno wyłączenie po upływie limitu czasu i odcięcie po wystąpieniu warunku niskiego napięcia. Dodatkowo wysłać ręczne żądanie przy aktywnym odcięciu napięciowym i sprawdzić, że wyjście pozostaje wyłączone.
+3. Przy aktywnym ręcznym żądaniu sprawdzić działanie zabezpieczeń wyjścia przez kontrolowane wymuszenie według projektu kanału. W osobnym przebiegu przerwać komunikację z HMI i po potwierdzeniu jej utraty sprawdzić anulowanie ręcznego żądania według SYS-053. Progi, czasy i sposób wymuszenia określić przed próbą. [Macierz weryfikacji](../verification/macierz-wymagan.md).
+
+## Pytanie 197 — usterka pomiaru podczas automatycznego chłodzenia po zgaszeniu
+
+Do ustalenia pozostaje, czy zakończyć już rozpoczęte chłodzenie automatyczne po zgaszeniu, gdy ECU potwierdzi usterkę pomiaru temperatury płynu. Ręczne włączenie z HMI podlega SYS-186.

@@ -21,3 +21,5 @@ Przegląd pomiarów F01 został zakończony. Weryfikacja obejmie kontrolę zadek
 W odpowiedzi **A na pytanie 194** właściciel zatwierdził automatyczne włączenie sprawnego wentylatora podczas pracy silnika, gdy ECU potwierdzi usterkę pomiaru temperatury płynu. ECU zapisuje DTC z zamrożoną ramką (SYS-184). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-184).
 
 W odpowiedzi **A na pytanie 195** właściciel zatwierdził zakończenie tego wymuszenia po potwierdzeniu zatrzymania silnika przy utrzymującej się usterce, także w profilu z włączonym chłodzeniem po zgaszeniu (SYS-185). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-185).
+
+W odpowiedzi A na pytanie 196 (2026-11-12) właściciel dopuścił ręczne włączenie sprawnego wentylatora z HMI przy zgaszonym silniku, wybudzonym ECU i nadal potwierdzonej usterce pomiaru temperatury płynu. Obowiązują limit czasu, odcięcie przy niskim napięciu (SYS-061) oraz zabezpieczenia wyjścia (SYS-186). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-186).
