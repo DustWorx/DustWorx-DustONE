@@ -56,6 +56,8 @@ W odpowiedzi **A na pytanie 190** (2026-11-11) właściciel zatwierdził zamkni�
 
 W odpowiedzi **A na pytanie 191** (2026-11-12) właściciel zatwierdził utrzymanie odcięcia po zaniku zasilania podczas pracy silnika. Gdy zasilanie wróci przy obracającym się wale, ponowne dopuszczenie zapłonu i wtrysku wymaga zatrzymania i nowej świadomej próby (SYS-181). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-181).
 
+W odpowiedzi **A na pytanie 192** (2026-11-12) właściciel zatwierdził zakończenie rozruchu elektrycznego po zaniku zasilania ECU. Po jego powrocie rozrusznik oczekuje na potwierdzone zatrzymanie wału i nowe naciśnięcie START (SYS-182). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-182).
+
 ## Konsekwencje
 
 - Dane i pomiary wymagane do autonomicznego sterowania silnikiem oraz jego zabezpieczeń muszą być dostępne ECU bez udziału HMI. Uwzględnić to przy wyborze miejsca podłączenia czujników.

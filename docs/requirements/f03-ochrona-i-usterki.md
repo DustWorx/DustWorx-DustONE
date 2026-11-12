@@ -13,7 +13,7 @@ Stan na 2026-11-12. **F03 aktywny po zamknięciu F02.** Macierz robocza łączy 
 | Brak HMI albo CAN | ECU działa samodzielnie, a reakcje akcesoriów są odrębne (SYS-046/050–053). | Zależności od pozostałych stanów ochronnych. | V07 |
 | Usterka TPS lub pomiaru ciśnienia używanego do określenia obciążenia | Przyjęto reguły kalibracji awaryjnej, kontrolowanego zatrzymania, powrotu i wymuszenia „Standard” (SYS-121–142). | Powiązać z pozostałymi blokadami F03. [Zakres F02](f02-przeglad-zakresu.md) opisuje przyjęte przypadki. | V02, V03, V04 |
 | Chłodzenie i pozostałe pomiary ochronne | Przyjęto pomiar płynu i automatykę wentylatora oraz wejścia ciśnienia paliwa i binarne oleju (SYS-029/043/044/060). | Reakcje na niedostępny pomiar i na warunki poza dopuszczalnym zakresem w wyposażonych profilach. | V02, V03, V05 |
-| Zasilanie i restart ECU | Zasilanie bez stacyjki, zasady oszczędzania i odtwarzania danych (SYS-054/084–089/106/109/155). Odcięcie, restart i zapis DTC po zawieszeniu określają SYS-169–172. Limity, odzyskiwanie i powrót po przerwaniu prób określają SYS-173–180. Po zaniku zasilania podczas pracy i powrocie przed zatrzymaniem wału zapłon i wtrysk wracają w nowej próbie po potwierdzonym zatrzymaniu (SYS-181). | Zachowanie rozrusznika po zaniku zasilania ECU podczas rozruchu elektrycznego (pytanie 192). | V01, V04, V06, V10, V12, V13 |
+| Zasilanie i restart ECU | Zasilanie bez stacyjki, zasady oszczędzania i odtwarzania danych (SYS-054/084–089/106/109/155). Odcięcie, restart i zapis DTC po zawieszeniu określają SYS-169–172. Limity, odzyskiwanie i powrót po przerwaniu prób określają SYS-173–180. Po zaniku zasilania podczas pracy i powrocie przed zatrzymaniem wału zapłon i wtrysk wracają w nowej próbie po potwierdzonym zatrzymaniu (SYS-181). Zanik zasilania kończy rozruch elektryczny. Po powrocie zasilania rozrusznik wymaga zatrzymania wału i nowego naciśnięcia START (SYS-182). | Ponowne dopuszczenie zapłonu i wtrysku po zaniku zasilania podczas próby kopniakiem (pytanie 193). | V01, V04, V06, V10, V12, V13 |
 
 ## Utrata synchronizacji wału podczas pracy
 
@@ -272,6 +272,16 @@ W odpowiedzi A na pytanie 191 (2026-11-12) właściciel zatwierdził utrzymanie 
 2. Odwzorować zatrzymanie wału i sprawdzić utrzymanie odcięcia do nowej świadomej próby. Wykonać nową próbę przewodowym START albo kopniakiem, odpowiednio do wyposażenia. Potwierdzić dopuszczenie zapłonu i wtrysku po uzyskaniu wiarygodnej synchronizacji przy spełnionych pozostałych warunkach. W przebiegu kontrolnym wymusić niewiarygodną synchronizację i sprawdzić utrzymanie odcięcia.
 3. Uwzględnić zapłon CDI i TCI/IDI oraz wtrysk w wyposażonych profilach. Powtórzyć próbę bez HMI. Przed próbą określić sposób wymuszenia zaniku, kryterium ponownego uruchomienia i zatrzymania wału oraz punkty pomiarowe. [Macierz weryfikacji](../verification/macierz-wymagan.md).
 
-## Pytanie 192 — rozrusznik po zaniku zasilania ECU podczas rozruchu
+## Rozrusznik po zaniku zasilania ECU podczas rozruchu
 
-Do ustalenia pozostaje, czy po powrocie zasilania ECU przy nadal wciśniętym START rozrusznik ma czekać na nowe naciśnięcie, czy może dokończyć pierwotną próbę przy potwierdzonym zatrzymaniu wału i spełnieniu pozostałych warunków, w tym pierwotnego limitu czasu rozruchu.
+W odpowiedzi A na pytanie 192 (2026-11-12) właściciel zatwierdził zakończenie próby rozruchu elektrycznego, jeśli zanik zasilania przerwie działanie ECU. Od powrotu zasilania rozrusznik pozostaje wyłączony także przy przytrzymanym START. Kolejna próba wymaga potwierdzonego zatrzymania wału oraz nowego naciśnięcia START po zatrzymaniu, przy spełnieniu pozostałych warunków. Wciśnięty START trzeba najpierw puścić (SYS-182).
+
+### Plan próby SYS-182
+
+1. Na stanowisku z obciążeniem zastępczym toru rozrusznika odwzorować rozruch elektryczny przy przytrzymanym START. Wymusić całkowity zanik zasilania powodujący ponowne uruchomienie ECU. Przywrócić zasilanie przy nadal przytrzymanym START i symulowanym obrocie wału. Zarejestrować zasilanie, START, stan obciążenia i potwierdzić wyłączony rozrusznik od chwili powrotu zasilania.
+2. Przy nadal przytrzymanym START odwzorować zatrzymanie wału. Potwierdzić utrzymanie wyłączenia. Puścić START i nacisnąć go ponownie po potwierdzonym zatrzymaniu. Przy spełnionych pozostałych warunkach sprawdzić załączenie rozrusznika w nowej próbie.
+3. Powtórzyć bez HMI. W przebiegu kontrolnym wykonać nowe naciśnięcie START podczas obrotu wału po powrocie zasilania. Sprawdzić, że rozrusznik oczekuje na naciśnięcie po potwierdzonym zatrzymaniu. Kryteria zatrzymania i sposób pomiaru stanu toru określić przed próbą. [Macierz weryfikacji](../verification/macierz-wymagan.md).
+
+## Pytanie 193 — zanik zasilania podczas próby rozruchu kopniakiem
+
+Do ustalenia pozostaje dopuszczenie zapłonu i wtrysku po powrocie zasilania przy nadal obracającym się wale, gdy zanik przerwał pracę ECU podczas już rozpoczętej próby kopniakiem. Rozpatrujemy nową próbę po zatrzymaniu wału oraz wznowienie w tej samej próbie przy wiarygodnej synchronizacji i spełnionych pozostałych warunkach.
