@@ -12,8 +12,8 @@ Stan na 2026-11-12. **F03 aktywny po zamknięciu F02.** Macierz robocza łączy 
 | Potwierdzone przewrócenie | ECU wyłącza silnik. Po postawieniu i spełnieniu warunków bezpieczeństwa rozruch wymaga świadomej próby (SYS-039/040). | Warunki zadziałania i powrotu odpowiednie dla enduro. | V04 |
 | Brak HMI albo CAN | ECU działa samodzielnie, a reakcje akcesoriów są odrębne (SYS-046/050–053). | Zależności od pozostałych stanów ochronnych. | V07 |
 | Usterka TPS lub pomiaru ciśnienia używanego do określenia obciążenia | Przyjęto reguły kalibracji awaryjnej, kontrolowanego zatrzymania, powrotu i wymuszenia „Standard” (SYS-121–142). | Powiązać z pozostałymi blokadami F03. [Zakres F02](f02-przeglad-zakresu.md) opisuje przyjęte przypadki. | V02, V03, V04 |
-| Chłodzenie i pozostałe pomiary ochronne | Przyjęto pomiar płynu i automatykę wentylatora oraz wejścia ciśnienia paliwa i binarne oleju (SYS-029/043/044/060). | Reakcje na niedostępny pomiar i na warunki poza dopuszczalnym zakresem w wyposażonych profilach. | V02, V03, V05 |
-| Zasilanie i restart ECU | Zasilanie bez stacyjki, zasady oszczędzania i odtwarzania danych (SYS-054/084–089/106/109/155). Odcięcie, restart i zapis DTC po zawieszeniu określają SYS-169–172. Limity, odzyskiwanie i powrót po przerwaniu prób określają SYS-173–180. Po zaniku zasilania podczas pracy i powrocie przed zatrzymaniem wału zapłon i wtrysk wracają w nowej próbie po potwierdzonym zatrzymaniu (SYS-181). Zanik zasilania kończy rozruch elektryczny. Po powrocie zasilania rozrusznik wymaga zatrzymania wału i nowego naciśnięcia START (SYS-182). | Ponowne dopuszczenie zapłonu i wtrysku po zaniku zasilania podczas próby kopniakiem (pytanie 193). | V01, V04, V06, V10, V12, V13 |
+| Chłodzenie i pozostałe pomiary ochronne | Przyjęto pomiar płynu i automatykę wentylatora oraz wejścia ciśnienia paliwa i binarne oleju (SYS-029/043/044/060). | Sterowanie wentylatorem po usterce pomiaru temperatury płynu (pytanie 194). Reakcje na pozostałe niedostępne pomiary i warunki poza dopuszczalnym zakresem. | V02, V03, V05 |
+| Zasilanie i restart ECU | Zasilanie bez stacyjki, zasady oszczędzania i odtwarzania danych (SYS-054/084–089/106/109/155). Odcięcie, restart i zapis DTC po zawieszeniu określają SYS-169–172. Limity, odzyskiwanie i powrót po przerwaniu prób określają SYS-173–180. Przyjęto reakcje na zanik zasilania podczas pracy silnika oraz rozruchu elektrycznego i kopniakiem (SYS-181–183). | Kryteria wykrywania zdarzeń, czasy i realizacja do projektu. | V01, V04, V06, V10, V12, V13 |
 
 ## Utrata synchronizacji wału podczas pracy
 
@@ -282,6 +282,18 @@ W odpowiedzi A na pytanie 192 (2026-11-12) właściciel zatwierdził zakończeni
 2. Przy nadal przytrzymanym START odwzorować zatrzymanie wału. Potwierdzić utrzymanie wyłączenia. Puścić START i nacisnąć go ponownie po potwierdzonym zatrzymaniu. Przy spełnionych pozostałych warunkach sprawdzić załączenie rozrusznika w nowej próbie.
 3. Powtórzyć bez HMI. W przebiegu kontrolnym wykonać nowe naciśnięcie START podczas obrotu wału po powrocie zasilania. Sprawdzić, że rozrusznik oczekuje na naciśnięcie po potwierdzonym zatrzymaniu. Kryteria zatrzymania i sposób pomiaru stanu toru określić przed próbą. [Macierz weryfikacji](../verification/macierz-wymagan.md).
 
-## Pytanie 193 — zanik zasilania podczas próby rozruchu kopniakiem
+## Zanik zasilania podczas próby rozruchu kopniakiem
 
-Do ustalenia pozostaje dopuszczenie zapłonu i wtrysku po powrocie zasilania przy nadal obracającym się wale, gdy zanik przerwał pracę ECU podczas już rozpoczętej próby kopniakiem. Rozpatrujemy nową próbę po zatrzymaniu wału oraz wznowienie w tej samej próbie przy wiarygodnej synchronizacji i spełnionych pozostałych warunkach.
+W odpowiedzi A na pytanie 193 (2026-11-12) właściciel zatwierdził zakończenie rozpoczętej próby kopniakiem po zaniku zasilania ECU, gdy zasilanie wraca przy nadal obracającym się wale. ECU utrzymuje odcięcie zapłonu i wtrysku także po odzyskaniu synchronizacji w czasie dalszego obrotu. Dopuszcza zapłon i wtrysk w nowej próbie kopniakiem po potwierdzeniu zatrzymania wału, przy wiarygodnej synchronizacji i spełnionych pozostałych warunkach (SYS-183).
+
+### Plan próby SYS-183
+
+1. Na stanowisku z obciążeniami zastępczymi przy aktywnym ECU odwzorować rozpoczętą próbę kopniakiem. Przed potwierdzeniem pracy silnika wywołać zanik zasilania powodujący ponowne uruchomienie ECU. Po powrocie zasilania odwzorować dalszy obrót wału. Sprawdzić odcięcie zapłonu i wtrysku w wyposażonym profilu od chwili powrotu zasilania, także po odzyskaniu wiarygodnej synchronizacji.
+2. Odwzorować zatrzymanie wału, potwierdzić utrzymanie odcięcia, a następnie rozpocząć nową próbę kopniakiem. Sprawdzić dopuszczenie zapłonu i wtrysku przy wiarygodnej synchronizacji i spełnionych pozostałych warunkach. Powtórzyć bez HMI.
+3. W przebiegu kontrolnym wybudzić ECU kopniakiem przy dostępnym zasilaniu i sprawdzić zwykły rozruch według SYS-054. Przed próbą określić kryteria zatrzymania wału i rozpoznania nowej próby oraz punkty pomiarowe. [Macierz weryfikacji](../verification/macierz-wymagan.md).
+
+## Pytanie 194 — wentylator po usterce pomiaru temperatury płynu
+
+Właściciel potwierdził wentylator i pomiar temperatury płynu w egzemplarzu referencyjnym Beta 300 RR Racing 2015. Schemat Beta RR 250–300 Race 2T MY2025 również pokazuje opcjonalny wentylator. [Instrukcja Betamotor, schemat elektryczny RR 250–300](https://betausa.com/content/2025-Owner%20manual-RR-RACE-2T.rev.pdf#page=17).
+
+Do ustalenia pozostaje sterowanie zamontowanym i sprawnym wentylatorem po potwierdzonej usterce pomiaru temperatury płynu podczas pracy silnika. Rejestrację DTC określa SYS-019.

@@ -120,6 +120,8 @@ Według SYS-181 po zaniku zasilania podczas pracy silnika i powrocie zasilania p
 
 Według SYS-182 zanik zasilania podczas rozruchu elektrycznego kończy próbę. Po powrocie zasilania rozrusznik pozostaje wyłączony do potwierdzenia zatrzymania wału i nowego naciśnięcia START, przy spełnieniu pozostałych warunków.
 
+Według SYS-183 po zaniku zasilania podczas rozpoczętej próby kopniakiem i powrocie przy obracającym się wale ECU utrzymuje odcięcie zapłonu i wtrysku. Dopuszcza sterowanie w nowej próbie kopniakiem po potwierdzonym zatrzymaniu i z wiarygodną synchronizacją.
+
 SYS-121 określa zgłoszenie usterki TPS i awaryjny zapłon gaźnika ze zweryfikowanej krzywej zależnej od obrotów, przy prawidłowej synchronizacji wału.
 
 SYS-122 przypisuje krzywą awaryjną do konfiguracji silnika jako wspólną dla jej zestawów map.

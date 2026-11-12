@@ -58,6 +58,8 @@ W odpowiedzi **A na pytanie 191** (2026-11-12) właściciel zatwierdził utrzyma
 
 W odpowiedzi **A na pytanie 192** (2026-11-12) właściciel zatwierdził zakończenie rozruchu elektrycznego po zaniku zasilania ECU. Po jego powrocie rozrusznik oczekuje na potwierdzone zatrzymanie wału i nowe naciśnięcie START (SYS-182). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-182).
 
+W odpowiedzi **A na pytanie 193** (2026-11-12) właściciel zatwierdził nową próbę kopniakiem po potwierdzonym zatrzymaniu wału i odzyskaniu wiarygodnej synchronizacji, gdy zanik zasilania przerwał trwającą próbę, a zasilanie wróciło przy nadal obracającym się wale (SYS-183). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-183).
+
 ## Konsekwencje
 
 - Dane i pomiary wymagane do autonomicznego sterowania silnikiem oraz jego zabezpieczeń muszą być dostępne ECU bez udziału HMI. Uwzględnić to przy wyborze miejsca podłączenia czujników.

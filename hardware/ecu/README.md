@@ -32,7 +32,7 @@ Projekt pamięci, nadzoru i uruchamiania ma umożliwić odtworzenie liczby zako�
 
 Projekt nadzoru i uruchamiania ma umożliwić potwierdzenie okresu stabilnej pracy i rozliczenie ponownego zawieszenia w bieżącej serii według SYS-180. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-180).
 
-Tory zapłonu i wtrysku mają utrzymywać odcięcie od chwili powrotu zasilania do dopuszczenia sterowania według SYS-181. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-181).
+Tory zapłonu i wtrysku mają utrzymywać odcięcie od powrotu zasilania do dopuszczenia sterowania po przerwaniu pracy silnika lub rozruchu kopniakiem według SYS-181 i SYS-183. [Próba podczas pracy](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-181), [próba kopniakiem](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-183).
 
 Tor rozrusznika ma pozostawać wyłączony od chwili powrotu zasilania po przerwanym rozruchu do nowej dopuszczonej próby według SYS-182. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-182).
 
