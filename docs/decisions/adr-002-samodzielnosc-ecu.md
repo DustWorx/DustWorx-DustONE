@@ -54,6 +54,8 @@ W odpowiedzi **B na pytanie 189** (2026-11-11) właściciel zatwierdził zachowa
 
 W odpowiedzi **A na pytanie 190** (2026-11-11) właściciel zatwierdził zamknięcie serii po potwierdzeniu gotowości i okresie stabilnej pracy ECU. Ponowne zawieszenie w tym okresie podlega limitowi bieżącej serii (SYS-180). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-180).
 
+W odpowiedzi **A na pytanie 191** (2026-11-12) właściciel zatwierdził utrzymanie odcięcia po zaniku zasilania podczas pracy silnika. Gdy zasilanie wróci przy obracającym się wale, ponowne dopuszczenie zapłonu i wtrysku wymaga zatrzymania i nowej świadomej próby (SYS-181). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-181).
+
 ## Konsekwencje
 
 - Dane i pomiary wymagane do autonomicznego sterowania silnikiem oraz jego zabezpieczeń muszą być dostępne ECU bez udziału HMI. Uwzględnić to przy wyborze miejsca podłączenia czujników.

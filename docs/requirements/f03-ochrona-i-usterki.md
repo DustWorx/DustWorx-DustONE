@@ -1,6 +1,6 @@
 # F03 — ochrona i reakcje na usterki
 
-Stan na 2026-11-11. **F03 aktywny po zamknięciu F02.** Macierz robocza łączy zdarzenie, reakcję i warunek powrotu. Zatwierdzone wymagania są w [rejestrze SYS](../01-zakres-systemu.md). Kolejność pakietów określa [status projektu](../00-proces-i-status.md).
+Stan na 2026-11-12. **F03 aktywny po zamknięciu F02.** Macierz robocza łączy zdarzenie, reakcję i warunek powrotu. Zatwierdzone wymagania są w [rejestrze SYS](../01-zakres-systemu.md). Kolejność pakietów określa [status projektu](../00-proces-i-status.md).
 
 | Zdarzenie lub temat | Przyjęta reakcja i warunek powrotu | Do rozstrzygnięcia w F03 | Plan prób |
 | --- | --- | --- | --- |
@@ -13,7 +13,7 @@ Stan na 2026-11-11. **F03 aktywny po zamknięciu F02.** Macierz robocza łączy 
 | Brak HMI albo CAN | ECU działa samodzielnie, a reakcje akcesoriów są odrębne (SYS-046/050–053). | Zależności od pozostałych stanów ochronnych. | V07 |
 | Usterka TPS lub pomiaru ciśnienia używanego do określenia obciążenia | Przyjęto reguły kalibracji awaryjnej, kontrolowanego zatrzymania, powrotu i wymuszenia „Standard” (SYS-121–142). | Powiązać z pozostałymi blokadami F03. [Zakres F02](f02-przeglad-zakresu.md) opisuje przyjęte przypadki. | V02, V03, V04 |
 | Chłodzenie i pozostałe pomiary ochronne | Przyjęto pomiar płynu i automatykę wentylatora oraz wejścia ciśnienia paliwa i binarne oleju (SYS-029/043/044/060). | Reakcje na niedostępny pomiar i na warunki poza dopuszczalnym zakresem w wyposażonych profilach. | V02, V03, V05 |
-| Zasilanie i restart ECU | Zasilanie bez stacyjki, zasady oszczędzania i odtwarzania danych (SYS-054/084–089/106/109/155). Po zawieszeniu nadzór odcina wyjścia i inicjuje reset (SYS-169). Powrót sterowania i zapis DTC określają SYS-170–172. Standardowe uruchamianie i samodzielne odzyskiwanie mają osobne limity. Po wyczerpaniu limitu odzyskiwania ECU udostępnia naprawę z Windows (SYS-173–176). Po zaniku zasilania przed rozpoczęciem naprawy ECU wraca bezpośrednio do trybu naprawy i utrzymuje odcięcie (SYS-177). Po zaniku zasilania ECU odtwarza wykorzystanie limitu odzyskiwania i zalicza przerwaną próbę jeden raz (SYS-178). Po zaniku zasilania ECU zachowuje zakończone standardowe próby i ponawia przerwaną w tym samym miejscu limitu (SYS-179). Seria prób kończy się po potwierdzeniu gotowości i stabilnej pracy przez ustalony czas (SYS-180). | Wznowienie zapłonu i wtrysku po zaniku zasilania podczas pracy silnika (pytanie 191). | V01, V04, V06, V10, V12, V13 |
+| Zasilanie i restart ECU | Zasilanie bez stacyjki, zasady oszczędzania i odtwarzania danych (SYS-054/084–089/106/109/155). Odcięcie, restart i zapis DTC po zawieszeniu określają SYS-169–172. Limity, odzyskiwanie i powrót po przerwaniu prób określają SYS-173–180. Po zaniku zasilania podczas pracy i powrocie przed zatrzymaniem wału zapłon i wtrysk wracają w nowej próbie po potwierdzonym zatrzymaniu (SYS-181). | Zachowanie rozrusznika po zaniku zasilania ECU podczas rozruchu elektrycznego (pytanie 192). | V01, V04, V06, V10, V12, V13 |
 
 ## Utrata synchronizacji wału podczas pracy
 
@@ -262,6 +262,16 @@ W odpowiedzi A na pytanie 190 (2026-11-11) właściciel zatwierdził wymaganie p
 2. Wymusić kolejne zawieszenie tuż przed upływem okresu stabilności. Potwierdzić zaliczenie niepowodzenia do bieżącej serii oraz zastosowanie pozostałego limitu. Powtórzyć dla ostatniej dozwolonej próby i potwierdzić przejście do odzyskiwania po standardowych próbach albo do naprawy z Windows po próbach odzyskania.
 3. Po potwierdzonym zakończeniu serii wymusić kolejne zawieszenie i sprawdzić rozpoczęcie nowej serii. Przed próbami określić okres stabilności, obserwowane stany i kryteria ich potwierdzenia. [Macierz weryfikacji](../verification/macierz-wymagan.md).
 
-## Pytanie 191 — wznowienie sterowania po zaniku zasilania podczas pracy silnika
+## Wznowienie sterowania po zaniku zasilania podczas pracy silnika
 
-Do rozstrzygnięcia pozostaje moment ponownego dopuszczenia zapłonu i wtrysku, gdy zasilanie ECU wróci podczas dalszego obrotu wału, a ECU potwierdzi poprawną konfigurację i odzyska wiarygodną synchronizację.
+W odpowiedzi A na pytanie 191 (2026-11-12) właściciel zatwierdził utrzymanie odcięcia zapłonu i wtrysku, gdy zanik zasilania przerwie działanie ECU podczas pracy silnika, a zasilanie wróci przed zatrzymaniem wału. ECU weryfikuje konfigurację i synchronizację podczas dalszego obrotu przy odciętych wyjściach. ECU może dopuścić sterowanie w nowej świadomej próbie rozruchu po potwierdzonym zatrzymaniu wału, z wiarygodną synchronizacją i przy spełnionych pozostałych warunkach (SYS-181).
+
+### Plan próby SYS-181
+
+1. Na stanowisku z obciążeniami zastępczymi odwzorować pracę silnika z poprawną konfiguracją. Wywołać całkowity zanik zasilania powodujący ponowne uruchomienie ECU. Po powrocie zasilania nadal odwzorowywać obrót wału oraz fazę, jeśli profil jej wymaga. Zarejestrować zasilanie i stan wyjść od chwili powrotu zasilania. Potwierdzić odcięcie zapłonu i wtrysku również po odzyskaniu wiarygodnej synchronizacji.
+2. Odwzorować zatrzymanie wału i sprawdzić utrzymanie odcięcia do nowej świadomej próby. Wykonać nową próbę przewodowym START albo kopniakiem, odpowiednio do wyposażenia. Potwierdzić dopuszczenie zapłonu i wtrysku po uzyskaniu wiarygodnej synchronizacji przy spełnionych pozostałych warunkach. W przebiegu kontrolnym wymusić niewiarygodną synchronizację i sprawdzić utrzymanie odcięcia.
+3. Uwzględnić zapłon CDI i TCI/IDI oraz wtrysk w wyposażonych profilach. Powtórzyć próbę bez HMI. Przed próbą określić sposób wymuszenia zaniku, kryterium ponownego uruchomienia i zatrzymania wału oraz punkty pomiarowe. [Macierz weryfikacji](../verification/macierz-wymagan.md).
+
+## Pytanie 192 — rozrusznik po zaniku zasilania ECU podczas rozruchu
+
+Do ustalenia pozostaje, czy po powrocie zasilania ECU przy nadal wciśniętym START rozrusznik ma czekać na nowe naciśnięcie, czy może dokończyć pierwotną próbę przy potwierdzonym zatrzymaniu wału i spełnieniu pozostałych warunków, w tym pierwotnego limitu czasu rozruchu.

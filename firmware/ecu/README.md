@@ -116,6 +116,8 @@ Według SYS-179 ECU po zaniku zasilania w trakcie standardowej próby zachowuje 
 
 Według SYS-180 ECU zamyka serię standardowych prób lub samodzielnego odzyskiwania po potwierdzeniu gotowości i ustalonym okresie stabilnej pracy. Ponowne zawieszenie w tym okresie obciąża bieżącą serię.
 
+Według SYS-181 po zaniku zasilania podczas pracy silnika i powrocie zasilania przy obracającym się wale ECU utrzymuje odcięcie zapłonu i wtrysku. Dopuszczenie sterowania wymaga potwierdzonego zatrzymania wału i nowej świadomej próby z wiarygodną synchronizacją.
+
 SYS-121 określa zgłoszenie usterki TPS i awaryjny zapłon gaźnika ze zweryfikowanej krzywej zależnej od obrotów, przy prawidłowej synchronizacji wału.
 
 SYS-122 przypisuje krzywą awaryjną do konfiguracji silnika jako wspólną dla jej zestawów map.
