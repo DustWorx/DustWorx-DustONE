@@ -12,7 +12,7 @@ Stan na 2026-11-12. **F03 aktywny po zamknięciu F02.** Macierz robocza łączy 
 | Potwierdzone przewrócenie | ECU wyłącza silnik. Po postawieniu i spełnieniu warunków bezpieczeństwa rozruch wymaga świadomej próby (SYS-039/040). | Warunki zadziałania i powrotu odpowiednie dla enduro. | V04 |
 | Brak HMI albo CAN | ECU działa samodzielnie, a reakcje akcesoriów są odrębne (SYS-046/050–053). | Zależności od pozostałych stanów ochronnych. | V07 |
 | Usterka TPS lub pomiaru ciśnienia używanego do określenia obciążenia | Przyjęto reguły kalibracji awaryjnej, kontrolowanego zatrzymania, powrotu i wymuszenia „Standard” (SYS-121–142). | Powiązać z pozostałymi blokadami F03. [Zakres F02](f02-przeglad-zakresu.md) opisuje przyjęte przypadki. | V02, V03, V04 |
-| Chłodzenie i pozostałe pomiary ochronne | Przyjęto pomiar płynu i automatykę wentylatora oraz wejścia ciśnienia paliwa i binarne oleju (SYS-029/043/044/060). | Sterowanie wentylatorem po usterce pomiaru temperatury płynu (pytanie 194). Reakcje na pozostałe niedostępne pomiary i warunki poza dopuszczalnym zakresem. | V02, V03, V05 |
+| Chłodzenie i pozostałe pomiary ochronne | Przyjęto pomiar płynu i automatykę wentylatora oraz wejścia ciśnienia paliwa i binarne oleju (SYS-029/043/044/060). Przy usterce pomiaru temperatury płynu ECU automatycznie włącza wentylator podczas pracy silnika i zapisuje DTC (SYS-184). | Zachowanie wentylatora po zatrzymaniu przy utrzymującej się usterce pomiaru (pytanie 195). Reakcje na pozostałe niedostępne pomiary i warunki poza dopuszczalnym zakresem. | V02, V03, V05, V10 |
 | Zasilanie i restart ECU | Zasilanie bez stacyjki, zasady oszczędzania i odtwarzania danych (SYS-054/084–089/106/109/155). Odcięcie, restart i zapis DTC po zawieszeniu określają SYS-169–172. Limity, odzyskiwanie i powrót po przerwaniu prób określają SYS-173–180. Przyjęto reakcje na zanik zasilania podczas pracy silnika oraz rozruchu elektrycznego i kopniakiem (SYS-181–183). | Kryteria wykrywania zdarzeń, czasy i realizacja do projektu. | V01, V04, V06, V10, V12, V13 |
 
 ## Utrata synchronizacji wału podczas pracy
@@ -292,8 +292,18 @@ W odpowiedzi A na pytanie 193 (2026-11-12) właściciel zatwierdził zakończeni
 2. Odwzorować zatrzymanie wału, potwierdzić utrzymanie odcięcia, a następnie rozpocząć nową próbę kopniakiem. Sprawdzić dopuszczenie zapłonu i wtrysku przy wiarygodnej synchronizacji i spełnionych pozostałych warunkach. Powtórzyć bez HMI.
 3. W przebiegu kontrolnym wybudzić ECU kopniakiem przy dostępnym zasilaniu i sprawdzić zwykły rozruch według SYS-054. Przed próbą określić kryteria zatrzymania wału i rozpoznania nowej próby oraz punkty pomiarowe. [Macierz weryfikacji](../verification/macierz-wymagan.md).
 
-## Pytanie 194 — wentylator po usterce pomiaru temperatury płynu
+## Wentylator podczas pracy silnika przy usterce pomiaru temperatury płynu
 
 Właściciel potwierdził wentylator i pomiar temperatury płynu w egzemplarzu referencyjnym Beta 300 RR Racing 2015. Schemat Beta RR 250–300 Race 2T MY2025 również pokazuje opcjonalny wentylator. [Instrukcja Betamotor, schemat elektryczny RR 250–300](https://betausa.com/content/2025-Owner%20manual-RR-RACE-2T.rev.pdf#page=17).
 
-Do ustalenia pozostaje sterowanie zamontowanym i sprawnym wentylatorem po potwierdzonej usterce pomiaru temperatury płynu podczas pracy silnika. Rejestrację DTC określa SYS-019.
+W odpowiedzi A na pytanie 194 (2026-11-12) właściciel zatwierdził automatyczne włączenie sprawnego wentylatora podczas potwierdzonej pracy silnika, gdy ECU potwierdzi usterkę pomiaru temperatury płynu. ECU utrzymuje wymuszenie przez czas pracy z potwierdzoną usterką oraz zapisuje DTC z zamrożoną ramką. Wymuszenie działa lokalnie, niezależnie od HMI i CAN (SYS-184).
+
+### Plan próby SYS-184
+
+1. Na stanowisku odwzorować pracę silnika w profilu ze sprawnym wentylatorem i wiarygodną temperaturą poniżej progu załączenia. Potwierdzić wyłączony wentylator. Wymusić reprezentatywną usterkę wejścia temperatury i po jej potwierdzeniu sprawdzić automatyczne załączenie i utrzymanie pracy wentylatora przy potwierdzonej usterce. Odczytać DTC i zamrożoną ramkę według SYS-019.
+2. Powtórzyć z wentylatorem włączonym przez normalną automatykę przed usterką. Sprawdzić utrzymanie włączenia podczas przejścia na wymuszenie po usterce.
+3. Powtórzyć z odłączonym HMI oraz w osobnym przebiegu przerwać CAN po załączeniu. Sprawdzić załączenie i utrzymanie pracy wentylatora. Kryteria potwierdzenia usterki, rodzaje wymuszanych usterek i punkty pomiarowe określić przed próbą. [Macierz weryfikacji](../verification/macierz-wymagan.md).
+
+## Pytanie 195 — wentylator po zatrzymaniu silnika przy usterce pomiaru
+
+Do ustalenia pozostaje zachowanie automatycznego wymuszenia wentylatora po potwierdzeniu zatrzymania silnika przy utrzymującej się usterce pomiaru temperatury płynu. Rozpatrujemy zakończenie wymuszenia po zatrzymaniu albo jego ograniczone przedłużenie w profilach z włączoną funkcją chłodzenia po zgaszeniu, w granicach czasu i napięcia według SYS-060.

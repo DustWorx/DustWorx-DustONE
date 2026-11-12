@@ -122,6 +122,8 @@ Według SYS-182 zanik zasilania podczas rozruchu elektrycznego kończy próbę. 
 
 Według SYS-183 po zaniku zasilania podczas rozpoczętej próby kopniakiem i powrocie przy obracającym się wale ECU utrzymuje odcięcie zapłonu i wtrysku. Dopuszcza sterowanie w nowej próbie kopniakiem po potwierdzonym zatrzymaniu i z wiarygodną synchronizacją.
 
+Według SYS-184 potwierdzona usterka pomiaru temperatury płynu powoduje zapis DTC z zamrożoną ramką. W wyposażonym profilu ECU lokalnie włącza sprawny wentylator podczas pracy silnika przy utrzymującej się potwierdzonej usterce.
+
 SYS-121 określa zgłoszenie usterki TPS i awaryjny zapłon gaźnika ze zweryfikowanej krzywej zależnej od obrotów, przy prawidłowej synchronizacji wału.
 
 SYS-122 przypisuje krzywą awaryjną do konfiguracji silnika jako wspólną dla jej zestawów map.

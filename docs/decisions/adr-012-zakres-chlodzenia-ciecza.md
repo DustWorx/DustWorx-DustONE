@@ -15,3 +15,7 @@ Decyzję zapisano w SYS-098; pomiar temperatury płynu pozostaje w SYS-044. Pozo
 Macierz wariantów i kwalifikacja modeli podlegają ograniczeniu chłodzenia cieczą. Dla tej platformy nie projektujemy funkcji temperatury silnika chłodzonego powietrzem. Miejsce pomiaru płynu, czujniki, zakres, dokładność i realizację określimy w etapach 3–6; ważne części wybierzemy wspólnie.
 
 Przegląd pomiarów F01 został zakończony. Weryfikacja obejmie kontrolę zadeklarowanego zakresu i wymagany pomiar płynu w odpowiednich konfiguracjach, według grup V03/V13. Parametry i procedury wykonawcze oraz dowody produktu pozostają do opracowania.
+
+## Uzupełnienie F03 z 2026-11-12
+
+W odpowiedzi **A na pytanie 194** właściciel zatwierdził automatyczne włączenie sprawnego wentylatora podczas pracy silnika, gdy ECU potwierdzi usterkę pomiaru temperatury płynu. ECU zapisuje DTC z zamrożoną ramką (SYS-184). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-184).
