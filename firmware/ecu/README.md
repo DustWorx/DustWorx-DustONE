@@ -128,6 +128,8 @@ Przy potwierdzonym przegrzaniu podczas pracy silnika z wiarygodnego pomiaru ECU 
 
 Po odłączeniu wyjścia wentylatora z powodu potwierdzonego przeciążenia ECU zapisuje DTC i zamrożoną ramkę oraz przekazuje stan usterki do HMI według SYS-190.
 
+ECU utrzymuje odcięcie wentylatora do sprawdzenia obwodu z wynikiem potwierdzającym sprawność i świadomego odblokowania według SYS-191. Żądania chłodzenia podlegają temu odcięciu.
+
 SYS-121 określa zgłoszenie usterki TPS i awaryjny zapłon gaźnika ze zweryfikowanej krzywej zależnej od obrotów, przy prawidłowej synchronizacji wału.
 
 SYS-122 przypisuje krzywą awaryjną do konfiguracji silnika jako wspólną dla jej zestawów map.

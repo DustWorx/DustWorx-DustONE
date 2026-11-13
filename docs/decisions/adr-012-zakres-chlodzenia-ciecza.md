@@ -33,3 +33,5 @@ W odpowiedzi A na pytanie 199 (2026-11-12) właściciel wybrał ostrzeżenie na 
 ## Uzupełnienie F03 z 2026-11-13
 
 W odpowiedzi A na pytanie 200 (2026-11-13) właściciel zatwierdził zapis DTC z zamrożoną ramką i odrębne ostrzeżenie kierowcy na HMI po odłączeniu wentylatora przez zabezpieczenie z powodu potwierdzonego przeciążenia. Ostrzeżenie pojawia się również przy temperaturze poniżej progu przegrzania (SYS-190). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-190).
+
+W odpowiedzi A na pytanie 201 (2026-11-13) właściciel zatwierdził utrzymanie odcięcia wentylatora po potwierdzonym przeciążeniu do sprawdzenia obwodu i świadomego odblokowania. Reguła obowiązuje również przy dalszym zapotrzebowaniu na chłodzenie (SYS-191). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-191).
