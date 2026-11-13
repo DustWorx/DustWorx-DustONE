@@ -84,6 +84,8 @@ Po zgaszeniu silnika wskutek przewrócenia potwierdzenie postawienia motocykla p
 
 Jeśli podczas pracy silnika ECU potwierdzi usterkę wykrywania przewrócenia i blokada po upadku jest nieaktywna, steruje dalej według bieżącego profilu, zapisuje DTC z zamrożoną ramką i zgłasza niedostępność wykrywania do HMI (SYS-198).
 
+Przy potwierdzonej usterce toru i zgaszonym silniku ECU dopuszcza świadomy rozruch przez START lub kopniak, jeśli blokada po przewróceniu jest nieaktywna i pozostałe warunki rozruchu są spełnione (SYS-199). ECU udostępnia stan usterki HMI i samodzielnie rozstrzyga o rozruchu.
+
 Według SYS-163 wybudzone ECU rozróżnia zwolniony i naciśnięty przycisk STOP w sprawnym obwodzie oraz przerwę w obwodzie. Nadzór działa niezależnie od HMI i CAN. [Macierz F03](../../docs/requirements/f03-ochrona-i-usterki.md).
 
 SYS-164 wymaga zapisu DTC z zamrożoną ramką przy potwierdzonej przerwie w STOP. ECU kontynuuje pracę i dopuszcza nową próbę rozruchu przy spełnieniu pozostałych warunków.

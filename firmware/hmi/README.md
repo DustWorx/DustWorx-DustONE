@@ -16,7 +16,7 @@ Gdy ECU zgłasza potwierdzone przeciążenie skutkujące odłączeniem wentylato
 
 HMI udostępnia osobne potwierdzenie zakończenia czynności przy wentylatorze, które zleca próbę w ECU. HMI informuje o nieudanej próbie według SYS-192 i przedstawia aktywną usterkę przekazaną z ECU po wybudzeniu według SYS-193.
 
-Gdy ECU zgłasza niedostępność wykrywania przewrócenia podczas pracy silnika, HMI ostrzega kierowcę według SYS-198.
+Gdy ECU zgłasza niedostępność wykrywania przewrócenia, HMI ostrzega kierowcę również przy zgaszonym silniku (SYS-198–199).
 
 Przy odłożonym przełączeniu zestawu w czasie jazdy HMI pokazuje oczekiwanie i wskazuje faktycznie aktywny zestaw według stanu otrzymanego z ECU (SYS-143).
 
