@@ -82,6 +82,8 @@ Według SYS-162 zwolnienie przewodowego STOP przy nadal obracającym się wale u
 
 Po zgaszeniu silnika wskutek przewrócenia potwierdzenie postawienia motocykla przy przytrzymanym START pozostawia rozrusznik wyłączony. ECU dopuszcza nową próbę po zwolnieniu i ponownym naciśnięciu START przy spełnionych warunkach rozruchu (SYS-040 i SYS-197).
 
+Jeśli podczas pracy silnika ECU potwierdzi usterkę wykrywania przewrócenia i blokada po upadku jest nieaktywna, steruje dalej według bieżącego profilu, zapisuje DTC z zamrożoną ramką i zgłasza niedostępność wykrywania do HMI (SYS-198).
+
 Według SYS-163 wybudzone ECU rozróżnia zwolniony i naciśnięty przycisk STOP w sprawnym obwodzie oraz przerwę w obwodzie. Nadzór działa niezależnie od HMI i CAN. [Macierz F03](../../docs/requirements/f03-ochrona-i-usterki.md).
 
 SYS-164 wymaga zapisu DTC z zamrożoną ramką przy potwierdzonej przerwie w STOP. ECU kontynuuje pracę i dopuszcza nową próbę rozruchu przy spełnieniu pozostałych warunków.
