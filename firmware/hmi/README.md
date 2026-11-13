@@ -12,6 +12,8 @@ HMI wyświetla przyczynę odrzucenia zmiany zestawu map otrzymaną z ECU po uste
 
 Gdy ECU zgłasza aktywny stan przegrzania według SYS-189, HMI ostrzega kierowcę. Układ i pierwszeństwo komunikatu określimy w wymaganiach HMI.
 
+Gdy ECU zgłasza potwierdzone przeciążenie skutkujące odłączeniem wentylatora, HMI ostrzega o usterce jego obwodu według SYS-190. Wygaszenie ostrzeżenia podlega SYS-023.
+
 Przy odłożonym przełączeniu zestawu w czasie jazdy HMI pokazuje oczekiwanie i wskazuje faktycznie aktywny zestaw według stanu otrzymanego z ECU (SYS-143).
 
 Po otrzymaniu statusu wygaśnięcia żądania HMI informuje kierowcę o konieczności ponownego wyboru zestawu (SYS-144).

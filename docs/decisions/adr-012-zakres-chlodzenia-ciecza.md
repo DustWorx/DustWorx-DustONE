@@ -29,3 +29,7 @@ W odpowiedzi A na pytanie 197 (2026-11-12) właściciel zatwierdził zakończeni
 W odpowiedzi A na pytanie 198 (2026-11-12) właściciel dopuścił ponowne uruchomienie automatycznego chłodzenia w tym samym postoju po odzyskaniu wiarygodnego pomiaru, gdy aktualna temperatura wymaga chłodzenia, napięcie dopuszcza pracę, a pierwotny limit czasu pozostaje ważny. Wznowienie wykorzystuje pozostały czas pierwotnego limitu (SYS-188). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-188).
 
 W odpowiedzi A na pytanie 199 (2026-11-12) właściciel wybrał ostrzeżenie na HMI po potwierdzeniu przegrzania przy wiarygodnym pomiarze podczas pracy silnika. Decyzję o zatrzymaniu z powodu przegrzania podejmuje kierowca (SYS-189). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-189).
+
+## Uzupełnienie F03 z 2026-11-13
+
+W odpowiedzi A na pytanie 200 (2026-11-13) właściciel zatwierdził zapis DTC z zamrożoną ramką i odrębne ostrzeżenie kierowcy na HMI po odłączeniu wentylatora przez zabezpieczenie z powodu potwierdzonego przeciążenia. Ostrzeżenie pojawia się również przy temperaturze poniżej progu przegrzania (SYS-190). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-190).

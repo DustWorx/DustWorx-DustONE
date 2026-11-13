@@ -126,6 +126,8 @@ Według SYS-184 potwierdzona usterka pomiaru temperatury płynu powoduje zapis D
 
 Przy potwierdzonym przegrzaniu podczas pracy silnika z wiarygodnego pomiaru ECU przekazuje stan do HMI i prowadzi sterowanie według bieżącego profilu oraz obowiązujących zabezpieczeń (SYS-189).
 
+Po odłączeniu wyjścia wentylatora z powodu potwierdzonego przeciążenia ECU zapisuje DTC i zamrożoną ramkę oraz przekazuje stan usterki do HMI według SYS-190.
+
 SYS-121 określa zgłoszenie usterki TPS i awaryjny zapłon gaźnika ze zweryfikowanej krzywej zależnej od obrotów, przy prawidłowej synchronizacji wału.
 
 SYS-122 przypisuje krzywą awaryjną do konfiguracji silnika jako wspólną dla jej zestawów map.

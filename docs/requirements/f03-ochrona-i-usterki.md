@@ -1,6 +1,6 @@
 # F03 — ochrona i reakcje na usterki
 
-Stan na 2026-11-12. **F03 aktywny po zamknięciu F02.** Macierz robocza łączy zdarzenie, reakcję i warunek powrotu. Zatwierdzone wymagania są w [rejestrze SYS](../01-zakres-systemu.md). Kolejność pakietów określa [status projektu](../00-proces-i-status.md).
+Stan na 2026-11-13. **F03 aktywny po zamknięciu F02.** Macierz robocza łączy zdarzenie, reakcję i warunek powrotu. Zatwierdzone wymagania są w [rejestrze SYS](../01-zakres-systemu.md). Kolejność pakietów określa [status projektu](../00-proces-i-status.md).
 
 | Zdarzenie lub temat | Przyjęta reakcja i warunek powrotu | Do rozstrzygnięcia w F03 | Plan prób |
 | --- | --- | --- | --- |
@@ -12,7 +12,7 @@ Stan na 2026-11-12. **F03 aktywny po zamknięciu F02.** Macierz robocza łączy 
 | Potwierdzone przewrócenie | ECU wyłącza silnik. Po postawieniu i spełnieniu warunków bezpieczeństwa rozruch wymaga świadomej próby (SYS-039/040). | Warunki zadziałania i powrotu odpowiednie dla enduro. | V04 |
 | Brak HMI albo CAN | ECU działa samodzielnie, a reakcje akcesoriów są odrębne (SYS-046/050–053). | Zależności od pozostałych stanów ochronnych. | V07 |
 | Usterka TPS lub pomiaru ciśnienia używanego do określenia obciążenia | Przyjęto reguły kalibracji awaryjnej, kontrolowanego zatrzymania, powrotu i wymuszenia „Standard” (SYS-121–142). | Powiązać z pozostałymi blokadami F03. [Zakres F02](f02-przeglad-zakresu.md) opisuje przyjęte przypadki. | V02, V03, V04 |
-| Chłodzenie i pozostałe pomiary ochronne | Przyjęto pomiar płynu i automatykę wentylatora oraz wejścia ciśnienia paliwa i binarne oleju (SYS-029/043/044/060). Przy usterce pomiaru temperatury płynu ECU automatycznie włącza wentylator podczas pracy silnika i zapisuje DTC (SYS-184). Po potwierdzeniu zatrzymania kończy to wymuszenie przy nadal aktywnej usterce (SYS-185). Przy zgaszonym silniku i potwierdzonej usterce ECU dopuszcza ręczne włączenie z HMI z limitami i zabezpieczeniami (SYS-186). Jeżeli usterka zostanie potwierdzona w trakcie automatycznego chłodzenia po zgaszeniu, ECU kończy to chłodzenie (SYS-187). Po odzyskaniu wiarygodnego pomiaru chłodzenie może wrócić przy odpowiedniej temperaturze i napięciu, w granicach pierwotnego limitu (SYS-188). Przy potwierdzonym przegrzaniu z wiarygodnego pomiaru HMI ostrzega kierowcę, który decyduje o zatrzymaniu silnika (SYS-189). | Ostrzeżenie o przeciążeniu obwodu wentylatora przed przegrzaniem (pytanie 200). Reakcje na pozostałe niedostępne pomiary i warunki poza dopuszczalnym zakresem. | V02, V03, V05, V07, V08, V10 |
+| Chłodzenie i pozostałe pomiary ochronne | Przyjęto pomiar płynu i automatykę wentylatora oraz wejścia ciśnienia paliwa i binarne oleju (SYS-029/043/044/060). Przy usterce pomiaru temperatury płynu ECU automatycznie włącza wentylator podczas pracy silnika i zapisuje DTC (SYS-184). Po potwierdzeniu zatrzymania kończy to wymuszenie przy nadal aktywnej usterce (SYS-185). Przy zgaszonym silniku i potwierdzonej usterce ECU dopuszcza ręczne włączenie z HMI z limitami i zabezpieczeniami (SYS-186). Jeżeli usterka zostanie potwierdzona w trakcie automatycznego chłodzenia po zgaszeniu, ECU kończy to chłodzenie (SYS-187). Po odzyskaniu wiarygodnego pomiaru chłodzenie może wrócić przy odpowiedniej temperaturze i napięciu, w granicach pierwotnego limitu (SYS-188). Przy potwierdzonym przegrzaniu z wiarygodnego pomiaru HMI ostrzega kierowcę, który decyduje o zatrzymaniu silnika (SYS-189). Potwierdzone przeciążenie skutkujące odłączeniem wentylatora powoduje zapis DTC z zamrożoną ramką i ostrzeżenie na HMI także przed przegrzaniem (SYS-190). | Ponowne załączenie wentylatora po odcięciu z powodu przeciążenia (pytanie 201). Reakcje na pozostałe niedostępne pomiary i warunki poza dopuszczalnym zakresem. | V02, V03, V05, V07, V08, V10 |
 | Zasilanie i restart ECU | Zasilanie bez stacyjki, zasady oszczędzania i odtwarzania danych (SYS-054/084–089/106/109/155). Odcięcie, restart i zapis DTC po zawieszeniu określają SYS-169–172. Limity, odzyskiwanie i powrót po przerwaniu prób określają SYS-173–180. Przyjęto reakcje na zanik zasilania podczas pracy silnika oraz rozruchu elektrycznego i kopniakiem (SYS-181–183). | Kryteria wykrywania zdarzeń, czasy i realizacja do projektu. | V01, V04, V06, V10, V12, V13 |
 
 ## Utrata synchronizacji wału podczas pracy
@@ -356,8 +356,20 @@ W odpowiedzi A na pytanie 199 (2026-11-12) właściciel wybrał ostrzeżenie na 
 2. Przy aktywnym ostrzeżeniu sprawdzić pracę wyjść silnikowych zgodnie z bieżącym profilem, w tym dotychczasowe granice obrotów i korekty zależne od temperatury. Następnie użyć przewodowego STOP i sprawdzić zatrzymanie według SYS-037 i SYS-162.
 3. Powtórzyć na reprezentatywnym profilu gaźnikowym i wtryskowym. W osobnym przebiegu zadać stan niesprawnego wejścia temperatury przy braku aktywnego przegrzania. Sprawdzić reakcję na usterkę pomiaru według SYS-184 oraz brak nowego potwierdzenia przegrzania na podstawie tego sygnału. Progi, czasy potwierdzenia i kryteria obserwacji wyjść ustalić przed próbą. [Macierz weryfikacji](../verification/macierz-wymagan.md).
 
-## Pytanie 200 — przeciążenie obwodu wentylatora przed przegrzaniem
+## Ostrzeżenie po odłączeniu przeciążonego wentylatora
 
 Instrukcja KTM 450 EXC-F MY2025 wskazuje wentylator jako nadzorowane wyjście OCU. Moduł odłącza przeciążone wyjście i sygnalizuje jego stan diodą. [Instrukcja KTM 450 EXC-F MY2025, s. 131](https://manualzz.com/doc/81264919/ktm-450-exc-f-six-days-bike-2025-owner-manual), [Opis OCU producenta](https://www.ktm.com/en-si/models/enduro/4-stroke/2025-ktm-450-excfchampionedition.html).
 
-Do ustalenia pozostaje sposób ostrzegania kierowcy w DustONE po potwierdzonym przeciążeniu obwodu wentylatora, gdy temperatura płynu pozostaje poniżej progu przegrzania.
+W odpowiedzi A na pytanie 200 (2026-11-13) właściciel zatwierdził zapis DTC z zamrożoną ramką i odrębne ostrzeżenie kierowcy na HMI po odłączeniu wentylatora przez zabezpieczenie z powodu potwierdzonego przeciążenia. Ostrzeżenie pojawia się również przy temperaturze poniżej progu przegrzania (SYS-190).
+
+### Plan próby SYS-190
+
+1. Na stanowisku z ECU i HMI odwzorować pracę silnika z wiarygodnym odczytem temperatury powodującym załączenie wentylatora, poniżej progu przegrzania. Potwierdzić prawidłowe załączenie bez ostrzeżenia o usterce obwodu wentylatora.
+2. Wymusić przeciążenie za pomocą kontrolowanego obciążenia stanowiska według ograniczeń zaprojektowanego kanału. Sprawdzić odcięcie wyjścia, potwierdzenie usterki i ostrzeżenie o obwodzie wentylatora na HMI, nadal poniżej progu przegrzania. Zmierzyć czas od potwierdzenia usterki do ostrzeżenia. Odczytać DTC z powiązaną zamrożoną ramką w Windows według SYS-019–024.
+3. Powtórzyć potwierdzenie usterki przy odłączonym HMI i sprawdzić odcięcie wyjścia oraz zapis diagnostyczny w ECU. W osobnym przebiegu sprawdzić wygaszenie ostrzeżenia po potwierdzeniu ustąpienia usterki i zachowanie historii DTC według SYS-023. Sposób potwierdzenia ustąpienia usterki, kryteria przeciążenia i dopuszczalny czas reakcji określić przed próbą. [Macierz weryfikacji](../verification/macierz-wymagan.md).
+
+## Pytanie 201 — ponowne załączenie wentylatora po przeciążeniu
+
+Dokumentacja sterownika samochodowego Texas Instruments pokazuje działanie zabezpieczenia nadprądowego w trybie automatycznego ponawiania i w trybie utrzymania odcięcia. [Texas Instruments TPS1211-Q1, rysunki 9-8 i 9-9](https://www.ti.com/lit/ds/symlink/tps1211-q1.pdf#page=35).
+
+Do ustalenia pozostają warunki ponownego załączenia wentylatora przy zapotrzebowaniu na chłodzenie po potwierdzonym przeciążeniu. Dobór elementów, czasy i limity pozostają do projektu.
