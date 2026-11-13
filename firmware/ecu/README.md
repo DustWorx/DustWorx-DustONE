@@ -88,6 +88,8 @@ Przy potwierdzonej usterce toru i zgaszonym silniku ECU dopuszcza świadomy rozr
 
 Po potwierdzeniu usterki toru ECU oznacza wykrywanie przewrócenia jako niedostępne i zwalnia blokadę po upadku. Po jej zwolnieniu rozruch wymaga nowej świadomej próby. Jeżeli START pozostał wciśnięty, ECU czeka na zwolnienie i nowe naciśnięcie (SYS-200).
 
+Po potwierdzeniu wiarygodnego pomiaru ECU przywraca wykrywanie przewrócenia podczas bieżącej pracy silnika i aktualizuje stan dla HMI według SYS-201.
+
 Według SYS-163 wybudzone ECU rozróżnia zwolniony i naciśnięty przycisk STOP w sprawnym obwodzie oraz przerwę w obwodzie. Nadzór działa niezależnie od HMI i CAN. [Macierz F03](../../docs/requirements/f03-ochrona-i-usterki.md).
 
 SYS-164 wymaga zapisu DTC z zamrożoną ramką przy potwierdzonej przerwie w STOP. ECU kontynuuje pracę i dopuszcza nową próbę rozruchu przy spełnieniu pozostałych warunków.
