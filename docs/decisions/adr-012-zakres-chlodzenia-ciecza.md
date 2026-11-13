@@ -41,3 +41,5 @@ W odpowiedzi na pytanie 202 (2026-11-13) właściciel wybrał potwierdzenie na H
 Właściciel doprecyzował również zachowanie po uśpieniu. ECU przechowuje stan usterki i odcięcia, odtwarza go po wybudzeniu i sprawdza wentylator w ramach autotestu (SYS-193). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-193).
 
 W odpowiedzi na pytanie 203 (2026-11-13) właściciel wskazał próbę wentylatora w autoteście przy każdym wybudzeniu ze snu, również po zapamiętanej usterce. Próba jest automatyczna, bez polecenia z HMI, gdy pozwalają na to warunki zasilania i zabezpieczenia wyjścia (SYS-193). [Plan próby wentylatora](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-193). [Autotest ECU w ADR-003](adr-003-wybudzanie-bez-wlacznika.md).
+
+W odpowiedzi A na pytanie 204 (2026-11-13) właściciel wybrał automatyczne wykonanie odłożonej próby wentylatora w tym samym okresie wybudzenia po powrocie właściwych warunków. Do potwierdzenia sprawności ECU utrzymuje istniejące odcięcie i stan usterki (SYS-195). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-195).

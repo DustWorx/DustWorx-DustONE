@@ -128,7 +128,7 @@ Przy potwierdzonym przegrzaniu podczas pracy silnika z wiarygodnego pomiaru ECU 
 
 Po odłączeniu wyjścia wentylatora z powodu potwierdzonego przeciążenia ECU zapisuje DTC i zamrożoną ramkę oraz przekazuje stan usterki do HMI według SYS-190.
 
-ECU utrzymuje blokadę zwykłego sterowania wentylatorem po przeciążeniu i po zgaszeniu silnika. Przyjęte potwierdzenie z HMI zleca jedną ograniczoną próbę z pomiarem prądu. ECU odblokowuje zwykłe sterowanie po wyniku potwierdzającym sprawność (SYS-191–192). Po każdym wybudzeniu ze snu ECU uruchamia autotest zgodnie z konfiguracją (SYS-194). Odtwarza zapamiętany stan usterki wentylatora i automatycznie wykonuje ograniczoną próbę z pomiarem prądu, gdy warunki na to pozwalają (SYS-193). Testy oczekujące na warunki zachowują odrębny status, a gotowość do rozruchu ma priorytet.
+ECU utrzymuje blokadę zwykłego sterowania wentylatorem po przeciążeniu i po zgaszeniu silnika. Przyjęte potwierdzenie z HMI zleca jedną ograniczoną próbę z pomiarem prądu. ECU odblokowuje zwykłe sterowanie po wyniku potwierdzającym sprawność (SYS-191–192). Po każdym wybudzeniu ze snu ECU uruchamia autotest zgodnie z konfiguracją (SYS-194). Odtwarza zapamiętany stan usterki wentylatora i automatycznie wykonuje ograniczoną próbę z pomiarem prądu, gdy warunki na to pozwalają (SYS-193). Testy oczekujące na warunki zachowują odrębny status, a gotowość do rozruchu ma priorytet. ECU automatycznie wykonuje odłożoną próbę wentylatora po powrocie warunków w tym samym okresie wybudzenia (SYS-195).
 
 SYS-121 określa zgłoszenie usterki TPS i awaryjny zapłon gaźnika ze zweryfikowanej krzywej zależnej od obrotów, przy prawidłowej synchronizacji wału.
 
