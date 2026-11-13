@@ -80,6 +80,8 @@ Według SYS-161 przewodowy STOP wykryty podczas kręcenia wyłącza rozrusznik i
 
 Według SYS-162 zwolnienie przewodowego STOP przy nadal obracającym się wale utrzymuje odcięcie. Ponowne dopuszczenie zapłonu i wtrysku wymaga zatrzymania wału i nowej świadomej próby z wiarygodną synchronizacją.
 
+Po zgaszeniu silnika wskutek przewrócenia potwierdzenie postawienia motocykla przy przytrzymanym START pozostawia rozrusznik wyłączony. ECU dopuszcza nową próbę po zwolnieniu i ponownym naciśnięciu START przy spełnionych warunkach rozruchu (SYS-040 i SYS-197).
+
 Według SYS-163 wybudzone ECU rozróżnia zwolniony i naciśnięty przycisk STOP w sprawnym obwodzie oraz przerwę w obwodzie. Nadzór działa niezależnie od HMI i CAN. [Macierz F03](../../docs/requirements/f03-ochrona-i-usterki.md).
 
 SYS-164 wymaga zapisu DTC z zamrożoną ramką przy potwierdzonej przerwie w STOP. ECU kontynuuje pracę i dopuszcza nową próbę rozruchu przy spełnieniu pozostałych warunków.
