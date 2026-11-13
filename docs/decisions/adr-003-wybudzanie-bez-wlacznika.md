@@ -64,3 +64,7 @@ Przy braku potwierdzenia sprawdzić ograniczenie oczekiwania/prób, sterowanie w
 Dla pracy wentylatora po zgaszeniu sprawdzić blokowanie uśpienia ECU, odcięcie po limicie czasu lub niskim napięciu także przy ręcznym żądaniu HMI i późniejsze dopuszczenie uśpienia według SYS-059 przy braku innych blokad. Szczegółowe próby funkcji są wskazane przy SYS-060/061 w zakresie systemu.
 
 Przy zasilaniu 12 V z akumulatora i osobno z odpowiedniego zasilacza warsztatowego sprawdzić wybudzenie po podłączeniu PC oraz utrzymanie gotowości ECU/HMI mimo bezczynności, podczas diagnostyki i aktualizacji. Po rozłączeniu sprawdzić zwolnienie blokady według przyszłej specyfikacji z uwzględnieniem stanu aktualizacji. Warunki i mierzalne limity ustalić przed próbami; testów sprzętu ani firmware nie wykonano.
+
+## Uzupełnienie F03 z 2026-11-13
+
+Właściciel rozszerzył autotest na funkcje ECU i wyposażenie danej konfiguracji. Autotest ma wykrywać także usterki lub odłączenia powstałe podczas postoju (SYS-194). Każde wybudzenie ze snu uruchamia autotest. Rozruch ma pierwszeństwo, a aktywna próba wentylatora podlega SYS-193. Odłożoną próbę ECU wykonuje po powrocie warunków w tym samym okresie wybudzenia według SYS-195. [Plan próby autotestu](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-194).

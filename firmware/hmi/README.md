@@ -10,6 +10,14 @@ SYS-086: przy próbie włączenia odbiornika objętego aktywnym odcięciem oszcz
 
 HMI wyświetla przyczynę odrzucenia zmiany zestawu map otrzymaną z ECU po usterce wymagającej pracy awaryjnej lub zatrzymania silnika (SYS-135 i SYS-137). Szczegóły scenariusza i próby zawiera [specyfikacja F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 
+Gdy ECU zgłasza aktywny stan przegrzania według SYS-189, HMI ostrzega kierowcę. Układ i pierwszeństwo komunikatu określimy w wymaganiach HMI.
+
+Gdy ECU zgłasza potwierdzone przeciążenie skutkujące odłączeniem wentylatora, HMI ostrzega o usterce jego obwodu według SYS-190. Wygaszenie ostrzeżenia podlega SYS-023.
+
+HMI udostępnia osobne potwierdzenie zakończenia czynności przy wentylatorze, które zleca próbę w ECU. HMI informuje o nieudanej próbie według SYS-192 i przedstawia aktywną usterkę przekazaną z ECU po wybudzeniu według SYS-193.
+
+Gdy ECU zgłasza niedostępność wykrywania przewrócenia, HMI ostrzega kierowcę także przy zgaszonym silniku oraz po zwolnieniu blokady po upadku (SYS-198–200). Po potwierdzonym ustąpieniu usterki HMI wygasza ostrzeżenie według SYS-023 i SYS-201.
+
 Przy odłożonym przełączeniu zestawu w czasie jazdy HMI pokazuje oczekiwanie i wskazuje faktycznie aktywny zestaw według stanu otrzymanego z ECU (SYS-143).
 
 Po otrzymaniu statusu wygaśnięcia żądania HMI informuje kierowcę o konieczności ponownego wyboru zestawu (SYS-144).

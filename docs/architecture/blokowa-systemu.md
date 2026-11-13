@@ -1,6 +1,6 @@
 # Architektura blokowa DustONE
 
-Stan na: 2026-11-09. **Materiał wstępny dla etapu 4, który oczekuje w kolejce**, wyprowadzona z [wymagań SYS-001–150](../01-zakres-systemu.md) i przyjętych ADR. Podział poniżej porządkuje projektowanie; nie wybiera komponentów, liczby pinów, protokołu PC ani topologii stopni mocy. G1 pozostaje otwarta.
+**Wstępna architektura dla etapu 4.** Bazowy podział bloków z 2026-11-09 oparto na [wymaganiach SYS-001–150](../01-zakres-systemu.md) i przyjętych ADR. Komponenty, liczba pinów, protokół PC i topologie stopni mocy pozostają do ustalenia w projekcie. G1 pozostaje otwarta. Uzupełnienie z 2026-11-11 obejmuje odcięcie przez STOP (SYS-167–168), reakcje nadzoru, powrót po resecie i odzyskiwanie (SYS-169–180). Uzupełnienie z 2026-11-12 obejmuje powrót zasilania po przerwaniu pracy lub rozruchu (SYS-181–183) oraz sterowanie wentylatorem po usterce pomiaru płynu (SYS-184–188) i reakcję na przegrzanie przy wiarygodnym pomiarze (SYS-189). Uzupełnienie z 2026-11-13 obejmuje diagnostykę, odcięcie i próbę wentylatora z HMI oraz autotest po wybudzeniu, w tym wykonanie odłożonej próby i limit jednej próby automatycznej na wybudzenie po usterce wentylatora (SYS-190–196). Uwzględniono ponowny START po przewróceniu oraz reakcje na usterkę toru położenia podczas pracy silnika i przed rozruchem przy nieaktywnej blokadzie (SYS-197–199). Uzupełnienie z 2026-11-14 obejmuje zwolnienie blokady przy potwierdzonej usterce i powrót wykrywania po odzyskaniu wiarygodnego pomiaru (SYS-200–201).
 
 Zakres silnikowy: jeden cylinder, 2T/4T i wyłącznie chłodzenie cieczą według SYS-098. Rozwinięcie projektu blokowego pozostaje w kolejce etapu 4.
 
@@ -10,7 +10,7 @@ Zakres silnikowy: jeden cylinder, 2T/4T i wyłącznie chłodzenie cieczą wedłu
 flowchart LR
     BAT["Akumulator / zasilacz 12 V"]
     SENS["Czujniki silnika, koła i motocykla"]
-    ACT["Zapłon, wtrysk, pompa, napędy i akcesoria"]
+    ACT["Zapłon, wtrysk, rozrusznik, pompa, napędy i akcesoria"]
     START["START — osobny przewód"]
     STOP["STOP — osobny obwód"]
     KICK["Zdarzenie kopania — detekcja do projektu"]
@@ -19,6 +19,7 @@ flowchart LR
     SERVICE["Jeden przewodowy punkt obsługi — topologia otwarta"]
     subgraph ECU["ECU — samodzielny sterownik"]
         PWR["ECU-PWR: zasilanie i nadzór"]
+        SUP["Niezależny nadzór firmware"]
         WAKE["ECU-WAKE: czuwanie i wybudzanie"]
         IN["ECU-IN: wejścia i pomiary"]
         CTRL["ECU-CTRL: sterowanie i rozstrzyganie żądań"]
@@ -34,11 +35,16 @@ flowchart LR
     BAT --> PWR
     PWR --> WAKE
     PWR --> CTRL
+    PWR --> SUP
+    CTRL -->|"nadzór działania"| SUP
+    SUP -->|"inicjacja resetu (SYS-169)"| CTRL
+    SUP -->|"odcięcie niezależne od resetu (SYS-169)"| OUT
     PWR -->|"kontrolowane zasilanie z ECU"| HP
     SENS --> IN --> CTRL --> OUT --> ACT
     START --> WAKE
     START --> CTRL
-    STOP -->|"gaszenie; realizacja obwodu otwarta"| CTRL
+    STOP -->|"odczyt i nadzór"| IN
+    STOP -->|"odcięcie zapłonu, wtrysku i rozrusznika (SYS-167–168)"| OUT
     KICK -.-> WAKE
     IN -.->|"tor ruchu koła musi działać także w śnie"| WAKE
     WAKE --> CTRL
@@ -54,23 +60,23 @@ flowchart LR
     SERVICE <-->|"dostęp do obu urządzeń"| COM
 ```
 
-Diagram pokazuje zależności funkcjonalne. Strzałki zasilania nie są kompletnym schematem szyn; wszystkie bloki wymagają właściwego zasilania. Droga standardowej obsługi obu urządzeń przez ECU-COM jest kandydatem do projektu. Miejsce złącza, interfejs PC i ewentualny mostek pozostają otwarte; SYS-027 nie przesądza USB w ECU. STOP działa bez HMI/CAN; rysunek nie ustanawia niezależności od procesora ECU, której realizacji jeszcze nie określono.
+Diagram pokazuje zależności funkcjonalne. Strzałki zasilania nie są kompletnym schematem szyn; wszystkie bloki wymagają właściwego zasilania. Droga standardowej obsługi obu urządzeń przez ECU-COM jest kandydatem do projektu. Miejsce złącza, interfejs PC i ewentualny mostek pozostają otwarte; SYS-027 nie przesądza USB w ECU. Ścieżki STOP pokazują odczyt stanu i odcięcie zapłonu, wtrysku oraz rozrusznika niezależne od głównego firmware (SYS-167–168). Niezależny nadzór wymusza odcięcie tych wyjść i osobno inicjuje reset (SYS-169). Warunki wznowienia zapłonu i wtrysku po resecie określa SYS-170, a warunki załączenia rozrusznika określa SYS-171. Nadzór egzekwuje limit standardowych prób uruchomienia według SYS-173. ECU po limicie samoczynnie rozpoczyna odzyskiwanie według SYS-174. Po wyczerpaniu osobnego limitu samodzielnych prób bez gotowości udostępnia naprawę z Windows według SYS-175 i SYS-176. Po zaniku zasilania przed naprawą ECU odtwarza tryb naprawy z odcięciem według SYS-177. Po zaniku zasilania podczas samodzielnej próby odtwarza wykorzystanie limitu według SYS-178. Po zaniku w trakcie standardowej próby stosuje SYS-179. Powodzenie serii wymaga potwierdzenia gotowości i okresu stabilnej pracy według SYS-180. Po zaniku zasilania podczas pracy silnika dopuszczenie zapłonu i wtrysku podlega SYS-181. Po zaniku zasilania podczas rozruchu elektrycznego załączenie rozrusznika podlega SYS-182. Po zaniku zasilania podczas rozpoczętej próby kopniakiem dopuszczenie zapłonu i wtrysku podlega SYS-183. Realizacja torów odcięcia i nadzoru jest wejściem do etapu 4.
 
 ## Bloki i zadania
 
 | ID bloku | Odpowiedzialność | Co musi być rozstrzygnięte przed doborem części |
 | --- | --- | --- |
-| ECU-PWR | Przyjęcie instalacji klasy 12 V, ochrona i dystrybucja energii, nadzór napięcia, kontrola zasilania HMI. | Zakresy napięć, rozruch i zakłócenia, prądy/temperatury, profile AGM/LiFePO4 i domeny zasilania. |
-| ECU-WAKE | Obsługa źródeł wybudzania, koordynacja snu, blokady snu przy PC i wymaganych zadaniach. | Detekcja kopania, pierwszych impulsów koła, przycisków HMI i PC; pobór, opóźnienia, zasilanie HMI po awaryjnym odłączeniu części aktywnej. |
-| ECU-IN | Synchronizacja, pomiary analogowe/cyfrowe (w tym MAP/CCPS według SYS-096/097), sensory na PCB oraz wejścia START, hamulców i pozostałych funkcji. | Modele osprzętu, zakresy, zasilanie, charakterystyki, dokładności, częstotliwości, zabezpieczenia i diagnostyka. |
-| ECU-CTRL | Sterowanie czasowe silnikiem, reguły rozruchu/STOP/przewrócenia, automatyka akcesoriów i kontrola dopuszczenia poleceń. | Strategie i granice czasu, obciążenie obliczeniowe, reakcje na usterki i restart, warunki strojenia na żywo. |
-| ECU-OUT | Jeden kanał zapłonu w trybie CDI lub TCI/IDI, wtrysk, pompa, power valve/IAC oraz wyjścia akcesoriów. | Rodzaje i liczby kanałów, jednoczesność, prądy/energia/czasy, granica stopni mocy i diagnostyka. SmartFET jest preferencją dla akcesoriów, nie wyborem konkretnego układu. |
-| ECU-DATA | Właściciel konfiguracji i map, chronionych liczników, DTC/freeze frame, czasu rzeczywistego i ważności czasu. | Pojemność, trwałość i spójność zapisów, zakres utraty danych przy zaniku zasilania, reguły dostępu, odtwarzanie i obsługa pełnej pamięci. |
-| ECU-COM | CAN ECU–HMI oraz logiczna obsługa konfiguracji, danych, diagnostyki, aktualizacji i development tool. | Interfejs PC, przepustowość, wersjonowanie, sesje/uprawnienia, formaty danych i odzyskiwanie. |
+| ECU-PWR | Przyjęcie instalacji klasy 12 V, ochrona i dystrybucja energii, nadzór napięcia, kontrola zasilania HMI oraz niezależny nadzór głównego firmware. Nadzór realizuje limit standardowych prób i umożliwia wejście do odzyskiwania według SYS-169, SYS-173 i SYS-174. Zamknięcie serii podlega SYS-180. | Zakresy napięć, rozruch i zakłócenia, prądy/temperatury, profile AGM/LiFePO4 i domeny zasilania. |
+| ECU-WAKE | Obsługa źródeł wybudzania, koordynacja snu, blokady snu przy PC i wymaganych zadaniach. Po każdym wybudzeniu ze snu inicjuje autotest ECU. Stan usterki wentylatora jest odtwarzany do chwili rozstrzygnięcia próby (SYS-193–194). | Detekcja kopania, pierwszych impulsów koła, przycisków HMI i PC; pobór, opóźnienia, zasilanie HMI po awaryjnym odłączeniu części aktywnej. |
+| ECU-IN | Synchronizacja, pomiary analogowe/cyfrowe (w tym MAP/CCPS według SYS-096/097), sensory na PCB oraz wejścia START, STOP, hamulców i pozostałych funkcji. Diagnostyka toru wykrywania przewrócenia dostarcza informacji o usterce i wiarygodności pomiaru także przed rozruchem (SYS-198–199). | Modele osprzętu, zakresy, zasilanie, charakterystyki, dokładności, częstotliwości, zabezpieczenia i diagnostyka. |
+| ECU-CTRL | Sterowanie czasowe silnikiem, reguły rozruchu, STOP i przewrócenia, w tym ponowienie START po potwierdzeniu postawienia motocykla (SYS-197), dopuszczenie zapłonu, wtrysku i rozrusznika po resecie nadzoru oraz odzyskaniu działania (SYS-170–171 i SYS-174), wznowienie sterowania po zaniku zasilania podczas pracy lub rozruchu (SYS-181–183), automatyka akcesoriów i kontrola dopuszczenia poleceń. Wymuszenie awaryjne wentylatora i jego zakończenie podlegają SYS-184–185. Ręczne włączenie po zgaszeniu przy usterce podlega SYS-186, a zakończenie i wznowienie automatycznego chłodzenia po zgaszeniu podlegają SYS-187–188. ECU potwierdza przegrzanie i udostępnia jego stan według SYS-189. Przeciążenie obwodu wentylatora zgłasza według SYS-190. Utrzymuje blokadę i przeprowadza próbę z HMI według SYS-191–192. Autotest wykonuje dostępne sprawdzenia zgodnie z konfiguracją. Odłożoną próbę wentylatora uruchamia po powrocie warunków (SYS-193–195). Po nieudanej próbie autotest dopuszcza jedną nową próbę automatyczną przy kolejnym wybudzeniu (SYS-196). Przy usterce toru wykrywania przewrócenia sterowanie, dopuszczenie rozruchu i zgłaszanie stanu podlegają SYS-198–200. Po odzyskaniu wiarygodnego pomiaru ECU przywraca wykrywanie w bieżącej pracy silnika według SYS-201. | Strategie i granice czasu, obciążenie obliczeniowe, reakcje na usterki i restart, warunki strojenia na żywo. |
+| ECU-OUT | Jeden kanał zapłonu w trybie CDI lub TCI/IDI, wtrysk, sterowanie rozrusznikiem, pompa, power valve/IAC oraz wyjścia akcesoriów. Odcięcie zapłonu, wtrysku i rozrusznika przez STOP (SYS-167–168) i niezależny nadzór (SYS-169). Tor wentylatora zapewnia odcięcie przeciążonego wyjścia i informację dla diagnostyki SYS-190. Układ stopnia mocy ma pozwalać ECU utrzymać blokadę zwykłego załączenia i wykonać ograniczoną próbę z pomiarem prądu przy aktywnych zabezpieczeniach, zarówno z HMI, jak i po wybudzeniu (SYS-191–193). | Rodzaje i liczby kanałów, jednoczesność, prądy/energia/czasy, granica stopni mocy i diagnostyka. SmartFET jest preferencją dla akcesoriów, nie wyborem konkretnego układu. |
+| ECU-DATA | Właściciel konfiguracji i map, chronionych liczników, DTC/freeze frame, czasu rzeczywistego i ważności czasu. Zapis przyczyny i danych potwierdzonego resetu nadzoru według SYS-172 oraz zachowanie stanu oczekiwania na naprawę i rozliczenia obu limitów według SYS-177–179. | Pojemność, trwałość i spójność zapisów, zakres utraty danych przy zaniku zasilania, reguły dostępu, odtwarzanie i obsługa pełnej pamięci. |
+| ECU-COM | CAN ECU–HMI oraz logiczna obsługa konfiguracji, danych, diagnostyki, aktualizacji i development tool. Przewodowy dostęp do naprawy ECU według SYS-175. | Interfejs PC, przepustowość, wersjonowanie, sesje/uprawnienia, formaty danych i odzyskiwanie. |
 | HMI-PWR | Zasilanie z ECU, normalny sen na polecenie ECU i wybudzanie przyciskami. | Pobór i gotowość, działanie wybudzania także po awaryjnym odłączeniu części aktywnej, sterowanie ekranem. |
-| HMI-UI | Ekran bez dotyku, odczyt przycisków, prezentacja danych i ostrzeżeń, układy użytkownika. | Ekran i obsługa, zasoby grafiki, czytelność, menu i pierwszeństwo ostrzeżeń. |
+| HMI-UI | Ekran bez dotyku, odczyt przycisków, prezentacja danych i ostrzeżeń, w tym ostrzeżenia o przegrzaniu (SYS-189), usterce obwodu wentylatora (SYS-190) i niedostępności wykrywania przewrócenia (SYS-198–201), oraz układy użytkownika. | Ekran i obsługa, zasoby grafiki, czytelność, menu i pierwszeństwo ostrzeżeń. |
 | HMI-COM | Żądania do ECU, odbiór rzeczywistych stanów, sekwencja snu i obsługa serwisowa HMI. | Protokół CAN, sygnalizacja aktywności użytkownika, aktualizacja i odzyskiwanie. |
-| WIN-APP | Jedna aplikacja Windows: konfiguracja, strojenie, edytor HMI, diagnostyka, aktualizacja i narzędzia. | Przypadki użycia, uprawnienia, pliki/wersje, dopuszczenie operacji w stanach pojazdu, interfejs PC. |
+| WIN-APP | Jedna aplikacja Windows: konfiguracja, strojenie, edytor HMI, diagnostyka, aktualizacja i narzędzia. Obsługa naprawy ECU według SYS-175. | Przypadki użycia, uprawnienia, pliki/wersje, dopuszczenie operacji w stanach pojazdu, interfejs PC. |
 | SYS-INST | PCB, obudowy, złącza, nowa wiązka i instalacja w motocyklu. | Miejsce montażu, gabaryty, prądy, ciepło, szczelność, pomiar barometryczny i dostęp serwisowy. |
 
 ID są oznaczeniami architektury, bez przydziału konkretnych układów scalonych. ECU-CTRL i pozostałe bloki logiczne mogą korzystać ze wspólnych zasobów; ich fizyczny podział wybierzemy po bilansach.
