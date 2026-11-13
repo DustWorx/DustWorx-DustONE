@@ -35,3 +35,7 @@ W odpowiedzi A na pytanie 199 (2026-11-12) właściciel wybrał ostrzeżenie na 
 W odpowiedzi A na pytanie 200 (2026-11-13) właściciel zatwierdził zapis DTC z zamrożoną ramką i odrębne ostrzeżenie kierowcy na HMI po odłączeniu wentylatora przez zabezpieczenie z powodu potwierdzonego przeciążenia. Ostrzeżenie pojawia się również przy temperaturze poniżej progu przegrzania (SYS-190). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-190).
 
 W odpowiedzi A na pytanie 201 (2026-11-13) właściciel zatwierdził utrzymanie odcięcia wentylatora po potwierdzonym przeciążeniu do sprawdzenia obwodu i świadomego odblokowania. Reguła obowiązuje również przy dalszym zapotrzebowaniu na chłodzenie (SYS-191). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-191).
+
+W odpowiedzi na pytanie 202 (2026-11-13) właściciel wybrał potwierdzenie na HMI po usunięciu blokady lub sprawdzeniu wentylatora. ECU wykonuje próbę z pomiarem prądu zarówno przy pracującym, jak i przy zgaszonym silniku, jeśli pozostaje wybudzone. Pozytywny wynik przywraca normalne sterowanie. Nieudana próba pozostawia odcięcie oraz informację o niesprawnym wentylatorze (SYS-191–192). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-192).
+
+Właściciel doprecyzował również zachowanie po uśpieniu. ECU przechowuje stan usterki i odcięcia, odtwarza go po wybudzeniu i sprawdza wentylator w ramach autotestu (SYS-193). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-193).
