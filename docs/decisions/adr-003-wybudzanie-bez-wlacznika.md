@@ -68,3 +68,7 @@ Przy zasilaniu 12 V z akumulatora i osobno z odpowiedniego zasilacza warsztatowe
 ## Uzupełnienie F03 z 2026-11-13
 
 Właściciel rozszerzył autotest na funkcje ECU i wyposażenie danej konfiguracji. Autotest ma wykrywać także usterki lub odłączenia powstałe podczas postoju (SYS-194). Każde wybudzenie ze snu uruchamia autotest. Rozruch ma pierwszeństwo, a aktywna próba wentylatora podlega SYS-193. Odłożoną próbę ECU wykonuje po powrocie warunków w tym samym okresie wybudzenia według SYS-195. [Plan próby autotestu](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-194).
+
+## Uzupełnienie F03 z 2026-11-15
+
+Po wybudzeniu ECU ustala blokadę rozruchu na podstawie aktualnego, wiarygodnego pomiaru położenia (SYS-202). Do potwierdzenia położenia ECU wstrzymuje dopuszczenie rozruchu. Potwierdzona usterka toru podlega SYS-199 i SYS-200. [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-202).
