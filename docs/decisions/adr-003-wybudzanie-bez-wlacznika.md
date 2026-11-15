@@ -71,4 +71,4 @@ Właściciel rozszerzył autotest na funkcje ECU i wyposażenie danej konfigurac
 
 ## Uzupełnienie F03 z 2026-11-15
 
-Po wybudzeniu ECU ustala blokadę rozruchu na podstawie aktualnego, wiarygodnego pomiaru położenia (SYS-202). Do potwierdzenia położenia ECU wstrzymuje dopuszczenie rozruchu. Potwierdzona usterka toru podlega SYS-199 i SYS-200. [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-202).
+Po wybudzeniu ECU ustala blokadę rozruchu na podstawie aktualnego, wiarygodnego pomiaru położenia (SYS-202). Do potwierdzenia położenia ECU wstrzymuje dopuszczenie rozruchu. Przy sprawnym torze i motocyklu stojącym w prawidłowym położeniu ECU potwierdza położenie najpóźniej z chwilą zakończenia pozostałych czynności przygotowania ECU do próby rozruchu. Potwierdzona usterka toru podlega SYS-199 i SYS-200. [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-202).

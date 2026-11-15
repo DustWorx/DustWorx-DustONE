@@ -90,7 +90,7 @@ Po potwierdzeniu usterki toru ECU oznacza wykrywanie przewrócenia jako niedost�
 
 Po potwierdzeniu wiarygodnego pomiaru ECU przywraca wykrywanie przewrócenia podczas bieżącej pracy silnika i aktualizuje stan dla HMI według SYS-201.
 
-Przy wybudzeniu ze snu ECU wstrzymuje rozruch do ponownej wiarygodnej oceny położenia. Potwierdzone przewrócenie blokuje rozruch, a prawidłowe położenie pozwala dopuścić świadomą próbę po spełnieniu pozostałych warunków. Tę ocenę określa SYS-202, a reakcję na potwierdzoną usterkę toru określają SYS-199 i SYS-200.
+Przy wybudzeniu ze snu ECU wstrzymuje rozruch do ponownej wiarygodnej oceny położenia. Potwierdzone przewrócenie blokuje rozruch, a prawidłowe położenie pozwala dopuścić świadomą próbę po spełnieniu pozostałych warunków. W prawidłowym położeniu i ze sprawnym czujnikiem ocena ma zmieścić się w czasie przygotowania ECU do próby rozruchu według SYS-202, a reakcję na potwierdzoną usterkę toru określają SYS-199 i SYS-200.
 
 Według SYS-163 wybudzone ECU rozróżnia zwolniony i naciśnięty przycisk STOP w sprawnym obwodzie oraz przerwę w obwodzie. Nadzór działa niezależnie od HMI i CAN. [Macierz F03](../../docs/requirements/f03-ochrona-i-usterki.md).
 
