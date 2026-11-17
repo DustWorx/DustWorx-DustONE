@@ -1,6 +1,6 @@
 # DustONE — ścieżka projektu, status i odpowiedzialności
 
-Stan na 2026-11-15. Zamknięcie F02 i aktualna praca w F03 są w tabeli bieżącej pracy. Ścieżka projektu i warunki postoju z PR #17/#18 są scalone. Dokument aktualizujemy przy istotnej odpowiedzi lub decyzji, wykonanej pracy, wyniku próby, zmianie zakresu i przeglądzie etapu; wraz z wymaganiami, ADR, interfejsami i weryfikacją.
+Stan na 2026-11-17. Zamknięcie F02 i aktualna praca w F03 są w tabeli bieżącej pracy. Ścieżka projektu i warunki postoju z PR #17/#18 są scalone. Dokument aktualizujemy przy istotnej odpowiedzi lub decyzji, wykonanej pracy, wyniku próby, zmianie zakresu i przeglądzie etapu; wraz z wymaganiami, ADR, interfejsami i weryfikacją.
 
 Kontrola pełnego F01 została zakończona: właściciel potwierdził zgodność podsumowania i polecił dalszą pracę (2026-11-04). Źródło kontroli: [przyjęte podsumowanie F01](requirements/f01-podsumowanie-kontrolne.md). Potwierdzenie dotyczy F01. Późniejsza odpowiedź A na pytanie 108 określiła ostatnio wybrany prawidłowy zestaw po restarcie ECU (SYS-099).
 
@@ -67,7 +67,7 @@ Parametry wyliczane z osprzętu, charakterystyki czujników, wartości elementó
 | W03 — Weryfikacja wymagań | W kolejce, etap 5. | Zachowany [przydział 202 SYS do grup](verification/macierz-wymagan.md); kryteria, procedury i dowody do rozwinięcia. |
 | W06 — Bilanse i wybór komponentów | W kolejce, etapy 4 i 6. | Wymagane wejściowe parametry; ważne komponenty wybierzemy wspólnie. |
 
-**Najbliższy krok to ustalenie zakresu kontroli autotestu wymaganych przed dopuszczeniem rozruchu (pytanie 212).** Przyjęte reakcje i plan prób są w [macierzy F03](requirements/f03-ochrona-i-usterki.md). Konkrety osprzętu, w tym wykonalność konwersji TPI, mają właścicieli i etapy w [przekazaniu F01](requirements/f01-sterowanie-silnikiem.md). Parametry elektryczne, bilanse i procedury wykonawcze pozostają w kolejce właściwych etapów.
+**Najbliższy krok to ustalenie zakresu kontroli autotestu wymaganych przed dopuszczeniem rozruchu przy sprawnym czujniku i potwierdzonym prawidłowym położeniu motocykla (pytanie 212).** Przyjęte reakcje i plan prób są w [macierzy F03](requirements/f03-ochrona-i-usterki.md). Konkrety osprzętu, w tym wykonalność konwersji TPI, mają właścicieli i etapy w [przekazaniu F01](requirements/f01-sterowanie-silnikiem.md). Parametry elektryczne, bilanse i procedury wykonawcze pozostają w kolejce właściwych etapów.
 
 ## Warunki przechodzenia dalej
 

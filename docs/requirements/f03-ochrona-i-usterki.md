@@ -1,6 +1,6 @@
 # F03 — ochrona i reakcje na usterki
 
-Stan na 2026-11-15. **F03 aktywny po zamknięciu F02.** Macierz robocza łączy zdarzenie, reakcję i warunek powrotu. Zatwierdzone wymagania są w [rejestrze SYS](../01-zakres-systemu.md). Kolejność pakietów określa [status projektu](../00-proces-i-status.md).
+Stan na 2026-11-17. **F03 aktywny po zamknięciu F02.** Macierz robocza łączy zdarzenie, reakcję i warunek powrotu. Zatwierdzone wymagania są w [rejestrze SYS](../01-zakres-systemu.md). Kolejność pakietów określa [status projektu](../00-proces-i-status.md).
 
 | Zdarzenie lub temat | Przyjęta reakcja i warunek powrotu | Do rozstrzygnięcia w F03 | Plan prób |
 | --- | --- | --- | --- |
@@ -519,6 +519,6 @@ W doprecyzowaniu pytania 212 z 2026-11-15 właściciel określił cel czasowy oc
 
 Instrukcja KTM 350 EXC-F US MY2025 opisuje rozruch przyciskiem rozrusznika. [Instrukcja KTM 350 EXC-F US MY2025, rozdział 9.2](https://d2inxtzgf08fgn.cloudfront.net/ownerManuals/3240050EN.pdf#page=49).
 
-Do ustalenia pozostaje zakres kontroli, które ECU ma zakończyć przed dopuszczeniem rozruchu. Rozpatrujemy gotowość po kontrolach wymaganych do rozpoczęcia rozruchu, w tym ocenie położenia, albo oczekiwanie także na pozostałe próby wykonalne w danym stanie przy zgaszonym silniku, np. na próbę wentylatora. SYS-194 obejmuje również sprawdzenia wymagające innych warunków, a SYS-195 określa wykonanie odłożonej próby wentylatora. Funkcjonalna kontrola sygnału wału wymaga jego obrotu. Instrukcja KTM 350 EXC-F US MY2026 opisuje diagnostykę braku impulsów wału przy pracującym silniku. [Instrukcja KTM 350 EXC-F US MY2026, rozdział 22.1](https://manualzz.com/doc/86852189/ktm-350-exc-f-bike-2026-owner-manual).
+Pytanie dotyczy sprawnego toru wykrywania przewrócenia i potwierdzonego prawidłowego położenia motocykla. Potwierdzone położenie na boku utrzymuje blokadę rozruchu według SYS-202. Do ustalenia pozostaje zakres pozostałych kontroli, które ECU ma zakończyć przed dopuszczeniem rozruchu. Rozpatrujemy gotowość po kontrolach wymaganych do rozpoczęcia rozruchu, w tym potwierdzeniu prawidłowego położenia, albo oczekiwanie także na pozostałe próby wykonalne w danym stanie przy zgaszonym silniku, np. na próbę wentylatora. SYS-194 obejmuje również sprawdzenia wymagające innych warunków, a SYS-195 określa wykonanie odłożonej próby wentylatora. Funkcjonalna kontrola sygnału wału wymaga jego obrotu. Instrukcja KTM 350 EXC-F US MY2026 opisuje diagnostykę braku impulsów wału przy pracującym silniku. [Instrukcja KTM 350 EXC-F US MY2026, rozdział 22.1](https://manualzz.com/doc/86852189/ktm-350-exc-f-bike-2026-owner-manual).
 
 Obsługa naciśnięcia START, które wybudziło ECU i nadal trwa po ukończeniu wymaganych kontroli, pozostaje do potwierdzenia.
