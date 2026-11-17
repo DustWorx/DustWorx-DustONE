@@ -49,3 +49,5 @@ Budżet poboru ECU, zasilanego z niego HMI i torów czuwania musi wynikać z cel
 Do późniejszego projektu: SYS-096 wymaga możliwości odczytu MAP z kompatybilnego czujnika OEM lub dodatkowego na wspólnej PCB. Konfiguracje niewymagające MAP pracują bez czujnika; model, parametry toru i komponenty dobierzemy we właściwych etapach. [Karta MAP](../../docs/interfaces/cisnienie-dolotu-map.md).
 
 Do późniejszego projektu: SYS-097 wymaga możliwości odczytu ciśnienia gazów w skrzyni korbowej 2T (CCPS) z kompatybilnego czujnika. Model, parametry i podział zasobów z MAP określimy w etapach projektowych; [karta CCPS](../../docs/interfaces/cisnienie-skrzyni-korbowej.md).
+
+Przy projekcie zasilania, pomiarów i torów wykonawczych uwzględnić próby autotestu dostępne przed rozruchem według SYS-203, w tym próbę wentylatora. Tory rozrusznika, zapłonu i wtrysku pozostają bez sterowania rozruchowego do zakończenia tych prób. Czasy gotowości i warunki zasilania wymagają bilansu i pomiarów, także przy wybudzeniu kopniakiem. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-203).

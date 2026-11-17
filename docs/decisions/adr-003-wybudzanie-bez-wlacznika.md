@@ -1,6 +1,6 @@
 # ADR-003 — wybudzanie bez osobnego włącznika
 
-Data: 2026-10-25; uzupełnienie: 2026-11-01. Status: zatwierdzone wymagania użytkowe; realizacja sprzętowa i parametry do projektu oraz weryfikacji.
+Data: 2026-10-25; uzupełnienie: 2026-11-17. Status: zatwierdzone wymagania użytkowe; realizacja sprzętowa i parametry do projektu oraz weryfikacji.
 
 ## Problem i opcje
 
@@ -26,8 +26,8 @@ W odpowiedzi A na pytanie 85 z 2026-11-01 właściciel zatwierdził wyłączenie
 
 | Zdarzenie | Wymagane wybudzenie | Uwagi |
 | --- | --- | --- |
-| Naciśnięcie przewodowego START | ECU i HMI | Priorytet gotowości ECU; rozruch niezależny od HMI, dalsza obsługa według SYS-048/049. |
-| Rozruch kopniakiem | ECU i HMI | Priorytet gotowości ECU; detekcja, sekwencja i czasy wymagają projektu. Obowiązuje założenie podłączonego akumulatora z SYS-013 i zakresu systemu. |
+| Naciśnięcie przewodowego START | ECU i HMI | Priorytet gotowości ECU względem HMI; przed dopuszczeniem rozruchu kontrole według SYS-203; rozruch niezależny od HMI, dalsza obsługa według SYS-048/049. |
+| Rozruch kopniakiem | ECU i HMI | Priorytet gotowości ECU względem HMI; kontrole przed rozruchem według SYS-203; detekcja, sekwencja i czasy wymagają projektu. Obowiązuje założenie podłączonego akumulatora z SYS-013 i zakresu systemu. |
 | Użycie przycisków obsługi HMI | HMI i ECU | Przyciski pozostają w HMI. |
 | Podłączenie komputera | ECU i HMI | Przy dostępnym zasilaniu 12 V według SYS-058; utrzymana blokada usypiania obu urządzeń przez czas połączenia. |
 | Wykrycie obrotów przedniego koła | ECU i HMI | Przy dostępnym zasilaniu, także ze zgaszonym silnikiem. ECU wybudza HMI; naliczanie ODO nie czeka na jego gotowość (SYS-075/079/080). |
@@ -67,8 +67,12 @@ Przy zasilaniu 12 V z akumulatora i osobno z odpowiedniego zasilacza warsztatowe
 
 ## Uzupełnienie F03 z 2026-11-13
 
-Właściciel rozszerzył autotest na funkcje ECU i wyposażenie danej konfiguracji. Autotest ma wykrywać także usterki lub odłączenia powstałe podczas postoju (SYS-194). Każde wybudzenie ze snu uruchamia autotest. Rozruch ma pierwszeństwo, a aktywna próba wentylatora podlega SYS-193. Odłożoną próbę ECU wykonuje po powrocie warunków w tym samym okresie wybudzenia według SYS-195. [Plan próby autotestu](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-194).
+Właściciel rozszerzył autotest na funkcje ECU i wyposażenie danej konfiguracji. Autotest ma wykrywać także usterki lub odłączenia powstałe podczas postoju (SYS-194). Każde wybudzenie ze snu uruchamia autotest. Aktywna próba wentylatora podlega SYS-193. Zakres prób wymaganych przed dopuszczeniem rozruchu doprecyzowuje SYS-203. Odłożoną próbę ECU wykonuje po powrocie warunków w tym samym okresie wybudzenia według SYS-195. [Plan próby autotestu](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-194).
 
 ## Uzupełnienie F03 z 2026-11-15
 
 Po wybudzeniu ECU ustala blokadę rozruchu na podstawie aktualnego, wiarygodnego pomiaru położenia (SYS-202). Do potwierdzenia położenia ECU wstrzymuje dopuszczenie rozruchu. Przy sprawnym torze i motocyklu stojącym w prawidłowym położeniu ECU potwierdza położenie najpóźniej z chwilą zakończenia pozostałych czynności przygotowania ECU do próby rozruchu. Potwierdzona usterka toru podlega SYS-199 i SYS-200. [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-202).
+
+## Uzupełnienie F03 z 2026-11-17
+
+W odpowiedzi B na pytanie 212 właściciel przyjął zakończenie wszystkich prób autotestu wykonalnych w aktualnych warunkach przy zgaszonym silniku przed dopuszczeniem rozruchu (SYS-203). Dostępna próba wentylatora poprzedza rozruch. Sprawdzenia wymagające obrotu wału, pracy silnika lub innych niespełnionych warunków pozostają oczekujące. Wyniki podlegają właściwym reakcjom na usterki. Rozruch pozostaje niezależny od HMI. Uwzględnić czas prób w budżecie gotowości, również dla kopniaka. [Plan próby](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-203).
