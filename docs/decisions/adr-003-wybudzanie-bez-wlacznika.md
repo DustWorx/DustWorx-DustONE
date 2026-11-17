@@ -26,7 +26,7 @@ W odpowiedzi A na pytanie 85 z 2026-11-01 właściciel zatwierdził wyłączenie
 
 | Zdarzenie | Wymagane wybudzenie | Uwagi |
 | --- | --- | --- |
-| Naciśnięcie przewodowego START | ECU i HMI | Priorytet gotowości ECU względem HMI; przed dopuszczeniem rozruchu kontrole według SYS-203; rozruch niezależny od HMI, dalsza obsługa według SYS-048/049. |
+| Naciśnięcie przewodowego START | ECU i HMI | Priorytet gotowości ECU względem HMI; przed dopuszczeniem rozruchu kontrole według SYS-203; rozruch niezależny od HMI, przy zwykłym wybudzeniu trzymany START uruchamia rozrusznik po uzyskaniu gotowości według SYS-204, z zachowaniem SYS-048/049 i reguł ponowienia po odcięciach. |
 | Rozruch kopniakiem | ECU i HMI | Priorytet gotowości ECU względem HMI; kontrole przed rozruchem według SYS-203; detekcja, sekwencja i czasy wymagają projektu. Obowiązuje założenie podłączonego akumulatora z SYS-013 i zakresu systemu. |
 | Użycie przycisków obsługi HMI | HMI i ECU | Przyciski pozostają w HMI. |
 | Podłączenie komputera | ECU i HMI | Przy dostępnym zasilaniu 12 V według SYS-058; utrzymana blokada usypiania obu urządzeń przez czas połączenia. |
@@ -76,3 +76,5 @@ Po wybudzeniu ECU ustala blokadę rozruchu na podstawie aktualnego, wiarygodnego
 ## Uzupełnienie F03 z 2026-11-17
 
 W odpowiedzi B na pytanie 212 właściciel przyjął zakończenie wszystkich prób autotestu wykonalnych w aktualnych warunkach przy zgaszonym silniku przed dopuszczeniem rozruchu (SYS-203). Dostępna próba wentylatora poprzedza rozruch. Sprawdzenia wymagające obrotu wału, pracy silnika lub innych niespełnionych warunków pozostają oczekujące. Wyniki podlegają właściwym reakcjom na usterki. Rozruch pozostaje niezależny od HMI. Uwzględnić czas prób w budżecie gotowości, również dla kopniaka. [Plan próby](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-203).
+
+W odpowiedzi A na pytanie 213 właściciel dopuścił załączenie rozrusznika na tym samym przytrzymaniu START po zakończeniu wymaganych prób podczas zwykłego wybudzenia (SYS-204). Puszczenie przycisku przed gotowością kończy żądanie. Pozostałe warunki rozruchu oraz reguły ponowienia po odcięciach mają pierwszeństwo. [Plan próby](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-204).

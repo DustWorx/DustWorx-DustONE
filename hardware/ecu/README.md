@@ -51,3 +51,5 @@ Do późniejszego projektu: SYS-096 wymaga możliwości odczytu MAP z kompatybil
 Do późniejszego projektu: SYS-097 wymaga możliwości odczytu ciśnienia gazów w skrzyni korbowej 2T (CCPS) z kompatybilnego czujnika. Model, parametry i podział zasobów z MAP określimy w etapach projektowych; [karta CCPS](../../docs/interfaces/cisnienie-skrzyni-korbowej.md).
 
 Przy projekcie zasilania, pomiarów i torów wykonawczych uwzględnić próby autotestu dostępne przed rozruchem według SYS-203, w tym próbę wentylatora. Tory rozrusznika, zapłonu i wtrysku pozostają bez sterowania rozruchowego do zakończenia tych prób. Czasy gotowości i warunki zasilania wymagają bilansu i pomiarów, także przy wybudzeniu kopniakiem. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-203).
+
+Tor przewodowego START ma umożliwiać wybudzenie i odczyt aktualnego przytrzymania po zakończeniu autotestu według SYS-204. Uwzględnić ciągłość obserwacji stanu i zwolnienie przycisku podczas wybudzania. Interfejs oraz filtrację dobierzemy w projekcie. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-204).
