@@ -78,3 +78,5 @@ Do specyfikacji aplikacji: SYS-208 wymaga odczytu stanu usterki IAT, użycia war
 Po automatycznym powrocie ECU na rzeczywisty IAT aplikacja odczytuje aktualne źródło danych, status usterki i zachowaną historię DTC według SYS-209. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-209).
 
 Do specyfikacji aplikacji: SYS-210 wymaga odczytu diagnostycznego usterki barometru i stanu użycia stałej awaryjnej wartości ciśnienia. Dobór wartości oraz reguły jej konfiguracji i uprawnień pozostają do projektu. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-210).
+
+Po powrocie ECU do pomiaru barometru aplikacja odczytuje aktualne źródło BARO, status usterki i zachowaną historię DTC według SYS-211. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-211).
