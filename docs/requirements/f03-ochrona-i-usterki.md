@@ -594,6 +594,31 @@ Przy typowej kompensacji gęstości zaniżona temperatura przyjęta przez ECU mo
 
 IAT jest ważny dla dawkowania. Po jego utracie ECU może nadal znać położenie silnika z wału i fazy, a strategia zastępcza może umożliwić pracę w zweryfikowanym zakresie. Prawidłowość takiej strategii podczas pracy i rozruchu wymaga osobnych prób. Ewentualne ograniczenia oraz zastępczą temperaturę dobierzemy dla konkretnego profilu.
 
-Rozpatrujemy profil wtryskowy z potwierdzoną usterką IAT i wiarygodnymi pozostałymi wymaganymi sygnałami. **Pytanie 217 pozostaje otwarte.** Do decyzji pozostaje dopuszczenie dalszej pracy i rozruchu na osobno zweryfikowanych strategiach zastępczych, dopuszczenie wyłącznie dalszej pracy albo wymaganie naprawy przed dalszą pracą i rozruchem. W każdym wariancie obowiązują DTC i pozostałe zabezpieczenia.
+Rozpatrujemy profil wtryskowy z potwierdzoną usterką IAT i wiarygodnymi pozostałymi wymaganymi sygnałami. **Pytanie 217 pozostaje otwarte.** W wypowiedzi z 2026-11-18 właściciel zaproponował użycie temperatury ECU, np. z kanału temperatury barometru, jako pomocy przy utracie IAT. Oczekuje strategii awaryjnej pozwalającej jeździć możliwie normalnie. Wariant estymacji wymaga oceny i prób; do doprecyzowania pozostaje, czy dopuszczenie obejmie także nowy rozruch, osobno zweryfikowany dla profilu, czy tylko dalszą pracę. W każdym wariancie obowiązują DTC i pozostałe zabezpieczenia.
 
-Propozycja DustONE: praca i rozruch mogą być dopuszczone odpowiednio do osobno zweryfikowanej kalibracji właściwej dla profilu i usterki, w jej granicach. Strategia obejmowałaby zastępczą wartość temperatury oraz sposób kompensacji; wartości i warunki ustalimy w specyfikacji i potwierdzimy próbami, w tym zimnego i ciepłego silnika. Materiał producenta potwierdza wyposażenie motocykla. Wybór reakcji DustONE pozostaje do decyzji właściciela w pytaniu 217. Temperatura PCB pozostaje osobnym pomiarem według SYS-031.
+Proponowany kierunek to oszacowanie zastępczej IAT w granicach zweryfikowanej kalibracji profilu, w tym ocena pomocniczego użycia temperatury ECU opisana poniżej. Praca i rozruch wymagają osobnej walidacji. Temperatura PCB pozostaje osobną wielkością według SYS-031. Rozruch pozostaje do decyzji właściciela w pytaniu 217.
+
+### Wariant pomocniczej temperatury ECU — propozycja do oceny w pytaniu 217
+
+Propozycja wykorzystuje temperaturę ECU jako jedno z danych do oszacowania zastępczej IAT przy usterce. Podstawowy pomiar dolotu nadal pochodzi z IAT według SYS-031. Dobór konkretnego barometru i sposobu pomiaru temperatury pozostaje do wspólnej decyzji na właściwym etapie.
+
+[Bosch BME280, opis na s. 3 i uwaga 7 na s. 12](https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bme280-ds002.pdf#page=12) dopuszcza szacowanie temperatury otoczenia z kanału temperatury i wskazuje wpływ PCB oraz samonagrzewania na jego wskazanie. Jest to przykład własności pomiaru, a nie wybór komponentu do DustONE.
+
+Wniosek projektowy: po dostatecznym wyrównaniu temperatur taki odczyt może dać użyteczne odniesienie. W trakcie pracy i po gorącym postoju trzeba uwzględnić zmienny błąd i opóźnienie cieplne, zależne od obudowy, montażu i obciążeń ECU. Dokładność sensora nie opisuje całego błędu oszacowania dolotu. Warunek wyrównania ciśnienia dla barometru jest już przekazany do projektu obudowy w zakresie systemu.
+
+Przykład ilustracyjny: przy rzeczywistej IAT 20°C i zastąpieniu jej odczytem PCB 60°C prosty model gęstości przy tym samym ciśnieniu zaniży oszacowaną masę powietrza o około 12% (293,15/333,15 − 1). Rzeczywisty wpływ na dawkę zależy od strategii i kalibracji profilu. [Podstawa obliczenia — równanie stanu gazu](https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/equation-of-state/).
+
+Kandydat do realizacji, po potwierdzeniu użyteczności danych:
+
+1. Zapamiętać ostatnią wiarygodną IAT wraz z wiekiem próbki i stanem jej ważności.
+2. Szacować temperaturę na podstawie wiarygodnych dostępnych danych. Kandydatami są temperatura ECU, stan cieplny silnika z ECT i czas od wybudzenia lub zmiany stanu. Skład danych, model i zakres jego wiarygodności wynikną z pomiarów; warunki zimnego postoju oraz gorącego ponownego rozruchu wymagają odrębnej oceny.
+3. Strategię zastępczą powiązać z wymuszonym „Standard” według SYS-137. Celem jest zachowanie możliwie normalnej jazdy w zweryfikowanym zakresie. Ewentualne ograniczenia wynikają z prób i dopuszczalnej niepewności dawki. Stan IAT i dane oszacowane mają być rozróżnialne w diagnostyce; zamrożona ramka powinna pozwolić ocenić źródło oszacowania.
+
+#### Plan oceny wariantu
+
+- Najpierw porównać estymację z działającym, skalibrowanym referencyjnym IAT, rejestrując dane przed użyciem estymacji do sterowania dawką. Uwzględnić temperaturę ECU, IAT, ECT, stan odbiorników, warunki jazdy i znaczniki czasu.
+- Objąć pomiarami wyrównanie temperatur po postoju, zimne wybudzenie, nagrzewanie ECU, wolną i szybszą jazdę, gorący postój oraz ponowny rozruch. Sprawdzić wpływ włączenia wentylatora, świateł i innych obciążeń na odczyt temperatury ECU oraz zależność od montażu i obudowy.
+- Sprawdzić stare lub niedostępne ostatnie IAT oraz niesprawny pomocniczy pomiar ECU. Określić warunki korzystania z estymacji i postępowanie poza zweryfikowanym zakresem.
+- Po ocenie błędu estymacji przygotować próby kalibracji dawki i dozwolonego zakresu pracy, z zewnętrznym pomiarem lambda zgodnie z zakresem strojenia. Rozruch wymaga osobnej walidacji, jeśli zostanie objęty wyborem w pytaniu 217. Kryteria liczbowe ustalić przed wykonaniem prób.
+
+To plan oceny propozycji w aktywnym F03 i wejście do późniejszych pomiarów oraz projektu. Dobór komponentu i weryfikacja estymatora na produkcie pozostają w kolejce odpowiednich etapów.

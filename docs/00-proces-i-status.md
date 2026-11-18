@@ -67,7 +67,7 @@ Parametry wyliczane z osprzętu, charakterystyki czujników, wartości elementó
 | W03 — Weryfikacja wymagań | W kolejce, etap 5. | Zachowany [przydział 202 SYS do grup](verification/macierz-wymagan.md); kryteria, procedury i dowody do rozwinięcia. |
 | W06 — Bilanse i wybór komponentów | W kolejce, etapy 4 i 6. | Wymagane wejściowe parametry; ważne komponenty wybierzemy wspólnie. |
 
-**Najbliższy krok to ustalenie reakcji na usterkę pomiaru IAT w profilu wtryskowym — dalsza praca i rozruch (pytanie 217).** Przyjęte reakcje i plan prób są w [macierzy F03](requirements/f03-ochrona-i-usterki.md). Konkrety osprzętu, w tym wykonalność konwersji TPI, mają właścicieli i etapy w [przekazaniu F01](requirements/f01-sterowanie-silnikiem.md). Parametry elektryczne, bilanse i procedury wykonawcze pozostają w kolejce właściwych etapów.
+**Najbliższy krok to doprecyzowanie zakresu awaryjnego rozruchu przy usterce IAT (pytanie 217). Właściciel zaproponował pomocnicze wykorzystanie temperatury ECU i oczekuje możliwie normalnej dalszej jazdy; sposób estymacji wymaga oceny i prób.** Przyjęte reakcje i plan prób są w [macierzy F03](requirements/f03-ochrona-i-usterki.md). Konkrety osprzętu, w tym wykonalność konwersji TPI, mają właścicieli i etapy w [przekazaniu F01](requirements/f01-sterowanie-silnikiem.md). Parametry elektryczne, bilanse i procedury wykonawcze pozostają w kolejce właściwych etapów.
 
 ## Warunki przechodzenia dalej
 
