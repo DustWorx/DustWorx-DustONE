@@ -76,3 +76,5 @@ SYS-099: wybór zestawu po restarcie realizuje ECU, również bez HMI/PC; jest t
 Do specyfikacji aplikacji: SYS-208 wymaga odczytu stanu usterki IAT, użycia wartości zastępczej oraz dostępnych danych o źródle oszacowania w diagnostyce ECU. Wartość mierzona i oszacowana muszą być rozróżnialne. Model i dopuszczenie pracy/rozruchu należą do ECU i kalibracji profilu; zakres widoków ustalimy w pakiecie aplikacji. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-208).
 
 Po automatycznym powrocie ECU na rzeczywisty IAT aplikacja odczytuje aktualne źródło danych, status usterki i zachowaną historię DTC według SYS-209. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-209).
+
+Do specyfikacji aplikacji: SYS-210 wymaga odczytu diagnostycznego usterki barometru i stanu użycia stałej awaryjnej wartości ciśnienia. Dobór wartości oraz reguły jej konfiguracji i uprawnień pozostają do projektu. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-210).
