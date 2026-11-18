@@ -122,6 +122,20 @@ Ustalenie właściciela z 2026-11-01: przed pytaniem o nową funkcję silnika lu
 
 Przed pytaniem wskazujemy aktywny pakiet i cel. Przechodzimy do następnego pakietu dopiero po zapisanym zamknięciu poprzedniego; wpływ na późniejsze tematy odkładamy do ich kolejki. Najpierw określamy decyzje wpływające na sprzęt i wspólną PCB. Szczegóły niezależne od sprzętu można rozwijać później. Pytania pojedyncze z propozycjami służą ustalaniu preferencji, zakresu, brakujących informacji oraz wspólnemu wyborowi ważnych komponentów po przedstawieniu porównania. Obliczenia i propozycje rozwiązań technicznych przygotowuje asystent z uzasadnieniem; właściciel aktywnie uczestniczy w doborze części według powyższej zasady.
 
+### Sposób przedstawiania pytań
+
+Ustalenie właściciela z 2026-11-18: przed pytaniem z propozycjami krótko wyjaśniamy problem i podstawę decyzji:
+
+1. Rolę sygnału lub funkcji w ECU oraz jego znaczenie dla sterowania.
+2. Rozpatrywany przypadek, zakładane sprawne elementy i skutki utraty lub błędu sygnału.
+3. Wpływ na rozruch, pracę silnika, osprzęt i kierowcę — odpowiednio do tematu.
+4. Możliwe reakcje, ich korzyści i ograniczenia oraz uzasadnienie rekomendacji.
+5. Dane i próby potrzebne do potwierdzenia rozwiązania; przykłady liczbowe oznaczamy jako ilustracyjne.
+
+Następnie pokazujemy jedno pytanie w oknie wyboru z 2–3 zrozumiałymi propozycjami. Zakres wyjaśnienia dopasowujemy do problemu. Prośba o wyjaśnienie pozostawia pytanie otwarte i nie stanowi wyboru wariantu.
+
+### Kontrola kompletności
+
 Kompletność sprawdzamy według [mapy obszarów i otwartych tematów](requirements/pokrycie-funkcjonalne.md), a nie liczby zadanych pytań. Dla każdego obszaru przeglądamy normalną pracę, rozruch/wyłączenie, granice, brak opcjonalnego wyposażenia, usterki oraz serwis i aktualizację, odpowiednio do jego roli. Zapisujemy wymagania przyjęte, wyłączenia i kwestie otwarte. Każda istotna decyzja otrzymuje źródło; wymagania łączymy dalej z blokiem realizującym i weryfikacją.
 
 Przed zamknięciem architektury, wydaniem PCB i rozpoczęciem prób wykonujemy odpowiedni przegląd pokrycia. Późniejsza zmiana wymaga oceny wpływu na pozostałe urządzenia, I/O, zasoby, dokumentację i testy. Pełny przegląd kompletności oraz szczegółowa macierz realizacji i weryfikacji pozostają do opracowania; sama mapa obszarów ich nie zastępuje.
