@@ -35,3 +35,5 @@ Na postoju przy zgaszonym silniku HMI przekazuje wybór do zasilanego ECU i poka
 Po restarcie ECU HMI odczytuje faktycznie aktywny zestaw i bieżący stan oczekiwania z ECU (SYS-150).
 
 Po ponownym wyborze tego samego oczekującego zestawu HMI nadal pokazuje oczekiwanie według danych ECU. Termin wygaśnięcia pozostaje pierwotny (SYS-151).
+
+Do specyfikacji HMI: dla SYS-208 panel przedstawia zgłoszoną przez ECU usterkę IAT i rozróżnia wartość mierzoną od zastępczej według udostępnionego statusu. Wymuszenie „Standard” i odmowa zmiany zestawu podlegają SYS-137. Sposób prezentacji ustalimy we właściwym pakiecie; HMI nie wyznacza oszacowania IAT. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-208).
