@@ -82,3 +82,5 @@ Do specyfikacji aplikacji: SYS-210 wymaga odczytu diagnostycznego usterki barome
 Po powrocie ECU do pomiaru barometru aplikacja odczytuje aktualne źródło BARO, status usterki i zachowaną historię DTC według SYS-211. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-211).
 
 Do specyfikacji aplikacji: SYS-212 wymaga diagnostycznego odczytu usterki ECT i stanu użycia danych zastępczych do dawkowania, rozróżnialnych od wiarygodnego pomiaru rzeczywistej temperatury płynu. Model/wartości oraz ich konfigurację doprecyzujemy w projekcie. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-212).
+
+Po powrocie korekt dawkowania do prawidłowego ECT aplikacja odczytuje aktualne źródło danych, status usterki i zachowaną historię według SYS-213. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-213).

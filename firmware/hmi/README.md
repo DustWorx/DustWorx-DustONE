@@ -45,3 +45,5 @@ Do specyfikacji HMI: przy SYS-210 panel prezentuje otrzymaną z ECU usterkę bar
 Po powrocie do pomiaru barometru według SYS-211 HMI aktualizuje źródło ciśnienia i bieżące ostrzeżenie według statusu ECU oraz SYS-023. Historia pozostaje zachowana. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-211).
 
 Do specyfikacji HMI: dla SYS-212 rozróżnić brak wiarygodnego pomiaru temperatury płynu i dane zastępcze używane przez ECU do dawkowania. Prezentacja wynika ze statusu ECU; układ ekranu ustalimy we właściwym pakiecie. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-212).
+
+Po odzyskaniu ECT według SYS-213 HMI aktualizuje źródło temperatury i bieżące ostrzeżenie zgodnie ze statusem ECU i SYS-023. Historia pozostaje zachowana. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-213).
