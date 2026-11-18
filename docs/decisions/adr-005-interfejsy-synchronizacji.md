@@ -22,7 +22,7 @@ W odpowiedzi **A na pytanie 169** właściciel zatwierdził przerwanie próby ko
 
 - Uwzględnić odpowiednie tory wejściowe i ewentualne zasilanie czujnika, zabezpieczenia, filtrację oraz zasoby czasowe procesora. Liczba pinów i topologia nie zostały wybrane.
 - Ustalić modele referencyjne, zakresy i polaryzację sygnałów, interfejsy mas, zasilanie, progi i opóźnienia. Dla VR uwzględnić zakres amplitud od kopania/rozruchu do maksymalnych obrotów; dla Halla także rodzaj wyjścia i wymagane podciąganie.
-- Zakresy wejść są odrębne: wał VR/Hall (SYS-069), faza 4T tylko Hall z wyjściem cyfrowym (SYS-070). Układy znaczników, ich odniesienie do GMP, obsługiwane dekodery oraz kryteria wykrycia utraty i odzyskania synchronizacji pozostają do określenia. Dalszą pracę 4T o stałych fazach po zaniku impulsów fazy przy zachowanym wiarygodnym cyklu i wale określa SYS-205. Rozruch z trwającą usterką oraz pozostałe przypadki utraty fazy pozostają w F03. Nie przyjęto automatycznego rozpoznawania rodzaju czujnika.
+- Zakresy wejść są odrębne: wał VR/Hall (SYS-069), faza 4T tylko Hall z wyjściem cyfrowym (SYS-070). Układy znaczników, ich odniesienie do GMP, obsługiwane dekodery oraz kryteria wykrycia utraty i odzyskania synchronizacji pozostają do określenia. Dalszą pracę 4T o stałych fazach po zaniku impulsów fazy przy zachowanym wiarygodnym cyklu i wale określa SYS-205. Warunek prawidłowego sygnału fazy przy nowym uruchomieniu określa SYS-206. Pozostałe przypadki niezgodności i utraty wiarygodności fazy pozostają w F03. Nie przyjęto automatycznego rozpoznawania rodzaju czujnika.
 - Układy wejściowe i ważne elementy wybieramy wspólnie z właścicielem po analizie i porównaniu.
 
 ## Proponowana weryfikacja
@@ -39,4 +39,4 @@ Podstawa techniczna rozpoznawania fazy pełnego cyklu przez dodatkowy sygnał: [
 
 W odpowiedzi na pytanie 214 właściciel ustalił dalszą pracę po zaniku impulsów czujnika fazy w zsynchronizowanym 4T o stałych fazach rozrządu, gdy ECU zachowuje wiarygodny cykl 720° i prawidłowy sygnał wału. ECU utrzymuje bieżące sterowanie i rejestruje DTC według SYS-205. Odcięcie po utracie synchronizacji wału nadal podlega SYS-157. [Plan próby](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-205).
 
-Rozruch przy trwającej usterce czujnika fazy jest propozycją do decyzji w pytaniu 215. Możliwe realizacje i warunki ich dopuszczenia opisuje [macierz F03](../requirements/f03-ochrona-i-usterki.md#pytanie-215--rozruch-z-usterką-czujnika-fazy).
+W odpowiedzi B na pytanie 215 właściciel wymaga prawidłowego czujnika fazy przy nowym uruchomieniu profilu, który go wykorzystuje (SYS-206). Rozrusznik umożliwia bieżącą ocenę sygnału podczas obrotu zgodnie z istniejącymi warunkami i limitami; zapłon i wtrysk czekają na wymaganą synchronizację. Historia DTC jest zachowywana według SYS-019–025. [Plan próby](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-206).
