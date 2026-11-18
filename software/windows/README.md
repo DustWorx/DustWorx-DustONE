@@ -80,3 +80,5 @@ Po automatycznym powrocie ECU na rzeczywisty IAT aplikacja odczytuje aktualne ź
 Do specyfikacji aplikacji: SYS-210 wymaga odczytu diagnostycznego usterki barometru i stanu użycia stałej awaryjnej wartości ciśnienia. Dobór wartości oraz reguły jej konfiguracji i uprawnień pozostają do projektu. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-210).
 
 Po powrocie ECU do pomiaru barometru aplikacja odczytuje aktualne źródło BARO, status usterki i zachowaną historię DTC według SYS-211. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-211).
+
+Do specyfikacji aplikacji: SYS-212 wymaga diagnostycznego odczytu usterki ECT i stanu użycia danych zastępczych do dawkowania, rozróżnialnych od wiarygodnego pomiaru rzeczywistej temperatury płynu. Model/wartości oraz ich konfigurację doprecyzujemy w projekcie. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-212).
