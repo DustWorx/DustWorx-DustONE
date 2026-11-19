@@ -51,3 +51,5 @@ Po odzyskaniu ECT według SYS-213 HMI aktualizuje źródło temperatury i bież�
 Do specyfikacji HMI: SYS-214 wymaga informacji o niedostępnym pomiarze ciśnienia paliwa i stanie strategii zastępczej według danych ECU. Dane zastępcze pozostają odróżnialne od pomiaru. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-214).
 
 Dla SYS-215 HMI odróżnia dane nominalne używane przez ECU od wiarygodnego pomiaru ciśnienia, zgodnie z otrzymanym statusem. Sposób prezentacji ustalimy we właściwym pakiecie. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-215).
+
+Po zakończeniu strategii zastępczej według SYS-216 HMI aktualizuje źródło ciśnienia paliwa, stan strategii i bieżące ostrzeżenie według statusu ECU. Historia DTC pozostaje zachowana. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-216).
