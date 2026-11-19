@@ -1,6 +1,6 @@
 # ADR-002 — samodzielność ECU i HMI jako klient
 
-Data: 2026-10-25. Status: zatwierdzona zasada architektury; szczegóły realizacji otwarte.
+Data decyzji 2026-10-25. Uzupełnienie 2026-11-11 obejmuje nadzór obwodu STOP oraz odcięcie przez STOP i niezależny nadzór przy zawieszeniu głównego firmware ECU. Szczegóły realizacji są do określenia.
 
 ## Problem i opcje
 
@@ -11,6 +11,54 @@ Utrata HMI lub CAN może oznaczać wyłączenie silnika albo pozostawienie stero
 Właściciel projektu w odpowiedzi na pytanie 55 z 2026-10-25 wskazał, że ECU ma działać niezależnie od komunikacji z HMI, jest właścicielem danych, a HMI wysyła żądania odczytu lub polecenia, np. zmiany map. W odpowiedzi na pytanie 56 i późniejszym doprecyzowaniu tego samego dnia potwierdził, że przyciski obsługi HMI pozostają podłączone do HMI, natomiast START i STOP są od niego niezależne.
 
 ECU samodzielnie steruje silnikiem i jego zabezpieczeniami, zarządza konfiguracją, mapami, diagnostyką oraz danymi eksploatacyjnymi motocykla. HMI jest klientem: prezentuje dane i przekazuje żądania użytkownika. ECU rozstrzyga wykonanie żądania i podaje rzeczywisty stan. Obecność HMI nie jest warunkiem pracy ECU; sama utrata HMI/CAN nie gasi silnika. Powiązania: [SYS-046 i SYS-047](../01-zakres-systemu.md).
+
+W odpowiedzi **A na pytanie 170** (2026-11-11) właściciel zatwierdził utrzymanie wyłączonego rozrusznika przy naciśnięciu START na zgaszonym silniku z aktywnym przewodowym STOP. Po zwolnieniu STOP wymagane jest nowe naciśnięcie START (SYS-160). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md).
+
+W odpowiedzi **A na pytanie 171** (2026-11-11) właściciel zatwierdził odłączenie rozrusznika po wykryciu przewodowego STOP podczas kręcenia. ECU kończy próbę. Po zwolnieniu STOP potrzebne jest nowe naciśnięcie START (SYS-161). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md).
+
+W odpowiedzi **A na pytanie 172** (2026-11-11) właściciel zatwierdził utrzymanie odcięcia po zwolnieniu STOP podczas obrotu wału. Powrót sterowania wymaga zatrzymania wału i nowej świadomej próby rozruchu z wiarygodną synchronizacją (SYS-162). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md).
+
+W odpowiedzi **A na pytanie 173** (2026-11-11) właściciel zatwierdził nadzór przewodowego STOP w wybudzonym ECU. ECU rozpoznaje przerwę w obwodzie także przy zwolnionym przycisku, niezależnie od HMI i CAN (SYS-163). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md).
+
+W odpowiedzi na **pytanie 174** (2026-11-11) właściciel ustalił reakcję diagnostyczną na przerwę w obwodzie STOP. ECU zgłasza DTC, kontynuuje sterowanie silnikiem i dopuszcza nową próbę rozruchu przy spełnieniu pozostałych warunków (SYS-164). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-164).
+
+W odpowiedzi **A na pytanie 175** (2026-11-11) właściciel zatwierdził odrębne rozpoznawanie zwarcia przewodu sygnałowego STOP do masy. Wybudzone ECU odróżnia je od naciśnięcia sprawnego przycisku niezależnie od HMI i CAN (SYS-165). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-165).
+
+W odpowiedzi **A na pytanie 176** (2026-11-11) właściciel zatwierdził zapis DTC z zamrożoną ramką po potwierdzonym zwarciu STOP do masy. ECU kontynuuje sterowanie i dopuszcza nowy rozruch przy spełnieniu pozostałych warunków (SYS-166). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-166).
+
+W odpowiedzi **A na pytanie 177** (2026-11-11) właściciel zatwierdził działanie sprawnego przewodowego STOP przy zawieszeniu głównego firmware ECU. Naciśnięcie STOP wymusza odcięcie zapłonu oraz wtrysku w wyposażonych profilach (SYS-167). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-167).
+
+W odpowiedzi **A na pytanie 178** (2026-11-11) właściciel zatwierdził odłączenie rozrusznika przez sprawny przewodowy STOP również przy zawieszeniu głównego firmware i przytrzymanym START (SYS-168). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-168).
+
+W odpowiedzi **A na pytanie 179** (2026-11-11) właściciel zatwierdził samoczynne odcięcie zapłonu, wtrysku i rozrusznika po wykryciu zawieszenia głównego firmware. Nadzór wymusza odcięcie niezależnie od resetu i osobno inicjuje reset (SYS-169). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-169).
+
+W odpowiedzi **A na pytanie 180** (2026-11-11) właściciel zatwierdził wznowienie zapłonu i wtrysku po resecie nadzoru dopiero po zatrzymaniu wału, w nowej świadomej próbie rozruchu z wiarygodną synchronizacją (SYS-170). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-170).
+
+W odpowiedzi **A na pytanie 181** (2026-11-11) właściciel zatwierdził odrzucenie START przed potwierdzeniem zatrzymania wału po resecie nadzoru. Rozrusznik można załączyć po nowym naciśnięciu START wykonanym po zatrzymaniu (SYS-171). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-171).
+
+W odpowiedzi na **pytanie 182** (2026-11-11) właściciel ustalił zapis przyczyny i dostępnych danych zdarzenia w zamrożonej ramce po potwierdzonym resecie nadzoru (SYS-172). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-172).
+
+W odpowiedzi **A na pytanie 183** (2026-11-11) właściciel zatwierdził limit automatycznych prób uruchomienia po powtarzających się resetach nadzoru i utrzymanie odcięcia po osiągnięciu limitu (SYS-173). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-173).
+
+W odpowiedzi na **pytanie 184** (2026-11-11) właściciel wskazał automatyczne odzyskiwanie ECU. Po limicie standardowych prób ECU samoczynnie rozpoczyna odzyskiwanie przy utrzymanym odcięciu (SYS-174). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-174).
+
+W odpowiedzi **A na pytanie 185** (2026-11-11) właściciel zatwierdził samodzielne odzyskiwanie gotowości ECU, a po jego niepowodzeniu udostępnienie naprawy z Windows (SYS-175). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-175).
+
+W odpowiedzi **B na pytanie 186** (2026-11-11) właściciel zatwierdził osobny limit kilku samodzielnych prób odzyskania. Po jego wyczerpaniu bez odzyskania gotowości ECU udostępnia naprawę z Windows (SYS-176). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-176).
+
+W odpowiedzi **A na pytanie 187** (2026-11-11) właściciel zatwierdził bezpośredni powrót do trybu naprawy z Windows i utrzymanie odcięcia po zaniku zasilania przed rozpoczęciem naprawy (SYS-177). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-177).
+
+W odpowiedzi **A na pytanie 188** (2026-11-11) właściciel zatwierdził zachowanie wykorzystania limitu samodzielnych prób po zaniku zasilania, wliczając przerwaną próbę (SYS-178). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-178).
+
+W odpowiedzi **B na pytanie 189** (2026-11-11) właściciel zatwierdził zachowanie zakończonych standardowych prób i ponowienie przerwanej próby w tym samym miejscu limitu po zaniku zasilania (SYS-179). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-179).
+
+W odpowiedzi **A na pytanie 190** (2026-11-11) właściciel zatwierdził zamknięcie serii po potwierdzeniu gotowości i okresie stabilnej pracy ECU. Ponowne zawieszenie w tym okresie podlega limitowi bieżącej serii (SYS-180). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-180).
+
+W odpowiedzi **A na pytanie 191** (2026-11-12) właściciel zatwierdził utrzymanie odcięcia po zaniku zasilania podczas pracy silnika. Gdy zasilanie wróci przy obracającym się wale, ponowne dopuszczenie zapłonu i wtrysku wymaga zatrzymania i nowej świadomej próby (SYS-181). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-181).
+
+W odpowiedzi **A na pytanie 192** (2026-11-12) właściciel zatwierdził zakończenie rozruchu elektrycznego po zaniku zasilania ECU. Po jego powrocie rozrusznik oczekuje na potwierdzone zatrzymanie wału i nowe naciśnięcie START (SYS-182). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-182).
+
+W odpowiedzi **A na pytanie 193** (2026-11-12) właściciel zatwierdził nową próbę kopniakiem po potwierdzonym zatrzymaniu wału i odzyskaniu wiarygodnej synchronizacji, gdy zanik zasilania przerwał trwającą próbę, a zasilanie wróciło przy nadal obracającym się wale (SYS-183). [Plan próby F03](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-183).
 
 ## Konsekwencje
 

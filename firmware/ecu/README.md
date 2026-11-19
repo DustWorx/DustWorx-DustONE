@@ -68,6 +68,80 @@ SYS-119 określa wybór mapy położenia zadanego elektronicznego zaworu wydecho
 
 SYS-120 określa bazowy zapłon gaźnika z aktywnego zestawu według obrotów bez TPS albo według obrotów i położenia przepustnicy z TPS.
 
+SYS-157 wymaga odcięcia zapłonu, a w profilach wtryskowych także wtrysku, po potwierdzonej utracie synchronizacji wału podczas pracy. Powrót sterowania wymaga zatrzymania i nowej świadomej próby ze zweryfikowaną synchronizacją. [Macierz F03](../../docs/requirements/f03-ochrona-i-usterki.md).
+
+Według SYS-158 potwierdzona utrata wcześniej uzyskanej synchronizacji podczas rozruchu elektrycznego przed rozpoznaniem pracy silnika kończy próbę. Firmware odłącza rozrusznik także przy trzymanym START. Kolejna próba wymaga zatrzymania, zwolnienia i nowego naciśnięcia START.
+
+Według SYS-159 potwierdzona utrata synchronizacji podczas rozruchu kopniakiem przed rozpoznaniem pracy silnika kończy próbę. Odcięcie zapłonu i wtrysku trwa do zatrzymania wału i dopuszczenia nowej świadomej próby z wiarygodną synchronizacją.
+
+Według SYS-160 naciśnięcie START przy zgaszonym silniku i aktywnym przewodowym STOP utrzymuje rozrusznik wyłączony. Po zwolnieniu STOP potrzebne jest nowe naciśnięcie START. [Macierz F03](../../docs/requirements/f03-ochrona-i-usterki.md).
+
+Według SYS-161 przewodowy STOP wykryty podczas kręcenia wyłącza rozrusznik i kończy próbę. Po zwolnieniu STOP ECU wymaga ponownego naciśnięcia START.
+
+Według SYS-162 zwolnienie przewodowego STOP przy nadal obracającym się wale utrzymuje odcięcie. Ponowne dopuszczenie zapłonu i wtrysku wymaga zatrzymania wału i nowej świadomej próby z wiarygodną synchronizacją.
+
+Po zgaszeniu silnika wskutek przewrócenia potwierdzenie postawienia motocykla przy przytrzymanym START pozostawia rozrusznik wyłączony. ECU dopuszcza nową próbę po zwolnieniu i ponownym naciśnięciu START przy spełnionych warunkach rozruchu (SYS-040 i SYS-197).
+
+Jeśli podczas pracy silnika ECU potwierdzi usterkę wykrywania przewrócenia i blokada po upadku jest nieaktywna, steruje dalej według bieżącego profilu, zapisuje DTC z zamrożoną ramką i zgłasza niedostępność wykrywania do HMI (SYS-198).
+
+Przy potwierdzonej usterce toru i zgaszonym silniku ECU dopuszcza świadomy rozruch przez START lub kopniak, jeśli blokada po przewróceniu jest nieaktywna i pozostałe warunki rozruchu są spełnione (SYS-199). ECU udostępnia stan usterki HMI i samodzielnie rozstrzyga o rozruchu.
+
+Po potwierdzeniu usterki toru ECU oznacza wykrywanie przewrócenia jako niedostępne i zwalnia blokadę po upadku. Po jej zwolnieniu rozruch wymaga nowej świadomej próby. Jeżeli START pozostał wciśnięty, ECU czeka na zwolnienie i nowe naciśnięcie (SYS-200).
+
+Po potwierdzeniu wiarygodnego pomiaru ECU przywraca wykrywanie przewrócenia podczas bieżącej pracy silnika i aktualizuje stan dla HMI według SYS-201.
+
+Przy wybudzeniu ze snu ECU wstrzymuje rozruch do ponownej wiarygodnej oceny położenia. Potwierdzone przewrócenie blokuje rozruch, a prawidłowe położenie pozwala dopuścić świadomą próbę po spełnieniu pozostałych warunków. W prawidłowym położeniu i ze sprawnym czujnikiem ocena ma zmieścić się w czasie przygotowania ECU do próby rozruchu według SYS-202, a reakcję na potwierdzoną usterkę toru określają SYS-199 i SYS-200.
+
+Według SYS-163 wybudzone ECU rozróżnia zwolniony i naciśnięty przycisk STOP w sprawnym obwodzie oraz przerwę w obwodzie. Nadzór działa niezależnie od HMI i CAN. [Macierz F03](../../docs/requirements/f03-ochrona-i-usterki.md).
+
+SYS-164 wymaga zapisu DTC z zamrożoną ramką przy potwierdzonej przerwie w STOP. ECU kontynuuje pracę i dopuszcza nową próbę rozruchu przy spełnieniu pozostałych warunków.
+
+Według SYS-165 ECU klasyfikuje zwarcie przewodu sygnałowego STOP do masy jako stan usterki odrębny od naciśnięcia sprawnego przycisku i pozostałych stanów według SYS-163.
+
+SYS-166 wymaga zapisu DTC z zamrożoną ramką po potwierdzonym zwarciu STOP do masy. ECU kontynuuje pracę i dopuszcza nową próbę rozruchu przy spełnieniu pozostałych warunków.
+
+SYS-167 wymaga działania odcięcia zapłonu i wtrysku przez STOP przy zawieszeniu głównego firmware. Po użyciu STOP podczas pracy silnika firmware uwzględnia warunki ponownego dopuszczenia sterowania według SYS-162.
+
+SYS-168 wymaga odłączenia rozrusznika przez STOP przy zawieszonym głównym firmware i przytrzymanym START. Nowa próba po odzyskaniu działania wymaga zwolnienia STOP oraz puszczenia i ponownego naciśnięcia START według SYS-161.
+
+Według SYS-169 niezależny nadzór po wykryciu zawieszenia głównego firmware odcina zapłon, wtrysk i rozrusznik oraz osobno inicjuje reset.
+
+Według SYS-170 ECU po takim resecie utrzymuje odcięcie zapłonu i wtrysku przy obracającym się wale, również po odzyskaniu synchronizacji. Powrót sterowania wymaga potwierdzonego zatrzymania i nowej świadomej próby z wiarygodną synchronizacją oraz spełnienia pozostałych warunków.
+
+Według SYS-171 ECU po resecie nadzoru odrzuca START naciśnięty przed potwierdzeniem zatrzymania wału. Załączenie rozrusznika wymaga nowego naciśnięcia po zatrzymaniu i spełnienia pozostałych warunków rozruchu.
+
+Według SYS-172 ECU zapisuje DTC i zamrożoną ramkę po potwierdzeniu resetu nadzoru. Ramka zawiera przyczynę resetu i wiarygodne dane związane ze zdarzeniem w zakresie ich dostępności.
+
+Według SYS-173 nadzór ogranicza automatyczne próby uruchomienia przy powtarzających się resetach przed ukończeniem startu ECU. Kryterium zakończenia uruchamiania będzie wejściem do projektu komunikacji firmware z nadzorem.
+
+Według SYS-174 ECU po limicie standardowych prób samoczynnie rozpoczyna odzyskiwanie przy utrzymanym odcięciu zapłonu, wtrysku i rozrusznika. Powrót do rozruchu podlega SYS-170 i SYS-171. Mechanizm uruchamiania odzyskiwania wymaga projektu.
+
+Według SYS-175 ECU najpierw podejmuje samodzielne odzyskiwanie gotowości. Po niepowodzeniu udostępnia przewodowy tryb naprawy dla Windows także przy nieuruchomionym głównym firmware.
+
+Według SYS-176 odzyskiwanie ma osobny limit kilku prób. ECU kończy sekwencję po potwierdzeniu gotowości albo przechodzi do naprawy z Windows po wyczerpaniu limitu. Wartość limitu i kryteria zakończenia próby wymagają projektu.
+
+Według SYS-177 ECU po zaniku zasilania w stanie oczekiwania na naprawę odtwarza ten stan i bezpośrednio udostępnia tryb naprawy z Windows. Odcięcie obowiązuje od chwili powrotu zasilania.
+
+Według SYS-178 po zaniku zasilania w trakcie samodzielnej próby ECU odtwarza wykorzystanie limitu i zalicza przerwaną próbę jeden raz. Po wyczerpaniu limitu udostępnia naprawę z Windows.
+
+Według SYS-179 ECU po zaniku zasilania w trakcie standardowej próby zachowuje liczbę zakończonych prób i ponawia przerwaną w tym samym miejscu limitu. Po wyczerpaniu limitu bez gotowości rozpoczyna odzyskiwanie.
+
+Według SYS-180 ECU zamyka serię standardowych prób lub samodzielnego odzyskiwania po potwierdzeniu gotowości i ustalonym okresie stabilnej pracy. Ponowne zawieszenie w tym okresie obciąża bieżącą serię.
+
+Według SYS-181 po zaniku zasilania podczas pracy silnika i powrocie zasilania przy obracającym się wale ECU utrzymuje odcięcie zapłonu i wtrysku. Dopuszczenie sterowania wymaga potwierdzonego zatrzymania wału i nowej świadomej próby z wiarygodną synchronizacją.
+
+Według SYS-182 zanik zasilania podczas rozruchu elektrycznego kończy próbę. Po powrocie zasilania rozrusznik pozostaje wyłączony do potwierdzenia zatrzymania wału i nowego naciśnięcia START, przy spełnieniu pozostałych warunków.
+
+Według SYS-183 po zaniku zasilania podczas rozpoczętej próby kopniakiem i powrocie przy obracającym się wale ECU utrzymuje odcięcie zapłonu i wtrysku. Dopuszcza sterowanie w nowej próbie kopniakiem po potwierdzonym zatrzymaniu i z wiarygodną synchronizacją.
+
+Według SYS-184 potwierdzona usterka pomiaru temperatury płynu powoduje zapis DTC z zamrożoną ramką. W wyposażonym profilu ECU lokalnie włącza sprawny wentylator podczas pracy silnika przy utrzymującej się potwierdzonej usterce. Po potwierdzeniu zatrzymania silnika kończy to wymuszenie także przy włączonym chłodzeniu po zgaszeniu (SYS-185). Przy zgaszonym silniku ECU przyjmuje ręczne żądanie z HMI przy potwierdzonej usterce zgodnie z SYS-186. Egzekwuje limit czasu i odcięcie napięciowe według SYS-061 oraz zabezpieczenia wyjścia. Przy potwierdzeniu usterki podczas automatycznego chłodzenia po zgaszeniu wycofuje żądanie automatyczne. Ręczne żądanie może podtrzymać pracę na warunkach SYS-186 (SYS-187). Po odzyskaniu wiarygodnego pomiaru automatyczne chłodzenie może wrócić według SYS-188, z zachowaniem pierwotnego terminu zakończenia.
+
+Przy potwierdzonym przegrzaniu podczas pracy silnika z wiarygodnego pomiaru ECU przekazuje stan do HMI i prowadzi sterowanie według bieżącego profilu oraz obowiązujących zabezpieczeń (SYS-189).
+
+Po odłączeniu wyjścia wentylatora z powodu potwierdzonego przeciążenia ECU zapisuje DTC i zamrożoną ramkę oraz przekazuje stan usterki do HMI według SYS-190.
+
+ECU utrzymuje blokadę zwykłego sterowania wentylatorem po przeciążeniu i po zgaszeniu silnika. Przyjęte potwierdzenie z HMI zleca jedną ograniczoną próbę z pomiarem prądu. ECU odblokowuje zwykłe sterowanie po wyniku potwierdzającym sprawność (SYS-191–192). Po każdym wybudzeniu ze snu ECU uruchamia autotest zgodnie z konfiguracją (SYS-194). Odtwarza zapamiętany stan usterki wentylatora i automatycznie wykonuje ograniczoną próbę z pomiarem prądu, gdy warunki na to pozwalają (SYS-193). Testy oczekujące na warunki zachowują odrębny status. Przed dopuszczeniem rozruchu ECU kończy wszystkie próby dostępne przy zgaszonym silniku według SYS-203. Przy zwykłym wybudzeniu trzymany START uruchamia rozrusznik po uzyskaniu gotowości według SYS-204. Puszczenie przed gotowością kończy żądanie. Reguły nowego naciśnięcia po odcięciach mają pierwszeństwo. Po zakończeniu prób dopuszczenie wynika z ich wyników i właściwych reakcji na usterki; rozruch pozostaje niezależny od gotowości HMI. ECU automatycznie wykonuje odłożoną próbę wentylatora po powrocie warunków w tym samym okresie wybudzenia (SYS-195). Po wyniku negatywnym każdemu kolejnemu wybudzeniu odpowiada jedna próba automatyczna przy odpowiednich warunkach (SYS-196).
+
 SYS-121 określa zgłoszenie usterki TPS i awaryjny zapłon gaźnika ze zweryfikowanej krzywej zależnej od obrotów, przy prawidłowej synchronizacji wału.
 
 SYS-122 przypisuje krzywą awaryjną do konfiguracji silnika jako wspólną dla jej zestawów map.
@@ -133,3 +207,27 @@ SYS-151 wymaga zachowania pierwotnego terminu oczekiwania po ponownym wyborze te
 SYS-101: ECU przyjmuje robocze zmiany wybranych wartości aktywnego i nieaktywnych zestawów podczas pracy silnika. Edycja nie przełącza zestawu; zmiany nieaktywnego wpływają na silnik dopiero po jego świadomym wybraniu. Trwały zapis nadal podlega SYS-095. Szczegóły: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 
 SYS-099: po restarcie ECU aktywuje ostatnio wybrany prawidłowy zestaw spośród trwale zapisanych, także bez HMI. Zapamiętanie wyboru i zapis wartości map mają odrębne reguły; brak automatycznego utrwalania edycji na żywo. SYS-100 wymaga po prawidłowym śnie/wybudzeniu odrzucenia roboczej edycji i użycia trwale zapisanych wartości, bez automatycznego utrwalania. Mechanizm pamięci wyboru, walidacja, gotowość do rozruchu i przerwana sekwencja snu są do projektu: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
+
+Według SYS-205 w 4T o stałych fazach rozrządu, po prawidłowym rozpoznaniu cyklu, brak impulsów czujnika fazy przy zachowanej wiarygodności cyklu 720° i wału dopuszcza dalsze bieżące sterowanie oraz zapis DTC z zamrożoną ramką. ECU zachowuje bieżący zestaw map i jego zwykłą obsługę. Utrzymywanie cyklu na podstawie wału działa równolegle z diagnostyką wejścia fazy. Pozostałe reakcje ochronne, w tym SYS-157, nadal obowiązują. Nowe uruchomienie profilu wykorzystującego czujnik fazy wymaga prawidłowego sygnału według SYS-206. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-205).
+
+Według SYS-206 zapłon i wtrysk nowej próby w profilu wykorzystującym czujnik fazy czekają na prawidłowy sygnał fazy i rozpoznanie cyklu 720° z wałem. Rozrusznik umożliwia ocenę podczas obrotu, przy spełnieniu warunków i limitów SYS-048/049 oraz SYS-203/204. Ocena sygnału odbywa się bez wymagania wcześniejszego ręcznego kasowania DTC; historia pozostaje zachowana. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-206).
+
+Według SYS-207 potwierdzona niezgodność fazy z wałem podczas pracy powoduje odcięcie zapłonu i wtrysku oraz zapis DTC z zamrożoną ramką. Powrót zgodnych sygnałów przed zatrzymaniem wału utrzymuje odcięcie. Wznowienie wymaga zatrzymania wału, nowej świadomej próby i prawidłowej synchronizacji według SYS-206. START sprzed zatrzymania jest odrzucany. Obowiązuje reakcja „Standard” według SYS-137/147. Sterowanie działa lokalnie bez HMI i CAN. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-207).
+
+Według SYS-208 potwierdzona usterka IAT dopuszcza dalszą pracę i nowy rozruch na osobno zweryfikowanych strategiach profilu. Model może pomocniczo korzystać z temperatury ECU, ostatniej wiarygodnej IAT z jej wiekiem i innych dostępnych danych w zakresie potwierdzonej przydatności. Obowiązują „Standard”, blokada przełączania, DTC z zamrożoną ramką i oznaczenie wartości zastępczej. Brak odpowiedniej zweryfikowanej strategii oznacza kontrolowane zatrzymanie albo blokadę uruchomienia. Powrót na prawidłowy IAT określa SYS-209. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-208).
+
+Według SYS-209 po potwierdzeniu odzyskanej wiarygodności IAT ECU automatycznie przechodzi z oszacowania na rzeczywisty pomiar w bieżącej pracy silnika, zgodnie z przejściem zweryfikowanym dla profilu. Zachowuje historię DTC, wybór „Standard” oraz pozostałe aktywne blokady według istniejących reguł. Kryteria potwierdzenia i przebieg przejścia wymagają projektu. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-209).
+
+Według SYS-210 potwierdzona usterka barometru dopuszcza dalszą pracę i ponowne rozruchy przy spełnieniu pozostałych warunków. ECU wyłącza kompensację opartą na bieżącym pomiarze BARO i przyjmuje stałą awaryjną wartość ciśnienia określoną w oprogramowaniu. Obowiązują DTC, oznaczenie wartości zastępczej oraz „Standard” według SYS-137. Wartość, miejsce w obliczeniach dawki i zakres stosowania wymagają projektu oraz prób dla profilu; powrót do pomiaru określa SYS-211. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-210).
+
+Według SYS-211 po potwierdzeniu odzyskanej wiarygodności barometru ECU automatycznie przechodzi ze stałej awaryjnej na rzeczywisty pomiar i kompensację w bieżącej pracy silnika, zgodnie z przejściem zweryfikowanym dla profilu. Zachowuje historię DTC, wybór „Standard” i pozostałe aktywne blokady według istniejących reguł. Kryteria oraz przebieg przejścia wymagają projektu. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-211).
+
+Według SYS-212 ECU dopuszcza pracę i rozruch przy usterce ECT na osobno zweryfikowanych strategiach profilu; bez właściwej strategii kontrolowanie zatrzymuje silnik albo blokuje uruchomienie. Model/wartości zastępcze wymagają projektu i oznaczenia ich statusu. Obowiązują DTC, „Standard”, pozostałe zabezpieczenia i reakcje wentylatora SYS-184–188. Powrót korekt dawkowania określa SYS-213. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-212).
+
+Według SYS-213 po potwierdzeniu odzyskanego wiarygodnego ECT ECU automatycznie wraca do korekt dawkowania opartych na pomiarze podczas bieżącej pracy, ze zweryfikowanym przejściem profilu. Zachowuje historię DTC, wybór „Standard” i pozostałe aktywne blokady. Reakcje chłodzenia i ocena przegrzania korzystają z pomiaru według SYS-184–189. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-213).
+
+Według SYS-214 ECU dopuszcza pracę i ponowne rozruchy przy usterce pomiaru ciśnienia paliwa na zweryfikowanej strategii profilu. Udostępnia DTC, brak wiarygodnego pomiaru i stan danych zastępczych; obowiązują „Standard” i pozostałe zabezpieczenia. Regułę pompy i nominalnych parametrów określa SYS-215; konkretne wartości oraz kalibracja wymagają projektu i walidacji. [Analiza i plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-214).
+
+Według SYS-215 zgodny profil zachowuje normalne sterowanie pompą niezależne od niesprawnego pomiaru i używa nominalnych parametrów ciśnienia oraz odpowiadającej im kalibracji wtrysku. Układ zależny od utraconego sygnału wymaga osobno zweryfikowanej strategii pompy. Dane nominalne pozostają oznaczone. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-215).
+
+Według SYS-216 po potwierdzeniu odzyskanej wiarygodności pomiaru ciśnienia paliwa i warunków normalnej pracy ECU automatycznie kończy strategię zastępczą podczas bieżącej pracy. Przejście w dawkowaniu i sterowaniu pompą odpowiada profilowi oraz wymaga weryfikacji. Historia DTC, wybór „Standard” i inne aktywne blokady pozostają według istniejących reguł. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-216).

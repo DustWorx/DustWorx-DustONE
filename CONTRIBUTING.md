@@ -14,6 +14,8 @@
 
 Ustalenie właściciela z 2026-11-04: etapy i pakiety prowadzimy kolejno, zamykając bieżący przed następnym. Aktywny jest jeden pakiet; wpływ na dalszy etap zapisujemy w jego kolejce. Aktualną kolejność, kryteria zamknięcia i status utrzymujemy w [dokumencie procesowym](docs/00-proces-i-status.md).
 
+Pytanie z propozycjami poprzedzamy krótkim wyjaśnieniem problemu i uzasadnieniem rekomendacji według [sposobu przedstawiania pytań](docs/00-proces-i-status.md#sposób-przedstawiania-pytań).
+
 ## Zmiany w repozytorium
 
 - `main` przechowuje aktualną, spójną wersję projektu. Dokumenty robocze mogą się tam znajdować, jeżeli mają jawny status.
