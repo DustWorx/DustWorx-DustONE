@@ -86,3 +86,5 @@ Do specyfikacji aplikacji: SYS-212 wymaga diagnostycznego odczytu usterki ECT i 
 Po powrocie korekt dawkowania do prawidłowego ECT aplikacja odczytuje aktualne źródło danych, status usterki i zachowaną historię według SYS-213. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-213).
 
 Do specyfikacji aplikacji: dla SYS-214 odczyt diagnostyczny rozróżnia usterkę pomiaru ciśnienia paliwa, jego niedostępność i stan danych zastępczych. Parametry oraz reguły ich konfiguracji pozostają do projektu. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-214).
+
+Dla SYS-215 aplikacja odczytuje nominalne dane ciśnienia i stan aktywnej strategii z ECU, odróżniając je od pomiaru. Wartości, kalibrację i sposób konfiguracji określimy w projekcie. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-215).

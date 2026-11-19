@@ -49,3 +49,5 @@ Do specyfikacji HMI: dla SYS-212 rozróżnić brak wiarygodnego pomiaru temperat
 Po odzyskaniu ECT według SYS-213 HMI aktualizuje źródło temperatury i bieżące ostrzeżenie zgodnie ze statusem ECU i SYS-023. Historia pozostaje zachowana. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-213).
 
 Do specyfikacji HMI: SYS-214 wymaga informacji o niedostępnym pomiarze ciśnienia paliwa i stanie strategii zastępczej według danych ECU. Dane zastępcze pozostają odróżnialne od pomiaru. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-214).
+
+Dla SYS-215 HMI odróżnia dane nominalne używane przez ECU od wiarygodnego pomiaru ciśnienia, zgodnie z otrzymanym statusem. Sposób prezentacji ustalimy we właściwym pakiecie. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-215).
