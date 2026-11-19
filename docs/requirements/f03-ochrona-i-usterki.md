@@ -1,6 +1,6 @@
 # F03 — ochrona i reakcje na usterki
 
-Stan na 2026-11-18. **F03 aktywny po zamknięciu F02.** Macierz robocza łączy zdarzenie, reakcję i warunek powrotu. Zatwierdzone wymagania są w [rejestrze SYS](../01-zakres-systemu.md). Kolejność pakietów określa [status projektu](../00-proces-i-status.md).
+Stan na 2026-11-19. **F03 aktywny po zamknięciu F02.** Macierz robocza łączy zdarzenie, reakcję i warunek powrotu. Zatwierdzone wymagania są w [rejestrze SYS](../01-zakres-systemu.md). Kolejność pakietów określa [status projektu](../00-proces-i-status.md).
 
 | Zdarzenie lub temat | Przyjęta reakcja i warunek powrotu | Do rozstrzygnięcia w F03 | Plan prób |
 | --- | --- | --- | --- |
@@ -702,8 +702,16 @@ Odzyskany pomiar jest używany przez automatykę chłodzenia i ocenę przegrzani
 
 ## Pytanie 223 — usterka pomiaru ciśnienia paliwa
 
-Tor pomiaru ciśnienia paliwa jest wymagany przez SYS-029. [Haltech — czujnik ciśnienia paliwa](https://support.haltech.com/portal/en/kb/articles/fuel-pressure) opisuje zastosowanie do diagnostyki, oceny różnicy ciśnień na wtryskiwaczu i funkcji ochronnych. Różnica ciśnienia wpływa na model przepływu przez wtryskiwacz. To podstawa znaczenia sygnału; sposób jego użycia w obliczeniach DustONE wymaga specyfikacji strategii profilu.
+Tor pomiaru ciśnienia paliwa jest wymagany przez SYS-029. Czujnik pozwala nadzorować zasilanie wtrysku. Różnica ciśnień po obu stronach wtryskiwacza wpływa na jego wydatek, dlatego pomiar może również uczestniczyć w obliczeniu dawki. [Haltech — czujnik ciśnienia paliwa](https://support.haltech.com/portal/en/kb/articles/fuel-pressure) opisuje diagnostykę, model przepływu według różnicy ciśnień i funkcje ochronne. Sposób wykorzystania pomiaru w obliczeniach DustONE wymaga specyfikacji strategii profilu.
 
-Rozpatrujemy potwierdzoną usterkę toru, np. przerwę w obwodzie skonfigurowanego czujnika. ECU traci wiarygodną informację o ciśnieniu paliwa. Reakcja na rzeczywisty spadek ciśnienia przy sprawnym pomiarze będzie osobnym przypadkiem tego samego obszaru F03.
+Przykład: podczas jazdy przerywa się przewód skonfigurowanego czujnika. Pompa i regulator mogą nadal pracować poprawnie, lecz ECU traci wiarygodną informację o aktualnym ciśnieniu. Nadzór oparty na tym pomiarze staje się niedostępny. Gdy profil używa odczytu do korekty dawki, potrzebuje strategii zastępczej. Reakcja na rzeczywisty spadek ciśnienia przy sprawnym pomiarze będzie osobnym przypadkiem tego samego obszaru F03.
 
-Do ustalenia pozostaje dalsza praca i nowy rozruch profilu wtryskowego przy usterce tego pomiaru oraz wiarygodnych pozostałych wymaganych sygnałach. Propozycja: dopuścić oba zastosowania na zweryfikowanej strategii profilu niewymagającej niesprawnego pomiaru; bez takiej strategii odpowiednio kontrolowanie zatrzymać silnik albo zablokować rozruch. Alternatywy: dopuścić tylko dalszą pracę lub zatrzymać silnik i blokować rozruch do odzyskania pomiaru. Każdy wariant obejmuje DTC i pozostałe zabezpieczenia. Pytanie 223 pozostaje otwarte.
+Do rozstrzygnięcia pozostają dalsza praca i nowy rozruch przy potwierdzonej usterce tego pomiaru oraz wiarygodnych pozostałych wymaganych sygnałach. Możliwe zasady:
+
+- A — dopuścić pracę i rozruch na zweryfikowanej strategii niewymagającej tego pomiaru; bez takiej strategii kontrolowanie zatrzymać silnik albo zablokować rozruch.
+- B — dopuścić tylko dalszą pracę na zweryfikowanej strategii; kolejny rozruch wymaga sprawnego pomiaru.
+- C — kontrolowanie zatrzymać silnik i blokować rozruch do odzyskania wiarygodnego pomiaru.
+
+Rekomendacja projektowa: A zachowuje możliwość jazdy i rozruchu po usterce toru pomiarowego w granicach sprawdzonej strategii. Ograniczeniem jest utrata nadzoru opartego na ciśnieniu; ECU zgłasza DTC i niedostępność pomiaru, a kierowca otrzymuje ostrzeżenie. Wariant B dodatkowo blokuje kolejny rozruch, a C kończy bieżącą pracę silnika. Pozostałe zabezpieczenia obowiązują w każdym wariancie.
+
+Przed dopuszczeniem A lub B trzeba określić sposób pracy profilu bez sygnału, granice stosowania i kryteria akceptacji. Próby powinny objąć rozruch, pracę pod obciążeniem i utratę sygnału, z referencyjnym pomiarem ciśnienia oraz zewnętrznym pomiarem lambda podczas strojenia. Sposób zastąpienia danych i ewentualne ograniczenia wynikną z projektu oraz wyników prób. To propozycja do oceny; pytanie 223 pozostaje otwarte.
