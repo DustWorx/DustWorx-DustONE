@@ -106,3 +106,5 @@ Dla SYS-222 diagnostyka odczytuje stan i wynik przygotowania pompy po ochronnym 
 Dla SYS-223 diagnostyka odczytuje stan wejścia oleju 0/1 oraz DTC i zamrożone ramki. Rozróżnienie stanu ostrzegawczego od rozpoznanej usterki toru musi odpowiadać rzeczywistemu statusowi ECU. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-223).
 
 Dla SYS-224 diagnostyka odczytuje usterkę toru oleju, status niedostępnego nadzoru i wynik kwalifikacji odzyskanego sygnału. Niedostępna informacja pozostaje odrębna od potwierdzenia prawidłowego lub niskiego ciśnienia. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-224).
+
+Dla SYS-225 diagnostyka odczytuje usterkę pozycjonowania zaworu 2T, dostępne dane położenia i sterowania, DTC z ramkami oraz stan kwalifikacji strategii. Zakres danych zależy od napędu i projektu interfejsu. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-225).
