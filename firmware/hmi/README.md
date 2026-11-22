@@ -65,3 +65,5 @@ Dla SYS-220 HMI pokazuje rzeczywisty stan utrzymywanej strategii zastępczej wed
 Dla SYS-221 HMI przedstawia stan strategii rozruchu i przyczynę ewentualnej blokady według ECU. Dopuszczenie rozruchu i jego warunki są egzekwowane w ECU. Prezentację rozwiniemy we właściwym pakiecie. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-221).
 
 Dla SYS-222 HMI odzwierciedla stan przygotowania pompy i przyczynę blokady według ECU. Samo wybudzenie panelu nie rozpoczyna nowej próby po ochronnym zatrzymaniu. Prezentację rozwiniemy we właściwym pakiecie. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-222).
+
+Dla SYS-223 HMI ostrzega o potwierdzonym stanie niskiego ciśnienia oleju według danych ECU. Decyzję o zatrzymaniu podejmuje kierowca. Bieżące ostrzeżenie podlega SYS-023; historię zachowuje ECU. Prezentację rozwiniemy we właściwym pakiecie. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-223).

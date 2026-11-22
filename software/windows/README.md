@@ -102,3 +102,5 @@ Dla SYS-220 diagnostyka odczytuje aktywną strategię i stan kwalifikacji normal
 Dla SYS-221 diagnostyka odczytuje strategię rozruchu, warunki dopuszczenia i wynik próby. Kwalifikacja wymaga osobnych dowodów dla rozruchu; połączenie PC ani samo kasowanie historii jej nie zastępują. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-221).
 
 Dla SYS-222 diagnostyka odczytuje stan i wynik przygotowania pompy po ochronnym zatrzymaniu. Samo połączenie PC nie inicjuje nowej próby w normalnej obsłudze; testy serwisowe rozwiniemy w F07. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-222).
+
+Dla SYS-223 diagnostyka odczytuje stan wejścia oleju 0/1 oraz DTC i zamrożone ramki. Rozróżnienie stanu ostrzegawczego od rozpoznanej usterki toru musi odpowiadać rzeczywistemu statusowi ECU. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-223).
