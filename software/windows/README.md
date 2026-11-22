@@ -110,3 +110,5 @@ Dla SYS-224 diagnostyka odczytuje usterkę toru oleju, status niedostępnego nad
 Dla SYS-225 diagnostyka odczytuje usterkę pozycjonowania zaworu 2T, dostępne dane położenia i sterowania, DTC z ramkami oraz stan kwalifikacji strategii. Zakres danych zależy od napędu i projektu interfejsu. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-225).
 
 Dla SYS-226 diagnostyka odczytuje TPS, dostępne dane pozycjonowania i warunków pracy, stan kwalifikacji oraz przejścia do normalnego sterowania. Kryteria i zakres rejestrowanych danych ustalimy dla profilu. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-226).
+
+Dla SYS-227 diagnostyka odczytuje stan odłożonego przejścia. Przy analizie czasu SYS-228 dane muszą pozwalać odróżnić lokalny przebieg sterowania od opóźnienia transmisji lub wyświetlania. Zakres znaczników i zapisów ustalimy w projekcie. [Plan reakcji](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-227), [plan pomiarów](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-228).

@@ -73,3 +73,5 @@ Dla SYS-224 HMI przedstawia niedostępność nadzoru ciśnienia oleju według EC
 Dla SYS-225 HMI przedstawia usterkę pozycjonowania zaworu 2T, faktyczny tryb strategii oraz przyczynę odmowy rozruchu lub zmiany zestawu według ECU. Prezentację rozwiniemy we właściwym pakiecie. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-225).
 
 Dla SYS-226 HMI przedstawia faktyczny stan strategii oraz kwalifikacji powrotu według ECU. Powrót do normalnego sterowania podlega regułom wyboru „Standard” i historii DTC; prezentację dopracujemy we właściwym pakiecie. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-226).
+
+Dla SYS-227 HMI przedstawia rzeczywisty stan odłożonego powrotu według ECU. Sposób prezentacji rozwiniemy we właściwym pakiecie; sterowanie i jego czas pozostają lokalne w ECU. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-227).
