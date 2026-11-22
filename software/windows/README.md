@@ -98,3 +98,5 @@ Dla SYS-218 aplikacja odczytuje stan i wynik przygotowania ciśnienia. Samo poł
 Do specyfikacji aplikacji: dla SYS-219 diagnostyka odczytuje stan wysokiego ciśnienia, aktywnej próby ochronnej i powodu jej zakończenia lub zatrzymania. Parametry strategii i kryteria pozostają do projektu profilu. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-219).
 
 Dla SYS-220 diagnostyka odczytuje aktywną strategię i stan kwalifikacji normalnego sterowania. Samo skasowanie historii DTC nie potwierdza poprawności układu i nie przywraca normalnej strategii. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-220).
+
+Dla SYS-221 diagnostyka odczytuje strategię rozruchu, warunki dopuszczenia i wynik próby. Kwalifikacja wymaga osobnych dowodów dla rozruchu; połączenie PC ani samo kasowanie historii jej nie zastępują. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-221).
