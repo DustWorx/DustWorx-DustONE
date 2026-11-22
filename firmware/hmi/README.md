@@ -53,3 +53,5 @@ Do specyfikacji HMI: SYS-214 wymaga informacji o niedostępnym pomiarze ciśnien
 Dla SYS-215 HMI odróżnia dane nominalne używane przez ECU od wiarygodnego pomiaru ciśnienia, zgodnie z otrzymanym statusem. Sposób prezentacji ustalimy we właściwym pakiecie. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-215).
 
 Po zakończeniu strategii zastępczej według SYS-216 HMI aktualizuje źródło ciśnienia paliwa, stan strategii i bieżące ostrzeżenie według statusu ECU. Historia DTC pozostaje zachowana. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-216).
+
+Do specyfikacji HMI: SYS-217 wymaga ostrzeżenia o rzeczywistym niedoborze ciśnienia paliwa i przedstawienia przyczyny blokady uruchomienia według statusu ECU. Panel nie zwalnia blokady lokalną zmianą danych. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-217).

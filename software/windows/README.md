@@ -90,3 +90,5 @@ Do specyfikacji aplikacji: dla SYS-214 odczyt diagnostyczny rozróżnia usterkę
 Dla SYS-215 aplikacja odczytuje nominalne dane ciśnienia i stan aktywnej strategii z ECU, odróżniając je od pomiaru. Wartości, kalibrację i sposób konfiguracji określimy w projekcie. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-215).
 
 Dla SYS-216 aplikacja odczytuje aktualne źródło ciśnienia paliwa i stan strategii po jej automatycznym przywróceniu, z zachowaną historią DTC. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-216).
+
+Do specyfikacji aplikacji: dla SYS-217 diagnostyka odczytuje przyczynę ochronnego zatrzymania, stan blokady i dostępne dane z chwili zdarzenia. Skasowanie historii DTC samo nie potwierdza prawidłowego zasilania paliwem. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-217).
