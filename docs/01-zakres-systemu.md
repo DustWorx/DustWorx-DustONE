@@ -687,6 +687,8 @@ W odpowiedzi A na pytanie 232 (2026-11-22) właściciel dopuścił dalszą prac�
 
 W odpowiedzi „A” na pytanie 233 (2026-11-22) właściciel dopuścił dalszą pracę i nowy rozruch po usterce pozycjonowania elektronicznego zaworu wydechowego 2T na odpowiednich, osobno zweryfikowanych strategiach zastępczych. Bez właściwej strategii obowiązują kontrolowane zatrzymanie albo blokada rozruchu (SYS-225). Zakres walidacji dotyczy konkretnego napędu, silnika i usterki. [Plan próby](requirements/f03-ochrona-i-usterki.md#plan-próby-sys-225).
 
+W doprecyzowaniu pytania 234 (2026-11-22) właściciel zaproponował przywrócenie funkcji zaworu wydechowego po potwierdzeniu zamknięcia przepustnicy podczas jazdy. Wariant powrotu z warunkiem wiarygodnego TPS, sprawnego pozycjonowania i przejścia zweryfikowanego dla profilu pozostaje propozycją; pytanie 234 nie jest zamknięte. [Warianty i zakres prób](requirements/f03-ochrona-i-usterki.md#pytanie-234--powrót-do-normalnego-sterowania-zaworem-wydechowym).
+
 ### Sprzęgło i położenie biegu — ustalenie właściciela z 2026-10-18
 
 Przewidujemy na PCB ECU obsługę opcjonalnego sygnału sprzęgła i czujnika położenia biegu, z rozpoznawaniem poszczególnych biegów, nie tylko luzu (SYS-041). Ma to umożliwić późniejsze podłączenie czujników bez przebudowy PCB. Ich montaż nie jest obowiązkowy; wariant bez tych czujników musi działać. Nie przewidujemy wejścia stopki bocznej.
