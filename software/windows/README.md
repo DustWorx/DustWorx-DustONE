@@ -108,3 +108,5 @@ Dla SYS-223 diagnostyka odczytuje stan wejścia oleju 0/1 oraz DTC i zamrożone 
 Dla SYS-224 diagnostyka odczytuje usterkę toru oleju, status niedostępnego nadzoru i wynik kwalifikacji odzyskanego sygnału. Niedostępna informacja pozostaje odrębna od potwierdzenia prawidłowego lub niskiego ciśnienia. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-224).
 
 Dla SYS-225 diagnostyka odczytuje usterkę pozycjonowania zaworu 2T, dostępne dane położenia i sterowania, DTC z ramkami oraz stan kwalifikacji strategii. Zakres danych zależy od napędu i projektu interfejsu. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-225).
+
+Dla SYS-226 diagnostyka odczytuje TPS, dostępne dane pozycjonowania i warunków pracy, stan kwalifikacji oraz przejścia do normalnego sterowania. Kryteria i zakres rejestrowanych danych ustalimy dla profilu. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-226).
