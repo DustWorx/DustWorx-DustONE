@@ -63,3 +63,5 @@ Do specyfikacji HMI: SYS-219 wymaga ostrzeżenia o wysokim ciśnieniu oraz przed
 Dla SYS-220 HMI pokazuje rzeczywisty stan utrzymywanej strategii zastępczej według danych ECU. Prawidłowe ciśnienie uzyskane w tym trybie samo nie oznacza kwalifikacji normalnego sterowania. Sposób prezentacji ustalimy we właściwym pakiecie. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-220).
 
 Dla SYS-221 HMI przedstawia stan strategii rozruchu i przyczynę ewentualnej blokady według ECU. Dopuszczenie rozruchu i jego warunki są egzekwowane w ECU. Prezentację rozwiniemy we właściwym pakiecie. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-221).
+
+Dla SYS-222 HMI odzwierciedla stan przygotowania pompy i przyczynę blokady według ECU. Samo wybudzenie panelu nie rozpoczyna nowej próby po ochronnym zatrzymaniu. Prezentację rozwiniemy we właściwym pakiecie. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-222).

@@ -100,3 +100,5 @@ Do specyfikacji aplikacji: dla SYS-219 diagnostyka odczytuje stan wysokiego ciś
 Dla SYS-220 diagnostyka odczytuje aktywną strategię i stan kwalifikacji normalnego sterowania. Samo skasowanie historii DTC nie potwierdza poprawności układu i nie przywraca normalnej strategii. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-220).
 
 Dla SYS-221 diagnostyka odczytuje strategię rozruchu, warunki dopuszczenia i wynik próby. Kwalifikacja wymaga osobnych dowodów dla rozruchu; połączenie PC ani samo kasowanie historii jej nie zastępują. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-221).
+
+Dla SYS-222 diagnostyka odczytuje stan i wynik przygotowania pompy po ochronnym zatrzymaniu. Samo połączenie PC nie inicjuje nowej próby w normalnej obsłudze; testy serwisowe rozwiniemy w F07. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-222).
