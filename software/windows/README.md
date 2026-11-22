@@ -114,3 +114,5 @@ Dla SYS-226 diagnostyka odczytuje TPS, dostępne dane pozycjonowania i warunków
 Dla SYS-227 diagnostyka odczytuje stan odłożonego przejścia. Przy analizie czasu SYS-228 dane muszą pozwalać odróżnić lokalny przebieg sterowania od opóźnienia transmisji lub wyświetlania. Zakres znaczników i zapisów ustalimy w projekcie. [Plan reakcji](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-227), [plan pomiarów](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-228).
 
 Dla SYS-229 diagnostyka odczytuje usterkę IAC, DTC z ramkami, dostępne dane sterowania oraz stan kwalifikacji strategii. Zakres danych i kryteria zależą od układu oraz profilu. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-229).
+
+Dla SYS-230 diagnostyka odczytuje dostępne dane pozycjonowania, kwalifikacji i przejścia IAC oraz pozostałe blokady. Zakres danych zależy od układu i projektu interfejsu. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-230).
