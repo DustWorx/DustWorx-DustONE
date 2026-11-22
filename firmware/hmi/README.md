@@ -59,3 +59,5 @@ Do specyfikacji HMI: SYS-217 wymaga ostrzeżenia o rzeczywistym niedoborze ciśn
 Dla SYS-218 HMI przedstawia stan przygotowania ciśnienia i powód utrzymanej blokady według ECU. Ograniczona próba START/kopniakiem działa niezależnie od HMI; jego wybudzenie samo nie inicjuje pompy przy stanie po SYS-217. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-218).
 
 Do specyfikacji HMI: SYS-219 wymaga ostrzeżenia o wysokim ciśnieniu oraz przedstawienia stanu próby ochronnej i powodu jej zakończenia według ECU. Układ komunikatów ustalimy we właściwym pakiecie. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-219).
+
+Dla SYS-220 HMI pokazuje rzeczywisty stan utrzymywanej strategii zastępczej według danych ECU. Prawidłowe ciśnienie uzyskane w tym trybie samo nie oznacza kwalifikacji normalnego sterowania. Sposób prezentacji ustalimy we właściwym pakiecie. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-220).

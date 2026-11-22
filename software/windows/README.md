@@ -96,3 +96,5 @@ Do specyfikacji aplikacji: dla SYS-217 diagnostyka odczytuje przyczynę ochronne
 Dla SYS-218 aplikacja odczytuje stan i wynik przygotowania ciśnienia. Samo połączenie PC w normalnej obsłudze nie uruchamia pompy po ochronnym zatrzymaniu. Testy serwisowe rozwiniemy we właściwym pakiecie. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-218).
 
 Do specyfikacji aplikacji: dla SYS-219 diagnostyka odczytuje stan wysokiego ciśnienia, aktywnej próby ochronnej i powodu jej zakończenia lub zatrzymania. Parametry strategii i kryteria pozostają do projektu profilu. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-219).
+
+Dla SYS-220 diagnostyka odczytuje aktywną strategię i stan kwalifikacji normalnego sterowania. Samo skasowanie historii DTC nie potwierdza poprawności układu i nie przywraca normalnej strategii. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-220).
