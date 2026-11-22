@@ -94,3 +94,5 @@ Dla SYS-216 aplikacja odczytuje aktualne źródło ciśnienia paliwa i stan stra
 Do specyfikacji aplikacji: dla SYS-217 diagnostyka odczytuje przyczynę ochronnego zatrzymania, stan blokady i dostępne dane z chwili zdarzenia. Skasowanie historii DTC samo nie potwierdza prawidłowego zasilania paliwem. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-217).
 
 Dla SYS-218 aplikacja odczytuje stan i wynik przygotowania ciśnienia. Samo połączenie PC w normalnej obsłudze nie uruchamia pompy po ochronnym zatrzymaniu. Testy serwisowe rozwiniemy we właściwym pakiecie. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-218).
+
+Do specyfikacji aplikacji: dla SYS-219 diagnostyka odczytuje stan wysokiego ciśnienia, aktywnej próby ochronnej i powodu jej zakończenia lub zatrzymania. Parametry strategii i kryteria pozostają do projektu profilu. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-219).
