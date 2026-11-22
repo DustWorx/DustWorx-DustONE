@@ -13,7 +13,7 @@ W odpowiedzi na poprawione pytanie 77 z 2026-11-01, po sprawdzeniu zastosowania 
 - Wspólna PCB ma uwzględnić sterowanie napędem dla odpowiednich wariantów 4T. Konfiguracje bez IAC działają bez niego; główna przepustnica nadal jest sterowana linką (SYS-038).
 - Przed doborem elektroniki potwierdzić modele, uzwojenia i połączenia, prądy, zasilanie, zakres ruchu, kalibrację oraz wymaganą liczbę wyjść. Rozważyć wykorzystanie zasobów między wariantami; współdzielenie z power valve nie zostało wybrane.
 - Uwzględnić pozycjonowanie/kalibrację w czasie wybudzania i gotowości do rozruchu, szczególnie kopniakiem (SYS-054), oraz pracę napędu i pobór energii przy usypianiu (SYS-059). Warunki i czasy wymagają analizy.
-- Określić sterowanie, limity, diagnostykę i reakcje na usterki. Ważne komponenty wybieramy wspólnie z właścicielem po porównaniu; obsługa innych odmian IAC wymaga osobnych podstaw i uzgodnienia.
+- Reakcję na potwierdzoną wykrywalną usterkę IAC w dalszej pracy i rozruchu określa [SYS-229 i plan próby](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-229), przyjęty w F03 2026-11-22. Powrót do normalnej regulacji pozostaje w F03 (pytanie 237). Sterowanie, limity, diagnostyka i parametry wymagają projektu. Ważne komponenty wybieramy wspólnie z właścicielem po porównaniu; obsługa innych odmian IAC wymaga osobnych podstaw i uzgodnienia.
 
 ## Proponowana weryfikacja
 
