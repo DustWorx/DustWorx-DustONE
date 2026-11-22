@@ -55,3 +55,5 @@ Dla SYS-215 HMI odróżnia dane nominalne używane przez ECU od wiarygodnego pom
 Po zakończeniu strategii zastępczej według SYS-216 HMI aktualizuje źródło ciśnienia paliwa, stan strategii i bieżące ostrzeżenie według statusu ECU. Historia DTC pozostaje zachowana. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-216).
 
 Do specyfikacji HMI: SYS-217 wymaga ostrzeżenia o rzeczywistym niedoborze ciśnienia paliwa i przedstawienia przyczyny blokady uruchomienia według statusu ECU. Panel nie zwalnia blokady lokalną zmianą danych. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-217).
+
+Dla SYS-218 HMI przedstawia stan przygotowania ciśnienia i powód utrzymanej blokady według ECU. Ograniczona próba START/kopniakiem działa niezależnie od HMI; jego wybudzenie samo nie inicjuje pompy przy stanie po SYS-217. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-218).
