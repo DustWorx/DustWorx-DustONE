@@ -118,3 +118,5 @@ Dla SYS-229 diagnostyka odczytuje usterkę IAC, DTC z ramkami, dostępne dane st
 Dla SYS-230 diagnostyka odczytuje dostępne dane pozycjonowania, kwalifikacji i przejścia IAC oraz pozostałe blokady. Zakres danych zależy od układu i projektu interfejsu. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-230).
 
 Dla SYS-231 diagnostyka odczytuje usterkę obwodu wtryskiwacza, DTC z ramkami, dostępne dane zabezpieczeń oraz stan kwalifikacji do nowej próby. Skasowanie historii nie potwierdza naprawy. Zakres danych i metody sprawdzenia zależą od osprzętu oraz projektu. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-231).
+
+Dla SYS-232 diagnostyka odczytuje DTC, ramki, dostępne dane toru zapłonu i wynik automatycznej oceny przy nowej próbie. Ani sesja Windows, ani potwierdzenie użytkownika nie są wymagane do tej oceny. Kasowanie historii nie potwierdza naprawy. Zakres danych wymaga specyfikacji interfejsu. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-232).
