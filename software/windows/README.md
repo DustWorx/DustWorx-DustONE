@@ -116,3 +116,5 @@ Dla SYS-227 diagnostyka odczytuje stan odłożonego przejścia. Przy analizie cz
 Dla SYS-229 diagnostyka odczytuje usterkę IAC, DTC z ramkami, dostępne dane sterowania oraz stan kwalifikacji strategii. Zakres danych i kryteria zależą od układu oraz profilu. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-229).
 
 Dla SYS-230 diagnostyka odczytuje dostępne dane pozycjonowania, kwalifikacji i przejścia IAC oraz pozostałe blokady. Zakres danych zależy od układu i projektu interfejsu. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-230).
+
+Dla SYS-231 diagnostyka odczytuje usterkę obwodu wtryskiwacza, DTC z ramkami, dostępne dane zabezpieczeń oraz stan kwalifikacji do nowej próby. Skasowanie historii nie potwierdza naprawy. Zakres danych i metody sprawdzenia zależą od osprzętu oraz projektu. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-231).

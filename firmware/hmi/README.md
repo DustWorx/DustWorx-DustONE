@@ -79,3 +79,5 @@ Dla SYS-227 HMI przedstawia rzeczywisty stan odłożonego powrotu według ECU. S
 Dla SYS-229 HMI przedstawia usterkę IAC, rzeczywisty tryb strategii i przyczynę odmowy rozruchu lub zmiany zestawu według ECU. Prezentację rozwiniemy we właściwym pakiecie. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-229).
 
 Dla SYS-230 HMI przedstawia rzeczywisty stan regulacji IAC i kwalifikacji powrotu według ECU, z zachowaniem reguł „Standard” i historii DTC. Prezentację rozwiniemy we właściwym pakiecie. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-230).
+
+Dla SYS-231 HMI przedstawia potwierdzoną usterkę obwodu wtryskiwacza i powód blokady rozruchu według ECU, z zachowaniem reguł historii DTC oraz „Standard”. Prezentację rozwiniemy we właściwym pakiecie. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-231).
