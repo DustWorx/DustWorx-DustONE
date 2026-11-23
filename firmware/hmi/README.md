@@ -83,3 +83,5 @@ Dla SYS-230 HMI przedstawia rzeczywisty stan regulacji IAC i kwalifikacji powrot
 Dla SYS-231 HMI przedstawia potwierdzoną usterkę obwodu wtryskiwacza i powód blokady rozruchu według ECU, z zachowaniem reguł historii DTC oraz „Standard”. Prezentację rozwiniemy we właściwym pakiecie. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-231).
 
 Dla SYS-232 HMI przedstawia usterkę zapłonu, stan automatycznej oceny i powód niedopuszczenia pracy według ECU. Nie wymaga od użytkownika potwierdzania naprawy do rozpoczęcia nowej próby. Reguły historii DTC i „Standard” obowiązują. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-232).
+
+Dla SYS-233 HMI przedstawia usterkę obwodu pompy, stan automatycznej oceny i powód niedopuszczenia pracy według ECU, bez wymagania potwierdzenia naprawy przez użytkownika. Reguły historii i „Standard” obowiązują. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-233).
