@@ -85,3 +85,5 @@ Dla SYS-231 HMI przedstawia potwierdzoną usterkę obwodu wtryskiwacza i powód 
 Dla SYS-232 HMI przedstawia usterkę zapłonu, stan automatycznej oceny i powód niedopuszczenia pracy według ECU. Nie wymaga od użytkownika potwierdzania naprawy do rozpoczęcia nowej próby. Reguły historii DTC i „Standard” obowiązują. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-232).
 
 Dla SYS-233 HMI przedstawia usterkę obwodu pompy, stan automatycznej oceny i powód niedopuszczenia pracy według ECU, bez wymagania potwierdzenia naprawy przez użytkownika. Reguły historii i „Standard” obowiązują. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-233).
+
+SYS-234 działa niezależnie od HMI. Prezentację dostępnego stanu ogranicznika rozwiniemy we właściwym pakiecie według danych ECU. Klasyfikacja prawidłowego zadziałania w diagnostyce pozostaje do ustalenia w F03 (pytanie 242). [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-234).
