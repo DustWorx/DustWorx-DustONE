@@ -263,6 +263,7 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-234 | ECU realizuje aktywny ogranicznik maksymalnych obrotów w uzgodnionych profilach gaźnikowych i wtryskowych 2T/4T, na podstawie wiarygodnej prędkości wału i według zweryfikowanej strategii danego profilu. Funkcja działa lokalnie bez HMI/CAN oraz Windows. Po spadku obrotów i spełnieniu warunków powrotu ECU przywraca normalne sterowanie bez nowej próby rozruchu, o ile pozwalają na to pozostałe aktywne zabezpieczenia i blokady. Sam spadek obrotów nie zwalnia odrębnego odcięcia, np. po STOP lub utracie synchronizacji. Metoda ograniczania, progi, warunki powrotu, przebieg i dopuszczone granice wymagają danych silnika, projektu oraz prób, z uwzględnieniem smarowania 2T według SYS-033. Funkcja ogranicza obroty napędzane spalaniem; nie zapewnia ochrony przed każdym przekroczeniem wymuszonym mechanicznie przez koło i przekładnię. |
 | SYS-235 | ECU traktuje prawidłowe zadziałanie ogranicznika SYS-234 przy sprawnym silniku i wiarygodnych wymaganych sygnałach jako normalny stan sterowania. Samo to zadziałanie nie generuje DTC ani powiązanej zamrożonej ramki i nie wymusza zestawu „Standard”. Odrębnie potwierdzone usterki zachowują własne DTC, historię i reakcje oraz reguły SYS-137–138. Brak DTC dla prawidłowego ograniczania nie zwalnia innych aktywnych blokad. |
 | SYS-236 | Po potwierdzeniu utraty HMI lub łączności CAN między ECU a HMI sterownik wyłącza aktywny klakson. Decyzja i wyłączenie są realizowane lokalnie w ECU, bez udziału HMI i aplikacji Windows. Kryteria potwierdzenia utraty łączności oraz dopuszczalny czas wyłączenia pozostają do określenia i sprawdzenia w projekcie. Zachowanie po odzyskaniu łączności jest osobnym ustaleniem F04. |
+| SYS-237 | Po wyłączeniu klaksonu według SYS-236 samo odzyskanie łączności HMI/CAN nie wznawia sygnału, również gdy przycisk nadal jest trzymany. ECU dopuszcza ponowne załączenie po potwierdzonym zwolnieniu przycisku i nowym naciśnięciu, z zachowaniem pozostałych warunków oraz zabezpieczeń wyjścia. Sposób wiarygodnego przekazania stanów przycisku i odróżnienia ich od wcześniejszych poleceń wymaga projektu protokołu. |
 
 ## 3. Podział odpowiedzialności
 
@@ -790,7 +791,7 @@ W odpowiedzi A na pytanie 242 (2026-11-24) właściciel przyjął normalny stan 
 
 ### Uzupełnienia F04
 
-W odpowiedzi A na pytanie 244 (2026-11-24) właściciel przyjął wyłączenie aktywnego klaksonu przez ECU po potwierdzonej utracie HMI/CAN (SYS-236). [F04: przyjęte reakcje i plan próby](requirements/f04-akcesoria-i-io.md). Powrót łączności pozostaje otwarty w pytaniu 245; nie zmienia to uzgodnionej reakcji na utratę.
+W odpowiedzi A na pytanie 244 (2026-11-24) właściciel przyjął wyłączenie aktywnego klaksonu przez ECU po potwierdzonej utracie HMI/CAN (SYS-236). [F04: przyjęte reakcje i plan próby](requirements/f04-akcesoria-i-io.md). W odpowiedzi A na pytanie 245 (2026-11-24) właściciel przyjął SYS-237: po odzyskaniu łączności klakson pozostaje wyłączony do zwolnienia przycisku i nowego naciśnięcia. [Plan próby](requirements/f04-akcesoria-i-io.md#plan-próby-sys-237).
 
 ## 4. Decyzje potrzebne przed doborem sprzętu
 
