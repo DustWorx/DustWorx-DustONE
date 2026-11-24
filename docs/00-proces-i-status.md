@@ -1,6 +1,6 @@
 # DustONE — ścieżka projektu, status i odpowiedzialności
 
-Stan na 2026-11-24. Zamknięcie F02 i aktualna praca w F03 są w tabeli bieżącej pracy. Ścieżka projektu i warunki postoju z PR #17/#18 są scalone. Dokument aktualizujemy przy istotnej odpowiedzi lub decyzji, wykonanej pracy, wyniku próby, zmianie zakresu i przeglądzie etapu; wraz z wymaganiami, ADR, interfejsami i weryfikacją.
+Stan na 2026-11-24. Aktualne etapy i pakiety są opisane w tabelach statusu oraz bieżącej pracy. Dokument aktualizujemy przy istotnej odpowiedzi lub decyzji, wykonanej pracy, wyniku próby, zmianie zakresu i przeglądzie etapu; wraz z wymaganiami, ADR, interfejsami i weryfikacją.
 
 Kontrola pełnego F01 została zakończona: właściciel potwierdził zgodność podsumowania i polecił dalszą pracę (2026-11-04). Źródło kontroli: [przyjęte podsumowanie F01](requirements/f01-podsumowanie-kontrolne.md). Potwierdzenie dotyczy F01. Późniejsza odpowiedź A na pytanie 108 określiła ostatnio wybrany prawidłowy zestaw po restarcie ECU (SYS-099).
 
@@ -19,6 +19,14 @@ Kontrola pełnego F01 została zakończona: właściciel potwierdził zgodność
 | Kod i próby produktu | W repozytorium brak implementacji firmware/Windows i raportów prób DustONE. Istnieją plany, szablon procedury i przydział 234 wymagań do 13 grup weryfikacji. |
 
 Podstawy: [wymagania](requirements/README.md), [decyzje](decisions/README.md), [macierz silników](architecture/macierz-wariantow-silnika.md), [I/O](interfaces/wstepna-lista-io.md) i [weryfikacja](verification/README.md). Liczba wymagań i pytań nie jest procentem wykonania produktu.
+
+## Publikacja dokumentacji i gałęzie
+
+Ustalenie właściciela z 2026-11-24: dokumenty prowadzimy w odpowiednich katalogach, a zmiany w krótkich gałęziach tematycznych i PR-ach. Zatwierdzone, spójne porcje ustaleń trafiają do `main` w trakcie pracy nad aktywnym pakietem. Dokumenty zachowują jawne propozycje, kwestie otwarte i status wykonania.
+
+Scalenie PR-u publikuje stan dokumentacji. Formalne zamknięcie F03 lub etapu wymaga osobnego przeglądu i decyzji według poniższych bramek. Jeden aktywny pakiet może być publikowany przez kilka kolejnych PR-ów. Gałęzie zakończonych zmian porządkujemy po potwierdzeniu scalenia i zachowania historii.
+
+Wzorce nazw, miejsca plików i cykl publikacji określają [zasady repozytorium](../CONTRIBUTING.md#zmiany-w-repozytorium). Indeksy dokumentacji i tematów aktualizujemy razem ze zmianami.
 
 ## Etapy i warunki zakończenia
 

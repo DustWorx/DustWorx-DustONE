@@ -8,6 +8,12 @@ Wymaganie szczegółowe powinno mieć identyfikator, jednoznaczną treść, źr�
 
 Robocza [mapa obszarów i otwartych tematów](pokrycie-funkcjonalne.md) służy do kontroli zakresu pytań i przeglądów. [Model współpracy](../00-proces-i-status.md) określa podział pracy i podstawę pytań.
 
-Zamknięto [F01](f01-podsumowanie-kontrolne.md) i [F02](f02-przeglad-zakresu.md) po kontroli właściciela. Aktywny jest [F03 — ochrona i reakcje na usterki](f03-ochrona-i-usterki.md). F04–F08 oczekują. Pakiety zamykamy kolejno. Domknięcie zakresu funkcjonalnego prowadzimy według [8 pakietów F01–F08](domkniecie-zakresu-funkcjonalnego.md) i bramki G0 ze [ścieżki projektu](../00-proces-i-status.md). Otwarte parametry realizacji rozwijamy w etapach architektury i projektu wykonawczego.
+| Pakiet | Dokument źródłowy przeglądu | Status |
+| --- | --- | --- |
+| F01 — sterowanie silnikiem | [Podsumowanie kontrolne](f01-podsumowanie-kontrolne.md) | Zamknięty po kontroli właściciela. |
+| F02 — mapy i konfiguracja | [Karta przeglądu](f02-przeglad-zakresu.md) | Zamknięty po kontroli właściciela. |
+| F03 — ochrona i reakcje | [Indeks tematów, reakcje i plany prób](f03-ochrona-i-usterki.md#szybka-nawigacja) | Aktywny; otwarte pytanie jest oznaczone w dokumencie. |
+
+F04–F08 oczekują. Pakiety zamykamy kolejno według [rejestru domknięcia](domkniecie-zakresu-funkcjonalnego.md) i bramki G0 ze [ścieżki projektu](../00-proces-i-status.md). Publikacja bieżących ustaleń nie zamyka pakietu. Otwarte parametry realizacji rozwijamy na właściwych etapach.
 
 [Macierz SYS → blok → grupa weryfikacji](../verification/macierz-wymagan.md) zawiera pierwszy przydział wszystkich 234 wymagań. Przydział i zatwierdzenie treści są odrębne od późniejszego potwierdzenia na produkcie.

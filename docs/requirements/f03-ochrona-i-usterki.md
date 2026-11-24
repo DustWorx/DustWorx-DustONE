@@ -2,6 +2,34 @@
 
 Stan na 2026-11-24. **F03 aktywny po zamknięciu F02.** Macierz robocza łączy zdarzenie, reakcję i warunek powrotu. Zatwierdzone wymagania są w [rejestrze SYS](../01-zakres-systemu.md). Kolejność pakietów określa [status projektu](../00-proces-i-status.md).
 
+## Szybka nawigacja
+
+Każdy temat zawiera przyjętą reakcję, podstawę ustalenia i plan próby. Treść wymagań ma źródło w [rejestrze SYS](../01-zakres-systemu.md#2-wymagania-wynikające-z-opisu). Plany nie są raportami wykonanych prób.
+
+| Temat | Ustalenia i plany prób |
+| --- | --- |
+| Synchronizacja wału przy pracy i rozruchu | [SYS-157–159](#utrata-synchronizacji-wału-podczas-pracy). |
+| START, STOP i diagnostyka obwodu | [SYS-160–168](#naciśnięcie-start-przy-aktywnym-stop). |
+| Nadzór firmware, reset i odzyskiwanie | [SYS-169–180](#samoczynne-odcięcie-po-wykryciu-zawieszenia-głównego-firmware-ecu). |
+| Zanik zasilania podczas pracy i rozruchu | [SYS-181–183](#wznowienie-sterowania-po-zaniku-zasilania-podczas-pracy-silnika). |
+| Chłodzenie, wentylator i przegrzanie | [SYS-184–196](#wentylator-podczas-pracy-silnika-przy-usterce-pomiaru-temperatury-płynu). |
+| Przewrócenie i usterka pomiaru położenia | [SYS-197–202](#przytrzymany-start-podczas-podnoszenia-motocykla). |
+| Autotest i gotowość do rozruchu | [SYS-203–204, także SYS-194](#próby-autotestu-przed-dopuszczeniem-rozruchu). |
+| Czujnik fazy 4T i zgodność z wałem | [SYS-205–207](#utrata-impulsów-fazy-po-prawidłowej-synchronizacji-4t). |
+| Temperatura dolotu i ciśnienie atmosferyczne | [SYS-208–211](#usterka-temperatury-powietrza-dolotowego-iat--praca-i-rozruch). |
+| Temperatura płynu w sterowaniu dawką | [SYS-212–213](#temperatura-płynu-w-dawkowaniu-i-rozruchu-wtrysku). |
+| Pomiar i rzeczywiste ciśnienie paliwa | [SYS-214–222](#usterka-pomiaru-ciśnienia-paliwa--praca-rozruch-i-pompa). |
+| Ciśnienie oleju 0/1 | [SYS-223–224](#stan-niskiego-ciśnienia-oleju-podczas-pracy-4t). |
+| Elektroniczny zawór wydechowy 2T | [SYS-225–228](#usterka-pozycjonowania-elektronicznego-zaworu-wydechowego-2t). |
+| Regulacja powietrza biegu jałowego IAC | [SYS-229–230](#wykrywalna-usterka-iac-w-profilu-4t). |
+| Obwód wtryskiwacza | [SYS-231](#usterka-obwodu-wtryskiwacza). |
+| Tor zapłonu | [SYS-232](#usterka-toru-zapłonu). |
+| Obwód pompy paliwa | [SYS-233](#usterka-obwodu-pompy-paliwa). |
+| Aktywny ogranicznik obrotów | [SYS-234](#aktywny-ogranicznik-obrotów). |
+| Otwarte pytanie właściciela | [Pytanie 242 — diagnostyka zadziałania ogranicznika](#pytanie-242--diagnostyka-prawidłowego-zadziałania-ogranicznika). |
+
+## Macierz reakcji
+
 | Zdarzenie lub temat | Przyjęta reakcja i warunek powrotu | Do rozstrzygnięcia w F03 | Plan prób |
 | --- | --- | --- | --- |
 | Utrata synchronizacji wału podczas pracy | ECU odcina zapłon oraz wtrysk w wyposażonych profilach. Odzyskanie sygnału podczas dalszego obrotu utrzymuje odcięcie. Powrót wymaga zatrzymania, nowej świadomej próby rozruchu i ponownej wiarygodnej synchronizacji (SYS-157). | Wymaganie przyjęte. Kryteria rozpoznania zdarzeń do projektu. | V01, V02, V04 |

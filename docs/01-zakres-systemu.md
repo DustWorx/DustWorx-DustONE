@@ -2,6 +2,19 @@
 
 Status: punkt wyjścia do wymagań; zakres zapisany na podstawie opisu właściciela projektu. Propozycje i otwarte decyzje wymagają dalszego uzgodnienia.
 
+## Szybki dostęp
+
+- [Cel systemu](#1-cel)
+- [Rejestr wymagań SYS](#2-wymagania-wynikające-z-opisu)
+- [Podział odpowiedzialności i podstawy ustaleń](#3-podział-odpowiedzialności)
+- [Uzupełnienia F03](#uzupełnienia-f03)
+- [Dane potrzebne przed doborem sprzętu](#4-decyzje-potrzebne-przed-doborem-sprzętu)
+- [Następny rezultat](#5-następny-rezultat-inżynierski)
+- [Współpraca](#6-sposób-realizacji-i-współpracy)
+- [Motocykl referencyjny](#7-motocykl-referencyjny-i-zakres-weryfikacji)
+- [Koszty](#8-założenia-kosztowe--ustalenie-z-2026-10-18)
+- [Narzędzia projektowe](#9-narzędzia-projektowe--ustalenie-z-2026-10-18)
+
 ## 1. Cel
 
 Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy oraz jedną aplikację Windows do konfiguracji, strojenia, personalizacji HMI, diagnostyki, aktualizacji i prac rozwojowych.
@@ -758,6 +771,19 @@ Status: funkcja pożądana, do analizy wykonalności i określenia mierzalnych k
 
 Do ustalenia: minimalne napięcie i dostępny prąd pod obciążeniem, modele i profile AGM/LiFePO4 według SYS-092, stan akumulatora, temperatura, obciążenia aktywne podczas rozruchu oraz warunki mechaniczne rozruchu. Nie przyjmujemy arbitralnego progu 12 V jako granicy działania rozrusznika. Napięcie spoczynkowe nie zastępuje oceny pod obciążeniem: [Yuasa — badanie akumulatora ołowiowego](https://www.yuasabatteries.com.au/resources/expert-advice/how-to-test-a-lead-acid-battery).
 
+### Uzupełnienia F03
+
+Pełne reakcje, potwierdzenia właściciela i plany prób są w [dokumencie F03](requirements/f03-ochrona-i-usterki.md#szybka-nawigacja). Poniżej uzupełnienia dotyczące SYS-231–234.
+
+W odpowiedzi A na pytanie 238 (2026-11-23) właściciel przyjął kontrolowane zatrzymanie po potwierdzonej wykrywalnej usterce obwodu używanego wtryskiwacza, bez wyjątku dalszej pracy z tą usterką. Nowy rozruch wymaga sprawnego obwodu i pozostałych warunków (SYS-231). Zatrzymanie jest reakcją ECU, a nie oczekiwaniem na samoczynne zgaśnięcie. [Plan próby](requirements/f03-ochrona-i-usterki.md#plan-próby-sys-231).
+
+W odpowiedzi A z doprecyzowaniem do pytania 239 (2026-11-23) właściciel przyjął zakończenie sterowania silnikiem i odcięcie wtrysku po potwierdzonej wykrywalnej usterce zapłonu. Przy nowej próbie po zatrzymaniu ECU samo sprawdza tor i dopuszcza dalszy rozruch według wyniku, bez potwierdzenia naprawy przez użytkownika (SYS-232). [Plan próby](requirements/f03-ochrona-i-usterki.md#plan-próby-sys-232).
+
+W odpowiedzi A na pytanie 240 (2026-11-23) właściciel przyjął kontrolowane zatrzymanie po potwierdzonej wykrywalnej usterce obwodu pompy paliwa. Nowa świadoma próba po zatrzymaniu uruchamia automatyczne sprawdzenie w ECU, bez potwierdzenia użytkownika; dalszy rozruch wymaga pozytywnego wyniku i pozostałych warunków (SYS-233). [Plan próby](requirements/f03-ochrona-i-usterki.md#plan-próby-sys-233).
+
+W odpowiedzi A na pytanie 241 (2026-11-24) właściciel przyjął aktywny ogranicznik obrotów w uzgodnionych profilach gaźnikowych i wtryskowych 2T/4T. Po spadku obrotów i spełnieniu warunków normalne sterowanie wraca bez nowej próby rozruchu, z zachowaniem pozostałych zabezpieczeń (SYS-234). Progi i metodę dobierzemy do silnika. [Plan próby](requirements/f03-ochrona-i-usterki.md#plan-próby-sys-234).
+
+
 ## 4. Decyzje potrzebne przed doborem sprzętu
 
 | Obszar | Do ustalenia |
@@ -833,11 +859,3 @@ Schematy i PCB ECU oraz HMI projektujemy w **Autodesk Fusion Electronics**. Wła
 Fusion Electronics wykorzystuje zintegrowaną technologię EAGLE: [informacja Autodesk](https://www.autodesk.com/support/technical/article/caas/sfdcarticles/sfdcarticles/Autodesk-EAGLE-Announcement-Next-steps-and-FAQ.html).
 
 Dokumentacja projektu pozostaje w repozytorium. Archiwa projektów, biblioteki i eksporty produkcyjne należy powiązać z konkretną rewizją; sposób ich przygotowywania i formaty określimy w instrukcji pracy z CAD.
-
-W odpowiedzi A na pytanie 238 (2026-11-23) właściciel przyjął kontrolowane zatrzymanie po potwierdzonej wykrywalnej usterce obwodu używanego wtryskiwacza, bez wyjątku dalszej pracy z tą usterką. Nowy rozruch wymaga sprawnego obwodu i pozostałych warunków (SYS-231). Zatrzymanie jest reakcją ECU, a nie oczekiwaniem na samoczynne zgaśnięcie. [Plan próby](requirements/f03-ochrona-i-usterki.md#plan-próby-sys-231).
-
-W odpowiedzi A z doprecyzowaniem do pytania 239 (2026-11-23) właściciel przyjął zakończenie sterowania silnikiem i odcięcie wtrysku po potwierdzonej wykrywalnej usterce zapłonu. Przy nowej próbie po zatrzymaniu ECU samo sprawdza tor i dopuszcza dalszy rozruch według wyniku, bez potwierdzenia naprawy przez użytkownika (SYS-232). [Plan próby](requirements/f03-ochrona-i-usterki.md#plan-próby-sys-232).
-
-W odpowiedzi A na pytanie 240 (2026-11-23) właściciel przyjął kontrolowane zatrzymanie po potwierdzonej wykrywalnej usterce obwodu pompy paliwa. Nowa świadoma próba po zatrzymaniu uruchamia automatyczne sprawdzenie w ECU, bez potwierdzenia użytkownika; dalszy rozruch wymaga pozytywnego wyniku i pozostałych warunków (SYS-233). [Plan próby](requirements/f03-ochrona-i-usterki.md#plan-próby-sys-233).
-
-W odpowiedzi A na pytanie 241 (2026-11-24) właściciel przyjął aktywny ogranicznik obrotów w uzgodnionych profilach gaźnikowych i wtryskowych 2T/4T. Po spadku obrotów i spełnieniu warunków normalne sterowanie wraca bez nowej próby rozruchu, z zachowaniem pozostałych zabezpieczeń (SYS-234). Progi i metodę dobierzemy do silnika. [Plan próby](requirements/f03-ochrona-i-usterki.md#plan-próby-sys-234).
