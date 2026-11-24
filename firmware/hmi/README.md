@@ -91,3 +91,5 @@ SYS-234 działa niezależnie od HMI. Prezentację dostępnego stanu ogranicznika
 Według SYS-237 samo odzyskanie komunikacji nie wznawia klaksonu wyłączonego przez ECU po utracie HMI/CAN. HMI przekazuje wiarygodne stany przycisku, a ECU dopuszcza ponowne załączenie po zwolnieniu i nowym naciśnięciu. Ramki i kryteria ich ważności określimy z protokołem. [Plan próby F04](../../docs/requirements/f04-akcesoria-i-io.md#plan-próby-sys-237).
 
 SYS-238 wymaga, aby po restarcie ECU nadal trzymany przycisk klaksonu nie został uznany za nowe naciśnięcie. Regułę egzekwuje ECU na podstawie wiarygodnych danych HMI; zwolnienie i kolejne naciśnięcie dopuszczają nowe użycie. [Plan próby F04](../../docs/requirements/f04-akcesoria-i-io.md#plan-próby-sys-238).
+
+Według SYS-239 naciśnięcie klaksonu wybudzające HMI/ECU nie załącza sygnału. Ponowne użycie wymaga zwolnienia i nowego naciśnięcia; kwalifikację egzekwuje ECU. [Plan próby F04](../../docs/requirements/f04-akcesoria-i-io.md#plan-próby-sys-239).

@@ -265,6 +265,7 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-236 | Po potwierdzeniu utraty HMI lub łączności CAN między ECU a HMI sterownik wyłącza aktywny klakson. Decyzja i wyłączenie są realizowane lokalnie w ECU, bez udziału HMI i aplikacji Windows. Kryteria potwierdzenia utraty łączności oraz dopuszczalny czas wyłączenia pozostają do określenia i sprawdzenia w projekcie. Zachowanie po odzyskaniu łączności jest osobnym ustaleniem F04. |
 | SYS-237 | Po wyłączeniu klaksonu według SYS-236 samo odzyskanie łączności HMI/CAN nie wznawia sygnału, również gdy przycisk nadal jest trzymany. ECU dopuszcza ponowne załączenie po potwierdzonym zwolnieniu przycisku i nowym naciśnięciu, z zachowaniem pozostałych warunków oraz zabezpieczeń wyjścia. Sposób wiarygodnego przekazania stanów przycisku i odróżnienia ich od wcześniejszych poleceń wymaga projektu protokołu. |
 | SYS-238 | Jeśli po restarcie ECU HMI zgłasza przycisk klaksonu trzymany od czasu sprzed restartu, ECU po odzyskaniu gotowości pozostawia klakson wyłączony. Ponowne użycie wymaga potwierdzonego zwolnienia przycisku i nowego naciśnięcia, z zachowaniem pozostałych warunków oraz zabezpieczeń wyjścia. Sam stan naciśnięcia sprzed restartu ani odzyskanie gotowości ECU nie wznawiają sygnału. Wymaganie dotyczy obsługi poleceń użytkownika po restarcie; zwykłe wybudzenie ze snu jest osobnym przypadkiem F04. |
+| SYS-239 | Przy prawidłowym wybudzeniu HMI i ECU ze snu przez naciśnięcie przycisku klaksonu pierwsze naciśnięcie służy wybudzeniu systemu. Dalsze trzymanie tego samego przycisku nie załącza klaksonu także po uzyskaniu gotowości. ECU dopuszcza jego użycie dopiero po potwierdzonym zwolnieniu i nowym naciśnięciu, przy spełnieniu pozostałych warunków oraz zabezpieczeń wyjścia. Reguła dotyczy obsługi polecenia użytkownika; pobudzenia diagnostyczne autotestu są osobnym ustaleniem F04. |
 
 ## 3. Podział odpowiedzialności
 
@@ -795,6 +796,8 @@ W odpowiedzi A na pytanie 242 (2026-11-24) właściciel przyjął normalny stan 
 W odpowiedzi A na pytanie 244 (2026-11-24) właściciel przyjął wyłączenie aktywnego klaksonu przez ECU po potwierdzonej utracie HMI/CAN (SYS-236). [F04: przyjęte reakcje i plan próby](requirements/f04-akcesoria-i-io.md). W odpowiedzi A na pytanie 245 (2026-11-24) właściciel przyjął SYS-237: po odzyskaniu łączności klakson pozostaje wyłączony do zwolnienia przycisku i nowego naciśnięcia. [Plan próby](requirements/f04-akcesoria-i-io.md#plan-próby-sys-237).
 
 W odpowiedzi A na pytanie 246 (2026-11-24) właściciel przyjął SYS-238: po restarcie ECU nadal trzymany przycisk klaksonu nie wznawia sygnału; ponowne użycie wymaga zwolnienia i nowego naciśnięcia. [Plan próby F04](requirements/f04-akcesoria-i-io.md#plan-próby-sys-238).
+
+W odpowiedzi B na pytanie 247 (2026-11-24) właściciel przyjął SYS-239: naciśnięcie klaksonu podczas prawidłowego snu wybudza system; po wybudzeniu sygnał wymaga zwolnienia i nowego naciśnięcia. [Plan próby F04](requirements/f04-akcesoria-i-io.md#plan-próby-sys-239).
 
 ## 4. Decyzje potrzebne przed doborem sprzętu
 
