@@ -10,6 +10,14 @@ SYS-086: przy próbie włączenia odbiornika objętego aktywnym odcięciem oszcz
 
 HMI wyświetla przyczynę odrzucenia zmiany zestawu map otrzymaną z ECU po usterce wymagającej pracy awaryjnej lub zatrzymania silnika (SYS-135 i SYS-137). Szczegóły scenariusza i próby zawiera [specyfikacja F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 
+Gdy ECU zgłasza aktywny stan przegrzania według SYS-189, HMI ostrzega kierowcę. Układ i pierwszeństwo komunikatu określimy w wymaganiach HMI.
+
+Gdy ECU zgłasza potwierdzone przeciążenie skutkujące odłączeniem wentylatora, HMI ostrzega o usterce jego obwodu według SYS-190. Wygaszenie ostrzeżenia podlega SYS-023.
+
+HMI udostępnia osobne potwierdzenie zakończenia czynności przy wentylatorze, które zleca próbę w ECU. HMI informuje o nieudanej próbie według SYS-192 i przedstawia aktywną usterkę przekazaną z ECU po wybudzeniu według SYS-193.
+
+Gdy ECU zgłasza niedostępność wykrywania przewrócenia, HMI ostrzega kierowcę także przy zgaszonym silniku oraz po zwolnieniu blokady po upadku (SYS-198–200). Po potwierdzonym ustąpieniu usterki HMI wygasza ostrzeżenie według SYS-023 i SYS-201.
+
 Przy odłożonym przełączeniu zestawu w czasie jazdy HMI pokazuje oczekiwanie i wskazuje faktycznie aktywny zestaw według stanu otrzymanego z ECU (SYS-143).
 
 Po otrzymaniu statusu wygaśnięcia żądania HMI informuje kierowcę o konieczności ponownego wyboru zestawu (SYS-144).
@@ -27,3 +35,55 @@ Na postoju przy zgaszonym silniku HMI przekazuje wybór do zasilanego ECU i poka
 Po restarcie ECU HMI odczytuje faktycznie aktywny zestaw i bieżący stan oczekiwania z ECU (SYS-150).
 
 Po ponownym wyborze tego samego oczekującego zestawu HMI nadal pokazuje oczekiwanie według danych ECU. Termin wygaśnięcia pozostaje pierwotny (SYS-151).
+
+Do specyfikacji HMI: dla SYS-208 panel przedstawia zgłoszoną przez ECU usterkę IAT i rozróżnia wartość mierzoną od zastępczej według udostępnionego statusu. Wymuszenie „Standard” i odmowa zmiany zestawu podlegają SYS-137. Sposób prezentacji ustalimy we właściwym pakiecie; HMI nie wyznacza oszacowania IAT. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-208).
+
+Po powrocie na rzeczywisty IAT według SYS-209 HMI aktualizuje źródło temperatury oraz bieżące ostrzeżenie według statusu ECU i SYS-023. Historia usterki pozostaje zachowana. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-209).
+
+Do specyfikacji HMI: przy SYS-210 panel prezentuje otrzymaną z ECU usterkę barometru i stan użycia stałej wartości zastępczej. Odmowa zmiany zestawu podlega SYS-137. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-210).
+
+Po powrocie do pomiaru barometru według SYS-211 HMI aktualizuje źródło ciśnienia i bieżące ostrzeżenie według statusu ECU oraz SYS-023. Historia pozostaje zachowana. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-211).
+
+Do specyfikacji HMI: dla SYS-212 rozróżnić brak wiarygodnego pomiaru temperatury płynu i dane zastępcze używane przez ECU do dawkowania. Prezentacja wynika ze statusu ECU; układ ekranu ustalimy we właściwym pakiecie. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-212).
+
+Po odzyskaniu ECT według SYS-213 HMI aktualizuje źródło temperatury i bieżące ostrzeżenie zgodnie ze statusem ECU i SYS-023. Historia pozostaje zachowana. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-213).
+
+Do specyfikacji HMI: SYS-214 wymaga informacji o niedostępnym pomiarze ciśnienia paliwa i stanie strategii zastępczej według danych ECU. Dane zastępcze pozostają odróżnialne od pomiaru. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-214).
+
+Dla SYS-215 HMI odróżnia dane nominalne używane przez ECU od wiarygodnego pomiaru ciśnienia, zgodnie z otrzymanym statusem. Sposób prezentacji ustalimy we właściwym pakiecie. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-215).
+
+Po zakończeniu strategii zastępczej według SYS-216 HMI aktualizuje źródło ciśnienia paliwa, stan strategii i bieżące ostrzeżenie według statusu ECU. Historia DTC pozostaje zachowana. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-216).
+
+Do specyfikacji HMI: SYS-217 wymaga ostrzeżenia o rzeczywistym niedoborze ciśnienia paliwa i przedstawienia przyczyny blokady uruchomienia według statusu ECU. Panel nie zwalnia blokady lokalną zmianą danych. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-217).
+
+Dla SYS-218 HMI przedstawia stan przygotowania ciśnienia i powód utrzymanej blokady według ECU. Ograniczona próba START/kopniakiem działa niezależnie od HMI; jego wybudzenie samo nie inicjuje pompy przy stanie po SYS-217. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-218).
+
+Do specyfikacji HMI: SYS-219 wymaga ostrzeżenia o wysokim ciśnieniu oraz przedstawienia stanu próby ochronnej i powodu jej zakończenia według ECU. Układ komunikatów ustalimy we właściwym pakiecie. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-219).
+
+Dla SYS-220 HMI pokazuje rzeczywisty stan utrzymywanej strategii zastępczej według danych ECU. Prawidłowe ciśnienie uzyskane w tym trybie samo nie oznacza kwalifikacji normalnego sterowania. Sposób prezentacji ustalimy we właściwym pakiecie. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-220).
+
+Dla SYS-221 HMI przedstawia stan strategii rozruchu i przyczynę ewentualnej blokady według ECU. Dopuszczenie rozruchu i jego warunki są egzekwowane w ECU. Prezentację rozwiniemy we właściwym pakiecie. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-221).
+
+Dla SYS-222 HMI odzwierciedla stan przygotowania pompy i przyczynę blokady według ECU. Samo wybudzenie panelu nie rozpoczyna nowej próby po ochronnym zatrzymaniu. Prezentację rozwiniemy we właściwym pakiecie. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-222).
+
+Dla SYS-223 HMI ostrzega o potwierdzonym stanie niskiego ciśnienia oleju według danych ECU. Decyzję o zatrzymaniu podejmuje kierowca. Bieżące ostrzeżenie podlega SYS-023; historię zachowuje ECU. Prezentację rozwiniemy we właściwym pakiecie. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-223).
+
+Dla SYS-224 HMI przedstawia niedostępność nadzoru ciśnienia oleju według ECU. Po potwierdzeniu odzyskania sygnału pokazuje aktualny stan, z zachowaniem historii DTC w ECU. Prezentację rozwiniemy we właściwym pakiecie. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-224).
+
+Dla SYS-225 HMI przedstawia usterkę pozycjonowania zaworu 2T, faktyczny tryb strategii oraz przyczynę odmowy rozruchu lub zmiany zestawu według ECU. Prezentację rozwiniemy we właściwym pakiecie. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-225).
+
+Dla SYS-226 HMI przedstawia faktyczny stan strategii oraz kwalifikacji powrotu według ECU. Powrót do normalnego sterowania podlega regułom wyboru „Standard” i historii DTC; prezentację dopracujemy we właściwym pakiecie. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-226).
+
+Dla SYS-227 HMI przedstawia rzeczywisty stan odłożonego powrotu według ECU. Sposób prezentacji rozwiniemy we właściwym pakiecie; sterowanie i jego czas pozostają lokalne w ECU. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-227).
+
+Dla SYS-229 HMI przedstawia usterkę IAC, rzeczywisty tryb strategii i przyczynę odmowy rozruchu lub zmiany zestawu według ECU. Prezentację rozwiniemy we właściwym pakiecie. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-229).
+
+Dla SYS-230 HMI przedstawia rzeczywisty stan regulacji IAC i kwalifikacji powrotu według ECU, z zachowaniem reguł „Standard” i historii DTC. Prezentację rozwiniemy we właściwym pakiecie. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-230).
+
+Dla SYS-231 HMI przedstawia potwierdzoną usterkę obwodu wtryskiwacza i powód blokady rozruchu według ECU, z zachowaniem reguł historii DTC oraz „Standard”. Prezentację rozwiniemy we właściwym pakiecie. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-231).
+
+Dla SYS-232 HMI przedstawia usterkę zapłonu, stan automatycznej oceny i powód niedopuszczenia pracy według ECU. Nie wymaga od użytkownika potwierdzania naprawy do rozpoczęcia nowej próby. Reguły historii DTC i „Standard” obowiązują. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-232).
+
+Dla SYS-233 HMI przedstawia usterkę obwodu pompy, stan automatycznej oceny i powód niedopuszczenia pracy według ECU, bez wymagania potwierdzenia naprawy przez użytkownika. Reguły historii i „Standard” obowiązują. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-233).
+
+SYS-234 działa niezależnie od HMI. Prezentację dostępnego stanu ogranicznika rozwiniemy we właściwym pakiecie według danych ECU. Według SYS-235 prawidłowe ograniczanie jest normalnym stanem bez DTC i wymuszenia „Standard”; HMI zachowuje rozróżnienie tego stanu od rzeczywistych ostrzeżeń ECU. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-234).

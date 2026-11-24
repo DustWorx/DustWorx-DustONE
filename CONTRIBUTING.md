@@ -14,14 +14,33 @@
 
 Ustalenie właściciela z 2026-11-04: etapy i pakiety prowadzimy kolejno, zamykając bieżący przed następnym. Aktywny jest jeden pakiet; wpływ na dalszy etap zapisujemy w jego kolejce. Aktualną kolejność, kryteria zamknięcia i status utrzymujemy w [dokumencie procesowym](docs/00-proces-i-status.md).
 
+Pytanie z propozycjami poprzedzamy krótkim wyjaśnieniem problemu i uzasadnieniem rekomendacji według [sposobu przedstawiania pytań](docs/00-proces-i-status.md#sposób-przedstawiania-pytań).
+
 ## Zmiany w repozytorium
 
-- `main` przechowuje aktualną, spójną wersję projektu. Dokumenty robocze mogą się tam znajdować, jeżeli mają jawny status.
-- Początkową strukturę zapisujemy bezpośrednio na `main`. Kolejne zmiany prowadzimy w krótkich gałęziach tematycznych i przez pull request.
-- Zalecane prefiksy gałęzi: `docs/`, `hardware/`, `firmware/`, `software/`, `tools/`.
-- Jeden commit lub pull request obejmuje logicznie spójną zmianę. Opis zawiera cel oraz adekwatną weryfikację.
-- Przed zapisem sprawdzamy aktualną zawartość repozytorium; nie nadpisujemy cudzych zmian ani historii.
-- Decyzje wpływające na kilka części systemu aktualizują odpowiednie wymagania i interfejsy w tej samej zmianie.
+`main` przechowuje aktualną, spójną dokumentację i pliki projektu. Dokument roboczy może tam trafić z jawnym statusem, propozycjami i otwartymi parametrami. Publikacja ustaleń przez PR jest odrębna od zatwierdzenia zamknięcia pakietu lub etapu przez właściciela.
+
+### Gałęzie tematyczne
+
+| Obszar zmiany | Wzorzec gałęzi | Miejsce plików |
+| --- | --- | --- |
+| Dokumentacja i uzgodnienia | `docs/<pakiet>-<temat>`, np. `docs/f03-diagnostyka-ogranicznika` | Odpowiedni podkatalog `docs/`; indeksy i opisy komponentów aktualizowane razem. |
+| Elektronika | `hardware/<urzadzenie>-<temat>` | `hardware/ecu/` lub `hardware/hmi/`. |
+| Firmware | `firmware/<urzadzenie>-<temat>` | `firmware/ecu/` lub `firmware/hmi/`. |
+| Aplikacja Windows | `software/windows-<temat>` | `software/windows/`. |
+| Mechanika | `mechanical/<temat>` | `mechanical/`. |
+| Testy i narzędzia | `tests/<temat>` lub `tools/<temat>` | `tests/`, `tools/` lub testy przy danym komponencie. |
+
+### Publikacja i porządkowanie
+
+1. Zakładamy krótką gałąź z aktualnego `main` dla jednej spójnej porcji pracy. Nazwa opisuje temat; aktywny pakiet może mieć kilka kolejnych PR-ów.
+2. W tej samej zmianie aktualizujemy wymagania, odpowiednie decyzje/interfejsy, plan weryfikacji i status procesu. Każdy temat zachowuje jedno miejsce źródłowe; pozostałe dokumenty odsyłają do niego.
+3. PR opisuje wynik, otwarte kwestie i wykonane sprawdzenia. Draft służy przygotowaniu konkretnej zmiany; oczekiwanie na zamknięcie całego aktywnego pakietu nie jest powodem utrzymywania gotowego PR-u w drafcie.
+4. Po przeglądzie i odpowiednich sprawdzeniach scalamy spójną porcję do `main`. F03 lub inny pakiet może nadal mieć status aktywny.
+5. Po potwierdzeniu scalenia i zachowania commitów w historii usuwamy zakończoną gałąź tematyczną. Historię i uzasadnienie zachowuje PR. Kolejny temat zaczynamy w nowej gałęzi.
+6. Przed zapisem lub usunięciem gałęzi sprawdzamy aktualny stan. Aktywne PR-y i zmiany nieobecne w `main` pozostają do osobnego rozpatrzenia.
+
+Zasady doprecyzował właściciel 2026-11-24 przy porządkowaniu repozytorium. Sekwencja etapów i formalne warunki ich zamknięcia pozostają w [dokumencie procesowym](docs/00-proces-i-status.md).
 
 ## Pliki źródłowe i wyniki
 

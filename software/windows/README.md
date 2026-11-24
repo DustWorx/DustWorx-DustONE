@@ -13,6 +13,8 @@ Całkowite motogodziny i ODO są udostępniane użytkownikowi końcowemu do odcz
 
 Aktualizacja ECU w trybie użytkowym ma dopuszczać wyłącznie firmware zatwierdzony przez producenta projektu ([SYS-078 i ADR-008](../../docs/decisions/adr-008-dostep-do-firmware-ecu.md)). Sama kontrola pliku przez aplikację nie zastępuje egzekwowania polityki w ECU. Dostęp rozwojowy twórców do programowania i debugowania pozostaje wymagany; szczegóły autoryzacji są otwarte. Decyzja nie określa jeszcze polityki firmware HMI.
 
+Po wyczerpaniu limitu samodzielnych prób odzyskiwania aplikacja obsługuje przewodową naprawę ECU także przy nieuruchomionym głównym firmware (SYS-175 i SYS-176). Po zaniku zasilania ECU przed rozpoczęciem naprawy aplikacja może połączyć się z odtworzonym trybem naprawy (SYS-177). Zakres operacji naprawy i uprawnienia doprecyzujemy w F07. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-175).
+
 Testy odbiorników: jawnie wybierany tryb serwisowy umożliwia zwolnienie odcięcia oszczędzania bez uruchamiania silnika przy potwierdzonym stabilnym zasilaniu warsztatowym (SYS-090). Samo połączenie PC nie odblokowuje odbiorników. Aplikacja przedstawia wynik dopuszczenia przez ECU; zwolnienie odcięcia nie uruchamia testu samo. Zabezpieczenia wyjść pozostają aktywne. SYS-091: po potwierdzonej utracie sesji ECU nie przyjmuje nowych testów, a rozpoczęty może dokończyć do pierwotnego limitu; następnie wyjątek jest wycofywany. Aplikacja nie może samym ponowieniem/odtworzeniem połączenia wydłużać testu ani uruchamiać następnego w fazie dokańczania. Uprawnienia, detekcja sesji i dokładne stany końcowe do projektu: [analiza i plan prób](../../docs/architecture/oszczedzanie-energii.md).
 
 Konfiguracja zasilania uwzględnia osobne profile ochrony AGM/LiFePO4 według SYS-092. Dane i egzekwowanie profilu należą do ECU; wybór, uprawnienia, zapis i warunki zmiany doprecyzujemy w projekcie interfejsu. [Zakres i otwarte szczegóły](../../docs/decisions/adr-010-akumulatory-agm-lifepo4.md).
@@ -70,3 +72,55 @@ Profil wtryskowy określa wymagane pomiary obciążenia i ich zastosowanie (SYS-
 SYS-101: Windows może przesyłać do ECU robocze zmiany wybranych wartości aktywnego i nieaktywnych zestawów podczas pracy silnika. Edycja nie przełącza zestawu; nieaktywny zaczyna wpływać na silnik dopiero po jego świadomym wybraniu. Obowiązuje SYS-095 dla trwałego zapisu. Szczegóły: [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
 
 SYS-099: wybór zestawu po restarcie realizuje ECU, również bez HMI/PC; jest to ostatnio wybrany prawidłowy zestaw spośród trwale zapisanych. Aplikacja po połączeniu odczytuje rzeczywisty stan. Po prawidłowym śnie/wybudzeniu niezapisane zmiany zostają odrzucone zgodnie z SYS-100. Uzgodnienie po powrocie sesji i walidacja danych pozostają do określenia w [F02](../../docs/interfaces/mapy-i-konfiguracja.md).
+
+Do specyfikacji aplikacji: SYS-208 wymaga odczytu stanu usterki IAT, użycia wartości zastępczej oraz dostępnych danych o źródle oszacowania w diagnostyce ECU. Wartość mierzona i oszacowana muszą być rozróżnialne. Model i dopuszczenie pracy/rozruchu należą do ECU i kalibracji profilu; zakres widoków ustalimy w pakiecie aplikacji. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-208).
+
+Po automatycznym powrocie ECU na rzeczywisty IAT aplikacja odczytuje aktualne źródło danych, status usterki i zachowaną historię DTC według SYS-209. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-209).
+
+Do specyfikacji aplikacji: SYS-210 wymaga odczytu diagnostycznego usterki barometru i stanu użycia stałej awaryjnej wartości ciśnienia. Dobór wartości oraz reguły jej konfiguracji i uprawnień pozostają do projektu. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-210).
+
+Po powrocie ECU do pomiaru barometru aplikacja odczytuje aktualne źródło BARO, status usterki i zachowaną historię DTC według SYS-211. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-211).
+
+Do specyfikacji aplikacji: SYS-212 wymaga diagnostycznego odczytu usterki ECT i stanu użycia danych zastępczych do dawkowania, rozróżnialnych od wiarygodnego pomiaru rzeczywistej temperatury płynu. Model/wartości oraz ich konfigurację doprecyzujemy w projekcie. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-212).
+
+Po powrocie korekt dawkowania do prawidłowego ECT aplikacja odczytuje aktualne źródło danych, status usterki i zachowaną historię według SYS-213. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-213).
+
+Do specyfikacji aplikacji: dla SYS-214 odczyt diagnostyczny rozróżnia usterkę pomiaru ciśnienia paliwa, jego niedostępność i stan danych zastępczych. Parametry oraz reguły ich konfiguracji pozostają do projektu. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-214).
+
+Dla SYS-215 aplikacja odczytuje nominalne dane ciśnienia i stan aktywnej strategii z ECU, odróżniając je od pomiaru. Wartości, kalibrację i sposób konfiguracji określimy w projekcie. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-215).
+
+Dla SYS-216 aplikacja odczytuje aktualne źródło ciśnienia paliwa i stan strategii po jej automatycznym przywróceniu, z zachowaną historią DTC. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-216).
+
+Do specyfikacji aplikacji: dla SYS-217 diagnostyka odczytuje przyczynę ochronnego zatrzymania, stan blokady i dostępne dane z chwili zdarzenia. Skasowanie historii DTC samo nie potwierdza prawidłowego zasilania paliwem. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-217).
+
+Dla SYS-218 aplikacja odczytuje stan i wynik przygotowania ciśnienia. Samo połączenie PC w normalnej obsłudze nie uruchamia pompy po ochronnym zatrzymaniu. Testy serwisowe rozwiniemy we właściwym pakiecie. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-218).
+
+Do specyfikacji aplikacji: dla SYS-219 diagnostyka odczytuje stan wysokiego ciśnienia, aktywnej próby ochronnej i powodu jej zakończenia lub zatrzymania. Parametry strategii i kryteria pozostają do projektu profilu. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-219).
+
+Dla SYS-220 diagnostyka odczytuje aktywną strategię i stan kwalifikacji normalnego sterowania. Samo skasowanie historii DTC nie potwierdza poprawności układu i nie przywraca normalnej strategii. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-220).
+
+Dla SYS-221 diagnostyka odczytuje strategię rozruchu, warunki dopuszczenia i wynik próby. Kwalifikacja wymaga osobnych dowodów dla rozruchu; połączenie PC ani samo kasowanie historii jej nie zastępują. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-221).
+
+Dla SYS-222 diagnostyka odczytuje stan i wynik przygotowania pompy po ochronnym zatrzymaniu. Samo połączenie PC nie inicjuje nowej próby w normalnej obsłudze; testy serwisowe rozwiniemy w F07. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-222).
+
+Dla SYS-223 diagnostyka odczytuje stan wejścia oleju 0/1 oraz DTC i zamrożone ramki. Rozróżnienie stanu ostrzegawczego od rozpoznanej usterki toru musi odpowiadać rzeczywistemu statusowi ECU. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-223).
+
+Dla SYS-224 diagnostyka odczytuje usterkę toru oleju, status niedostępnego nadzoru i wynik kwalifikacji odzyskanego sygnału. Niedostępna informacja pozostaje odrębna od potwierdzenia prawidłowego lub niskiego ciśnienia. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-224).
+
+Dla SYS-225 diagnostyka odczytuje usterkę pozycjonowania zaworu 2T, dostępne dane położenia i sterowania, DTC z ramkami oraz stan kwalifikacji strategii. Zakres danych zależy od napędu i projektu interfejsu. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-225).
+
+Dla SYS-226 diagnostyka odczytuje TPS, dostępne dane pozycjonowania i warunków pracy, stan kwalifikacji oraz przejścia do normalnego sterowania. Kryteria i zakres rejestrowanych danych ustalimy dla profilu. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-226).
+
+Dla SYS-227 diagnostyka odczytuje stan odłożonego przejścia. Przy analizie czasu SYS-228 dane muszą pozwalać odróżnić lokalny przebieg sterowania od opóźnienia transmisji lub wyświetlania. Zakres znaczników i zapisów ustalimy w projekcie. [Plan reakcji](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-227), [plan pomiarów](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-228).
+
+Dla SYS-229 diagnostyka odczytuje usterkę IAC, DTC z ramkami, dostępne dane sterowania oraz stan kwalifikacji strategii. Zakres danych i kryteria zależą od układu oraz profilu. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-229).
+
+Dla SYS-230 diagnostyka odczytuje dostępne dane pozycjonowania, kwalifikacji i przejścia IAC oraz pozostałe blokady. Zakres danych zależy od układu i projektu interfejsu. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-230).
+
+Dla SYS-231 diagnostyka odczytuje usterkę obwodu wtryskiwacza, DTC z ramkami, dostępne dane zabezpieczeń oraz stan kwalifikacji do nowej próby. Skasowanie historii nie potwierdza naprawy. Zakres danych i metody sprawdzenia zależą od osprzętu oraz projektu. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-231).
+
+Dla SYS-232 diagnostyka odczytuje DTC, ramki, dostępne dane toru zapłonu i wynik automatycznej oceny przy nowej próbie. Ani sesja Windows, ani potwierdzenie użytkownika nie są wymagane do tej oceny. Kasowanie historii nie potwierdza naprawy. Zakres danych wymaga specyfikacji interfejsu. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-232).
+
+Dla SYS-233 diagnostyka odczytuje DTC, ramki, dostępne dane obwodu pompy i wynik samodzielnej oceny przy nowej próbie. Sesja Windows i potwierdzenie użytkownika nie są wymagane do oceny przez ECU. Zakres danych wymaga specyfikacji interfejsu. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-233).
+
+Dla SYS-234 diagnostyka umożliwi obserwację dostępnego stanu sterowania i przebiegu ograniczania; zakres danych określimy z interfejsem. Działanie funkcji nie wymaga sesji Windows. Progi i metodę ograniczania kwalifikujemy dla profilu; według SYS-235 prawidłowe ograniczanie pozostaje normalnym stanem bez DTC i wymuszenia „Standard”. Odczyt diagnostyczny rozróżnia ten stan i rzeczywiste usterki; szczegóły do właściwego pakietu. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-234).
