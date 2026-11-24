@@ -1,6 +1,6 @@
 # F04 — akcesoria i dodatkowe I/O
 
-Stan na 2026-11-24. **F04 aktywny po zamknięciu F03 w pytaniu 243.** Aktualny temat: klakson. Źródłem wymagań jest [rejestr SYS](../01-zakres-systemu.md); kolejność i warunki zamknięcia określa [proces](../00-proces-i-status.md).
+Stan na 2026-11-24. **F04 aktywny po zamknięciu F03 w pytaniu 243.** Aktualny temat: dodatkowe wyjścia mocy. Zasady klaksonu SYS-236–240 są już przyjęte i zachowane poniżej. Źródłem wymagań jest [rejestr SYS](../01-zakres-systemu.md); kolejność i warunki zamknięcia określa [proces](../00-proces-i-status.md).
 
 ## Zakres i kolejność
 
@@ -12,7 +12,8 @@ Stan na 2026-11-24. **F04 aktywny po zamknięciu F03 w pytaniu 243.** Aktualny t
 | Klakson przy zwykłym wybudzeniu ze snu | Przyjęty SYS-239, odpowiedź B na pytanie 247: pierwsze naciśnięcie wybudza; sygnał wymaga zwolnienia i nowego naciśnięcia. |
 | Autotest klaksonu | Przyjęty SYS-240, odpowiedź A na pytanie 248: bez samoczynnego dźwięku; próba dźwiękowa na świadome polecenie użytkownika. |
 | Pozostałe stany akcesoriów | W kolejce w F04: start/restart ECU, powrót łączności i brakujące reguły wyjść. Zachowujemy przyjęte SYS-050–053 oraz SYS-081–091. |
-| Dodatkowe I/O | Następny temat: zastosowania dodatkowych wyjść, pytanie 249; następnie funkcje, liczba kanałów i zachowanie odbiorników. Parametry elektryczne i stopnie mocy dobieramy w dalszych etapach. |
+| Dodatkowe wyjścia mocy | Przyjęte zastosowania SYS-241, odpowiedź B na pytanie 249: oświetlenie i zewnętrzne akcesoria. Liczba niezależnych kanałów otwarta w pytaniu 250. |
+| Sygnałowe I/O i komunikacja | Osobny przegląd po wyjściach mocy; wymagania funkcjonalne oddzielamy od późniejszego doboru interfejsów i torów. |
 
 Klakson należy do przyjętego zakresu SYS-004. Obecność klaksonu 12 V w dokumentacji Bety jest potwierdzona w [analizie instrukcji i suplementu](../interfaces/beta-2015-analiza-dokumentacji.md). ECU steruje odbiornikiem, a HMI przekazuje polecenia kierowcy. Nie ustalono tu jeszcze pełnej obsługi przycisku ani wszystkich stanów po restarcie.
 
@@ -105,6 +106,23 @@ Sprawdzono spójność tych reguł z autonomią ECU, wybudzaniem SYS-055 i autot
 
 Metody, progi, czasy i kwalifikację danych opracujemy w etapie 4; procedury w etapie 5, a tor mocy i jego diagnostykę w etapach 6–8. Wspólne reguły energii i pozostałych odbiorników nadal należą do F04. Przyjęta część SYS-236–240 nie zamyka całego pakietu.
 
+## Dodatkowe wyjścia mocy
+
+W odpowiedzi **B na doprecyzowane pytanie 249** (2026-11-24) właściciel przyjął SYS-241: dodatkowe oświetlenie oraz zasilanie zewnętrznych akcesoriów, np. GPS lub zewnętrznej ładowarki telefonu.
+
+Wyjście mocy steruje prądem odbiornika. Sposób sterowania, np. ON/OFF lub PWM mocy, dobierzemy do zastosowania. Logiczny sygnał PWM do zewnętrznego modułu i interfejs komunikacyjny są odrębnymi funkcjami, do osobnego przeglądu I/O. Odpowiedź 249 określa zastosowania wyjść mocy.
+
+Liczba niezależnych kanałów pozostaje otwarta. Jeden kanał może zasilać grupę odbiorników załączanych razem; osobne sterowanie grupami wymaga osobnych kanałów. Konkretne urządzenia, prądy, dopuszczone kombinacje i warunki pracy określimy z danymi osprzętu oraz architekturą. Komponenty wybierzemy wspólnie na etapie doboru.
+
+### Plan próby SYS-241
+
+1. Po uzgodnieniu liczby i funkcji kanałów oraz parametrów wybrać reprezentatywną lampę dodatkową i zewnętrzny moduł zasilania akcesorium. Z ich dokumentacji wyznaczyć warunki, wartości dopuszczalne i kryteria sprawdzenia; najpierw zweryfikować tor ECU na stanowisku z właściwymi obciążeniami.
+2. Dla każdej dopuszczonej konfiguracji załączyć i wyłączyć odbiorniki przyjętym interfejsem poleceń. Na rzeczywistym ECU mierzyć napięcie/prąd wyjścia oraz stan zasilanego urządzenia. Sprawdzić zgodność z zakresem deklarowanym dla danego kanału; nie zakładać obsługi dowolnego odbiornika.
+3. Sprawdzić przyjęte konfiguracje w kwalifikowanym zakresie zasilania i temperatury, z zachowaniem zabezpieczeń oraz uzgodnionych reguł energii. Sposób sterowania i reakcje na usterki mają odpowiadać później przyjętej specyfikacji kanału. Prądy rozruchowe i równoczesność odbiorników uwzględnić w kryteriach.
+4. Po kwalifikacji stanowiskowej potwierdzić zasilanie rzeczywistych urządzeń i obsługę w HMI/Windows zgodnie z ich przyjętym zakresem. Przygotować połączenia, wyposażenie i warunki przerwania przed wykonaniem; wyniki powiązać z HW/FW, konfiguracją i modelami odbiorników. [Macierz weryfikacji](../verification/macierz-wymagan.md).
+
+To plan zakresu do rozwinięcia po ustaleniu kanałów i parametrów. Nie ma wyników prób produktu.
+
 ## Następna decyzja
 
-**Pytanie 249:** do jakich zastosowań mają służyć dodatkowe wyjścia ECU poza już przyjętymi odbiornikami? Najpierw ustalamy zastosowania, następnie potrzebną liczbę i zachowanie kanałów, a parametry elektryczne i komponenty dobieramy na dalszym etapie.
+**Pytanie 250:** ile niezależnie sterowanych dodatkowych kanałów mocy ma obsługiwać ECU? Liczymy je ponad kanałami już przeznaczonymi na uzgodnione odbiorniki motocykla. Najpierw wybieramy potrzebną niezależność sterowania; parametry i fizyczną realizację zweryfikujemy w dalszym projekcie.

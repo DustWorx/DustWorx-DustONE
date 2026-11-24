@@ -267,6 +267,7 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-238 | Jeśli po restarcie ECU HMI zgłasza przycisk klaksonu trzymany od czasu sprzed restartu, ECU po odzyskaniu gotowości pozostawia klakson wyłączony. Ponowne użycie wymaga potwierdzonego zwolnienia przycisku i nowego naciśnięcia, z zachowaniem pozostałych warunków oraz zabezpieczeń wyjścia. Sam stan naciśnięcia sprzed restartu ani odzyskanie gotowości ECU nie wznawiają sygnału. Wymaganie dotyczy obsługi poleceń użytkownika po restarcie; zwykłe wybudzenie ze snu jest osobnym przypadkiem F04. |
 | SYS-239 | Przy prawidłowym wybudzeniu HMI i ECU ze snu przez naciśnięcie przycisku klaksonu pierwsze naciśnięcie służy wybudzeniu systemu. Dalsze trzymanie tego samego przycisku nie załącza klaksonu także po uzyskaniu gotowości. ECU dopuszcza jego użycie dopiero po potwierdzonym zwolnieniu i nowym naciśnięciu, przy spełnieniu pozostałych warunków oraz zabezpieczeń wyjścia. Reguła dotyczy obsługi polecenia użytkownika; pobudzenia diagnostyczne autotestu są osobnym ustaleniem F04. |
 | SYS-240 | Autotest ECU nie uruchamia samoczynnego sygnału dźwiękowego klaksonu, także po wybudzeniu. Automatycznie wykonuje dostępne sprawdzenia niewywołujące dźwięku, według metod zweryfikowanych dla danego toru i klaksonu. Próbę dźwiękową wywołuje świadomie użytkownik, z zachowaniem pozostałych warunków oraz zabezpieczeń wyjścia. Zakres wykrywanych usterek i kryteria sprawdzeń bez dźwięku wymagają projektu i prób. |
+| SYS-241 | Dodatkowe konfigurowalne wyjścia mocy ECU obsługują dodatkowe oświetlenie oraz załączanie zasilania zewnętrznych akcesoriów, np. GPS lub zewnętrznej ładowarki telefonu. Liczba niezależnych kanałów, dopuszczone odbiorniki, sposób sterowania oraz parametry elektryczne wymagają dalszego uzgodnienia i projektu. Zakres dotyczy sterowania mocą odbiorników; logiczne sygnały PWM i interfejsy komunikacyjne są odrębnymi zagadnieniami I/O. |
 
 ## 3. Podział odpowiedzialności
 
@@ -801,6 +802,8 @@ W odpowiedzi A na pytanie 246 (2026-11-24) właściciel przyjął SYS-238: po re
 W odpowiedzi B na pytanie 247 (2026-11-24) właściciel przyjął SYS-239: naciśnięcie klaksonu podczas prawidłowego snu wybudza system; po wybudzeniu sygnał wymaga zwolnienia i nowego naciśnięcia. [Plan próby F04](requirements/f04-akcesoria-i-io.md#plan-próby-sys-239).
 
 W odpowiedzi A na pytanie 248 (2026-11-24) właściciel przyjął SYS-240: autotest bez samoczynnego dźwięku klaksonu, a próba dźwiękowa na świadome polecenie użytkownika. Automatyczny zakres diagnostyki dobierzemy i sprawdzimy dla toru wyjściowego. [Plan próby F04](requirements/f04-akcesoria-i-io.md#plan-próby-sys-240).
+
+W odpowiedzi B na doprecyzowane pytanie 249 (2026-11-24) właściciel przyjął SYS-241: dodatkowe wyjścia mocy do oświetlenia i zasilania zewnętrznych akcesoriów. Wcześniejsze doprecyzowanie odróżniało te wyjścia od logicznego PWM i komunikacji. [Zakres i plan próby F04](requirements/f04-akcesoria-i-io.md#dodatkowe-wyjścia-mocy).
 
 ## 4. Decyzje potrzebne przed doborem sprzętu
 
