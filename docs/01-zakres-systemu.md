@@ -268,6 +268,7 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-239 | Przy prawidłowym wybudzeniu HMI i ECU ze snu przez naciśnięcie przycisku klaksonu pierwsze naciśnięcie służy wybudzeniu systemu. Dalsze trzymanie tego samego przycisku nie załącza klaksonu także po uzyskaniu gotowości. ECU dopuszcza jego użycie dopiero po potwierdzonym zwolnieniu i nowym naciśnięciu, przy spełnieniu pozostałych warunków oraz zabezpieczeń wyjścia. Reguła dotyczy obsługi polecenia użytkownika; pobudzenia diagnostyczne autotestu są osobnym ustaleniem F04. |
 | SYS-240 | Autotest ECU nie uruchamia samoczynnego sygnału dźwiękowego klaksonu, także po wybudzeniu. Automatycznie wykonuje dostępne sprawdzenia niewywołujące dźwięku, według metod zweryfikowanych dla danego toru i klaksonu. Próbę dźwiękową wywołuje świadomie użytkownik, z zachowaniem pozostałych warunków oraz zabezpieczeń wyjścia. Zakres wykrywanych usterek i kryteria sprawdzeń bez dźwięku wymagają projektu i prób. |
 | SYS-241 | Dodatkowe konfigurowalne wyjścia mocy ECU obsługują dodatkowe oświetlenie oraz załączanie zasilania zewnętrznych akcesoriów, np. GPS lub zewnętrznej ładowarki telefonu. Liczba niezależnych kanałów, dopuszczone odbiorniki, sposób sterowania oraz parametry elektryczne wymagają dalszego uzgodnienia i projektu. Zakres dotyczy sterowania mocą odbiorników; logiczne sygnały PWM i interfejsy komunikacyjne są odrębnymi zagadnieniami I/O. |
+| SYS-242 | ECU udostępnia trzy niezależnie sterowane dodatkowe kanały mocy do zastosowań SYS-241, ponad wyjściami potrzebnymi dla uzgodnionego osprzętu silnika i podstawowych akcesoriów motocykla. Każdy kanał może załączać wspólnie grupę odbiorników; jego zwykłe sterowanie jest niezależne od pozostałych dwóch kanałów. Dopuszczone konfiguracje, obciążenia pojedyncze i równoczesne, parametry elektryczne oraz granice zabezpieczeń wymagają projektu i prób. |
 
 ## 3. Podział odpowiedzialności
 
@@ -804,6 +805,8 @@ W odpowiedzi B na pytanie 247 (2026-11-24) właściciel przyjął SYS-239: naci�
 W odpowiedzi A na pytanie 248 (2026-11-24) właściciel przyjął SYS-240: autotest bez samoczynnego dźwięku klaksonu, a próba dźwiękowa na świadome polecenie użytkownika. Automatyczny zakres diagnostyki dobierzemy i sprawdzimy dla toru wyjściowego. [Plan próby F04](requirements/f04-akcesoria-i-io.md#plan-próby-sys-240).
 
 W odpowiedzi B na doprecyzowane pytanie 249 (2026-11-24) właściciel przyjął SYS-241: dodatkowe wyjścia mocy do oświetlenia i zasilania zewnętrznych akcesoriów. Wcześniejsze doprecyzowanie odróżniało te wyjścia od logicznego PWM i komunikacji. [Zakres i plan próby F04](requirements/f04-akcesoria-i-io.md#dodatkowe-wyjścia-mocy).
+
+W odpowiedzi B na pytanie 250 (2026-11-24) właściciel wybrał trzy dodatkowe kanały mocy (SYS-242). Odpowiedź ustala ich liczbę i niezależność sterowania; nie przypisuje na stałe odbiorników do kanałów. [Plan próby F04](requirements/f04-akcesoria-i-io.md#plan-próby-sys-242).
 
 ## 4. Decyzje potrzebne przed doborem sprzętu
 

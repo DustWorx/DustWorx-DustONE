@@ -12,7 +12,7 @@ Stan na 2026-11-24. **F04 aktywny po zamknięciu F03 w pytaniu 243.** Aktualny t
 | Klakson przy zwykłym wybudzeniu ze snu | Przyjęty SYS-239, odpowiedź B na pytanie 247: pierwsze naciśnięcie wybudza; sygnał wymaga zwolnienia i nowego naciśnięcia. |
 | Autotest klaksonu | Przyjęty SYS-240, odpowiedź A na pytanie 248: bez samoczynnego dźwięku; próba dźwiękowa na świadome polecenie użytkownika. |
 | Pozostałe stany akcesoriów | W kolejce w F04: start/restart ECU, powrót łączności i brakujące reguły wyjść. Zachowujemy przyjęte SYS-050–053 oraz SYS-081–091. |
-| Dodatkowe wyjścia mocy | Przyjęte zastosowania SYS-241, odpowiedź B na pytanie 249: oświetlenie i zewnętrzne akcesoria. Liczba niezależnych kanałów otwarta w pytaniu 250. |
+| Dodatkowe wyjścia mocy | Przyjęte zastosowania SYS-241, odpowiedź B na pytanie 249: oświetlenie i zewnętrzne akcesoria. Przyjęte 3 niezależne kanały SYS-242, odpowiedź B na pytanie 250; zachowanie po utracie HMI/CAN otwarte w pytaniu 251. |
 | Sygnałowe I/O i komunikacja | Osobny przegląd po wyjściach mocy; wymagania funkcjonalne oddzielamy od późniejszego doboru interfejsów i torów. |
 
 Klakson należy do przyjętego zakresu SYS-004. Obecność klaksonu 12 V w dokumentacji Bety jest potwierdzona w [analizie instrukcji i suplementu](../interfaces/beta-2015-analiza-dokumentacji.md). ECU steruje odbiornikiem, a HMI przekazuje polecenia kierowcy. Nie ustalono tu jeszcze pełnej obsługi przycisku ani wszystkich stanów po restarcie.
@@ -112,7 +112,7 @@ W odpowiedzi **B na doprecyzowane pytanie 249** (2026-11-24) właściciel przyj�
 
 Wyjście mocy steruje prądem odbiornika. Sposób sterowania, np. ON/OFF lub PWM mocy, dobierzemy do zastosowania. Logiczny sygnał PWM do zewnętrznego modułu i interfejs komunikacyjny są odrębnymi funkcjami, do osobnego przeglądu I/O. Odpowiedź 249 określa zastosowania wyjść mocy.
 
-Liczba niezależnych kanałów pozostaje otwarta. Jeden kanał może zasilać grupę odbiorników załączanych razem; osobne sterowanie grupami wymaga osobnych kanałów. Konkretne urządzenia, prądy, dopuszczone kombinacje i warunki pracy określimy z danymi osprzętu oraz architekturą. Komponenty wybierzemy wspólnie na etapie doboru.
+W odpowiedzi **B na pytanie 250** (2026-11-24) właściciel przyjął **trzy niezależnie sterowane dodatkowe kanały mocy** (SYS-242), ponad wyjściami dla uzgodnionego osprzętu silnika i podstawowych akcesoriów. Wybór nie ustala stałego przypisania lamp lub akcesoriów do konkretnego kanału. Jeden kanał może zasilać grupę odbiorników załączanych razem; osobne sterowanie grupami wymaga osobnych kanałów. Konkretne urządzenia, prądy, dopuszczone kombinacje i warunki pracy określimy z danymi osprzętu oraz architekturą. Komponenty wybierzemy wspólnie na etapie doboru.
 
 ### Plan próby SYS-241
 
@@ -123,6 +123,19 @@ Liczba niezależnych kanałów pozostaje otwarta. Jeden kanał może zasilać gr
 
 To plan zakresu do rozwinięcia po ustaleniu kanałów i parametrów. Nie ma wyników prób produktu.
 
+## Trzy dodatkowe kanały mocy
+
+SYS-242 ustala liczbę kanałów. Ich przeznaczenie podlega konfiguracji i dopuszczonym zastosowaniom SYS-241. Parametry, dozwolone kombinacje oraz rzeczywiste obciążenia określimy z danymi osprzętu w architekturze; nie wybrano topologii, układów ani pinów złącza.
+
+### Plan próby SYS-242
+
+1. Po określeniu specyfikacji podłączyć do rzeczywistego ECU trzy obciążenia stanowiskowe w dopuszczonym zakresie. Z przyjętego interfejsu załączać i wyłączać każdy kanał osobno; mierzyć rzeczywisty stan napięcia/prądu wszystkich trzech.
+2. Sprawdzić niezależność zwykłych poleceń: zmiana jednego kanału nie zmienia zadanych stanów pozostałych dwóch. Przejść przez dopuszczone kombinacje trzech stanów ON/OFF, w tym równoczesne załączenie w granicach obciążeń określonych przez projekt.
+3. Powtórzyć sprawdzenie dla przyjętych konfiguracji oświetlenia i akcesoriów oraz kwalifikowanego zasilania i temperatur. Odrębnie sprawdzić granice wspólnych i indywidualnych zabezpieczeń według ich specyfikacji; sama niezależność zwykłego sterowania nie określa jeszcze izolacji usterek.
+4. Potwierdzić poprawne przypisanie poleceń i odczytów HMI/Windows do każdego kanału oraz właściwy fizyczny tor. Przed wykonaniem ustalić kryteria, połączenia, obciążenia i warunki przerwania; wyniki powiązać z HW/FW i konfiguracją. [Macierz weryfikacji](../verification/macierz-wymagan.md).
+
+Plan wymaga danych i procedury wykonawczej; prób produktu jeszcze nie wykonano.
+
 ## Następna decyzja
 
-**Pytanie 250:** ile niezależnie sterowanych dodatkowych kanałów mocy ma obsługiwać ECU? Liczymy je ponad kanałami już przeznaczonymi na uzgodnione odbiorniki motocykla. Najpierw wybieramy potrzebną niezależność sterowania; parametry i fizyczną realizację zweryfikujemy w dalszym projekcie.
+**Pytanie 251:** jak trzy dodatkowe kanały mocy mają zachować się po potwierdzonej utracie HMI/CAN podczas nieprzerwanej pracy ECU? Ustalone zabezpieczenia wyjść i ochrona energii nadal obowiązują. Rozpatrujemy zachowanie zasilanych lamp i akcesoriów, bez resetu ECU; powrót komunikacji oraz restart są kolejnymi przypadkami do przeglądu.

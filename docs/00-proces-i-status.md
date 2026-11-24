@@ -10,13 +10,13 @@ Kontrola pełnego F01 została zakończona: właściciel potwierdził zgodność
 
 | Obszar | Stan potwierdzony dokumentacją |
 | --- | --- |
-| Wymagania systemowe | 241 wymagań SYS-001–241; pierwszy przydział do bloków i grup weryfikacji gotowy, kryteria i procedury do rozwinięcia. |
+| Wymagania systemowe | 242 wymagań SYS-001–242; pierwszy przydział do bloków i grup weryfikacji gotowy, kryteria i procedury do rozwinięcia. |
 | Decyzje | 12 zapisów ADR-001–012; ostatni ogranicza platformę do silników chłodzonych cieczą. |
 | Zakres wariantów | Macierz 6 wariantów silnika; jest planem obsługi, nie potwierdzeniem zgodności modeli. |
 | Pierwsza jednostka | Beta 300 RR Racing 2015; analiza dokumentów i zdjęć, bez raportów pomiarowych instalacji. |
 | Architektura | Pierwszy diagram blokowy, funkcje sześciu wariantów i przydział zasobów gotowe jako wersje robocze. Modele, parametry i liczbowe bilanse pozostają otwarte. |
 | Schematy, BOM, PCB i mechanika | W repozytorium brak projektu wykonawczego i zatwierdzonego kompletnego BOM ECU/HMI. |
-| Kod i próby produktu | W repozytorium brak implementacji firmware/Windows i raportów prób DustONE. Istnieją plany, szablon procedury i przydział 241 wymagań do 13 grup weryfikacji. |
+| Kod i próby produktu | W repozytorium brak implementacji firmware/Windows i raportów prób DustONE. Istnieją plany, szablon procedury i przydział 242 wymagań do 13 grup weryfikacji. |
 
 Podstawy: [wymagania](requirements/README.md), [decyzje](decisions/README.md), [macierz silników](architecture/macierz-wariantow-silnika.md), [I/O](interfaces/wstepna-lista-io.md) i [weryfikacja](verification/README.md). Liczba wymagań i pytań nie jest procentem wykonania produktu.
 
@@ -70,13 +70,13 @@ Parametry wyliczane z osprzętu, charakterystyki czujników, wartości elementó
 | W04 — Zakres funkcjonalny: F01 | Zamknięty po kontroli właściciela: 2026-11-04. | [Pomiary](requirements/f01-pomiary-silnika.md), [przegląd sterowania i wynik zamknięcia](requirements/f01-sterowanie-silnikiem.md); dane techniczne przekazane do kolejki etapów 3–6. |
 | F02 — Mapy, konfiguracja i strojenie ECU | Zamknięty po akceptacji właściciela 2026-11-09. | Odpowiedź A na pytanie 166. [Karta F02](requirements/f02-przeglad-zakresu.md) zawiera przyjęty zakres, plan weryfikacji i przekazanie. |
 | F03 — Ochrona i reakcje na usterki | Zamknięty po akceptacji właściciela: 2026-11-24. | Odpowiedź A na pytanie 243. [Karta F03](requirements/f03-przeglad-zakresu.md) obejmuje SYS-157–235, przegląd spójności, 79 planów prób i przekazanie do dalszych etapów. [Szczegółowe reakcje](requirements/f03-ochrona-i-usterki.md) pozostają źródłem rozwinięcia; nie wykonano prób produktu. |
-| F04 — Akcesoria i dodatkowe I/O | Aktywny po zamknięciu F03. | [Dokument F04](requirements/f04-akcesoria-i-io.md): zasady klaksonu SYS-236–240 przyjęte; zastosowania dodatkowych wyjść mocy przyjęte w SYS-241 (B na pytanie 249). Następna decyzja: liczba niezależnych dodatkowych kanałów mocy, pytanie 250; dalej ich stany oraz pozostałe I/O. |
+| F04 — Akcesoria i dodatkowe I/O | Aktywny po zamknięciu F03. | [Dokument F04](requirements/f04-akcesoria-i-io.md): zasady klaksonu SYS-236–240 przyjęte; zastosowania dodatkowych wyjść mocy przyjęte w SYS-241 (B na pytanie 249). Trzy kanały przyjęte w SYS-242 (B na pytanie 250). Następna decyzja: ich zachowanie po utracie HMI/CAN, pytanie 251; dalej pozostałe stany i I/O. |
 | W05 — Inwentaryzacja Bety | W kolejce, etap 3. | Zachowany [plan INV](verification/beta-2015-plan-inwentaryzacji.md); brak wyników pomiarowych. |
 | W01/W02 — Architektura i zasoby | W kolejce, etap 4. | Zachowane [diagram](architecture/blokowa-systemu.md) i [macierz wariantów](architecture/macierz-wariantow-silnika.md); bez zamkniętych bilansów. |
-| W03 — Weryfikacja wymagań | W kolejce, etap 5. | Zachowany [przydział 241 SYS do grup](verification/macierz-wymagan.md); kryteria, procedury i dowody do rozwinięcia. |
+| W03 — Weryfikacja wymagań | W kolejce, etap 5. | Zachowany [przydział 242 SYS do grup](verification/macierz-wymagan.md); kryteria, procedury i dowody do rozwinięcia. |
 | W06 — Bilanse i wybór komponentów | W kolejce, etapy 4 i 6. | Wymagane wejściowe parametry; ważne komponenty wybierzemy wspólnie. |
 
-**F03 zamknięto odpowiedzią A na pytanie 243 (2026-11-24). W aktywnym F04 przyjęto zasady klaksonu SYS-236–240: utratę/powrót HMI, restart, zwykłe wybudzenie i autotest bez samoczynnego dźwięku. W pytaniu 249 przyjęto oświetlenie i zasilanie zewnętrznych akcesoriów (SYS-241). Najbliższy krok to liczba niezależnych dodatkowych kanałów mocy, pytanie 250.** [Dokument F04](requirements/f04-akcesoria-i-io.md) zachowuje przyjęte reguły, plany prób i kolejkę. [Karta F03](requirements/f03-przeglad-zakresu.md) zawiera przekazanie zamkniętej części. Inwentaryzacja, parametry elektryczne, bilanse i procedury wykonawcze pozostają w kolejce właściwych etapów.
+**F03 zamknięto odpowiedzią A na pytanie 243 (2026-11-24). W aktywnym F04 przyjęto zasady klaksonu SYS-236–240: utratę/powrót HMI, restart, zwykłe wybudzenie i autotest bez samoczynnego dźwięku. W pytaniu 249 przyjęto oświetlenie i zasilanie zewnętrznych akcesoriów (SYS-241). W pytaniu 250 przyjęto trzy niezależne dodatkowe kanały mocy (SYS-242). Najbliższy krok to ich zachowanie po utracie HMI/CAN, pytanie 251.** [Dokument F04](requirements/f04-akcesoria-i-io.md) zachowuje przyjęte reguły, plany prób i kolejkę. [Karta F03](requirements/f03-przeglad-zakresu.md) zawiera przekazanie zamkniętej części. Inwentaryzacja, parametry elektryczne, bilanse i procedury wykonawcze pozostają w kolejce właściwych etapów.
 
 ## Warunki przechodzenia dalej
 

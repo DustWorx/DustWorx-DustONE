@@ -268,4 +268,4 @@ Według SYS-234 ECU lokalnie realizuje aktywny ogranicznik w uzgodnionych profil
 
 Reguły klaksonu SYS-236–240 są w [F04 wraz z planami prób](../../docs/requirements/f04-akcesoria-i-io.md). ECU wyłącza go po utracie HMI/CAN; powrót łączności, restart i naciśnięcie wybudzające wymagają zwolnienia oraz nowego naciśnięcia. Autotest nie wywołuje samoczynnego dźwięku. Kryteria komunikacji, kwalifikacja przycisku i pokrycie diagnostyki wymagają projektu protokołu oraz toru mocy.
 
-Zakres dodatkowych wyjść mocy do oświetlenia i zasilania zewnętrznych akcesoriów określa SYS-241 w [F04](../../docs/requirements/f04-akcesoria-i-io.md#dodatkowe-wyjścia-mocy). Liczba kanałów, ich konfiguracja i reguły sterowania są do dalszego uzgodnienia.
+Zakres dodatkowych wyjść mocy do oświetlenia i zasilania zewnętrznych akcesoriów określa SYS-241 w [F04](../../docs/requirements/f04-akcesoria-i-io.md#dodatkowe-wyjścia-mocy). Liczbę trzech niezależnych dodatkowych kanałów ustalono w SYS-242. Dopuszczone konfiguracje i reguły ich sterowania wymagają dalszego uzgodnienia.
