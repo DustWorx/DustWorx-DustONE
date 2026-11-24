@@ -89,3 +89,5 @@ Dla SYS-233 HMI przedstawia usterkę obwodu pompy, stan automatycznej oceny i po
 SYS-234 działa niezależnie od HMI. Prezentację dostępnego stanu ogranicznika rozwiniemy we właściwym pakiecie według danych ECU. Według SYS-235 prawidłowe ograniczanie jest normalnym stanem bez DTC i wymuszenia „Standard”; HMI zachowuje rozróżnienie tego stanu od rzeczywistych ostrzeżeń ECU. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-234).
 
 Według SYS-237 samo odzyskanie komunikacji nie wznawia klaksonu wyłączonego przez ECU po utracie HMI/CAN. HMI przekazuje wiarygodne stany przycisku, a ECU dopuszcza ponowne załączenie po zwolnieniu i nowym naciśnięciu. Ramki i kryteria ich ważności określimy z protokołem. [Plan próby F04](../../docs/requirements/f04-akcesoria-i-io.md#plan-próby-sys-237).
+
+SYS-238 wymaga, aby po restarcie ECU nadal trzymany przycisk klaksonu nie został uznany za nowe naciśnięcie. Regułę egzekwuje ECU na podstawie wiarygodnych danych HMI; zwolnienie i kolejne naciśnięcie dopuszczają nowe użycie. [Plan próby F04](../../docs/requirements/f04-akcesoria-i-io.md#plan-próby-sys-238).

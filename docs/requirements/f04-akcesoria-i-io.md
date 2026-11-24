@@ -8,7 +8,8 @@ Stan na 2026-11-24. **F04 aktywny po zamknięciu F03 w pytaniu 243.** Aktualny t
 | --- | --- |
 | Klakson po utracie HMI/CAN | Przyjęty SYS-236, odpowiedź A na pytanie 244. |
 | Klakson po odzyskaniu łączności | Przyjęty SYS-237, odpowiedź A na pytanie 245: zwolnienie i nowe naciśnięcie. |
-| Klakson po restarcie ECU | Otwarty, pytanie 246. |
+| Klakson po restarcie ECU | Przyjęty SYS-238, odpowiedź A na pytanie 246: zwolnienie i nowe naciśnięcie. |
+| Klakson przy zwykłym wybudzeniu ze snu | Otwarty, pytanie 247. |
 | Pozostałe stany akcesoriów | W kolejce w F04: start/restart ECU, powrót łączności i brakujące reguły wyjść. Zachowujemy przyjęte SYS-050–053 oraz SYS-081–091. |
 | Dodatkowe I/O | W kolejce: konkretne zastosowania, potrzebne funkcje i liczba wejść/wyjść. Parametry elektryczne i stopnie mocy dobieramy w dalszych etapach. |
 
@@ -33,7 +34,7 @@ Plan wymaga procedury wykonawczej, stanowiska i kryteriów liczbowych. Nie ma wy
 
 W odpowiedzi **A na pytanie 245** (2026-11-24) właściciel przyjął SYS-237: powrót HMI/CAN nie wznawia klaksonu wyłączonego po utracie łączności. Przy trzymanym przycisku klakson pozostaje wyłączony; ponowne użycie wymaga zwolnienia i nowego naciśnięcia.
 
-ECU egzekwuje tę regułę na podstawie wiarygodnych danych HMI. Stany przycisku, rozpoznanie nowego naciśnięcia i odrzucanie wcześniejszych poleceń rozwiniemy w etapie 4. Ustalenie dotyczy odzyskania komunikacji po SYS-236; stany po restarcie ECU wymagają osobnej decyzji.
+ECU egzekwuje tę regułę na podstawie wiarygodnych danych HMI. Stany przycisku, rozpoznanie nowego naciśnięcia i odrzucanie wcześniejszych poleceń rozwiniemy w etapie 4. Ustalenie dotyczy odzyskania komunikacji po SYS-236; obsługę nadal trzymanego przycisku po restarcie ECU określa SYS-238.
 
 ### Plan próby SYS-237
 
@@ -44,6 +45,21 @@ ECU egzekwuje tę regułę na podstawie wiarygodnych danych HMI. Stany przycisku
 
 To plan do rozwinięcia w procedurę; prób produktu jeszcze nie wykonano.
 
+## Klakson po restarcie ECU
+
+W odpowiedzi **A na pytanie 246** (2026-11-24) właściciel przyjął SYS-238: po odzyskaniu gotowości ECU nie wznawia klaksonu na podstawie przycisku trzymanego od czasu sprzed restartu. Ponowne użycie wymaga zwolnienia i nowego naciśnięcia.
+
+Reguła dotyczy obsługi poleceń użytkownika po restarcie. Nie rozstrzyga zwykłego wybudzenia ze snu ani pobudzeń diagnostycznych autotestu. Kwalifikację stanów przycisku i moment dopuszczenia poleceń opracujemy w etapie 4.
+
+### Plan próby SYS-238
+
+1. Na stanowisku ECU–HMI załączyć klakson i wywołać kontrolowany restart ECU, pozostawiając HMI działające oraz przycisk trzymany. Po odzyskaniu gotowości ECU i prawidłowej komunikacji potwierdzić brak zwykłego załączenia klaksonu ze starego stanu przycisku. Rejestrować komunikację, gotowość ECU i rzeczywiste napięcie/prąd wyjścia.
+2. Zwolnić przycisk i nacisnąć go ponownie. Przy potwierdzonych stanach i spełnionych pozostałych warunkach potwierdzić dopuszczenie nowego użycia klaksonu. Osobno rozpocząć od zwolnionego przycisku i sprawdzić pierwsze nowe naciśnięcie po gotowości.
+3. Powtórzyć dla reprezentatywnych przyczyn restartu objętych projektem oraz wcześniejszych poleceń załączenia odtwarzanych przez HMI. Po każdym restarcie potwierdzić tę samą kwalifikację; nie traktować ponownego komunikatu o nadal trzymanym przycisku jako nowego naciśnięcia.
+4. Powtórzyć bez sesji Windows i z aktywną odrębną ochroną wyjścia. Zabezpieczenia nadal obowiązują. Próba nie zatwierdza pobudzeń diagnostycznych podczas uruchamiania ani zachowania przy zwykłym wybudzeniu. Przed wykonaniem ustalić kryteria, połączenia i sposób restartu; wyniki powiązać z HW/FW oraz konfiguracją. [Macierz weryfikacji](../verification/macierz-wymagan.md).
+
+To plan do rozwinięcia w procedurę; prób produktu jeszcze nie wykonano.
+
 ## Następna decyzja
 
-**Pytanie 246:** po restarcie ECU i odzyskaniu gotowości klakson jest wyłączony, lecz HMI zgłasza nadal trzymany przycisk. Czy wymagać zwolnienia i nowego naciśnięcia, czy przyjąć aktualny stan naciśnięcia? Pozostajemy przy klaksonie przed następnym tematem F04.
+**Pytanie 247:** system śpi prawidłowo, bez wcześniejszej blokady wymagającej nowego naciśnięcia. Kierowca naciska i trzyma klakson, wybudzając HMI/ECU według SYS-055. Czy po uzyskaniu gotowości dopuścić sygnał na tym samym przytrzymaniu, czy wymagać nowego naciśnięcia? Zwykłe wybudzenie odróżniamy od restartu SYS-238 i odzyskania łączności SYS-237.
