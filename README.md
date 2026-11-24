@@ -2,7 +2,7 @@
 
 System sterowania motocyklem: ECU dla silników jednocylindrowych 2T/4T na wspólnej platformie sprzętowej, HMI po CAN oraz aplikacja Windows do konfiguracji, strojenia, diagnostyki, aktualizacji i prac rozwojowych.
 
-**Aktywny etap 2 — zakres funkcjonalny.** F01 i F02 zamknięto w zakresie funkcji. Aktywny jest **F03 — ochrona i reakcje na usterki**. F04–F08 i kolejne etapy oczekują w kolejce. [Ścieżka projektu i aktualny status](docs/00-proces-i-status.md) opisują etapy, warunki ich zakończenia i najbliższe rezultaty.
+**Aktywny etap 2 — zakres funkcjonalny.** F01–F03 zamknięto w zakresie funkcji. Aktywny jest **F04 — akcesoria i dodatkowe I/O**. F05–F08 i kolejne etapy oczekują w kolejce. [Ścieżka projektu i aktualny status](docs/00-proces-i-status.md) opisują etapy, warunki ich zakończenia i najbliższe rezultaty.
 
 ## Dokumentacja
 

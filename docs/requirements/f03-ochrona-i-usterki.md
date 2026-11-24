@@ -1,6 +1,6 @@
 # F03 — ochrona i reakcje na usterki
 
-Stan na 2026-11-24. **F03 aktywny — karta przeglądu czeka na akceptację właściciela.** Macierz robocza łączy zdarzenie, reakcję i warunek powrotu. Zatwierdzone wymagania są w [rejestrze SYS](../01-zakres-systemu.md). Kolejność pakietów określa [status projektu](../00-proces-i-status.md).
+Stan na 2026-11-24. **F03 zamknięty w zakresie funkcji po akceptacji właściciela w pytaniu 243 (A, 2026-11-24).** Macierz łączy przyjęte zdarzenie, reakcję i warunek powrotu; parametry oraz kwalifikacja pozostają do dalszego projektu i prób. Zatwierdzone wymagania są w [rejestrze SYS](../01-zakres-systemu.md). Kolejność pakietów określa [status projektu](../00-proces-i-status.md).
 
 ## Szybka nawigacja
 
@@ -27,7 +27,7 @@ Każdy temat zawiera przyjętą reakcję, podstawę ustalenia i plan próby. Tre
 | Obwód pompy paliwa | [SYS-233](#usterka-obwodu-pompy-paliwa). |
 | Aktywny ogranicznik obrotów | [SYS-234](#aktywny-ogranicznik-obrotów). |
 | Diagnostyka prawidłowego ograniczania | [SYS-235](#diagnostyka-prawidłowego-zadziałania-ogranicznika). |
-| Przegląd właściciela | [Karta F03 — zakres, spójność i przekazanie](f03-przeglad-zakresu.md). Decyzja o zamknięciu w pytaniu 243. |
+| Przegląd właściciela | [Karta F03 — zakres, spójność i przekazanie](f03-przeglad-zakresu.md). Zatwierdzona w pytaniu 243; F03 zamknięty 2026-11-24. |
 
 ## Macierz reakcji
 
@@ -1123,4 +1123,4 @@ W odpowiedzi **A na pytanie 242** (2026-11-24) właściciel przyjął SYS-235: p
 4. Osobno odtworzyć przypadek wyłącznie ostrzegawczy według SYS-189, SYS-223 lub SYS-224. Potwierdzić zachowanie jego diagnostyki i ostrzeżenia bez dodawania odcięcia albo wymuszenia „Standard” przez prawidłowe ograniczanie.
 5. Sprawdzić lokalną klasyfikację bez HMI/CAN i Windows, a następnie zgodność dostępnych odczytów stanu i historii. Późniejsza integracja HMI/Windows ma zachować rozróżnienie normalnego stanu i usterki; szczegóły prezentacji do właściwych pakietów. Fizyczne działanie ogranicznika na konkretnych silnikach podlega odrębnie planowi SYS-234. [Macierz weryfikacji](../verification/macierz-wymagan.md).
 
-Przygotowano [kartę przeglądu F03](f03-przeglad-zakresu.md): spójność przyjętych reakcji, plany prób i przekazanie danych do dalszych etapów. Do akceptacji właściciela w pytaniu 243 F03 pozostaje aktywny.
+Przygotowano [kartę przeglądu F03](f03-przeglad-zakresu.md): spójność przyjętych reakcji, plany prób i przekazanie danych do dalszych etapów. Właściciel zaakceptował kartę i zamknął F03 odpowiedzią A na pytanie 243 (2026-11-24). Wynik dotyczy funkcji, bez potwierdzenia wykonania lub prób produktu.

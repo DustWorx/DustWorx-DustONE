@@ -785,7 +785,7 @@ W odpowiedzi A na pytanie 240 (2026-11-23) właściciel przyjął kontrolowane z
 W odpowiedzi A na pytanie 241 (2026-11-24) właściciel przyjął aktywny ogranicznik obrotów w uzgodnionych profilach gaźnikowych i wtryskowych 2T/4T. Po spadku obrotów i spełnieniu warunków normalne sterowanie wraca bez nowej próby rozruchu, z zachowaniem pozostałych zabezpieczeń (SYS-234). Progi i metodę dobierzemy do silnika. [Plan próby](requirements/f03-ochrona-i-usterki.md#plan-próby-sys-234).
 
 
-W odpowiedzi A na pytanie 242 (2026-11-24) właściciel przyjął normalny stan sterowania przy prawidłowym zadziałaniu ogranicznika, bez DTC i wymuszania „Standard” z samej tej przyczyny (SYS-235). Rzeczywiste usterki zachowują własną diagnostykę i reakcje. [Plan próby](requirements/f03-ochrona-i-usterki.md#plan-próby-sys-235). [Karta przeglądu F03](requirements/f03-przeglad-zakresu.md) czeka na akceptację właściciela.
+W odpowiedzi A na pytanie 242 (2026-11-24) właściciel przyjął normalny stan sterowania przy prawidłowym zadziałaniu ogranicznika, bez DTC i wymuszania „Standard” z samej tej przyczyny (SYS-235). Rzeczywiste usterki zachowują własną diagnostykę i reakcje. [Plan próby](requirements/f03-ochrona-i-usterki.md#plan-próby-sys-235). [Kartę przeglądu F03](requirements/f03-przeglad-zakresu.md) właściciel zaakceptował odpowiedzią A na pytanie 243 (2026-11-24), zamykając F03 w zakresie funkcji i zezwalając na scalenie PR #24.
 
 ## 4. Decyzje potrzebne przed doborem sprzętu
 
@@ -818,7 +818,7 @@ W odpowiedzi A na pytanie 242 (2026-11-24) właściciel przyjął normalny stan 
 
 Przygotowano robocze materiały: [listę funkcji wejść/wyjść](interfaces/wstepna-lista-io.md), [macierz wariantów silnika](architecture/macierz-wariantow-silnika.md) i [plan inwentaryzacji Bety 300 RR Racing 2015](verification/beta-2015-plan-inwentaryzacji.md). Nie są one zatwierdzonym pinoutem ani potwierdzeniem zgodności sprzętu.
 
-Przygotowano pierwszą [architekturę blokową](architecture/blokowa-systemu.md), funkcjonalny przydział zasobów w macierzy wariantów i [macierz SYS → blok → grupa weryfikacji](verification/macierz-wymagan.md). F01 i F02 zamknięto w zakresie funkcji; aktywny jest etap 2, pakiet F03: ochrona i reakcje na usterki, według [kolejności procesu](00-proces-i-status.md). Kolejne pakiety podejmujemy po zamknięciu poprzedniego; inwentaryzacja, architektura, bilanse i procedury wykonawcze oczekują we właściwych etapach. Zapisujemy tam wpływ decyzji. Ważne komponenty wybierzemy wspólnie po dojściu do etapu doboru i uzyskaniu jego danych.
+Przygotowano pierwszą [architekturę blokową](architecture/blokowa-systemu.md), funkcjonalny przydział zasobów w macierzy wariantów i [macierz SYS → blok → grupa weryfikacji](verification/macierz-wymagan.md). F01–F03 zamknięto w zakresie funkcji; aktywny jest etap 2, pakiet F04: akcesoria i dodatkowe I/O, według [kolejności procesu](00-proces-i-status.md). Kolejne pakiety podejmujemy po zamknięciu poprzedniego; inwentaryzacja, architektura, bilanse i procedury wykonawcze oczekują we właściwych etapach. Zapisujemy tam wpływ decyzji. Ważne komponenty wybierzemy wspólnie po dojściu do etapu doboru i uzyskaniu jego danych.
 
 ## 6. Sposób realizacji i współpracy
 

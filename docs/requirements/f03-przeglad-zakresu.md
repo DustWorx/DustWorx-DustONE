@@ -1,6 +1,6 @@
 # F03 — przegląd ochrony i reakcji na usterki
 
-Stan na 2026-11-24. **Przegląd inżynierski przygotowany; F03 pozostaje aktywny do akceptacji właściciela.** Karta obejmuje SYS-157–235 i ich powiązania z wcześniejszymi wymaganiami. Właściciel rozstrzygnął pytanie 242 odpowiedzią A. Następny krok to kontrola tej karty i decyzja o zamknięciu F03; sam zapis karty ani scalenie PR nie oznaczają zamknięcia.
+Stan na 2026-11-24. **F03 zamknięty w zakresie funkcji po przeglądzie inżynierskim i akceptacji właściciela.** Karta obejmuje SYS-157–235 i ich powiązania z wcześniejszymi wymaganiami. Właściciel rozstrzygnął pytanie 242 odpowiedzią A. W odpowiedzi A na pytanie 243 (2026-11-24) właściciel zaakceptował tę kartę, zamknął F03 i zezwolił na scalenie kompletnej dokumentacji przez PR #24. Aktywnym kolejnym pakietem jest F04.
 
 Źródła: [rejestr SYS](../01-zakres-systemu.md#2-wymagania-wynikające-z-opisu), [reakcje, podstawy i plany prób F03](f03-ochrona-i-usterki.md#szybka-nawigacja), [kolejność procesu](../00-proces-i-status.md).
 
@@ -31,7 +31,7 @@ Sprawdzono powiązania przyjętych zasad:
 | Kilka aktywnych przyczyn ograniczeń | Każda zachowuje warunki zwolnienia. Powrót po jednej usterce nie zwalnia pozostałych odcięć. Dopuszczenie strategii awaryjnej wymaga jej warunków w aktualnym stanie; sprawdzenie pojedynczej usterki nie kwalifikuje pracy po utracie innego sygnału potrzebnego tej strategii. Podstawa: SYS-128–133, SYS-208–213, SYS-225–230. |
 | Powrót z ograniczania obrotów | Nie zwalnia STOP, utraty synchronizacji ani innego odcięcia wymagającego nowej próby. Podstawa: SYS-157, SYS-162, SYS-169–183, SYS-234–235. |
 | Autotest i późniejsze kontrole | Wykonanie dostępnych prób przed rozruchem nie oznacza, że próby wymagające obrotu wału są już wykonane. Kontrolowane pobudzenia przy nowej próbie zapłonu/pompy pozostają w granicach STOP i zabezpieczeń. Podstawa: SYS-194, SYS-203–204, SYS-232–233. |
-| HMI/CAN i blokady ECU | ECU wykonuje ochronę lokalnie. Utrata lub powrót HMI nie potwierdzają sprawności toru ani nie zwalniają blokady. Pozostałe zachowania akcesoriów są w kolejce F04. Podstawa: SYS-046, SYS-050–053 i odpowiednie reakcje F03. |
+| HMI/CAN i blokady ECU | ECU wykonuje ochronę lokalnie. Utrata lub powrót HMI nie potwierdzają sprawności toru ani nie zwalniają blokady. Pozostałe zachowania akcesoriów należą do aktywnego F04. Podstawa: SYS-046, SYS-050–053 i odpowiednie reakcje F03. |
 | Ostrzeżenie a reakcja silnika | Rzeczywiste usterki zachowują własne reakcje. Ostrzegawcze przypadki SYS-189/223/224 oraz normalne ograniczanie SYS-235 nie są automatycznie zamieniane w odcięcie lub wymuszenie „Standard”. |
 
 Przegląd nie ujawnił kolejnej decyzji produktowej potrzebnej do przyjętego zakresu F03. Uszczegółowienie stanów, metod diagnostyki i kwalifikacja konkretnych konfiguracji należą do wskazanych etapów; nowa luka ujawniona danymi lub próbą podlega ocenie wpływu zgodnie z procesem.
@@ -53,4 +53,4 @@ Beta 300 RR Racing 2015 z gaźnikiem bez TPS potwierdzi część zakresu. Zgodno
 
 ## Kontrola właściciela
 
-Karta czeka na decyzję w pytaniu 243: zgodność podsumowania, jawne przekazanie otwartych danych i zamknięcie F03 w zakresie funkcji. Do tej decyzji F03 pozostaje aktywny, a F04 w kolejce. Akceptacja nie potwierdza gotowości PCB, firmware ani zgodności konkretnych motocykli; te wyniki wymagają dalszego projektu i prób.
+Właściciel potwierdził zgodność karty odpowiedzią A na pytanie 243 (2026-11-24): „Akceptuję kartę i zamykam F03. Publikujemy kompletną dokumentację przez scalenie PR #24.” F03 jest zamknięty w zakresie funkcji, a aktywnym następnym pakietem jest F04. Akceptacja nie potwierdza gotowości PCB, firmware ani zgodności konkretnych motocykli; te wyniki wymagają dalszego projektu i prób.
