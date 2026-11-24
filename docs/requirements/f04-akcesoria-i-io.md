@@ -10,9 +10,9 @@ Stan na 2026-11-24. **F04 aktywny po zamknięciu F03 w pytaniu 243.** Aktualny t
 | Klakson po odzyskaniu łączności | Przyjęty SYS-237, odpowiedź A na pytanie 245: zwolnienie i nowe naciśnięcie. |
 | Klakson po restarcie ECU | Przyjęty SYS-238, odpowiedź A na pytanie 246: zwolnienie i nowe naciśnięcie. |
 | Klakson przy zwykłym wybudzeniu ze snu | Przyjęty SYS-239, odpowiedź B na pytanie 247: pierwsze naciśnięcie wybudza; sygnał wymaga zwolnienia i nowego naciśnięcia. |
-| Dźwiękowa próba klaksonu w autoteście | Otwarta, pytanie 248. |
+| Autotest klaksonu | Przyjęty SYS-240, odpowiedź A na pytanie 248: bez samoczynnego dźwięku; próba dźwiękowa na świadome polecenie użytkownika. |
 | Pozostałe stany akcesoriów | W kolejce w F04: start/restart ECU, powrót łączności i brakujące reguły wyjść. Zachowujemy przyjęte SYS-050–053 oraz SYS-081–091. |
-| Dodatkowe I/O | W kolejce: konkretne zastosowania, potrzebne funkcje i liczba wejść/wyjść. Parametry elektryczne i stopnie mocy dobieramy w dalszych etapach. |
+| Dodatkowe I/O | Następny temat: zastosowania dodatkowych wyjść, pytanie 249; następnie funkcje, liczba kanałów i zachowanie odbiorników. Parametry elektryczne i stopnie mocy dobieramy w dalszych etapach. |
 
 Klakson należy do przyjętego zakresu SYS-004. Obecność klaksonu 12 V w dokumentacji Bety jest potwierdzona w [analizie instrukcji i suplementu](../interfaces/beta-2015-analiza-dokumentacji.md). ECU steruje odbiornikiem, a HMI przekazuje polecenia kierowcy. Nie ustalono tu jeszcze pełnej obsługi przycisku ani wszystkich stanów po restarcie.
 
@@ -50,14 +50,14 @@ To plan do rozwinięcia w procedurę; prób produktu jeszcze nie wykonano.
 
 W odpowiedzi **A na pytanie 246** (2026-11-24) właściciel przyjął SYS-238: po odzyskaniu gotowości ECU nie wznawia klaksonu na podstawie przycisku trzymanego od czasu sprzed restartu. Ponowne użycie wymaga zwolnienia i nowego naciśnięcia.
 
-Reguła dotyczy obsługi poleceń użytkownika po restarcie. Zwykłe wybudzenie określa SYS-239; dźwiękowe pobudzenia diagnostyczne autotestu pozostają otwarte w pytaniu 248. Kwalifikację stanów przycisku i moment dopuszczenia poleceń opracujemy w etapie 4.
+Reguła dotyczy obsługi poleceń użytkownika po restarcie. Zwykłe wybudzenie określa SYS-239; autotest bez samoczynnego dźwięku podlega SYS-240. Kwalifikację stanów przycisku i moment dopuszczenia poleceń opracujemy w etapie 4.
 
 ### Plan próby SYS-238
 
 1. Na stanowisku ECU–HMI załączyć klakson i wywołać kontrolowany restart ECU, pozostawiając HMI działające oraz przycisk trzymany. Po odzyskaniu gotowości ECU i prawidłowej komunikacji potwierdzić brak zwykłego załączenia klaksonu ze starego stanu przycisku. Rejestrować komunikację, gotowość ECU i rzeczywiste napięcie/prąd wyjścia.
 2. Zwolnić przycisk i nacisnąć go ponownie. Przy potwierdzonych stanach i spełnionych pozostałych warunkach potwierdzić dopuszczenie nowego użycia klaksonu. Osobno rozpocząć od zwolnionego przycisku i sprawdzić pierwsze nowe naciśnięcie po gotowości.
 3. Powtórzyć dla reprezentatywnych przyczyn restartu objętych projektem oraz wcześniejszych poleceń załączenia odtwarzanych przez HMI. Po każdym restarcie potwierdzić tę samą kwalifikację; nie traktować ponownego komunikatu o nadal trzymanym przycisku jako nowego naciśnięcia.
-4. Powtórzyć bez sesji Windows i z aktywną odrębną ochroną wyjścia. Zabezpieczenia nadal obowiązują. Zwykłe wybudzenie sprawdzić odrębnie według SYS-239; pobudzenia diagnostyczne podlegają odrębnemu ustaleniu z pytania 248. Przed wykonaniem ustalić kryteria, połączenia i sposób restartu; wyniki powiązać z HW/FW oraz konfiguracją. [Macierz weryfikacji](../verification/macierz-wymagan.md).
+4. Powtórzyć bez sesji Windows i z aktywną odrębną ochroną wyjścia. Zabezpieczenia nadal obowiązują. Zwykłe wybudzenie sprawdzić odrębnie według SYS-239; brak samoczynnej próby dźwiękowej potwierdzić według SYS-240. Przed wykonaniem ustalić kryteria, połączenia i sposób restartu; wyniki powiązać z HW/FW oraz konfiguracją. [Macierz weryfikacji](../verification/macierz-wymagan.md).
 
 To plan do rozwinięcia w procedurę; prób produktu jeszcze nie wykonano.
 
@@ -65,21 +65,46 @@ To plan do rozwinięcia w procedurę; prób produktu jeszcze nie wykonano.
 
 W odpowiedzi **B na pytanie 247** (2026-11-24) właściciel przyjął SYS-239. Pierwsze naciśnięcie klaksonu wybudza HMI i ECU, ale nie załącza sygnału. Po gotowości trzeba zwolnić przycisk i nacisnąć go ponownie, również gdy przed snem nie było blokady.
 
-Przyjęta obsługa klaksonu różni się od obsługi START na tym samym przytrzymaniu według SYS-204. Zasady rozruchu silnika pozostają odrębne. SYS-239 dotyczy polecenia kierowcy; ewentualny dźwięk wywoływany przez autotest rozstrzyga pytanie 248.
+Przyjęta obsługa klaksonu różni się od obsługi START na tym samym przytrzymaniu według SYS-204. Zasady rozruchu silnika pozostają odrębne. SYS-239 dotyczy polecenia kierowcy; autotest bez samoczynnego dźwięku podlega SYS-240.
 
 ### Plan próby SYS-239
 
 1. Doprowadzić stanowisko ECU–HMI do prawidłowego snu, bez wcześniejszego warunku nowego naciśnięcia po usterce. Nacisnąć i trzymać klakson. Potwierdzić wybudzenie obu urządzeń i brak zwykłego załączenia z tego naciśnięcia także po gotowości. Rejestrować stany przycisku, komunikację, gotowość i rzeczywiste wyjście.
 2. Osobno zwolnić przycisk przed uzyskaniem gotowości oraz po niej. Potwierdzić brak odłożonego sygnału z pierwszego naciśnięcia. Po gotowości wykonać nowe naciśnięcie; przy pozostałych spełnionych warunkach potwierdzić dopuszczenie klaksonu.
 3. Powtarzać prawidłowe cykle snu i wybudzenia, również bez sesji Windows. Sprawdzić, że powtarzane dane o nadal trzymanym przycisku nie są uznawane za nowe naciśnięcie. Obecność odrębnego warunku SYS-237/238 nie może zostać pominięta przez sen.
-4. Oddzielnie rejestrować zwykłe polecenia użytkownika i ewentualne pobudzenia autotestu, zgodnie z wynikiem pytania 248. Przed wykonaniem ustalić kryteria gotowości, połączenia i pomiar wyjścia; wyniki powiązać z HW/FW i konfiguracją. [Macierz weryfikacji](../verification/macierz-wymagan.md).
+4. Oddzielnie rejestrować zwykłe polecenia użytkownika i sprawdzenia autotestu; potwierdzić brak samoczynnego sygnału według SYS-240. Przed wykonaniem ustalić kryteria gotowości, połączenia i pomiar wyjścia; wyniki powiązać z HW/FW i konfiguracją. [Macierz weryfikacji](../verification/macierz-wymagan.md).
 
 To plan do rozwinięcia w procedurę; prób produktu jeszcze nie wykonano.
 
+## Autotest bez samoczynnego dźwięku klaksonu
+
+W odpowiedzi **A na pytanie 248** (2026-11-24) właściciel przyjął SYS-240: autotest nie wywołuje samoczynnego sygnału klaksonu. Próbę dźwiękową wywołuje świadomie użytkownik. Automatyczne sprawdzenia obejmują zakres dostępny bez dźwięku, zweryfikowany dla rzeczywistego toru i odbiornika.
+
+Przykład możliwości sprzętowej: [Infineon — diagnostyka open-load w stanie OFF](https://community.infineon.com/t5/Knowledge-Base-Articles/How-an-open-load-condition-can-be-detected-by-PROFET-2-12V-devices/ta-p/458652) opisuje badanie obwodu małym prądem bez uruchomienia obciążenia, z koniecznością dopasowania do odbiornika i weryfikacji. To podstawa do analizy, a nie potwierdzenie konkretnego rozwiązania DustONE. Metodę i układy dobierzemy wspólnie; wynik elektryczny nie potwierdza prawidłowego dźwięku.
+
+### Plan próby SYS-240
+
+1. Na stanowisku rzeczywistego ECU–HMI z klaksonem wykonać autotest przy wszystkich źródłach wybudzenia objętych SYS-054–056/079–080 oraz reprezentatywnych uruchomieniach ECU. Bez świadomego polecenia próby dźwiękowej potwierdzić brak sygnału. Rejestrować polecenia, napięcie/prąd wyjścia i ocenę akustyczną według kryteriów ustalonych przed próbą.
+2. Dla zaprojektowanej diagnostyki odtworzyć nominalny obwód oraz wykrywalne przerwy i zwarcia na właściwym stanowisku, w granicach zabezpieczeń. Sprawdzić rzeczywiste pokrycie, wyniki i brak dźwięku podczas automatycznych sprawdzeń. Wynik musi odpowiadać sprawdzonym cechom; nie uznawać samej poprawnej odpowiedzi elektrycznej za potwierdzenie prawidłowego dźwięku.
+3. Wywołać świadomie próbę dźwiękową, wykorzystując przyjętą obsługę przycisku albo istniejący test serwisowy po jego dopuszczeniu. Potwierdzić reakcję na polecenie i zachowanie zabezpieczeń. Po powrocie łączności, restarcie i śnie obowiązują także SYS-237–239.
+4. Powtórzyć cykle snu/wybudzenia, przypadek ruchu koła i autotest bez sesji Windows. Nie dopuszczać do samoczynnego dźwięku jako efektu zakończenia autotestu lub gotowości HMI. Kryteria, połączenia i wyposażenie akustyczne oraz elektryczne ustalić przed wykonaniem; wyniki powiązać z HW/FW i konfiguracją. [Macierz weryfikacji](../verification/macierz-wymagan.md).
+
+To plan do rozwinięcia w procedurę; prób produktu jeszcze nie wykonano.
+
+## Przegląd przyjętej części dotyczącej klaksonu
+
+| Przypadek | Przyjęta reguła | Podstawa |
+| --- | --- | --- |
+| Utrata HMI/CAN | ECU wyłącza aktywny klakson. | A na 244, SYS-236 |
+| Odzyskanie łączności | Zwolnienie i nowe naciśnięcie zamiast wznowienia starego stanu. | A na 245, SYS-237 |
+| Restart ECU | Zwolnienie i nowe naciśnięcie po stanie sprzed restartu. | A na 246, SYS-238 |
+| Zwykłe wybudzenie klaksonem | Pierwsze naciśnięcie wybudza; sygnał wymaga zwolnienia i nowego naciśnięcia. | B na 247, SYS-239 |
+| Autotest | Bez samoczynnego dźwięku; próbę dźwiękową wywołuje użytkownik. | A na 248, SYS-240 |
+
+Sprawdzono spójność tych reguł z autonomią ECU, wybudzaniem SYS-055 i autotestem SYS-194. Naciśnięcie wybudzające nie omija kwalifikacji nowego użycia, a autotest nie zastępuje świadomego polecenia dźwięku. Każde z SYS-236–240 ma plan próby i przypisanie do bloków oraz grup weryfikacji.
+
+Metody, progi, czasy i kwalifikację danych opracujemy w etapie 4; procedury w etapie 5, a tor mocy i jego diagnostykę w etapach 6–8. Wspólne reguły energii i pozostałych odbiorników nadal należą do F04. Przyjęta część SYS-236–240 nie zamyka całego pakietu.
+
 ## Następna decyzja
 
-**Pytanie 248:** czy autotest po każdym wybudzeniu może sam uruchomić krótki sygnał klaksonu? SYS-194 przewiduje kontrole skonfigurowanych torów, ale nie wyznacza jeszcze metody dla klaksonu. Wybudzenia następują także np. przy ruchu koła, więc próba dźwiękowa byłaby zauważalnym zachowaniem podczas zwykłej obsługi.
-
-Propozycja A: bez samoczynnego dźwięku; automatyczne sprawdzenia obejmują to, co można zweryfikować bez sygnału, a próbę dźwiękową wywołuje świadomie użytkownik. Alternatywa B: krótka próba dźwiękowa w autoteście każdego wybudzenia, przy spełnionych warunkach i zabezpieczeniach. To propozycje, nie przyjęte wymagania.
-
-Przykład możliwości sprzętowej: [Infineon — diagnostyka open-load w stanie OFF](https://community.infineon.com/t5/Knowledge-Base-Articles/How-an-open-load-condition-can-be-detected-by-PROFET-2-12V-devices/ta-p/458652) opisuje badanie obwodu małym prądem bez uruchomienia obciążenia, z koniecznością dopasowania do odbiornika i weryfikacji. Nie potwierdza to jeszcze wykonalności ani pokrycia dla klaksonu DustONE. Metodę i układy dobierzemy wspólnie w dalszym projekcie; sprawdzenie elektryczne nie jest potwierdzeniem wydawania prawidłowego dźwięku.
+**Pytanie 249:** do jakich zastosowań mają służyć dodatkowe wyjścia ECU poza już przyjętymi odbiornikami? Najpierw ustalamy zastosowania, następnie potrzebną liczbę i zachowanie kanałów, a parametry elektryczne i komponenty dobieramy na dalszym etapie.
