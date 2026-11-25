@@ -89,3 +89,9 @@ Dla SYS-233 HMI przedstawia usterkę obwodu pompy, stan automatycznej oceny i po
 SYS-234 działa niezależnie od HMI. Prezentację dostępnego stanu ogranicznika rozwiniemy we właściwym pakiecie według danych ECU. Według SYS-235 prawidłowe ograniczanie jest normalnym stanem bez DTC i wymuszenia „Standard”; HMI zachowuje rozróżnienie tego stanu od rzeczywistych ostrzeżeń ECU. [Plan próby](../../docs/requirements/f03-ochrona-i-usterki.md#plan-próby-sys-234).
 
 [F04 — klakson, SYS-236–240](../../docs/requirements/f04-akcesoria-i-io.md) określa wyłączenie po utracie łączności oraz wymaganie zwolnienia i nowego naciśnięcia po jej powrocie, restarcie ECU i naciśnięciu wybudzającym. HMI przekazuje wiarygodne stany przycisku; kwalifikację egzekwuje ECU. Autotest nie uruchamia samoczynnego dźwięku, a próbę dźwiękową wywołuje świadomie użytkownik. Szczegóły ramek i ich ważności do projektu protokołu.
+
+Dla SYS-243 źródłem stanów dodatkowych kanałów pozostaje ECU także po utracie komunikacji. Po jej przywróceniu odczyty HMI mają odpowiadać rzeczywistym stanom ECU; protokół odczytu i kwalifikację nowych poleceń opracujemy w projekcie interfejsu. [Plan próby F04](../../docs/requirements/f04-akcesoria-i-io.md#plan-próby-sys-243).
+
+Po restarcie ECU dodatkowe kanały rozpoczynają od wyłączonych według SYS-244. Odczyt HMI ma odzwierciedlać stany ECU, a wcześniejsze dane lub żądania nie zastępują nowego polecenia załączenia. Kwalifikację poleceń opracujemy z protokołem. [Plan próby F04](../../docs/requirements/f04-akcesoria-i-io.md#plan-próby-sys-244).
+
+SYS-245 pozostawia dodatkowe kanały wyłączone po prawidłowym śnie i wybudzeniu do nowego polecenia. Po wybudzeniu HMI odczytuje stany ECU; dawne dane nie są poleceniem ponownego załączenia. [Plan próby F04](../../docs/requirements/f04-akcesoria-i-io.md#plan-próby-sys-245).

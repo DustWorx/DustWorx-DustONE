@@ -1,6 +1,6 @@
 # F04 — akcesoria i dodatkowe I/O
 
-Stan na 2026-11-24. **F04 aktywny po zamknięciu F03 w pytaniu 243.** Aktualny temat: klakson. Źródłem wymagań jest [rejestr SYS](../01-zakres-systemu.md); kolejność i warunki zamknięcia określa [proces](../00-proces-i-status.md).
+Stan na 2026-11-25. **F04 aktywny po zamknięciu F03 w pytaniu 243.** Aktualny temat: dodatkowe wyjścia mocy. Zasady klaksonu SYS-236–240 są już przyjęte i zachowane poniżej. Źródłem wymagań jest [rejestr SYS](../01-zakres-systemu.md); kolejność i warunki zamknięcia określa [proces](../00-proces-i-status.md).
 
 ## Zakres i kolejność
 
@@ -12,7 +12,12 @@ Stan na 2026-11-24. **F04 aktywny po zamknięciu F03 w pytaniu 243.** Aktualny t
 | Klakson przy zwykłym wybudzeniu ze snu | Przyjęty SYS-239, odpowiedź B na pytanie 247: pierwsze naciśnięcie wybudza; sygnał wymaga zwolnienia i nowego naciśnięcia. |
 | Autotest klaksonu | Przyjęty SYS-240, odpowiedź A na pytanie 248: bez samoczynnego dźwięku; próba dźwiękowa na świadome polecenie użytkownika. |
 | Pozostałe stany akcesoriów | W kolejce w F04: start/restart ECU, powrót łączności i brakujące reguły wyjść. Zachowujemy przyjęte SYS-050–053 oraz SYS-081–091. |
-| Dodatkowe I/O | Następny temat: zastosowania dodatkowych wyjść, pytanie 249; następnie funkcje, liczba kanałów i zachowanie odbiorników. Parametry elektryczne i stopnie mocy dobieramy w dalszych etapach. |
+| Dodatkowe wyjścia mocy | Zastosowania SYS-241 i 3 niezależne kanały SYS-242 przyjęte odpowiedziami B na pytania 249–250. |
+| Dodatkowe kanały po utracie HMI/CAN | Zachowują własne stany według SYS-243, odpowiedź A na pytanie 251. |
+| Dodatkowe kanały po restarcie ECU | Start od wyłączonych według SYS-244, odpowiedź A na pytanie 252. |
+| Dodatkowe kanały przy prawidłowym śnie i wybudzeniu | Wyłączone przed snem i po wybudzeniu do nowego polecenia według SYS-245, odpowiedź A na pytanie 253. |
+| Sposób sterowania dodatkowymi lampami | Otwarty, pytanie 254: ON/OFF albo również PWM mocy dla zgodnych lamp. |
+| Sygnałowe I/O i komunikacja | Osobny przegląd po wyjściach mocy; wymagania funkcjonalne oddzielamy od późniejszego doboru interfejsów i torów. |
 
 Klakson należy do przyjętego zakresu SYS-004. Obecność klaksonu 12 V w dokumentacji Bety jest potwierdzona w [analizie instrukcji i suplementu](../interfaces/beta-2015-analiza-dokumentacji.md). ECU steruje odbiornikiem, a HMI przekazuje polecenia kierowcy. Nie ustalono tu jeszcze pełnej obsługi przycisku ani wszystkich stanów po restarcie.
 
@@ -105,6 +110,101 @@ Sprawdzono spójność tych reguł z autonomią ECU, wybudzaniem SYS-055 i autot
 
 Metody, progi, czasy i kwalifikację danych opracujemy w etapie 4; procedury w etapie 5, a tor mocy i jego diagnostykę w etapach 6–8. Wspólne reguły energii i pozostałych odbiorników nadal należą do F04. Przyjęta część SYS-236–240 nie zamyka całego pakietu.
 
+## Dodatkowe wyjścia mocy
+
+W odpowiedzi **B na doprecyzowane pytanie 249** (2026-11-24) właściciel przyjął SYS-241: dodatkowe oświetlenie oraz zasilanie zewnętrznych akcesoriów, np. GPS lub zewnętrznej ładowarki telefonu.
+
+Wyjście mocy steruje prądem odbiornika. Sposób sterowania, np. ON/OFF lub PWM mocy, dobierzemy do zastosowania. Logiczny sygnał PWM do zewnętrznego modułu i interfejs komunikacyjny są odrębnymi funkcjami, do osobnego przeglądu I/O. Odpowiedź 249 określa zastosowania wyjść mocy.
+
+W odpowiedzi **B na pytanie 250** (2026-11-24) właściciel przyjął **trzy niezależnie sterowane dodatkowe kanały mocy** (SYS-242), ponad wyjściami dla uzgodnionego osprzętu silnika i podstawowych akcesoriów. Wybór nie ustala stałego przypisania lamp lub akcesoriów do konkretnego kanału. Jeden kanał może zasilać grupę odbiorników załączanych razem; osobne sterowanie grupami wymaga osobnych kanałów. Konkretne urządzenia, prądy, dopuszczone kombinacje i warunki pracy określimy z danymi osprzętu oraz architekturą. Komponenty wybierzemy wspólnie na etapie doboru.
+
+### Plan próby SYS-241
+
+1. Po uzgodnieniu liczby i funkcji kanałów oraz parametrów wybrać reprezentatywną lampę dodatkową i zewnętrzny moduł zasilania akcesorium. Z ich dokumentacji wyznaczyć warunki, wartości dopuszczalne i kryteria sprawdzenia; najpierw zweryfikować tor ECU na stanowisku z właściwymi obciążeniami.
+2. Dla każdej dopuszczonej konfiguracji załączyć i wyłączyć odbiorniki przyjętym interfejsem poleceń. Na rzeczywistym ECU mierzyć napięcie/prąd wyjścia oraz stan zasilanego urządzenia. Sprawdzić zgodność z zakresem deklarowanym dla danego kanału; nie zakładać obsługi dowolnego odbiornika.
+3. Sprawdzić przyjęte konfiguracje w kwalifikowanym zakresie zasilania i temperatury, z zachowaniem zabezpieczeń oraz uzgodnionych reguł energii. Sposób sterowania i reakcje na usterki mają odpowiadać później przyjętej specyfikacji kanału. Prądy rozruchowe i równoczesność odbiorników uwzględnić w kryteriach.
+4. Po kwalifikacji stanowiskowej potwierdzić zasilanie rzeczywistych urządzeń i obsługę w HMI/Windows zgodnie z ich przyjętym zakresem. Przygotować połączenia, wyposażenie i warunki przerwania przed wykonaniem; wyniki powiązać z HW/FW, konfiguracją i modelami odbiorników. [Macierz weryfikacji](../verification/macierz-wymagan.md).
+
+To plan zakresu do rozwinięcia po ustaleniu kanałów i parametrów. Nie ma wyników prób produktu.
+
+## Trzy dodatkowe kanały mocy
+
+SYS-242 ustala liczbę kanałów. Ich przeznaczenie podlega konfiguracji i dopuszczonym zastosowaniom SYS-241. Parametry, dozwolone kombinacje oraz rzeczywiste obciążenia określimy z danymi osprzętu w architekturze; nie wybrano topologii, układów ani pinów złącza.
+
+### Plan próby SYS-242
+
+1. Po określeniu specyfikacji podłączyć do rzeczywistego ECU trzy obciążenia stanowiskowe w dopuszczonym zakresie. Z przyjętego interfejsu załączać i wyłączać każdy kanał osobno; mierzyć rzeczywisty stan napięcia/prądu wszystkich trzech.
+2. Sprawdzić niezależność zwykłych poleceń: zmiana jednego kanału nie zmienia zadanych stanów pozostałych dwóch. Przejść przez dopuszczone kombinacje trzech stanów ON/OFF, w tym równoczesne załączenie w granicach obciążeń określonych przez projekt.
+3. Powtórzyć sprawdzenie dla przyjętych konfiguracji oświetlenia i akcesoriów oraz kwalifikowanego zasilania i temperatur. Odrębnie sprawdzić granice wspólnych i indywidualnych zabezpieczeń według ich specyfikacji; sama niezależność zwykłego sterowania nie określa jeszcze izolacji usterek.
+4. Potwierdzić poprawne przypisanie poleceń i odczytów HMI/Windows do każdego kanału oraz właściwy fizyczny tor. Przed wykonaniem ustalić kryteria, połączenia, obciążenia i warunki przerwania; wyniki powiązać z HW/FW i konfiguracją. [Macierz weryfikacji](../verification/macierz-wymagan.md).
+
+Plan wymaga danych i procedury wykonawczej; prób produktu jeszcze nie wykonano.
+
+## Dodatkowe kanały po utracie HMI lub CAN
+
+W odpowiedzi **A na pytanie 251** (2026-11-25) właściciel przyjął SYS-243: przy działającym ECU trzy dodatkowe kanały mocy zachowują własne ostatnie stany pracy po potwierdzonej utracie HMI/CAN. Zabezpieczenia i ochrona energii mogą nadal zmienić stan według swoich reguł.
+
+Zasada utrzymuje dodatkowe oświetlenie i zasilanie akcesoriów mimo niedostępnego interfejsu. Jest spójna z autonomią ECU SYS-046 i przyjętym zachowaniem świateł podstawowych SYS-050. Stany po nieplanowanym restarcie lub powrocie zasilania określa SYS-244. Kryteria łączności i czasy opracujemy z protokołem w etapie 4.
+
+### Plan próby SYS-243
+
+1. Na stanowisku ECU–HMI ustawić dopuszczone kombinacje stanów trzech kanałów, także mieszane ON/OFF. Osobno odtworzyć odłączenie zasilania HMI, przerwanie CAN oraz brak wymaganych komunikatów HMI. Po potwierdzeniu utraty sprawdzić zachowanie stanu pracy każdego kanału; rejestrować komunikację, stan zadany i rzeczywiste napięcie/prąd wyjść.
+2. Powtórzyć przy symulowanej pracy i zatrzymaniu silnika oraz bez sesji Windows. Sama utrata HMI/CAN nie ma wyłączać dodatkowych kanałów ani sterowania silnikiem według SYS-046. Potwierdzić lokalną realizację stanów przez ECU.
+3. Przy utraconej łączności odtworzyć warunki zadziałania przewidzianych zabezpieczeń wyjść i ochrony energii. Potwierdzić właściwe odcięcia; zachowanie stanu po utracie HMI nie może omijać ochrony. Warunki i wartości ustalić przed próbą według specyfikacji profilu i kanałów.
+4. Przywrócić komunikację i odczytać rzeczywiste stany ECU. Sprawdzić zgodność odczytów bez zmiany wyjść z samego odczytu; obsługę nowych poleceń kwalifikować według protokołu. Restart ECU sprawdzić odrębnie według planu SYS-244. Kryteria, połączenia i warunki przerwania przygotować przed wykonaniem; wyniki powiązać z HW/FW i konfiguracją. [Macierz weryfikacji](../verification/macierz-wymagan.md).
+
+To plan do rozwinięcia w procedurę; prób produktu jeszcze nie wykonano.
+
+## Dodatkowe kanały po restarcie ECU
+
+W odpowiedzi **A na pytanie 252** (2026-11-25) właściciel przyjął SYS-244: po nieplanowanym restarcie lub powrocie zasilania ECU rozpoczyna sterowanie trzema dodatkowymi kanałami od stanów wyłączonych. Wcześniejsze stany nie są odtwarzane; ponowne załączenie wymaga nowego dopuszczonego polecenia.
+
+Utrata samego HMI/CAN podczas ciągłej pracy podlega odrębnej regule zachowania stanów SYS-243. Stan po restarcie jest kwalifikowany przez ECU, a HMI odczytuje go zgodnie z przyjętym podziałem ról. Warunki gotowości, kwalifikację poleceń i przebieg inicjalizacji wyjść opracujemy w architekturze.
+
+### Plan próby SYS-244
+
+1. Na stanowisku ECU–HMI ustawić dopuszczone kombinacje stanów trzech kanałów, także ON/ON/ON. Wywołać kontrolowany nieplanowany restart ECU przy nadal działającym HMI. Po odzyskaniu gotowości potwierdzić wyłączenie wszystkich trzech kanałów i brak odtworzenia poprzednich stanów. Rejestrować gotowość, polecenia i rzeczywiste napięcie/prąd wyjść.
+2. Powtórzyć dla powrotu zasilania i reprezentatywnych przyczyn restartu objętych projektem. Sprawdzić stan po gotowości bez HMI i bez sesji Windows. Przebieg inicjalizacji oraz ewentualne sprawdzenia diagnostyczne ocenić według osobnej specyfikacji toru.
+3. Przywrócić komunikację i odczytać stany ECU. Odtworzyć wcześniejsze żądania załączenia lub dane buforowane przez HMI; nie mogą one zastąpić nowego polecenia po restarcie. Kryteria ważności danych i odróżnienia nowego żądania ustalić z protokołem przed wykonaniem.
+4. Wydać nowe dopuszczone polecenie dla wybranego kanału. Przy spełnionych warunkach potwierdzić jego załączenie i poprawne stany pozostałych kanałów. Odrębnie sprawdzić, że zabezpieczenia i ochrona energii nadal mogą odmówić załączenia. Przed wykonaniem ustalić połączenia, obciążenia i warunki przerwania; wyniki powiązać z HW/FW i konfiguracją. [Macierz weryfikacji](../verification/macierz-wymagan.md).
+
+To plan do rozwinięcia w procedurę; prób produktu jeszcze nie wykonano.
+
+## Dodatkowe kanały przy prawidłowym śnie i wybudzeniu
+
+W odpowiedzi **A na pytanie 253** (2026-11-25) właściciel przyjął SYS-245: przed prawidłowym uśpieniem ECU/HMI dodatkowe kanały są wyłączane, a po zwykłym wybudzeniu pozostają wyłączone do nowego dopuszczonego polecenia.
+
+To reguła stanów pracy wyjść. Prawidłowy sen jest koordynowany według SYS-059/062/063; wybudzenie nie przywraca samoczynnie zasilania akcesoriów. Nieplanowany restart podlega SYS-244, a sama utrata HMI/CAN podczas ciągłej pracy podlega SYS-243. Warunki gotowości i wykonanie przejść opracujemy w architekturze.
+
+Wniosek do architektury z SYS-194/245: autotest nie omija stanu wyłączonego ani warunku nowego polecenia. Przy wybudzeniu wykonuje dostępne kontrole zgodne ze stanem OFF; próby wymagające załączenia odbiornika czekają na spełnienie warunków zgodnie z SYS-194. Zakres takich kontroli zależy od rzeczywistego toru i odbiornika.
+
+### Plan próby SYS-245
+
+1. Na stanowisku ECU–HMI załączyć dopuszczone kombinacje dodatkowych kanałów. Doprowadzić do spełnienia warunków prawidłowego snu, bez aktywnej sesji PC i innych zadań blokujących usypianie. Potwierdzić rzeczywiste wyłączenie wszystkich trzech wyjść przed przejściem systemu w zdefiniowany stan uśpienia.
+2. Sprawdzić wymagane źródła wybudzenia według SYS-054–056/079–080, w tym ruch koła i późniejsze podłączenie PC. Bez nowego polecenia dla dodatkowych kanałów potwierdzić ich stan wyłączony podczas wybudzania, autotestu i po gotowości ECU/HMI; autotest nie może omijać tej reguły. Rejestrować sekwencję, komunikację i rzeczywiste napięcie/prąd wyjść.
+3. Sprawdzić stany sprzed snu i dawne dane lub żądania HMI: nie mogą przywracać wyjść w miejsce nowego polecenia. Następnie wydać nowe dopuszczone polecenie i potwierdzić właściwe załączenie. Zabezpieczenia i ochrona energii nadal mogą odmówić załączenia.
+4. Powtarzać cykle snu/wybudzenia, również przy wcześniej potwierdzonej utracie HMI/CAN i przy aktywnej ochronie energii. Sprawdzić, że normalny sen nie jest traktowany jak ciągła praca z zachowywaniem stanów SYS-243. Przed wykonaniem ustalić połączenia, kryteria, wyposażenie i warunki przerwania; wyniki powiązać z HW/FW oraz konfiguracją. [Macierz weryfikacji](../verification/macierz-wymagan.md).
+
+To plan do rozwinięcia w procedurę; prób produktu jeszcze nie wykonano.
+
+## Przegląd przyjętej części wyjść mocy
+
+| Zakres | Przyjęta reguła | Podstawa |
+| --- | --- | --- |
+| Zastosowania | Dodatkowe oświetlenie i zasilanie zewnętrznych akcesoriów. | B na 249, SYS-241 |
+| Liczba kanałów | Trzy niezależnie sterowane kanały ponad podstawowymi odbiornikami. | B na 250, SYS-242 |
+| Utrata HMI/CAN | Zachowanie własnego stanu każdego kanału przy ciągłej pracy ECU. | A na 251, SYS-243 |
+| Nieplanowany restart / powrót zasilania | Start od wyłączonych; załączenie wymaga nowego polecenia. | A na 252, SYS-244 |
+| Prawidłowy sen i zwykłe wybudzenie | Wyłączenie przed snem; po wybudzeniu pozostają wyłączone do nowego polecenia. | A na 253, SYS-245 |
+
+Sprawdzono spójność reguł z autonomią ECU, rozróżnieniem restartu i snu oraz pierwszeństwem zabezpieczeń i ochrony energii. Każde z SYS-241–245 ma plan próby i przydział do bloków oraz grup weryfikacji.
+
+Uzgodniona porcja SYS-241–245 ma historię w [PR #26](https://github.com/DustWorx/DustWorx-DustONE/pull/26). F04 pozostaje aktywny: do dalszych ustaleń należą sposób sterowania lampami, brakujące reakcje wyjść na usterki, pozostałe stany akcesoriów i I/O. Parametry, topologię oraz pokrycie diagnostyki opracujemy we właściwych etapach, a ważne komponenty wybierzemy wspólnie.
+
 ## Następna decyzja
 
-**Pytanie 249:** do jakich zastosowań mają służyć dodatkowe wyjścia ECU poza już przyjętymi odbiornikami? Najpierw ustalamy zastosowania, następnie potrzebną liczbę i zachowanie kanałów, a parametry elektryczne i komponenty dobieramy na dalszym etapie.
+**Pytanie 254:** czy dodatkowe kanały mają oferować tylko ON/OFF, czy także opcjonalny PWM mocy do regulacji jasności zgodnych lamp? Zasilanie GPS lub zewnętrznej ładowarki traktujemy jako ON/OFF; sygnałowy PWM pozostaje osobnym tematem I/O.
+
+Potwierdzony przykład funkcji: [Skene IQ-275-KTM](https://skenelights.com/iq-275-ktm.html) opisuje regulację jasności dla KTM/Husqvarna enduro z lat 2014–2023. Producent opisuje również [PWM w rodzinie IQ-275X](https://skenelights.com/skene-iq-275x-dimmer-with-integrated-wire-harness.html) dla odpowiednich lamp. To potwierdzenie zastosowania funkcji, nie wybór części DustONE ani zgodności konkretnej lampy.
+
+Propozycja: opcjonalny PWM mocy tylko dla lamp, których zgodność zostanie potwierdzona; alternatywa to wyłącznie ON/OFF. Decyzja nie jest jeszcze podjęta. Zakres regulacji, częstotliwość i komponenty wymagają danych oraz projektu.
