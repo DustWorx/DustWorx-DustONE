@@ -13,7 +13,8 @@ Stan na 2026-11-25. **F04 aktywny po zamknięciu F03 w pytaniu 243.** Aktualny t
 | Autotest klaksonu | Przyjęty SYS-240, odpowiedź A na pytanie 248: bez samoczynnego dźwięku; próba dźwiękowa na świadome polecenie użytkownika. |
 | Pozostałe stany akcesoriów | W toku w F04. Przyjęty SYS-250, A na pytanie 258: podstawowe światła po nieplanowanym restarcie i przy zgaszonym silniku OFF do nowego polecenia. Zachowujemy SYS-050–053 oraz SYS-081–091. |
 | Kierunkowskazy po powrocie HMI/CAN | Przyjęty SYS-251, odpowiedź A na pytanie 259: pozostają OFF do nowego świadomego wyboru użytkownika, bez wznowienia dawnych stanów. |
-| Kierunkowskazy po restarcie i prawidłowym śnie | Otwarte, pytanie 260: OFF do nowego wyboru w obu przypadkach albo przywrócenie nadal zgłaszanej strony tylko po zwykłym wybudzeniu. |
+| Kierunkowskazy po restarcie i prawidłowym śnie | Przyjęty SYS-252, odpowiedź A na pytanie 260: wyłączenie przed snem; po wybudzeniu i restarcie OFF do nowego świadomego wyboru. |
+| Próby podstawowego oświetlenia, kierunkowskazów i klaksonu po ochronnym odcięciu | Otwarte, pytanie 261: przyjęta ręczna próba i limit jak SYS-247/248 albo ograniczone ponowienia automatyczne. |
 | Dodatkowe wyjścia mocy | Zastosowania SYS-241 i 3 niezależne kanały SYS-242 przyjęte odpowiedziami B na pytania 249–250. |
 | Dodatkowe kanały po utracie HMI/CAN | Zachowują własne stany według SYS-243, odpowiedź A na pytanie 251. |
 | Dodatkowe kanały po restarcie ECU | Start od wyłączonych według SYS-244, odpowiedź A na pytanie 252. |
@@ -278,7 +279,7 @@ To plan do rozwinięcia w procedurę; prób produktu jeszcze nie wykonano.
 
 Sprawdzono spójność reguł z autonomią ECU, rozróżnieniem restartu i snu oraz pierwszeństwem zabezpieczeń i ochrony energii. Każde z SYS-241–249 ma plan próby i przydział do bloków oraz grup weryfikacji.
 
-Uzgodniona porcja SYS-241–245 ma historię w [PR #26](https://github.com/DustWorx/DustWorx-DustONE/pull/26). SYS-246 dodaje opcjonalny PWM zgodnych lamp, a SYS-247 określa próbę kanału po ochronnym odcięciu. SYS-248 ustala limit i jego odnawianie. SYS-249 określa zachowanie pozostałych kanałów przy lokalnej usterce. F04 pozostaje aktywny; podstawowe światła po nieplanowanym restarcie określa poniższe SYS-250. Następny temat to kierunkowskazy po powrocie HMI/CAN, a następnie pozostałe reguły akcesoriów i I/O. Parametry, topologię oraz pokrycie diagnostyki opracujemy we właściwych etapach, a ważne komponenty wybierzemy wspólnie.
+Uzgodniona porcja SYS-241–245 ma historię w [PR #26](https://github.com/DustWorx/DustWorx-DustONE/pull/26). SYS-246 dodaje opcjonalny PWM zgodnych lamp, a SYS-247 określa próbę kanału po ochronnym odcięciu. SYS-248 ustala limit i jego odnawianie. SYS-249 określa zachowanie pozostałych kanałów przy lokalnej usterce. F04 pozostaje aktywny; podstawowe światła po nieplanowanym restarcie określa poniższe SYS-250. Powrót HMI/CAN oraz restart i sen kierunkowskazów określają dalsze SYS-251/252. Następny temat to próby pozostałych podstawowych wyjść po ochronnym odcięciu, a następnie pozostałe reguły akcesoriów i I/O. Parametry, topologię oraz pokrycie diagnostyki opracujemy we właściwych etapach, a ważne komponenty wybierzemy wspólnie.
 
 ## Podstawowe światła po nieplanowanym restarcie
 
@@ -312,10 +313,27 @@ To reguła odzyskania komunikacji podczas pracy ECU; restart oraz prawidłowy se
 
 To plan do rozwinięcia w procedurę; prób produktu jeszcze nie wykonano.
 
+## Kierunkowskazy po restarcie i prawidłowym śnie
+
+W odpowiedzi **A na pytanie 260** (2026-11-25) właściciel przyjął SYS-252. Przed prawidłowym snem ECU wyłącza kierunkowskazy. Po zwykłym wybudzeniu oraz po odzyskaniu gotowości po nieplanowanym restarcie pozostają one OFF do nowego świadomego wyboru użytkownika z HMI. Poprzednia strona i odtworzone dawne żądania nie przywracają sygnalizacji.
+
+To reguła stanów ECU, odrębna od powrotu HMI/CAN w bieżącym okresie wybudzenia z SYS-251. Zachowujemy automatyczny i koordynowany sen według SYS-059/062/063 oraz jego warunki. Miganiem nadal steruje ECU z pierwszeństwem zabezpieczeń i ochrony energii. Gotowość, kwalifikację nowych wyborów i ich przekazanie przez HMI rozwiniemy we właściwych etapach architektury, HMI i protokołu.
+
+### Plan próby SYS-252
+
+1. Na rzeczywistym stanowisku ECU–HMI załączyć lewy, a osobno prawy kierunkowskaz. Przy zgaszonym silniku, bez sesji PC i po spełnieniu pozostałych warunków przeprowadzić prawidłowe usypianie. Potwierdzić rzeczywiste wyłączenie kierunkowskazów przed stanem snu; rejestrować komunikację, stany ECU i napięcie/prąd skonfigurowanych lamp.
+2. Wybudzić system wymaganymi źródłami, w tym ruchem koła, START, obsługą HMI bez nowego wyboru strony oraz podłączeniem PC. Bez nowego świadomego wyboru potwierdzić OFF po wybudzeniu i gotowości. Odtworzyć poprzednie dane i żądania strony; nie mogą przywrócić sygnalizacji. Następnie wykonać nowy dopuszczony wybór i potwierdzić właściwe miganie.
+3. Podczas sygnalizacji wywołać nieplanowany restart ECU, także przy działającym HMI nadal zgłaszającym poprzednią stronę. Po odzyskaniu gotowości potwierdzić OFF do nowego świadomego wyboru, brak odtworzenia z dawnych stanów i właściwą reakcję na nowy wybór. Powtórzyć dla obu stron i reprezentatywnych przyczyn restartu objętych projektem.
+4. Powtarzać cykle snu/wybudzenia i restartu, również po wcześniejszej utracie HMI/CAN oraz przy obowiązujących nadrzędnych odcięciach. Nowy wybór nie może omijać zabezpieczeń ani ochrony energii. Rozróżnić poprawne zakończenie snu od restartu; kryteria przejść, ważności danych, połączenia, obciążenia i warunki przerwania ustalić przed wykonaniem. Wyniki powiązać z HW/FW oraz konfiguracją. [Macierz weryfikacji](../verification/macierz-wymagan.md).
+
+To plan do rozwinięcia w procedurę; prób produktu jeszcze nie wykonano.
+
 ## Następna decyzja
 
-**Pytanie 260:** czy po nieplanowanym restarcie ECU oraz po prawidłowym śnie i wybudzeniu kierunkowskazy mają rozpoczynać od OFF do nowego świadomego wyboru kierowcy? To przypadki odrębne od powrotu CAN w bieżącym okresie wybudzenia z SYS-251.
+**Pytanie 261:** po ochronnym odcięciu wyjścia podstawowego oświetlenia, kierunkowskazów albo klaksonu wskutek potwierdzonego zwarcia lub przeciążenia, czy stosować tę samą zasadę świadomej próby i limitu co w dodatkowych kanałach SYS-247/248?
 
-Propozycja A: przed prawidłowym snem wyłączyć kierunkowskazy; po wybudzeniu i po odzyskaniu gotowości po restarcie pozostawić je wyłączone do nowego świadomego wyboru. Alternatywa B: po restarcie wymagać nowego wyboru, lecz po zwykłym wybudzeniu wznawiać poprzednią stronę, jeżeli HMI nadal zgłasza jej aktywny wybór. Decyzja nie jest jeszcze podjęta.
+Propozycja A: bez samoczynnego ponawiania; jedna ograniczona próba na nowe świadome polecenie użytkownika lub serwisu. Jej niepowodzenie blokuje dalsze próby danego kanału do pełnego cyklu snu lub pełnego zaniku i powrotu zasilania. Alternatywa B: ograniczone samoczynne ponowienia, gdy nadal istnieje ważne żądanie załączenia; po wyczerpaniu limitu blokada do snu lub pełnego zaniku zasilania. Decyzja nie jest jeszcze podjęta.
 
-Rekomendujemy A: kolejny okres pracy lub wybudzenie, np. ruchem koła podczas pchania, nie powinny przywracać sygnalizacji dawnego manewru. Usypianie pozostaje automatyczne, a warunki gotowości i kwalifikację wyborów rozwiniemy w architekturze. W obu wariantach ECU steruje miganiem lokalnie, a zabezpieczenia i ochrona energii zachowują pierwszeństwo.
+A ogranicza ponowne pobudzanie niesprawnego obwodu i zachowuje spójny sposób obsługi, ale dotyczy też głównego oświetlenia: po nieudanym ponowieniu dalsza próba wymaga zdarzenia odnawiającego limit. B może przywrócić odbiornik po przejściowej usterce, kosztem ponownych pobudzeń. W obu wariantach pozostają DTC z zamrożoną ramką, informacja HMI, warunki cieplne, ochrona energii i dotychczasowe reguły nowych żądań po powrocie CAN/restarcie/śnie. Mówimy o zaprojektowanym kanale, nie o gwarancji osobnego wyjścia dla każdej lampy.
+
+Zakres nie zmienia odrębnych zasad wentylatora i funkcji silnikowych zamkniętych w F03 ani reguł zasilania HMI. Kryteria, energia i czas próby oraz współdziałanie z ochroną układu mocy wymagają projektu. [Przykład mechanizmów ograniczonego ponawiania i zatrzasku odcięcia](https://www.infineon.com/products/power/smart-power-switches/high-side-switches/12v/profet-plus-2-12v-automotive) służy porównaniu, nie jest wyborem komponentu.
