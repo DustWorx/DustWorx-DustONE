@@ -2,7 +2,7 @@
 
 Miejsce na wymagania systemowe oraz wymagania ECU, HMI i aplikacji Windows.
 
-Na tym etapie wymagania SYS-001–SYS-252 znajdują się w [zakresie systemu](../01-zakres-systemu.md). Przy rozbudowie przenosimy je tutaj, zachowując identyfikatory i aktualizując odsyłacze; nie utrzymujemy dwóch niezależnych rejestrów.
+Na tym etapie wymagania SYS-001–SYS-253 znajdują się w [zakresie systemu](../01-zakres-systemu.md). Przy rozbudowie przenosimy je tutaj, zachowując identyfikatory i aktualizując odsyłacze; nie utrzymujemy dwóch niezależnych rejestrów.
 
 Wymaganie szczegółowe powinno mieć identyfikator, jednoznaczną treść, źródło, status oraz kryterium i sposób weryfikacji. Parametry nieustalone oznaczamy wprost jako do ustalenia.
 
@@ -16,4 +16,4 @@ Robocza [mapa obszarów i otwartych tematów](pokrycie-funkcjonalne.md) służy 
 
 [F04 — akcesoria i dodatkowe I/O](f04-akcesoria-i-io.md) jest aktywny, F05–F08 oczekują. Pakiety zamykamy kolejno według [rejestru domknięcia](domkniecie-zakresu-funkcjonalnego.md) i bramki G0 ze [ścieżki projektu](../00-proces-i-status.md). Publikacja bieżących ustaleń nie zamyka pakietu. Otwarte parametry realizacji rozwijamy na właściwych etapach.
 
-[Macierz SYS → blok → grupa weryfikacji](../verification/macierz-wymagan.md) zawiera pierwszy przydział wszystkich 252 wymagań. Przydział i zatwierdzenie treści są odrębne od późniejszego potwierdzenia na produkcie.
+[Macierz SYS → blok → grupa weryfikacji](../verification/macierz-wymagan.md) zawiera pierwszy przydział wszystkich 253 wymagań. Przydział i zatwierdzenie treści są odrębne od późniejszego potwierdzenia na produkcie.

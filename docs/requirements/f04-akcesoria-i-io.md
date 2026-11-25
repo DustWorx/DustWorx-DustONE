@@ -14,7 +14,8 @@ Stan na 2026-11-25. **F04 aktywny po zamknięciu F03 w pytaniu 243.** Aktualny t
 | Pozostałe stany akcesoriów | W toku w F04. Przyjęty SYS-250, A na pytanie 258: podstawowe światła po nieplanowanym restarcie i przy zgaszonym silniku OFF do nowego polecenia. Zachowujemy SYS-050–053 oraz SYS-081–091. |
 | Kierunkowskazy po powrocie HMI/CAN | Przyjęty SYS-251, odpowiedź A na pytanie 259: pozostają OFF do nowego świadomego wyboru użytkownika, bez wznowienia dawnych stanów. |
 | Kierunkowskazy po restarcie i prawidłowym śnie | Przyjęty SYS-252, odpowiedź A na pytanie 260: wyłączenie przed snem; po wybudzeniu i restarcie OFF do nowego świadomego wyboru. |
-| Próby podstawowego oświetlenia, kierunkowskazów i klaksonu po ochronnym odcięciu | Otwarte, pytanie 261: przyjęta ręczna próba i limit jak SYS-247/248 albo ograniczone ponowienia automatyczne. |
+| Próby podstawowego oświetlenia, kierunkowskazów i klaksonu po ochronnym odcięciu | Przyjęty SYS-253, odpowiedź A na pytanie 261: jedna świadoma próba, po niepowodzeniu blokada danego kanału jak SYS-247/248; bez samoczynnych ponowień. |
+| Inicjowanie próby światła hamowania | Otwarte, pytanie 262: nowe użycie hamulca po zwolnieniu obu albo polecenie wyłącznie HMI/serwisu; normalne działanie nadal według SYS-051. |
 | Dodatkowe wyjścia mocy | Zastosowania SYS-241 i 3 niezależne kanały SYS-242 przyjęte odpowiedziami B na pytania 249–250. |
 | Dodatkowe kanały po utracie HMI/CAN | Zachowują własne stany według SYS-243, odpowiedź A na pytanie 251. |
 | Dodatkowe kanały po restarcie ECU | Start od wyłączonych według SYS-244, odpowiedź A na pytanie 252. |
@@ -328,12 +329,29 @@ To reguła stanów ECU, odrębna od powrotu HMI/CAN w bieżącym okresie wybudze
 
 To plan do rozwinięcia w procedurę; prób produktu jeszcze nie wykonano.
 
+## Próby podstawowych wyjść po ochronnym odcięciu
+
+W odpowiedzi **A na pytanie 261** (2026-11-25) właściciel przyjął SYS-253. Po potwierdzonym zwarciu lub przeciążeniu i ochronnym odcięciu zaprojektowanego kanału podstawowego oświetlenia, kierunkowskazów albo klaksonu ECU nie ponawia samoczynnie załączenia. Jedna ograniczona próba ze sprawdzeniem obwodu wymaga nowego świadomego polecenia użytkownika lub serwisu.
+
+Po jej niepowodzeniu dalsze próby danego kanału są blokowane do pełnego cyklu prawidłowego snu i wybudzenia albo pełnego zaniku i powrotu zasilania, zgodnie z SYS-247/248. Zwykły reset programu ani powrót HMI/CAN nie odnawiają limitu. Odnowienie daje tylko prawo do nowej świadomej próby; nie załącza wyjścia i nie kasuje historii DTC. Dotyczy to także głównego oświetlenia.
+
+Zabezpieczenia wyjścia, wymagane ostygnięcie, ochrona energii, DTC z zamrożoną ramką i informacja HMI pozostają aktywne. Podział na fizyczne kanały, kryteria diagnozy, energia i czas próby oraz współdziałanie z ochroną układu mocy wymagają architektury, danych odbiorników i weryfikacji. Nie wybrano komponentu ani liczby oddzielnych wyjść dla każdej lampy.
+
+Wentylator i funkcje silnikowe zachowują zasady zamkniętego F03, a zasilanie HMI własne reguły. Normalne światło hamowania nadal działa z bezpośrednich wejść według SYS-051; sposób świadomego zlecenia próby tego toru doprecyzowuje następne pytanie 262. Nie przesądzono, że do tej próby musi być dostępne HMI.
+
+### Plan próby SYS-253
+
+1. Na kwalifikowanym stanowisku rzeczywistego ECU odtworzyć wykrywalne zwarcie i przeciążenie każdego objętego kanału osobno, z dopuszczonymi lampami lub klaksonem. Potwierdzić ochronne odcięcie, DTC z zamrożoną ramką i informację HMI. Bez nowego świadomego polecenia sprawdzić brak samoczynnego ponowienia, także po ustąpieniu pobudzenia lub wymaganym ostygnięciu. Przed wykonaniem ustalić bezpieczny obwód wymuszania i limity energii.
+2. Zlecić jedną dopuszczoną świadomą próbę według przyjętego sposobu obsługi. Przy trwającej usterce potwierdzić ograniczone niepowodzenie i blokadę dalszych prób. Powtarzać polecenia użytkownika oraz uprawnionego serwisu, odtwarzać dawne żądania, powrót HMI/CAN i zwykły reset programu: żadne z nich nie może odnowić limitu ani spowodować kolejnego pobudzenia. Sposób inicjowania próby światła hamowania uzupełnić po decyzji 262.
+3. Osobno przeprowadzić pełny cykl prawidłowego snu i wybudzenia oraz pełny zanik i powrót zasilania według kryteriów projektu. Potwierdzić odnowienie wyłącznie prawa do próby, brak automatycznego ON, zachowanie historii DTC i nadal aktywne warunki termiczne oraz ochronę energii. Nowe polecenie po odnowieniu dopuszcza jedną próbę; po jej niepowodzeniu blokada wraca.
+4. Po usunięciu usterki sprawdzić wynik ograniczonej próby i dalsze sterowanie według funkcji odbiornika, z zachowaniem reguł klaksonu, świateł i kierunkowskazów. Powtórzyć dla dopuszczonych obciążeń, w tym prądów załączania, oraz istotnych zakresów zasilania i temperatury. Rejestrować komunikację, stan próby i rzeczywiste napięcie/prąd wyjścia. Przed wykonaniem określić kryteria, połączenia, wyposażenie i warunki przerwania; wyniki powiązać z HW/FW oraz konfiguracją. [Macierz weryfikacji](../verification/macierz-wymagan.md).
+
+To plan do rozwinięcia w procedurę; prób produktu jeszcze nie wykonano.
+
 ## Następna decyzja
 
-**Pytanie 261:** po ochronnym odcięciu wyjścia podstawowego oświetlenia, kierunkowskazów albo klaksonu wskutek potwierdzonego zwarcia lub przeciążenia, czy stosować tę samą zasadę świadomej próby i limitu co w dodatkowych kanałach SYS-247/248?
+**Pytanie 262:** po ochronnym odcięciu toru światła hamowania wskutek potwierdzonego zwarcia lub przeciążenia, czy nowe użycie hamulca może zlecić ograniczoną próbę bez HMI? Światło to ma osobne bezpośrednie wejścia przedniego i tylnego hamulca według SYS-051.
 
-Propozycja A: bez samoczynnego ponawiania; jedna ograniczona próba na nowe świadome polecenie użytkownika lub serwisu. Jej niepowodzenie blokuje dalsze próby danego kanału do pełnego cyklu snu lub pełnego zaniku i powrotu zasilania. Alternatywa B: ograniczone samoczynne ponowienia, gdy nadal istnieje ważne żądanie załączenia; po wyczerpaniu limitu blokada do snu lub pełnego zaniku zasilania. Decyzja nie jest jeszcze podjęta.
+Propozycja A: po zwolnieniu obu hamulców nowe użycie któregokolwiek może zlecić jedną ograniczoną próbę przy spełnionych warunkach, bez wymaganego HMI. Alternatywa B: próbę zleca wyłącznie świadome polecenie HMI lub serwisu; same wejścia hamulców nie odblokowują toru. Decyzja nie jest jeszcze podjęta.
 
-A ogranicza ponowne pobudzanie niesprawnego obwodu i zachowuje spójny sposób obsługi, ale dotyczy też głównego oświetlenia: po nieudanym ponowieniu dalsza próba wymaga zdarzenia odnawiającego limit. B może przywrócić odbiornik po przejściowej usterce, kosztem ponownych pobudzeń. W obu wariantach pozostają DTC z zamrożoną ramką, informacja HMI, warunki cieplne, ochrona energii i dotychczasowe reguły nowych żądań po powrocie CAN/restarcie/śnie. Mówimy o zaprojektowanym kanale, nie o gwarancji osobnego wyjścia dla każdej lampy.
-
-Zakres nie zmienia odrębnych zasad wentylatora i funkcji silnikowych zamkniętych w F03 ani reguł zasilania HMI. Kryteria, energia i czas próby oraz współdziałanie z ochroną układu mocy wymagają projektu. [Przykład mechanizmów ograniczonego ponawiania i zatrzasku odcięcia](https://www.infineon.com/products/power/smart-power-switches/high-side-switches/12v/profet-plus-2-12v-automotive) służy porównaniu, nie jest wyborem komponentu.
+W obu wariantach po niepowodzeniu obowiązuje blokada do pełnego cyklu snu lub pełnego zaniku i powrotu zasilania według SYS-253; zabezpieczenia pozostają nadrzędne. Samo trzymanie hamulca ani odnowienie limitu nie są nowym użyciem. A zachowuje możliwość sprawdzenia bez HMI po nowym działaniu kierowcy; B wymaga osobnego polecenia próby po usterce. Kryteria zwolnienia, nowego użycia, sprawności toru i czasu/energii próby opracujemy w architekturze i procedurach.
