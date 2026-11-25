@@ -1,6 +1,6 @@
 # F04 — akcesoria i dodatkowe I/O
 
-Stan na 2026-11-25. **F04 aktywny po zamknięciu F03 w pytaniu 243.** Aktualny temat: dodatkowe wyjścia mocy. Zasady klaksonu SYS-236–240 są już przyjęte i zachowane poniżej. Źródłem wymagań jest [rejestr SYS](../01-zakres-systemu.md); kolejność i warunki zamknięcia określa [proces](../00-proces-i-status.md).
+Stan na 2026-11-25. **F04 aktywny po zamknięciu F03 w pytaniu 243.** Aktualny temat: pozostałe stany podstawowych akcesoriów. Zasady klaksonu SYS-236–240 są już przyjęte i zachowane poniżej. Źródłem wymagań jest [rejestr SYS](../01-zakres-systemu.md); kolejność i warunki zamknięcia określa [proces](../00-proces-i-status.md).
 
 ## Zakres i kolejność
 
@@ -11,7 +11,8 @@ Stan na 2026-11-25. **F04 aktywny po zamknięciu F03 w pytaniu 243.** Aktualny t
 | Klakson po restarcie ECU | Przyjęty SYS-238, odpowiedź A na pytanie 246: zwolnienie i nowe naciśnięcie. |
 | Klakson przy zwykłym wybudzeniu ze snu | Przyjęty SYS-239, odpowiedź B na pytanie 247: pierwsze naciśnięcie wybudza; sygnał wymaga zwolnienia i nowego naciśnięcia. |
 | Autotest klaksonu | Przyjęty SYS-240, odpowiedź A na pytanie 248: bez samoczynnego dźwięku; próba dźwiękowa na świadome polecenie użytkownika. |
-| Pozostałe stany akcesoriów | Następny temat w F04: podstawowe światła po nieplanowanym restarcie ECU, pytanie 258. Dalej pozostałe brakujące stany akcesoriów. Zachowujemy SYS-050–053 oraz SYS-081–091. |
+| Pozostałe stany akcesoriów | W toku w F04. Przyjęty SYS-250, A na pytanie 258: podstawowe światła po nieplanowanym restarcie i przy zgaszonym silniku OFF do nowego polecenia. Zachowujemy SYS-050–053 oraz SYS-081–091. |
+| Kierunkowskazy po powrocie HMI/CAN | Otwarte, pytanie 259: nowy świadomy wybór albo odtworzenie poprzedniej strony po potwierdzeniu żądania z HMI. |
 | Dodatkowe wyjścia mocy | Zastosowania SYS-241 i 3 niezależne kanały SYS-242 przyjęte odpowiedziami B na pytania 249–250. |
 | Dodatkowe kanały po utracie HMI/CAN | Zachowują własne stany według SYS-243, odpowiedź A na pytanie 251. |
 | Dodatkowe kanały po restarcie ECU | Start od wyłączonych według SYS-244, odpowiedź A na pytanie 252. |
@@ -276,12 +277,29 @@ To plan do rozwinięcia w procedurę; prób produktu jeszcze nie wykonano.
 
 Sprawdzono spójność reguł z autonomią ECU, rozróżnieniem restartu i snu oraz pierwszeństwem zabezpieczeń i ochrony energii. Każde z SYS-241–249 ma plan próby i przydział do bloków oraz grup weryfikacji.
 
-Uzgodniona porcja SYS-241–245 ma historię w [PR #26](https://github.com/DustWorx/DustWorx-DustONE/pull/26). SYS-246 dodaje opcjonalny PWM zgodnych lamp, a SYS-247 określa próbę kanału po ochronnym odcięciu. SYS-248 ustala limit i jego odnawianie. SYS-249 określa zachowanie pozostałych kanałów przy lokalnej usterce. F04 pozostaje aktywny; kolejny temat to otwarte stany podstawowego oświetlenia po nieplanowanym restarcie ECU, a następnie pozostałe reguły akcesoriów i I/O. Parametry, topologię oraz pokrycie diagnostyki opracujemy we właściwych etapach, a ważne komponenty wybierzemy wspólnie.
+Uzgodniona porcja SYS-241–245 ma historię w [PR #26](https://github.com/DustWorx/DustWorx-DustONE/pull/26). SYS-246 dodaje opcjonalny PWM zgodnych lamp, a SYS-247 określa próbę kanału po ochronnym odcięciu. SYS-248 ustala limit i jego odnawianie. SYS-249 określa zachowanie pozostałych kanałów przy lokalnej usterce. F04 pozostaje aktywny; podstawowe światła po nieplanowanym restarcie określa poniższe SYS-250. Następny temat to kierunkowskazy po powrocie HMI/CAN, a następnie pozostałe reguły akcesoriów i I/O. Parametry, topologię oraz pokrycie diagnostyki opracujemy we właściwych etapach, a ważne komponenty wybierzemy wspólnie.
+
+## Podstawowe światła po nieplanowanym restarcie
+
+W odpowiedzi **A na pytanie 258** (2026-11-25) właściciel przyjął SYS-250. Po odzyskaniu gotowości ECU po nieplanowanym restarcie, przy zgaszonym silniku, przednie i tylne pozycyjne, mijania i drogowe pozostają OFF do nowego polecenia użytkownika z HMI. Wcześniejsze stany i powtórzone dawne żądania nie są takim poleceniem.
+
+To stan podstawowego oświetlenia, odrębny od trzech dodatkowych kanałów SYS-241–249. Zwykły sen i wybudzenie nadal podlegają SYS-081. Po potwierdzonym uruchomieniu silnika automatyka pozycyjnych działa według SYS-082/087, także bez HMI, z pierwszeństwem zabezpieczeń i ochrony energii. Światło hamowania nadal reaguje na bezpośrednie wejścia według SYS-051.
+
+Motocykl pozostaje bez stacyjki; nie wprowadzamy przełącznika zasilania ani jego obsługi. Warunki gotowości, rozpoznanie przyczyny uruchomienia, inicjalizację wyjść i kwalifikację nowych poleceń rozwiniemy w architekturze i projekcie torów. Przyjęcie reguły nie oznacza potwierdzenia jej realizacji.
+
+### Plan próby SYS-250
+
+1. Na rzeczywistym stanowisku ECU–HMI z dopuszczonymi lampami odtworzyć reprezentatywne stany pozycyjnych, mijania i drogowych przy zgaszonym silniku. Wywołać nieplanowany restart według warunków projektu, także przy działającym HMI. Po odzyskaniu gotowości, bez nowego polecenia użytkownika, potwierdzić OFF wszystkich wymienionych świateł. Rejestrować gotowość ECU, komunikację i rzeczywiste napięcie/prąd torów.
+2. Odtworzyć dawne stany i żądania HMI, również po jego ponownym połączeniu. Potwierdzić brak samoczynnego załączenia po restarcie. Wydać nowe dopuszczone polecenie użytkownika i sprawdzić właściwą reakcję. Powtórzyć bez dostępnego HMI; kryteria ważności i odróżnienia nowych poleceń ustalić z protokołem przed próbą.
+3. Po potwierdzonym uruchomieniu silnika sprawdzić automatyczne przednie i tylne pozycyjne według SYS-082/087, także bez HMI. Mijania i drogowe nadal wymagają polecenia użytkownika. Osobno odtworzyć nadrzędne odcięcie oszczędzania i ochronę wyjść: gotowość po restarcie ani nowe polecenie nie mogą ich omijać.
+4. Przy zgaszonym silniku i gotowym ECU uruchamiać osobno przedni oraz tylny hamulec i ich dopuszczone kombinacje. Potwierdzić światło hamowania według SYS-051, również bez HMI/CAN, mimo OFF pozycyjnych. Rozróżnić nieplanowany restart od prawidłowego snu i wybudzenia; sprawdzić reprezentatywne przyczyny restartu objęte projektem. Przed wykonaniem ustalić połączenia, obciążenia, kryteria, sposób resetu i warunki przerwania; wyniki powiązać z HW/FW oraz konfiguracją. [Macierz weryfikacji](../verification/macierz-wymagan.md).
+
+To plan do rozwinięcia w procedurę; prób produktu jeszcze nie wykonano.
 
 ## Następna decyzja
 
-**Pytanie 258:** po nieplanowanym restarcie ECU odzyskało gotowość, silnik jest zgaszony, napięcie jest prawidłowe i nie ma nadrzędnego odcięcia. Od jakiego stanu mają rozpocząć przednie i tylne pozycyjne oraz światła mijania i drogowe? To podstawowe oświetlenie, odrębne od trzech dodatkowych kanałów.
+**Pytanie 259:** ECU wyłączyło kierunkowskaz po potwierdzonej utracie HMI/CAN według SYS-052. Łączność wraca, ECU pracuje nieprzerwanie i nie wystąpił jego restart. Czy kierunkowskaz ma czekać na nowy świadomy wybór, czy wrócić do poprzedniej strony, jeśli HMI ponownie zgłasza tę stronę jako wybraną?
 
-Propozycja A: wszystkie wymienione światła pozostają wyłączone do nowego polecenia HMI; po potwierdzonym uruchomieniu silnika automatyka pozycyjnych nadal działa według SYS-082/087. Alternatywa B: po gotowości ECU automatycznie włączyć przednie i tylne pozycyjne już przy zgaszonym silniku; mijania i drogowe pozostawić wyłączone do nowego polecenia. Decyzja nie jest jeszcze podjęta.
+Propozycja A: pozostawić kierunkowskazy wyłączone do nowego świadomego wyboru użytkownika z HMI. Alternatywa B: wznowić poprzednią stronę po potwierdzeniu jej nadal aktywnego wyboru z HMI. Decyzja nie jest jeszcze podjęta.
 
-A zachowuje zasadę wyłączonych świateł przy gotowości ze zgaszonym silnikiem, podobnie do przyjętego zwykłego wybudzenia SYS-081, i ogranicza pobór akumulatora. B daje od razu światła pozycyjne. To wybór stanu po nieplanowanym restarcie, nie sposobu włączania systemu: motocykl nie ma stacyjki, a sen pozostaje automatyczny. Samo odtworzenie dawnych danych HMI nie jest nowym świadomym poleceniem. Światło hamowania nadal działa według bezpośrednich wejść SYS-051, niezależnie od HMI/CAN. Warunki gotowości, kwalifikację poleceń i realizację stanów opracujemy w architekturze.
+Dawny wybór może nie odpowiadać aktualnemu zamiarowi po zakończeniu manewru, dlatego rekomendujemy A. B może podtrzymać sygnalizację przy nadal trwającym manewrze, ale wymaga kwalifikacji aktualności żądania. W obu wariantach miganiem steruje lokalnie ECU, a zabezpieczenia i ochrona energii mają pierwszeństwo. Kryteria powrotu komunikacji i nowych żądań opracujemy w protokole; wybieramy teraz zachowanie akcesorium w F04.

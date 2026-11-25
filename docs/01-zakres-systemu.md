@@ -8,6 +8,7 @@ Status: punkt wyjścia do wymagań; zakres zapisany na podstawie opisu właścic
 - [Rejestr wymagań SYS](#2-wymagania-wynikające-z-opisu)
 - [Podział odpowiedzialności i podstawy ustaleń](#3-podział-odpowiedzialności)
 - [Uzupełnienia F03](#uzupełnienia-f03)
+- [Uzupełnienia F04](#uzupełnienia-f04)
 - [Dane potrzebne przed doborem sprzętu](#4-decyzje-potrzebne-przed-doborem-sprzętu)
 - [Następny rezultat](#5-następny-rezultat-inżynierski)
 - [Współpraca](#6-sposób-realizacji-i-współpracy)
@@ -276,6 +277,7 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-247 | Po odłączeniu dodatkowego kanału mocy SYS-241/242 przez zabezpieczenie wskutek potwierdzonego zwarcia lub przeciążenia ECU nie wykonuje samoczynnych ponowień. Ograniczoną próbę ponownego załączenia ze sprawdzeniem obwodu dopuszcza wyłącznie na nowe świadome polecenie użytkownika lub serwisu, przy spełnionych warunkach oraz aktywnych zabezpieczeniach wyjścia i ochronie energii. Usterka podlega zapisowi DTC z zamrożoną ramką i informacji na HMI. Kryteria oraz parametry próby wymagają projektu i weryfikacji; łączny limit świadomych prób i warunki jego odnawiania są osobnym ustaleniem. |
 | SYS-248 | Po pierwszym ochronnym odcięciu dodatkowego kanału dostępna jest jedna świadoma próba według SYS-247. Jej niepowodzenie blokuje dalsze próby tego kanału do zakończonego cyklu prawidłowego snu i wybudzenia albo pełnego zaniku i powrotu zasilania. Limit i blokada są prowadzone osobno dla każdego kanału. Zwykły reset programu ECU ani powrót HMI/CAN nie odnawiają limitu. Odnowienie daje prawo do jednej nowej próby na nowe świadome polecenie, bez automatycznego załączenia wyjścia i bez kasowania historii DTC. Warunki próby i zabezpieczenia, w tym wymagane ostygnięcie toru, zachowują pierwszeństwo. Kryteria zdarzeń oraz przechowanie limitu wymagają projektu i prób. |
 | SYS-249 | Przy potwierdzonym zwarciu lub przeciążeniu jednego z trzech dodatkowych kanałów mocy SYS-241/242 ochronne odcięcie i blokada według SYS-247/248 obejmują tylko uszkodzony kanał, jeżeli pozostałe kanały i wspólne zasilanie są sprawne oraz nie występuje wspólne zagrożenie termiczne. Pozostałe kanały zachowują własne stany ON/OFF lub PWM z uwzględnieniem ich zabezpieczeń i ochrony energii. Wspólna usterka zasilania lub zagrożenie termiczne mogą wymagać szerszego odcięcia według projektu. Wykonalność izolacji usterki wymaga architektury, bilansu cieplnego oraz prób. |
+| SYS-250 | Po odzyskaniu gotowości ECU po nieplanowanym restarcie, przy zgaszonym silniku, przednie i tylne światła pozycyjne oraz światła mijania i drogowe pozostają wyłączone do nowego polecenia użytkownika z HMI. Dawny stan ani odtworzone wcześniejsze żądanie nie przywracają ich automatycznie. Po potwierdzonym uruchomieniu silnika nadal obowiązuje automatyka pozycyjnych SYS-082/087, z pierwszeństwem zabezpieczeń i ochrony energii. Światło hamowania nadal reaguje na bezpośrednie wejścia według SYS-051, niezależnie od HMI/CAN. Warunki gotowości i kwalifikacja nowych poleceń wymagają projektu oraz prób. |
 
 ## 3. Podział odpowiedzialności
 
@@ -750,7 +752,7 @@ Przyciski obsługi HMI są podłączone do HMI. Tor sterowania zwykłymi akcesor
 
 Samodzielność ECU i dalsza praca silnika przy braku HMI/CAN są wymagane według SYS-046/047. START i odcięcia rozrusznika określają SYS-048/049. Do osobnej analizy pozostają: aktualność i poprawność żądań, zachowanie pozostałych akcesoriów po utracie komunikacji oraz szczegółowe parametry rozruchu.
 
-W odpowiedzi na pytanie 60 z 2026-10-25 właściciel potwierdził zachowanie ostatniego stanu świateł przednich i tylnych pozycyjnych po utracie HMI/CAN, przy nadal działających zabezpieczeniach wyjść (SYS-050). Stany początkowe po restarcie lub zaniku zasilania ECU pozostają do ustalenia.
+W odpowiedzi na pytanie 60 z 2026-10-25 właściciel potwierdził zachowanie ostatniego stanu świateł przednich i tylnych pozycyjnych po utracie HMI/CAN przy działającym ECU i zabezpieczeniach wyjść (SYS-050). Późniejsze SYS-250 określa stan po nieplanowanym restarcie przy zgaszonym silniku; warunki gotowości i rozpoznania przyczyn uruchomienia rozwiniemy w architekturze.
 
 Proponowana weryfikacja SYS-050: przy działającym ECU i zasilaniu świateł przerwać komunikację oraz wyłączyć lub odłączyć HMI, sprawdzając zachowanie ostatniego stanu dla świateł wcześniej włączonych i wyłączonych. Sprawdzić przyjęcie nowego polecenia po przywróceniu komunikacji oraz zachowanie działania zabezpieczeń wyjść podczas braku HMI. Warunki i kryteria prób zabezpieczeń określić wraz z projektem stopni mocy; prób nie wykonano.
 
@@ -828,6 +830,8 @@ W odpowiedzi A na pytanie 255 (2026-11-25) właściciel przyjął SYS-247: po oc
 W odpowiedzi A na pytanie 256 (2026-11-25) właściciel przyjął SYS-248: po jednym nieudanym świadomym ponowieniu dalsze próby danego dodatkowego kanału są blokowane do pełnego cyklu prawidłowego snu i wybudzenia albo pełnego zaniku i powrotu zasilania. Odnowienie limitu nie załącza wyjścia i nie kasuje historii DTC; zwykły reset programu i powrót CAN nie odnawiają limitu. [Plan próby F04](requirements/f04-akcesoria-i-io.md#plan-próby-sys-248).
 
 W odpowiedzi A na pytanie 257 (2026-11-25) właściciel przyjął SYS-249: lokalna usterka jednego dodatkowego kanału odłącza tylko ten kanał; pozostałe zachowują stany przy prawidłowych warunkach, z pierwszeństwem zabezpieczeń i ochrony energii. Wspólne zagrożenie zasilania lub temperatury nadal może wymagać szerszej reakcji. [Plan próby F04](requirements/f04-akcesoria-i-io.md#plan-próby-sys-249).
+
+W odpowiedzi A na pytanie 258 (2026-11-25) właściciel przyjął SYS-250: po nieplanowanym restarcie przy zgaszonym silniku podstawowe pozycyjne, mijania i drogowe pozostają OFF do nowego polecenia użytkownika. Automatyka pozycyjnych po uruchomieniu i niezależne światło hamowania nadal obowiązują. [Plan próby F04](requirements/f04-akcesoria-i-io.md#plan-próby-sys-250).
 
 ## 4. Decyzje potrzebne przed doborem sprzętu
 
