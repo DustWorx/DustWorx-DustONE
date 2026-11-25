@@ -95,3 +95,5 @@ Dla SYS-243 źródłem stanów dodatkowych kanałów pozostaje ECU także po utr
 Po restarcie ECU dodatkowe kanały rozpoczynają od wyłączonych według SYS-244. Odczyt HMI ma odzwierciedlać stany ECU, a wcześniejsze dane lub żądania nie zastępują nowego polecenia załączenia. Kwalifikację poleceń opracujemy z protokołem. [Plan próby F04](../../docs/requirements/f04-akcesoria-i-io.md#plan-próby-sys-244).
 
 SYS-245 pozostawia dodatkowe kanały wyłączone po prawidłowym śnie i wybudzeniu do nowego polecenia. Po wybudzeniu HMI odczytuje stany ECU; dawne dane nie są poleceniem ponownego załączenia. [Plan próby F04](../../docs/requirements/f04-akcesoria-i-io.md#plan-próby-sys-245).
+
+Dla SYS-246 HMI pozostaje klientem stanów i dopuszczonych poleceń dodatkowych kanałów; źródłem rzeczywistego stanu jest ECU. ON/OFF i opcjonalny PWM dotyczą zgodnych lamp, a GPS i ładowarki pozostają przy ON/OFF. Sposób obsługi jasności i reprezentację danych opracujemy w późniejszym zakresie HMI i protokołu; nie wybrano tu układu ekranów. [Ustalenie F04](../../docs/requirements/f04-akcesoria-i-io.md#onoff-i-opcjonalny-pwm-mocy).

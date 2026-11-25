@@ -36,11 +36,11 @@ Pytanie z propozycjami poprzedzamy krótkim wyjaśnieniem problemu i uzasadnieni
 1. Zakładamy krótką gałąź z aktualnego `main` dla jednej spójnej porcji pracy. Nazwa opisuje temat; aktywny pakiet może mieć kilka kolejnych PR-ów.
 2. W tej samej zmianie aktualizujemy wymagania, odpowiednie decyzje/interfejsy, plan weryfikacji i status procesu. Każdy temat zachowuje jedno miejsce źródłowe; pozostałe dokumenty odsyłają do niego.
 3. PR opisuje wynik, otwarte kwestie i wykonane sprawdzenia. Draft służy przygotowaniu konkretnej zmiany; oczekiwanie na zamknięcie całego aktywnego pakietu nie jest powodem utrzymywania gotowego PR-u w drafcie.
-4. Po przeglądzie i odpowiednich sprawdzeniach scalamy spójną porcję do `main`. F03 lub inny pakiet może nadal mieć status aktywny.
+4. Po przeglądzie i odpowiednich sprawdzeniach scalamy spójną porcję do `main`. Według zgody właściciela z 2026-11-25 asystent samodzielnie scala sprawdzone PR-y dokumentujące przyjęte ustalenia. Aktywny pakiet może nadal trwać; decyzje projektowe i jego formalne zamknięcie nadal zatwierdza właściciel.
 5. Po potwierdzeniu scalenia i zachowania commitów w historii usuwamy zakończoną gałąź tematyczną. Historię i uzasadnienie zachowuje PR. Kolejny temat zaczynamy w nowej gałęzi.
 6. Przed zapisem lub usunięciem gałęzi sprawdzamy aktualny stan. Aktywne PR-y i zmiany nieobecne w `main` pozostają do osobnego rozpatrzenia.
 
-Zasady doprecyzował właściciel 2026-11-24 przy porządkowaniu repozytorium. Sekwencja etapów i formalne warunki ich zamknięcia pozostają w [dokumencie procesowym](docs/00-proces-i-status.md).
+Zasady doprecyzował właściciel 2026-11-24 przy porządkowaniu repozytorium i 2026-11-25 przy zgodzie na samodzielne scalanie sprawdzonej dokumentacji. Sekwencja etapów i formalne warunki ich zamknięcia pozostają w [dokumencie procesowym](docs/00-proces-i-status.md).
 
 ## Pliki źródłowe i wyniki
 

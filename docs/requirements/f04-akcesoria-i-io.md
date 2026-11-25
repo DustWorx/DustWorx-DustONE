@@ -16,7 +16,8 @@ Stan na 2026-11-25. **F04 aktywny po zamknięciu F03 w pytaniu 243.** Aktualny t
 | Dodatkowe kanały po utracie HMI/CAN | Zachowują własne stany według SYS-243, odpowiedź A na pytanie 251. |
 | Dodatkowe kanały po restarcie ECU | Start od wyłączonych według SYS-244, odpowiedź A na pytanie 252. |
 | Dodatkowe kanały przy prawidłowym śnie i wybudzeniu | Wyłączone przed snem i po wybudzeniu do nowego polecenia według SYS-245, odpowiedź A na pytanie 253. |
-| Sposób sterowania dodatkowymi lampami | Otwarty, pytanie 254: ON/OFF albo również PWM mocy dla zgodnych lamp. |
+| Sposób sterowania dodatkowymi lampami | Przyjęty SYS-246, odpowiedź A na pytanie 254: ON/OFF i opcjonalny PWM mocy dla zgodnych lamp; GPS i ładowarki w trybie ON/OFF. |
+| Ponowne załączenie dodatkowego kanału po ochronnym odcięciu | Otwarte, pytanie 255: nowe świadome polecenie albo ograniczone samoczynne ponowienia. |
 | Sygnałowe I/O i komunikacja | Osobny przegląd po wyjściach mocy; wymagania funkcjonalne oddzielamy od późniejszego doboru interfejsów i torów. |
 
 Klakson należy do przyjętego zakresu SYS-004. Obecność klaksonu 12 V w dokumentacji Bety jest potwierdzona w [analizie instrukcji i suplementu](../interfaces/beta-2015-analiza-dokumentacji.md). ECU steruje odbiornikiem, a HMI przekazuje polecenia kierowcy. Nie ustalono tu jeszcze pełnej obsługi przycisku ani wszystkich stanów po restarcie.
@@ -114,7 +115,7 @@ Metody, progi, czasy i kwalifikację danych opracujemy w etapie 4; procedury w e
 
 W odpowiedzi **B na doprecyzowane pytanie 249** (2026-11-24) właściciel przyjął SYS-241: dodatkowe oświetlenie oraz zasilanie zewnętrznych akcesoriów, np. GPS lub zewnętrznej ładowarki telefonu.
 
-Wyjście mocy steruje prądem odbiornika. Sposób sterowania, np. ON/OFF lub PWM mocy, dobierzemy do zastosowania. Logiczny sygnał PWM do zewnętrznego modułu i interfejs komunikacyjny są odrębnymi funkcjami, do osobnego przeglądu I/O. Odpowiedź 249 określa zastosowania wyjść mocy.
+Wyjście mocy steruje prądem odbiornika. Sposób sterowania określa późniejsze SYS-246: ON/OFF i opcjonalny PWM mocy zgodnych lamp; parametry dobierzemy do zastosowania. Logiczny sygnał PWM do zewnętrznego modułu i interfejs komunikacyjny są odrębnymi funkcjami, do osobnego przeglądu I/O. Odpowiedź 249 określa zastosowania wyjść mocy.
 
 W odpowiedzi **B na pytanie 250** (2026-11-24) właściciel przyjął **trzy niezależnie sterowane dodatkowe kanały mocy** (SYS-242), ponad wyjściami dla uzgodnionego osprzętu silnika i podstawowych akcesoriów. Wybór nie ustala stałego przypisania lamp lub akcesoriów do konkretnego kanału. Jeden kanał może zasilać grupę odbiorników załączanych razem; osobne sterowanie grupami wymaga osobnych kanałów. Konkretne urządzenia, prądy, dopuszczone kombinacje i warunki pracy określimy z danymi osprzętu oraz architekturą. Komponenty wybierzemy wspólnie na etapie doboru.
 
@@ -187,6 +188,25 @@ Wniosek do architektury z SYS-194/245: autotest nie omija stanu wyłączonego an
 
 To plan do rozwinięcia w procedurę; prób produktu jeszcze nie wykonano.
 
+## ON/OFF i opcjonalny PWM mocy
+
+W odpowiedzi **A na pytanie 254** (2026-11-25) właściciel przyjął SYS-246. Każdy z trzech dodatkowych kanałów ma obsługiwać ON/OFF i opcjonalny PWM mocy do regulacji jasności zgodnych lamp. GPS i zewnętrzne ładowarki zasilamy w trybie ON/OFF. Nie jest to wybór układów ani gotowa specyfikacja elektryczna.
+
+PWM cyklicznie przełącza moc doprowadzaną do odbiornika. Obsługa lampy wymaga potwierdzenia jej zgodności i dopuszczonego zakresu; obecność elektroniki w lampie nie oznacza zgodności z dowolnym PWM. Przykład zastosowania w enduro potwierdza [Skene IQ-275-KTM](https://skenelights.com/iq-275-ktm.html), a producent opisuje [PWM dla odpowiednich lamp dwuprzewodowych](https://skenelights.com/skene-iq-275x-dimmer-with-integrated-wire-harness.html). To podstawa zakresu funkcji, nie wybór osprzętu DustONE.
+
+Do etapów 3–6 przekazujemy: dane lamp i akcesoriów, zakres jasności, częstotliwość i rozdzielczość PWM, niezależne zasoby sterowania, zgodność diagnostyki ze sterowaniem impulsowym, prądy załączania oraz straty cieplne i zakłócenia przy dopuszczonych kombinacjach. Ważne komponenty wybierzemy wspólnie. Sygnałowy PWM do zewnętrznego modułu nadal jest osobnym tematem I/O.
+
+Wniosek do projektu stanów: przy utracie HMI/CAN zachowany stan SYS-243 obejmuje przyjęte sterowanie kanału, także zadaną regulację PWM. Restart i sen nie przywracają wcześniejszego PWM; SYS-244/245 nadal wymagają nowego polecenia. PWM i autotest nie omijają zabezpieczeń ani ochrony energii.
+
+### Plan próby SYS-246
+
+1. Po doborze toru i uzgodnieniu parametrów podłączyć do rzeczywistego ECU kwalifikowane obciążenia, lampy oraz reprezentatywny GPS lub zewnętrzną ładowarkę. Z dokumentacji ustalić dopuszczone konfiguracje, warunki zasilania, temperatury i kryteria. Nie zakładać zgodności dowolnej lampy.
+2. Dla każdego z trzech kanałów sprawdzić ON/OFF oraz PWM z kompatybilną lampą: stan wyłączony, dopuszczone granice regulacji i punkty pośrednie. Mierzyć przebieg napięcia/prądu, częstotliwość, wypełnienie i reakcję świetlną według kryteriów. Potwierdzić brak PWM zasilania kanału skonfigurowanego do GPS lub ładowarki w trybie ON/OFF.
+3. Sprawdzić niezależne zadawanie i dopuszczone równoczesne kombinacje trzech kanałów. W kwalifikowanym zakresie zasilania i temperatury ocenić rozruch lamp, poprawność diagnostyki, nagrzewanie oraz wpływ przełączeń na zasilanie i inne funkcje ECU. Próby zakłóceń rozwinąć z projektem EMC; nie uznawać samej obserwacji przebiegu za potwierdzenie EMC.
+4. Podczas PWM odtworzyć utratę HMI/CAN i sprawdzić zachowanie przyjętego stanu według SYS-243. Osobno sprawdzić restart oraz prawidłowy sen i wybudzenie: kanały pozostają wyłączone do nowego polecenia według SYS-244/245. Potwierdzić pierwszeństwo ochrony wyjść i energii; PWM nie może jej omijać. Przed wykonaniem określić stanowisko, kryteria, obciążenia i warunki przerwania; wyniki powiązać z HW/FW oraz konfiguracją. [Macierz weryfikacji](../verification/macierz-wymagan.md).
+
+To plan do rozwinięcia w procedurę; prób produktu jeszcze nie wykonano.
+
 ## Przegląd przyjętej części wyjść mocy
 
 | Zakres | Przyjęta reguła | Podstawa |
@@ -196,15 +216,16 @@ To plan do rozwinięcia w procedurę; prób produktu jeszcze nie wykonano.
 | Utrata HMI/CAN | Zachowanie własnego stanu każdego kanału przy ciągłej pracy ECU. | A na 251, SYS-243 |
 | Nieplanowany restart / powrót zasilania | Start od wyłączonych; załączenie wymaga nowego polecenia. | A na 252, SYS-244 |
 | Prawidłowy sen i zwykłe wybudzenie | Wyłączenie przed snem; po wybudzeniu pozostają wyłączone do nowego polecenia. | A na 253, SYS-245 |
+| Sterowanie lampami i akcesoriami | ON/OFF oraz opcjonalny PWM mocy zgodnych lamp; GPS i ładowarki bez PWM zasilania. | A na 254, SYS-246 |
 
-Sprawdzono spójność reguł z autonomią ECU, rozróżnieniem restartu i snu oraz pierwszeństwem zabezpieczeń i ochrony energii. Każde z SYS-241–245 ma plan próby i przydział do bloków oraz grup weryfikacji.
+Sprawdzono spójność reguł z autonomią ECU, rozróżnieniem restartu i snu oraz pierwszeństwem zabezpieczeń i ochrony energii. Każde z SYS-241–246 ma plan próby i przydział do bloków oraz grup weryfikacji.
 
-Uzgodniona porcja SYS-241–245 ma historię w [PR #26](https://github.com/DustWorx/DustWorx-DustONE/pull/26). F04 pozostaje aktywny: do dalszych ustaleń należą sposób sterowania lampami, brakujące reakcje wyjść na usterki, pozostałe stany akcesoriów i I/O. Parametry, topologię oraz pokrycie diagnostyki opracujemy we właściwych etapach, a ważne komponenty wybierzemy wspólnie.
+Uzgodniona porcja SYS-241–245 ma historię w [PR #26](https://github.com/DustWorx/DustWorx-DustONE/pull/26). SYS-246 dodaje opcjonalny PWM zgodnych lamp. F04 pozostaje aktywny: do dalszych ustaleń należą brakujące reakcje wyjść na usterki, pozostałe stany akcesoriów i I/O. Parametry, topologię oraz pokrycie diagnostyki opracujemy we właściwych etapach, a ważne komponenty wybierzemy wspólnie.
 
 ## Następna decyzja
 
-**Pytanie 254:** czy dodatkowe kanały mają oferować tylko ON/OFF, czy także opcjonalny PWM mocy do regulacji jasności zgodnych lamp? Zasilanie GPS lub zewnętrznej ładowarki traktujemy jako ON/OFF; sygnałowy PWM pozostaje osobnym tematem I/O.
+**Pytanie 255:** po odłączeniu dodatkowego kanału przez zabezpieczenie po zwarciu lub przeciążeniu, kiedy ECU ma spróbować go ponownie załączyć? Rozpatrujemy bieżący okres wybudzenia, przy sprawnym zasilaniu i pozostałych warunkach. Powrót zasilania po restarcie lub śnie nadal podlega SYS-244/245.
 
-Potwierdzony przykład funkcji: [Skene IQ-275-KTM](https://skenelights.com/iq-275-ktm.html) opisuje regulację jasności dla KTM/Husqvarna enduro z lat 2014–2023. Producent opisuje również [PWM w rodzinie IQ-275X](https://skenelights.com/skene-iq-275x-dimmer-with-integrated-wire-harness.html) dla odpowiednich lamp. To potwierdzenie zastosowania funkcji, nie wybór części DustONE ani zgodności konkretnej lampy.
+Propozycja A: ograniczona próba dopiero na nowe świadome polecenie użytkownika lub serwisu, przy spełnionych warunkach; brak samoczynnych ponowień. Alternatywa B: ograniczone samoczynne ponowienia, a po wyczerpaniu limitu odcięcie do nowego polecenia. Obie wymagają ochrony wyjścia, DTC z zamrożoną ramką oraz informacji HMI. Decyzja o ponowieniu nie jest jeszcze podjęta; progi, odstępy i limity dobierzemy w projekcie.
 
-Propozycja: opcjonalny PWM mocy tylko dla lamp, których zgodność zostanie potwierdzona; alternatywa to wyłącznie ON/OFF. Decyzja nie jest jeszcze podjęta. Zakres regulacji, częstotliwość i komponenty wymagają danych oraz projektu.
+Ograniczenie ponowień zmniejsza ponowne obciążanie niesprawnego obwodu; samoczynne ponowienia mogą przywrócić zasilanie po przejściowej usterce. [Infineon opisuje warianty z ograniczonym ponawianiem i z zatrzaskiem odcięcia](https://www.infineon.com/products/power/smart-power-switches/high-side-switches/12v/profet-plus-2-12v-automotive). To porównanie mechanizmów, nie wybór komponentu. Zachowanie wewnętrznych zabezpieczeń i sterowania PWM trzeba dopasować do przyjętej reguły.

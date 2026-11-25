@@ -10,13 +10,13 @@ Kontrola pełnego F01 została zakończona: właściciel potwierdził zgodność
 
 | Obszar | Stan potwierdzony dokumentacją |
 | --- | --- |
-| Wymagania systemowe | 245 wymagań SYS-001–245; pierwszy przydział do bloków i grup weryfikacji gotowy, kryteria i procedury do rozwinięcia. |
+| Wymagania systemowe | 246 wymagań SYS-001–246; pierwszy przydział do bloków i grup weryfikacji gotowy, kryteria i procedury do rozwinięcia. |
 | Decyzje | 12 zapisów ADR-001–012; ostatni ogranicza platformę do silników chłodzonych cieczą. |
 | Zakres wariantów | Macierz 6 wariantów silnika; jest planem obsługi, nie potwierdzeniem zgodności modeli. |
 | Pierwsza jednostka | Beta 300 RR Racing 2015; analiza dokumentów i zdjęć, bez raportów pomiarowych instalacji. |
 | Architektura | Pierwszy diagram blokowy, funkcje sześciu wariantów i przydział zasobów gotowe jako wersje robocze. Modele, parametry i liczbowe bilanse pozostają otwarte. |
 | Schematy, BOM, PCB i mechanika | W repozytorium brak projektu wykonawczego i zatwierdzonego kompletnego BOM ECU/HMI. |
-| Kod i próby produktu | W repozytorium brak implementacji firmware/Windows i raportów prób DustONE. Istnieją plany, szablon procedury i przydział 245 wymagań do 13 grup weryfikacji. |
+| Kod i próby produktu | W repozytorium brak implementacji firmware/Windows i raportów prób DustONE. Istnieją plany, szablon procedury i przydział 246 wymagań do 13 grup weryfikacji. |
 
 Podstawy: [wymagania](requirements/README.md), [decyzje](decisions/README.md), [macierz silników](architecture/macierz-wariantow-silnika.md), [I/O](interfaces/wstepna-lista-io.md) i [weryfikacja](verification/README.md). Liczba wymagań i pytań nie jest procentem wykonania produktu.
 
@@ -24,7 +24,9 @@ Podstawy: [wymagania](requirements/README.md), [decyzje](decisions/README.md), [
 
 Ustalenie właściciela z 2026-11-24: dokumenty prowadzimy w odpowiednich katalogach, a zmiany w krótkich gałęziach tematycznych i PR-ach. Zatwierdzone, spójne porcje ustaleń trafiają do `main` w trakcie pracy nad aktywnym pakietem. Dokumenty zachowują jawne propozycje, kwestie otwarte i status wykonania.
 
-Scalenie PR-u publikuje stan dokumentacji. Formalne zamknięcie F03 lub etapu wymaga osobnego przeglądu i decyzji według poniższych bramek. Jeden aktywny pakiet może być publikowany przez kilka kolejnych PR-ów. Gałęzie zakończonych zmian porządkujemy po potwierdzeniu scalenia i zachowania historii.
+Scalenie PR-u publikuje stan dokumentacji. Formalne zamknięcie pakietu lub etapu wymaga osobnego przeglądu i decyzji według poniższych bramek. Jeden aktywny pakiet może być publikowany przez kilka kolejnych PR-ów. Gałęzie zakończonych zmian porządkujemy po potwierdzeniu scalenia i zachowania historii.
+
+Ustalenie właściciela z 2026-11-25 (odpowiedź A na pytanie o scalenie PR #26): asystent samodzielnie scala sprawdzone PR-y wyłącznie dokumentujące przyjęte ustalenia, także podczas aktywnego pakietu. Decyzje projektowe i zamknięcia pakietów lub etapów nadal zatwierdza właściciel. Zgoda dotyczy publikacji dokumentacji; nie rozszerza zakresu zatwierdzonych prac produktu.
 
 Wzorce nazw, miejsca plików i cykl publikacji określają [zasady repozytorium](../CONTRIBUTING.md#zmiany-w-repozytorium). Indeksy dokumentacji i tematów aktualizujemy razem ze zmianami.
 
@@ -70,13 +72,13 @@ Parametry wyliczane z osprzętu, charakterystyki czujników, wartości elementó
 | W04 — Zakres funkcjonalny: F01 | Zamknięty po kontroli właściciela: 2026-11-04. | [Pomiary](requirements/f01-pomiary-silnika.md), [przegląd sterowania i wynik zamknięcia](requirements/f01-sterowanie-silnikiem.md); dane techniczne przekazane do kolejki etapów 3–6. |
 | F02 — Mapy, konfiguracja i strojenie ECU | Zamknięty po akceptacji właściciela 2026-11-09. | Odpowiedź A na pytanie 166. [Karta F02](requirements/f02-przeglad-zakresu.md) zawiera przyjęty zakres, plan weryfikacji i przekazanie. |
 | F03 — Ochrona i reakcje na usterki | Zamknięty po akceptacji właściciela: 2026-11-24. | Odpowiedź A na pytanie 243. [Karta F03](requirements/f03-przeglad-zakresu.md) obejmuje SYS-157–235, przegląd spójności, 79 planów prób i przekazanie do dalszych etapów. [Szczegółowe reakcje](requirements/f03-ochrona-i-usterki.md) pozostają źródłem rozwinięcia; nie wykonano prób produktu. |
-| F04 — Akcesoria i dodatkowe I/O | Aktywny po zamknięciu F03. | [Dokument F04](requirements/f04-akcesoria-i-io.md): klakson SYS-236–240 i uzgodniona część trzech dodatkowych kanałów SYS-241–245. Kanały zachowują stany przy utracie HMI/CAN, lecz po restarcie lub śnie wymagają nowego polecenia. Następna decyzja: ON/OFF i opcjonalna regulacja jasności lamp przez PWM mocy, pytanie 254; dalej reakcje wyjść na usterki oraz pozostałe stany i I/O. |
+| F04 — Akcesoria i dodatkowe I/O | Aktywny po zamknięciu F03. | [Dokument F04](requirements/f04-akcesoria-i-io.md): klakson SYS-236–240 i trzy dodatkowe kanały SYS-241–246. Przyjęto ich zastosowania, liczbę, stany i ON/OFF oraz opcjonalny PWM zgodnych lamp. Następna decyzja: ponowne załączenie kanału po ochronnym odcięciu, pytanie 255; dalej pozostałe reakcje wyjść, stany akcesoriów i I/O. |
 | W05 — Inwentaryzacja Bety | W kolejce, etap 3. | Zachowany [plan INV](verification/beta-2015-plan-inwentaryzacji.md); brak wyników pomiarowych. |
 | W01/W02 — Architektura i zasoby | W kolejce, etap 4. | Zachowane [diagram](architecture/blokowa-systemu.md) i [macierz wariantów](architecture/macierz-wariantow-silnika.md); bez zamkniętych bilansów. |
 | W03 — Weryfikacja wymagań | W kolejce, etap 5. | Zachowany [przydział 245 SYS do grup](verification/macierz-wymagan.md); kryteria, procedury i dowody do rozwinięcia. |
 | W06 — Bilanse i wybór komponentów | W kolejce, etapy 4 i 6. | Wymagane wejściowe parametry; ważne komponenty wybierzemy wspólnie. |
 
-**F03 zamknięto odpowiedzią A na pytanie 243 (2026-11-24). W aktywnym F04 przyjęto klakson SYS-236–240 i część dotyczącą trzech dodatkowych kanałów SYS-241–245. Po utracie HMI/CAN zachowują one stany; restart lub zakończony sen wymagają nowego polecenia załączenia. Najbliższy krok to ON/OFF lub dodatkowy PWM mocy do regulacji jasności zgodnych lamp, pytanie 254.** [Dokument F04](requirements/f04-akcesoria-i-io.md) zachowuje przyjęte reguły, plany prób i kolejkę. [Karta F03](requirements/f03-przeglad-zakresu.md) zawiera przekazanie zamkniętej części. Inwentaryzacja, parametry elektryczne, bilanse i procedury wykonawcze pozostają w kolejce właściwych etapów.
+**F03 zamknięto odpowiedzią A na pytanie 243 (2026-11-24). W aktywnym F04 przyjęto klakson SYS-236–240 i trzy dodatkowe kanały SYS-241–246. Odpowiedź A na pytanie 254 dopuszcza ON/OFF oraz opcjonalny PWM mocy zgodnych lamp; GPS i ładowarki pozostają przy ON/OFF. Najbliższy krok to reguła ponownego załączenia kanału po ochronnym odcięciu, pytanie 255.** [Dokument F04](requirements/f04-akcesoria-i-io.md) zachowuje ustalenia, plany prób i kolejkę. [Karta F03](requirements/f03-przeglad-zakresu.md) pozostaje bez zmian. Parametry, bilanse i procedury wykonawcze oczekują we właściwych etapach.
 
 ## Warunki przechodzenia dalej
 
