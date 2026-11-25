@@ -59,3 +59,5 @@ Do późniejszego projektu: SYS-208 przewiduje ocenę temperatury ECU jako pomoc
 Do późniejszego projektu: SYS-241/242 wymagają trzech niezależnie sterowanych dodatkowych kanałów mocy do oświetlenia i zasilania zewnętrznych akcesoriów. Prądy pojedyncze/równoczesne, topologię, zabezpieczenia i pinout ustalimy w architekturze, a ważne komponenty wybierzemy wspólnie. [Zakres i plan próby F04](../../docs/requirements/f04-akcesoria-i-io.md#trzy-dodatkowe-kanały-mocy).
 
 Przy projektowaniu inicjalizacji i sterowania dodatkowymi torami mocy uwzględnić stan wyłączony po odzyskaniu gotowości ECU po nieplanowanym restarcie lub powrocie zasilania według SYS-244. Przebieg inicjalizacji i zachowanie wyjść określimy z architekturą i danymi układów. [Plan próby F04](../../docs/requirements/f04-akcesoria-i-io.md#plan-próby-sys-244).
+
+SYS-245 wymaga wyłączenia dodatkowych torów przed prawidłowym snem i pozostawienia ich wyłączonych po zwykłym wybudzeniu do nowego polecenia. Zachowanie sterowania w stanach niskiego poboru uwzględnić w projekcie domen i interfejsów wyjść. [Plan próby F04](../../docs/requirements/f04-akcesoria-i-io.md#plan-próby-sys-245).

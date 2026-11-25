@@ -93,3 +93,5 @@ SYS-234 działa niezależnie od HMI. Prezentację dostępnego stanu ogranicznika
 Dla SYS-243 źródłem stanów dodatkowych kanałów pozostaje ECU także po utracie komunikacji. Po jej przywróceniu odczyty HMI mają odpowiadać rzeczywistym stanom ECU; protokół odczytu i kwalifikację nowych poleceń opracujemy w projekcie interfejsu. [Plan próby F04](../../docs/requirements/f04-akcesoria-i-io.md#plan-próby-sys-243).
 
 Po restarcie ECU dodatkowe kanały rozpoczynają od wyłączonych według SYS-244. Odczyt HMI ma odzwierciedlać stany ECU, a wcześniejsze dane lub żądania nie zastępują nowego polecenia załączenia. Kwalifikację poleceń opracujemy z protokołem. [Plan próby F04](../../docs/requirements/f04-akcesoria-i-io.md#plan-próby-sys-244).
+
+SYS-245 pozostawia dodatkowe kanały wyłączone po prawidłowym śnie i wybudzeniu do nowego polecenia. Po wybudzeniu HMI odczytuje stany ECU; dawne dane nie są poleceniem ponownego załączenia. [Plan próby F04](../../docs/requirements/f04-akcesoria-i-io.md#plan-próby-sys-245).

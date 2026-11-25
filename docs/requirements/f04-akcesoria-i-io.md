@@ -15,7 +15,8 @@ Stan na 2026-11-25. **F04 aktywny po zamknięciu F03 w pytaniu 243.** Aktualny t
 | Dodatkowe wyjścia mocy | Zastosowania SYS-241 i 3 niezależne kanały SYS-242 przyjęte odpowiedziami B na pytania 249–250. |
 | Dodatkowe kanały po utracie HMI/CAN | Zachowują własne stany według SYS-243, odpowiedź A na pytanie 251. |
 | Dodatkowe kanały po restarcie ECU | Start od wyłączonych według SYS-244, odpowiedź A na pytanie 252. |
-| Dodatkowe kanały przy prawidłowym śnie i wybudzeniu | Otwarte, pytanie 253. |
+| Dodatkowe kanały przy prawidłowym śnie i wybudzeniu | Wyłączone przed snem i po wybudzeniu do nowego polecenia według SYS-245, odpowiedź A na pytanie 253. |
+| Sposób sterowania dodatkowymi lampami | Otwarty, pytanie 254: ON/OFF albo również PWM mocy dla zgodnych lamp. |
 | Sygnałowe I/O i komunikacja | Osobny przegląd po wyjściach mocy; wymagania funkcjonalne oddzielamy od późniejszego doboru interfejsów i torów. |
 
 Klakson należy do przyjętego zakresu SYS-004. Obecność klaksonu 12 V w dokumentacji Bety jest potwierdzona w [analizie instrukcji i suplementu](../interfaces/beta-2015-analiza-dokumentacji.md). ECU steruje odbiornikiem, a HMI przekazuje polecenia kierowcy. Nie ustalono tu jeszcze pełnej obsługi przycisku ani wszystkich stanów po restarcie.
@@ -169,6 +170,41 @@ Utrata samego HMI/CAN podczas ciągłej pracy podlega odrębnej regule zachowani
 
 To plan do rozwinięcia w procedurę; prób produktu jeszcze nie wykonano.
 
+## Dodatkowe kanały przy prawidłowym śnie i wybudzeniu
+
+W odpowiedzi **A na pytanie 253** (2026-11-25) właściciel przyjął SYS-245: przed prawidłowym uśpieniem ECU/HMI dodatkowe kanały są wyłączane, a po zwykłym wybudzeniu pozostają wyłączone do nowego dopuszczonego polecenia.
+
+To reguła stanów pracy wyjść. Prawidłowy sen jest koordynowany według SYS-059/062/063; wybudzenie nie przywraca samoczynnie zasilania akcesoriów. Nieplanowany restart podlega SYS-244, a sama utrata HMI/CAN podczas ciągłej pracy podlega SYS-243. Warunki gotowości i wykonanie przejść opracujemy w architekturze.
+
+Wniosek do architektury z SYS-194/245: autotest nie omija stanu wyłączonego ani warunku nowego polecenia. Przy wybudzeniu wykonuje dostępne kontrole zgodne ze stanem OFF; próby wymagające załączenia odbiornika czekają na spełnienie warunków zgodnie z SYS-194. Zakres takich kontroli zależy od rzeczywistego toru i odbiornika.
+
+### Plan próby SYS-245
+
+1. Na stanowisku ECU–HMI załączyć dopuszczone kombinacje dodatkowych kanałów. Doprowadzić do spełnienia warunków prawidłowego snu, bez aktywnej sesji PC i innych zadań blokujących usypianie. Potwierdzić rzeczywiste wyłączenie wszystkich trzech wyjść przed przejściem systemu w zdefiniowany stan uśpienia.
+2. Sprawdzić wymagane źródła wybudzenia według SYS-054–056/079–080, w tym ruch koła i późniejsze podłączenie PC. Bez nowego polecenia dla dodatkowych kanałów potwierdzić ich stan wyłączony podczas wybudzania, autotestu i po gotowości ECU/HMI; autotest nie może omijać tej reguły. Rejestrować sekwencję, komunikację i rzeczywiste napięcie/prąd wyjść.
+3. Sprawdzić stany sprzed snu i dawne dane lub żądania HMI: nie mogą przywracać wyjść w miejsce nowego polecenia. Następnie wydać nowe dopuszczone polecenie i potwierdzić właściwe załączenie. Zabezpieczenia i ochrona energii nadal mogą odmówić załączenia.
+4. Powtarzać cykle snu/wybudzenia, również przy wcześniej potwierdzonej utracie HMI/CAN i przy aktywnej ochronie energii. Sprawdzić, że normalny sen nie jest traktowany jak ciągła praca z zachowywaniem stanów SYS-243. Przed wykonaniem ustalić połączenia, kryteria, wyposażenie i warunki przerwania; wyniki powiązać z HW/FW oraz konfiguracją. [Macierz weryfikacji](../verification/macierz-wymagan.md).
+
+To plan do rozwinięcia w procedurę; prób produktu jeszcze nie wykonano.
+
+## Przegląd przyjętej części wyjść mocy
+
+| Zakres | Przyjęta reguła | Podstawa |
+| --- | --- | --- |
+| Zastosowania | Dodatkowe oświetlenie i zasilanie zewnętrznych akcesoriów. | B na 249, SYS-241 |
+| Liczba kanałów | Trzy niezależnie sterowane kanały ponad podstawowymi odbiornikami. | B na 250, SYS-242 |
+| Utrata HMI/CAN | Zachowanie własnego stanu każdego kanału przy ciągłej pracy ECU. | A na 251, SYS-243 |
+| Nieplanowany restart / powrót zasilania | Start od wyłączonych; załączenie wymaga nowego polecenia. | A na 252, SYS-244 |
+| Prawidłowy sen i zwykłe wybudzenie | Wyłączenie przed snem; po wybudzeniu pozostają wyłączone do nowego polecenia. | A na 253, SYS-245 |
+
+Sprawdzono spójność reguł z autonomią ECU, rozróżnieniem restartu i snu oraz pierwszeństwem zabezpieczeń i ochrony energii. Każde z SYS-241–245 ma plan próby i przydział do bloków oraz grup weryfikacji.
+
+Uzgodniona porcja SYS-241–245 ma historię w [PR #26](https://github.com/DustWorx/DustWorx-DustONE/pull/26). F04 pozostaje aktywny: do dalszych ustaleń należą sposób sterowania lampami, brakujące reakcje wyjść na usterki, pozostałe stany akcesoriów i I/O. Parametry, topologię oraz pokrycie diagnostyki opracujemy we właściwych etapach, a ważne komponenty wybierzemy wspólnie.
+
 ## Następna decyzja
 
-**Pytanie 253:** co zrobić z dodatkowymi kanałami przy prawidłowym usypianiu i późniejszym wybudzeniu ECU/HMI? Proponujemy wyłączenie odbiorników przed snem; do wyboru pozostaje pozostawienie ich wyłączonych po wybudzeniu albo odtworzenie wcześniejszych stanów po gotowości i kwalifikacji. To propozycja do decyzji właściciela, nie przyjęte wymaganie. Ochrona wyjść i energii obowiązuje w obu wariantach.
+**Pytanie 254:** czy dodatkowe kanały mają oferować tylko ON/OFF, czy także opcjonalny PWM mocy do regulacji jasności zgodnych lamp? Zasilanie GPS lub zewnętrznej ładowarki traktujemy jako ON/OFF; sygnałowy PWM pozostaje osobnym tematem I/O.
+
+Potwierdzony przykład funkcji: [Skene IQ-275-KTM](https://skenelights.com/iq-275-ktm.html) opisuje regulację jasności dla KTM/Husqvarna enduro z lat 2014–2023. Producent opisuje również [PWM w rodzinie IQ-275X](https://skenelights.com/skene-iq-275x-dimmer-with-integrated-wire-harness.html) dla odpowiednich lamp. To potwierdzenie zastosowania funkcji, nie wybór części DustONE ani zgodności konkretnej lampy.
+
+Propozycja: opcjonalny PWM mocy tylko dla lamp, których zgodność zostanie potwierdzona; alternatywa to wyłącznie ON/OFF. Decyzja nie jest jeszcze podjęta. Zakres regulacji, częstotliwość i komponenty wymagają danych oraz projektu.

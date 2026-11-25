@@ -271,6 +271,7 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-242 | ECU udostępnia trzy niezależnie sterowane dodatkowe kanały mocy do zastosowań SYS-241, ponad wyjściami potrzebnymi dla uzgodnionego osprzętu silnika i podstawowych akcesoriów motocykla. Każdy kanał może załączać wspólnie grupę odbiorników; jego zwykłe sterowanie jest niezależne od pozostałych dwóch kanałów. Dopuszczone konfiguracje, obciążenia pojedyncze i równoczesne, parametry elektryczne oraz granice zabezpieczeń wymagają projektu i prób. |
 | SYS-243 | Przy nieprzerwanej pracy ECU sama potwierdzona utrata HMI lub komunikacji CAN ECU–HMI nie zmienia ostatniego przyjętego stanu pracy żadnego z trzech dodatkowych kanałów mocy SYS-241/242. Każdy kanał zachowuje swój stan z uwzględnieniem nadrzędnych zabezpieczeń wyjścia i ochrony energii. Kryteria potwierdzenia utraty łączności i czasy wymagają projektu protokołu oraz prób. Stany po restarcie ECU są odrębnym przypadkiem F04. |
 | SYS-244 | Po odzyskaniu gotowości ECU po nieplanowanym restarcie lub powrocie zasilania trzy dodatkowe kanały mocy SYS-241/242 rozpoczynają od stanu wyłączonego. ECU nie odtwarza wcześniejszych stanów sterowania tych kanałów. Ponowne załączenie wymaga nowego dopuszczonego polecenia, z zachowaniem zabezpieczeń wyjść i ochrony energii. Prawidłowe usypianie i wybudzenie ze snu są osobnym przypadkiem F04. |
+| SYS-245 | Przed prawidłowym uśpieniem systemu ECU/HMI trzy dodatkowe kanały mocy SYS-241/242 są wyłączane. Po zwykłym wybudzeniu pozostają wyłączone, bez automatycznego odtworzenia stanów sprzed snu; ponowne załączenie wymaga nowego dopuszczonego polecenia. Zabezpieczenia wyjść i ochrona energii zachowują pierwszeństwo. Reguła dotyczy stanów pracy wyjść w skoordynowanym śnie i wybudzeniu, odrębnie od nieplanowanego restartu według SYS-244. |
 
 ## 3. Podział odpowiedzialności
 
@@ -813,6 +814,8 @@ W odpowiedzi B na pytanie 250 (2026-11-24) właściciel wybrał trzy dodatkowe k
 W odpowiedzi A na pytanie 251 (2026-11-25) właściciel przyjął SYS-243: po potwierdzonej utracie HMI/CAN każdy z trzech dodatkowych kanałów mocy zachowuje ostatni stan pracy przy działającym ECU. Zabezpieczenia wyjść i ochrona energii zachowują pierwszeństwo. [Plan próby F04](requirements/f04-akcesoria-i-io.md#plan-próby-sys-243).
 
 W odpowiedzi A na pytanie 252 (2026-11-25) właściciel przyjął SYS-244: po nieplanowanym restarcie lub powrocie zasilania trzy dodatkowe kanały rozpoczynają od wyłączonych, bez odtwarzania poprzednich stanów; ponowne załączenie wymaga nowego polecenia. [Plan próby F04](requirements/f04-akcesoria-i-io.md#plan-próby-sys-244).
+
+W odpowiedzi A na pytanie 253 (2026-11-25) właściciel przyjął SYS-245: trzy dodatkowe kanały są wyłączane przed prawidłowym snem, a po wybudzeniu pozostają wyłączone do nowego dopuszczonego polecenia. [Plan próby F04](requirements/f04-akcesoria-i-io.md#plan-próby-sys-245).
 
 ## 4. Decyzje potrzebne przed doborem sprzętu
 
