@@ -17,7 +17,8 @@ Stan na 2026-11-25. **F04 aktywny po zamknięciu F03 w pytaniu 243.** Aktualny t
 | Dodatkowe kanały po restarcie ECU | Start od wyłączonych według SYS-244, odpowiedź A na pytanie 252. |
 | Dodatkowe kanały przy prawidłowym śnie i wybudzeniu | Wyłączone przed snem i po wybudzeniu do nowego polecenia według SYS-245, odpowiedź A na pytanie 253. |
 | Sposób sterowania dodatkowymi lampami | Przyjęty SYS-246, odpowiedź A na pytanie 254: ON/OFF i opcjonalny PWM mocy dla zgodnych lamp; GPS i ładowarki w trybie ON/OFF. |
-| Ponowne załączenie dodatkowego kanału po ochronnym odcięciu | Otwarte, pytanie 255: nowe świadome polecenie albo ograniczone samoczynne ponowienia. |
+| Ponowne załączenie dodatkowego kanału po ochronnym odcięciu | Przyjęty SYS-247, odpowiedź A na pytanie 255: ograniczona próba wyłącznie na nowe świadome polecenie, bez samoczynnych ponowień. |
+| Limit świadomych prób po niepowodzeniu | Otwarty, pytanie 256: propozycja właściciela — blokada po jednym nieudanym ponowieniu do snu lub odłączenia zasilania. |
 | Sygnałowe I/O i komunikacja | Osobny przegląd po wyjściach mocy; wymagania funkcjonalne oddzielamy od późniejszego doboru interfejsów i torów. |
 
 Klakson należy do przyjętego zakresu SYS-004. Obecność klaksonu 12 V w dokumentacji Bety jest potwierdzona w [analizie instrukcji i suplementu](../interfaces/beta-2015-analiza-dokumentacji.md). ECU steruje odbiornikiem, a HMI przekazuje polecenia kierowcy. Nie ustalono tu jeszcze pełnej obsługi przycisku ani wszystkich stanów po restarcie.
@@ -207,6 +208,21 @@ Wniosek do projektu stanów: przy utracie HMI/CAN zachowany stan SYS-243 obejmuj
 
 To plan do rozwinięcia w procedurę; prób produktu jeszcze nie wykonano.
 
+## Próba dodatkowego kanału po ochronnym odcięciu
+
+W odpowiedzi **A na pytanie 255** (2026-11-25) właściciel przyjął SYS-247: po odłączeniu dodatkowego kanału wskutek potwierdzonego zwarcia lub przeciążenia ECU czeka na nowe świadome polecenie użytkownika albo serwisu. Nie wykonuje samoczynnych ponowień. Próba jest ograniczona, obejmuje ocenę obwodu i podlega zabezpieczeniom oraz ochronie energii. DTC z zamrożoną ramką i informacja HMI opisują usterkę.
+
+Przywrócenie sprawności wymaga wyniku sprawdzenia; samo polecenie nie potwierdza naprawy. Progi, czas i energia próby, kryteria wyniku, warunki cieplne oraz współdziałanie zabezpieczeń układu mocy z ECU wymagają projektu. Należy odróżnić dopuszczony prąd załączenia odbiornika od usterki. Istniejące reguły SYS-243–246 nadal obowiązują; zakres dotyczy trzech dodatkowych kanałów, a nie odrębnych prób wentylatora z F03.
+
+### Plan próby SYS-247
+
+1. Na stanowisku rzeczywistego ECU z kwalifikowanymi obciążeniami odtworzyć wykrywalne zwarcie i przeciążenie każdego dodatkowego kanału osobno. Przed wykonaniem określić bezpieczny układ wymuszania usterek, limity źródła, kryteria oraz warunki przerwania. Potwierdzić ochronne odcięcie, DTC z zamrożoną ramką oraz informację HMI; rejestrować napięcie/prąd i stan zabezpieczenia.
+2. Bez nowego świadomego polecenia obserwować kanał po ustąpieniu pobudzenia lub warunków termicznych oraz przy powtarzanych wcześniejszych danych sterujących, utracie i powrocie HMI/CAN. Potwierdzić brak samoczynnego ponowienia. Ocenić także współdziałanie wewnętrznej ochrony układu mocy z ECU i PWM; nie utożsamiać każdej fazy jego ochrony z nową próbą użytkownika.
+3. Wydać nowe dopuszczone polecenie próby z HMI oraz osobno z uprawnionego trybu serwisowego. Przy trwającej usterce potwierdzić ograniczenie próby i odcięcie, a po usunięciu usterki ocenę obwodu według kryteriów. Sprawdzić odmowę przy niespełnionych warunkach zasilania, termicznych lub ochrony energii. Samo podłączenie PC nie omija warunków serwisowych.
+4. Dla dopuszczonych odbiorników sprawdzić ON/OFF i PWM zgodnych lamp, także poprawny prąd ich załączenia. Potwierdzić zgodność odczytów HMI z ECU i zachowanie historii DTC. Łączny limit świadomych prób oraz jego odnowienie sprawdzić po rozstrzygnięciu pytania 256. Wyniki powiązać z HW/FW, konfiguracją i osprzętem. [Macierz weryfikacji](../verification/macierz-wymagan.md).
+
+To plan do rozwinięcia w procedurę; prób produktu jeszcze nie wykonano.
+
 ## Przegląd przyjętej części wyjść mocy
 
 | Zakres | Przyjęta reguła | Podstawa |
@@ -217,15 +233,18 @@ To plan do rozwinięcia w procedurę; prób produktu jeszcze nie wykonano.
 | Nieplanowany restart / powrót zasilania | Start od wyłączonych; załączenie wymaga nowego polecenia. | A na 252, SYS-244 |
 | Prawidłowy sen i zwykłe wybudzenie | Wyłączenie przed snem; po wybudzeniu pozostają wyłączone do nowego polecenia. | A na 253, SYS-245 |
 | Sterowanie lampami i akcesoriami | ON/OFF oraz opcjonalny PWM mocy zgodnych lamp; GPS i ładowarki bez PWM zasilania. | A na 254, SYS-246 |
+| Próba po zwarciu lub przeciążeniu | Bez samoczynnych ponowień; ograniczona próba ze sprawdzeniem obwodu na nowe świadome polecenie. | A na 255, SYS-247 |
 
-Sprawdzono spójność reguł z autonomią ECU, rozróżnieniem restartu i snu oraz pierwszeństwem zabezpieczeń i ochrony energii. Każde z SYS-241–246 ma plan próby i przydział do bloków oraz grup weryfikacji.
+Sprawdzono spójność reguł z autonomią ECU, rozróżnieniem restartu i snu oraz pierwszeństwem zabezpieczeń i ochrony energii. Każde z SYS-241–247 ma plan próby i przydział do bloków oraz grup weryfikacji.
 
-Uzgodniona porcja SYS-241–245 ma historię w [PR #26](https://github.com/DustWorx/DustWorx-DustONE/pull/26). SYS-246 dodaje opcjonalny PWM zgodnych lamp. F04 pozostaje aktywny: do dalszych ustaleń należą brakujące reakcje wyjść na usterki, pozostałe stany akcesoriów i I/O. Parametry, topologię oraz pokrycie diagnostyki opracujemy we właściwych etapach, a ważne komponenty wybierzemy wspólnie.
+Uzgodniona porcja SYS-241–245 ma historię w [PR #26](https://github.com/DustWorx/DustWorx-DustONE/pull/26). SYS-246 dodaje opcjonalny PWM zgodnych lamp, a SYS-247 określa próbę kanału po ochronnym odcięciu. F04 pozostaje aktywny: do dalszych ustaleń należą łączny limit świadomych prób i jego odnawianie, pozostałe reakcje wyjść, stany akcesoriów i I/O. Parametry, topologię oraz pokrycie diagnostyki opracujemy we właściwych etapach, a ważne komponenty wybierzemy wspólnie.
 
 ## Następna decyzja
 
-**Pytanie 255:** po odłączeniu dodatkowego kanału przez zabezpieczenie po zwarciu lub przeciążeniu, kiedy ECU ma spróbować go ponownie załączyć? Rozpatrujemy bieżący okres wybudzenia, przy sprawnym zasilaniu i pozostałych warunkach. Powrót zasilania po restarcie lub śnie nadal podlega SYS-244/245.
+**Pytanie 256:** jak odnawiać możliwość próby po jednym nieudanym świadomym ponowieniu dodatkowego kanału? Właściciel zaproponował taką blokadę, aby kolejne polecenia nie powodowały wielokrotnego zasilania nadal uszkodzonego obwodu. Przekroczenie limitu i jego kasowanie nie są jeszcze zatwierdzonym wymaganiem.
 
-Propozycja A: ograniczona próba dopiero na nowe świadome polecenie użytkownika lub serwisu, przy spełnionych warunkach; brak samoczynnych ponowień. Alternatywa B: ograniczone samoczynne ponowienia, a po wyczerpaniu limitu odcięcie do nowego polecenia. Obie wymagają ochrony wyjścia, DTC z zamrożoną ramką oraz informacji HMI. Decyzja o ponowieniu nie jest jeszcze podjęta; progi, odstępy i limity dobierzemy w projekcie.
+Rekomendowana propozycja A: limit i blokada osobno dla każdego kanału; po pierwszym odcięciu jedna świadoma próba. Po jej niepowodzeniu kolejne polecenia odrzucane do zakończonego cyklu prawidłowego snu i wybudzenia albo pełnego zaniku i powrotu zasilania. Zwykły reset programu lub powrót CAN nie odnawia limitu. Odnowienie daje wyłącznie prawo do nowej świadomej próby, nie załącza wyjścia i nie kasuje historii DTC. Pozostają wymagane warunki termiczne i pozostałe zabezpieczenia. Alternatywa B: kolejna świadoma próba po ustalonej przerwie, także bez snu i odłączenia zasilania.
 
-Ograniczenie ponowień zmniejsza ponowne obciążanie niesprawnego obwodu; samoczynne ponowienia mogą przywrócić zasilanie po przejściowej usterce. [Infineon opisuje warianty z ograniczonym ponawianiem i z zatrzaskiem odcięcia](https://www.infineon.com/products/power/smart-power-switches/high-side-switches/12v/profet-plus-2-12v-automotive). To porównanie mechanizmów, nie wybór komponentu. Zachowanie wewnętrznych zabezpieczeń i sterowania PWM trzeba dopasować do przyjętej reguły.
+Do architektury po wyborze reguły: rozróżnienie pełnego zaniku zasilania od restartu programu, zachowanie licznika prób, warunki chłodzenia i kwalifikacja samej próby. ECU może rozpoznawać skutki zaniku zasilania; nie zakładamy potwierdzenia, że użytkownik fizycznie odłączył akumulator. Zdarzenie odnawiające limit nie oznacza potwierdzenia usunięcia usterki. Niespełnione warunki nie mogą być omijane przez powtarzanie cykli snu lub zasilania.
+
+[Infineon opisuje warianty z ograniczonym ponawianiem i zatrzaskiem odcięcia](https://www.infineon.com/products/power/smart-power-switches/high-side-switches/12v/profet-plus-2-12v-automotive). To podstawa porównania mechanizmów, nie wybór komponentu ani dowód, że sam sprzęt realizuje regułę DustONE.
