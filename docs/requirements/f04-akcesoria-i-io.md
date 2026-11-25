@@ -12,7 +12,8 @@ Stan na 2026-11-25. **F04 aktywny po zamknięciu F03 w pytaniu 243.** Aktualny t
 | Klakson przy zwykłym wybudzeniu ze snu | Przyjęty SYS-239, odpowiedź B na pytanie 247: pierwsze naciśnięcie wybudza; sygnał wymaga zwolnienia i nowego naciśnięcia. |
 | Autotest klaksonu | Przyjęty SYS-240, odpowiedź A na pytanie 248: bez samoczynnego dźwięku; próba dźwiękowa na świadome polecenie użytkownika. |
 | Pozostałe stany akcesoriów | W toku w F04. Przyjęty SYS-250, A na pytanie 258: podstawowe światła po nieplanowanym restarcie i przy zgaszonym silniku OFF do nowego polecenia. Zachowujemy SYS-050–053 oraz SYS-081–091. |
-| Kierunkowskazy po powrocie HMI/CAN | Otwarte, pytanie 259: nowy świadomy wybór albo odtworzenie poprzedniej strony po potwierdzeniu żądania z HMI. |
+| Kierunkowskazy po powrocie HMI/CAN | Przyjęty SYS-251, odpowiedź A na pytanie 259: pozostają OFF do nowego świadomego wyboru użytkownika, bez wznowienia dawnych stanów. |
+| Kierunkowskazy po restarcie i prawidłowym śnie | Otwarte, pytanie 260: OFF do nowego wyboru w obu przypadkach albo przywrócenie nadal zgłaszanej strony tylko po zwykłym wybudzeniu. |
 | Dodatkowe wyjścia mocy | Zastosowania SYS-241 i 3 niezależne kanały SYS-242 przyjęte odpowiedziami B na pytania 249–250. |
 | Dodatkowe kanały po utracie HMI/CAN | Zachowują własne stany według SYS-243, odpowiedź A na pytanie 251. |
 | Dodatkowe kanały po restarcie ECU | Start od wyłączonych według SYS-244, odpowiedź A na pytanie 252. |
@@ -296,10 +297,25 @@ Motocykl pozostaje bez stacyjki; nie wprowadzamy przełącznika zasilania ani je
 
 To plan do rozwinięcia w procedurę; prób produktu jeszcze nie wykonano.
 
+## Kierunkowskazy po odzyskaniu HMI/CAN
+
+W odpowiedzi **A na pytanie 259** (2026-11-25) właściciel przyjął SYS-251. Po wyłączeniu kierunkowskazu według SYS-052 powrót HMI/CAN nie wznawia sygnalizacji. Przy nieprzerwanej pracy ECU w bieżącym okresie wybudzenia wymagany jest nowy świadomy wybór użytkownika z HMI. Samo ponowne zgłoszenie poprzedniej strony ani odtworzone wcześniejsze żądanie nie są takim wyborem.
+
+To reguła odzyskania komunikacji podczas pracy ECU; restart oraz prawidłowy sen i wybudzenie są osobnym następnym ustaleniem. Miganiem nadal steruje lokalnie ECU, a zabezpieczenia i ochrona energii mają pierwszeństwo. Kryteria powrotu łączności, kwalifikację danych i nowych wyborów opracujemy w architekturze/protokole. Ustalenie nie tworzy tu nowego DTC komunikacji.
+
+### Plan próby SYS-251
+
+1. Na rzeczywistym stanowisku ECU–HMI z dopuszczonymi lampami włączyć kierunkowskaz, utrzymując pracę i zasilanie ECU. Odtworzyć utratę HMI/CAN i potwierdzić wyłączenie według SYS-052. Przywrócić komunikację bez nowego działania kierowcy, także gdy HMI ponownie zgłasza poprzednią stronę. Potwierdzić brak wznowienia rzeczywistej sygnalizacji. Powtórzyć dla lewej i prawej strony.
+2. Odtworzyć dawne stany oraz wcześniejsze żądania, ponowne zgłoszenie tego samego wyboru, kolejną utratę i powrót łączności oraz restart samego HMI przy nadal działającym ECU. Potwierdzić utrzymanie OFF do nowego świadomego wyboru. Kryteria ważności danych i odróżnienia wyborów ustalić z protokołem przed wykonaniem.
+3. Po odzyskaniu łączności wykonać nowy świadomy wybór strony z HMI. Przy spełnionych pozostałych warunkach potwierdzić przyjęcie wyboru i właściwą lokalną sygnalizację ECU. Sprawdzić wybór strony poprzedniej oraz przeciwnej i odczyt rzeczywistych stanów przez HMI; nie wyznaczać tu jeszcze interwałów migania.
+4. Powtórzyć przy pracy i zatrzymaniu silnika, bez sesji Windows i z nadrzędnymi zabezpieczeniami wyjść oraz ochroną energii zgodnie z zakresem projektu. Nowy wybór nie może omijać obowiązujących odcięć. Rejestrować komunikację, stany ECU i rzeczywiste napięcie/prąd skonfigurowanych lamp. Przed wykonaniem ustalić połączenia, obciążenia, kryteria oraz warunki przerwania; wyniki powiązać z HW/FW i konfiguracją. [Macierz weryfikacji](../verification/macierz-wymagan.md).
+
+To plan do rozwinięcia w procedurę; prób produktu jeszcze nie wykonano.
+
 ## Następna decyzja
 
-**Pytanie 259:** ECU wyłączyło kierunkowskaz po potwierdzonej utracie HMI/CAN według SYS-052. Łączność wraca, ECU pracuje nieprzerwanie i nie wystąpił jego restart. Czy kierunkowskaz ma czekać na nowy świadomy wybór, czy wrócić do poprzedniej strony, jeśli HMI ponownie zgłasza tę stronę jako wybraną?
+**Pytanie 260:** czy po nieplanowanym restarcie ECU oraz po prawidłowym śnie i wybudzeniu kierunkowskazy mają rozpoczynać od OFF do nowego świadomego wyboru kierowcy? To przypadki odrębne od powrotu CAN w bieżącym okresie wybudzenia z SYS-251.
 
-Propozycja A: pozostawić kierunkowskazy wyłączone do nowego świadomego wyboru użytkownika z HMI. Alternatywa B: wznowić poprzednią stronę po potwierdzeniu jej nadal aktywnego wyboru z HMI. Decyzja nie jest jeszcze podjęta.
+Propozycja A: przed prawidłowym snem wyłączyć kierunkowskazy; po wybudzeniu i po odzyskaniu gotowości po restarcie pozostawić je wyłączone do nowego świadomego wyboru. Alternatywa B: po restarcie wymagać nowego wyboru, lecz po zwykłym wybudzeniu wznawiać poprzednią stronę, jeżeli HMI nadal zgłasza jej aktywny wybór. Decyzja nie jest jeszcze podjęta.
 
-Dawny wybór może nie odpowiadać aktualnemu zamiarowi po zakończeniu manewru, dlatego rekomendujemy A. B może podtrzymać sygnalizację przy nadal trwającym manewrze, ale wymaga kwalifikacji aktualności żądania. W obu wariantach miganiem steruje lokalnie ECU, a zabezpieczenia i ochrona energii mają pierwszeństwo. Kryteria powrotu komunikacji i nowych żądań opracujemy w protokole; wybieramy teraz zachowanie akcesorium w F04.
+Rekomendujemy A: kolejny okres pracy lub wybudzenie, np. ruchem koła podczas pchania, nie powinny przywracać sygnalizacji dawnego manewru. Usypianie pozostaje automatyczne, a warunki gotowości i kwalifikację wyborów rozwiniemy w architekturze. W obu wariantach ECU steruje miganiem lokalnie, a zabezpieczenia i ochrona energii zachowują pierwszeństwo.
