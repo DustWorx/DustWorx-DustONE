@@ -11,7 +11,7 @@ Stan na 2026-11-25. **F04 aktywny po zamknięciu F03 w pytaniu 243.** Aktualny t
 | Klakson po restarcie ECU | Przyjęty SYS-238, odpowiedź A na pytanie 246: zwolnienie i nowe naciśnięcie. |
 | Klakson przy zwykłym wybudzeniu ze snu | Przyjęty SYS-239, odpowiedź B na pytanie 247: pierwsze naciśnięcie wybudza; sygnał wymaga zwolnienia i nowego naciśnięcia. |
 | Autotest klaksonu | Przyjęty SYS-240, odpowiedź A na pytanie 248: bez samoczynnego dźwięku; próba dźwiękowa na świadome polecenie użytkownika. |
-| Pozostałe stany akcesoriów | W kolejce w F04: start/restart ECU, powrót łączności i brakujące reguły wyjść. Zachowujemy przyjęte SYS-050–053 oraz SYS-081–091. |
+| Pozostałe stany akcesoriów | Następny temat w F04: podstawowe światła po nieplanowanym restarcie ECU, pytanie 258. Dalej pozostałe brakujące stany akcesoriów. Zachowujemy SYS-050–053 oraz SYS-081–091. |
 | Dodatkowe wyjścia mocy | Zastosowania SYS-241 i 3 niezależne kanały SYS-242 przyjęte odpowiedziami B na pytania 249–250. |
 | Dodatkowe kanały po utracie HMI/CAN | Zachowują własne stany według SYS-243, odpowiedź A na pytanie 251. |
 | Dodatkowe kanały po restarcie ECU | Start od wyłączonych według SYS-244, odpowiedź A na pytanie 252. |
@@ -19,8 +19,8 @@ Stan na 2026-11-25. **F04 aktywny po zamknięciu F03 w pytaniu 243.** Aktualny t
 | Sposób sterowania dodatkowymi lampami | Przyjęty SYS-246, odpowiedź A na pytanie 254: ON/OFF i opcjonalny PWM mocy dla zgodnych lamp; GPS i ładowarki w trybie ON/OFF. |
 | Ponowne załączenie dodatkowego kanału po ochronnym odcięciu | Przyjęty SYS-247, odpowiedź A na pytanie 255: ograniczona próba wyłącznie na nowe świadome polecenie, bez samoczynnych ponowień. |
 | Limit świadomych prób po niepowodzeniu | Przyjęty SYS-248, odpowiedź A na pytanie 256: po jednej nieudanej próbie blokada danego kanału do pełnego cyklu snu lub zaniku i powrotu zasilania. |
-| Wpływ usterki jednego kanału na pozostałe | Otwarty, pytanie 257: odłączenie tylko uszkodzonego kanału albo wszystkich trzech jako grupy, przy braku wspólnego zagrożenia. |
-| Sygnałowe I/O i komunikacja | Osobny przegląd po wyjściach mocy; wymagania funkcjonalne oddzielamy od późniejszego doboru interfejsów i torów. |
+| Wpływ usterki jednego kanału na pozostałe | Przyjęty SYS-249, odpowiedź A na pytanie 257: odcięcie tylko uszkodzonego kanału przy prawidłowych warunkach pozostałych; wspólne zagrożenia pozostają nadrzędne. |
+| Sygnałowe I/O i komunikacja | Osobny przegląd po regułach wyjść mocy i stanów akcesoriów; funkcje oddzielamy od późniejszego doboru interfejsów i torów. |
 
 Klakson należy do przyjętego zakresu SYS-004. Obecność klaksonu 12 V w dokumentacji Bety jest potwierdzona w [analizie instrukcji i suplementu](../interfaces/beta-2015-analiza-dokumentacji.md). ECU steruje odbiornikiem, a HMI przekazuje polecenia kierowcy. Nie ustalono tu jeszcze pełnej obsługi przycisku ani wszystkich stanów po restarcie.
 
@@ -243,6 +243,23 @@ Do architektury przekazujemy rozpoznanie pełnego zaniku zasilania i ukończenia
 
 To plan do rozwinięcia w procedurę; prób produktu jeszcze nie wykonano.
 
+## Usterka jednego dodatkowego kanału
+
+W odpowiedzi **A na pytanie 257** (2026-11-25) właściciel zatwierdził SYS-249. Potwierdzone zwarcie lub przeciążenie jednego dodatkowego kanału powoduje odcięcie i blokadę tylko tego kanału, jeżeli pozostałe obwody, wspólne zasilanie i warunki termiczne pozwalają na ich dalszą pracę. Pozostałe kanały zachowują własne stany, w tym sterowanie PWM, z zachowaniem ich zabezpieczeń oraz ochrony energii.
+
+Reguła nie wymaga utrzymania wyjść przy wspólnym zagrożeniu zasilania lub temperatury. Zakres takich reakcji i granice sprawności wymagają projektu. Licznik i blokada prób uszkodzonego kanału nadal podlegają SYS-247/248; usterka jednego toru nie jest sama w sobie poleceniem wyłączenia pozostałych.
+
+Do architektury i doboru przekazujemy ocenę wspólnych ścieżek zasilania, ograniczenia prądu zwarciowego, sprzężeń cieplnych oraz wpływu usterki na sterowanie i diagnostykę sąsiednich kanałów. [ST opisuje lokalną ochronę termiczną wyjść i możliwość wpływu nagrzewania wspólnego układu na inne kanały](https://www.st.com/content/ccc/resource/technical/document/datasheet/fd/11/11/45/55/61/44/50/CD00003429.pdf/files/CD00003429.pdf/jcr:content/translations/en.CD00003429.pdf), sekcja 3.10. To uzasadnienie oceny, nie wybór komponentu ani dowód izolacji w DustONE. Ważne układy i kompromisy dobierzemy wspólnie.
+
+### Plan próby SYS-249
+
+1. Na kwalifikowanym stanowisku rzeczywistego ECU podłączyć trzy dopuszczone obciążenia. Ustawić reprezentatywne stany ON/OFF oraz PWM zgodnych lamp. Przy prawidłowym wspólnym zasilaniu i temperaturze odtworzyć wykrywalne zwarcie lub przeciążenie jednego kanału w zaprojektowanym obwodzie wymuszania usterek. Rejestrować napięcie/prąd wszystkich wyjść, zasilanie ECU i stany sterowania.
+2. Potwierdzić odcięcie i blokadę uszkodzonego kanału, zapis diagnostyczny oraz informację HMI. Dla dwóch pozostałych potwierdzić zachowanie przyjętych stanów i sterowania w ich dopuszczonych granicach; polecenie odcięcia nie może obejmować ich wyłącznie z powodu lokalnej usterki sąsiada. Powtórzyć usterkę kolejno dla każdego kanału i kwalifikowanych kombinacji obciążeń.
+3. Sprawdzić ograniczoną świadomą próbę uszkodzonego kanału i blokadę po niepowodzeniu według SYS-247/248. Potwierdzić, że te działania nie zmieniają zadanych stanów sprawnych sąsiednich kanałów przy prawidłowych warunkach. Ocenić wpływ nagrzewania oraz zakłóceń i spadków zasilania w zakresie zadeklarowanym przez projekt; nie uznawać poprawnego zwykłego sterowania za dowód izolacji usterki.
+4. Osobno odtworzyć kwalifikowane przypadki wspólnego zagrożenia zasilania lub temperatury i sprawdzić szerszą reakcję przewidzianą przez projekt. Nie wymagać podtrzymania kanału wbrew jego własnym zabezpieczeniom lub ochronie energii. Przed wykonaniem ustalić granice obu klas przypadków, obciążenia, wyposażenie, limity wymuszania i warunki przerwania; wyniki powiązać z HW/FW i konfiguracją. [Macierz weryfikacji](../verification/macierz-wymagan.md).
+
+To plan do rozwinięcia w procedurę; prób produktu jeszcze nie wykonano.
+
 ## Przegląd przyjętej części wyjść mocy
 
 | Zakres | Przyjęta reguła | Podstawa |
@@ -255,15 +272,16 @@ To plan do rozwinięcia w procedurę; prób produktu jeszcze nie wykonano.
 | Sterowanie lampami i akcesoriami | ON/OFF oraz opcjonalny PWM mocy zgodnych lamp; GPS i ładowarki bez PWM zasilania. | A na 254, SYS-246 |
 | Próba po zwarciu lub przeciążeniu | Bez samoczynnych ponowień; ograniczona próba ze sprawdzeniem obwodu na nowe świadome polecenie. | A na 255, SYS-247 |
 | Nieudana świadoma próba | Blokada dalszych prób danego kanału do pełnego cyklu snu lub zaniku i powrotu zasilania; odnowienie bez automatycznego ON. | A na 256, SYS-248 |
+| Usterka jednego kanału | Odcięcie i blokada tylko uszkodzonego toru; pozostałe zachowują stany przy prawidłowych warunkach, z pierwszeństwem zabezpieczeń. | A na 257, SYS-249 |
 
-Sprawdzono spójność reguł z autonomią ECU, rozróżnieniem restartu i snu oraz pierwszeństwem zabezpieczeń i ochrony energii. Każde z SYS-241–248 ma plan próby i przydział do bloków oraz grup weryfikacji.
+Sprawdzono spójność reguł z autonomią ECU, rozróżnieniem restartu i snu oraz pierwszeństwem zabezpieczeń i ochrony energii. Każde z SYS-241–249 ma plan próby i przydział do bloków oraz grup weryfikacji.
 
-Uzgodniona porcja SYS-241–245 ma historię w [PR #26](https://github.com/DustWorx/DustWorx-DustONE/pull/26). SYS-246 dodaje opcjonalny PWM zgodnych lamp, a SYS-247 określa próbę kanału po ochronnym odcięciu. SYS-248 ustala limit i jego odnawianie. F04 pozostaje aktywny: do dalszych ustaleń należą wpływ usterki jednego kanału na pozostałe, dalsze reakcje wyjść, stany akcesoriów i I/O. Parametry, topologię oraz pokrycie diagnostyki opracujemy we właściwych etapach, a ważne komponenty wybierzemy wspólnie.
+Uzgodniona porcja SYS-241–245 ma historię w [PR #26](https://github.com/DustWorx/DustWorx-DustONE/pull/26). SYS-246 dodaje opcjonalny PWM zgodnych lamp, a SYS-247 określa próbę kanału po ochronnym odcięciu. SYS-248 ustala limit i jego odnawianie. SYS-249 określa zachowanie pozostałych kanałów przy lokalnej usterce. F04 pozostaje aktywny; kolejny temat to otwarte stany podstawowego oświetlenia po nieplanowanym restarcie ECU, a następnie pozostałe reguły akcesoriów i I/O. Parametry, topologię oraz pokrycie diagnostyki opracujemy we właściwych etapach, a ważne komponenty wybierzemy wspólnie.
 
 ## Następna decyzja
 
-**Pytanie 257:** uszkodzony jest obwód jednego dodatkowego kanału, np. zasilanie ładowarki; pozostałe kanały i wspólne zasilanie są sprawne, bez wspólnego zagrożenia termicznego. Czy ochronne odcięcie i blokada mają obejmować tylko uszkodzony kanał, czy wszystkie trzy dodatkowe kanały jako grupę?
+**Pytanie 258:** po nieplanowanym restarcie ECU odzyskało gotowość, silnik jest zgaszony, napięcie jest prawidłowe i nie ma nadrzędnego odcięcia. Od jakiego stanu mają rozpocząć przednie i tylne pozycyjne oraz światła mijania i drogowe? To podstawowe oświetlenie, odrębne od trzech dodatkowych kanałów.
 
-Propozycja A: odłączyć i blokować tylko uszkodzony kanał; pozostałe zachowują swoje stany z pierwszeństwem ich własnych zabezpieczeń i ochrony energii. Alternatywa B: odłączyć wszystkie trzy dodatkowe kanały. Decyzja nie jest jeszcze podjęta. Wspólna usterka zasilania lub zagrożenie termiczne pozostają odrębnym powodem szerszej reakcji według projektu.
+Propozycja A: wszystkie wymienione światła pozostają wyłączone do nowego polecenia HMI; po potwierdzonym uruchomieniu silnika automatyka pozycyjnych nadal działa według SYS-082/087. Alternatywa B: po gotowości ECU automatycznie włączyć przednie i tylne pozycyjne już przy zgaszonym silniku; mijania i drogowe pozostawić wyłączone do nowego polecenia. Decyzja nie jest jeszcze podjęta.
 
-Podstawa do późniejszego doboru: [ST opisuje ochronę termiczną poszczególnych wyjść i możliwy wpływ nagrzewania wspólnego układu na inne kanały](https://www.st.com/content/ccc/resource/technical/document/datasheet/fd/11/11/45/55/61/44/50/CD00003429.pdf/files/CD00003429.pdf/jcr:content/translations/en.CD00003429.pdf), sekcja 3.10. Sama niezależność zwykłego sterowania SYS-242 nie jest dowodem odporności na usterkę sąsiedniego toru. Wykonalność wybranej reguły wymaga architektury, bilansu cieplnego i prób; nie wybrano komponentu.
+A zachowuje zasadę wyłączonych świateł przy gotowości ze zgaszonym silnikiem, podobnie do przyjętego zwykłego wybudzenia SYS-081, i ogranicza pobór akumulatora. B daje od razu światła pozycyjne. To wybór stanu po nieplanowanym restarcie, nie sposobu włączania systemu: motocykl nie ma stacyjki, a sen pozostaje automatyczny. Samo odtworzenie dawnych danych HMI nie jest nowym świadomym poleceniem. Światło hamowania nadal działa według bezpośrednich wejść SYS-051, niezależnie od HMI/CAN. Warunki gotowości, kwalifikację poleceń i realizację stanów opracujemy w architekturze.
