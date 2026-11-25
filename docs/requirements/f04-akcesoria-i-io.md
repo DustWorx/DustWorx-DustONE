@@ -1,6 +1,6 @@
 # F04 — akcesoria i dodatkowe I/O
 
-Stan na 2026-11-24. **F04 aktywny po zamknięciu F03 w pytaniu 243.** Aktualny temat: dodatkowe wyjścia mocy. Zasady klaksonu SYS-236–240 są już przyjęte i zachowane poniżej. Źródłem wymagań jest [rejestr SYS](../01-zakres-systemu.md); kolejność i warunki zamknięcia określa [proces](../00-proces-i-status.md).
+Stan na 2026-11-25. **F04 aktywny po zamknięciu F03 w pytaniu 243.** Aktualny temat: dodatkowe wyjścia mocy. Zasady klaksonu SYS-236–240 są już przyjęte i zachowane poniżej. Źródłem wymagań jest [rejestr SYS](../01-zakres-systemu.md); kolejność i warunki zamknięcia określa [proces](../00-proces-i-status.md).
 
 ## Zakres i kolejność
 
@@ -12,7 +12,7 @@ Stan na 2026-11-24. **F04 aktywny po zamknięciu F03 w pytaniu 243.** Aktualny t
 | Klakson przy zwykłym wybudzeniu ze snu | Przyjęty SYS-239, odpowiedź B na pytanie 247: pierwsze naciśnięcie wybudza; sygnał wymaga zwolnienia i nowego naciśnięcia. |
 | Autotest klaksonu | Przyjęty SYS-240, odpowiedź A na pytanie 248: bez samoczynnego dźwięku; próba dźwiękowa na świadome polecenie użytkownika. |
 | Pozostałe stany akcesoriów | W kolejce w F04: start/restart ECU, powrót łączności i brakujące reguły wyjść. Zachowujemy przyjęte SYS-050–053 oraz SYS-081–091. |
-| Dodatkowe wyjścia mocy | Przyjęte zastosowania SYS-241, odpowiedź B na pytanie 249: oświetlenie i zewnętrzne akcesoria. Przyjęte 3 niezależne kanały SYS-242, odpowiedź B na pytanie 250; zachowanie po utracie HMI/CAN otwarte w pytaniu 251. |
+| Dodatkowe wyjścia mocy | Przyjęte zastosowania SYS-241, odpowiedź B na pytanie 249: oświetlenie i zewnętrzne akcesoria. Przyjęte 3 niezależne kanały SYS-242, odpowiedź B na pytanie 250; po utracie HMI/CAN każdy zachowuje swój stan według SYS-243 (A na pytanie 251). Stany po restarcie są otwarte w pytaniu 252. |
 | Sygnałowe I/O i komunikacja | Osobny przegląd po wyjściach mocy; wymagania funkcjonalne oddzielamy od późniejszego doboru interfejsów i torów. |
 
 Klakson należy do przyjętego zakresu SYS-004. Obecność klaksonu 12 V w dokumentacji Bety jest potwierdzona w [analizie instrukcji i suplementu](../interfaces/beta-2015-analiza-dokumentacji.md). ECU steruje odbiornikiem, a HMI przekazuje polecenia kierowcy. Nie ustalono tu jeszcze pełnej obsługi przycisku ani wszystkich stanów po restarcie.
@@ -136,6 +136,21 @@ SYS-242 ustala liczbę kanałów. Ich przeznaczenie podlega konfiguracji i dopus
 
 Plan wymaga danych i procedury wykonawczej; prób produktu jeszcze nie wykonano.
 
+## Dodatkowe kanały po utracie HMI lub CAN
+
+W odpowiedzi **A na pytanie 251** (2026-11-25) właściciel przyjął SYS-243: przy działającym ECU trzy dodatkowe kanały mocy zachowują własne ostatnie stany pracy po potwierdzonej utracie HMI/CAN. Zabezpieczenia i ochrona energii mogą nadal zmienić stan według swoich reguł.
+
+Zasada utrzymuje dodatkowe oświetlenie i zasilanie akcesoriów mimo niedostępnego interfejsu. Jest spójna z autonomią ECU SYS-046 i przyjętym zachowaniem świateł podstawowych SYS-050. Nie określa stanów po resecie procesora lub zaniku zasilania. Kryteria łączności i czasy opracujemy z protokołem w etapie 4.
+
+### Plan próby SYS-243
+
+1. Na stanowisku ECU–HMI ustawić dopuszczone kombinacje stanów trzech kanałów, także mieszane ON/OFF. Osobno odtworzyć odłączenie zasilania HMI, przerwanie CAN oraz brak wymaganych komunikatów HMI. Po potwierdzeniu utraty sprawdzić zachowanie stanu pracy każdego kanału; rejestrować komunikację, stan zadany i rzeczywiste napięcie/prąd wyjść.
+2. Powtórzyć przy symulowanej pracy i zatrzymaniu silnika oraz bez sesji Windows. Sama utrata HMI/CAN nie ma wyłączać dodatkowych kanałów ani sterowania silnikiem według SYS-046. Potwierdzić lokalną realizację stanów przez ECU.
+3. Przy utraconej łączności odtworzyć warunki zadziałania przewidzianych zabezpieczeń wyjść i ochrony energii. Potwierdzić właściwe odcięcia; zachowanie stanu po utracie HMI nie może omijać ochrony. Warunki i wartości ustalić przed próbą według specyfikacji profilu i kanałów.
+4. Przywrócić komunikację i odczytać rzeczywiste stany ECU. Sprawdzić zgodność odczytów bez zmiany wyjść z samego odczytu; obsługę nowych poleceń kwalifikować według protokołu. Osobno sprawdzamy restart ECU po decyzji z pytania 252. Kryteria, połączenia i warunki przerwania przygotować przed wykonaniem; wyniki powiązać z HW/FW i konfiguracją. [Macierz weryfikacji](../verification/macierz-wymagan.md).
+
+To plan do rozwinięcia w procedurę; prób produktu jeszcze nie wykonano.
+
 ## Następna decyzja
 
-**Pytanie 251:** jak trzy dodatkowe kanały mocy mają zachować się po potwierdzonej utracie HMI/CAN podczas nieprzerwanej pracy ECU? Ustalone zabezpieczenia wyjść i ochrona energii nadal obowiązują. Rozpatrujemy zachowanie zasilanych lamp i akcesoriów, bez resetu ECU; powrót komunikacji oraz restart są kolejnymi przypadkami do przeglądu.
+**Pytanie 252:** jakie stany trzech dodatkowych kanałów dopuścić po restarcie ECU i odzyskaniu gotowości: wyłączone do nowego polecenia czy odtworzone z wcześniejszego zapamiętanego stanu? Dotyczy ponownego uruchomienia ECU, nie ciągłej pracy bez HMI ani zwykłego wybudzenia ze snu. Zabezpieczenia i ochrona energii nadal obowiązują.

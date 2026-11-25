@@ -269,6 +269,7 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-240 | Autotest ECU nie uruchamia samoczynnego sygnału dźwiękowego klaksonu, także po wybudzeniu. Automatycznie wykonuje dostępne sprawdzenia niewywołujące dźwięku, według metod zweryfikowanych dla danego toru i klaksonu. Próbę dźwiękową wywołuje świadomie użytkownik, z zachowaniem pozostałych warunków oraz zabezpieczeń wyjścia. Zakres wykrywanych usterek i kryteria sprawdzeń bez dźwięku wymagają projektu i prób. |
 | SYS-241 | Dodatkowe konfigurowalne wyjścia mocy ECU obsługują dodatkowe oświetlenie oraz załączanie zasilania zewnętrznych akcesoriów, np. GPS lub zewnętrznej ładowarki telefonu. Liczba niezależnych kanałów, dopuszczone odbiorniki, sposób sterowania oraz parametry elektryczne wymagają dalszego uzgodnienia i projektu. Zakres dotyczy sterowania mocą odbiorników; logiczne sygnały PWM i interfejsy komunikacyjne są odrębnymi zagadnieniami I/O. |
 | SYS-242 | ECU udostępnia trzy niezależnie sterowane dodatkowe kanały mocy do zastosowań SYS-241, ponad wyjściami potrzebnymi dla uzgodnionego osprzętu silnika i podstawowych akcesoriów motocykla. Każdy kanał może załączać wspólnie grupę odbiorników; jego zwykłe sterowanie jest niezależne od pozostałych dwóch kanałów. Dopuszczone konfiguracje, obciążenia pojedyncze i równoczesne, parametry elektryczne oraz granice zabezpieczeń wymagają projektu i prób. |
+| SYS-243 | Przy nieprzerwanej pracy ECU sama potwierdzona utrata HMI lub komunikacji CAN ECU–HMI nie zmienia ostatniego przyjętego stanu pracy żadnego z trzech dodatkowych kanałów mocy SYS-241/242. Każdy kanał zachowuje swój stan z uwzględnieniem nadrzędnych zabezpieczeń wyjścia i ochrony energii. Kryteria potwierdzenia utraty łączności i czasy wymagają projektu protokołu oraz prób. Stany po restarcie ECU są odrębnym przypadkiem F04. |
 
 ## 3. Podział odpowiedzialności
 
@@ -807,6 +808,8 @@ W odpowiedzi A na pytanie 248 (2026-11-24) właściciel przyjął SYS-240: autot
 W odpowiedzi B na doprecyzowane pytanie 249 (2026-11-24) właściciel przyjął SYS-241: dodatkowe wyjścia mocy do oświetlenia i zasilania zewnętrznych akcesoriów. Wcześniejsze doprecyzowanie odróżniało te wyjścia od logicznego PWM i komunikacji. [Zakres i plan próby F04](requirements/f04-akcesoria-i-io.md#dodatkowe-wyjścia-mocy).
 
 W odpowiedzi B na pytanie 250 (2026-11-24) właściciel wybrał trzy dodatkowe kanały mocy (SYS-242). Odpowiedź ustala ich liczbę i niezależność sterowania; nie przypisuje na stałe odbiorników do kanałów. [Plan próby F04](requirements/f04-akcesoria-i-io.md#plan-próby-sys-242).
+
+W odpowiedzi A na pytanie 251 (2026-11-25) właściciel przyjął SYS-243: po potwierdzonej utracie HMI/CAN każdy z trzech dodatkowych kanałów mocy zachowuje ostatni stan pracy przy działającym ECU. Zabezpieczenia wyjść i ochrona energii zachowują pierwszeństwo. [Plan próby F04](requirements/f04-akcesoria-i-io.md#plan-próby-sys-243).
 
 ## 4. Decyzje potrzebne przed doborem sprzętu
 
