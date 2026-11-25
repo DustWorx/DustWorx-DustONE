@@ -6,6 +6,7 @@
 - Każdy temat ma jedno miejsce źródłowe. W innych dokumentach stosujemy odsyłacze.
 - Rozróżniamy: wymaganie właściciela, propozycję, zatwierdzoną decyzję i informację do ustalenia. Nie przedstawiamy założeń jako faktów.
 - Wymagania otrzymują trwałe identyfikatory, początkowo SYS-001 itd. Identyfikatorów nie zmieniamy ani nie używamy ponownie po wycofaniu wymagania.
+- Aktualizując liczbę wymagań, nie zmieniamy identyfikatorów SYS w odwołaniach. Kontrola obejmuje zgodność numeru z treścią notatki i wskazanym planem próby.
 - Istotne decyzje zapisujemy w `docs/decisions/`, z uzasadnieniem i skutkami. Zatwierdzenie wymaga wskazania faktycznego potwierdzenia właściciela projektu.
 - Wersję roboczą oznaczamy jako roboczą. Nie dopisujemy „final”, „final2” ani numerów kopii do nazw; historię zapewnia Git.
 - Normy i rozbudowane elementy procesu wprowadzamy, gdy wynikają z zastosowania produktu lub dają konkretną wartość. Nie deklarujemy zgodności bez podstaw i weryfikacji.

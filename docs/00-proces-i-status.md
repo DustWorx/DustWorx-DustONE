@@ -10,13 +10,13 @@ Kontrola pełnego F01 została zakończona: właściciel potwierdził zgodność
 
 | Obszar | Stan potwierdzony dokumentacją |
 | --- | --- |
-| Wymagania systemowe | 250 wymagań SYS-001–250; pierwszy przydział do bloków i grup weryfikacji gotowy, kryteria i procedury do rozwinięcia. |
+| Wymagania systemowe | 251 wymagań SYS-001–251; pierwszy przydział do bloków i grup weryfikacji gotowy, kryteria i procedury do rozwinięcia. |
 | Decyzje | 12 zapisów ADR-001–012; ostatni ogranicza platformę do silników chłodzonych cieczą. |
 | Zakres wariantów | Macierz 6 wariantów silnika; jest planem obsługi, nie potwierdzeniem zgodności modeli. |
 | Pierwsza jednostka | Beta 300 RR Racing 2015; analiza dokumentów i zdjęć, bez raportów pomiarowych instalacji. |
 | Architektura | Pierwszy diagram blokowy, funkcje sześciu wariantów i przydział zasobów gotowe jako wersje robocze. Modele, parametry i liczbowe bilanse pozostają otwarte. |
 | Schematy, BOM, PCB i mechanika | W repozytorium brak projektu wykonawczego i zatwierdzonego kompletnego BOM ECU/HMI. |
-| Kod i próby produktu | W repozytorium brak implementacji firmware/Windows i raportów prób DustONE. Istnieją plany, szablon procedury i przydział 250 wymagań do 13 grup weryfikacji. |
+| Kod i próby produktu | W repozytorium brak implementacji firmware/Windows i raportów prób DustONE. Istnieją plany, szablon procedury i przydział 251 wymagań do 13 grup weryfikacji. |
 
 Podstawy: [wymagania](requirements/README.md), [decyzje](decisions/README.md), [macierz silników](architecture/macierz-wariantow-silnika.md), [I/O](interfaces/wstepna-lista-io.md) i [weryfikacja](verification/README.md). Liczba wymagań i pytań nie jest procentem wykonania produktu.
 
@@ -72,13 +72,13 @@ Parametry wyliczane z osprzętu, charakterystyki czujników, wartości elementó
 | W04 — Zakres funkcjonalny: F01 | Zamknięty po kontroli właściciela: 2026-11-04. | [Pomiary](requirements/f01-pomiary-silnika.md), [przegląd sterowania i wynik zamknięcia](requirements/f01-sterowanie-silnikiem.md); dane techniczne przekazane do kolejki etapów 3–6. |
 | F02 — Mapy, konfiguracja i strojenie ECU | Zamknięty po akceptacji właściciela 2026-11-09. | Odpowiedź A na pytanie 166. [Karta F02](requirements/f02-przeglad-zakresu.md) zawiera przyjęty zakres, plan weryfikacji i przekazanie. |
 | F03 — Ochrona i reakcje na usterki | Zamknięty po akceptacji właściciela: 2026-11-24. | Odpowiedź A na pytanie 243. [Karta F03](requirements/f03-przeglad-zakresu.md) obejmuje SYS-157–235, przegląd spójności, 79 planów prób i przekazanie do dalszych etapów. [Szczegółowe reakcje](requirements/f03-ochrona-i-usterki.md) pozostają źródłem rozwinięcia; nie wykonano prób produktu. |
-| F04 — Akcesoria i dodatkowe I/O | Aktywny po zamknięciu F03. | [Dokument F04](requirements/f04-akcesoria-i-io.md): klakson SYS-236–240, dodatkowe kanały SYS-241–249 i podstawowe światła po restarcie SYS-250. Następna decyzja: kierunkowskazy po powrocie HMI/CAN przy ciągłej pracy ECU, pytanie 259; dalej pozostałe stany akcesoriów i I/O. |
+| F04 — Akcesoria i dodatkowe I/O | Aktywny po zamknięciu F03. | [Dokument F04](requirements/f04-akcesoria-i-io.md): SYS-236–251 obejmują klakson, dodatkowe kanały, podstawowe światła po restarcie i kierunkowskazy po powrocie HMI/CAN. Następna decyzja: kierunkowskazy po restarcie oraz prawidłowym śnie i wybudzeniu, pytanie 260; dalej pozostałe stany akcesoriów i I/O. |
 | W05 — Inwentaryzacja Bety | W kolejce, etap 3. | Zachowany [plan INV](verification/beta-2015-plan-inwentaryzacji.md); brak wyników pomiarowych. |
 | W01/W02 — Architektura i zasoby | W kolejce, etap 4. | Zachowane [diagram](architecture/blokowa-systemu.md) i [macierz wariantów](architecture/macierz-wariantow-silnika.md); bez zamkniętych bilansów. |
 | W03 — Weryfikacja wymagań | W kolejce, etap 5. | Zachowany [przydział 245 SYS do grup](verification/macierz-wymagan.md); kryteria, procedury i dowody do rozwinięcia. |
 | W06 — Bilanse i wybór komponentów | W kolejce, etapy 4 i 6. | Wymagane wejściowe parametry; ważne komponenty wybierzemy wspólnie. |
 
-**F03 zamknięto odpowiedzią A na pytanie 243 (2026-11-24). W aktywnym F04 przyjęto SYS-236–250. Odpowiedź A na pytanie 258 ustala OFF podstawowych świateł po nieplanowanym restarcie przy zgaszonym silniku, do nowego polecenia użytkownika. Automatyka pozycyjnych po uruchomieniu i światło hamowania nadal obowiązują. Następny krok: kierunkowskazy po powrocie HMI/CAN przy nieprzerwanej pracy ECU, pytanie 259.** [Dokument F04](requirements/f04-akcesoria-i-io.md) zachowuje ustalenia, plany prób i kolejkę. [Karta F03](requirements/f03-przeglad-zakresu.md) pozostaje bez zmian. Parametry, bilanse i procedury wykonawcze oczekują we właściwych etapach.
+**F03 zamknięto odpowiedzią A na pytanie 243 (2026-11-24). W aktywnym F04 przyjęto SYS-236–251. Odpowiedź A na pytanie 259 wymaga nowego świadomego wyboru kierunkowskazu po powrocie HMI/CAN; wcześniejsze dane nie wznawiają sygnalizacji. Następny krok: kierunkowskazy po restarcie oraz prawidłowym śnie i wybudzeniu, pytanie 260.** [Dokument F04](requirements/f04-akcesoria-i-io.md) zachowuje ustalenia, plany prób i kolejkę. [Karta F03](requirements/f03-przeglad-zakresu.md) pozostaje bez zmian. Parametry, bilanse i procedury wykonawcze oczekują we właściwych etapach.
 
 ## Warunki przechodzenia dalej
 
