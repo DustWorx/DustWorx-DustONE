@@ -91,3 +91,5 @@ SYS-234 działa niezależnie od HMI. Prezentację dostępnego stanu ogranicznika
 [F04 — klakson, SYS-236–240](../../docs/requirements/f04-akcesoria-i-io.md) określa wyłączenie po utracie łączności oraz wymaganie zwolnienia i nowego naciśnięcia po jej powrocie, restarcie ECU i naciśnięciu wybudzającym. HMI przekazuje wiarygodne stany przycisku; kwalifikację egzekwuje ECU. Autotest nie uruchamia samoczynnego dźwięku, a próbę dźwiękową wywołuje świadomie użytkownik. Szczegóły ramek i ich ważności do projektu protokołu.
 
 Dla SYS-243 źródłem stanów dodatkowych kanałów pozostaje ECU także po utracie komunikacji. Po jej przywróceniu odczyty HMI mają odpowiadać rzeczywistym stanom ECU; protokół odczytu i kwalifikację nowych poleceń opracujemy w projekcie interfejsu. [Plan próby F04](../../docs/requirements/f04-akcesoria-i-io.md#plan-próby-sys-243).
+
+Po restarcie ECU dodatkowe kanały rozpoczynają od wyłączonych według SYS-244. Odczyt HMI ma odzwierciedlać stany ECU, a wcześniejsze dane lub żądania nie zastępują nowego polecenia załączenia. Kwalifikację poleceń opracujemy z protokołem. [Plan próby F04](../../docs/requirements/f04-akcesoria-i-io.md#plan-próby-sys-244).

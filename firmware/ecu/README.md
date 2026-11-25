@@ -270,4 +270,4 @@ Reguły klaksonu SYS-236–240 są w [F04 wraz z planami prób](../../docs/requi
 
 Zakres dodatkowych wyjść mocy do oświetlenia i zasilania zewnętrznych akcesoriów określa SYS-241 w [F04](../../docs/requirements/f04-akcesoria-i-io.md#dodatkowe-wyjścia-mocy). Liczbę trzech niezależnych dodatkowych kanałów ustalono w SYS-242. Dopuszczone konfiguracje i reguły ich sterowania wymagają dalszego uzgodnienia.
 
-SYS-243 zachowuje ostatni stan pracy każdego z trzech dodatkowych kanałów przy utracie HMI/CAN podczas nieprzerwanej pracy ECU, z pierwszeństwem ochrony wyjść i energii. Stany po restarcie pozostają osobną decyzją F04. [Plan próby](../../docs/requirements/f04-akcesoria-i-io.md#plan-próby-sys-243).
+SYS-243 zachowuje ostatni stan pracy każdego z trzech dodatkowych kanałów przy utracie HMI/CAN podczas nieprzerwanej pracy ECU, z pierwszeństwem ochrony wyjść i energii. Po nieplanowanym restarcie lub powrocie zasilania SYS-244 wymaga startu od wyłączonych i nowego dopuszczonego polecenia załączenia. [Plan restartu](../../docs/requirements/f04-akcesoria-i-io.md#plan-próby-sys-244). [Plan próby](../../docs/requirements/f04-akcesoria-i-io.md#plan-próby-sys-243).
