@@ -10,13 +10,13 @@ Kontrola pełnego F01 została zakończona: właściciel potwierdził zgodność
 
 | Obszar | Stan potwierdzony dokumentacją |
 | --- | --- |
-| Wymagania systemowe | 253 wymagań SYS-001–253; pierwszy przydział do bloków i grup weryfikacji gotowy, kryteria i procedury do rozwinięcia. |
+| Wymagania systemowe | 254 wymagań SYS-001–254; pierwszy przydział do bloków i grup weryfikacji gotowy, kryteria i procedury do rozwinięcia. |
 | Decyzje | 12 zapisów ADR-001–012; ostatni ogranicza platformę do silników chłodzonych cieczą. |
 | Zakres wariantów | Macierz 6 wariantów silnika; jest planem obsługi, nie potwierdzeniem zgodności modeli. |
 | Pierwsza jednostka | Beta 300 RR Racing 2015; analiza dokumentów i zdjęć, bez raportów pomiarowych instalacji. |
 | Architektura | Pierwszy diagram blokowy, funkcje sześciu wariantów i przydział zasobów gotowe jako wersje robocze. Modele, parametry i liczbowe bilanse pozostają otwarte. |
 | Schematy, BOM, PCB i mechanika | W repozytorium brak projektu wykonawczego i zatwierdzonego kompletnego BOM ECU/HMI. |
-| Kod i próby produktu | W repozytorium brak implementacji firmware/Windows i raportów prób DustONE. Istnieją plany, szablon procedury i przydział 253 wymagań do 13 grup weryfikacji. |
+| Kod i próby produktu | W repozytorium brak implementacji firmware/Windows i raportów prób DustONE. Istnieją plany, szablon procedury i przydział 254 wymagań do 13 grup weryfikacji. |
 
 Podstawy: [wymagania](requirements/README.md), [decyzje](decisions/README.md), [macierz silników](architecture/macierz-wariantow-silnika.md), [I/O](interfaces/wstepna-lista-io.md) i [weryfikacja](verification/README.md). Liczba wymagań i pytań nie jest procentem wykonania produktu.
 
@@ -72,13 +72,13 @@ Parametry wyliczane z osprzętu, charakterystyki czujników, wartości elementó
 | W04 — Zakres funkcjonalny: F01 | Zamknięty po kontroli właściciela: 2026-11-04. | [Pomiary](requirements/f01-pomiary-silnika.md), [przegląd sterowania i wynik zamknięcia](requirements/f01-sterowanie-silnikiem.md); dane techniczne przekazane do kolejki etapów 3–6. |
 | F02 — Mapy, konfiguracja i strojenie ECU | Zamknięty po akceptacji właściciela 2026-11-09. | Odpowiedź A na pytanie 166. [Karta F02](requirements/f02-przeglad-zakresu.md) zawiera przyjęty zakres, plan weryfikacji i przekazanie. |
 | F03 — Ochrona i reakcje na usterki | Zamknięty po akceptacji właściciela: 2026-11-24. | Odpowiedź A na pytanie 243. [Karta F03](requirements/f03-przeglad-zakresu.md) obejmuje SYS-157–235, przegląd spójności, 79 planów prób i przekazanie do dalszych etapów. [Szczegółowe reakcje](requirements/f03-ochrona-i-usterki.md) pozostają źródłem rozwinięcia; nie wykonano prób produktu. |
-| F04 — Akcesoria i dodatkowe I/O | Aktywny po zamknięciu F03. | [Dokument F04](requirements/f04-akcesoria-i-io.md): SYS-236–253 obejmują klakson, dodatkowe kanały, przyjęte stany podstawowych świateł i kierunkowskazów oraz próby podstawowych wyjść po ochronnym odcięciu. Następna decyzja: inicjowanie próby światła hamowania z bezpośrednich wejść, pytanie 262; dalej pozostałe reguły akcesoriów i I/O. |
+| F04 — Akcesoria i dodatkowe I/O | Aktywny po zamknięciu F03. | [Dokument F04](requirements/f04-akcesoria-i-io.md): SYS-236–254 obejmują przyjęte akcesoria, stany i próby po usterkach, w tym próbę światła hamowania bez HMI. Następna decyzja: zakres dodatkowych zewnętrznych portów sygnałowych/rezerwowych, pytanie 263; parametry i realizacja do właściwych etapów. |
 | W05 — Inwentaryzacja Bety | W kolejce, etap 3. | Zachowany [plan INV](verification/beta-2015-plan-inwentaryzacji.md); brak wyników pomiarowych. |
 | W01/W02 — Architektura i zasoby | W kolejce, etap 4. | Zachowane [diagram](architecture/blokowa-systemu.md) i [macierz wariantów](architecture/macierz-wariantow-silnika.md); bez zamkniętych bilansów. |
 | W03 — Weryfikacja wymagań | W kolejce, etap 5. | Zachowany [przydział 245 SYS do grup](verification/macierz-wymagan.md); kryteria, procedury i dowody do rozwinięcia. |
 | W06 — Bilanse i wybór komponentów | W kolejce, etapy 4 i 6. | Wymagane wejściowe parametry; ważne komponenty wybierzemy wspólnie. |
 
-**F03 zamknięto odpowiedzią A na pytanie 243 (2026-11-24). W aktywnym F04 przyjęto SYS-236–253. Odpowiedź A na pytanie 261 rozszerza świadomą próbę i limit po niepowodzeniu na podstawowe oświetlenie, kierunkowskazy i klakson, z zachowaniem odrębnych zasad F03. Następny krok: inicjowanie próby światła hamowania z bezpośrednich wejść, pytanie 262.** [Dokument F04](requirements/f04-akcesoria-i-io.md) i [lista I/O](interfaces/wstepna-lista-io.md) zachowują przyjęte reguły i otwarte parametry. Architektura, bilanse i procedury wykonawcze pozostają w kolejce właściwych etapów.
+**F03 zamknięto odpowiedzią A na pytanie 243 (2026-11-24). W aktywnym F04 przyjęto SYS-236–254. Odpowiedź A na pytanie 262 dopuszcza jedną ograniczoną próbę światła hamowania po zwolnieniu obu hamulców i nowym użyciu któregokolwiek, bez HMI i przy dostępnym wspólnym limicie. Następny krok: przegląd dodatkowych zewnętrznych portów sygnałowych/rezerwowych, pytanie 263.** [Dokument F04](requirements/f04-akcesoria-i-io.md) i [lista I/O](interfaces/wstepna-lista-io.md) zachowują przyjęte reguły i otwarte parametry. Architektura, bilanse i procedury wykonawcze pozostają w kolejce właściwych etapów.
 
 ## Warunki przechodzenia dalej
 

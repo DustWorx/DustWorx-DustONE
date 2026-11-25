@@ -15,7 +15,7 @@ Stan na 2026-11-25. **F04 aktywny po zamknięciu F03 w pytaniu 243.** Aktualny t
 | Kierunkowskazy po powrocie HMI/CAN | Przyjęty SYS-251, odpowiedź A na pytanie 259: pozostają OFF do nowego świadomego wyboru użytkownika, bez wznowienia dawnych stanów. |
 | Kierunkowskazy po restarcie i prawidłowym śnie | Przyjęty SYS-252, odpowiedź A na pytanie 260: wyłączenie przed snem; po wybudzeniu i restarcie OFF do nowego świadomego wyboru. |
 | Próby podstawowego oświetlenia, kierunkowskazów i klaksonu po ochronnym odcięciu | Przyjęty SYS-253, odpowiedź A na pytanie 261: jedna świadoma próba, po niepowodzeniu blokada danego kanału jak SYS-247/248; bez samoczynnych ponowień. |
-| Inicjowanie próby światła hamowania | Otwarte, pytanie 262: nowe użycie hamulca po zwolnieniu obu albo polecenie wyłącznie HMI/serwisu; normalne działanie nadal według SYS-051. |
+| Inicjowanie próby światła hamowania | Przyjęty SYS-254, odpowiedź A na pytanie 262: nowe użycie któregokolwiek hamulca po zwolnieniu obu może zlecić jedną próbę bez HMI, przy dostępnym limicie i spełnionych warunkach. |
 | Dodatkowe wyjścia mocy | Zastosowania SYS-241 i 3 niezależne kanały SYS-242 przyjęte odpowiedziami B na pytania 249–250. |
 | Dodatkowe kanały po utracie HMI/CAN | Zachowują własne stany według SYS-243, odpowiedź A na pytanie 251. |
 | Dodatkowe kanały po restarcie ECU | Start od wyłączonych według SYS-244, odpowiedź A na pytanie 252. |
@@ -24,7 +24,7 @@ Stan na 2026-11-25. **F04 aktywny po zamknięciu F03 w pytaniu 243.** Aktualny t
 | Ponowne załączenie dodatkowego kanału po ochronnym odcięciu | Przyjęty SYS-247, odpowiedź A na pytanie 255: ograniczona próba wyłącznie na nowe świadome polecenie, bez samoczynnych ponowień. |
 | Limit świadomych prób po niepowodzeniu | Przyjęty SYS-248, odpowiedź A na pytanie 256: po jednej nieudanej próbie blokada danego kanału do pełnego cyklu snu lub zaniku i powrotu zasilania. |
 | Wpływ usterki jednego kanału na pozostałe | Przyjęty SYS-249, odpowiedź A na pytanie 257: odcięcie tylko uszkodzonego kanału przy prawidłowych warunkach pozostałych; wspólne zagrożenia pozostają nadrzędne. |
-| Sygnałowe I/O i komunikacja | Osobny przegląd po regułach wyjść mocy i stanów akcesoriów; funkcje oddzielamy od późniejszego doboru interfejsów i torów. |
+| Sygnałowe I/O i komunikacja | Rozpoczynamy przegląd zakresu w F04, pytanie 263: czy potrzebne są dodatkowe zewnętrzne porty rezerwowe do nieprzypisanych zastosowań. Interfejsy uzgodnionych funkcji pozostają wymagane; parametry i pinout do architektury. |
 
 Klakson należy do przyjętego zakresu SYS-004. Obecność klaksonu 12 V w dokumentacji Bety jest potwierdzona w [analizie instrukcji i suplementu](../interfaces/beta-2015-analiza-dokumentacji.md). ECU steruje odbiornikiem, a HMI przekazuje polecenia kierowcy. Nie ustalono tu jeszcze pełnej obsługi przycisku ani wszystkich stanów po restarcie.
 
@@ -337,21 +337,40 @@ Po jej niepowodzeniu dalsze próby danego kanału są blokowane do pełnego cykl
 
 Zabezpieczenia wyjścia, wymagane ostygnięcie, ochrona energii, DTC z zamrożoną ramką i informacja HMI pozostają aktywne. Podział na fizyczne kanały, kryteria diagnozy, energia i czas próby oraz współdziałanie z ochroną układu mocy wymagają architektury, danych odbiorników i weryfikacji. Nie wybrano komponentu ani liczby oddzielnych wyjść dla każdej lampy.
 
-Wentylator i funkcje silnikowe zachowują zasady zamkniętego F03, a zasilanie HMI własne reguły. Normalne światło hamowania nadal działa z bezpośrednich wejść według SYS-051; sposób świadomego zlecenia próby tego toru doprecyzowuje następne pytanie 262. Nie przesądzono, że do tej próby musi być dostępne HMI.
+Wentylator i funkcje silnikowe zachowują zasady zamkniętego F03, a zasilanie HMI własne reguły. Normalne światło hamowania nadal działa z bezpośrednich wejść według SYS-051; sposób zlecenia próby bez HMI przyjęto w późniejszym SYS-254.
 
 ### Plan próby SYS-253
 
 1. Na kwalifikowanym stanowisku rzeczywistego ECU odtworzyć wykrywalne zwarcie i przeciążenie każdego objętego kanału osobno, z dopuszczonymi lampami lub klaksonem. Potwierdzić ochronne odcięcie, DTC z zamrożoną ramką i informację HMI. Bez nowego świadomego polecenia sprawdzić brak samoczynnego ponowienia, także po ustąpieniu pobudzenia lub wymaganym ostygnięciu. Przed wykonaniem ustalić bezpieczny obwód wymuszania i limity energii.
-2. Zlecić jedną dopuszczoną świadomą próbę według przyjętego sposobu obsługi. Przy trwającej usterce potwierdzić ograniczone niepowodzenie i blokadę dalszych prób. Powtarzać polecenia użytkownika oraz uprawnionego serwisu, odtwarzać dawne żądania, powrót HMI/CAN i zwykły reset programu: żadne z nich nie może odnowić limitu ani spowodować kolejnego pobudzenia. Sposób inicjowania próby światła hamowania uzupełnić po decyzji 262.
+2. Zlecić jedną dopuszczoną świadomą próbę według przyjętego sposobu obsługi. Przy trwającej usterce potwierdzić ograniczone niepowodzenie i blokadę dalszych prób. Powtarzać polecenia użytkownika oraz uprawnionego serwisu, odtwarzać dawne żądania, powrót HMI/CAN i zwykły reset programu: żadne z nich nie może odnowić limitu ani spowodować kolejnego pobudzenia. Inicjowanie próby światła hamowania sprawdzić według przyjętego SYS-254.
 3. Osobno przeprowadzić pełny cykl prawidłowego snu i wybudzenia oraz pełny zanik i powrót zasilania według kryteriów projektu. Potwierdzić odnowienie wyłącznie prawa do próby, brak automatycznego ON, zachowanie historii DTC i nadal aktywne warunki termiczne oraz ochronę energii. Nowe polecenie po odnowieniu dopuszcza jedną próbę; po jej niepowodzeniu blokada wraca.
 4. Po usunięciu usterki sprawdzić wynik ograniczonej próby i dalsze sterowanie według funkcji odbiornika, z zachowaniem reguł klaksonu, świateł i kierunkowskazów. Powtórzyć dla dopuszczonych obciążeń, w tym prądów załączania, oraz istotnych zakresów zasilania i temperatury. Rejestrować komunikację, stan próby i rzeczywiste napięcie/prąd wyjścia. Przed wykonaniem określić kryteria, połączenia, wyposażenie i warunki przerwania; wyniki powiązać z HW/FW oraz konfiguracją. [Macierz weryfikacji](../verification/macierz-wymagan.md).
 
 To plan do rozwinięcia w procedurę; prób produktu jeszcze nie wykonano.
 
+## Próba światła hamowania bez HMI
+
+W odpowiedzi **A na pytanie 262** (2026-11-25) właściciel przyjął SYS-254. Przy dostępnym limicie i spełnionych warunkach, po potwierdzonym zwolnieniu obu hamulców, nowe użycie któregokolwiek może zlecić jedną ograniczoną próbę toru światła hamowania bez HMI.
+
+Samo trzymanie hamulca, powrót CAN lub odnowienie limitu nie inicjują próby. Po jej niepowodzeniu obowiązuje blokada SYS-253; kolejne użycia hamulców i polecenia HMI lub serwisu podlegają temu samemu limitowi kanału. Odnowienie prawa do próby nadal wymaga pełnego cyklu prawidłowego snu albo pełnego zaniku i powrotu zasilania. Zabezpieczenia, termika i ochrona energii zachowują pierwszeństwo.
+
+Normalna praca sprawnego toru pozostaje według SYS-051. Po prawidłowym wyniku próby dalsze sterowanie musi odpowiadać bieżącym wejściom hamulców. Kryteria poprawności wejść, zwolnienia i nowego użycia, filtracja, ocena wyniku i parametry próby wymagają architektury, danych osprzętu i procedury. Ważne elementy wybierzemy wspólnie.
+
+### Plan próby SYS-254
+
+1. Na kwalifikowanym stanowisku rzeczywistego ECU odtworzyć ochronne odcięcie toru światła hamowania. Przy dostępnym limicie pozostawić jeden lub oba hamulce aktywne i potwierdzić brak samoczynnej próby. Zwolnienie tylko jednego przy drugim nadal aktywnym nie może spełnić warunku zwolnienia obu. Rejestrować wejścia, stan limitu oraz rzeczywiste napięcie/prąd toru.
+2. Potwierdzić zwolnienie obu hamulców, a następnie osobno w kolejnych kwalifikowanych przypadkach użyć przedniego i tylnego. Bez HMI/CAN, przy spełnionych warunkach, potwierdzić jedną ograniczoną próbę i ocenę obwodu. Przy trwającej usterce potwierdzić niepowodzenie i blokadę dalszych prób; powtarzane użycia hamulców oraz polecenia HMI/serwisu nie mogą omijać wspólnego limitu. Zlecenie próby najpierw innym dopuszczonym interfejsem również zużywa ten sam limit.
+3. Po pełnym cyklu snu albo pełnym zaniku i powrocie zasilania sprawdzić odnowienie tylko prawa do próby. Jeżeli hamulec pozostaje trzymany, nie wolno rozpocząć próby bez potwierdzonego zwolnienia obu i nowego użycia. Zwykły reset programu lub powrót CAN nie odnawia limitu. Powtórzyć przy niespełnionych warunkach zasilania, termicznych i ochrony energii; nowe użycie nie może ich ominąć.
+4. Po naprawie obwodu i prawidłowym wyniku dopuszczonej próby potwierdzić sterowanie światłem według aktualnych wejść SYS-051, także po zwolnieniu hamulca przed zakończeniem sprawdzenia oraz bez HMI. Zachować historię DTC. Przed wykonaniem ustalić połączenia, obciążenia, kryteria wejść/wyniku, limity energii, wyposażenie i warunki przerwania; wyniki powiązać z HW/FW oraz konfiguracją. [Macierz weryfikacji](../verification/macierz-wymagan.md).
+
+To plan do rozwinięcia w procedurę; prób produktu jeszcze nie wykonano.
+
 ## Następna decyzja
 
-**Pytanie 262:** po ochronnym odcięciu toru światła hamowania wskutek potwierdzonego zwarcia lub przeciążenia, czy nowe użycie hamulca może zlecić ograniczoną próbę bez HMI? Światło to ma osobne bezpośrednie wejścia przedniego i tylnego hamulca według SYS-051.
+**Pytanie 263 — dodatkowe I/O:** czy poza torami potrzebnymi do uzgodnionych funkcji przewidujemy zewnętrzne, rezerwowe porty sygnałowe lub kolejne magistrale do jeszcze nieprzypisanych zastosowań?
 
-Propozycja A: po zwolnieniu obu hamulców nowe użycie któregokolwiek może zlecić jedną ograniczoną próbę przy spełnionych warunkach, bez wymaganego HMI. Alternatywa B: próbę zleca wyłącznie świadome polecenie HMI lub serwisu; same wejścia hamulców nie odblokowują toru. Decyzja nie jest jeszcze podjęta.
+Propozycja A: każdy zewnętrzny tor wynika z uzgodnionej funkcji; bez dodatkowych portów rezerwowych do nieokreślonych urządzeń. Alternatywa B: przewidzieć dodatkową rezerwę sygnałową, a jej zastosowania i zakres rozstrzygnąć przed zamknięciem F04. Decyzja nie jest jeszcze podjęta.
 
-W obu wariantach po niepowodzeniu obowiązuje blokada do pełnego cyklu snu lub pełnego zaniku i powrotu zasilania według SYS-253; zabezpieczenia pozostają nadrzędne. Samo trzymanie hamulca ani odnowienie limitu nie są nowym użyciem. A zachowuje możliwość sprawdzenia bez HMI po nowym działaniu kierowcy; B wymaga osobnego polecenia próby po usterce. Kryteria zwolnienia, nowego użycia, sprawności toru i czasu/energii próby opracujemy w architekturze i procedurach.
+Wyjście sygnałowe, np. logiczny PWM, przekazuje polecenie do modułu; wyjście mocy zasila odbiornik. Trzy dodatkowe kanały mocy są już wymagane według SYS-241/242. Nadal wymagane są interfejsy uzgodnionych czujników i osprzętu silnika, CAN ECU–HMI, połączenia PC, programowania i debugowania. Wcześniejsze ogólne dodatkowe pomiary doprecyzowano w rejestrze SYS do wskazanych funkcji; nie pomijamy ich w tym przeglądzie.
+
+A odpowiada priorytetowi kompaktowego ECU: zewnętrzny port zajmuje piny złącza, wymaga właściwego toru i ochrony. Rezerwę zasobów procesora, wewnętrzne magistrale i punkty testowe ocenimy w architekturze/projekcie; pytanie dotyczy zakresu dodatkowych zewnętrznych portów do nieprzypisanych urządzeń. Typy elektryczne, pinout, bilanse i komponenty pozostają do właściwych etapów.
