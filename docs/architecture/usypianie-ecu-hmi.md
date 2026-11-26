@@ -78,3 +78,7 @@ Wprowadzić nową aktywność w każdej fazie i sprawdzić, że nie kończy się
 ## Restart a dawna blokada awaryjnych — F04
 
 Po restarcie programu i powrocie zasilania awaryjne pozostają OFF według SYS-260, do nowego świadomego polecenia. Wcześniejszy ON nie podtrzymuje blokady snu SYS-259. ECU ocenia pozostałe warunki SYS-059/062–066; nie jest to bezwarunkowy nakaz natychmiastowego snu. [Plan próby F04](../requirements/f04-akcesoria-i-io.md#plan-próby-sys-260).
+
+## Zwykłe odbiorniki — kontrola F04
+
+Przegląd z 2026-11-26 wskazał brak jawnej reguły przy upływie bezczynności dla mijania/drogowych ręcznie włączonych po zgaszeniu oraz utrzymanych wejść hamowania/klaksonu. Wpływ na sen i odnawianie bezczynności są decyzją funkcjonalną 270, a nie wyłącznie parametrem do architektury. Przyjęte stany pozycyjnych, dodatkowych kanałów, pojedynczych kierunkowskazów, awaryjnych, wentylatora i PC zachowujemy. [Kontrola i propozycje F04](../requirements/f04-akcesoria-i-io.md#kontrola-odbiorników-przy-upływie-bezczynności).
