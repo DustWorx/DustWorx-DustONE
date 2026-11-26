@@ -89,3 +89,5 @@ Detekcję obu hamulców w śnie i czas gotowości toru światła uwzględnić w 
 ## Uzupełnienie F04 — aktywne awaryjne
 
 Odpowiedź A na pytanie 267 (2026-11-26) przyjmuje SYS-259: aktywne awaryjne blokują skoordynowany sen ECU i HMI do ich wyłączenia albo zakończenia zgodnie z właściwym odcięciem ochronnym. Sprawne HMI pozostaje aktywne z ECU; utrata HMI/CAN przy podtrzymaniu awaryjnych nie znosi blokady. Po zakończeniu obowiązują zwykłe pozostałe warunki snu. Dodatkowego limitu czasu nie wybrano; pobór należy ująć w bilansie aktywnego zestawu. [Plan próby F04](../requirements/f04-akcesoria-i-io.md#plan-próby-sys-259).
+
+Odpowiedź A na pytanie 270 (2026-11-26) uzupełnia SYS-262: zwykłe mijania/drogowe i utrzymane hamowanie/klakson nie blokują snu przy spełnionych pozostałych warunkach. Odbiorniki gasną przed snem, a utrzymane wejście nie wybudza ponownie; nowe hamowanie odnawia bezczynność. Po wybudzeniu stosować przyjęte reakcje i nowe polecenia, z zachowaniem blokad awaryjnych/wentylatora/PC. [Plan próby F04](../requirements/f04-akcesoria-i-io.md#plan-próby-sys-262).

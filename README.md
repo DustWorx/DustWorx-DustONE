@@ -2,7 +2,7 @@
 
 System sterowania motocyklem: ECU dla silników jednocylindrowych 2T/4T na wspólnej platformie sprzętowej, HMI po CAN oraz aplikacja Windows do konfiguracji, strojenia, diagnostyki, aktualizacji i prac rozwojowych.
 
-**Aktywny etap 2 — zakres funkcjonalny.** F01–F03 zamknięto w zakresie funkcji. Aktywny jest **F04 — akcesoria i dodatkowe I/O**. F05–F08 i kolejne etapy oczekują w kolejce. [Ścieżka projektu i aktualny status](docs/00-proces-i-status.md) opisują etapy, warunki ich zakończenia i najbliższe rezultaty.
+**Aktywny etap 2 — zakres funkcjonalny.** F01–F03 zamknięto w zakresie funkcji. Aktywny jest **F04 — akcesoria i dodatkowe I/O**; [karta przeglądu F04](docs/requirements/f04-przeglad-zakresu.md) oczekuje kontroli właściciela. F05–F08 i kolejne etapy oczekują w kolejce. [Ścieżka projektu i aktualny status](docs/00-proces-i-status.md) opisują etapy, warunki ich zakończenia i najbliższe rezultaty.
 
 ## Dokumentacja
 
@@ -12,6 +12,7 @@ System sterowania motocyklem: ECU dla silników jednocylindrowych 2T/4T na wspó
 | Przyjęte wymaganie SYS | [Rejestr wymagań](docs/01-zakres-systemu.md#2-wymagania-wynikające-z-opisu). |
 | Sterowanie silnikiem, mapy i konfiguracja | Zamknięte przeglądy [F01](docs/requirements/f01-podsumowanie-kontrolne.md) i [F02](docs/requirements/f02-przeglad-zakresu.md). |
 | Ochrona, reakcje na usterki i plany prób F03 | [Indeks tematów F03](docs/requirements/f03-ochrona-i-usterki.md#szybka-nawigacja). |
+| Akcesoria, I/O, energia i stany odbiorników | [Karta F04](docs/requirements/f04-przeglad-zakresu.md) oraz [ustalenia i plany prób](docs/requirements/f04-akcesoria-i-io.md). |
 | Uzasadnienie decyzji | [Rejestr ADR](docs/decisions/README.md). |
 | I/O, czujniki, osprzęt i dokumentacja Bety | [Interfejsy](docs/interfaces/README.md). |
 | Diagramy, warianty i bilanse | [Wstępna architektura](docs/architecture/README.md). |
