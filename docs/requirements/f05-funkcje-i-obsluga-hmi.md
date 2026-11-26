@@ -1,6 +1,6 @@
 # F05 — funkcje i obsługa HMI
 
-Stan na 2026-11-26. **Pakiet aktywny**, rozpoczęty po zatwierdzeniu [karty F04](f04-przeglad-zakresu.md) w odpowiedzi na pytanie 271. Nowe ustalenia F05 nie zostały jeszcze przyjęte. Pierwsza propozycja: pytanie 272.
+Stan na 2026-11-26. **Pakiet aktywny**, rozpoczęty po zatwierdzeniu [karty F04](f04-przeglad-zakresu.md) w odpowiedzi na pytanie 271. Przyjęto SYS-263 na podstawie własnej odpowiedzi właściciela na pytanie 272: kontrolka i animowany pasek z krótkim opisem. Następna decyzja 273 dotyczy zachowania paska przy nadal aktywnej usterce.
 
 Źródłem wymagań pozostaje [rejestr SYS](../01-zakres-systemu.md); kolejność i bramki określa [proces](../00-proces-i-status.md). Dokument zbiera podstawy, decyzje i plany F05. Przyjęcie zakresu nie potwierdza działania produktu.
 
@@ -25,7 +25,7 @@ Szczegóły reakcji silnika i odbiorników pozostają w [F02](f02-przeglad-zakre
 
 | Kolejność | Temat | Status / wynik do uzgodnienia |
 | --- | --- | --- |
-| 1 | Ważne ostrzeżenia | Aktywny temat: sposób prezentacji na każdym ekranie, priorytety i obsługa kilku ostrzeżeń. Pierwsza decyzja 272. |
+| 1 | Ważne ostrzeżenia | Aktywny temat. Przyjęto formę prezentacji SYS-263. Kolejna decyzja 273: chowanie paska; potem priorytety i obsługa kilku ostrzeżeń. |
 | 2 | Dane i ekrany | W kolejce: wymagane dane, ekrany jazdy/postoju i dane opcjonalne. |
 | 3 | Przyciski i menu | W kolejce: nawigacja, wybór map i obsługa akcesoriów według reguł ECU. |
 | 4 | Personalizacja | W kolejce: elementy obowiązkowe, granice własnych ekranów i szablonów. |
@@ -34,18 +34,35 @@ Szczegóły reakcji silnika i odbiorników pozostają w [F02](f02-przeglad-zakre
 
 Nie rozpoczynamy F06–F08 przed zamknięciem F05. Temat późniejszego pakietu zapisujemy w jego kolejce, gdy wynika z bieżącej decyzji.
 
-## Pierwsza decyzja — pytanie 272
+## Kontrolka i animowany pasek ostrzeżenia
 
-**Propozycja, bez decyzji właściciela.** ECU zgłasza ważne ostrzeżenie, np. przegrzanie lub usterkę wentylatora. Kierowca może w tym czasie używać własnego ekranu HMI. Jak przedstawić problem na każdym ekranie, także niestandardowym?
+**Przyjęto 2026-11-26, pytanie 272, własna odpowiedź właściciela — SYS-263.** HMI pokazuje kontrolkę oraz animowany pasek wysuwający się z góry albo dołu ekranu, z krótkim opisem tego, co jest nie tak. Dotyczy to także własnych ekranów użytkownika.
 
-- **A — rekomendowana:** widoczny krótki tekst opisujący problem; własny układ nie może go usunąć ani ukryć. Szczegóły po otwarciu listy ostrzeżeń.
-- **B:** widoczny symbol ostrzeżenia; pełny opis dopiero po otwarciu listy.
+Źródło: „kontrolka na ekranie oraz pasek animowany wyjezdzajacy z dołu lub góry który krótkim opisem mówi co jest nie tak”. Nie wybrano jeszcze konkretnej krawędzi, koloru, ikony, czasu ani parametrów animacji. Wygaszanie ostrzeżenia o DTC po potwierdzonym ustąpieniu usterki pozostaje według SYS-023; historia w ECU podlega SYS-022. Chowanie samego paska nie jest potwierdzeniem naprawy ani poleceniem kasowania DTC.
 
-A przekazuje przyczynę bez dodatkowej obsługi. B zajmuje mniej miejsca, ale wymaga otwarcia opisu. Oba warianty zachowują ostrzeganie wymagane w F03. Czas prezentacji, potwierdzanie, priorytety i przypadki wielu ostrzeżeń rozstrzygniemy kolejno w tym temacie. Nie wybrano jeszcze układu graficznego ani komponentu wyświetlacza.
+### Plan próby SYS-263
+
+Status: **plan do rozwinięcia, bez wyników produktu**. Blok: HMI-UI; grupa: V08. Powiązania: SYS-008/018/022/023 oraz ostrzeżenia przyjęte w F03.
+
+1. Na stanowisku ECU–HMI lub z kontrolowanym źródłem stanów ECU zgłosić przykładowe ważne ostrzeżenie, np. przegrzanie albo usterkę wentylatora. Zapisać wejściowy stan/identyfikator ostrzeżenia i rewizje urządzeń.
+2. Na każdym uzgodnionym ekranie gotowym i własnym potwierdzić kontrolkę oraz wysunięcie paska z wybranej w projekcie górnej albo dolnej krawędzi. Krótki opis ma odpowiadać zgłoszonemu problemowi.
+3. Sprawdzić szablony i własne układy z dużą liczbą pól, grafik i różnymi dopuszczonymi ustawieniami. Treść ekranu nie może zasłonić kontrolki ani prezentowanego paska. Nawigacja nie może pozbawić kolejnego ekranu wymaganej prezentacji ostrzeżenia.
+4. Zarejestrować obraz i czasy prezentacji; ocenić czytelność na docelowym HMI. Kryteria liczbowe, parametry animacji oraz scenariusze chowania, potwierdzania i wielu ostrzeżeń uzupełnić po ich uzgodnieniu. Nie uznawać tych otwartych przypadków za zaliczone.
+
+Przed wykonaniem: zamknąć właściwe reguły F05, wybrać wspólnie ekran i platformę, opracować format danych, mierzalne kryteria oraz procedurę stanowiskową. Plan prezentacji nie wymaga wywoływania rzeczywistego przegrzania silnika.
+
+## Następna decyzja — pytanie 273
+
+**Propozycja, bez decyzji właściciela.** Usterka nadal jest aktywna, HMI pokazało kontrolkę i opis na pasku. Czy pasek powinien sam się schować, czy czekać na potwierdzenie kierowcy?
+
+- **A:** pasek pozostaje do potwierdzenia przyciskiem.
+- **B — rekomendowana:** pasek chowa się po ustalonym czasie; wartość dobierzemy później.
+
+W obu propozycjach kontrolka pozostaje przy aktywnej usterce. Potwierdzenie oznacza przeczytanie komunikatu, bez kasowania DTC lub zmiany reakcji ECU. B ogranicza obsługę przycisków w enduro i czas zajmowania ekranu; A daje kierowcy czas na przeczytanie kosztem potrzeby potwierdzenia. Priorytety ostrzeżeń i wyjątki dla szczególnie ważnych komunikatów rozstrzygniemy następnie w tym samym temacie.
 
 ## Weryfikacja i przekazanie
 
-Po przyjęciu każdej nowej reguły dopisujemy identyfikator SYS, źródło decyzji, przypisanie do bloku/grupy weryfikacji oraz plan próby lub przeglądu. F05 nie ma jeszcze nowych wymagań ani nowych planów; wcześniejsze wymagania i ich weryfikacja pozostają zachowane. Właściciel wykona przygotowane próby na odpowiednim etapie produktu, a asystent opracuje procedury i przeanalizuje wyniki.
+Po przyjęciu każdej nowej reguły dopisujemy identyfikator SYS, źródło decyzji, przypisanie do bloku/grupy weryfikacji oraz plan próby lub przeglądu. F05 obejmuje obecnie jedno nowe wymaganie SYS-263 i jeden plan próby; wcześniejsze wymagania i ich weryfikacja pozostają zachowane. Właściciel wykona przygotowane próby na odpowiednim etapie produktu, a asystent opracuje procedury i przeanalizuje wyniki.
 
 | Miejsce dalszej pracy | Co należy tam rozwinąć |
 | --- | --- |
