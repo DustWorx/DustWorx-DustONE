@@ -292,4 +292,6 @@ SYS-256 wymaga wybudzenia obu urządzeń przez nowe użycie hamulca i obsługi �
 
 SYS-257 rozróżnia dostępne w oszczędzaniu awaryjne od odciętego pojedynczego kierunku i klaksonu. [Plan próby F04](../../docs/requirements/f04-akcesoria-i-io.md#plan-próby-sys-257).
 
-SYS-258 wymaga podtrzymania włączonych awaryjnych lokalnie po utracie HMI/CAN przy nieprzerwanej pracy ECU, z zachowaniem zabezpieczeń. Sen, restart i wybór strony nadal do ustalenia w F04. [Plan próby F04](../../docs/requirements/f04-akcesoria-i-io.md#plan-próby-sys-258).
+SYS-258 wymaga podtrzymania włączonych awaryjnych lokalnie po utracie HMI/CAN przy nieprzerwanej pracy ECU, z zachowaniem zabezpieczeń. Blokadę snu określa SYS-259; restart i wybór strony nadal do ustalenia w F04. [Plan próby F04](../../docs/requirements/f04-akcesoria-i-io.md#plan-próby-sys-258).
+
+SYS-259: podczas aktywnej obsługi awaryjnych blokować skoordynowany sen ECU/HMI niezależnie od upływu bezczynności i braku HMI/CAN. Zakończenie obsługi usuwa tylko tę blokadę; pozostają inne warunki SYS-059/062–066 i ochrona. Wymaganie nie wybiera dodatkowego limitu czasu ani polityki restartu. [Plan próby F04](../../docs/requirements/f04-akcesoria-i-io.md#plan-próby-sys-259).

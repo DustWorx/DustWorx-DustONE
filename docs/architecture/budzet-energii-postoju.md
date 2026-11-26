@@ -46,3 +46,7 @@ Procedury wykonawcze, przyrządy, połączenia, tolerancje i warunki przerwania 
 ## Przekazanie F04 — detekcja hamulców
 
 Przyjęty SYS-256 dodaje detekcję nowego użycia obu hamulców w śnie i wybudzenie ECU oraz HMI. Pobór tych torów włączyć do łącznego prądu czuwania; zmierzyć go na całym zestawie. Cel 28 dni nadal dotyczy postoju bez korzystania z motocykla. Wybudzenia przez świadome użycie hamulców i ich energię ocenić osobnymi próbami; nie traktować ich jako bezczynnego postoju. Kryteria nowego użycia, filtracja, długi stan aktywny i czasy do architektury. [Plan SYS-256](../requirements/f04-akcesoria-i-io.md#plan-próby-sys-256).
+
+## Przekazanie F04 — awaryjne
+
+Według SYS-259 aktywne awaryjne wstrzymują skoordynowany sen ECU/HMI. Uwzględnić pobór lamp obu stron, ECU i aktywnego HMI w osobnym bilansie oraz próbach. Cel 28 dni z SYS-093 dotyczy uśpionych urządzeń bez korzystania z motocykla i nie obejmuje takiej sygnalizacji. Nie przyjęto tu nowego czasu działania ani progów; ochrona zasilania i wyjść nadal obowiązuje. [Plan SYS-259](../requirements/f04-akcesoria-i-io.md#plan-próby-sys-259).
