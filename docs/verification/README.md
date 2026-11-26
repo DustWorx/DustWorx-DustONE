@@ -24,7 +24,7 @@ Beta 300 RR Racing 2015 jest pierwszą konfiguracją testową. Macierz wariantó
 
 Etap 5 oczekuje w kolejce zgodnie z [procesem](../00-proces-i-status.md). Poniższe plany i powiązania są zachowanymi materiałami wstępnymi; zapis wpływu bieżących decyzji nie rozpoczyna tego etapu.
 
-Przygotowano [wstępny plan inwentaryzacji Bety Racing 2015](beta-2015-plan-inwentaryzacji.md) z listą dostępnych przyrządów: multimetr, Rigol DHO804, 4 sondy PVP3150 i 3 sondy P4100. Model multimetru i dokumentacja P4100 pozostają do określenia. Przy części wymagań są propozycje prób, a powyżej określono zasady i szablon. Przygotowano [pierwszy przydział 254 wymagań do bloków i 13 grup weryfikacji](macierz-wymagan.md). Kryteria liczbowe, konfiguracje, procedury wykonawcze i dowody wymagają rozwinięcia; nie ma raportów pomiarów ani prób produktu. Kod testów i dane wejściowe obejmujące wiele komponentów należą do `tests/`.
+Przygotowano [wstępny plan inwentaryzacji Bety Racing 2015](beta-2015-plan-inwentaryzacji.md) z listą dostępnych przyrządów: multimetr, Rigol DHO804, 4 sondy PVP3150 i 3 sondy P4100. Model multimetru i dokumentacja P4100 pozostają do określenia. Przy części wymagań są propozycje prób, a powyżej określono zasady i szablon. Przygotowano [pierwszy przydział 255 wymagań do bloków i 13 grup weryfikacji](macierz-wymagan.md). Kryteria liczbowe, konfiguracje, procedury wykonawcze i dowody wymagają rozwinięcia; nie ma raportów pomiarów ani prób produktu. Kod testów i dane wejściowe obejmujące wiele komponentów należą do `tests/`.
 
 Przeanalizowano instrukcję i suplement dostarczone przez właściciela: [wyniki i braki danych](../interfaces/beta-2015-analiza-dokumentacji.md). Rozbieżność oznaczenia rocznika suplementu i wyposażenia TPS wymaga porównania z motocyklem; schemat nie jest jeszcze zweryfikowaną mapą jego złączy.
 
@@ -34,7 +34,7 @@ SYS-093 wymaga potwierdzenia rezerwy na rozruch po minimum 4 tygodniach postoju 
 
 Dla F03 przygotowano 79 planów prób SYS-157–235. [Karta przeglądu](../requirements/f03-przeglad-zakresu.md) podaje zakres, wynik kontroli spójności i odpowiedzialność za dalsze procedury oraz próby. Akceptacja funkcji nie zastępuje wyników produktu.
 
-Dla SYS-236 w [F04](../requirements/f04-akcesoria-i-io.md#plan-próby-sys-236) przygotowano plan lokalnego wyłączenia klaksonu po utracie HMI/CAN. F03 zachowuje 79 planów; F04 zawiera obecnie 19 planów: SYS-236–254. To materiały do procedur, bez wyników produktu.
+Dla SYS-236 w [F04](../requirements/f04-akcesoria-i-io.md#plan-próby-sys-236) przygotowano plan lokalnego wyłączenia klaksonu po utracie HMI/CAN. F03 zachowuje 79 planów; F04 zawiera obecnie 20 planów: SYS-236–255. To materiały do procedur, bez wyników produktu.
 
 [Plan SYS-237](../requirements/f04-akcesoria-i-io.md#plan-próby-sys-237) obejmuje odzyskanie łączności przy trzymanym i zwolnionym przycisku klaksonu, wcześniejsze polecenia oraz dopuszczenie nowego naciśnięcia.
 
@@ -71,3 +71,5 @@ Dla SYS-236 w [F04](../requirements/f04-akcesoria-i-io.md#plan-próby-sys-236) p
 [Plan SYS-253](../requirements/f04-akcesoria-i-io.md#plan-próby-sys-253) obejmuje podstawowe oświetlenie, kierunkowskazy i klakson po ochronnym odcięciu: brak automatycznych ponowień, jedną świadomą próbę, blokadę po niepowodzeniu oraz odnowienie bez samoczynnego ON. Inicjowanie próby światła hamowania podlega przyjętemu SYS-254.
 
 [Plan SYS-254](../requirements/f04-akcesoria-i-io.md#plan-próby-sys-254) obejmuje próbę światła hamowania bez HMI po potwierdzeniu zwolnienia obu hamulców i nowym użyciu któregokolwiek, brak próby przy trzymanym hamulcu i zachowanie wspólnego limitu przy różnych źródłach zlecenia.
+
+[Plan SYS-255](../requirements/f04-akcesoria-i-io.md#plan-próby-sys-255) łączy przegląd przypisania portów do uzgodnionych funkcji, inspekcję rzeczywistego prototypu i potwierdzenie wymaganych interfejsów właściwymi próbami.

@@ -7,3 +7,5 @@ Wymagania bazowe: komunikacja z ECU po CAN, fizyczne przyciski i ekran bez dotyk
 Narzędzie EDA: **Autodesk Fusion Electronics**, płatna subskrypcja właściciela projektu.
 
 Wymagania i otwarte decyzje: [zakres systemu](../../docs/01-zakres-systemu.md).
+
+SYS-255 zachowuje przyjęte funkcje i interfejsy HMI; dodatkowe zewnętrzne porty do nieokreślonych urządzeń są poza zakresem. Wewnętrzne zasoby, magistrale i punkty testowe ocenić w architekturze; ważne układy wybrać wspólnie. [Zakres i plan weryfikacji F04](../../docs/requirements/f04-akcesoria-i-io.md#zakres-zewnętrznych-portów).
