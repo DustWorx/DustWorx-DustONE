@@ -10,13 +10,13 @@ Kontrola pełnego F01 została zakończona: właściciel potwierdził zgodność
 
 | Obszar | Stan potwierdzony dokumentacją |
 | --- | --- |
-| Wymagania systemowe | 262 wymagań SYS-001–262; pierwszy przydział do bloków i grup weryfikacji gotowy, kryteria i procedury do rozwinięcia. |
+| Wymagania systemowe | 263 wymagań SYS-001–263; pierwszy przydział do bloków i grup weryfikacji gotowy, kryteria i procedury do rozwinięcia. |
 | Decyzje | 12 zapisów ADR-001–012; ostatni ogranicza platformę do silników chłodzonych cieczą. |
 | Zakres wariantów | Macierz 6 wariantów silnika; jest planem obsługi, nie potwierdzeniem zgodności modeli. |
 | Pierwsza jednostka | Beta 300 RR Racing 2015; analiza dokumentów i zdjęć, bez raportów pomiarowych instalacji. |
 | Architektura | Pierwszy diagram blokowy, funkcje sześciu wariantów i przydział zasobów gotowe jako wersje robocze. Modele, parametry i liczbowe bilanse pozostają otwarte. |
 | Schematy, BOM, PCB i mechanika | W repozytorium brak projektu wykonawczego i zatwierdzonego kompletnego BOM ECU/HMI. |
-| Kod i próby produktu | W repozytorium brak implementacji firmware/Windows i raportów prób DustONE. Istnieją plany, szablon procedury i przydział 262 wymagań do 13 grup weryfikacji. |
+| Kod i próby produktu | W repozytorium brak implementacji firmware/Windows i raportów prób DustONE. Istnieją plany, szablon procedury i przydział 263 wymagań do 13 grup weryfikacji. |
 
 Podstawy: [wymagania](requirements/README.md), [decyzje](decisions/README.md), [macierz silników](architecture/macierz-wariantow-silnika.md), [I/O](interfaces/wstepna-lista-io.md) i [weryfikacja](verification/README.md). Liczba wymagań i pytań nie jest procentem wykonania produktu.
 
@@ -73,13 +73,13 @@ Parametry wyliczane z osprzętu, charakterystyki czujników, wartości elementó
 | F02 — Mapy, konfiguracja i strojenie ECU | Zamknięty po akceptacji właściciela 2026-11-09. | Odpowiedź A na pytanie 166. [Karta F02](requirements/f02-przeglad-zakresu.md) zawiera przyjęty zakres, plan weryfikacji i przekazanie. |
 | F03 — Ochrona i reakcje na usterki | Zamknięty po akceptacji właściciela: 2026-11-24. | Odpowiedź A na pytanie 243. [Karta F03](requirements/f03-przeglad-zakresu.md) obejmuje SYS-157–235, przegląd spójności, 79 planów prób i przekazanie do dalszych etapów. [Szczegółowe reakcje](requirements/f03-ochrona-i-usterki.md) pozostają źródłem rozwinięcia; nie wykonano prób produktu. |
 | F04 — Akcesoria i dodatkowe I/O | Zamknięty po akceptacji właściciela: 2026-11-26. | Odpowiedź na pytanie 271 zatwierdza [kartę F04](requirements/f04-przeglad-zakresu.md): SYS-236–262, przegląd spójności, 27 planów prób i przekazanie. Prób produktu nie wykonano. |
-| F05 — Funkcje i obsługa HMI | Aktywny. | [Podstawy i kolejność tematów F05](requirements/f05-funkcje-i-obsluga-hmi.md). Pierwsza decyzja 272: sposób prezentacji ważnych ostrzeżeń także na własnych ekranach. Propozycja oczekuje odpowiedzi; brak nowych wymagań F05. |
+| F05 — Funkcje i obsługa HMI | Aktywny. | [Ustalenia F05](requirements/f05-funkcje-i-obsluga-hmi.md): przyjęto SYS-263 — kontrolkę i animowany pasek z krótkim opisem, także na własnych ekranach. Przygotowano pierwszy plan próby. Następna decyzja 273: zachowanie paska przy aktywnej usterce; propozycja oczekuje odpowiedzi. |
 | W05 — Inwentaryzacja Bety | W kolejce, etap 3. | Zachowany [plan INV](verification/beta-2015-plan-inwentaryzacji.md); brak wyników pomiarowych. |
 | W01/W02 — Architektura i zasoby | W kolejce, etap 4. | Zachowane [diagram](architecture/blokowa-systemu.md) i [macierz wariantów](architecture/macierz-wariantow-silnika.md); bez zamkniętych bilansów. |
 | W03 — Weryfikacja wymagań | W kolejce, etap 5. | Zachowany [przydział 262 SYS do grup](verification/macierz-wymagan.md); kryteria, procedury i dowody do rozwinięcia. |
 | W06 — Bilanse i wybór komponentów | W kolejce, etapy 4 i 6. | Wymagane wejściowe parametry; ważne komponenty wybierzemy wspólnie. |
 
-**F04 zamknięto po wyraźnej akceptacji karty w odpowiedzi na pytanie 271 (2026-11-26). F01–F04 są zamknięte w zakresie funkcji; rozpoczęto F05.** [Karta F04](requirements/f04-przeglad-zakresu.md) zachowuje przyjęte ustalenia, 27 planów i zadania dla dalszych etapów. W F05 pracujemy kolejno nad ostrzeżeniami, danymi i ekranami, obsługą, personalizacją oraz stanami panelu. F06–F08 pozostają w kolejce. Architektura, komponenty, PCB, implementacja i próby produktu wymagają dalszej pracy.
+**F04 zamknięto po wyraźnej akceptacji karty w odpowiedzi na pytanie 271 (2026-11-26). F01–F04 są zamknięte w zakresie funkcji; rozpoczęto F05.** [Karta F04](requirements/f04-przeglad-zakresu.md) zachowuje przyjęte ustalenia, 27 planów i zadania dla dalszych etapów. W F05 przyjęto formę ostrzeżenia w SYS-263 i przygotowano pierwszy plan próby. Nadal rozwijamy ostrzeżenia (kolejna decyzja 273), następnie dane i ekrany, obsługę, personalizację oraz stany panelu. F06–F08 pozostają w kolejce. Architektura, komponenty, PCB, implementacja i próby produktu wymagają dalszej pracy.
 
 ## Warunki przechodzenia dalej
 

@@ -9,6 +9,7 @@ Status: punkt wyjścia do wymagań; zakres zapisany na podstawie opisu właścic
 - [Podział odpowiedzialności i podstawy ustaleń](#3-podział-odpowiedzialności)
 - [Uzupełnienia F03](#uzupełnienia-f03)
 - [Uzupełnienia F04](#uzupełnienia-f04)
+- [Ustalenia F05 — HMI](requirements/f05-funkcje-i-obsluga-hmi.md)
 - [Dane potrzebne przed doborem sprzętu](#4-decyzje-potrzebne-przed-doborem-sprzętu)
 - [Następny rezultat](#5-następny-rezultat-inżynierski)
 - [Współpraca](#6-sposób-realizacji-i-współpracy)
@@ -297,6 +298,7 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-261 | Aktywne awaryjne mają pierwszeństwo przed zwykłym wyborem pojedynczego kierunkowskazu z HMI. ECU odrzuca wybór lewo/prawo do świadomego wyłączenia awaryjnych; uruchomienie strony wymaga następnego nowego wyboru. Odrzucony wybór nie jest wykonywany później automatycznie. Świadome włączenie awaryjnych zastępuje aktywny pojedynczy kierunek, a ich wyłączenie nie przywraca dawnej strony. W oszczędzaniu żądanie pojedynczej strony nadal jest odrzucane według SYS-257 i nie wyłącza awaryjnych. Gotowość, zabezpieczenia, limity i dopuszczone zasilanie pozostają nadrzędne; kwalifikacja poleceń oraz obsługa HMI wymagają projektu i prób. |
 
 | SYS-262 | Przy zgaszonym silniku, odłączonym PC i braku innych blokad, po upływie bezczynności ręczne mijania/drogowe, hamowanie i klakson nie wstrzymują skoordynowanego snu ECU/HMI. ECU wyłącza te odbiorniki przed snem również przy utrzymanym wejściu hamulca lub klaksonu. Samo trzymanie nie odnawia stale bezczynności ani nie wybudza ponownie; wybudzenie z tego wejścia wymaga zwolnienia i nowego użycia. Nowe użycie hamulca odnawia odliczanie. Po zwykłym wybudzeniu mijania/drogowe pozostają OFF do nowego polecenia, światło hamowania po gotowości odpowiada bieżącym wejściom SYS-051/256, a klakson wymaga nowego naciśnięcia według SYS-239. W normalnej obsłudze zwolnienie klaksonu kończy sygnał. Awaryjne, wentylator, PC, inne zadania wymagające pracy i zabezpieczenia zachowują własne reguły. Parametry oraz realizacja detekcji, snu i nowych poleceń wymagają projektu i prób. |
+| SYS-263 | Ważne ostrzeżenie z ECU jest prezentowane na HMI jako kontrolka oraz animowany pasek wysuwający się z górnej albo dolnej krawędzi ekranu, z krótkim opisem problemu. Prezentacja obowiązuje na ekranach gotowych i własnych użytkownika. Wybór krawędzi, szczegóły grafiki, czas prezentacji, potwierdzanie oraz priorytety wymagają dalszego określenia w F05 i projekcie HMI. |
 
 ## 3. Podział odpowiedzialności
 
