@@ -1,10 +1,12 @@
 # Wstępna lista funkcji wejść i wyjść
 
-Stan na: 2026-11-25. Status: materiał roboczy do architektury, bez zatwierdzonego pinoutu. Przyjęte liczby kanałów odnotowano w wierszach; pozostałe liczby oraz parametry wymagają bilansu i projektu. Przydział funkcji do wariantów i zasobów: [macierz silników](../architecture/macierz-wariantow-silnika.md). Podstawa: [wymagania systemu](../01-zakres-systemu.md).
+Stan na: 2026-11-26. Status: materiał roboczy do architektury, bez zatwierdzonego pinoutu. Przyjęte liczby kanałów odnotowano w wierszach; pozostałe liczby oraz parametry wymagają bilansu i projektu. Przydział funkcji do wariantów i zasobów: [macierz silników](../architecture/macierz-wariantow-silnika.md). Podstawa: [wymagania systemu](../01-zakres-systemu.md).
 
 Wiersz oznacza funkcję, nie pojedynczy pin ani kanał. Kanałów nie sumujemy przed analizą jednoczesnej pracy, wariantów silnika i współdzielenia zasobów. „Opcjonalny czujnik” oznacza możliwość pracy bez niego, przy zachowaniu wymaganej obsługi sprzętowej na PCB.
 
 Wiązkę i złącze ECU projektujemy od nowa (SYS-045), według potrzebnych funkcji, prądów i gabarytów. Pinout starego ECU nie jest ograniczeniem projektu. Potrzebne są parametry i połączenia zachowywanych czujników oraz odbiorników; dla zapłonu przygotowano [kartę cewki IG5128](beta-cewka-zaplonowa-ig5128.md).
+
+Zakres portów według SYS-255: każdy zewnętrzny port ma uzgodnione zastosowanie, bez dodatkowej rezerwy do nieokreślonych urządzeń. Funkcje poniżej pozostają wymagane; zasoby wewnętrzne, magistrale na PCB, punkty testowe i niewykorzystane pozycje złączy oceniamy w architekturze/projekcie. [Ustalenie i plan weryfikacji F04](../requirements/f04-akcesoria-i-io.md#zakres-zewnętrznych-portów).
 
 ## Funkcje wynikające z ustalonego zakresu
 

@@ -104,3 +104,5 @@ ID są oznaczeniami architektury, bez przydziału konkretnych układów scalonyc
 | A07 | Gabaryty, montaż, bilans cieplny i współpraca pomiaru ciśnienia atmosferycznego ze szczelną obudową. | Właściciel: przestrzeń montażowa; asystent: rozwiązania i sprawdzenie. | F08, etapy 3/4/7. |
 
 Przydział wymagań i grup weryfikacji: [macierz SYS → blok → weryfikacja](../verification/macierz-wymagan.md). Każda niewiadoma pozostaje otwarta do uzyskania danych i przeglądu; sam schemat blokowy nie dopuszcza PCB do wykonania.
+
+SYS-255 ogranicza zewnętrzne porty do uzgodnionych zastosowań. Zachować przyjęte czujniki, osprzęt, trzy dodatkowe kanały mocy, CAN ECU–HMI, PC i dostęp programowania/debugowania według ról. Wewnętrzne magistrale, zasoby MCU, punkty testowe i niewykorzystane pozycje złączy wymagają oceny przy doborze. [Zakres i plan weryfikacji F04](../requirements/f04-akcesoria-i-io.md#zakres-zewnętrznych-portów).

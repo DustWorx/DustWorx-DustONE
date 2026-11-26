@@ -1,6 +1,6 @@
 # F04 — akcesoria i dodatkowe I/O
 
-Stan na 2026-11-25. **F04 aktywny po zamknięciu F03 w pytaniu 243.** Aktualny temat: pozostałe stany podstawowych akcesoriów. Zasady klaksonu SYS-236–240 są już przyjęte i zachowane poniżej. Źródłem wymagań jest [rejestr SYS](../01-zakres-systemu.md); kolejność i warunki zamknięcia określa [proces](../00-proces-i-status.md).
+Stan na 2026-11-26. **F04 aktywny po zamknięciu F03 w pytaniu 243.** Aktualny temat: kontrola pokrycia F04 przed przeglądem zamykającym. Zasady klaksonu SYS-236–240 są już przyjęte i zachowane poniżej. Źródłem wymagań jest [rejestr SYS](../01-zakres-systemu.md); kolejność i warunki zamknięcia określa [proces](../00-proces-i-status.md).
 
 ## Zakres i kolejność
 
@@ -24,7 +24,8 @@ Stan na 2026-11-25. **F04 aktywny po zamknięciu F03 w pytaniu 243.** Aktualny t
 | Ponowne załączenie dodatkowego kanału po ochronnym odcięciu | Przyjęty SYS-247, odpowiedź A na pytanie 255: ograniczona próba wyłącznie na nowe świadome polecenie, bez samoczynnych ponowień. |
 | Limit świadomych prób po niepowodzeniu | Przyjęty SYS-248, odpowiedź A na pytanie 256: po jednej nieudanej próbie blokada danego kanału do pełnego cyklu snu lub zaniku i powrotu zasilania. |
 | Wpływ usterki jednego kanału na pozostałe | Przyjęty SYS-249, odpowiedź A na pytanie 257: odcięcie tylko uszkodzonego kanału przy prawidłowych warunkach pozostałych; wspólne zagrożenia pozostają nadrzędne. |
-| Sygnałowe I/O i komunikacja | Rozpoczynamy przegląd zakresu w F04, pytanie 263: czy potrzebne są dodatkowe zewnętrzne porty rezerwowe do nieprzypisanych zastosowań. Interfejsy uzgodnionych funkcji pozostają wymagane; parametry i pinout do architektury. |
+| Sygnałowe I/O i komunikacja | Przyjęty SYS-255, odpowiedź A na pytanie 263: zewnętrzne porty wynikają z uzgodnionych funkcji; bez rezerwy do nieokreślonych urządzeń. Parametry, zasoby i pinout do architektury. |
+| Wybudzanie przez hamulce | Luka wskazana w kontroli pokrycia: bezpośrednie wejścia są wymagane, ale ich roli w wybudzaniu nie ustalono. Następne pytanie 264. |
 
 Klakson należy do przyjętego zakresu SYS-004. Obecność klaksonu 12 V w dokumentacji Bety jest potwierdzona w [analizie instrukcji i suplementu](../interfaces/beta-2015-analiza-dokumentacji.md). ECU steruje odbiornikiem, a HMI przekazuje polecenia kierowcy. Nie ustalono tu jeszcze pełnej obsługi przycisku ani wszystkich stanów po restarcie.
 
@@ -365,12 +366,44 @@ Normalna praca sprawnego toru pozostaje według SYS-051. Po prawidłowym wyniku 
 
 To plan do rozwinięcia w procedurę; prób produktu jeszcze nie wykonano.
 
+## Zakres zewnętrznych portów
+
+W odpowiedzi **A na pytanie 263** (2026-11-25) właściciel przyjął SYS-255: każdy zewnętrzny port ma uzgodnione zastosowanie. Zakres nie obejmuje dodatkowych zewnętrznych portów sygnałowych ani magistral rezerwowych do nieokreślonych urządzeń.
+
+Wymagane pozostają tory wszystkich przyjętych czujników i osprzętu silnika, trzy dodatkowe kanały mocy, CAN ECU–HMI, obsługa PC, programowanie i debugowanie według przyjętych ról. Nowa zatwierdzona funkcja może wymagać zmiany listy I/O według procesu kontroli zmian.
+
+Rezerwa zasobów procesora, wewnętrzne magistrale, punkty testowe i niewykorzystane pozycje standardowego złącza wymagają oceny w architekturze/projekcie. Nie wybrano pinoutu ani komponentów; ważne układy nadal wybieramy wspólnie. Zewnętrzny tor wymaga powiązania z funkcją, wymaganiami i metodą weryfikacji.
+
+### Plan próby SYS-255
+
+1. W etapie architektury i projektu sporządzić zestawienie zewnętrznych portów oraz styków ECU/HMI, przypisując funkcje, zasilania, masy i interfejsy serwisowe do zatwierdzonego zakresu. Wykazać pokrycie wymaganych funkcji w wariantach silnika; oddzielnie oznaczyć wewnętrzne punkty testowe i niewykorzystane pozycje złączy.
+2. W przeglądzie schematów, BOM, pinoutu i wiązki potwierdzić brak zewnętrznych portów dla nieokreślonych urządzeń oraz zachowanie przyjętych czujników, osprzętu, trzech dodatkowych kanałów mocy, CAN, PC i programowania/debugowania. Parametry i działanie sprawdzić właściwymi procedurami, nie samym istnieniem styku.
+3. Na wykonanym prototypie porównać rzeczywiste złącza, obsadę i połączenia z zatwierdzoną dokumentacją. Potwierdzić przypisanie i oznaczenie portów oraz zgodność niewykorzystanych pozycji i punktów testowych z projektem. Inspekcja produktu uzupełnia przegląd dokumentacji i próby elektryczne.
+4. Powiązanymi procedurami potwierdzić komunikację ECU–HMI, dostęp PC, programowanie/debugowanie w uprawnionych trybach i przyjęte funkcje I/O. Zachować ograniczenia ról oraz ochrony firmware/liczników. Przed wykonaniem określić rewizje, warianty, zestawienie portów, kryteria i wyposażenie; wyniki powiązać z HW/FW, konfiguracją i dokumentacją. [Macierz weryfikacji](../verification/macierz-wymagan.md).
+
+To plan przeglądu, inspekcji produktu i powiązanych prób do rozwinięcia w procedury; nie wykonano weryfikacji produktu.
+
+## Kontrola pokrycia przed kartą F04
+
+Stan kontroli: 2026-11-26, po decyzji 263. F04 pozostaje aktywny. Tabela rozdziela przyjęty zakres, kwestie funkcjonalne do doprecyzowania i dane techniczne.
+
+| Obszar | Przyjęty zakres / stan | Dalsze rozstrzygnięcie |
+| --- | --- | --- |
+| Klakson | SYS-236–240 i próby po odcięciu SYS-253. | Tor, prądy, komunikacja i pokrycie diagnostyki w etapach 3–6. |
+| Trzy dodatkowe kanały | SYS-241–249: zastosowania, stany, ON/OFF/PWM, próby, limit i lokalna usterka. | Obciążenia, zgodne lampy, bilanse, topologia i komponenty w etapach 3–6. |
+| Podstawowe światła | SYS-050, SYS-081–091, SYS-250 i SYS-253. | Kombinacje i parametry lamp, podział kanałów, gotowość i diagnostyka z danymi osprzętu. |
+| Kierunkowskazy | SYS-052 i SYS-251–253: utrata/powrót CAN, restart, sen i próby po usterce. | Parametry migania i realizacja interfejsu w projekcie. |
+| Światło hamowania | SYS-051, SYS-253/254: bezpośrednie wejścia i próba bez HMI. | Wybudzenie przez hamulce jest otwartą decyzją funkcjonalną, pytanie 264. |
+| Wentylator | Zachowane funkcje i zamknięte reakcje F03, w tym SYS-043/044/053/060/061/089 i SYS-184–196. | Dane osprzętu, parametry i procedury na właściwych etapach; F03 pozostaje zamknięty. |
+| Zewnętrzne porty | SYS-255: uzgodnione funkcje, bez dodatkowej rezerwy zewnętrznej dla nieokreślonych urządzeń. | Typy, liczby pozostałych torów, pinout i wewnętrzna rezerwa zasobów w architekturze. |
+| Oszczędzanie energii | Przyjęte SYS-084–091. | Przed kartą skontrolować jawne przypisanie odbiorników do odcięcia; progi i czasy w architekturze. |
+
+Potwierdzona luka funkcjonalna: źródła wybudzenia obejmują START/kopniak, przyciski HMI, PC i przednie koło (SYS-054–056/079/080), a hamulce SYS-051 nie mają określonej roli w śnie. Do rozstrzygnięcia pozostaje pytanie 264. Sprawdzenie przypisania odbiorników do oszczędzania i końcowa kontrola spójności poprzedzą kartę zamykającą. F04 nie jest jeszcze zamknięty.
+
 ## Następna decyzja
 
-**Pytanie 263 — dodatkowe I/O:** czy poza torami potrzebnymi do uzgodnionych funkcji przewidujemy zewnętrzne, rezerwowe porty sygnałowe lub kolejne magistrale do jeszcze nieprzypisanych zastosowań?
+**Pytanie 264:** system prawidłowo śpi, koło się nie obraca i kierowca nie używa HMI ani START. Czy nowe użycie któregokolwiek hamulca ma wybudzić ECU i HMI, aby sprawny tor światła hamowania mógł zareagować bez HMI?
 
-Propozycja A: każdy zewnętrzny tor wynika z uzgodnionej funkcji; bez dodatkowych portów rezerwowych do nieokreślonych urządzeń. Alternatywa B: przewidzieć dodatkową rezerwę sygnałową, a jej zastosowania i zakres rozstrzygnąć przed zamknięciem F04. Decyzja nie jest jeszcze podjęta.
+Propozycja A: tak, nowe użycie przedniego albo tylnego hamulca wybudza ECU i HMI. Po uzyskaniu gotowości wymaganych torów światło hamowania reaguje na bieżące wejścia, niezależnie od gotowości lub sprawności HMI/CAN. Alternatywa B: hamulce są obsługiwane dopiero po wybudzeniu innym uzgodnionym źródłem. Decyzja nie jest jeszcze podjęta.
 
-Wyjście sygnałowe, np. logiczny PWM, przekazuje polecenie do modułu; wyjście mocy zasila odbiornik. Trzy dodatkowe kanały mocy są już wymagane według SYS-241/242. Nadal wymagane są interfejsy uzgodnionych czujników i osprzętu silnika, CAN ECU–HMI, połączenia PC, programowania i debugowania. Wcześniejsze ogólne dodatkowe pomiary doprecyzowano w rejestrze SYS do wskazanych funkcji; nie pomijamy ich w tym przeglądzie.
-
-A odpowiada priorytetowi kompaktowego ECU: zewnętrzny port zajmuje piny złącza, wymaga właściwego toru i ochrony. Rezerwę zasobów procesora, wewnętrzne magistrale i punkty testowe ocenimy w architekturze/projekcie; pytanie dotyczy zakresu dodatkowych zewnętrznych portów do nieprzypisanych urządzeń. Typy elektryczne, pinout, bilanse i komponenty pozostają do właściwych etapów.
+A rozszerza bezpośrednią obsługę hamulców na wybudzenie ze snu; B ogranicza źródła wybudzania podczas postoju. Warunki zasilania i zabezpieczenia nadal obowiązują. Wybudzenie nie potwierdza naprawy ani nie omija próby i limitu SYS-253/254. Kryteria nowego użycia, filtracja, czas reakcji, pobór czuwania i obsługa długiego stanu aktywnego wymagają projektu i prób.
