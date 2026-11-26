@@ -46,7 +46,7 @@ W odpowiedzi A na pytanie 264 (2026-11-26) właściciel dodał nowe użycie prze
 - ECU inicjuje usypianie HMI poleceniem i w normalnym przebiegu oczekuje na jego aplikacyjne potwierdzenie, przed własnym uśpieniem. HMI nie zasypia autonomicznie po bezczynności.
 - Wyprowadzić sterowane zasilanie HMI z ECU. Po poprawnej sekwencji wyjście pozostaje włączone podczas snu obu urządzeń; odłączenie jest ostatecznością przy awarii lub zdefiniowanych ograniczeniach. Zachować wybudzanie przyciskami po odłączeniu. Zapewnić podtrzymanie właściwego stanu wyjścia także podczas snu ECU: włączonego w normalnej pracy i odłączonego po zadziałaniu ścieżki awaryjnej. Topologia i parametry pozostają do projektu.
 - Odnawiać czas bezczynności po użyciu przycisków, próbach rozruchu i rzeczywistej aktywności użytkownika w HMI. Zwykły cykliczny odczyt danych i ruch CAN nie stanowią same w sobie aktywności użytkownika; podłączenie PC blokuje sen niezależnie od ruchu danych.
-- Przed planowanym uśpieniem zakończyć zadania wymagające pracy, np. obsługę rozruchu i wymagane zapisy pamięci nieulotnej. Obsługa wentylatora po zgaszeniu według SYS-060/061 wstrzymuje uśpienie; HMI czeka na polecenie ECU. Limity czasu i napięcia mają pierwszeństwo przed ręcznym żądaniem HMI. Pozostałe blokady wymagają doprecyzowania.
+- Przed planowanym uśpieniem zakończyć zadania wymagające pracy, np. obsługę rozruchu i wymagane zapisy pamięci nieulotnej. Obsługa wentylatora po zgaszeniu według SYS-060/061 wstrzymuje uśpienie; HMI czeka na polecenie ECU. Limity czasu i napięcia wentylatora mają pierwszeństwo przed ręcznym żądaniem HMI. Aktywne awaryjne dodatkowo blokują skoordynowany sen według SYS-259; pozostałe blokady wymagają doprecyzowania.
 
 ## Do określenia
 
@@ -85,3 +85,7 @@ W odpowiedzi A na pytanie 213 właściciel dopuścił załączenie rozrusznika n
 ## Uzupełnienie F04 — hamulce
 
 Detekcję obu hamulców w śnie i czas gotowości toru światła uwzględnić w architekturze oraz budżecie energii. Filtracja, kryteria nowego użycia i obsługa długiego stanu aktywnego wymagają specyfikacji. Użycie hamulca samo nie żąda rozruchu. [Plan SYS-256](../requirements/f04-akcesoria-i-io.md#plan-próby-sys-256) obejmuje oba wejścia, niezależność od HMI/CAN, stany przez wybudzenie, czas reakcji i pobór czuwania. Przyjęty zakres nie stanowi wyniku prób produktu.
+
+## Uzupełnienie F04 — aktywne awaryjne
+
+Odpowiedź A na pytanie 267 (2026-11-26) przyjmuje SYS-259: aktywne awaryjne blokują skoordynowany sen ECU i HMI do ich wyłączenia albo zakończenia zgodnie z właściwym odcięciem ochronnym. Sprawne HMI pozostaje aktywne z ECU; utrata HMI/CAN przy podtrzymaniu awaryjnych nie znosi blokady. Po zakończeniu obowiązują zwykłe pozostałe warunki snu. Dodatkowego limitu czasu nie wybrano; pobór należy ująć w bilansie aktywnego zestawu. [Plan próby F04](../requirements/f04-akcesoria-i-io.md#plan-próby-sys-259).
