@@ -27,7 +27,7 @@ Stan na 2026-11-26. **F04 aktywny po zamknięciu F03 w pytaniu 243.** Aktualny t
 | Sygnałowe I/O i komunikacja | Przyjęty SYS-255, odpowiedź A na pytanie 263: zewnętrzne porty wynikają z uzgodnionych funkcji; bez rezerwy do nieokreślonych urządzeń. Parametry, zasoby i pinout do architektury. |
 | Wybudzanie przez hamulce | Przyjęty SYS-256, odpowiedź A na pytanie 264: nowe użycie dowolnego hamulca wybudza ECU i HMI; światło działa bez oczekiwania na HMI. |
 | Lista odcięcia oszczędzania | Przyjęty SYS-257, odpowiedź na 265 i A na doprecyzowanie: światło hamowania oraz awaryjne dostępne, pojedyncze kierunkowskazy i klakson odcięte razem ze światłami stałymi i trzema dodatkowymi kanałami. |
-| Stany awaryjnych | W toku F04: utrata HMI/CAN, sen, restart i współdziałanie z wyborem strony. Następna decyzja 266. |
+| Stany awaryjnych | Przyjęty SYS-258, A na pytanie 266: podtrzymanie po utracie HMI/CAN przy ciągłej pracy ECU. Sen, restart i współdziałanie z wyborem strony nadal otwarte. Następna decyzja 267. |
 
 Klakson należy do przyjętego zakresu SYS-004. Obecność klaksonu 12 V w dokumentacji Bety jest potwierdzona w [analizie instrukcji i suplementu](../interfaces/beta-2015-analiza-dokumentacji.md). ECU steruje odbiornikiem, a HMI przekazuje polecenia kierowcy. Nie ustalono tu jeszcze pełnej obsługi przycisku ani wszystkich stanów po restarcie.
 
@@ -419,20 +419,37 @@ W odpowiedzi na pytanie 265 (2026-11-26) właściciel wybrał światło hamowani
 
 Zabezpieczenia, wymagane ostygnięcie, limity prób po usterce i dopuszczone zasilanie nadal obowiązują. Dostępność awaryjnych nie omija blokady żadnego kanału. HMI przekazuje żądanie i pokazuje rzeczywisty stan lub odmowę ECU. Wyjście z oszczędzania, powrót ręcznych odbiorników i wyjątek serwisowy pozostają według SYS-087–091. Prądy, progi, czasy i zdolność wspólnej pracy obu stron wymagają danych, bilansu i prób.
 
-Awaryjne stanowią nowy, jawnie wskazany przez właściciela tryb. Reakcje na utratę HMI/CAN, sen i restart oraz współdziałanie z wyborem strony pozostają otwarte w F04. Dotychczasowe SYS-052/251/252 ustalały zachowanie pojedynczego kierunkowskazu; decyzji tych nie uznano za rozstrzygnięcie nowych stanów awaryjnych.
+Awaryjne stanowią nowy, jawnie wskazany przez właściciela tryb. Podtrzymanie po utracie HMI/CAN przy ciągłej pracy określa SYS-258. Sen, restart i współdziałanie z wyborem strony pozostają otwarte w F04. Dotychczasowe SYS-052/251/252 ustalały zachowanie pojedynczego kierunkowskazu; nowe stany awaryjnych rozstrzygamy osobno.
 
 ### Plan próby SYS-257
 
 1. Na stanowisku ECU–HMI ze sprawnymi dopuszczonymi obciążeniami, przy zgaszonym silniku, odtworzyć kwalifikowane wejście w oszczędzanie. W osobnych przypadkach rozpocząć od włączonych pozycyjnych, mijania/drogowych, każdego i wszystkich trzech dodatkowych kanałów, pojedynczej lewej/prawej strony oraz klaksonu. Potwierdzić odcięcie objętych odbiorników; samo wejście nie może włączyć awaryjnych. Rejestrować napięcie, stan odcięcia oraz rzeczywiste napięcia/prądy wyjść.
 2. Podczas aktywnego odcięcia osobno użyć przedniego i tylnego hamulca; przy spełnionych warunkach potwierdzić światło według bieżących wejść, także przy niedostępnym HMI/CAN i po wybudzeniu SYS-256. Przy sprawnym HMI świadomie wybrać awaryjne i potwierdzić wspólne miganie obu stron. Zmierzyć przebieg, równoczesne obciążenie i zasilanie w dopuszczonych warunkach. Kryteria synchronizacji i czasu przyjąć przed próbą.
 3. Przy aktywnym odcięciu zlecać zwykłe ON objętych wyjść, wybór wyłącznie lewej/prawej strony i klakson. Potwierdzić odmowę ECU oraz informację HMI według SYS-085/086, również dla ponowień i dawnych żądań. Zwykły interfejs PC nie omija blokady. Odróżnić żądanie awaryjnych od wyboru jednej strony; szczegóły obsługi i arbitrażu rozstrzygnąć w F04 przed wykonaniem.
-4. Powtórzyć w zakwalifikowanym zakresie zasilania i temperatury oraz przy aktywnych ochronach/limitach toru światła hamowania i kierunkowskazów. Żądanie awaryjnych nie może omijać ich odcięcia ani limitów SYS-253/254. Sprawdzić warunki wyjścia SYS-087, brak automatycznego odtworzenia odciętych odbiorników według SYS-088 oraz własne reguły wentylatora i HMI. Wyjątek serwisowy sprawdzić odrębnie według SYS-090/091. Przed wykonaniem ustalić stany awaryjnych po utracie łączności, śnie i restarcie w F04, a następnie progi/czasy, połączenia, obciążenia, wyposażenie i warunki przerwania w projekcie/procedurze. Wyniki powiązać z HW/FW, konfiguracją i profilem akumulatora. [Macierz weryfikacji](../verification/macierz-wymagan.md).
+4. Powtórzyć w zakwalifikowanym zakresie zasilania i temperatury oraz przy aktywnych ochronach/limitach toru światła hamowania i kierunkowskazów. Żądanie awaryjnych nie może omijać ich odcięcia ani limitów SYS-253/254. Sprawdzić warunki wyjścia SYS-087, brak automatycznego odtworzenia odciętych odbiorników według SYS-088 oraz własne reguły wentylatora i HMI. Wyjątek serwisowy sprawdzić odrębnie według SYS-090/091. Utratę łączności sprawdzić według SYS-258. Przed wykonaniem ustalić stany awaryjnych po śnie i restarcie w F04, a następnie progi/czasy, połączenia, obciążenia, wyposażenie i warunki przerwania w projekcie/procedurze. Wyniki powiązać z HW/FW, konfiguracją i profilem akumulatora. [Macierz weryfikacji](../verification/macierz-wymagan.md).
+
+To plan do rozwinięcia w procedurę; prób produktu jeszcze nie wykonano.
+
+## Awaryjne po utracie HMI/CAN
+
+W odpowiedzi **A na pytanie 266** (2026-11-26) właściciel przyjął SYS-258: działające nieprzerwanie ECU podtrzymuje włączone awaryjne po potwierdzeniu utraty HMI lub komunikacji CAN. Miganie obu stron wykonuje lokalnie; nie wymaga dalszych poleceń panelu ani PC. Reguła obowiązuje również w oszczędzaniu dopuszczającym awaryjne według SYS-257.
+
+Utrata łączności sama nie włącza wyłączonych awaryjnych. Zabezpieczenia każdego toru, limity po usterce i dopuszczone zasilanie nadal obowiązują. Stan faktyczny pozostaje w ECU według SYS-047; przy braku komunikacji HMI nie może zlecić zmiany. Kryteria ważności komunikacji, parametry migania i kwalifikację poleceń opracujemy w architekturze.
+
+SYS-258 dotyczy nieprzerwanej pracy w bieżącym okresie wybudzenia. Sam nie ustanawia blokady snu ani odtwarzania awaryjnych po restarcie. Te stany oraz współdziałanie z wyborem pojedynczej strony pozostają do ustalenia w F04; reguły pojedynczego kierunkowskazu SYS-052/251/252 pozostają zachowane.
+
+### Plan próby SYS-258
+
+1. Na stanowisku rzeczywistego ECU–HMI ze sprawnymi torami włączyć awaryjne i potwierdzić wspólne miganie obu stron. Osobno odtworzyć wyłączenie HMI, przerwę komunikacji CAN oraz brak wymaganych komunikatów przy pozostającym zasilaniu. Przy nieprzerwanej pracy ECU potwierdzić lokalne podtrzymanie migania po rozpoznaniu utraty, bez PC i dalszych poleceń panelu. Rejestrować komunikację, stan ECU i rzeczywiste napięcia/prądy obu stron.
+2. Powtórzyć przy zgaszonym silniku, w aktywnym oszczędzaniu według SYS-257 oraz z symulowaną nominalną pracą silnika. Wywołać utratę w fazach ON i OFF migania; potwierdzić ciągłość funkcji w dopuszczonych warunkach. Powtórzyć przy wcześniej wyłączonych awaryjnych: sama utrata nie może ich włączyć. Przypadki pojedynczego kierunku sprawdzić odrębnie według SYS-052/251.
+3. Przywrócić prawidłową komunikację i odczytać rzeczywisty stan awaryjnych z ECU, zgodnie z jego rolą właściciela danych. Sprawdzić zgodność prezentacji HMI z wyjściami; kwalifikację poleceń i synchronizację danych opracować z protokołem przed próbą. Bez restartu ECU potwierdzić, że podtrzymanie nie zależy od sesji Windows ani obsługi HMI.
+4. Przy braku HMI/CAN zweryfikować nadal aktywne zabezpieczenia oraz limity wyjść według SYS-253, a także warunki zasilania. Podtrzymanie awaryjnych nie może omijać odcięcia właściwego toru; kryteria i bezpieczne wymuszanie usterek określić przed wykonaniem. Stany snu, restartu i wyboru strony sprawdzić po ich ustaleniu w F04 odrębnymi planami. Przed próbą przyjąć parametry migania, czasy/kryteria łączności, połączenia, obciążenia, wyposażenie i warunki przerwania; wyniki powiązać z HW/FW i konfiguracją. [Macierz weryfikacji](../verification/macierz-wymagan.md).
 
 To plan do rozwinięcia w procedurę; prób produktu jeszcze nie wykonano.
 
 ## Kontrola pokrycia przed kartą F04
 
-Stan kontroli: 2026-11-26, po odpowiedzi 265 i jej doprecyzowaniu. F04 pozostaje aktywny. Tabela rozdziela przyjęty zakres, kwestie funkcjonalne do doprecyzowania i dane techniczne.
+Stan kontroli: 2026-11-26, po decyzji 266. F04 pozostaje aktywny. Tabela rozdziela przyjęty zakres, kwestie funkcjonalne do doprecyzowania i dane techniczne.
 
 | Obszar | Przyjęty zakres / stan | Dalsze rozstrzygnięcie |
 | --- | --- | --- |
@@ -440,13 +457,13 @@ Stan kontroli: 2026-11-26, po odpowiedzi 265 i jej doprecyzowaniu. F04 pozostaje
 | Trzy dodatkowe kanały | SYS-241–249: zastosowania, stany, ON/OFF/PWM, próby, limit i lokalna usterka. | Obciążenia, zgodne lampy, bilanse, topologia i komponenty w etapach 3–6. |
 | Podstawowe światła | SYS-050, SYS-081–091, SYS-250 i SYS-253. | Kombinacje i parametry lamp, podział kanałów, gotowość i diagnostyka z danymi osprzętu. |
 | Kierunkowskazy | SYS-052 i SYS-251–253: utrata/powrót CAN, restart, sen i próby po usterce; pojedynczy kierunek odcięty w oszczędzaniu SYS-257. | Parametry migania i realizacja interfejsu w projekcie. |
-| Awaryjne | SYS-257: świadome włączenie obu stron dostępne w oszczędzaniu. | Stany utraty HMI/CAN, snu, restartu i współdziałanie z wyborem strony otwarte w F04; następna decyzja 266. |
+| Awaryjne | SYS-257: dostępne w oszczędzaniu; SYS-258: podtrzymanie po utracie HMI/CAN przy nieprzerwanej pracy ECU. | Wpływ na sen, restart i współdziałanie z wyborem strony otwarte w F04; następna decyzja 267. |
 | Światło hamowania | SYS-051, SYS-253/254 i SYS-256: bezpośrednie wejścia, próba bez HMI oraz wybudzanie obu urządzeń. | Detekcja nowego użycia w śnie, filtracja, długi stan aktywny, czas reakcji i pobór do architektury oraz prób. |
 | Wentylator | Zachowane funkcje i zamknięte reakcje F03, w tym SYS-043/044/053/060/061/089 i SYS-184–196. | Dane osprzętu, parametry i procedury na właściwych etapach; F03 pozostaje zamknięty. |
 | Zewnętrzne porty | SYS-255: uzgodnione funkcje, bez dodatkowej rezerwy zewnętrznej dla nieokreślonych urządzeń. | Typy, liczby pozostałych torów, pinout i wewnętrzna rezerwa zasobów w architekturze. |
 | Oszczędzanie energii | Przyjęte SYS-084–091 i lista SYS-257; klakson odcięty po doprecyzowaniu 265. | Progi, czasy, bilanse i realizacja w architekturze/projekcie. |
 
-Wybudzanie przez hamulce rozstrzyga SYS-256. Odpowiedź 265 i jej doprecyzowanie określają listę odcięcia oraz dodają możliwość awaryjnych w oszczędzaniu (SYS-257). Reguły nowych stanów awaryjnych pozostają do rozstrzygnięcia w F04, począwszy od pytania 266. Po nich przeprowadzimy kontrolę spójności i kartę do zatwierdzenia przez właściciela. F04 pozostaje aktywny.
+Wybudzanie przez hamulce rozstrzyga SYS-256. Odpowiedź 265 i jej doprecyzowanie określają listę odcięcia oraz dodają możliwość awaryjnych w oszczędzaniu (SYS-257). Odpowiedź A na pytanie 266 przyjmuje podtrzymanie po utracie HMI/CAN (SYS-258). Wpływ awaryjnych na sen, restart i wybór strony pozostaje do rozstrzygnięcia w F04, począwszy od pytania 267. Po nich przeprowadzimy kontrolę spójności i kartę do zatwierdzenia przez właściciela. F04 pozostaje aktywny.
 
 ## Kontrola listy odcięcia energii
 
@@ -454,8 +471,8 @@ Lista jest przyjęta jako SYS-257 na podstawie odpowiedzi 265 oraz A na doprecyz
 
 ## Następna decyzja
 
-**Pytanie 266:** podczas nieprzerwanej pracy ECU awaryjne są włączone i ECU potwierdza utratę HMI/CAN. Czy ma utrzymać miganie obu stron?
+**Pytanie 267:** silnik jest zgaszony, PC odłączony, awaryjne migają i upływa czas bezczynności. Czy awaryjne mają wstrzymywać skoordynowane uśpienie ECU/HMI?
 
-Propozycja A: utrzymać awaryjne lokalnie w ECU, z zachowaniem zabezpieczeń i dopuszczonego zasilania, również w oszczędzaniu dopuszczającym je według SYS-257. Alternatywa B: wyłączyć po potwierdzeniu utraty, jak wcześniej ustalono dla pojedynczego kierunkowskazu. Decyzja nie jest jeszcze podjęta.
+Propozycja A: utrzymać obsługę awaryjnych i wstrzymać pełną sekwencję snu do ich wyłączenia lub właściwego ochronnego odcięcia. HMI pozostaje aktywne razem z ECU według SYS-062. Alternatywa B: po upływie bezczynności automatycznie wyłączyć awaryjne i uśpić system, jeśli nie ma innych blokad. Decyzja nie jest jeszcze podjęta.
 
-A podtrzymuje sygnalizację przy awarii panelu lub komunikacji. B kończy ją po utracie interfejsu obsługi. Pytanie dotyczy działającego ECU, bez jego restartu i bez przejścia w sen; te stany i współdziałanie z wyborem strony rozstrzygniemy w F04. Kryteria oraz czasy wykrycia utraty wymagają architektury i prób.
+A zachowuje świadomie uruchomioną sygnalizację kosztem zużycia energii przez lampy, ECU i HMI. B ogranicza czas jej działania podczas postoju. Zabezpieczenia wyjść i dopuszczone zasilanie pozostają nadrzędne; nie wybieramy tu progów ani dodatkowego limitu czasu. Stany restartu i współdziałanie z wyborem strony pozostają do kolejnych ustaleń F04.

@@ -10,13 +10,13 @@ Kontrola pełnego F01 została zakończona: właściciel potwierdził zgodność
 
 | Obszar | Stan potwierdzony dokumentacją |
 | --- | --- |
-| Wymagania systemowe | 257 wymagań SYS-001–257; pierwszy przydział do bloków i grup weryfikacji gotowy, kryteria i procedury do rozwinięcia. |
+| Wymagania systemowe | 258 wymagań SYS-001–258; pierwszy przydział do bloków i grup weryfikacji gotowy, kryteria i procedury do rozwinięcia. |
 | Decyzje | 12 zapisów ADR-001–012; ostatni ogranicza platformę do silników chłodzonych cieczą. |
 | Zakres wariantów | Macierz 6 wariantów silnika; jest planem obsługi, nie potwierdzeniem zgodności modeli. |
 | Pierwsza jednostka | Beta 300 RR Racing 2015; analiza dokumentów i zdjęć, bez raportów pomiarowych instalacji. |
 | Architektura | Pierwszy diagram blokowy, funkcje sześciu wariantów i przydział zasobów gotowe jako wersje robocze. Modele, parametry i liczbowe bilanse pozostają otwarte. |
 | Schematy, BOM, PCB i mechanika | W repozytorium brak projektu wykonawczego i zatwierdzonego kompletnego BOM ECU/HMI. |
-| Kod i próby produktu | W repozytorium brak implementacji firmware/Windows i raportów prób DustONE. Istnieją plany, szablon procedury i przydział 257 wymagań do 13 grup weryfikacji. |
+| Kod i próby produktu | W repozytorium brak implementacji firmware/Windows i raportów prób DustONE. Istnieją plany, szablon procedury i przydział 258 wymagań do 13 grup weryfikacji. |
 
 Podstawy: [wymagania](requirements/README.md), [decyzje](decisions/README.md), [macierz silników](architecture/macierz-wariantow-silnika.md), [I/O](interfaces/wstepna-lista-io.md) i [weryfikacja](verification/README.md). Liczba wymagań i pytań nie jest procentem wykonania produktu.
 
@@ -72,13 +72,13 @@ Parametry wyliczane z osprzętu, charakterystyki czujników, wartości elementó
 | W04 — Zakres funkcjonalny: F01 | Zamknięty po kontroli właściciela: 2026-11-04. | [Pomiary](requirements/f01-pomiary-silnika.md), [przegląd sterowania i wynik zamknięcia](requirements/f01-sterowanie-silnikiem.md); dane techniczne przekazane do kolejki etapów 3–6. |
 | F02 — Mapy, konfiguracja i strojenie ECU | Zamknięty po akceptacji właściciela 2026-11-09. | Odpowiedź A na pytanie 166. [Karta F02](requirements/f02-przeglad-zakresu.md) zawiera przyjęty zakres, plan weryfikacji i przekazanie. |
 | F03 — Ochrona i reakcje na usterki | Zamknięty po akceptacji właściciela: 2026-11-24. | Odpowiedź A na pytanie 243. [Karta F03](requirements/f03-przeglad-zakresu.md) obejmuje SYS-157–235, przegląd spójności, 79 planów prób i przekazanie do dalszych etapów. [Szczegółowe reakcje](requirements/f03-ochrona-i-usterki.md) pozostają źródłem rozwinięcia; nie wykonano prób produktu. |
-| F04 — Akcesoria i dodatkowe I/O | Aktywny; stany awaryjnych przed kartą zamykającą. | [Dokument F04](requirements/f04-akcesoria-i-io.md): przyjęte SYS-236–257. Odpowiedź 265 i A na doprecyzowanie określają listę odcięcia; światło hamowania i awaryjne pozostają dostępne. Reguły utraty HMI/CAN, snu, restartu i współdziałania awaryjnych z wyborem strony do ustalenia w F04. Następna decyzja 266; potem kontrola i karta właściciela. Parametry oraz realizacja na właściwych etapach. |
+| F04 — Akcesoria i dodatkowe I/O | Aktywny; stany awaryjnych przed kartą zamykającą. | [Dokument F04](requirements/f04-akcesoria-i-io.md): przyjęte SYS-236–258. Lista odcięcia jest określona, a włączone awaryjne pozostają aktywne po utracie HMI/CAN przy nieprzerwanej pracy ECU. Sen, restart i współdziałanie z wyborem strony do rozstrzygnięcia w F04; następna decyzja 267 dotyczy blokowania snu. Potem kontrola spójności i karta właściciela. Parametry oraz realizacja na właściwych etapach. |
 | W05 — Inwentaryzacja Bety | W kolejce, etap 3. | Zachowany [plan INV](verification/beta-2015-plan-inwentaryzacji.md); brak wyników pomiarowych. |
 | W01/W02 — Architektura i zasoby | W kolejce, etap 4. | Zachowane [diagram](architecture/blokowa-systemu.md) i [macierz wariantów](architecture/macierz-wariantow-silnika.md); bez zamkniętych bilansów. |
-| W03 — Weryfikacja wymagań | W kolejce, etap 5. | Zachowany [przydział 257 SYS do grup](verification/macierz-wymagan.md); kryteria, procedury i dowody do rozwinięcia. |
+| W03 — Weryfikacja wymagań | W kolejce, etap 5. | Zachowany [przydział 258 SYS do grup](verification/macierz-wymagan.md); kryteria, procedury i dowody do rozwinięcia. |
 | W06 — Bilanse i wybór komponentów | W kolejce, etapy 4 i 6. | Wymagane wejściowe parametry; ważne komponenty wybierzemy wspólnie. |
 
-**F03 zamknięto odpowiedzią A na pytanie 243 (2026-11-24). W aktywnym F04 przyjęto SYS-236–257. Odpowiedź 265 i A na doprecyzowanie klaksonu przyjmują listę odcięcia oszczędzania: światło hamowania i możliwość awaryjnych pozostają dostępne, pojedyncze kierunkowskazy oraz klakson są niedostępne. Następna decyzja 266 dotyczy awaryjnych po utracie HMI/CAN.** [Kontrola F04](requirements/f04-akcesoria-i-io.md#kontrola-pokrycia-przed-kartą-f04) obejmuje też otwarte stany awaryjnych i sprawdzenie spójności przed kartą. F04 pozostaje aktywny; architektura, bilanse, wybór komponentów i próby produktu nie są zakończone.
+**F03 zamknięto odpowiedzią A na pytanie 243 (2026-11-24). W aktywnym F04 przyjęto SYS-236–258. Odpowiedź A na pytanie 266 przyjmuje podtrzymanie włączonych awaryjnych po utracie HMI/CAN, także w oszczędzaniu, przy nieprzerwanej pracy ECU i aktywnych zabezpieczeniach. Następna decyzja 267 dotyczy skoordynowanego snu podczas awaryjnych.** [Kontrola F04](requirements/f04-akcesoria-i-io.md#kontrola-pokrycia-przed-kartą-f04) wskazuje pozostałe stany do ustalenia przed kartą. F04 pozostaje aktywny; architektura, bilanse, wybór komponentów i próby produktu nie są zakończone.
 
 ## Warunki przechodzenia dalej
 
