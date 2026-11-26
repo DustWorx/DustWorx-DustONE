@@ -42,3 +42,7 @@ Przykład samego rachunku: średnio 100 µA przez 672 h daje 67,2 mAh. Wartość
 Przypadki analizy i prób mają uwzględnić temperaturę w czasie postoju oraz temperaturę późniejszego rozruchu. Przejścia i stabilizację cieplną akumulatora/urządzeń oraz tolerancje doprecyzujemy w procedurach. Zakres otoczenia jest celem do potwierdzenia dla zgodnych konfiguracji, a nie potwierdzonym parametrem dowolnego akumulatora. Przed próbą potwierdzić w dokumentacji konkretnej baterii i regulatora dopuszczalność rozruchu oraz następującego po nim ładowania w danej temperaturze.
 
 Procedury wykonawcze, przyrządy, połączenia, tolerancje i warunki przerwania przygotujemy według [zasad weryfikacji](../verification/README.md) po ustaleniu danych. Pomiar krótkotrwały i obliczenia wspierają próbę długotrwałą produktu. Nie wykonano pomiarów ani testów; nie potwierdzono jeszcze spełnienia celu.
+
+## Przekazanie F04 — detekcja hamulców
+
+Przyjęty SYS-256 dodaje detekcję nowego użycia obu hamulców w śnie i wybudzenie ECU oraz HMI. Pobór tych torów włączyć do łącznego prądu czuwania; zmierzyć go na całym zestawie. Cel 28 dni nadal dotyczy postoju bez korzystania z motocykla. Wybudzenia przez świadome użycie hamulców i ich energię ocenić osobnymi próbami; nie traktować ich jako bezczynnego postoju. Kryteria nowego użycia, filtracja, długi stan aktywny i czasy do architektury. [Plan SYS-256](../requirements/f04-akcesoria-i-io.md#plan-próby-sys-256).

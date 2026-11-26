@@ -284,6 +284,8 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 | SYS-254 | Po ochronnym odcięciu toru światła hamowania, przy dostępnym limicie SYS-253 i spełnionych warunkach, ECU dopuszcza jedną ograniczoną próbę bez HMI: po potwierdzonym zwolnieniu obu hamulców nowe użycie któregokolwiek zleca sprawdzenie toru. Samo trzymanie hamulca ani odnowienie limitu nie inicjują próby. Jej niepowodzenie blokuje dalsze próby według SYS-253; polecenia HMI i serwisu nie omijają wspólnego limitu kanału. Zabezpieczenia i warunki termiczne oraz ochrona energii pozostają nadrzędne. Normalne działanie sprawnego toru nadal podlega SYS-051. Kryteria zwolnienia, nowego użycia i oceny próby wymagają projektu oraz weryfikacji. |
 | SYS-255 | Każdy zewnętrzny port systemu ma uzgodnione zastosowanie. Zakres nie obejmuje dodatkowych zewnętrznych portów sygnałowych ani magistral rezerwowych do nieokreślonych urządzeń. Pozostają wymagane tory wszystkich przyjętych czujników i osprzętu, trzy dodatkowe kanały mocy, CAN ECU–HMI oraz interfejsy obsługi PC, programowania i debugowania według przyjętych ról. Rezerwę zasobów procesora, wewnętrzne magistrale i punkty testowe ocenia się w architekturze/projekcie. Typy elektryczne, pinout, bilanse i ważne komponenty wymagają dalszego projektu oraz wspólnego wyboru. |
 
+| SYS-256 | Przy dostępnym zasilaniu nowe użycie przedniego albo tylnego hamulca wybudza ECU oraz HMI z prawidłowego snu. Po uzyskaniu gotowości wymaganych torów ECU steruje sprawnym światłem hamowania według bieżących wejść SYS-051, niezależnie od gotowości lub sprawności HMI/CAN. Wybudzenie nie omija zabezpieczeń, warunków zasilania ani zasad próby i limitu SYS-253/254. Kryteria nowego użycia, filtracja, obsługa długiego stanu aktywnego, czas reakcji i pobór czuwania wymagają projektu oraz weryfikacji. |
+
 ## 3. Podział odpowiedzialności
 
 - **ECU:** samodzielne sterowanie silnikiem i akcesoriami, pomiary, wykrywanie usterek oraz reakcje na błędy. Właściciel danych i wykonawca żądań według SYS-046 i SYS-047. Sterowanie wymagające precyzyjnego czasu realizowane lokalnie w ECU.
@@ -847,6 +849,8 @@ W odpowiedzi A na pytanie 261 (2026-11-25) właściciel rozszerzył zasadę świ
 W odpowiedzi A na pytanie 262 (2026-11-25) właściciel przyjął SYS-254: przy dostępnym limicie i spełnionych warunkach nowe użycie któregokolwiek hamulca po zwolnieniu obu może zlecić ograniczoną próbę toru bez HMI. Obowiązuje wspólny limit kanału i blokada po niepowodzeniu. [Plan próby F04](requirements/f04-akcesoria-i-io.md#plan-próby-sys-254).
 
 W odpowiedzi A na pytanie 263 (2026-11-25) właściciel przyjął SYS-255: każdy zewnętrzny port ma uzgodnione zastosowanie; bez dodatkowej rezerwy zewnętrznej dla nieokreślonych urządzeń. Zachowano wszystkie przyjęte funkcje i interfejsy oraz odrębną ocenę wewnętrznej rezerwy zasobów w architekturze. [Plan weryfikacji F04](requirements/f04-akcesoria-i-io.md#plan-próby-sys-255).
+
+W odpowiedzi A na pytanie 264 (2026-11-26) właściciel przyjął SYS-256: nowe użycie dowolnego hamulca wybudza ECU i HMI. Sprawne światło hamowania reaguje na bieżące wejścia po gotowości wymaganych torów, bez czekania na HMI/CAN. Zabezpieczenia oraz zasady prób po usterce pozostają nadrzędne. [Ustalenie i plan próby F04](requirements/f04-akcesoria-i-io.md#wybudzanie-przez-hamulce).
 
 ## 4. Decyzje potrzebne przed doborem sprzętu
 

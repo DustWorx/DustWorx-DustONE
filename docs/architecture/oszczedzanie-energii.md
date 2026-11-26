@@ -56,3 +56,7 @@ Konsekwencja dla projektu: brak aktywnego testu nie uzasadnia podtrzymania wyją
 | Pomiar i energia | Dokładność, uszkodzenia toru, prąd odbiorników oraz pobór ECU/HMI w stanach docelowych. |
 
 Stanowiska, konkretne połączenia, limity i dowody zostaną przygotowane przed próbami. To plan, nie wykonane testy ani potwierdzenie ochrony akumulatora.
+
+## Kontrola F04 — lista odbiorników
+
+Kontrola z 2026-11-26 potwierdziła, że pełna lista odbiorników objętych odcięciem pozostaje otwartą decyzją funkcjonalną. Zestawienie obecnych ustaleń i propozycje pytania 265 są w [F04](../requirements/f04-akcesoria-i-io.md#kontrola-listy-odcięcia-energii). Nie zatwierdzono jeszcze nowych wyjątków ani rozszerzenia odcięcia na poszczególne akcesoria. Progi, czasy i bilanse pozostają do architektury.
