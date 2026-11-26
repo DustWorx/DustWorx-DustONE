@@ -286,6 +286,8 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 
 | SYS-256 | Przy dostępnym zasilaniu nowe użycie przedniego albo tylnego hamulca wybudza ECU oraz HMI z prawidłowego snu. Po uzyskaniu gotowości wymaganych torów ECU steruje sprawnym światłem hamowania według bieżących wejść SYS-051, niezależnie od gotowości lub sprawności HMI/CAN. Wybudzenie nie omija zabezpieczeń, warunków zasilania ani zasad próby i limitu SYS-253/254. Kryteria nowego użycia, filtracja, obsługa długiego stanu aktywnego, czas reakcji i pobór czuwania wymagają projektu oraz weryfikacji. |
 
+| SYS-257 | Odcięcie oszczędzania energii SYS-084–087 w normalnej obsłudze obejmuje przednie i tylne pozycyjne, mijania, drogowe, wszystkie trzy dodatkowe kanały mocy, pojedyncze kierunkowskazy i klakson. ECU wyłącza objęte odbiorniki i odrzuca zwykłe żądania ich włączenia według SYS-085/086. Pozostają dostępne światło hamowania według SYS-051/256 oraz świadome włączenie świateł awaryjnych przez użytkownika z HMI, jako wspólnego migania obu stron sterowanego lokalnie przez ECU. Dostępność nie omija zabezpieczeń wyjść, limitów po usterce ani dopuszczonego zakresu zasilania. Wentylator, zasilanie HMI i funkcje silnika zachowują własne przyjęte reguły. Wyjście z odcięcia i wyjątek serwisowy nadal podlegają SYS-087–091; prądy, progi, czasy i realizacja wymagają projektu oraz prób. |
+
 ## 3. Podział odpowiedzialności
 
 - **ECU:** samodzielne sterowanie silnikiem i akcesoriami, pomiary, wykrywanie usterek oraz reakcje na błędy. Właściciel danych i wykonawca żądań według SYS-046 i SYS-047. Sterowanie wymagające precyzyjnego czasu realizowane lokalnie w ECU.
@@ -851,6 +853,8 @@ W odpowiedzi A na pytanie 262 (2026-11-25) właściciel przyjął SYS-254: przy 
 W odpowiedzi A na pytanie 263 (2026-11-25) właściciel przyjął SYS-255: każdy zewnętrzny port ma uzgodnione zastosowanie; bez dodatkowej rezerwy zewnętrznej dla nieokreślonych urządzeń. Zachowano wszystkie przyjęte funkcje i interfejsy oraz odrębną ocenę wewnętrznej rezerwy zasobów w architekturze. [Plan weryfikacji F04](requirements/f04-akcesoria-i-io.md#plan-próby-sys-255).
 
 W odpowiedzi A na pytanie 264 (2026-11-26) właściciel przyjął SYS-256: nowe użycie dowolnego hamulca wybudza ECU i HMI. Sprawne światło hamowania reaguje na bieżące wejścia po gotowości wymaganych torów, bez czekania na HMI/CAN. Zabezpieczenia oraz zasady prób po usterce pozostają nadrzędne. [Ustalenie i plan próby F04](requirements/f04-akcesoria-i-io.md#wybudzanie-przez-hamulce).
+
+W odpowiedzi na pytanie 265 (2026-11-26) właściciel zachował w oszczędzaniu światło hamowania i możliwość włączenia awaryjnych, wyłączając pojedyncze kierunkowskazy. Odpowiedź A na doprecyzowanie 265 potwierdziła odcięcie klaksonu. SYS-257 zapisuje tę listę z odcięciem świateł stałych i trzech dodatkowych kanałów z obu przedstawionych propozycji. Dostępność awaryjnych nie oznacza ich samoczynnego włączania; stany przy utracie CAN, śnie i restarcie wymagają dalszych ustaleń F04. [Ustalenie i plan próby](requirements/f04-akcesoria-i-io.md#odbiorniki-w-oszczędzaniu-energii).
 
 ## 4. Decyzje potrzebne przed doborem sprzętu
 
