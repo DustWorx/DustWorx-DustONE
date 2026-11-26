@@ -1,6 +1,6 @@
 # ADR-003 — wybudzanie bez osobnego włącznika
 
-Data: 2026-10-25; uzupełnienie: 2026-11-17. Status: zatwierdzone wymagania użytkowe; realizacja sprzętowa i parametry do projektu oraz weryfikacji.
+Data: 2026-10-25; uzupełnienie: 2026-11-26. Status: zatwierdzone wymagania użytkowe; realizacja sprzętowa i parametry do projektu oraz weryfikacji.
 
 ## Problem i opcje
 
@@ -24,6 +24,8 @@ W odpowiedzi na pytanie 83 z 2026-11-01 właściciel zatwierdził wybudzanie ECU
 
 W odpowiedzi A na pytanie 85 z 2026-11-01 właściciel zatwierdził wyłączenie świateł przednich i tylnych pozycyjnych przed prawidłowym uśpieniem. Po wybudzeniu ze zgaszonym silnikiem pozostają wyłączone do polecenia z HMI (SYS-081). Automatyczne przywracanie stanu sprzed snu nie zostało przyjęte. Przypadki i zakres prób opisuje [sekwencja usypiania](../architecture/usypianie-ecu-hmi.md).
 
+W odpowiedzi A na pytanie 264 (2026-11-26) właściciel dodał nowe użycie przedniego lub tylnego hamulca jako źródło wybudzenia ECU i HMI (SYS-256). Sprawne światło hamowania reaguje po gotowości wymaganych torów bez oczekiwania na HMI/CAN, z zachowaniem zabezpieczeń oraz zasad prób po usterce. [Ustalenie i plan prób F04](../requirements/f04-akcesoria-i-io.md#wybudzanie-przez-hamulce).
+
 | Zdarzenie | Wymagane wybudzenie | Uwagi |
 | --- | --- | --- |
 | Naciśnięcie przewodowego START | ECU i HMI | Priorytet gotowości ECU względem HMI; przed dopuszczeniem rozruchu kontrole według SYS-203; rozruch niezależny od HMI, przy zwykłym wybudzeniu trzymany START uruchamia rozrusznik po uzyskaniu gotowości według SYS-204, z zachowaniem SYS-048/049 i reguł ponowienia po odcięciach. |
@@ -31,6 +33,7 @@ W odpowiedzi A na pytanie 85 z 2026-11-01 właściciel zatwierdził wyłączenie
 | Użycie przycisków obsługi HMI | HMI i ECU | Przyciski pozostają w HMI. |
 | Podłączenie komputera | ECU i HMI | Przy dostępnym zasilaniu 12 V według SYS-058; utrzymana blokada usypiania obu urządzeń przez czas połączenia. |
 | Wykrycie obrotów przedniego koła | ECU i HMI | Przy dostępnym zasilaniu, także ze zgaszonym silnikiem. ECU wybudza HMI; naliczanie ODO nie czeka na jego gotowość (SYS-075/079/080). |
+| Nowe użycie przedniego albo tylnego hamulca | ECU i HMI | Po gotowości wymaganych torów światło reaguje według bieżących wejść SYS-051, niezależnie od HMI/CAN. Obowiązują warunki zasilania i zasady SYS-253/254. |
 
 ## Konsekwencje dla projektu
 
@@ -78,3 +81,7 @@ Po wybudzeniu ECU ustala blokadę rozruchu na podstawie aktualnego, wiarygodnego
 W odpowiedzi B na pytanie 212 właściciel przyjął zakończenie wszystkich prób autotestu wykonalnych w aktualnych warunkach przy zgaszonym silniku przed dopuszczeniem rozruchu (SYS-203). Dostępna próba wentylatora poprzedza rozruch. Sprawdzenia wymagające obrotu wału, pracy silnika lub innych niespełnionych warunków pozostają oczekujące. Wyniki podlegają właściwym reakcjom na usterki. Rozruch pozostaje niezależny od HMI. Uwzględnić czas prób w budżecie gotowości, również dla kopniaka. [Plan próby](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-203).
 
 W odpowiedzi A na pytanie 213 właściciel dopuścił załączenie rozrusznika na tym samym przytrzymaniu START po zakończeniu wymaganych prób podczas zwykłego wybudzenia (SYS-204). Puszczenie przycisku przed gotowością kończy żądanie. Pozostałe warunki rozruchu oraz reguły ponowienia po odcięciach mają pierwszeństwo. [Plan próby](../requirements/f03-ochrona-i-usterki.md#plan-próby-sys-204).
+
+## Uzupełnienie F04 — hamulce
+
+Detekcję obu hamulców w śnie i czas gotowości toru światła uwzględnić w architekturze oraz budżecie energii. Filtracja, kryteria nowego użycia i obsługa długiego stanu aktywnego wymagają specyfikacji. Użycie hamulca samo nie żąda rozruchu. [Plan SYS-256](../requirements/f04-akcesoria-i-io.md#plan-próby-sys-256) obejmuje oba wejścia, niezależność od HMI/CAN, stany przez wybudzenie, czas reakcji i pobór czuwania. Przyjęty zakres nie stanowi wyniku prób produktu.

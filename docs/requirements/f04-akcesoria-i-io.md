@@ -25,7 +25,7 @@ Stan na 2026-11-26. **F04 aktywny po zamknięciu F03 w pytaniu 243.** Aktualny t
 | Limit świadomych prób po niepowodzeniu | Przyjęty SYS-248, odpowiedź A na pytanie 256: po jednej nieudanej próbie blokada danego kanału do pełnego cyklu snu lub zaniku i powrotu zasilania. |
 | Wpływ usterki jednego kanału na pozostałe | Przyjęty SYS-249, odpowiedź A na pytanie 257: odcięcie tylko uszkodzonego kanału przy prawidłowych warunkach pozostałych; wspólne zagrożenia pozostają nadrzędne. |
 | Sygnałowe I/O i komunikacja | Przyjęty SYS-255, odpowiedź A na pytanie 263: zewnętrzne porty wynikają z uzgodnionych funkcji; bez rezerwy do nieokreślonych urządzeń. Parametry, zasoby i pinout do architektury. |
-| Wybudzanie przez hamulce | Luka wskazana w kontroli pokrycia: bezpośrednie wejścia są wymagane, ale ich roli w wybudzaniu nie ustalono. Następne pytanie 264. |
+| Wybudzanie przez hamulce | Przyjęty SYS-256, odpowiedź A na pytanie 264: nowe użycie dowolnego hamulca wybudza ECU i HMI; światło działa bez oczekiwania na HMI. |
 
 Klakson należy do przyjętego zakresu SYS-004. Obecność klaksonu 12 V w dokumentacji Bety jest potwierdzona w [analizie instrukcji i suplementu](../interfaces/beta-2015-analiza-dokumentacji.md). ECU steruje odbiornikiem, a HMI przekazuje polecenia kierowcy. Nie ustalono tu jeszcze pełnej obsługi przycisku ani wszystkich stanów po restarcie.
 
@@ -97,7 +97,7 @@ Przykład możliwości sprzętowej: [Infineon — diagnostyka open-load w stanie
 
 ### Plan próby SYS-240
 
-1. Na stanowisku rzeczywistego ECU–HMI z klaksonem wykonać autotest przy wszystkich źródłach wybudzenia objętych SYS-054–056/079–080 oraz reprezentatywnych uruchomieniach ECU. Bez świadomego polecenia próby dźwiękowej potwierdzić brak sygnału. Rejestrować polecenia, napięcie/prąd wyjścia i ocenę akustyczną według kryteriów ustalonych przed próbą.
+1. Na stanowisku rzeczywistego ECU–HMI z klaksonem wykonać autotest przy wszystkich źródłach wybudzenia objętych SYS-054–056/079–080/256 oraz reprezentatywnych uruchomieniach ECU. Bez świadomego polecenia próby dźwiękowej potwierdzić brak sygnału. Rejestrować polecenia, napięcie/prąd wyjścia i ocenę akustyczną według kryteriów ustalonych przed próbą.
 2. Dla zaprojektowanej diagnostyki odtworzyć nominalny obwód oraz wykrywalne przerwy i zwarcia na właściwym stanowisku, w granicach zabezpieczeń. Sprawdzić rzeczywiste pokrycie, wyniki i brak dźwięku podczas automatycznych sprawdzeń. Wynik musi odpowiadać sprawdzonym cechom; nie uznawać samej poprawnej odpowiedzi elektrycznej za potwierdzenie prawidłowego dźwięku.
 3. Wywołać świadomie próbę dźwiękową, wykorzystując przyjętą obsługę przycisku albo istniejący test serwisowy po jego dopuszczeniu. Potwierdzić reakcję na polecenie i zachowanie zabezpieczeń. Po powrocie łączności, restarcie i śnie obowiązują także SYS-237–239.
 4. Powtórzyć cykle snu/wybudzenia, przypadek ruchu koła i autotest bez sesji Windows. Nie dopuszczać do samoczynnego dźwięku jako efektu zakończenia autotestu lub gotowości HMI. Kryteria, połączenia i wyposażenie akustyczne oraz elektryczne ustalić przed wykonaniem; wyniki powiązać z HW/FW i konfiguracją. [Macierz weryfikacji](../verification/macierz-wymagan.md).
@@ -383,9 +383,26 @@ Rezerwa zasobów procesora, wewnętrzne magistrale, punkty testowe i niewykorzys
 
 To plan przeglądu, inspekcji produktu i powiązanych prób do rozwinięcia w procedury; nie wykonano weryfikacji produktu.
 
+## Wybudzanie przez hamulce
+
+W odpowiedzi **A na pytanie 264** (2026-11-26) właściciel przyjął SYS-256: nowe użycie przedniego albo tylnego hamulca wybudza ECU i HMI. Po gotowości wymaganych torów ECU obsługuje bieżące wejścia SYS-051 bez czekania na gotowość HMI i niezależnie od jego sprawności oraz CAN.
+
+Zdarzenie wybudzenia nie jest żądaniem rozruchu silnika. Nie potwierdza naprawy toru światła i nie omija zabezpieczeń, warunków zasilania ani wspólnego limitu prób SYS-253/254. Przy sprawnym torze obowiązuje normalne sterowanie według wejść; przy wcześniejszym odcięciu ewentualna próba wymaga warunków SYS-254. Samo odnowienie limitu nie załącza światła.
+
+W architekturze określimy detekcję nowego użycia w śnie, filtrację, obsługę długiego stanu aktywnego, gotowość toru światła, czasy i przekazanie wybudzenia HMI. Pobór detekcji obu hamulców włączymy do budżetu czuwania. Nie ustalono tu dodatkowych reguł odnawiania bezczynności przy już wybudzonym ECU ani wpływu trwale aktywnego wejścia na sen. Ważne układy wybierzemy wspólnie.
+
+### Plan próby SYS-256
+
+1. Doprowadzić rzeczywiste ECU i HMI do prawidłowego snu, przy nieruchomym kole, bez PC, START i używania przycisków HMI. Przy sprawnych torach osobno użyć przedniego i tylnego hamulca; potwierdzić wybudzenie obu urządzeń. Rejestrować wejścia, gotowość ECU/HMI, komunikację oraz rzeczywiste napięcie/prąd światła. Zmierzyć czas od nowego użycia do wybudzenia i reakcji światła; kryteria liczbowe przyjąć przed wykonaniem.
+2. Przy przytrzymaniu hamulca przez wybudzenie potwierdzić działanie sprawnego światła po gotowości wymaganych torów, bez oczekiwania na HMI. Powtórzyć z celowo opóźnionym lub niesprawnym HMI oraz brakiem CAN: sprawdzić niezależną obsługę światła przez ECU. Przy sprawnej ścieżce wybudzenia potwierdzić także żądane wybudzenie HMI. Osobno zwolnić hamulec przed gotowością i zmienić stany obu wejść podczas wybudzania; wyjście ma odpowiadać bieżącym stanom SYS-051, bez odłożonego ON z zakończonego użycia.
+3. Po wcześniejszym ochronnym odcięciu światła potwierdzić, że wybudzenie nie zastępuje sprawdzenia toru. Sprawdzić warunki zwolnienia obu hamulców i nowego użycia, dostępność wspólnego limitu, jedną ograniczoną próbę oraz blokadę po niepowodzeniu według SYS-253/254. Przy trzymanym hamulcu samo odnowienie limitu nie może uruchomić próby. Zachować historię DTC i pozostałe zabezpieczenia.
+4. W zweryfikowanym zakresie napięć i temperatur sprawdzić detekcję obu wejść w śnie, prąd czuwania całego zestawu, kwalifikację zakłóceń i przypadki użycia podczas przejścia w sen. Odtworzyć niespełnione warunki zasilania i ochrony energii według przyjętych reguł; wybudzenie nie może ich omijać ani inicjować rozruchu. Obsługę długiego stanu aktywnego sprawdzić według przyszłej specyfikacji, bez założenia nieograniczonego podtrzymania pracy. Przed wykonaniem ustalić interfejsy, połączenia, kryteria, wyposażenie i warunki przerwania; wyniki powiązać z HW/FW, konfiguracją i profilem akumulatora. [Macierz weryfikacji](../verification/macierz-wymagan.md).
+
+To plan do rozwinięcia w procedurę; prób produktu jeszcze nie wykonano.
+
 ## Kontrola pokrycia przed kartą F04
 
-Stan kontroli: 2026-11-26, po decyzji 263. F04 pozostaje aktywny. Tabela rozdziela przyjęty zakres, kwestie funkcjonalne do doprecyzowania i dane techniczne.
+Stan kontroli: 2026-11-26, po decyzji 264. F04 pozostaje aktywny. Tabela rozdziela przyjęty zakres, kwestie funkcjonalne do doprecyzowania i dane techniczne.
 
 | Obszar | Przyjęty zakres / stan | Dalsze rozstrzygnięcie |
 | --- | --- | --- |
@@ -393,17 +410,30 @@ Stan kontroli: 2026-11-26, po decyzji 263. F04 pozostaje aktywny. Tabela rozdzie
 | Trzy dodatkowe kanały | SYS-241–249: zastosowania, stany, ON/OFF/PWM, próby, limit i lokalna usterka. | Obciążenia, zgodne lampy, bilanse, topologia i komponenty w etapach 3–6. |
 | Podstawowe światła | SYS-050, SYS-081–091, SYS-250 i SYS-253. | Kombinacje i parametry lamp, podział kanałów, gotowość i diagnostyka z danymi osprzętu. |
 | Kierunkowskazy | SYS-052 i SYS-251–253: utrata/powrót CAN, restart, sen i próby po usterce. | Parametry migania i realizacja interfejsu w projekcie. |
-| Światło hamowania | SYS-051, SYS-253/254: bezpośrednie wejścia i próba bez HMI. | Wybudzenie przez hamulce jest otwartą decyzją funkcjonalną, pytanie 264. |
+| Światło hamowania | SYS-051, SYS-253/254 i SYS-256: bezpośrednie wejścia, próba bez HMI oraz wybudzanie obu urządzeń. | Detekcja nowego użycia w śnie, filtracja, długi stan aktywny, czas reakcji i pobór do architektury oraz prób. |
 | Wentylator | Zachowane funkcje i zamknięte reakcje F03, w tym SYS-043/044/053/060/061/089 i SYS-184–196. | Dane osprzętu, parametry i procedury na właściwych etapach; F03 pozostaje zamknięty. |
 | Zewnętrzne porty | SYS-255: uzgodnione funkcje, bez dodatkowej rezerwy zewnętrznej dla nieokreślonych urządzeń. | Typy, liczby pozostałych torów, pinout i wewnętrzna rezerwa zasobów w architekturze. |
-| Oszczędzanie energii | Przyjęte SYS-084–091. | Przed kartą skontrolować jawne przypisanie odbiorników do odcięcia; progi i czasy w architekturze. |
+| Oszczędzanie energii | Przyjęte SYS-084–091; kontrola ujawniła niepełne przypisanie odbiorników do odcięcia. | Funkcjonalny wybór listy odcięcia w pytaniu 265; progi i czasy w architekturze. |
 
-Potwierdzona luka funkcjonalna: źródła wybudzenia obejmują START/kopniak, przyciski HMI, PC i przednie koło (SYS-054–056/079/080), a hamulce SYS-051 nie mają określonej roli w śnie. Do rozstrzygnięcia pozostaje pytanie 264. Sprawdzenie przypisania odbiorników do oszczędzania i końcowa kontrola spójności poprzedzą kartę zamykającą. F04 nie jest jeszcze zamknięty.
+Lukę wybudzania przez hamulce rozstrzygnęła odpowiedź A na pytanie 264 (SYS-256). Kontrola odcięcia energii potwierdziła brak jednoznacznego przypisania wszystkich akcesoriów; otwarta pozostaje decyzja 265. Po niej przeprowadzimy końcową kontrolę spójności i przygotujemy kartę do zatwierdzenia przez właściciela. F04 pozostaje aktywny.
+
+## Kontrola listy odcięcia energii
+
+SYS-084–091 określają wejście, blokowanie ponownego ON, powrót i wyjątek serwisowy. Lista odbiorników pozostała otwarta. Ta kontrola nie ustala nowej polityki bez decyzji właściciela.
+
+| Odbiornik / funkcja | Stan przyjętych ustaleń |
+| --- | --- |
+| Przednie i tylne pozycyjne | Odcięcie przy oszczędzaniu jest wymagane w SYS-084; powrót według SYS-082/087. |
+| Mijania i drogowe | Podlegają regułom oszczędzania SYS-083–088; po jego zakończeniu wymagają nowego polecenia. |
+| Trzy dodatkowe kanały mocy | Ochrona energii ma pierwszeństwo przed poleceniami i podtrzymaniem stanów SYS-243–249; jawne objęcie wszystkich trzech odcięciem jest propozycją do 265. |
+| Światło hamowania, kierunkowskazy, klakson | Funkcje i stany są przyjęte, lecz przynależność do odcięcia oszczędzania nie jest jednoznaczna. Rozstrzygnięcie w pytaniu 265. |
+| Wentylator | Pozostają własne reguły SYS-060/061/089 i zamkniętego F03. |
+| ECU, rozruch i zasilanie HMI | Pozostają przyjęte funkcje i reguły zasilania/snu; nie przyjęto zwykłego odłączania HMI w tym trybie. Minimalne napięcia działania i bilanse wymagają projektu. |
 
 ## Następna decyzja
 
-**Pytanie 264:** system prawidłowo śpi, koło się nie obraca i kierowca nie używa HMI ani START. Czy nowe użycie któregokolwiek hamulca ma wybudzić ECU i HMI, aby sprawny tor światła hamowania mógł zareagować bez HMI?
+**Pytanie 265:** które akcesoria odłączać w trybie oszczędzania przy zgaszonym silniku?
 
-Propozycja A: tak, nowe użycie przedniego albo tylnego hamulca wybudza ECU i HMI. Po uzyskaniu gotowości wymaganych torów światło hamowania reaguje na bieżące wejścia, niezależnie od gotowości lub sprawności HMI/CAN. Alternatywa B: hamulce są obsługiwane dopiero po wybudzeniu innym uzgodnionym źródłem. Decyzja nie jest jeszcze podjęta.
+Propozycja A: odłączać przednie i tylne pozycyjne, mijania, drogowe oraz wszystkie trzy dodatkowe kanały. Światło hamowania, kierunkowskazy i klakson pozostają dostępne według swoich zasad, przy sprawnych torach i w dopuszczonym zakresie zasilania. Alternatywa B: odłączać również kierunkowskazy i klakson, zachowując dostępność światła hamowania. Decyzja nie jest jeszcze podjęta.
 
-A rozszerza bezpośrednią obsługę hamulców na wybudzenie ze snu; B ogranicza źródła wybudzania podczas postoju. Warunki zasilania i zabezpieczenia nadal obowiązują. Wybudzenie nie potwierdza naprawy ani nie omija próby i limitu SYS-253/254. Kryteria nowego użycia, filtracja, czas reakcji, pobór czuwania i obsługa długiego stanu aktywnego wymagają projektu i prób.
+A zachowuje funkcje sygnalizacji po zgaszeniu; B ogranicza więcej odbiorników dla rezerwy akumulatora. W obu propozycjach wentylator, zasilanie HMI i funkcje silnika zachowują własne przyjęte reguły. Nie znosi to ochrony zwarciowej, termicznej ani minimalnego napięcia działania elektroniki. Prądy, progi i czasy potwierdzimy w projekcie i próbach.

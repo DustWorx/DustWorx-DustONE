@@ -37,6 +37,10 @@ Potwierdzenie jest osobną aplikacyjną ramką CAN i oznacza przyjęcie poleceni
 - Blokada snu przy podłączonym PC pozostaje zgodna z SYS-057. Priorytet rozruchu i niezależność ECU od sprawności HMI pozostają zgodne z SYS-046/054.
 - Tor sterowania zasilaniem HMI musi utrzymywać zadany stan podczas snu ECU: włączony po poprawnej sekwencji, odłączony po zadziałaniu ścieżki awaryjnej. Uwzględnić to przy wyborze stanów niskiego poboru, sterownika wyjścia i ewentualnego podtrzymania stanu.
 
+## Hamulce — uzupełnienie F04 z 2026-11-26
+
+Odpowiedź A na pytanie 264 przyjmuje SYS-256: przy dostępnym zasilaniu nowe użycie przedniego lub tylnego hamulca wybudza ECU i HMI. Po gotowości wymaganych torów światło hamowania działa według bieżących wejść, bez czekania na gotowość HMI i niezależnie od jego sprawności oraz CAN. Wybudzenie nie omija zasad ochrony i prób SYS-253/254. Kryteria nowego użycia, filtracja, obsługa długiego stanu aktywnego oraz wpływ na przejście w sen wymagają specyfikacji; nie przyjęto tu dodatkowej reguły odnawiania czasu przy już wybudzonym ECU. [Ustalenie i plan prób](../requirements/f04-akcesoria-i-io.md#plan-próby-sys-256).
+
 ## Ruch przedniego koła — uzupełnienie z 2026-11-01
 
 Według SYS-079 wykrycie obrotów przedniego koła wybudza ECU do naliczania ODO także przy zgaszonym silniku. Tor detekcji musi działać w śnie, niezależnie od HMI. Zgodnie z SYS-080 ECU wybudza również HMI. Naliczanie ODO nie czeka na gotowość HMI i działa także przy jego awarii. Sposób przekazania wybudzenia i czasy reakcji pozostają do projektu. W próbach sprawdzić wybudzenie obu urządzeń i powtórzyć naliczanie przy opóźnionym lub niedostępnym HMI.
