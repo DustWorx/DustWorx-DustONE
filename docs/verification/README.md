@@ -24,7 +24,7 @@ Beta 300 RR Racing 2015 jest pierwszą konfiguracją testową. Macierz wariantó
 
 Etap 5 oczekuje w kolejce zgodnie z [procesem](../00-proces-i-status.md). Poniższe plany i powiązania są zachowanymi materiałami wstępnymi; zapis wpływu bieżących decyzji nie rozpoczyna tego etapu.
 
-Przygotowano [wstępny plan inwentaryzacji Bety Racing 2015](beta-2015-plan-inwentaryzacji.md) z listą dostępnych przyrządów: multimetr, Rigol DHO804, 4 sondy PVP3150 i 3 sondy P4100. Model multimetru i dokumentacja P4100 pozostają do określenia. Przy części wymagań są propozycje prób, a powyżej określono zasady i szablon. Przygotowano [pierwszy przydział 261 wymagań do bloków i 13 grup weryfikacji](macierz-wymagan.md). Kryteria liczbowe, konfiguracje, procedury wykonawcze i dowody wymagają rozwinięcia; nie ma raportów pomiarów ani prób produktu. Kod testów i dane wejściowe obejmujące wiele komponentów należą do `tests/`.
+Przygotowano [wstępny plan inwentaryzacji Bety Racing 2015](beta-2015-plan-inwentaryzacji.md) z listą dostępnych przyrządów: multimetr, Rigol DHO804, 4 sondy PVP3150 i 3 sondy P4100. Model multimetru i dokumentacja P4100 pozostają do określenia. Przy części wymagań są propozycje prób, a powyżej określono zasady i szablon. Przygotowano [pierwszy przydział 262 wymagań do bloków i 13 grup weryfikacji](macierz-wymagan.md). Kryteria liczbowe, konfiguracje, procedury wykonawcze i dowody wymagają rozwinięcia; nie ma raportów pomiarów ani prób produktu. Kod testów i dane wejściowe obejmujące wiele komponentów należą do `tests/`.
 
 Przeanalizowano instrukcję i suplement dostarczone przez właściciela: [wyniki i braki danych](../interfaces/beta-2015-analiza-dokumentacji.md). Rozbieżność oznaczenia rocznika suplementu i wyposażenia TPS wymaga porównania z motocyklem; schemat nie jest jeszcze zweryfikowaną mapą jego złączy.
 
@@ -34,7 +34,7 @@ SYS-093 wymaga potwierdzenia rezerwy na rozruch po minimum 4 tygodniach postoju 
 
 Dla F03 przygotowano 79 planów prób SYS-157–235. [Karta przeglądu](../requirements/f03-przeglad-zakresu.md) podaje zakres, wynik kontroli spójności i odpowiedzialność za dalsze procedury oraz próby. Akceptacja funkcji nie zastępuje wyników produktu.
 
-Dla SYS-236 w [F04](../requirements/f04-akcesoria-i-io.md#plan-próby-sys-236) przygotowano plan lokalnego wyłączenia klaksonu po utracie HMI/CAN. F03 zachowuje 79 planów; F04 zawiera obecnie 26 planów: SYS-236–261. To materiały do procedur, bez wyników produktu.
+Dla SYS-236 w [F04](../requirements/f04-akcesoria-i-io.md#plan-próby-sys-236) przygotowano plan lokalnego wyłączenia klaksonu po utracie HMI/CAN. F03 zachowuje 79 planów; F04 zawiera obecnie 27 planów: SYS-236–262. To materiały do procedur, bez wyników produktu.
 
 [Plan SYS-237](../requirements/f04-akcesoria-i-io.md#plan-próby-sys-237) obejmuje odzyskanie łączności przy trzymanym i zwolnionym przycisku klaksonu, wcześniejsze polecenia oraz dopuszczenie nowego naciśnięcia.
 
@@ -84,4 +84,6 @@ Dla SYS-236 w [F04](../requirements/f04-akcesoria-i-io.md#plan-próby-sys-236) p
 
 [Plan SYS-260](../requirements/f04-akcesoria-i-io.md#plan-próby-sys-260) obejmuje OFF po restarcie programu i powrocie zasilania, stare żądania/stany HMI, nowy świadomy wybór, limity po usterce i brak dawnej blokady snu. To plan, bez wyników produktu.
 
-[Plan SYS-261](../requirements/f04-akcesoria-i-io.md#plan-próby-sys-261) obejmuje pierwszeństwo awaryjnych, odrzucenie wyboru strony bez późniejszego wykonania, brak powrotu dawnej strony i ochrony. Kontrola snu zwykłych odbiorników pozostaje otwarta do decyzji 270. To plany bez wyników produktu.
+[Plan SYS-261](../requirements/f04-akcesoria-i-io.md#plan-próby-sys-261) obejmuje pierwszeństwo awaryjnych, odrzucenie wyboru strony bez późniejszego wykonania, brak powrotu dawnej strony i ochrony. Sen zwykłych odbiorników rozstrzyga późniejszy SYS-262. To plany bez wyników produktu.
+
+[Plan SYS-262](../requirements/f04-akcesoria-i-io.md#plan-próby-sys-262) obejmuje wyłączenie zwykłych odbiorników przed snem także przy trzymaniu wejścia, brak pętli wybudzania, odnawianie bezczynności nowym hamowaniem, reakcje po wybudzeniu i odrębne blokady. [Karta F04](../requirements/f04-przeglad-zakresu.md) podsumowuje 27 planów i przekazanie; wymaga kontroli właściciela. Wyników produktu nie ma.

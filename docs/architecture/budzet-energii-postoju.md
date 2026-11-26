@@ -50,3 +50,7 @@ Przyjęty SYS-256 dodaje detekcję nowego użycia obu hamulców w śnie i wybudz
 ## Przekazanie F04 — awaryjne
 
 Według SYS-259 aktywne awaryjne wstrzymują skoordynowany sen ECU/HMI. Uwzględnić pobór lamp obu stron, ECU i aktywnego HMI w osobnym bilansie oraz próbach. Cel 28 dni z SYS-093 dotyczy uśpionych urządzeń bez korzystania z motocykla i nie obejmuje takiej sygnalizacji. Nie przyjęto tu nowego czasu działania ani progów; ochrona zasilania i wyjść nadal obowiązuje. [Plan SYS-259](../requirements/f04-akcesoria-i-io.md#plan-próby-sys-259).
+
+## Przekazanie F04 — utrzymane wejścia
+
+SYS-262 wymaga prawidłowego snu i braku pętli wybudzania przy utrzymanym hamulcu/klaksonie. W bilansie i pomiarach sprawdzić pobór całego zestawu przy obu stanach wejść oraz detekcję po zwolnieniu i nowym użyciu. Nowe hamowanie odnawia bezczynność; inne uzgodnione źródła wybudzania pozostają dostępne. Parametry i realizacja do architektury. [Plan SYS-262](../requirements/f04-akcesoria-i-io.md#plan-próby-sys-262).

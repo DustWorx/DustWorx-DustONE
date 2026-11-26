@@ -60,3 +60,7 @@ Stanowiska, konkretne połączenia, limity i dowody zostaną przygotowane przed 
 ## Kontrola F04 — lista odbiorników
 
 Odpowiedź 265 i A na doprecyzowanie klaksonu (2026-11-26) przyjmują SYS-257: odcięcie pozycyjnych, mijania/drogowych, trzech dodatkowych kanałów, pojedynczych kierunkowskazów i klaksonu. Światło hamowania i świadome włączenie awaryjnych pozostają dostępne w granicach zasilania i zabezpieczeń. [Lista F04 i plan próby](../requirements/f04-akcesoria-i-io.md#odbiorniki-w-oszczędzaniu-energii) są rozwinięciem źródłowego SYS. Wentylator, HMI i funkcje silnika zachowują własne reguły. Podtrzymanie awaryjnych po utracie HMI/CAN przy ciągłej pracy określa SYS-258. Blokadę snu przyjęto w SYS-259; OFF po restarcie określa SYS-260; parametry, prądy i bilanse wymagają projektu.
+
+## Zwykły sen a odbiorniki
+
+Przyjęty SYS-262 odłącza zwykłe odbiorniki przed snem także przy trzymanym hamulcu lub klaksonie. Dostępność hamowania w oszczędzaniu według SYS-257 dotyczy pracy ECU; nie zastępuje reguły snu. Awaryjne nadal blokują sen według SYS-259. Nowe użycie hamulca odnawia odliczanie, a trzymanie nie powoduje pętli wybudzania. [Ustalenie i plan F04](../requirements/f04-akcesoria-i-io.md#zwykłe-odbiorniki-a-sen).

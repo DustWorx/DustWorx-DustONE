@@ -1,6 +1,6 @@
 # F04 — akcesoria i dodatkowe I/O
 
-Stan na 2026-11-26. **F04 aktywny po zamknięciu F03 w pytaniu 243.** Aktualny temat: kontrola stanów odbiorników przed skoordynowanym snem. Reguły awaryjnych rozstrzygnięto do SYS-261; pytanie 270 dotyczy pozostałego przypadku usypiania. Zasady klaksonu SYS-236–240 są już przyjęte i zachowane poniżej. Źródłem wymagań jest [rejestr SYS](../01-zakres-systemu.md); kolejność i warunki zamknięcia określa [proces](../00-proces-i-status.md).
+Stan na 2026-11-26. **F04 aktywny — karta gotowa do kontroli właściciela.** Pytanie 270 rozstrzygnięto odpowiedzią A, SYS-262. [Karta F04](f04-przeglad-zakresu.md) podsumowuje przyjęty zakres, przegląd i przekazanie; zamknięcie wymaga decyzji 271. Źródłem wymagań jest [rejestr SYS](../01-zakres-systemu.md), a kolejność określa [proces](../00-proces-i-status.md).
 
 ## Zakres i kolejność
 
@@ -11,7 +11,7 @@ Stan na 2026-11-26. **F04 aktywny po zamknięciu F03 w pytaniu 243.** Aktualny t
 | Klakson po restarcie ECU | Przyjęty SYS-238, odpowiedź A na pytanie 246: zwolnienie i nowe naciśnięcie. |
 | Klakson przy zwykłym wybudzeniu ze snu | Przyjęty SYS-239, odpowiedź B na pytanie 247: pierwsze naciśnięcie wybudza; sygnał wymaga zwolnienia i nowego naciśnięcia. |
 | Autotest klaksonu | Przyjęty SYS-240, odpowiedź A na pytanie 248: bez samoczynnego dźwięku; próba dźwiękowa na świadome polecenie użytkownika. |
-| Pozostałe stany akcesoriów | SYS-250 określa OFF podstawowych świateł po restarcie przy zgaszonym silniku. Kontrola ujawniła brak jawnej reguły snu przy ręcznych mijania/drogowych i utrzymanych wejściach hamowania/klaksonu; pytanie 270. |
+| Pozostałe stany akcesoriów | SYS-250 określa OFF świateł po restarcie; SYS-262 wyłącza zwykłe odbiorniki przed snem także przy utrzymanym hamulcu/klaksonie. |
 | Kierunkowskazy po powrocie HMI/CAN | Przyjęty SYS-251, odpowiedź A na pytanie 259: pozostają OFF do nowego świadomego wyboru użytkownika, bez wznowienia dawnych stanów. |
 | Kierunkowskazy po restarcie i prawidłowym śnie | Przyjęty SYS-252, odpowiedź A na pytanie 260: wyłączenie przed snem; po wybudzeniu i restarcie OFF do nowego świadomego wyboru. |
 | Próby podstawowego oświetlenia, kierunkowskazów i klaksonu po ochronnym odcięciu | Przyjęty SYS-253, odpowiedź A na pytanie 261: jedna świadoma próba, po niepowodzeniu blokada danego kanału jak SYS-247/248; bez samoczynnych ponowień. |
@@ -29,7 +29,7 @@ Stan na 2026-11-26. **F04 aktywny po zamknięciu F03 w pytaniu 243.** Aktualny t
 | Lista odcięcia oszczędzania | Przyjęty SYS-257, odpowiedź na 265 i A na doprecyzowanie: światło hamowania oraz awaryjne dostępne, pojedyncze kierunkowskazy i klakson odcięte razem ze światłami stałymi i trzema dodatkowymi kanałami. |
 | Stany awaryjnych | Przyjęte SYS-258–261: podtrzymanie bez HMI/CAN, blokada snu, OFF po restarcie i pierwszeństwo przed pojedynczą stroną. |
 
-Klakson należy do przyjętego zakresu SYS-004. Obecność klaksonu 12 V w dokumentacji Bety jest potwierdzona w [analizie instrukcji i suplementu](../interfaces/beta-2015-analiza-dokumentacji.md). ECU steruje odbiornikiem, a HMI przekazuje polecenia kierowcy. Uzgodnione stany klaksonu opisują SYS-236–240/257; podtrzymanie wejścia przy upływie bezczynności pozostaje do decyzji 270. Mapowanie i szczegóły przycisków należą do F05 oraz projektu protokołu.
+Klakson należy do przyjętego zakresu SYS-004. Obecność klaksonu 12 V w dokumentacji Bety jest potwierdzona w [analizie instrukcji i suplementu](../interfaces/beta-2015-analiza-dokumentacji.md). ECU steruje odbiornikiem, a HMI przekazuje polecenia kierowcy. Uzgodnione stany klaksonu opisują SYS-236–240/257; stany przy upływie bezczynności i zakończenie sygnału po puszczeniu określa SYS-262. Mapowanie i szczegóły przycisków należą do F05 oraz projektu protokołu.
 
 ## Klakson po utracie HMI lub CAN
 
@@ -391,7 +391,7 @@ W odpowiedzi **A na pytanie 264** (2026-11-26) właściciel przyjął SYS-256: n
 
 Zdarzenie wybudzenia nie jest żądaniem rozruchu silnika. Nie potwierdza naprawy toru światła i nie omija zabezpieczeń, warunków zasilania ani wspólnego limitu prób SYS-253/254. Przy sprawnym torze obowiązuje normalne sterowanie według wejść; przy wcześniejszym odcięciu ewentualna próba wymaga warunków SYS-254. Samo odnowienie limitu nie załącza światła.
 
-W architekturze określimy detekcję nowego użycia w śnie, filtrację, obsługę długiego stanu aktywnego, gotowość toru światła, czasy i przekazanie wybudzenia HMI. Pobór detekcji obu hamulców włączymy do budżetu czuwania. Funkcjonalne reguły odnawiania bezczynności przez hamowanie i wpływu utrzymanego wejścia na sen pozostają otwarte w F04, w pytaniu 270. Nie przenosimy tej decyzji do samego doboru parametrów. Ważne układy wybierzemy wspólnie.
+W architekturze określimy detekcję nowego użycia w śnie, filtrację, obsługę długiego stanu aktywnego, gotowość toru światła, czasy i przekazanie wybudzenia HMI. Pobór detekcji obu hamulców włączymy do budżetu czuwania. Reguły odnawiania bezczynności i wpływu utrzymanego wejścia na sen przyjęto w SYS-262; realizacja i parametry wymagają projektu. Ważne układy wybierzemy wspólnie.
 
 ### Plan próby SYS-256
 
@@ -498,40 +498,51 @@ W odpowiedzi **A na pytanie 269** (2026-11-26) właściciel przyjął SYS-261. P
 
 To plan do rozwinięcia w procedurę; prób produktu jeszcze nie wykonano.
 
+## Zwykłe odbiorniki a sen
+
+W odpowiedzi **A na pytanie 270** (2026-11-26) właściciel przyjął SYS-262. Przy zgaszonym silniku, odłączonym PC, braku innych blokad i po upływie bezczynności ECU wyłącza mijania/drogowe, światło hamowania i klakson przed skoordynowanym snem. Dotyczy to również trzymanego hamulca lub klaksonu. Te odbiorniki nie stają się dodatkową blokadą snu.
+
+Nowe użycie hamulca odnawia odliczanie; samo trzymanie nie odnawia go stale. Utrzymane wejście nie wybudza ponownie — wybudzenie z tego wejścia wymaga zwolnienia i nowego użycia. Inne uzgodnione źródła wybudzenia pozostają dostępne. Po wybudzeniu mijania/drogowe czekają na nowe polecenie, światło hamowania po gotowości reaguje na bieżące wejścia SYS-051/256, a klakson zachowuje SYS-239: naciśnięcie wybudzające nie daje dźwięku, trzeba je zwolnić i nacisnąć ponownie. W normalnej obsłudze puszczenie klaksonu kończy sygnał.
+
+Awaryjne zachowują blokadę SYS-259, wentylator SYS-060/061, a PC i zadania wymagające pracy własne warunki. Zabezpieczenia, limity prób oraz kontrolowana sekwencja SYS-062–066 pozostają nadrzędne. Reguła nie daje prawa do snu podczas wymaganej pracy ani automatycznej próby po usterce. Filtrację, detekcję nowych zdarzeń w obu stanach wejścia, pobór i czasy dobierzemy w architekturze; ważne układy wybierzemy wspólnie.
+
+### Plan próby SYS-262
+
+1. Na rzeczywistym ECU/HMI, przy zgaszonym silniku, bez PC, awaryjnych i innych blokad, w osobnych przypadkach włączyć mijania/drogowe, przytrzymać przedni/tylny hamulec oraz klakson. Bez nowej aktywności odtworzyć upływ czasu. Potwierdzić wyłączenie odbiorników przed skoordynowanym snem i prawidłową sekwencję HMI mimo trzymanego wejścia. Rejestrować wejścia, CAN, wyjścia, stany niskiego poboru i prąd całego zestawu.
+2. Pozostawić wejście utrzymane przez sen: sprawdzić brak samoczynnych pętli wybudzania i stałego odnawiania bezczynności. Osobno po zwolnieniu wykonać nowe użycie każdego wejścia i potwierdzić wymagane wybudzenie. Przy aktywnym ECU wykonać nowe użycie przedniego i tylnego hamulca przed upływem czasu: odliczanie ma się odnowić; dalsze trzymanie nie odnawia go stale. Odtworzyć zakłócenia według przyszłych kryteriów filtracji.
+3. Po wybudzeniu potwierdzić OFF mijania/drogowych do nowego polecenia, także przy odtwarzanych dawnych danych HMI. Wybudzić innym uzgodnionym źródłem przy trzymanym hamulcu i potwierdzić światło według bieżących wejść po gotowości, bez oczekiwania na HMI/CAN. Dla klaksonu potwierdzić brak dźwięku z naciśnięcia wybudzającego, zwolnienie i nowe naciśnięcie według SYS-239 oraz zakończenie normalnego sygnału po puszczeniu.
+4. Powtórzyć przy aktywnych awaryjnych, wymaganej pracy wentylatora, PC i innym zadaniu wymagającym działania: SYS-262 nie może zwalniać tych blokad ani ochron. Osobno odtworzyć wcześniejsze odcięcie wyjścia: sen nie może sam uruchomić próby ani ominąć limitu; sprawdzić SYS-248/253/254. Przed wykonaniem ustalić czasy, kryteria nowych zdarzeń, połączenia, zakresy zasilania, wyposażenie i warunki przerwania. Wyniki powiązać z HW/FW, konfiguracją i profilem akumulatora. [Macierz weryfikacji](../verification/macierz-wymagan.md).
+
+To plan do rozwinięcia w procedurę; prób produktu jeszcze nie wykonano.
+
 ## Kontrola pokrycia przed kartą F04
 
-Stan kontroli: 2026-11-26, po decyzji 269 i przeglądzie stanów snu. F04 pozostaje aktywny. Tabela rozdziela przyjęty zakres, kwestie funkcjonalne do doprecyzowania i dane techniczne.
+Stan kontroli: 2026-11-26, po decyzji 270. Wynik przeglądu zapisano w karcie F04; pakiet oczekuje kontroli właściciela. F04 pozostaje aktywny. Tabela rozdziela przyjęty zakres, kwestie funkcjonalne do doprecyzowania i dane techniczne.
 
 | Obszar | Przyjęty zakres / stan | Dalsze rozstrzygnięcie |
 | --- | --- | --- |
-| Klakson | SYS-236–240, próby SYS-253 i odcięcie oszczędzania SYS-257. | Utrzymany przycisk przy upływie bezczynności: decyzja 270. Parametry i pokrycie diagnostyki w etapach 3–6. |
+| Klakson | SYS-236–240/253/257/262: stany, próby, energia i zwykły sen. | Parametry, przyciski i pokrycie diagnostyki na właściwych etapach. |
 | Trzy dodatkowe kanały | SYS-241–249: zastosowania, stany, ON/OFF/PWM, próby, limit i lokalna usterka. | Obciążenia, zgodne lampy, bilanse, topologia i komponenty w etapach 3–6. |
-| Podstawowe światła | SYS-050, SYS-081–091, SYS-250/253/257. | Ręcznie ponownie włączone mijania/drogowe przed snem: decyzja 270. Kombinacje i parametry lamp, podział kanałów oraz diagnostyka do projektu. |
+| Podstawowe światła | SYS-050/081–091/250/253/257/262: automatyka, restart, energia i zwykły sen. | Kombinacje i parametry lamp, podział kanałów oraz diagnostyka do projektu. |
 | Kierunkowskazy | SYS-052 i SYS-251–253: utrata/powrót CAN, restart, sen i próby po usterce; pojedynczy kierunek odcięty w oszczędzaniu SYS-257. | Parametry migania i realizacja interfejsu w projekcie. |
 | Awaryjne | SYS-257–261: dostępne w oszczędzaniu, podtrzymanie bez HMI/CAN, blokada snu, OFF po restarcie i pierwszeństwo przed pojedynczą stroną. | Parametry migania, tory i kwalifikacja poleceń do projektu. |
-| Światło hamowania | SYS-051, SYS-253/254/256: wejścia bez HMI, próba po odcięciu i wybudzanie. | Utrzymany hamulec i odnawianie bezczynności: decyzja 270. Filtracja, czasy oraz pobór do architektury i prób. |
+| Światło hamowania | SYS-051/253/254/256/262: bezpośrednie wejścia, próba, wybudzanie, bezczynność i utrzymane wejście. | Filtracja, detekcja, czasy oraz pobór do architektury i prób. |
 | Wentylator | Zachowane funkcje i zamknięte reakcje F03, w tym SYS-043/044/053/060/061/089 i SYS-184–196. | Dane osprzętu, parametry i procedury na właściwych etapach; F03 pozostaje zamknięty. |
 | Zewnętrzne porty | SYS-255: uzgodnione funkcje, bez dodatkowej rezerwy zewnętrznej dla nieokreślonych urządzeń. | Typy, liczby pozostałych torów, pinout i wewnętrzna rezerwa zasobów w architekturze. |
 | Oszczędzanie energii | Przyjęte SYS-084–091 i lista SYS-257; klakson odcięty po doprecyzowaniu 265. | Progi, czasy, bilanse i realizacja w architekturze/projekcie. |
 
-Wybudzanie przez hamulce rozstrzyga SYS-256. Odpowiedź 265 i jej doprecyzowanie określają listę odcięcia oraz dodają możliwość awaryjnych w oszczędzaniu (SYS-257). Odpowiedź A na pytanie 266 przyjmuje podtrzymanie po utracie HMI/CAN (SYS-258). Odpowiedź A na pytanie 267 przyjmuje blokadę skoordynowanego snu (SYS-259). Odpowiedź B na pytanie 268 przyjmuje OFF po restarcie i powrocie zasilania do nowego polecenia (SYS-260). Odpowiedź A na pytanie 269 przyjmuje pierwszeństwo awaryjnych (SYS-261). Przegląd stanów snu ujawnił brak jawnej reguły dla ręcznych mijania/drogowych i utrzymanych wejść hamowania/klaksonu. Decyzja 270 musi poprzedzić kartę dla właściciela. F04 pozostaje aktywny.
+Wybudzanie przez hamulce rozstrzyga SYS-256. Odpowiedź 265 i jej doprecyzowanie określają listę odcięcia oraz dodają możliwość awaryjnych w oszczędzaniu (SYS-257). Odpowiedź A na pytanie 266 przyjmuje podtrzymanie po utracie HMI/CAN (SYS-258). Odpowiedź A na pytanie 267 przyjmuje blokadę skoordynowanego snu (SYS-259). Odpowiedź B na pytanie 268 przyjmuje OFF po restarcie i powrocie zasilania do nowego polecenia (SYS-260). Odpowiedź A na pytanie 269 przyjmuje pierwszeństwo awaryjnych (SYS-261). Odpowiedź A na pytanie 270 rozstrzyga zwykłe odbiorniki i utrzymane wejścia przy usypianiu (SYS-262). Kontrola przyjętego zakresu nie wskazała kolejnej decyzji funkcjonalnej blokującej kartę. [Karta F04](f04-przeglad-zakresu.md) oczekuje decyzji właściciela w pytaniu 271; F04 pozostaje aktywny.
 
 ## Kontrola listy odcięcia energii
 
-Lista jest przyjęta jako SYS-257 na podstawie odpowiedzi 265 oraz A na doprecyzowanie klaksonu. Zestawienie i granice znajdują się w [przyjętym zakresie](#odbiorniki-w-oszczędzaniu-energii). Nie oznacza to zamknięcia stanów awaryjnych ani wykonania prób. Wentylator, HMI i funkcje silnika zachowują własne reguły.
+Lista jest przyjęta jako SYS-257 na podstawie odpowiedzi 265 oraz A na doprecyzowanie klaksonu. Zestawienie i granice znajdują się w [przyjętym zakresie](#odbiorniki-w-oszczędzaniu-energii). Formalne zamknięcie F04 wymaga akceptacji karty; prób produktu jeszcze nie wykonano. Wentylator, HMI i funkcje silnika zachowują własne reguły.
 
 ## Kontrola odbiorników przy upływie bezczynności
 
-SYS-081 ustala wyłączenie pozycyjnych, SYS-245 dodatkowych kanałów, SYS-252 pojedynczych kierunkowskazów przed prawidłowym snem. SYS-083 pozwala jednak po zgaszeniu silnika ręcznie włączyć mijania/drogowe. Nie ustalono jednoznacznie, czy taki stan blokuje sen. SYS-256 pozostawił także otwarty wpływ utrzymanego hamulca na sen; długie trzymanie klaksonu wymaga analogicznego rozstrzygnięcia. To decyzja funkcjonalna 270, nie tylko parametr elektryczny.
-
-Awaryjne mają własną blokadę SYS-259, wentylator SYS-060/061, a PC i zadania wymagające pracy pozostają według SYS-057/059/062. Te ustalenia zachowujemy. Karta zamykająca nie jest jeszcze gotowa do zatwierdzenia.
+Brak wskazany w przeglądzie po pytaniu 269 rozstrzygnięto odpowiedzią A na pytanie 270, SYS-262. Zwykłe odbiorniki gasną przed snem również przy utrzymanych wejściach; nowe użycie hamulca odnawia bezczynność, samo trzymanie nie. Awaryjne, wentylator, PC i inne zadania zachowują odrębne blokady. Po wybudzeniu obowiązują przyjęte reakcje wejść i nowych poleceń. Parametry i realizacja należą do etapów architektury oraz projektu.
 
 ## Następna decyzja
 
-**Pytanie 270:** przy zgaszonym silniku, odłączonym PC i braku innych blokad upływa czas bezczynności. Jak traktować ręczne mijania/drogowe oraz trzymany hamulec lub klakson?
+**Pytanie 271:** czy właściciel akceptuje [kartę końcowego przeglądu F04](f04-przeglad-zakresu.md) i zamyka zakres funkcjonalny pakietu?
 
-Propozycja A: te odbiorniki nie blokują snu; ECU wyłącza je przed skoordynowanym uśpieniem także przy utrzymanym wejściu. Samo trzymanie wejścia nie wybudza ponownie; potrzebne jest zwolnienie i nowe użycie. B: aktywne mijania/drogowe, hamowanie lub klakson wstrzymują sen do wyłączenia/zwolnienia albo właściwego ochronnego zakończenia obsługi. Decyzja nie jest jeszcze podjęta.
-
-W obu propozycjach nowe użycie hamulca odnawia bezczynność; samo trzymanie jej stale nie odnawia. Przy zwykłym wybudzeniu mijania/drogowe pozostają OFF do nowego polecenia. Światło hamowania po gotowości reaguje na bieżące wejścia według SYS-051/256; klakson zachowuje nowe naciśnięcie po wybudzeniu według SYS-239. W normalnej obsłudze puszczenie przycisku klaksonu kończy sygnał. Są to jawne propozycje do zatwierdzenia wraz z 270.
-
-A sprzyja automatycznemu parkowaniu bez stacyjki; B zachowuje obsługę aktywnych odbiorników kosztem poboru lamp, ECU i HMI. Awaryjne, wentylator, PC, prace wymagające działania i zabezpieczenia zachowują własne reguły. Parametry czasowe, filtracja i tory do projektu.
+Karta obejmuje SYS-236–262, wcześniejsze powiązania, przegląd spójności, 27 planów prób i zadania przekazane do dalszych etapów. Odpowiedź A zamknie F04 i pozwoli rozpocząć F05 — funkcje i obsługę HMI. B pozostawia F04 aktywny do korekt. Decyzja nie jest jeszcze podjęta; projektowanie i próby produktu pozostają przed nami.

@@ -296,6 +296,8 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 
 | SYS-261 | Aktywne awaryjne mają pierwszeństwo przed zwykłym wyborem pojedynczego kierunkowskazu z HMI. ECU odrzuca wybór lewo/prawo do świadomego wyłączenia awaryjnych; uruchomienie strony wymaga następnego nowego wyboru. Odrzucony wybór nie jest wykonywany później automatycznie. Świadome włączenie awaryjnych zastępuje aktywny pojedynczy kierunek, a ich wyłączenie nie przywraca dawnej strony. W oszczędzaniu żądanie pojedynczej strony nadal jest odrzucane według SYS-257 i nie wyłącza awaryjnych. Gotowość, zabezpieczenia, limity i dopuszczone zasilanie pozostają nadrzędne; kwalifikacja poleceń oraz obsługa HMI wymagają projektu i prób. |
 
+| SYS-262 | Przy zgaszonym silniku, odłączonym PC i braku innych blokad, po upływie bezczynności ręczne mijania/drogowe, hamowanie i klakson nie wstrzymują skoordynowanego snu ECU/HMI. ECU wyłącza te odbiorniki przed snem również przy utrzymanym wejściu hamulca lub klaksonu. Samo trzymanie nie odnawia stale bezczynności ani nie wybudza ponownie; wybudzenie z tego wejścia wymaga zwolnienia i nowego użycia. Nowe użycie hamulca odnawia odliczanie. Po zwykłym wybudzeniu mijania/drogowe pozostają OFF do nowego polecenia, światło hamowania po gotowości odpowiada bieżącym wejściom SYS-051/256, a klakson wymaga nowego naciśnięcia według SYS-239. W normalnej obsłudze zwolnienie klaksonu kończy sygnał. Awaryjne, wentylator, PC, inne zadania wymagające pracy i zabezpieczenia zachowują własne reguły. Parametry oraz realizacja detekcji, snu i nowych poleceń wymagają projektu i prób. |
+
 ## 3. Podział odpowiedzialności
 
 - **ECU:** samodzielne sterowanie silnikiem i akcesoriami, pomiary, wykrywanie usterek oraz reakcje na błędy. Właściciel danych i wykonawca żądań według SYS-046 i SYS-047. Sterowanie wymagające precyzyjnego czasu realizowane lokalnie w ECU.
@@ -871,6 +873,8 @@ Odpowiedź A na pytanie 267 (2026-11-26) przyjmuje SYS-259: aktywne awaryjne blo
 Odpowiedź B na pytanie 268 (2026-11-26) przyjmuje SYS-260: zarówno po restarcie programu bez zaniku zasilania, jak i po powrocie zasilania awaryjne pozostają OFF do nowego świadomego polecenia. Nie odtwarzamy poprzedniego ON z ECU/HMI ani dawnych żądań. Pozostałe warunki snu, ochrona i odrębne blokady rozruchu nadal obowiązują. [Ustalenie i plan próby F04](requirements/f04-akcesoria-i-io.md#awaryjne-po-restarcie-i-powrocie-zasilania).
 
 Odpowiedź A na pytanie 269 (2026-11-26) przyjmuje SYS-261: awaryjne mają pierwszeństwo. Po ich świadomym wyłączeniu potrzebny jest nowy wybór strony; odrzucone lub dawne żądanie nie wykonuje się później. Włączenie awaryjnych zastępuje pojedynczy kierunek, a wyłączenie nie odtwarza dawnej strony. Oszczędzanie nadal blokuje pojedynczy kierunek. [Ustalenie i plan próby F04](requirements/f04-akcesoria-i-io.md#pierwszeństwo-awaryjnych).
+
+Odpowiedź A na pytanie 270 (2026-11-26) przyjmuje SYS-262: zwykłe mijania/drogowe i utrzymane wejścia hamowania/klaksonu nie blokują snu przy spełnionych pozostałych warunkach; odbiorniki są wyłączane przed snem. Potwierdzono nowe użycie hamulca jako aktywność odnawiającą bezczynność, brak ciągłego odnawiania/wybudzania od trzymania, przyjęte reakcje po wybudzeniu oraz zakończenie normalnego sygnału klaksonu po puszczeniu. [Ustalenie i plan próby F04](requirements/f04-akcesoria-i-io.md#zwykłe-odbiorniki-a-sen).
 
 ## 4. Decyzje potrzebne przed doborem sprzętu
 
