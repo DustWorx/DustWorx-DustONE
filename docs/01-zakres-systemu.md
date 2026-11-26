@@ -294,6 +294,8 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 
 | SYS-260 | Po restarcie programu ECU bez zaniku zasilania oraz po powrocie zasilania, którego zanik przerwał działanie ECU, światła awaryjne pozostają wyłączone do nowego świadomego polecenia użytkownika z HMI. Wcześniejszy stan ON, stan utrzymany w HMI ani ponowione dawne żądanie nie przywracają awaryjnych automatycznie. Dotyczy to również awaryjnych wcześniej podtrzymywanych według SYS-258 i blokujących sen według SYS-259; dawny stan nie podtrzymuje tej blokady po restarcie. Nowe polecenie podlega gotowości wymaganych torów, zabezpieczeniom, limitom po usterce i dopuszczonemu zasilaniu. Reguły rozruchu silnika pozostają odrębne; kwalifikacja nowych poleceń i zachowanie podczas inicjalizacji wymagają projektu oraz prób. |
 
+| SYS-261 | Aktywne awaryjne mają pierwszeństwo przed zwykłym wyborem pojedynczego kierunkowskazu z HMI. ECU odrzuca wybór lewo/prawo do świadomego wyłączenia awaryjnych; uruchomienie strony wymaga następnego nowego wyboru. Odrzucony wybór nie jest wykonywany później automatycznie. Świadome włączenie awaryjnych zastępuje aktywny pojedynczy kierunek, a ich wyłączenie nie przywraca dawnej strony. W oszczędzaniu żądanie pojedynczej strony nadal jest odrzucane według SYS-257 i nie wyłącza awaryjnych. Gotowość, zabezpieczenia, limity i dopuszczone zasilanie pozostają nadrzędne; kwalifikacja poleceń oraz obsługa HMI wymagają projektu i prób. |
+
 ## 3. Podział odpowiedzialności
 
 - **ECU:** samodzielne sterowanie silnikiem i akcesoriami, pomiary, wykrywanie usterek oraz reakcje na błędy. Właściciel danych i wykonawca żądań według SYS-046 i SYS-047. Sterowanie wymagające precyzyjnego czasu realizowane lokalnie w ECU.
@@ -862,11 +864,13 @@ W odpowiedzi A na pytanie 264 (2026-11-26) właściciel przyjął SYS-256: nowe 
 
 W odpowiedzi na pytanie 265 (2026-11-26) właściciel zachował w oszczędzaniu światło hamowania i możliwość włączenia awaryjnych, wyłączając pojedyncze kierunkowskazy. Odpowiedź A na doprecyzowanie 265 potwierdziła odcięcie klaksonu. SYS-257 zapisuje tę listę z odcięciem świateł stałych i trzech dodatkowych kanałów z obu przedstawionych propozycji. Dostępność awaryjnych nie oznacza ich samoczynnego włączania; utratę HMI/CAN przy nieprzerwanej pracy rozstrzyga późniejszy SYS-258, blokadę snu określa SYS-259, a OFF po restarcie określa SYS-260. [Ustalenie i plan próby](requirements/f04-akcesoria-i-io.md#odbiorniki-w-oszczędzaniu-energii).
 
-W odpowiedzi A na pytanie 266 (2026-11-26) właściciel przyjął SYS-258: przy nieprzerwanej pracy ECU utrata HMI/CAN nie przerywa włączonych awaryjnych, także w oszczędzaniu. Nadal obowiązują zabezpieczenia i dopuszczone zasilanie. Blokadę snu określa SYS-259; OFF po restarcie określa SYS-260; współdziałanie z wyborem strony pozostaje otwarte w F04. [Ustalenie i plan próby](requirements/f04-akcesoria-i-io.md#awaryjne-po-utracie-hmican).
+W odpowiedzi A na pytanie 266 (2026-11-26) właściciel przyjął SYS-258: przy nieprzerwanej pracy ECU utrata HMI/CAN nie przerywa włączonych awaryjnych, także w oszczędzaniu. Nadal obowiązują zabezpieczenia i dopuszczone zasilanie. Blokadę snu określa SYS-259; OFF po restarcie określa SYS-260; pierwszeństwo przed wyborem strony określa SYS-261. [Ustalenie i plan próby](requirements/f04-akcesoria-i-io.md#awaryjne-po-utracie-hmican).
 
 Odpowiedź A na pytanie 267 (2026-11-26) przyjmuje SYS-259: aktywne awaryjne blokują skoordynowany sen obu urządzeń do ich wyłączenia lub właściwego ochronnego odcięcia. Po zakończeniu tej obsługi nadal obowiązują pozostałe warunki snu. Pobór lamp, ECU i HMI wymaga osobnego bilansu; nie jest stanem postoju z uśpionymi urządzeniami. [Ustalenie i plan próby F04](requirements/f04-akcesoria-i-io.md#awaryjne-a-usypianie).
 
 Odpowiedź B na pytanie 268 (2026-11-26) przyjmuje SYS-260: zarówno po restarcie programu bez zaniku zasilania, jak i po powrocie zasilania awaryjne pozostają OFF do nowego świadomego polecenia. Nie odtwarzamy poprzedniego ON z ECU/HMI ani dawnych żądań. Pozostałe warunki snu, ochrona i odrębne blokady rozruchu nadal obowiązują. [Ustalenie i plan próby F04](requirements/f04-akcesoria-i-io.md#awaryjne-po-restarcie-i-powrocie-zasilania).
+
+Odpowiedź A na pytanie 269 (2026-11-26) przyjmuje SYS-261: awaryjne mają pierwszeństwo. Po ich świadomym wyłączeniu potrzebny jest nowy wybór strony; odrzucone lub dawne żądanie nie wykonuje się później. Włączenie awaryjnych zastępuje pojedynczy kierunek, a wyłączenie nie odtwarza dawnej strony. Oszczędzanie nadal blokuje pojedynczy kierunek. [Ustalenie i plan próby F04](requirements/f04-akcesoria-i-io.md#pierwszeństwo-awaryjnych).
 
 ## 4. Decyzje potrzebne przed doborem sprzętu
 
