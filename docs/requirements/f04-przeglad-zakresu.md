@@ -1,6 +1,6 @@
 # F04 — przegląd akcesoriów i dodatkowych I/O
 
-Stan na 2026-11-26. **Karta gotowa do kontroli właściciela; F04 pozostaje aktywny.** Obejmuje SYS-236–262 i powiązane wcześniejsze funkcje. Ostatnią decyzję, A na pytanie 270, zapisano w SYS-262. Zamknięcie wymaga osobnej odpowiedzi na pytanie 271.
+Stan na 2026-11-26. **F04 zamknięty w zakresie funkcji po akceptacji właściciela w odpowiedzi na pytanie 271.** Obejmuje SYS-236–262 i powiązane wcześniejsze funkcje. Ostatnią decyzję funkcjonalną, A na pytanie 270, zapisano w SYS-262. Właściciel zaakceptował kartę i polecił przejść do [F05 — funkcje i obsługa HMI](f05-funkcje-i-obsluga-hmi.md).
 
 Źródła: [rejestr SYS](../01-zakres-systemu.md#2-wymagania-wynikające-z-opisu), [ustalenia i plany F04](f04-akcesoria-i-io.md), [proces](../00-proces-i-status.md). Karta podsumowuje te źródła; nie tworzy drugiego rejestru wymagań.
 
@@ -20,7 +20,7 @@ Stan na 2026-11-26. **Karta gotowa do kontroli właściciela; F04 pozostaje akty
 | Serwis i wentylator | Jawny wyjątek serwisowy wymaga stabilnego zasilania warsztatowego; samo PC nie zwalnia odcięcia. Po utracie sesji rozpoczęty test może dokończyć do pierwotnego limitu, bez nowych testów. Wentylator zachowuje własne reguły i zabezpieczenia z zamkniętego F03. Zasilanie HMI pozostaje według SYS-064–066. | SYS-060/061/064–066/089–091, F03 |
 | Awaryjne | Świadome wspólne miganie obu stron, dostępne także w oszczędzaniu. Utrata HMI/CAN przy ciągłej pracy nie przerywa migania. Aktywny tryb blokuje skoordynowany sen ECU/HMI do wyłączenia lub właściwego ochronnego zakończenia. Po restarcie programu i powrocie zasilania OFF do nowego polecenia. Awaryjne mają pierwszeństwo: wybór strony odrzucony do ich świadomego wyłączenia i nowego wyboru. Dawna strona nie wraca. | SYS-257–261 |
 | Zwykłe odbiorniki a sen | Przy zgaszonym silniku, braku PC i innych blokad ręczne mijania/drogowe oraz trzymany hamulec lub klakson nie blokują snu; ECU wyłącza je przed snem. Samo utrzymane wejście nie wybudza ponownie, wymagane zwolnienie i nowe użycie. Po wybudzeniu mijania/drogowe OFF do nowego polecenia; hamowanie według bieżących wejść po gotowości, klakson według zasady nowego naciśnięcia. | SYS-059/081/239/245/252/262 |
-| Zewnętrzne porty | Każdy ma uzgodnione zastosowanie, bez dodatkowych portów/magistral do nieokreślonych urządzeń. Zachowane czujniki, osprzęt, trzy kanały mocy, CAN, PC oraz programowanie/debugowanie według ról. Wewnętrzne zasoby i punkty testowe do architektury. | SYS-255 |
+| Zewnętrzne porty | Każdy ma uzgodnione zastosowanie, bez dodatkowych portów/magistral do nieokreślonych urządzeń. Zachowane czujniki i osprzęt, w tym opcjonalne wejścia sprzęgła i poszczególnych biegów, trzy kanały mocy, CAN, PC oraz programowanie/debugowanie według ról. Wewnętrzne zasoby i punkty testowe do architektury. | SYS-041/255 |
 
 ## Przegląd spójności
 
@@ -50,4 +50,4 @@ Dla SYS-236–262 przygotowano **27 planów prób/przeglądu** i przypisanie do 
 
 ## Kontrola właściciela
 
-**Oczekiwana odpowiedź na pytanie 271.** Akceptacja zamknie F04 wyłącznie w zakresie funkcji i pozwoli rozpocząć F05 — funkcje i obsługę HMI. Etap 2 i bramka G0 pozostają otwarte do zakończenia F05–F08. Schematy, BOM, PCB, implementacja i próby produktu wymagają dalszej pracy zgodnie z procesem.
+**Wynik: akceptacja i zamknięcie F04, 2026-11-26.** Właściciel odpowiedział na pytanie 271: „akceptuje karte przegladu i zamykamy f04 i przechodzimy do f05”. Zamknięto wyłącznie zakres funkcjonalny; aktywny jest [F05](f05-funkcje-i-obsluga-hmi.md). Etap 2 i bramka G0 pozostają otwarte do zakończenia F05–F08 i przeglądu G0. Schematy, BOM, PCB, implementacja i próby produktu wymagają dalszej pracy zgodnie z procesem.

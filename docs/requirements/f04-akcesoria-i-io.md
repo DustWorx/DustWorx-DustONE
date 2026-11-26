@@ -1,6 +1,6 @@
 # F04 — akcesoria i dodatkowe I/O
 
-Stan na 2026-11-26. **F04 aktywny — karta gotowa do kontroli właściciela.** Pytanie 270 rozstrzygnięto odpowiedzią A, SYS-262. [Karta F04](f04-przeglad-zakresu.md) podsumowuje przyjęty zakres, przegląd i przekazanie; zamknięcie wymaga decyzji 271. Źródłem wymagań jest [rejestr SYS](../01-zakres-systemu.md), a kolejność określa [proces](../00-proces-i-status.md).
+Stan na 2026-11-26. **F04 zamknięty w zakresie funkcji po akceptacji właściciela w odpowiedzi na pytanie 271.** [Karta F04](f04-przeglad-zakresu.md) podsumowuje SYS-236–262, przegląd, 27 planów prób i przekazanie. Aktywny jest [F05 — funkcje i obsługa HMI](f05-funkcje-i-obsluga-hmi.md). Źródłem wymagań jest [rejestr SYS](../01-zakres-systemu.md), a kolejność określa [proces](../00-proces-i-status.md).
 
 ## Zakres i kolejność
 
@@ -283,7 +283,7 @@ To plan do rozwinięcia w procedurę; prób produktu jeszcze nie wykonano.
 
 Sprawdzono spójność reguł z autonomią ECU, rozróżnieniem restartu i snu oraz pierwszeństwem zabezpieczeń i ochrony energii. Każde z SYS-241–249 ma plan próby i przydział do bloków oraz grup weryfikacji.
 
-Uzgodniona porcja SYS-241–245 ma historię w [PR #26](https://github.com/DustWorx/DustWorx-DustONE/pull/26). SYS-246 dodaje opcjonalny PWM zgodnych lamp, a SYS-247 określa próbę kanału po ochronnym odcięciu. SYS-248 ustala limit i jego odnawianie. SYS-249 określa zachowanie pozostałych kanałów przy lokalnej usterce. F04 pozostaje aktywny; podstawowe światła po nieplanowanym restarcie określa poniższe SYS-250. Powrót HMI/CAN oraz restart i sen kierunkowskazów określają dalsze SYS-251/252. Próby podstawowych wyjść określają dalsze SYS-253/254, a porty i kolejne reguły akcesoriów SYS-255–261. Parametry, topologię oraz pokrycie diagnostyki opracujemy we właściwych etapach, a ważne komponenty wybierzemy wspólnie.
+Uzgodniona porcja SYS-241–245 ma historię w [PR #26](https://github.com/DustWorx/DustWorx-DustONE/pull/26). SYS-246 dodaje opcjonalny PWM zgodnych lamp, a SYS-247 określa próbę kanału po ochronnym odcięciu. SYS-248 ustala limit i jego odnawianie. SYS-249 określa zachowanie pozostałych kanałów przy lokalnej usterce. Podstawowe światła po nieplanowanym restarcie określa poniższe SYS-250. Powrót HMI/CAN oraz restart i sen kierunkowskazów określają dalsze SYS-251/252. Próby podstawowych wyjść określają dalsze SYS-253/254, a porty i kolejne reguły akcesoriów SYS-255–261. Parametry, topologię oraz pokrycie diagnostyki opracujemy we właściwych etapach, a ważne komponenty wybierzemy wspólnie.
 
 ## Podstawowe światła po nieplanowanym restarcie
 
@@ -517,7 +517,7 @@ To plan do rozwinięcia w procedurę; prób produktu jeszcze nie wykonano.
 
 ## Kontrola pokrycia przed kartą F04
 
-Stan kontroli: 2026-11-26, po decyzji 270. Wynik przeglądu zapisano w karcie F04; pakiet oczekuje kontroli właściciela. F04 pozostaje aktywny. Tabela rozdziela przyjęty zakres, kwestie funkcjonalne do doprecyzowania i dane techniczne.
+Stan kontroli: 2026-11-26, po decyzji 270 i akceptacji karty w odpowiedzi na pytanie 271. Wynik przeglądu i zamknięcia zapisano w karcie F04. Tabela rozdziela przyjęty zakres i dane techniczne przekazane do dalszego projektowania.
 
 | Obszar | Przyjęty zakres / stan | Dalsze rozstrzygnięcie |
 | --- | --- | --- |
@@ -531,18 +531,18 @@ Stan kontroli: 2026-11-26, po decyzji 270. Wynik przeglądu zapisano w karcie F0
 | Zewnętrzne porty | SYS-255: uzgodnione funkcje, bez dodatkowej rezerwy zewnętrznej dla nieokreślonych urządzeń. | Typy, liczby pozostałych torów, pinout i wewnętrzna rezerwa zasobów w architekturze. |
 | Oszczędzanie energii | Przyjęte SYS-084–091 i lista SYS-257; klakson odcięty po doprecyzowaniu 265. | Progi, czasy, bilanse i realizacja w architekturze/projekcie. |
 
-Wybudzanie przez hamulce rozstrzyga SYS-256. Odpowiedź 265 i jej doprecyzowanie określają listę odcięcia oraz dodają możliwość awaryjnych w oszczędzaniu (SYS-257). Odpowiedź A na pytanie 266 przyjmuje podtrzymanie po utracie HMI/CAN (SYS-258). Odpowiedź A na pytanie 267 przyjmuje blokadę skoordynowanego snu (SYS-259). Odpowiedź B na pytanie 268 przyjmuje OFF po restarcie i powrocie zasilania do nowego polecenia (SYS-260). Odpowiedź A na pytanie 269 przyjmuje pierwszeństwo awaryjnych (SYS-261). Odpowiedź A na pytanie 270 rozstrzyga zwykłe odbiorniki i utrzymane wejścia przy usypianiu (SYS-262). Kontrola przyjętego zakresu nie wskazała kolejnej decyzji funkcjonalnej blokującej kartę. [Karta F04](f04-przeglad-zakresu.md) oczekuje decyzji właściciela w pytaniu 271; F04 pozostaje aktywny.
+Wybudzanie przez hamulce rozstrzyga SYS-256. Odpowiedź 265 i jej doprecyzowanie określają listę odcięcia oraz dodają możliwość awaryjnych w oszczędzaniu (SYS-257). Odpowiedź A na pytanie 266 przyjmuje podtrzymanie po utracie HMI/CAN (SYS-258). Odpowiedź A na pytanie 267 przyjmuje blokadę skoordynowanego snu (SYS-259). Odpowiedź B na pytanie 268 przyjmuje OFF po restarcie i powrocie zasilania do nowego polecenia (SYS-260). Odpowiedź A na pytanie 269 przyjmuje pierwszeństwo awaryjnych (SYS-261). Odpowiedź A na pytanie 270 rozstrzyga zwykłe odbiorniki i utrzymane wejścia przy usypianiu (SYS-262). Kontrola przyjętego zakresu nie wskazała kolejnej decyzji funkcjonalnej blokującej kartę. [Kartę F04](f04-przeglad-zakresu.md) właściciel zaakceptował w odpowiedzi na pytanie 271 (2026-11-26); F04 zamknięto w zakresie funkcji.
 
 ## Kontrola listy odcięcia energii
 
-Lista jest przyjęta jako SYS-257 na podstawie odpowiedzi 265 oraz A na doprecyzowanie klaksonu. Zestawienie i granice znajdują się w [przyjętym zakresie](#odbiorniki-w-oszczędzaniu-energii). Formalne zamknięcie F04 wymaga akceptacji karty; prób produktu jeszcze nie wykonano. Wentylator, HMI i funkcje silnika zachowują własne reguły.
+Lista jest przyjęta jako SYS-257 na podstawie odpowiedzi 265 oraz A na doprecyzowanie klaksonu. Zestawienie i granice znajdują się w [przyjętym zakresie](#odbiorniki-w-oszczędzaniu-energii). Właściciel zaakceptował kartę i zamknął F04 2026-11-26; prób produktu jeszcze nie wykonano. Wentylator, HMI i funkcje silnika zachowują własne reguły.
 
 ## Kontrola odbiorników przy upływie bezczynności
 
 Brak wskazany w przeglądzie po pytaniu 269 rozstrzygnięto odpowiedzią A na pytanie 270, SYS-262. Zwykłe odbiorniki gasną przed snem również przy utrzymanych wejściach; nowe użycie hamulca odnawia bezczynność, samo trzymanie nie. Awaryjne, wentylator, PC i inne zadania zachowują odrębne blokady. Po wybudzeniu obowiązują przyjęte reakcje wejść i nowych poleceń. Parametry i realizacja należą do etapów architektury oraz projektu.
 
-## Następna decyzja
+## Wynik zamknięcia
 
-**Pytanie 271:** czy właściciel akceptuje [kartę końcowego przeglądu F04](f04-przeglad-zakresu.md) i zamyka zakres funkcjonalny pakietu?
+**Pytanie 271 — zaakceptowano 2026-11-26.** Właściciel zatwierdził [kartę końcowego przeglądu F04](f04-przeglad-zakresu.md), zamknął zakres funkcjonalny i polecił rozpocząć [F05 — funkcje i obsługę HMI](f05-funkcje-i-obsluga-hmi.md).
 
-Karta obejmuje SYS-236–262, wcześniejsze powiązania, przegląd spójności, 27 planów prób i zadania przekazane do dalszych etapów. Odpowiedź A zamknie F04 i pozwoli rozpocząć F05 — funkcje i obsługę HMI. B pozostawia F04 aktywny do korekt. Decyzja nie jest jeszcze podjęta; projektowanie i próby produktu pozostają przed nami.
+Karta obejmuje SYS-236–262, wcześniejsze powiązania, przegląd spójności, 27 planów prób i zadania przekazane do dalszych etapów. Nie wykonano prób produktu. Nowa potrzeba ujawniona w dalszej pracy podlega ocenie wpływu i kontroli zmian.
