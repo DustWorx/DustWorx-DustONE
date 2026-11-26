@@ -292,6 +292,8 @@ SYS-256 wymaga wybudzenia obu urządzeń przez nowe użycie hamulca i obsługi �
 
 SYS-257 rozróżnia dostępne w oszczędzaniu awaryjne od odciętego pojedynczego kierunku i klaksonu. [Plan próby F04](../../docs/requirements/f04-akcesoria-i-io.md#plan-próby-sys-257).
 
-SYS-258 wymaga podtrzymania włączonych awaryjnych lokalnie po utracie HMI/CAN przy nieprzerwanej pracy ECU, z zachowaniem zabezpieczeń. Blokadę snu określa SYS-259; restart i wybór strony nadal do ustalenia w F04. [Plan próby F04](../../docs/requirements/f04-akcesoria-i-io.md#plan-próby-sys-258).
+SYS-258 wymaga podtrzymania włączonych awaryjnych lokalnie po utracie HMI/CAN przy nieprzerwanej pracy ECU, z zachowaniem zabezpieczeń. Blokadę snu określa SYS-259; OFF po restarcie określa SYS-260; wybór strony nadal do ustalenia w F04. [Plan próby F04](../../docs/requirements/f04-akcesoria-i-io.md#plan-próby-sys-258).
 
-SYS-259: podczas aktywnej obsługi awaryjnych blokować skoordynowany sen ECU/HMI niezależnie od upływu bezczynności i braku HMI/CAN. Zakończenie obsługi usuwa tylko tę blokadę; pozostają inne warunki SYS-059/062–066 i ochrona. Wymaganie nie wybiera dodatkowego limitu czasu ani polityki restartu. [Plan próby F04](../../docs/requirements/f04-akcesoria-i-io.md#plan-próby-sys-259).
+SYS-259: podczas aktywnej obsługi awaryjnych blokować skoordynowany sen ECU/HMI niezależnie od upływu bezczynności i braku HMI/CAN. Zakończenie obsługi usuwa tylko tę blokadę; pozostają inne warunki SYS-059/062–066 i ochrona. Dodatkowego limitu czasu nie wybrano; OFF po restarcie określa SYS-260. [Plan próby F04](../../docs/requirements/f04-akcesoria-i-io.md#plan-próby-sys-259).
+
+SYS-260: po restarcie programu lub powrocie zasilania pozostawić awaryjne OFF do nowego świadomego polecenia HMI. Nie odtwarzać ON ani blokady snu z dawnego stanu lub ponowionych żądań. Nowe żądanie nie omija gotowości, ochron i limitów po usterce; reguły silnika pozostają odrębne. Kwalifikacja nowego polecenia i inicjalizacja do projektu. [Plan próby F04](../../docs/requirements/f04-akcesoria-i-io.md#plan-próby-sys-260).
