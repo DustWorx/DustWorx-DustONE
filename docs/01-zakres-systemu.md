@@ -288,6 +288,8 @@ Opracowanie systemu sterowania motocyklem obejmującego ECU, HMI na kierownicy o
 
 | SYS-257 | Odcięcie oszczędzania energii SYS-084–087 w normalnej obsłudze obejmuje przednie i tylne pozycyjne, mijania, drogowe, wszystkie trzy dodatkowe kanały mocy, pojedyncze kierunkowskazy i klakson. ECU wyłącza objęte odbiorniki i odrzuca zwykłe żądania ich włączenia według SYS-085/086. Pozostają dostępne światło hamowania według SYS-051/256 oraz świadome włączenie świateł awaryjnych przez użytkownika z HMI, jako wspólnego migania obu stron sterowanego lokalnie przez ECU. Dostępność nie omija zabezpieczeń wyjść, limitów po usterce ani dopuszczonego zakresu zasilania. Wentylator, zasilanie HMI i funkcje silnika zachowują własne przyjęte reguły. Wyjście z odcięcia i wyjątek serwisowy nadal podlegają SYS-087–091; prądy, progi, czasy i realizacja wymagają projektu oraz prób. |
 
+| SYS-258 | Przy nieprzerwanej pracy ECU w bieżącym okresie wybudzenia potwierdzona utrata HMI lub komunikacji CAN nie wyłącza wcześniej włączonych świateł awaryjnych. ECU samodzielnie podtrzymuje wspólne miganie obu stron, również podczas oszczędzania energii dopuszczającego je według SYS-257. Zabezpieczenia wyjść, limity po usterce i dopuszczony zakres zasilania pozostają nadrzędne. Utrata łączności przy wyłączonych awaryjnych sama ich nie włącza. Wymaganie nie rozstrzyga przejścia w sen ani restartu ECU; kryteria łączności, parametry migania i czasy wymagają projektu oraz prób. |
+
 ## 3. Podział odpowiedzialności
 
 - **ECU:** samodzielne sterowanie silnikiem i akcesoriami, pomiary, wykrywanie usterek oraz reakcje na błędy. Właściciel danych i wykonawca żądań według SYS-046 i SYS-047. Sterowanie wymagające precyzyjnego czasu realizowane lokalnie w ECU.
@@ -854,7 +856,9 @@ W odpowiedzi A na pytanie 263 (2026-11-25) właściciel przyjął SYS-255: każd
 
 W odpowiedzi A na pytanie 264 (2026-11-26) właściciel przyjął SYS-256: nowe użycie dowolnego hamulca wybudza ECU i HMI. Sprawne światło hamowania reaguje na bieżące wejścia po gotowości wymaganych torów, bez czekania na HMI/CAN. Zabezpieczenia oraz zasady prób po usterce pozostają nadrzędne. [Ustalenie i plan próby F04](requirements/f04-akcesoria-i-io.md#wybudzanie-przez-hamulce).
 
-W odpowiedzi na pytanie 265 (2026-11-26) właściciel zachował w oszczędzaniu światło hamowania i możliwość włączenia awaryjnych, wyłączając pojedyncze kierunkowskazy. Odpowiedź A na doprecyzowanie 265 potwierdziła odcięcie klaksonu. SYS-257 zapisuje tę listę z odcięciem świateł stałych i trzech dodatkowych kanałów z obu przedstawionych propozycji. Dostępność awaryjnych nie oznacza ich samoczynnego włączania; stany przy utracie CAN, śnie i restarcie wymagają dalszych ustaleń F04. [Ustalenie i plan próby](requirements/f04-akcesoria-i-io.md#odbiorniki-w-oszczędzaniu-energii).
+W odpowiedzi na pytanie 265 (2026-11-26) właściciel zachował w oszczędzaniu światło hamowania i możliwość włączenia awaryjnych, wyłączając pojedyncze kierunkowskazy. Odpowiedź A na doprecyzowanie 265 potwierdziła odcięcie klaksonu. SYS-257 zapisuje tę listę z odcięciem świateł stałych i trzech dodatkowych kanałów z obu przedstawionych propozycji. Dostępność awaryjnych nie oznacza ich samoczynnego włączania; utratę HMI/CAN przy nieprzerwanej pracy rozstrzyga późniejszy SYS-258, a sen i restart wymagają dalszych ustaleń F04. [Ustalenie i plan próby](requirements/f04-akcesoria-i-io.md#odbiorniki-w-oszczędzaniu-energii).
+
+W odpowiedzi A na pytanie 266 (2026-11-26) właściciel przyjął SYS-258: przy nieprzerwanej pracy ECU utrata HMI/CAN nie przerywa włączonych awaryjnych, także w oszczędzaniu. Nadal obowiązują zabezpieczenia i dopuszczone zasilanie. Wpływ na sen, restart i współdziałanie z wyborem strony pozostają otwarte w F04. [Ustalenie i plan próby](requirements/f04-akcesoria-i-io.md#awaryjne-po-utracie-hmican).
 
 ## 4. Decyzje potrzebne przed doborem sprzętu
 
