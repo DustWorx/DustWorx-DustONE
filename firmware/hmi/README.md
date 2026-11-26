@@ -1,5 +1,7 @@
 # Oprogramowanie HMI
 
+Aktualny zakres funkcjonalny panelu rozwijamy kolejno w [F05 — funkcje i obsługa HMI](../../docs/requirements/f05-funkcje-i-obsluga-hmi.md), po zamknięciu F04 przez właściciela 2026-11-26. Ten dokument pozostaje materiałem do dalszego projektowania.
+
 Miejsce na kod prezentacji danych, obsługi kierowcy, komunikacji CAN, diagnostyki i aktualizacji HMI.
 
 Stan: brak implementacji. Platforma i technologia interfejsu pozostają do ustalenia. Personalizacja ekranu z aplikacji Windows jest wymaganiem; jej zakres wymaga doprecyzowania.

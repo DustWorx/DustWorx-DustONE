@@ -1,5 +1,7 @@
 # Sprzęt HMI
 
+Aktualny zakres funkcjonalny panelu rozwijamy kolejno w [F05 — funkcje i obsługa HMI](../../docs/requirements/f05-funkcje-i-obsluga-hmi.md), po zamknięciu F04 przez właściciela 2026-11-26. Ten dokument pozostaje materiałem do dalszego projektowania.
+
 Miejsce na edytowalne schematy i PCB, BOM oraz kontrolowane eksporty produkcyjne HMI na kierownicy.
 
 Wymagania bazowe: komunikacja z ECU po CAN, fizyczne przyciski i ekran bez dotyku. Parametry ekranu, interfejsów wejściowych i zasilania oraz komponenty pozostają do ustalenia.
@@ -12,4 +14,4 @@ SYS-255 zachowuje przyjęte funkcje i interfejsy HMI; dodatkowe zewnętrzne port
 
 SYS-256 dodaje wybudzanie HMI przez ECU po nowym użyciu dowolnego hamulca. Tor i czasy przekazania wybudzenia pozostają do projektu; gotowość lub sprawność HMI nie warunkują obsługi światła hamowania przez ECU. [Ustalenie i plan próby F04](../../docs/requirements/f04-akcesoria-i-io.md#wybudzanie-przez-hamulce).
 
-SYS-257 wymaga rozróżnienia żądania awaryjnych od pojedynczego kierunkowskazu w obsłudze HMI. W oszczędzaniu dostępne są awaryjne, a pojedyncza strona i klakson niedostępne; ECU pozostaje wykonawcą żądań i źródłem statusów. Sposób obsługi i stany awaryjnych pozostają do ustalenia w F04/projekcie, bez wyboru nowego przycisku ani portu. [Zakres F04](../../docs/requirements/f04-akcesoria-i-io.md#odbiorniki-w-oszczędzaniu-energii).
+SYS-257 wymaga rozróżnienia żądania awaryjnych od pojedynczego kierunkowskazu w obsłudze HMI. W oszczędzaniu dostępne są awaryjne, a pojedyncza strona i klakson niedostępne; ECU pozostaje wykonawcą żądań i źródłem statusów. Stany awaryjnych określa zamknięty F04 (SYS-258–261); sposób obsługi rozwijamy w F05, bez wyboru nowego przycisku ani portu. [Zakres F04](../../docs/requirements/f04-akcesoria-i-io.md#odbiorniki-w-oszczędzaniu-energii).

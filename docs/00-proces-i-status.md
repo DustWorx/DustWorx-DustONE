@@ -6,7 +6,7 @@ Kontrola pełnego F01 została zakończona: właściciel potwierdził zgodność
 
 ## Aktualne miejsce w procesie
 
-**Aktywny etap 2 — zakres funkcjonalny. F01–F03 zamknięto po kontroli właściciela. Aktywny jest F04 — akcesoria i dodatkowe I/O.** F05–F08 i etapy 3–12 oczekują w kolejce. Wcześniejsze wymagania, decyzje i materiały robocze pozostają zachowane; nie oznaczają formalnego rozpoczęcia ani zamknięcia dalszych etapów.
+**Aktywny etap 2 — zakres funkcjonalny. F01–F04 zamknięto po kontroli właściciela. Aktywny jest F05 — funkcje i obsługa HMI.** F06–F08 i etapy 3–12 oczekują w kolejce. Wcześniejsze wymagania, decyzje i materiały robocze pozostają zachowane; nie oznaczają formalnego rozpoczęcia ani zamknięcia dalszych etapów.
 
 | Obszar | Stan potwierdzony dokumentacją |
 | --- | --- |
@@ -45,7 +45,7 @@ Statusy: **aktywny**, **w kolejce**, **zamknięty**. Istniejący szkic oznaczamy
 | Etap | Główny rezultat | Bieżący status | Warunek zakończenia / przejścia |
 | --- | --- | --- | --- |
 | 1. Organizacja | Repozytorium, struktura, zasady zmian i decyzji. | Zamknięty: 2026-11-04. Dokumentację utrzymujemy. | Uzgodnienia i źródła mają miejsce w repozytorium, zmiany są wersjonowane. |
-| 2. Zakres funkcjonalny | Funkcje, wyłączenia, warianty i reguły użytkowania ECU/HMI/Windows. | F01–F03 zamknięte. F04 aktywny, F05–F08 w kolejce. | G0: przyjęta baza zakresu, rozstrzygnięte decyzje produktowe i jawne otwarte parametry techniczne. |
+| 2. Zakres funkcjonalny | Funkcje, wyłączenia, warianty i reguły użytkowania ECU/HMI/Windows. | F01–F04 zamknięte. F05 aktywny, F06–F08 w kolejce. | G0: przyjęta baza zakresu, rozstrzygnięte decyzje produktowe i jawne otwarte parametry techniczne. |
 | 3. Inwentaryzacja i dane | Osprzęt, sygnały, obciążenia, zasilanie i przestrzeń montażowa. | W kolejce po G0; istnieją dokumenty/zdjęcia i plan INV, bez wyników pomiarów. | Dane wystarczają do projektowania odpowiedniego bloku; braki innych wariantów mają plan pozyskania. |
 | 4. Architektura | Diagramy blokowe, I/O dla wariantów, zasoby, zasilanie, interfejsy i stany awaryjne. | W kolejce po etapie 3; zachowane wstępne szkice diagramu i zasobów. | G1: uzasadniony podział bloków, bilanse, granice interfejsów i zamknięte niewiadome wpływające na projektowane bloki. |
 | 5. Plan weryfikacji | Powiązanie wymaganie → blok → metoda → kryterium → próba → dowód. | W kolejce po etapie 4; zachowane szablon i wstępny przydział wymagań. | Wymagania mają przydzieloną metodę i etap; procedura wykonawcza jest gotowa przed daną próbą. |
@@ -61,7 +61,7 @@ Projekt wspólnej PCB obejmuje docelowy uzgodniony zakres 2T/4T bez zmian obsady
 
 ## Co pozostało w funkcjonalności
 
-**F01–F03 zamknięte. Pozostaje pięć pakietów F04–F08** oraz przegląd zamykający G0. Ich treść i wynik wymagany do zamknięcia opisuje [rejestr domknięcia zakresu](requirements/domkniecie-zakresu-funkcjonalnego.md). Pakiet może zawierać kilka decyzji; część jego funkcji jest już uzgodniona. Jest to roboczy plan domknięcia obecnego zakresu, aktualizowany przy ujawnieniu nowych luk.
+**F01–F04 zamknięte. Pozostają cztery pakiety F05–F08** oraz przegląd zamykający G0. Ich treść i wynik wymagany do zamknięcia opisuje [rejestr domknięcia zakresu](requirements/domkniecie-zakresu-funkcjonalnego.md). Pakiet może zawierać kilka decyzji; część jego funkcji jest już uzgodniona. Jest to roboczy plan domknięcia obecnego zakresu, aktualizowany przy ujawnieniu nowych luk.
 
 Parametry wyliczane z osprzętu, charakterystyki czujników, wartości elementów, konkretne procesory i układy, formaty CAN oraz layout rozwijamy w odpowiednich etapach architektury i projektu wykonawczego. Ważne komponenty nadal wybieramy wspólnie.
 
@@ -72,13 +72,14 @@ Parametry wyliczane z osprzętu, charakterystyki czujników, wartości elementó
 | W04 — Zakres funkcjonalny: F01 | Zamknięty po kontroli właściciela: 2026-11-04. | [Pomiary](requirements/f01-pomiary-silnika.md), [przegląd sterowania i wynik zamknięcia](requirements/f01-sterowanie-silnikiem.md); dane techniczne przekazane do kolejki etapów 3–6. |
 | F02 — Mapy, konfiguracja i strojenie ECU | Zamknięty po akceptacji właściciela 2026-11-09. | Odpowiedź A na pytanie 166. [Karta F02](requirements/f02-przeglad-zakresu.md) zawiera przyjęty zakres, plan weryfikacji i przekazanie. |
 | F03 — Ochrona i reakcje na usterki | Zamknięty po akceptacji właściciela: 2026-11-24. | Odpowiedź A na pytanie 243. [Karta F03](requirements/f03-przeglad-zakresu.md) obejmuje SYS-157–235, przegląd spójności, 79 planów prób i przekazanie do dalszych etapów. [Szczegółowe reakcje](requirements/f03-ochrona-i-usterki.md) pozostają źródłem rozwinięcia; nie wykonano prób produktu. |
-| F04 — Akcesoria i dodatkowe I/O | Aktywny; karta gotowa do kontroli właściciela. | Przyjęte SYS-236–262, w tym A na 270: zwykłe odbiorniki i utrzymane wejścia nie blokują snu. [Karta F04](requirements/f04-przeglad-zakresu.md) obejmuje zakres, spójność, 27 planów i przekazanie. Następna decyzja 271: akceptacja albo korekty. F05 pozostaje w kolejce do zamknięcia F04. |
+| F04 — Akcesoria i dodatkowe I/O | Zamknięty po akceptacji właściciela: 2026-11-26. | Odpowiedź na pytanie 271 zatwierdza [kartę F04](requirements/f04-przeglad-zakresu.md): SYS-236–262, przegląd spójności, 27 planów prób i przekazanie. Prób produktu nie wykonano. |
+| F05 — Funkcje i obsługa HMI | Aktywny. | [Podstawy i kolejność tematów F05](requirements/f05-funkcje-i-obsluga-hmi.md). Pierwsza decyzja 272: sposób prezentacji ważnych ostrzeżeń także na własnych ekranach. Propozycja oczekuje odpowiedzi; brak nowych wymagań F05. |
 | W05 — Inwentaryzacja Bety | W kolejce, etap 3. | Zachowany [plan INV](verification/beta-2015-plan-inwentaryzacji.md); brak wyników pomiarowych. |
 | W01/W02 — Architektura i zasoby | W kolejce, etap 4. | Zachowane [diagram](architecture/blokowa-systemu.md) i [macierz wariantów](architecture/macierz-wariantow-silnika.md); bez zamkniętych bilansów. |
 | W03 — Weryfikacja wymagań | W kolejce, etap 5. | Zachowany [przydział 262 SYS do grup](verification/macierz-wymagan.md); kryteria, procedury i dowody do rozwinięcia. |
 | W06 — Bilanse i wybór komponentów | W kolejce, etapy 4 i 6. | Wymagane wejściowe parametry; ważne komponenty wybierzemy wspólnie. |
 
-**F03 zamknięto odpowiedzią A na pytanie 243 (2026-11-24). W aktywnym F04 przyjęto SYS-236–262. Odpowiedź A na pytanie 270 uzupełnia sen zwykłych odbiorników i utrzymanych wejść. Przegląd przyjętego zakresu nie wskazał kolejnej decyzji funkcjonalnej blokującej kartę.** [Karta F04](requirements/f04-przeglad-zakresu.md) jest gotowa do kontroli właściciela w pytaniu 271. F04 pozostaje aktywny, F05–F08 w kolejce; architektura, komponenty, PCB, implementacja i próby produktu wymagają dalszej pracy.
+**F04 zamknięto po wyraźnej akceptacji karty w odpowiedzi na pytanie 271 (2026-11-26). F01–F04 są zamknięte w zakresie funkcji; rozpoczęto F05.** [Karta F04](requirements/f04-przeglad-zakresu.md) zachowuje przyjęte ustalenia, 27 planów i zadania dla dalszych etapów. W F05 pracujemy kolejno nad ostrzeżeniami, danymi i ekranami, obsługą, personalizacją oraz stanami panelu. F06–F08 pozostają w kolejce. Architektura, komponenty, PCB, implementacja i próby produktu wymagają dalszej pracy.
 
 ## Warunki przechodzenia dalej
 

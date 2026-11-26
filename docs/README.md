@@ -3,7 +3,7 @@
 | Obszar | Dokument / katalog | Stan |
 | --- | --- | --- |
 | Ścieżka i status | [Etapy, warunki zakończenia i odpowiedzialności](00-proces-i-status.md) | Etap 2 — zakres funkcjonalny. |
-| Domknięcie funkcji | [Pakiety F01–F08](requirements/domkniecie-zakresu-funkcjonalnego.md) | F01–F03 zamknięte; [karta F03](requirements/f03-przeglad-zakresu.md) zaakceptowana w pytaniu 243. Aktywny [F04](requirements/f04-akcesoria-i-io.md), [karta F04](requirements/f04-przeglad-zakresu.md) do kontroli właściciela w 271. F05–F08 w kolejce przed G0. |
+| Domknięcie funkcji | [Pakiety F01–F08](requirements/domkniecie-zakresu-funkcjonalnego.md) | F01–F04 zamknięte; [karta F04](requirements/f04-przeglad-zakresu.md) zaakceptowana w odpowiedzi na pytanie 271: 2026-11-26. Aktywny [F05 — funkcje i obsługa HMI](requirements/f05-funkcje-i-obsluga-hmi.md). F06–F08 w kolejce przed G0. |
 | Zakres systemu | [Rejestr SYS i otwarte dane](01-zakres-systemu.md#2-wymagania-wynikające-z-opisu) | 262 wymagań SYS-001–262; parametry rozwijane z projektem. |
 | Wymagania | [requirements/](requirements/README.md) | Rejestr, mapa obszarów i kontrola kompletności; specyfikacje szczegółowe do rozwinięcia. |
 | Architektura | [architecture/](architecture/README.md) | Etap 4 w kolejce; zachowane wstępne diagramy i przydział zasobów. |
